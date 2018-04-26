@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="CMakeLists" pattern="file:CMakeLists.txt" />
+</component>
