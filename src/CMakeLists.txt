@@ -4,3 +4,11 @@ TARGET_SOURCES(aide
   PRIVATE
     application.cpp
 )
+
+TARGET_INCLUDE_DIRECTORIES(aide
+  INTERFACE
+    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/incl>
+    $<INSTALL_INTERFACE:include/
+  PRIVATE
+    ${PROJECT_SOURCE_DIR}/incl/aide
+)
