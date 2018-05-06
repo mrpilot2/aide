@@ -12,3 +12,8 @@ TARGET_INCLUDE_DIRECTORIES(aide
   PRIVATE
     ${PROJECT_SOURCE_DIR}/incl/aide
 )
+
+TARGET_LINK_LIBRARIES(aide
+  PUBLIC
+    Qt5::Widgets
+)

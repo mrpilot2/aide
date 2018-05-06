@@ -1,7 +1,12 @@
 
 #include "catch.hpp"
 
-TEST_CASE("Make sure test system works")
+#include <aide/application.hpp>
+
+TEST_CASE("Any application creates a main window")
 {
-    REQUIRE(true == true);
+    char* argv[] = {const_cast<char*>("a")};
+    aide::Application app(1, argv);
+
+    REQUIRE(app.mainWindow() != nullptr);
 }
