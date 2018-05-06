@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run all tests" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="aide" TARGET_NAME="aide_ut" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="aide" RUN_TARGET_NAME="aide_ut" TEST_MODE="SUITE_TEST">
+    <method />
+  </configuration>
+</component>
