@@ -1,0 +1,42 @@
+language: cpp
+
+coḿpiler:
+  - clang
+  - gcc
+
+matrix:
+  include:
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-5.0
+          packages:
+            - clang-5.0
+            - doxygen
+            - graphviz
+      env:
+        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
+
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-7
+            - doxygen
+            - graphviz
+      env:
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+
+before_install:
+  - wget -O cmake.sh https://cmake.org/files/v3.10/cmake-3.10.3-Linux-x86_64.sh
+  - sudo sh cmake.sh --skip-license --exclude-subdir --prefix=/usr/local
+  - eval "${MATRIX_EVAL}"
+
+script:
+  - mkdir build
+  - cd build
+  - /usr/local/bin/cmake ..
+  - /usr/local/bin/cmake --build .
