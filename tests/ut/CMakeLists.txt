@@ -27,6 +27,6 @@ TARGET_LINK_LIBRARIES(aide_ut
     aide
 )
 
-ADD_TEST(NAME aide_ut COMMAND $<TARGET_FILE:aide_ut>
-  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-)
+INCLUDE(../../cmake/Catch.cmake)
+
+CATCH_DISCOVER_TESTS(aide_ut)
