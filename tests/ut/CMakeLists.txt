@@ -7,8 +7,10 @@ TARGET_SOURCES(aide_ut
     applicationtest.cpp
 )
 
-TARGET_INCLUDE_DIRECTORIES(aide_ut
-  PRIVATE
+ADD_LIBRARY(catch INTERFACE)
+
+TARGET_INCLUDE_DIRECTORIES(catch
+  INTERFACE
     catch
 )
 
@@ -19,6 +21,7 @@ TARGET_COMPILE_DEFINITIONS(aide_ut
 
 TARGET_LINK_LIBRARIES(aide_ut
   PRIVATE
+    catch
     aide
 )
 
