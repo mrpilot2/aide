@@ -18,6 +18,11 @@ TARGET_LINK_LIBRARIES(aide
     Qt5::Widgets
 )
 
+TARGET_COMPILE_FEATURES(aide
+  PRIVATE
+    cxx_generalized_initializers
+)
+
 IF(ENABLE_COVERAGE)
   TARGET_COMPILE_OPTIONS(aide PRIVATE -g -O0 --coverage)
   TARGET_LINK_LIBRARIES(aide PRIVATE --coverage)
