@@ -9,13 +9,16 @@ namespace aide
     class Application
     {
     public:
-        Application(int argc, char* argv[]);
+        Application() = delete;
+        Application(int& argc, char** argv);
 
-        const QMainWindow* mainWindow() const;
+        QMainWindow* mainWindow() const;
+
+        static int exec();
 
     private:
         QApplication m_application;
 
-        QMainWindow m_mainWindow;
+        QMainWindow* m_mainWindow;
     };
-}
+}  // namespace aide

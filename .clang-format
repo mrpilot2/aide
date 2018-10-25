@@ -5,6 +5,7 @@ IndentWidth:     4
 TabWidth:        4
 AccessModifierOffset: -4
 NamespaceIndentation: All
+AllowShortFunctionsOnASingleLine: Empty
 BreakBeforeBraces: Allman
 BreakConstructorInitializers: BeforeComma
 ConstructorInitializerAllOnOneLineOrOnePerLine: false
