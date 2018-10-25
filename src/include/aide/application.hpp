@@ -12,9 +12,9 @@ namespace aide
         Application() = delete;
         Application(int& argc, char** argv);
 
-        QMainWindow* mainWindow() const;
+        auto mainWindow() const -> QMainWindow*;
 
-        static int exec();
+        static auto exec() -> int;
 
     private:
         QApplication m_application;

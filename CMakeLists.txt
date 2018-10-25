@@ -4,6 +4,7 @@ PROJECT(aide LANGUAGES CXX VERSION 0.1.0)
 
 OPTION(ENABLE_COVERAGE "Generate code coverage reports" OFF)
 
+SET(CMAKE_CXX_EXTENSIONS OFF)
 ADD_COMPILE_OPTIONS("$<$<CONFIG:Debug>:-Wall;-Wextra;-Wpedantic>")
 ADD_COMPILE_OPTIONS("$<$<AND:$<CXX_COMPILER_ID:Clang>,$<CONFIG:Debug>>:-Weverything;-Wno-c++98-compat>")
 
@@ -15,3 +16,4 @@ ADD_SUBDIRECTORY(demo)
 
 ENABLE_TESTING()
 ADD_SUBDIRECTORY(tests)
+MESSAGE("The compiler is capable of the following features" ${CMAKE_CXX_COMPILE_FEATURES})

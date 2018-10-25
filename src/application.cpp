@@ -12,12 +12,12 @@ Application::Application(int &argc, char **argv)
 {
 }
 
-QMainWindow* Application::mainWindow() const
+auto Application::mainWindow() const -> QMainWindow*
 {
     return m_mainWindow;
 }
 
-int Application::exec()
+auto Application::exec() -> int
 {
    return QApplication::exec();
 }
