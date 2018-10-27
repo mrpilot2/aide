@@ -9,12 +9,11 @@ environment:
     QT5: C:\Qt\5.9.5\msvc2017_64
 
 before_build:
-- rm -rf build
 - set Path=%QT5%\bin;%Path%
-- cmake -H. -Bbuild -G "%CMAKE_GENERATOR%" "-DCMAKE_PREFIX_PATH=%QT5%"
+- cmake -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=TRUE -G "%CMAKE_GENERATOR%" "-DCMAKE_PREFIX_PATH=%QT5%"
 
 build:
   project: $(APPVEYOR_BUILD_FOLDER)\$(APPVEYOR_PROJECT_NAME).sln
 
 test_script:
-  - '%APPVEYOR_BUILD_FOLDER%\%CONFIGURATION%\tests.exe'
+  - '%APPVEYOR_BUILD_FOLDER%\%CONFIGURATION%\aide_ut.exe'
