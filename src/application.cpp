@@ -1,12 +1,10 @@
 
 
-#include <application.hpp>
-
 #include "application.hpp"
 
 using aide::Application;
 
-Application::Application(int &argc, char **argv)
+Application::Application(int& argc, char** argv)
     : m_application{argc, argv}
     , m_mainWindow{new QMainWindow}
 {
@@ -19,5 +17,5 @@ auto Application::mainWindow() const -> QMainWindow*
 
 auto Application::exec() -> int
 {
-   return QApplication::exec();
+    return QApplication::exec();
 }

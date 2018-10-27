@@ -5,6 +5,7 @@ ADD_EXECUTABLE(aide_ut
 TARGET_SOURCES(aide_ut
   PRIVATE
     applicationtest.cpp
+    idtest.cpp
 )
 
 ADD_LIBRARY(catch INTERFACE)
