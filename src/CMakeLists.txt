@@ -25,6 +25,7 @@ TARGET_LINK_LIBRARIES(aide
 TARGET_COMPILE_FEATURES(aide
   PRIVATE
     cxx_generalized_initializers
+  PUBLIC
     cxx_trailing_return_types
 )
 

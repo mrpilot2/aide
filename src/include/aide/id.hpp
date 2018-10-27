@@ -29,6 +29,7 @@ namespace aide
          */
         constexpr explicit Id(char const* const description) noexcept
             : m_id{aide::utils::hash_64_fnv1a(description)}
+            , m_name{description}
         {
         }
 
@@ -36,13 +37,29 @@ namespace aide
          * The hashed description represented as HashValue
          * @return Returns the hashed value
          */
-        constexpr HashValue value() const
+        constexpr HashValue value() const noexcept
         {
             return m_id;
         }
 
+        /**
+         * The name given in the constructor of the UID
+         * @return the name
+         */
+        const char* name() const;
+
+        /**
+         * Compares two IDs and returns true if the own ID is alphabetically
+         * below the other one
+         * @param other The other ID
+         * @return True if the own ID is alphabetically lower
+         */
+        bool isAlphabeticallyBefore(const Id& other) const;
+
     private:
-        HashValue m_id;
+        const HashValue m_id{0};
+
+        const char* const m_name;
     };
 
 }  // end namespace aide

@@ -19,6 +19,6 @@ TARGET_COMPILE_FEATURES(aide_api
 )
 
 IF(ENABLE_COVERAGE)
-  TARGET_COMPILE_OPTIONS(aide_api PRIVATE -g -O0 --coverage)
+  TARGET_COMPILE_OPTIONS(aide_api PRIVATE -g -O0 --coverage -fno-inline)
   TARGET_LINK_LIBRARIES(aide_api PRIVATE --coverage)
 ENDIF()

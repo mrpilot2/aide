@@ -15,4 +15,12 @@ TEST_CASE("Any ID")
 
         REQUIRE(Id("This is a constexpr id").value() == 5812189927597425105);
     }
+
+    SECTION(" can be alphabetically compared")
+    {
+        constexpr Id lower("This is the lower one");
+        constexpr Id higher("This is the more higher one");
+
+        REQUIRE(lower.isAlphabeticallyBefore(higher));
+    }
 }
