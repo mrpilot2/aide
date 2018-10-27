@@ -4,6 +4,7 @@ ADD_EXECUTABLE(aide_ut
 
 TARGET_SOURCES(aide_ut
   PRIVATE
+  commandmanagertest.cpp
     applicationtest.cpp
     idtest.cpp
 )
@@ -26,6 +27,8 @@ TARGET_LINK_LIBRARIES(aide_ut
   PRIVATE
     catch
     aide
+
+    pthread
 )
 
 INCLUDE(../../cmake/Catch.cmake)

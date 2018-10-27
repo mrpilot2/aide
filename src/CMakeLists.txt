@@ -1,3 +1,6 @@
+
+FIND_PACKAGE(Qt5 COMPONENTS Core Widgets)
+
 ADD_SUBDIRECTORY(api)
 
 ADD_LIBRARY(aide SHARED)
@@ -19,7 +22,7 @@ TARGET_INCLUDE_DIRECTORIES(aide
 TARGET_LINK_LIBRARIES(aide
   PUBLIC
     Qt5::Widgets
-    aide_api
+    api
 )
 
 TARGET_COMPILE_FEATURES(aide

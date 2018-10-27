@@ -1,11 +1,18 @@
-ADD_LIBRARY(aide_api "")
+ADD_SUBDIRECTORY(commandmanager)
 
-TARGET_SOURCES(aide_api
+ADD_LIBRARY(api STATIC "")
+
+TARGET_SOURCES(api
   PRIVATE
     id.cpp
 )
 
-TARGET_INCLUDE_DIRECTORIES(aide_api
+TARGET_LINK_LIBRARIES(api
+  PUBLIC
+    commandmanager
+)
+
+TARGET_INCLUDE_DIRECTORIES(api
   INTERFACE
     $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/include/>
     $<INSTALL_INTERFACE:include/>
@@ -13,12 +20,12 @@ TARGET_INCLUDE_DIRECTORIES(aide_api
     ${CMAKE_SOURCE_DIR}/src/include/aide
 )
 
-TARGET_COMPILE_FEATURES(aide_api
+TARGET_COMPILE_FEATURES(api
   PUBLIC
     cxx_std_14
 )
 
 IF(ENABLE_COVERAGE)
-  TARGET_COMPILE_OPTIONS(aide_api PRIVATE -g -O0 --coverage -fno-inline)
-  TARGET_LINK_LIBRARIES(aide_api PRIVATE --coverage)
+  TARGET_COMPILE_OPTIONS(api PRIVATE -g -O0 --coverage -fno-inline)
+  TARGET_LINK_LIBRARIES(api PRIVATE --coverage)
 ENDIF()
