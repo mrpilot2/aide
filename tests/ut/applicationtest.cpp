@@ -29,20 +29,20 @@ TEST_CASE("Any application ")
         QMainWindow* mainWindow = app.mainWindow();
 
         const auto start = std::chrono::steady_clock::now();
-        const std::chrono::milliseconds sleepTime(10);
+        const std::chrono::milliseconds sleepTime(30);
         std::thread t([mainWindow, sleepTime]() {
             std::this_thread::sleep_for(sleepTime);
             mainWindow->close();
         });
 
         aide::Application::exec();
+        t.join();
 
         const auto end = std::chrono::steady_clock::now();
         const auto diff = end - start;
 
         REQUIRE(std::chrono::duration_cast<std::chrono::milliseconds>(diff)
                     .count() >= sleepTime.count());
-        t.join();
     }
 
     SECTION(" when executed returns 0 if application finishes normally")
@@ -51,7 +51,7 @@ TEST_CASE("Any application ")
         char* argv[] = {const_cast<char*>("a")};
         aide::Application app(argc, argv);
 
-        const std::chrono::milliseconds sleepTime(10);
+        const std::chrono::milliseconds sleepTime(30);
         std::thread t([sleepTime]() {
             std::this_thread::sleep_for(sleepTime);
             QApplication::quit();
@@ -68,7 +68,7 @@ TEST_CASE("Any application ")
         aide::Application app(argc, argv);
 
         int exitCode{-1};
-        const std::chrono::milliseconds sleepTime(10);
+        const std::chrono::milliseconds sleepTime(30);
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wpadded"
