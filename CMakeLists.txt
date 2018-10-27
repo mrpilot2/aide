@@ -4,6 +4,7 @@ PROJECT(aide LANGUAGES CXX VERSION 0.1.0)
 
 OPTION(ENABLE_COVERAGE "Generate code coverage reports" OFF)
 
+SET(CMAKE_CXX_STANDARD 14)
 SET(CMAKE_CXX_EXTENSIONS OFF)
 ADD_COMPILE_OPTIONS("$<$<CONFIG:Debug>:-Wall;-Wextra;-Wpedantic;-Werror>")
 ADD_COMPILE_OPTIONS("$<$<AND:$<CXX_COMPILER_ID:Clang>,$<CONFIG:Debug>>:-Weverything;-Wno-c++98-compat>")
