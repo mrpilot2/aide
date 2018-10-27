@@ -36,13 +36,13 @@ TEST_CASE("Any application ")
         });
 
         aide::Application::exec();
-        t.join();
 
         const auto end = std::chrono::steady_clock::now();
         const auto diff = end - start;
 
         REQUIRE(std::chrono::duration_cast<std::chrono::milliseconds>(diff)
                     .count() >= sleepTime.count());
+        t.join();
     }
 
     SECTION(" when executed returns 0 if application finishes normally")
