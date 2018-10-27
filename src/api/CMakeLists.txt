@@ -17,3 +17,8 @@ TARGET_COMPILE_FEATURES(aide_api
   PUBLIC
     cxx_std_14
 )
+
+IF(ENABLE_COVERAGE)
+  TARGET_COMPILE_OPTIONS(aide_api PRIVATE -g -O0 --coverage)
+  TARGET_LINK_LIBRARIES(aide_api PRIVATE --coverage)
+ENDIF()
