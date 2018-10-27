@@ -13,3 +13,7 @@ TARGET_INCLUDE_DIRECTORIES(aide_api
     ${CMAKE_SOURCE_DIR}/src/include/aide
 )
 
+TARGET_COMPILE_FEATURES(aide_api
+  PUBLIC
+    cxx_std_14
+)
