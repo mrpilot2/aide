@@ -21,4 +21,3 @@ ADD_SUBDIRECTORY(demo)
 
 ENABLE_TESTING()
 ADD_SUBDIRECTORY(tests)
-MESSAGE("The compiler is capable of the following features" ${CMAKE_CXX_COMPILE_FEATURES})

@@ -28,7 +28,7 @@ TARGET_LINK_LIBRARIES(aide_ut
     catch
     aide
 
-    pthread
+    $<$<PLATFORM_ID:Linux>:pthread>
 )
 
 INCLUDE(../../cmake/Catch.cmake)
