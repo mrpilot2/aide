@@ -14,7 +14,7 @@ before_build:
 - cmake -H. -Bbuild -G "%CMAKE_GENERATOR%" "-DCMAKE_PREFIX_PATH=%QT5%"
 
 build:
-  project: $(APPVEYOR_BUILD_FOLDER)\$(APPVEYOR_PROJECT_NAME).slnmake --build build --config Debug
+  project: $(APPVEYOR_BUILD_FOLDER)\$(APPVEYOR_PROJECT_NAME).sln
 
 test_script:
   - '%APPVEYOR_BUILD_FOLDER%\%CONFIGURATION%\tests.exe'
