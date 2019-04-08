@@ -2,7 +2,7 @@ ADD_LIBRARY(commandmanager STATIC "")
 
 TARGET_SOURCES(commandmanager
   PRIVATE
-    commandmanager.cpp
+  commandmanager.cpp
 )
 
 TARGET_LINK_LIBRARIES(commandmanager
@@ -16,7 +16,7 @@ TARGET_INCLUDE_DIRECTORIES(commandmanager
     $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/include/>
     $<INSTALL_INTERFACE:include/>
   PRIVATE
-  ../../include/aide/commandmanager
+  ../include/aide/commandmanager
 )
 
 IF(ENABLE_COVERAGE)
