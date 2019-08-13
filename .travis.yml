@@ -4,10 +4,6 @@ coḿpiler:
   - clang
   - gcc
 
-os:
-  - linux
-  - osx
-
 addons:
   apt:
     packages: &common_packages
@@ -28,6 +24,7 @@ matrix:
         - BUILD_TYPE=Debug
       os: linux
       dist: trusty
+      name: "Clang Trusty Debug"
       addons:
         apt:
           sources:
@@ -41,6 +38,7 @@ matrix:
         - BUILD_TYPE=Release
       os: linux
       dist: trusty
+      name: "Clang Trusty Release"
       addons:
         apt:
           sources:
@@ -54,6 +52,7 @@ matrix:
         - BUILD_TYPE=Debug
       os: linux
       dist: xenial
+      name: "Clang Xenial Debug"
       addons:
         apt:
           packages:
@@ -64,6 +63,7 @@ matrix:
         - BUILD_TYPE=Release
       os: linux
       dist: xenial
+      name: "Clang Xenial Release"
       addons:
         apt:
           packages:
@@ -74,6 +74,7 @@ matrix:
         - BUILD_TYPE=Debug
       os: linux
       dist: bionic
+      name: "Clang Bionic Debug"
       addons:
         apt:
           packages:
@@ -83,6 +84,7 @@ matrix:
         - BUILD_TYPE=Release
       os: linux
       dist: bionic
+      name: "Clang Bionic Release"
       addons:
         apt:
           packages:
@@ -96,6 +98,7 @@ matrix:
         - BUILD_TYPE=Debug
       os: linux
       dist: trusty
+      name: "GCC Trusty Debug"
       addons:
         apt:
           sources:
@@ -109,6 +112,7 @@ matrix:
         - BUILD_TYPE=Release
       os: linux
       dist: trusty
+      name: "GCC Trusty Release"
       addons:
         apt:
           sources:
@@ -122,16 +126,18 @@ matrix:
         - BUILD_TYPE=Debug
       os: linux
       dist: xenial
+      name: "GCC Xenial Debug"
       addons:
         apt:
           packages:
             - *common_packages
 
     - env:
-        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+        - MATRIX_EVAL="CC=gcc && CXX=g++"
         - BUILD_TYPE=Release
       os: linux
       dist: xenial
+      name: "GCC Xenial Release"
       addons:
         apt:
           packages:
@@ -142,16 +148,18 @@ matrix:
         - BUILD_TYPE=Debug
       os: linux
       dist: bionic
+      name: "GCC Bionic Debug"
       addons:
         apt:
           packages:
             - *common_packages
 
     - env:
-        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+        - MATRIX_EVAL="CC=gcc && CXX=g++"
         - BUILD_TYPE=Release
       os: linux
       dist: bionic
+      name: "GCC Bionic Release"
       addons:
         apt:
           packages:
