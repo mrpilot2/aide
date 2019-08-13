@@ -4,6 +4,10 @@ coḿpiler:
   - clang
   - gcc
 
+os:
+  - linux
+  - osx
+
 addons:
   apt:
     packages: &common_packages
@@ -15,7 +19,15 @@ addons:
 
 matrix:
   include:
-    - os: linux
+
+    ##########################################################################
+    # Clang on Linux
+    ##########################################################################
+    - env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - BUILD_TYPE=Debug
+      os: linux
+      dist: trusty
       addons:
         apt:
           sources:
@@ -23,10 +35,67 @@ matrix:
           packages:
             - clang-5.0
             - *common_packages
-      env:
-        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
 
-    - os: linux
+    - env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - BUILD_TYPE=Release
+      os: linux
+      dist: trusty
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-5.0
+          packages:
+            - clang-5.0
+            - *common_packages
+
+    - env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - BUILD_TYPE=Debug
+      os: linux
+      dist: xenial
+      addons:
+        apt:
+          packages:
+            - *common_packages
+
+    - env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - BUILD_TYPE=Release
+      os: linux
+      dist: xenial
+      addons:
+        apt:
+          packages:
+            - *common_packages
+
+    - env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - BUILD_TYPE=Debug
+      os: linux
+      dist: bionic
+      addons:
+        apt:
+          packages:
+            - *common_packages
+    - env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - BUILD_TYPE=Release
+      os: linux
+      dist: bionic
+      addons:
+        apt:
+          packages:
+            - *common_packages
+
+    ##########################################################################
+    # GCC on Linux
+    ##########################################################################
+    - env:
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+        - BUILD_TYPE=Debug
+      os: linux
+      dist: trusty
       addons:
         apt:
           sources:
@@ -34,8 +103,59 @@ matrix:
           packages:
             - g++-7
             - *common_packages
-      env:
+
+    - env:
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+        - BUILD_TYPE=Release
+      os: linux
+      dist: trusty
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-7
+            - *common_packages
+
+    - env:
+        - MATRIX_EVAL="CC=gcc && CXX=g++"
+        - BUILD_TYPE=Debug
+      os: linux
+      dist: xenial
+      addons:
+        apt:
+          packages:
+            - *common_packages
+
+    - env:
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+        - BUILD_TYPE=Release
+      os: linux
+      dist: xenial
+      addons:
+        apt:
+          packages:
+            - *common_packages
+
+    - env:
+        - MATRIX_EVAL="CC=gcc && CXX=g++"
+        - BUILD_TYPE=Debug
+      os: linux
+      dist: bionic
+      addons:
+        apt:
+          packages:
+            - *common_packages
+
+    - env:
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+        - BUILD_TYPE=Release
+      os: linux
+      dist: bionic
+      addons:
+        apt:
+          packages:
+            - *common_packages
 
 before_install:
   - wget -O cmake.sh https://cmake.org/files/v3.10/cmake-3.10.3-Linux-x86_64.sh
@@ -45,7 +165,7 @@ before_install:
 script:
   - mkdir build
   - cd build
-  - /usr/local/bin/cmake .. -DENABLE_COVERAGE=ON
+  - /usr/local/bin/cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DENABLE_COVERAGE=ON
   - /usr/local/bin/cmake --build . -- -j 2
 
   - CTEST_OUTPUT_ON_FAILURE=1 xvfb-run ctest
