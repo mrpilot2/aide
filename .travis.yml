@@ -67,7 +67,7 @@ matrix:
     # Clang on Linux
     ##########################################################################
     - env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - MATRIX_EVAL="CC=clang-7 && CXX=clang++-7"
         - BUILD_TYPE=Debug
         - COVERAGE=OFF
       os: linux
@@ -75,12 +75,17 @@ matrix:
       name: "Clang Xenial Debug"
       addons:
         apt:
+          sources:
+            - llvm-toolchain-xenial-7
+            - ubuntu-toolchain-r-test
           packages:
             - *common_packages
             - qt5-default
+            - clang-7
+            - g++-7
 
     - env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - MATRIX_EVAL="CC=clang-7 && CXX=clang++-7"
         - BUILD_TYPE=Release
         - COVERAGE=OFF
       os: linux
@@ -88,9 +93,14 @@ matrix:
       name: "Clang Xenial Release"
       addons:
         apt:
+          sources:
+            - llvm-toolchain-xenial-7
+            - ubuntu-toolchain-r-test
           packages:
             - *common_packages
             - qt5-default
+            - clang-7
+            - g++-7
 
     - env:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
@@ -122,7 +132,7 @@ matrix:
     # GCC on Linux
     ##########################################################################
     - env:
-        - MATRIX_EVAL="CC=gcc && CXX=g++"
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
         - BUILD_TYPE=Debug
         - COVERAGE=OFF
       os: linux
@@ -130,12 +140,15 @@ matrix:
       name: "GCC Xenial Debug"
       addons:
         apt:
+          sources:
+            - ubuntu-toolchain-r-test
           packages:
+            - g++-7
             - *common_packages
             - qt5-default
 
     - env:
-        - MATRIX_EVAL="CC=gcc && CXX=g++"
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
         - BUILD_TYPE=Release
         - COVERAGE=OFF
       os: linux
@@ -143,7 +156,10 @@ matrix:
       name: "GCC Xenial Release"
       addons:
         apt:
+          sources:
+            - ubuntu-toolchain-r-test
           packages:
+            - g++-7
             - *common_packages
             - qt5-default
 
