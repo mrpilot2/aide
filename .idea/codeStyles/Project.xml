@@ -31,6 +31,9 @@
     <XML>
       <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
     </XML>
+    <clangFormatSettings>
+      <option name="ENABLED" value="true" />
+    </clangFormatSettings>
     <codeStyleSettings language="CMake">
       <indentOptions>
         <option name="INDENT_SIZE" value="2" />
