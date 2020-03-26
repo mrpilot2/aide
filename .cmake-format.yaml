@@ -1,0 +1,9 @@
+line_width: 80
+tab_size: 2
+separate_ctrl_name_with_space: false
+separate_fn_name_with_space: false
+dangle_parens: true
+line_ending: unix
+command_case: 'canonical'
+bullet_char: '*'
+enum_char: .
