@@ -4,6 +4,8 @@ coḿpiler:
   - clang
   - gcc
 
+dist: bionic
+
 addons:
   apt:
     packages: &common_packages
@@ -71,38 +73,6 @@ matrix:
         - BUILD_TYPE=Debug
         - COVERAGE=OFF
       os: linux
-      dist: trusty
-      name: "Clang Trusty Debug"
-      addons:
-        apt:
-          sources:
-            - llvm-toolchain-trusty-5.0
-          packages:
-            - clang-5.0
-            - *common_packages
-            - qt5-default
-
-    - env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
-        - BUILD_TYPE=Release
-        - COVERAGE=OFF
-      os: linux
-      dist: trusty
-      name: "Clang Trusty Release"
-      addons:
-        apt:
-          sources:
-            - llvm-toolchain-trusty-5.0
-          packages:
-            - clang-5.0
-            - *common_packages
-            - qt5-default
-
-    - env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
-        - BUILD_TYPE=Debug
-        - COVERAGE=OFF
-      os: linux
       dist: xenial
       name: "Clang Xenial Debug"
       addons:
@@ -154,43 +124,12 @@ matrix:
     # GCC on Linux
     ##########################################################################
     - env:
-        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
-        - BUILD_TYPE=Debug
-        - COVERAGE=OFF
-      os: linux
-      dist: trusty
-      name: "GCC Trusty Debug"
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-7
-            - *common_packages
-            - qt5-default
-
-    - env:
-        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
-        - BUILD_TYPE=Release
-        - COVERAGE=OFF
-      os: linux
-      dist: trusty
-      name: "GCC Trusty Release"
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-7
-            - *common_packages
-            - qt5-default
-
-    - env:
         - MATRIX_EVAL="CC=gcc && CXX=g++"
         - BUILD_TYPE=Debug
         - COVERAGE=OFF
       os: linux
       dist: xenial
+      compiler: gcc
       name: "GCC Xenial Debug"
       addons:
         apt:
@@ -204,6 +143,7 @@ matrix:
         - COVERAGE=OFF
       os: linux
       dist: xenial
+      compiler: gcc
       name: "GCC Xenial Release"
       addons:
         apt:
@@ -217,6 +157,7 @@ matrix:
         - COVERAGE=OFF
       os: linux
       dist: bionic
+      compiler: gcc
       name: "GCC Bionic Debug"
       addons:
         apt:
@@ -230,6 +171,7 @@ matrix:
         - COVERAGE=OFF
       os: linux
       dist: bionic
+      compiler: gcc
       name: "GCC Bionic Release"
       addons:
         apt:
