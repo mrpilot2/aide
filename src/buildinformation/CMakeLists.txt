@@ -23,3 +23,5 @@ target_sources(
 target_include_directories(
   buildinformation INTERFACE ${CMAKE_CURRENT_BINARY_DIR}
 )
+
+target_compile_features(buildinformation INTERFACE cxx_std_11)
