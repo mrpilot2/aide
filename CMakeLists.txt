@@ -11,6 +11,7 @@ project(
   VERSION 0.1.0
 )
 
+include(CompilerWarnings)
 include(StaticAnalyzers)
 
 add_subdirectory(doc)
