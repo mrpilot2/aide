@@ -11,4 +11,8 @@ project(
   VERSION 0.1.0
 )
 
+include(StaticAnalyzers)
+
 add_subdirectory(doc)
+
+add_subdirectory(src)
