@@ -78,10 +78,10 @@ set(GCC_WARNINGS
 
 if(MSVC)
   set(PROJECT_WARNINGS ${MSVC_WARNINGS})
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL
+                                                 "AppleClang"
+)
   set(PROJECT_WARNINGS ${CLANG_WARNINGS})
 else()
   set(PROJECT_WARNINGS ${GCC_WARNINGS})
 endif()
-
-add_compile_options(${PROJECT_WARNINGS})

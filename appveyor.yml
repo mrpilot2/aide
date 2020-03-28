@@ -13,13 +13,17 @@ environment:
     QT5: C:\Qt\5.13.0\msvc2017_64
     BUILD_TYPE: Release
 
+install:
+- pip.exe install conan_package_tools
+- pip.exe install --upgrade --user -r requirements.txt
 
 before_build:
 - set Path=%QT5%\bin;%Path%
-- cmake -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=TRUE -G "%CMAKE_GENERATOR%" -DCMAKE_PREFIX_PATH="%QT5%" -DCMAKE_BUILD_TYPE="%BUILD_TYPE%"
+- mkdir build
+- cmake -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=TRUE -G "%CMAKE_GENERATOR%" -DCMAKE_PREFIX_PATH="%QT5%" -DCMAKE_BUILD_TYPE="%BUILD_TYPE%" -H. -Bbuild
 
 build:
-  project: $(APPVEYOR_BUILD_FOLDER)\$(APPVEYOR_PROJECT_NAME).sln
+  project: $(APPVEYOR_BUILD_FOLDER)\build\$(APPVEYOR_PROJECT_NAME).sln
 
-#test_script:
-#  - '%APPVEYOR_BUILD_FOLDER%\%CONFIGURATION%\aide_ut.exe'
+test_script:
+  - '%APPVEYOR_BUILD_FOLDER%\build\bin\ut.aide.exe'

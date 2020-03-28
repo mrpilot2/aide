@@ -1,9 +1,13 @@
+add_library(project_coverage INTERFACE)
+add_library(aide::project_coverage ALIAS project_coverage)
+
+add_library(project_sanitizers INTERFACE)
+add_library(aide::project_sanitizers ALIAS project_sanitizers)
+
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL
                                            "Clang"
 )
   option(ENABLE_COVERAGE "Enable coverage reporting for gcc/clang" FALSE)
-
-  add_library(project_coverage INTERFACE)
 
   if(ENABLE_COVERAGE)
     target_compile_options(project_coverage INTERFACE --coverage -O0 -g)
@@ -37,8 +41,6 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL
   list(JOIN SANITIZERS "," LIST_OF_SANITIZERS)
 
 endif()
-
-add_library(project_sanitizers INTERFACE)
 
 if(LIST_OF_SANITIZERS)
   if(NOT "${LIST_OF_SANITIZERS}" STREQUAL "")

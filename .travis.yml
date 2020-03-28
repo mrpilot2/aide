@@ -124,7 +124,7 @@ matrix:
     # GCC on Linux
     ##########################################################################
     - env:
-        - MATRIX_EVAL="CC=gcc && CXX=g++"
+        - MATRIX_EVAL="CC=gcc && CXX=g++-7"
         - BUILD_TYPE=Debug
         - COVERAGE=OFF
       os: linux
@@ -133,12 +133,15 @@ matrix:
       name: "GCC Xenial Debug"
       addons:
         apt:
+          sources:
+            - ubuntu-toolchain-r-test
           packages:
             - *common_packages
             - qt5-default
+            - g++-7
 
     - env:
-        - MATRIX_EVAL="CC=gcc && CXX=g++"
+        - MATRIX_EVAL="CC=gcc && CXX=g++-7"
         - BUILD_TYPE=Release
         - COVERAGE=OFF
       os: linux
@@ -147,9 +150,12 @@ matrix:
       name: "GCC Xenial Release"
       addons:
         apt:
+          sources:
+            - ubuntu-toolchain-r-test
           packages:
             - *common_packages
             - qt5-default
+            - g++-7
 
     - env:
         - MATRIX_EVAL="CC=gcc && CXX=g++"
@@ -183,10 +189,13 @@ install:
   - JOBS=2
   - |
     if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
+      pip install --user -r requirements.txt
       wget -O cmake.sh https://cmake.org/files/v3.15/cmake-3.15.7-Linux-x86_64.sh
       sudo sh cmake.sh --skip-license --exclude-subdir --prefix=/usr/local
       export PATH=/usr/local/bin:${PATH}
     else
+      python -m pip install --upgrade pip3
+      pip3 install -r requirements.txt
       brew install cmake || brew upgrade cmake
       QT5_CMAKE_PREFIX=/usr/local/opt/qt/lib/cmake/Qt5
       export QT5_CMAKE_PREFIX
