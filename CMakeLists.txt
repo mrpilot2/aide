@@ -13,6 +13,10 @@ project(
 
 include(CompilerWarnings)
 include(StaticAnalyzers)
+include(Sanitizers)
+
+add_library(aide::project_sanitizers ALIAS project_sanitizers)
+add_library(aide::project_coverage ALIAS project_coverage)
 
 add_subdirectory(doc)
 

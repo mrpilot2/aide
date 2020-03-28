@@ -7,3 +7,7 @@ target_include_directories(
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/>
   PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/aide/>
 )
+
+target_link_libraries(
+  aide PRIVATE aide::project_coverage aide::project_sanitizers
+)
