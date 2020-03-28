@@ -1,3 +1,5 @@
+add_subdirectory(buildinformation)
+
 add_library(aide SHARED)
 
 target_sources(aide PRIVATE application.cpp)

@@ -1,0 +1,41 @@
+#ifndef AIDE_BUILD_INFORMATION_HPP
+#define AIDE_BUILD_INFORMATION_HPP
+
+constexpr unsigned int AIDE_VERSION_MAJOR{@PROJECT_VERSION_MAJOR@};
+constexpr unsigned int AIDE_VERSION_MINOR{@PROJECT_VERSION_MINOR@};
+constexpr unsigned int AIDE_VERSION_PATCH{@PROJECT_VERSION_PATCH@};
+
+/*
+   can be used like #if (AIDE_VERSION >= AIDE_VERSION_CHECK(4, 4, 0))
+*/
+constexpr unsigned int AIDE_VERSION_CHECK(const unsigned int major,
+                                          const unsigned int minor,
+                                          const unsigned int patch)
+{
+    constexpr unsigned int majorShift{16};
+    constexpr unsigned int minorShift{8};
+    return((major << majorShift) | (minor << minorShift) | patch);
+}
+
+/*
+   AIDE_VERSION is (major << 16) + (minor << 8) + patch.
+*/
+constexpr unsigned int AIDE_VERSION{AIDE_VERSION_CHECK(
+    AIDE_VERSION_MAJOR, AIDE_VERSION_MINOR, AIDE_VERSION_PATCH)};
+
+namespace aide
+{
+    namespace build_information
+    {
+        const char* const AIDE_VERSION_STRING{"@PROJECT_VERSION@"};
+
+        const char* const GIT_HASH{"@GIT_HASH@"};
+        const char* const CMAKE_CXX_COMPILER{"@CMAKE_CXX_COMPILER@"};
+        const char* const CMAKE_CXX_COMPILER_VERSION{
+            "@CMAKE_CXX_COMPILER_VERSION@"};
+        const char* const CMAKE_BUILD_TYPE{"@CMAKE_BUILD_TYPE@"};
+        const char* const COMPILE_FLAGS{"@APP_COMPILE_FLAGS@"};
+    } // namespace build_information
+} // namespace aide
+
+#endif // AIDE_BUILD_INFORMATION_HPP
