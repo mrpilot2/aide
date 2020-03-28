@@ -18,6 +18,11 @@ include(Sanitizers)
 add_library(aide::project_sanitizers ALIAS project_sanitizers)
 add_library(aide::project_coverage ALIAS project_coverage)
 
+include(dependencies/CMakeLists.txt)
+
+enable_testing()
+add_subdirectory(tests)
+
 add_subdirectory(doc)
 
 add_subdirectory(src)
