@@ -16,3 +16,5 @@ target_sources(ut.aide PRIVATE buildinformationtest.cpp)
 target_link_libraries(
   ut.aide PRIVATE catch_main project_sanitizers buildinformation
 )
+
+catch_discover_tests(ut.aide EXTRA_ARGS --reporter=xml --out=test_result.xml)
