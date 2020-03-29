@@ -6,7 +6,7 @@ namespace aide
 {
     class Application
     {
-        Application();
+        explicit Application();
     };
 } // namespace aide
 #endif // AIDE_APPLICATION_HPP
