@@ -11,3 +11,4 @@ extraction:
       - export PATH=${DEPS_DIR}/cmake/bin:${PATH}
       - pip3 install --user conan
       - export PATH=~/.local/bin:${PATH}
+      - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
