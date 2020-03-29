@@ -1,7 +1,8 @@
 #include <string>
 
-#include <aide/buildinformation.hpp>
 #include <catch2/catch.hpp>
+
+#include <aide/buildinformation.hpp>
 
 using aide::build_information::GIT_HASH;
 

@@ -63,16 +63,18 @@ IncludeBlocks:       Regroup
 IncludeCategories:
   - Regex:           '^<boost'
     Priority:        3
-  - Regex:           '^<Q'
+  - Regex:           '^<catch2'
     Priority:        4
+  - Regex:           '^<Q'
+    Priority:        5
   - Regex:           '<sys/.*>'
     Priority:        2
   - Regex:           '<[[:alnum:].]+>'
     Priority:        1
   - Regex:           '<.*'
-    Priority:        5
-  - Regex:           '.*'
     Priority:        6
+  - Regex:           '.*'
+    Priority:        7
 IncludeIsMainRegex: '([-_](test|unittest))?$'
 IndentCaseLabels: false
 IndentPPDirectives: None
