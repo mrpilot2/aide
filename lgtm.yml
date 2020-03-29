@@ -4,5 +4,6 @@ extraction:
       packages:
         - python-pip
     after_prepare:    # Customizable step used by all languages.
+      - pip3 install --user scikit-build
       - pip3 install --user cmake conan
       - export PATH=$PATH:~/.local/bin
