@@ -12,3 +12,8 @@ extraction:
       - export PATH=${DEPS_DIR}/cmake/bin:${PATH}
       - pip3 install --user conan
       - export PATH=~/.local/bin:${PATH}
+      - conan profile new default --detect
+      - conan profile update settings.compiler.version=8 default
+      - conan profile update settings.compiler.libcxx=libstdc++11 default
+      - conan remote update conan-center https://conan.bintray.com False
+      - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan False
