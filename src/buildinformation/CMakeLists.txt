@@ -26,4 +26,4 @@ target_include_directories(
 
 target_link_libraries(buildinformation INTERFACE aide::project_coverage)
 
-target_compile_features(buildinformation INTERFACE cxx_std_11)
+target_compile_features(buildinformation INTERFACE cxx_std_14)
