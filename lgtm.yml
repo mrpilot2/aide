@@ -3,6 +3,7 @@ extraction:
     prepare:    # Customizable step used by all languages.
       packages:
         - python-pip
+        - ca-certificate
     after_prepare:    # Customizable step used by all languages.
       - DEPS_DIR="$HOME/deps"
       - mkdir ${DEPS_DIR} && cd ${DEPS_DIR}
@@ -11,4 +12,3 @@ extraction:
       - export PATH=${DEPS_DIR}/cmake/bin:${PATH}
       - pip3 install --user conan
       - export PATH=~/.local/bin:${PATH}
-      - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan FALSE
