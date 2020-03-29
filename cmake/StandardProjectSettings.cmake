@@ -1,6 +1,9 @@
 macro(standard_project_settings)
   # Set a default build type if none was specified
-  if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+  if(NOT GENERATOR_IS_MULTI_CONFIG
+     AND NOT CMAKE_BUILD_TYPE
+     AND NOT CMAKE_CONFIGURATION_TYPES
+  )
     message(
       STATUS "Setting build type to 'RelWithDebInfo' as none was specified."
     )
