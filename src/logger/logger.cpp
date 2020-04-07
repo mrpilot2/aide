@@ -22,4 +22,10 @@ Logger::Logger()
 
     m_logger = std::make_shared<spdlog::logger>("aide_logger", begin(sinks),
                                                 end(sinks));
+    m_logger->set_level(spdlog::level::trace);
+}
+
+void Logger::flush()
+{
+    m_logger->flush();
 }
