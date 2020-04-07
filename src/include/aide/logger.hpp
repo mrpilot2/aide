@@ -6,6 +6,7 @@
 #include <spdlog/spdlog.h>
 #include <string_view>
 
+const char* const AIDE_DEFAULT_MACRO_LOGGER{"aide_macro_logger"};
 namespace aide
 {
     /**
@@ -21,7 +22,7 @@ namespace aide
     {
     public:
         Logger();
-        Logger(const std::string& logFileName);
+        explicit Logger(const std::string& logFileName);
 
         template <typename... Args>
         void trace(std::string_view fmt, const Args&... args)
@@ -62,7 +63,13 @@ namespace aide
         void flush();
 
     private:
+        void registerLogger(std::shared_ptr<spdlog::logger> logger);
+
+        static std::vector<spdlog::sink_ptr> createSinks(
+            std::string logFileName);
+
         std::shared_ptr<spdlog::logger> m_logger;
+        std::shared_ptr<spdlog::logger> m_macroLogger;
     };
 } // namespace aide
 
