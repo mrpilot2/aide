@@ -9,15 +9,16 @@
 
 using aide::Logger;
 
+static constexpr unsigned int maxFileSizeInMB{1024 * 1024 * 5};
+static constexpr uint16_t maxNumberOfFiles{3};
+
 Logger::Logger()
 {
     std::vector<spdlog::sink_ptr> sinks;
     sinks.push_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
 
-    const int maxFileSize = 1048576 * 5;
-
     sinks.push_back(std::make_shared<spdlog::sinks::rotating_file_sink_mt>(
-        "logfile.txt", maxFileSize, 3));
+        "logfile.txt", maxFileSizeInMB, maxNumberOfFiles));
 
     m_logger = std::make_shared<spdlog::logger>("aide_logger", begin(sinks),
                                                 end(sinks));
