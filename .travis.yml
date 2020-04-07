@@ -69,7 +69,7 @@ matrix:
     # Clang on Linux
     ##########################################################################
     - env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - MATRIX_EVAL="CC=clang-9 && CXX=clang++-9"
         - BUILD_TYPE=Debug
         - COVERAGE=OFF
       os: linux
@@ -77,12 +77,18 @@ matrix:
       name: "Clang Xenial Debug"
       addons:
         apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - sourceline: 'deb https://apt.llvm.org/xenial/ llvm-toolchain-xenial-9 main'
+              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
           packages:
             - *common_packages
             - qt5-default
+            - clang-9
+            - g++-7
 
     - env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - MATRIX_EVAL="CC=clang-9 && CXX=clang++-9"
         - BUILD_TYPE=Release
         - COVERAGE=OFF
       os: linux
@@ -90,9 +96,15 @@ matrix:
       name: "Clang Xenial Release"
       addons:
         apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - sourceline: 'deb https://apt.llvm.org/xenial/ llvm-toolchain-xenial-9 main'
+              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
           packages:
             - *common_packages
             - qt5-default
+            - clang-9
+            - g++-7
 
     - env:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
