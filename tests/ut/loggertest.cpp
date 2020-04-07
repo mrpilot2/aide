@@ -27,11 +27,11 @@ TEST_CASE("Test construction of logger")
 
 TEST_CASE("Test different log levels")
 {
-    const char* const logFileName = "logfile.txt";
+    const char* const logFileName = "aide_test.log";
 
     std::remove(logFileName);
 
-    Logger logger;
+    Logger logger(logFileName);
 
     SECTION(" trace")
     {

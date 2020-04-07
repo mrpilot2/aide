@@ -13,12 +13,17 @@ static constexpr unsigned int maxFileSizeInMB{1024 * 1024 * 5};
 static constexpr uint16_t maxNumberOfFiles{3};
 
 Logger::Logger()
+    : Logger("aide.log")
+{
+}
+
+Logger::Logger(const std::string& logFileName)
 {
     std::vector<spdlog::sink_ptr> sinks;
     sinks.push_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
 
     sinks.push_back(std::make_shared<spdlog::sinks::rotating_file_sink_mt>(
-        "logfile.txt", maxFileSizeInMB, maxNumberOfFiles));
+        logFileName, maxFileSizeInMB, maxNumberOfFiles));
 
     m_logger = std::make_shared<spdlog::logger>("aide_logger", begin(sinks),
                                                 end(sinks));

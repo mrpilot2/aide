@@ -21,6 +21,7 @@ namespace aide
     {
     public:
         Logger();
+        Logger(const std::string& logFileName);
 
         template <typename... Args>
         void trace(std::string_view fmt, const Args&... args)
