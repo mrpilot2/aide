@@ -8,6 +8,8 @@
 #include <spdlog/sinks/rotating_file_sink.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 
+using aide::FileName;
+using aide::LoggerName;
 using aide::Logger;
 
 static constexpr unsigned int maxFileSizeInMB{1024 * 1024 * 5};
@@ -17,11 +19,11 @@ Logger::Logger()
     : Logger(FileName("aide.log"), LoggerName("aide"))
 {}
 
-Logger::Logger(aide::FileName fileName)
+Logger::Logger(FileName fileName)
     : Logger(fileName, LoggerName("aide"))
 {}
 
-Logger::Logger(aide::LoggerName loggerName)
+Logger::Logger(LoggerName loggerName)
     : Logger(FileName("aide.log"), loggerName)
 {}
 
