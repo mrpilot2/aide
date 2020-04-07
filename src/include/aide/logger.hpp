@@ -6,9 +6,31 @@
 #include <spdlog/spdlog.h>
 #include <string_view>
 
-const char* const AIDE_DEFAULT_MACRO_LOGGER{"aide_macro_logger"};
+const char* const AIDE_DEFAULT_MACRO_LOGGER{"aide_macro"};
 namespace aide
 {
+    struct FileName
+    {
+        explicit FileName(const char* const fileName)
+            : m_fileName{fileName}
+        {}
+
+        const char* operator()() const { return m_fileName; }
+    private:
+        const char* const m_fileName;
+    };
+
+    struct LoggerName
+    {
+        explicit LoggerName(const char* const fileName)
+            : m_loggerName{fileName}
+        {}
+
+        const char* operator()() const { return m_loggerName; }
+    private:
+        const char* const m_loggerName;
+    };
+
     /**
      * @brief Logging framework
      *
@@ -22,7 +44,10 @@ namespace aide
     {
     public:
         Logger();
-        explicit Logger(const std::string& logFileName);
+        explicit Logger(FileName logFileName);
+        explicit Logger(LoggerName loggerName);
+        explicit Logger(FileName logFileName,
+                        LoggerName loggerName);
 
         template <typename... Args>
         void trace(std::string_view fmt, const Args&... args)

@@ -6,6 +6,7 @@
 
 #include <aide/logger.hpp>
 
+using aide::FileName;
 using aide::Logger;
 
 namespace
@@ -31,7 +32,7 @@ TEST_CASE("Test different log levels")
 
     std::remove(logFileName);
 
-    Logger logger(logFileName);
+    Logger logger = Logger(FileName(logFileName));
 
     SECTION(" trace")
     {

@@ -14,19 +14,26 @@ static constexpr unsigned int maxFileSizeInMB{1024 * 1024 * 5};
 static constexpr uint16_t maxNumberOfFiles{3};
 
 Logger::Logger()
-    : Logger("aide.log")
-{
-}
+    : Logger(FileName("aide.log"), LoggerName("aide"))
+{}
 
-Logger::Logger(const std::string& logFileName)
+Logger::Logger(aide::FileName fileName)
+    : Logger(fileName, LoggerName("aide"))
+{}
+
+Logger::Logger(aide::LoggerName loggerName)
+    : Logger(FileName("aide.log"), loggerName)
+{}
+
+Logger::Logger(const FileName logFileName, const LoggerName loggerName)
 {
-    auto logSinks = createSinks(logFileName);
-    m_logger = std::make_shared<spdlog::logger>("aide_logger", begin(logSinks),
+    auto logSinks = createSinks(logFileName());
+    m_logger = std::make_shared<spdlog::logger>(loggerName(), begin(logSinks),
                                                 end(logSinks));
     m_logger->set_level(spdlog::level::trace);
     m_logger->set_pattern("%Y-%m-%d %H:%M:%S%e [%8t] - %8l - %n - %v");
 
-    auto macroLogSinks = createSinks(logFileName);
+    auto macroLogSinks = createSinks(logFileName());
     m_macroLogger      = std::make_shared<spdlog::logger>(
         AIDE_DEFAULT_MACRO_LOGGER, begin(macroLogSinks), end(macroLogSinks));
     m_macroLogger->set_level(spdlog::level::trace);
@@ -52,7 +59,6 @@ void Logger::registerLogger(std::shared_ptr<spdlog::logger> logger)
                        ex.what());
     }
 }
-
 std::vector<spdlog::sink_ptr> Logger::createSinks(std::string logFileName)
 {
     std::vector<spdlog::sink_ptr> sinks;
