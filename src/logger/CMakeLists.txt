@@ -14,4 +14,5 @@ target_link_libraries(
   PRIVATE project_coverage
 )
 
+target_compile_definitions(logger PUBLIC SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_TRACE)
 target_compile_features(logger PUBLIC cxx_std_17)

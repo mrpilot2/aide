@@ -1,12 +1,14 @@
 #ifndef AIDE_LOGGER_HPP
 #define AIDE_LOGGER_HPP
 
+#include <iostream>
 #include <memory>
 
 #include <spdlog/spdlog.h>
 #include <string_view>
 
-const char* const AIDE_DEFAULT_MACRO_LOGGER{"aide_macro"};
+#include "log_helper_macros.hpp"
+
 namespace aide
 {
     struct FileName
@@ -88,7 +90,7 @@ namespace aide
         void flush();
 
     private:
-        void registerLogger(std::shared_ptr<spdlog::logger> logger);
+        static void registerLogger(const std::shared_ptr<spdlog::logger>& logger);
 
         static std::vector<spdlog::sink_ptr> createSinks(
             std::string logFileName);

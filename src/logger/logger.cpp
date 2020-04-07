@@ -27,6 +27,7 @@ Logger::Logger(aide::LoggerName loggerName)
 
 Logger::Logger(const FileName logFileName, const LoggerName loggerName)
 {
+    std::cout << "Creating logger " << loggerName() << '\n';
     auto logSinks = createSinks(logFileName());
     m_logger = std::make_shared<spdlog::logger>(loggerName(), begin(logSinks),
                                                 end(logSinks));
@@ -35,7 +36,8 @@ Logger::Logger(const FileName logFileName, const LoggerName loggerName)
 
     auto macroLogSinks = createSinks(logFileName());
     m_macroLogger      = std::make_shared<spdlog::logger>(
-        AIDE_DEFAULT_MACRO_LOGGER, begin(macroLogSinks), end(macroLogSinks));
+        loggerName() + std::string("_macro"), begin(macroLogSinks),
+        end(macroLogSinks));
     m_macroLogger->set_level(spdlog::level::trace);
     m_macroLogger->set_pattern(
         "%Y-%m-%d %H:%M:%S%e [%8t] - %8l - %n - %g:%# - %v");
@@ -47,16 +49,18 @@ Logger::Logger(const FileName logFileName, const LoggerName loggerName)
 void Logger::flush()
 {
     m_logger->flush();
+    m_macroLogger->flush();
 }
 
-void Logger::registerLogger(std::shared_ptr<spdlog::logger> logger)
+void Logger::registerLogger(const std::shared_ptr<spdlog::logger>& logger)
 {
+    if (spdlog::get(logger->name()) != nullptr) { return; }
     try {
-        spdlog::register_logger(std::move(logger));
+        spdlog::register_logger(logger);
     }
     catch (const spdlog::spdlog_ex& ex) {
-        m_logger->info("Logger::Logger() - register macro logger failed {}: ",
-                       ex.what());
+        logger->info("Logger::Logger() - register logger failed {}: ",
+                      ex.what());
     }
 }
 std::vector<spdlog::sink_ptr> Logger::createSinks(std::string logFileName)

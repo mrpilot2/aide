@@ -7,17 +7,18 @@
 #include <aide/logger.hpp>
 
 using aide::FileName;
+using aide::LoggerName;
 using aide::Logger;
 
 namespace
 {
-    size_t lookForLogLevelInFile(const char* const fileName,
-                                 const char* const logLevel)
+    size_t lookForContentInFile(const char* const fileName,
+                                const char* const searchString)
     {
         std::ifstream logFile(fileName, std::ios::in);
-        std::stringstream content;
-        content << logFile.rdbuf();
-        return content.str().find(logLevel);
+        std::stringstream fileContent;
+        fileContent << logFile.rdbuf();
+        return fileContent.str().find(searchString);
     }
 } // namespace
 
@@ -39,7 +40,7 @@ TEST_CASE("Test different log levels")
         logger.trace("This logs to the file");
         logger.flush();
 
-        REQUIRE(::lookForLogLevelInFile(logFileName, "trace") !=
+        REQUIRE(::lookForContentInFile(logFileName, "trace") !=
                 std::string::npos);
     }
 
@@ -48,7 +49,7 @@ TEST_CASE("Test different log levels")
         logger.debug("This logs to the file");
         logger.flush();
 
-        REQUIRE(::lookForLogLevelInFile(logFileName, "debug") !=
+        REQUIRE(::lookForContentInFile(logFileName, "debug") !=
                 std::string::npos);
     }
 
@@ -57,7 +58,7 @@ TEST_CASE("Test different log levels")
         logger.info("This logs to the file");
         logger.flush();
 
-        REQUIRE(::lookForLogLevelInFile(logFileName, "info") !=
+        REQUIRE(::lookForContentInFile(logFileName, "info") !=
                 std::string::npos);
     }
 
@@ -66,7 +67,7 @@ TEST_CASE("Test different log levels")
         logger.warn("This logs to the file");
         logger.flush();
 
-        REQUIRE(::lookForLogLevelInFile(logFileName, "warn") !=
+        REQUIRE(::lookForContentInFile(logFileName, "warn") !=
                 std::string::npos);
     }
 
@@ -75,7 +76,7 @@ TEST_CASE("Test different log levels")
         logger.error("This logs to the file");
         logger.flush();
 
-        REQUIRE(::lookForLogLevelInFile(logFileName, "error") !=
+        REQUIRE(::lookForContentInFile(logFileName, "error") !=
                 std::string::npos);
     }
 
@@ -84,7 +85,245 @@ TEST_CASE("Test different log levels")
         logger.critical("This logs to the file");
         logger.flush();
 
-        REQUIRE(::lookForLogLevelInFile(logFileName, "critical") !=
+        REQUIRE(::lookForContentInFile(logFileName, "critical") !=
+                std::string::npos);
+    }
+}
+
+TEST_CASE("Test log macros")
+{
+    spdlog::drop_all();
+    const char* const logFileName = "aide_test.log";
+
+    std::remove(logFileName);
+
+    Logger logger = Logger(FileName(logFileName));
+
+    SECTION(" trace default logger")
+    {
+        AIDE_LOG_TRACE("Test")
+        logger.flush();
+
+        REQUIRE(::lookForContentInFile(logFileName, "aide_macro") !=
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "trace") !=
+                std::string::npos);
+    }
+
+    SECTION(" trace available logger")
+    {
+        Logger custom_logger(FileName(logFileName),
+                             LoggerName("my_fancy_logger"));
+
+        AIDE_CUSTOM_LOG_TRACE("my_fancy_logger", "Test")
+        custom_logger.flush();
+
+        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") !=
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "trace") !=
+                std::string::npos);
+    }
+
+    SECTION(" trace unavailable logger")
+    {
+        AIDE_CUSTOM_LOG_TRACE("my_fancy_logger", "Test")
+        logger.flush();
+
+        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") ==
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "error") !=
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "trying to access") !=
+                std::string::npos);
+    }
+
+    SECTION(" debug default logger")
+    {
+        AIDE_LOG_DEBUG("Test")
+        logger.flush();
+
+        REQUIRE(::lookForContentInFile(logFileName, "aide_macro") !=
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "debug") !=
+                std::string::npos);
+    }
+
+    SECTION(" debug available logger")
+    {
+        Logger custom_logger(FileName(logFileName),
+                             LoggerName("my_fancy_logger"));
+
+        AIDE_CUSTOM_LOG_DEBUG("my_fancy_logger", "Test")
+        custom_logger.flush();
+
+        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") !=
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "debug") !=
+                std::string::npos);
+    }
+
+    SECTION(" debug unavailable logger")
+    {
+        AIDE_CUSTOM_LOG_DEBUG("my_fancy_logger", "Test")
+        logger.flush();
+
+        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") ==
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "error") !=
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "trying to access") !=
+                std::string::npos);
+    }
+
+    SECTION(" info default logger")
+    {
+        AIDE_LOG_INFO("Test")
+        logger.flush();
+
+        REQUIRE(::lookForContentInFile(logFileName, "aide_macro") !=
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "info") !=
+                std::string::npos);
+    }
+
+    SECTION(" info available logger")
+    {
+        Logger custom_logger(FileName(logFileName),
+                             LoggerName("my_fancy_logger"));
+
+        AIDE_CUSTOM_LOG_INFO("my_fancy_logger", "Test")
+        custom_logger.flush();
+
+        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") !=
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "info") !=
+                std::string::npos);
+    }
+
+    SECTION(" info unavailable logger")
+    {
+        AIDE_CUSTOM_LOG_INFO("my_fancy_logger", "Test")
+        logger.flush();
+
+        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") ==
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "error") !=
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "trying to access") !=
+                std::string::npos);
+    }
+
+    SECTION(" warn default logger")
+    {
+        AIDE_LOG_WARN("Test")
+        logger.flush();
+
+        REQUIRE(::lookForContentInFile(logFileName, "aide_macro") !=
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "warn") !=
+                std::string::npos);
+    }
+
+    SECTION(" warn available logger")
+    {
+        Logger custom_logger(FileName(logFileName),
+                             LoggerName("my_fancy_logger"));
+
+        AIDE_CUSTOM_LOG_WARN("my_fancy_logger", "Test")
+        custom_logger.flush();
+
+        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") !=
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "warn") !=
+                std::string::npos);
+    }
+
+    SECTION(" warn unavailable logger")
+    {
+        AIDE_CUSTOM_LOG_WARN("my_fancy_logger", "Test")
+        logger.flush();
+
+        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") ==
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "error") !=
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "trying to access") !=
+                std::string::npos);
+    }
+
+    SECTION(" error default logger")
+    {
+        AIDE_LOG_ERROR("Test info")
+        logger.flush();
+
+        REQUIRE(::lookForContentInFile(logFileName, "aide_macro") !=
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "error") !=
+                std::string::npos);
+    }
+
+    SECTION(" error available logger")
+    {
+        Logger custom_logger(FileName(logFileName),
+                             LoggerName("my_fancy_logger"));
+
+        AIDE_CUSTOM_LOG_ERROR("my_fancy_logger", "Test")
+        custom_logger.flush();
+
+        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") !=
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "error") !=
+                std::string::npos);
+    }
+
+    SECTION(" error unavailable logger")
+    {
+        AIDE_CUSTOM_LOG_ERROR("my_fancy_logger", "Test")
+        logger.flush();
+
+        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") ==
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "error") !=
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "trying to access") !=
+                std::string::npos);
+    }
+
+    SECTION(" critical default logger")
+    {
+        AIDE_LOG_CRITICAL("Test")
+        logger.flush();
+
+        REQUIRE(::lookForContentInFile(logFileName, "aide_macro") !=
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "critical") !=
+                std::string::npos);
+    }
+
+    SECTION(" critical available logger")
+    {
+        Logger custom_logger(FileName(logFileName),
+                             LoggerName("my_fancy_logger"));
+
+        AIDE_CUSTOM_LOG_CRITICAL("my_fancy_logger", "Test")
+        custom_logger.flush();
+
+        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") !=
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "critical") !=
+                std::string::npos);
+    }
+
+    SECTION(" critical unavailable logger")
+    {
+        AIDE_CUSTOM_LOG_CRITICAL("my_fancy_logger", "Test")
+        logger.flush();
+
+        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") ==
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "error") !=
+                std::string::npos);
+        REQUIRE(::lookForContentInFile(logFileName, "trying to access") !=
                 std::string::npos);
     }
 }
