@@ -28,6 +28,7 @@ Logger::Logger(const std::string& logFileName)
     m_logger = std::make_shared<spdlog::logger>("aide_logger", begin(sinks),
                                                 end(sinks));
     m_logger->set_level(spdlog::level::trace);
+    m_logger->set_pattern("%Y-%m-%d %H:%M:%S%e [%8t] - %8l - %n - %g:%# - %v");
 }
 
 void Logger::flush()
