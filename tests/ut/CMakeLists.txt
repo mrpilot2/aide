@@ -17,4 +17,4 @@ target_link_libraries(
   ut.aide PRIVATE catch_main project_sanitizers buildinformation logger
 )
 
-catch_discover_tests(ut.aide EXTRA_ARGS --reporter=xml --out=test_result.xml)
+catch_discover_tests(ut.aide EXTRA_ARGS --reporter=junit --out=test_result.xml)
