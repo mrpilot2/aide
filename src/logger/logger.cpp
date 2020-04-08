@@ -29,7 +29,6 @@ Logger::Logger(LoggerName loggerName)
 
 Logger::Logger(const FileName logFileName, const LoggerName loggerName)
 {
-    std::cout << "Creating logger " << loggerName() << '\n';
     auto logSinks = createSinks(logFileName());
     m_logger = std::make_shared<spdlog::logger>(loggerName(), begin(logSinks),
                                                 end(logSinks));
@@ -68,7 +67,9 @@ void Logger::registerLogger(const std::shared_ptr<spdlog::logger>& logger)
 std::vector<spdlog::sink_ptr> Logger::createSinks(std::string logFileName)
 {
     std::vector<spdlog::sink_ptr> sinks;
+#ifndef NDEBUG
     sinks.push_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
+#endif
 
     sinks.push_back(std::make_shared<spdlog::sinks::rotating_file_sink_mt>(
         std::move(logFileName), maxFileSizeInMB, maxNumberOfFiles));
