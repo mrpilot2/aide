@@ -1,6 +1,9 @@
 image:
   - Visual Studio 2017
 
+cache:
+  - C:\Users\appveyor\.conan -> dependencies/CMakeLists.txt
+
 configuration:
   - Debug
   - Release

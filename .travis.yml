@@ -1,6 +1,16 @@
 language: cpp
 
-coḿpiler:
+before_cache:
+  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew cleanup; fi
+
+cache:
+  - pip
+  - ccache
+  - directories:
+    - $HOME/.conan
+    - $HOME/Library/Caches/Homebrew
+
+compiler:
   - clang
   - gcc
 
