@@ -11,9 +11,9 @@ AlignTrailingComments: true
 AllowAllArgumentsOnNextLine: false
 AllowAllConstructorInitializersOnNextLine: false
 AllowAllParametersOfDeclarationOnNextLine: false
-AllowShortBlocksOnASingleLine: true
+AllowShortBlocksOnASingleLine: Always
 AllowShortCaseLabelsOnASingleLine: false
-AllowShortFunctionsOnASingleLine: Empty
+AllowShortFunctionsOnASingleLine: Inline
 AllowShortIfStatementsOnASingleLine: WithoutElse
 AllowShortLambdasOnASingleLine: Inline
 AllowShortLoopsOnASingleLine: false
@@ -35,7 +35,7 @@ BraceWrapping:
   BeforeCatch:     true
   BeforeElse:      false
   IndentBraces:    false
-  SplitEmptyFunction: true
+  SplitEmptyFunction: false
   SplitEmptyRecord: true
   SplitEmptyNamespace: true
 BreakAfterJavaFieldAnnotations: false
@@ -63,16 +63,18 @@ IncludeBlocks:       Regroup
 IncludeCategories:
   - Regex:           '^<boost'
     Priority:        3
-  - Regex:           '^<Q'
+  - Regex:           '^<catch2'
     Priority:        4
+  - Regex:           '^<Q'
+    Priority:        5
   - Regex:           '<sys/.*>'
     Priority:        2
   - Regex:           '<[[:alnum:].]+>'
     Priority:        1
   - Regex:           '<.*'
-    Priority:        5
-  - Regex:           '.*'
     Priority:        6
+  - Regex:           '.*'
+    Priority:        7
 IncludeIsMainRegex: '([-_](test|unittest))?$'
 IndentCaseLabels: false
 IndentPPDirectives: None

@@ -1,4 +1,5 @@
 add_subdirectory(buildinformation)
+add_subdirectory(logger)
 
 add_library(aide SHARED)
 

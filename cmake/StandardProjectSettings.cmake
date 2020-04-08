@@ -1,6 +1,7 @@
 macro(standard_project_settings)
   # Set a default build type if none was specified
-  if(NOT GENERATOR_IS_MULTI_CONFIG
+  get_property(IS_MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
+  if(NOT ${IS_MULTI_CONFIG}
      AND NOT CMAKE_BUILD_TYPE
      AND NOT CMAKE_CONFIGURATION_TYPES
   )

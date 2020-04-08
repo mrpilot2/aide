@@ -1,6 +1,9 @@
 image:
   - Visual Studio 2017
 
+cache:
+  - C:\Users\appveyor\.conan -> dependencies/CMakeLists.txt
+
 configuration:
   - Debug
   - Release
@@ -27,4 +30,11 @@ build:
   project: $(APPVEYOR_BUILD_FOLDER)\build\$(APPVEYOR_PROJECT_NAME).sln
 
 test_script:
-  - '%APPVEYOR_BUILD_FOLDER%\build\bin\ut.aide.exe'
+  - cd build
+  - ctest -V
+
+on_success:
+  - appveyor PushArtifact tests\ut\test_result.xml
+  - sh: |
+      echo "Test $APPVEYOR_JOB_ID"
+      find "tests/ut" -type f -name 'test_result.xml' -print0 | xargs -0 -I '{}' curl -F 'file=@{}' "https://ci.appveyor.com/api/testresults/junit/$APPVEYOR_JOB_ID"
