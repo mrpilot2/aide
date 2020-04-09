@@ -18,4 +18,5 @@ target_link_libraries(
                   Aide::AideCore
 )
 
+enable_testing()
 catch_discover_tests(ut.aide EXTRA_ARGS --reporter=junit --out=test_result.xml)
