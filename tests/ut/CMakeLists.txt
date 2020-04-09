@@ -14,7 +14,7 @@ add_executable(ut.aide)
 target_sources(ut.aide PRIVATE buildinformationtest.cpp loggertest.cpp)
 
 target_link_libraries(
-  ut.aide PRIVATE catch_main project_sanitizers Aide::BuildInformation
+  ut.aide PRIVATE catch_main project_sanitizers Aide::AideBuildInformation
                   Aide::AideCore
 )
 
