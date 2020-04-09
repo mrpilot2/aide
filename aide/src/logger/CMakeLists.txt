@@ -1,4 +1,4 @@
-add_library(aide_logger STATIC)
+add_library(aide_logger OBJECT)
 add_library(Aide::Logger ALIAS aide_logger)
 
 target_sources(aide_logger PRIVATE logger.cpp)
@@ -14,6 +14,8 @@ target_link_libraries(
   PUBLIC CONAN_PKG::spdlog
   PRIVATE project_coverage
 )
+
+target_compile_options(aide_logger PRIVATE -fPIC)
 
 target_compile_definitions(
   aide_logger PUBLIC SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_TRACE
