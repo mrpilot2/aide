@@ -13,7 +13,9 @@ target_include_directories(
 )
 
 target_link_libraries(
-  aide_core PRIVATE aide::project_coverage aide::project_sanitizers
+  aide_core
+  PUBLIC Aide::Logger
+  PRIVATE aide::project_coverage aide::project_sanitizers
 )
 
 target_compile_features(aide_core PUBLIC cxx_std_11)
