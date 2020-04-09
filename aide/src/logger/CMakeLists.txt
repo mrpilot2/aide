@@ -15,7 +15,7 @@ target_link_libraries(
   PRIVATE project_coverage
 )
 
-target_compile_options(AideLogger PRIVATE -fPIC)
+set_target_properties(AideLogger PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 target_compile_definitions(
   AideLogger PUBLIC SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_TRACE
