@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/aide/cmake)
 
 include(StandardProjectSettings)
 standard_project_settings()
@@ -15,11 +16,7 @@ include(CompilerWarnings)
 include(StaticAnalyzers)
 include(Sanitizers)
 
-include(dependencies/CMakeLists.txt)
+add_subdirectory(aide)
 
 enable_testing()
 add_subdirectory(tests)
-
-add_subdirectory(doc)
-
-add_subdirectory(src)
