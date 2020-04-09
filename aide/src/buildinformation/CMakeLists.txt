@@ -13,17 +13,18 @@ set_source_files_properties(
                                                                    TRUE
 )
 
-add_library(buildinformation INTERFACE)
+add_library(aide_buildinformation INTERFACE)
+add_library(Aide::BuildInformation ALIAS aide_buildinformation)
 
 target_sources(
-  buildinformation
+  aide_buildinformation
   INTERFACE ${CMAKE_CURRENT_BINARY_DIR}/aide/buildinformation.hpp
 )
 
 target_include_directories(
-  buildinformation INTERFACE ${CMAKE_CURRENT_BINARY_DIR}
+  aide_buildinformation INTERFACE ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-target_link_libraries(buildinformation INTERFACE aide::project_coverage)
+target_link_libraries(aide_buildinformation INTERFACE aide::project_coverage)
 
-target_compile_features(buildinformation INTERFACE cxx_std_14)
+target_compile_features(aide_buildinformation INTERFACE cxx_std_14)
