@@ -11,14 +11,12 @@ project(
   VERSION 0.1.0
 )
 
-if(NOT TARGET aide::project_sanitizers)
-  add_library(project_sanitizers INTERFACE)
-  add_library(aide::project_sanitizers ALIAS project_sanitizers)
+if(NOT TARGET project_sanitizers)
+  add_library(project_sanitizers INTERFACE IMPORTED)
 endif()
 
-if(NOT TARGET aide::project_coverage)
-  add_library(project_coverage INTERFACE)
-  add_library(aide::project_coverage ALIAS project_coverage)
+if(NOT TARGET project_coverage)
+  add_library(project_coverage INTERFACE IMPORTED)
 endif()
 
 include(dependencies/CMakeLists.txt)

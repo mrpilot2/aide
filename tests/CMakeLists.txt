@@ -19,9 +19,8 @@ if(NOT TARGET Aide::AideCore)
 endif()
 
 # target does not exist in standalone mode, only when built from top-level
-if(NOT TARGET aide::project_sanitizers)
-  add_library(project_sanitizers INTERFACE)
-  add_library(aide::project_sanitizers ALIAS project_sanitizers)
+if(NOT TARGET project_sanitizers)
+  add_library(project_sanitizers INTERFACE IMPORTED)
 endif()
 
 enable_testing()

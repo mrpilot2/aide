@@ -1,7 +1,7 @@
 add_subdirectory(buildinformation)
 add_subdirectory(logger)
 
-add_library(AideCore SHARED)
+add_library(AideCore)
 add_library(Aide::AideCore ALIAS AideCore)
 
 target_sources(AideCore PRIVATE application.cpp $<TARGET_OBJECTS:AideLogger>)
@@ -15,7 +15,7 @@ target_include_directories(
 target_link_libraries(
   AideCore
   PUBLIC CONAN_PKG::spdlog
-  PRIVATE aide::project_coverage aide::project_sanitizers
+  PRIVATE project_coverage project_sanitizers
 )
 
 target_compile_features(AideCore PUBLIC cxx_std_17)
