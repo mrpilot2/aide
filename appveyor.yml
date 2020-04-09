@@ -2,7 +2,7 @@ image:
   - Visual Studio 2017
 
 cache:
-  - C:\Users\appveyor\.conan -> dependencies/CMakeLists.txt
+  - C:\Users\appveyor\.conan -> aide/dependencies/CMakeLists.txt
 
 configuration:
   - Debug
