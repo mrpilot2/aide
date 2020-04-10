@@ -13,8 +13,8 @@ environment:
   - BUILD_SHARED_LIBS: 0
     QT5: C:\Qt\5.13.0\msvc2017_64
 
-  - BUILD_SHARED_LIBS: 1
-    QT5: C:\Qt\5.13.0\msvc2017_64
+#  - BUILD_SHARED_LIBS: 1
+#    QT5: C:\Qt\5.13.0\msvc2017_64
 
 install:
 - pip.exe install conan_package_tools
