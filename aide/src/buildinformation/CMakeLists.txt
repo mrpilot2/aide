@@ -5,25 +5,29 @@ git_describe(GIT_HASH --tags --always --dirty)
 message("BuildInformation - Current git hash is " ${GIT_HASH})
 
 configure_file(
-  buildinformation.hpp.in ${CMAKE_CURRENT_BINARY_DIR}/aide/buildinformation.hpp
+  buildinformation.hpp.in ${CMAKE_BINARY_DIR}/include/aide/buildinformation.hpp
 )
 
 set_source_files_properties(
-  ${CMAKE_CURRENT_BINARY_DIR}/aide/buildinformation.hpp PROPERTIES GENERATED
+  ${CMAKE_BINARY_DIR}/include/aide/buildinformation.hpp PROPERTIES GENERATED
                                                                    TRUE
 )
 
-add_library(buildinformation INTERFACE)
+add_library(AideBuildInformation INTERFACE)
+add_library(Aide::AideBuildInformation ALIAS AideBuildInformation)
 
 target_sources(
-  buildinformation
-  INTERFACE ${CMAKE_CURRENT_BINARY_DIR}/aide/buildinformation.hpp
+  AideBuildInformation
+  INTERFACE
+    $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include/aide/buildinformation.hpp>
+    $<INSTALL_INTERFACE:include/aide/aide/buildinformation.hpp>
 )
 
 target_include_directories(
-  buildinformation INTERFACE ${CMAKE_CURRENT_BINARY_DIR}
+  AideBuildInformation INTERFACE $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include/>
+                                 $<INSTALL_INTERFACE:include/aide>
 )
 
-target_link_libraries(buildinformation INTERFACE aide::project_coverage)
+target_link_libraries(AideBuildInformation)
 
-target_compile_features(buildinformation INTERFACE cxx_std_14)
+target_compile_features(AideBuildInformation INTERFACE cxx_std_14)

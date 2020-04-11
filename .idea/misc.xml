@@ -3,7 +3,9 @@
   <component name="CMakeWorkspace" PROJECT_DIR="$PROJECT_DIR$" />
   <component name="CidrRootsConfiguration">
     <excludeRoots>
+      <file path="$PROJECT_DIR$/aide/build_standalone" />
       <file path="$PROJECT_DIR$/build" />
+      <file path="$PROJECT_DIR$/tests/build_standalone" />
     </excludeRoots>
   </component>
   <component name="JavaScriptSettings">

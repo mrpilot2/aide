@@ -14,7 +14,10 @@ add_executable(ut.aide)
 target_sources(ut.aide PRIVATE buildinformationtest.cpp loggertest.cpp)
 
 target_link_libraries(
-  ut.aide PRIVATE catch_main project_sanitizers buildinformation logger
+  ut.aide PRIVATE catch_main project_sanitizers project_coverage
+  Aide::AideBuildInformation
+                  Aide::AideCore
 )
 
+enable_testing()
 catch_discover_tests(ut.aide EXTRA_ARGS --reporter=junit --out=test_result.xml)

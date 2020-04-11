@@ -1,18 +1,23 @@
-add_library(logger STATIC)
+add_library(AideLogger OBJECT)
+add_library(Aide::AideLogger ALIAS AideLogger)
 
-target_sources(logger PRIVATE logger.cpp)
+target_sources(AideLogger PRIVATE logger.cpp)
 
 target_include_directories(
-  logger
+  AideLogger
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/>
   PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/>
 )
 
 target_link_libraries(
-  logger
+  AideLogger
   PUBLIC CONAN_PKG::spdlog
   PRIVATE project_coverage
 )
 
-target_compile_definitions(logger PUBLIC SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_TRACE)
-target_compile_features(logger PUBLIC cxx_std_17)
+set_target_properties(AideLogger PROPERTIES POSITION_INDEPENDENT_CODE ON)
+
+target_compile_definitions(
+  AideLogger PUBLIC SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_TRACE
+)
+target_compile_features(AideLogger PUBLIC cxx_std_17)

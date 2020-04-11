@@ -1,18 +1,25 @@
 add_subdirectory(buildinformation)
 add_subdirectory(logger)
 
-add_library(aide SHARED)
+add_library(AideCore)
+add_library(Aide::AideCore ALIAS AideCore)
 
-target_sources(aide PRIVATE application.cpp)
+target_sources(AideCore PRIVATE application.cpp $<TARGET_OBJECTS:AideLogger>)
 
 target_include_directories(
-  aide
+  AideCore
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/>
   PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/aide/>
 )
 
 target_link_libraries(
-  aide PRIVATE aide::project_coverage aide::project_sanitizers
+  AideCore
+  PUBLIC CONAN_PKG::spdlog
+  PRIVATE project_coverage project_sanitizers
 )
 
-target_compile_features(aide PUBLIC cxx_std_11)
+target_compile_features(AideCore PUBLIC cxx_std_17)
+
+target_compile_definitions(
+  AideCore PUBLIC SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_TRACE
+)
