@@ -2,7 +2,11 @@
 #ifndef AIDE_APPLICATION_HPP
 #define AIDE_APPLICATION_HPP
 
+#include <memory>
+
 #include <QApplication>
+
+#include <aide/logger.hpp>
 
 namespace aide
 {
@@ -24,6 +28,13 @@ namespace aide
 
     private:
         static bool isOrganizationNameSet();
+
+        void setupLogger();
+
+        [[nodiscard]] static bool tryToCreateLogLocationIfItDoesNotExist(
+            const QString& logLocation) ;
+
+        std::unique_ptr<aide::Logger> m_logger;
     };
 } // namespace aide
 #endif // AIDE_APPLICATION_HPP
