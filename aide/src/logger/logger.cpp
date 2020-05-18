@@ -9,8 +9,8 @@
 #include <spdlog/sinks/stdout_color_sinks.h>
 
 using aide::FileName;
-using aide::LoggerName;
 using aide::Logger;
+using aide::LoggerName;
 
 static constexpr unsigned int maxFileSizeInMB{1024 * 1024 * 5};
 static constexpr uint16_t maxNumberOfFiles{3};
@@ -19,15 +19,15 @@ Logger::Logger()
     : Logger(FileName("aide.log"), LoggerName("aide"))
 {}
 
-Logger::Logger(FileName fileName)
+Logger::Logger(const FileName& fileName)
     : Logger(fileName, LoggerName("aide"))
 {}
 
-Logger::Logger(LoggerName loggerName)
+Logger::Logger(const LoggerName& loggerName)
     : Logger(FileName("aide.log"), loggerName)
 {}
 
-Logger::Logger(const FileName logFileName, const LoggerName loggerName)
+Logger::Logger(const FileName& logFileName, const LoggerName& loggerName)
 {
     auto logSinks = createSinks(logFileName());
     m_logger = std::make_shared<spdlog::logger>(loggerName(), begin(logSinks),
@@ -61,7 +61,7 @@ void Logger::registerLogger(const std::shared_ptr<spdlog::logger>& logger)
     }
     catch (const spdlog::spdlog_ex& ex) {
         logger->info("Logger::Logger() - register logger failed {}: ",
-                      ex.what());
+                     ex.what());
     }
 }
 std::vector<spdlog::sink_ptr> Logger::createSinks(std::string logFileName)
