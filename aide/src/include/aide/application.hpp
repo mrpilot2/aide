@@ -21,6 +21,9 @@ namespace aide
     public:
         // NOLINTNEXTLINE
         explicit Application(int argc, char* argv[]);
+
+    private:
+        static bool isOrganizationNameSet();
     };
 } // namespace aide
 #endif // AIDE_APPLICATION_HPP

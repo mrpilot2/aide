@@ -11,7 +11,7 @@ target_include_directories(
 
 target_link_libraries(
   AideApplication
-  PUBLIC Qt5::Widgets
+  PUBLIC Qt5::Core Qt5::Widgets
   PRIVATE project_coverage project_sanitizers
 )
 
