@@ -10,7 +10,9 @@ target_include_directories(
 )
 
 target_link_libraries(
-  AideApplication PRIVATE project_coverage project_sanitizers
+  AideApplication
+  PUBLIC Qt5::Widgets
+  PRIVATE project_coverage project_sanitizers
 )
 
 target_compile_features(AideApplication PRIVATE cxx_std_11)
