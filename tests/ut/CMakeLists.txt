@@ -11,12 +11,19 @@ target_compile_features(catch_main PUBLIC cxx_std_11)
 
 add_executable(ut.aide)
 
-target_sources(ut.aide PRIVATE buildinformationtest.cpp loggertest.cpp)
+target_sources(
+  ut.aide PRIVATE applicationtest.cpp buildinformationtest.cpp loggertest.cpp
+)
 
 target_link_libraries(
-  ut.aide PRIVATE catch_main project_sanitizers project_coverage
-  Aide::AideBuildInformation
-                  Aide::AideCore
+  ut.aide
+  PRIVATE catch_main
+          Qt5::Core
+          project_sanitizers
+          project_coverage
+          Aide::AideApplication
+          Aide::AideBuildInformation
+          Aide::AideCore
 )
 
 enable_testing()

@@ -13,24 +13,26 @@ namespace aide
 {
     struct FileName
     {
-        explicit FileName(const char* const fileName)
-            : m_fileName{fileName}
+        explicit FileName(std::string fileName)
+            : m_fileName{std::move(fileName)}
         {}
 
-        const char* operator()() const { return m_fileName; }
+        const std::string& operator()() const { return m_fileName; }
+
     private:
-        const char* const m_fileName;
+        const std::string m_fileName;
     };
 
     struct LoggerName
     {
-        explicit LoggerName(const char* const fileName)
-            : m_loggerName{fileName}
+        explicit LoggerName(std::string loggerName)
+            : m_loggerName{std::move(loggerName)}
         {}
 
-        const char* operator()() const { return m_loggerName; }
+        const std::string& operator()() const { return m_loggerName; }
+
     private:
-        const char* const m_loggerName;
+        const std::string m_loggerName;
     };
 
     /**
@@ -46,10 +48,10 @@ namespace aide
     {
     public:
         Logger();
-        explicit Logger(FileName logFileName);
-        explicit Logger(LoggerName loggerName);
-        explicit Logger(FileName logFileName,
-                        LoggerName loggerName);
+        explicit Logger(const FileName& logFileName);
+        explicit Logger(const LoggerName& loggerName);
+        explicit Logger(const FileName& logFileName,
+                        const LoggerName& loggerName);
 
         template <typename... Args>
         void trace(std::string_view fmt, const Args&... args)
@@ -90,7 +92,8 @@ namespace aide
         void flush();
 
     private:
-        static void registerLogger(const std::shared_ptr<spdlog::logger>& logger);
+        static void registerLogger(
+            const std::shared_ptr<spdlog::logger>& logger);
 
         static std::vector<spdlog::sink_ptr> createSinks(
             std::string logFileName);
