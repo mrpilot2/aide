@@ -4,9 +4,9 @@
 #include <QDir>
 #include <QStandardPaths>
 #include <QString>
-#include <memory>
 
 using aide::Application;
+using aide::Logger;
 
 // NOLINTNEXTLINE
 Application::Application(int argc, char* argv[])
@@ -22,6 +22,11 @@ Application::Application(int argc, char* argv[])
 
     setupLogger();
 }
+std::shared_ptr<Logger> aide::Application::logger() const
+{
+    return m_logger;
+}
+
 bool Application::isOrganizationNameSet()
 {
     return !organizationName().isEmpty();
@@ -40,16 +45,19 @@ void Application::setupLogger()
         success = tryToCreateLogLocationIfItDoesNotExist(logLocation);
     }
 
-    if (success)
-    {
-        FileName logPath(logLocation.append(organizationName()).append(applicationName()).append(".log").toStdString().c_str());
-        LoggerName loggerName(applicationName().toStdString().c_str());
-        m_logger = std::make_unique<aide::Logger>(logPath, loggerName);
+    if (success) {
+        FileName logPath(logLocation.append("/")
+                             .append(applicationName())
+                             .append(".log")
+                             .toStdString());
+
+        m_logger = std::make_shared<aide::Logger>(logPath);
+
+        m_logger->info("Configured logger to log to file {}", logPath());
     } else {
-        m_logger = std::make_unique<Logger>();
+        m_logger = std::make_shared<Logger>();
     }
 }
-
 bool Application::tryToCreateLogLocationIfItDoesNotExist(
     const QString& logLocation)
 {

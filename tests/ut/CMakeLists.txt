@@ -17,8 +17,13 @@ target_sources(
 
 target_link_libraries(
   ut.aide
-  PRIVATE catch_main project_sanitizers project_coverage Aide::AideApplication
-          Aide::AideBuildInformation Aide::AideCore
+  PRIVATE catch_main
+          Qt5::Core
+          project_sanitizers
+          project_coverage
+          Aide::AideApplication
+          Aide::AideBuildInformation
+          Aide::AideCore
 )
 
 enable_testing()

@@ -26,15 +26,17 @@ namespace aide
         // NOLINTNEXTLINE
         explicit Application(int argc, char* argv[]);
 
+        [[nodiscard]] std::shared_ptr<Logger> logger() const;
+
     private:
         static bool isOrganizationNameSet();
 
         void setupLogger();
 
         [[nodiscard]] static bool tryToCreateLogLocationIfItDoesNotExist(
-            const QString& logLocation) ;
+            const QString& logLocation);
 
-        std::unique_ptr<aide::Logger> m_logger;
+        std::shared_ptr<aide::Logger> m_logger;
     };
 } // namespace aide
 #endif // AIDE_APPLICATION_HPP
