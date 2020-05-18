@@ -26,3 +26,9 @@ conan_cmake_run(
   BUILD
   missing
 )
+
+find_package(
+  Qt5
+  COMPONENTS Widgets
+  REQUIRED
+)

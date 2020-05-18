@@ -11,10 +11,11 @@ configuration:
 environment:
   matrix:
   - BUILD_SHARED_LIBS: 0
-    QT5: C:\Qt\5.13.0\msvc2017_64
+    QT5: C:\Qt\5.13.2\msvc2017_64
+    CMAKE_GENERATOR: "Visual Studio 15 2017 Win64"
 
 #  - BUILD_SHARED_LIBS: 1
-#    QT5: C:\Qt\5.13.0\msvc2017_64
+#    QT5: C:\Qt\5.13.2\msvc2017_64
 
 install:
 - pip.exe install conan_package_tools
@@ -23,7 +24,7 @@ install:
 before_build:
 - set Path=%QT5%\bin;%Path%
 - mkdir build
-- cmake -DWARNINGS_AS_ERRORS=0 -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=%BUILD_SHARED_LIBS% -DCMAKE_PREFIX_PATH="%QT5%" -H. -Bbuild
+- cmake -G "%CMAKE_GENERATOR%" -DWARNINGS_AS_ERRORS=0 -DCMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=TRUE -DBUILD_SHARED_LIBS=%BUILD_SHARED_LIBS% -DCMAKE_PREFIX_PATH="%QT5%" -H. -Bbuild
 
 build:
   verbosity: normal

@@ -10,12 +10,6 @@ cache:
     - $HOME/.conan
     - $HOME/Library/Caches/Homebrew
 
-compiler:
-  - clang
-  - gcc
-
-dist: bionic
-
 addons:
   apt:
     packages: &common_packages
