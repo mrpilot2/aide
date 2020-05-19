@@ -8,6 +8,8 @@
 
 #include <aide/logger.hpp>
 
+class QMainWindow;
+
 namespace aide
 {
     /**
@@ -37,6 +39,8 @@ namespace aide
             const QString& logLocation);
 
         std::shared_ptr<aide::Logger> m_logger;
+
+        std::shared_ptr<QMainWindow> m_mainWindow;
     };
 } // namespace aide
 #endif // AIDE_APPLICATION_HPP

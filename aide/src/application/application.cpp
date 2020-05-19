@@ -2,6 +2,7 @@
 #include "application.hpp"
 
 #include <QDir>
+#include <QMainWindow>
 #include <QStandardPaths>
 #include <QString>
 
@@ -11,6 +12,7 @@ using aide::Logger;
 // NOLINTNEXTLINE
 Application::Application(int argc, char* argv[])
     : QApplication(argc, argv)
+    , m_mainWindow(new QMainWindow(nullptr))
 {
     if (!isOrganizationNameSet()) {
         throw std::runtime_error(
@@ -21,7 +23,10 @@ Application::Application(int argc, char* argv[])
     }
 
     setupLogger();
+
+    m_mainWindow->show();
 }
+
 std::shared_ptr<Logger> aide::Application::logger() const
 {
     return m_logger;
