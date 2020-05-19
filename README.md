@@ -1,4 +1,5 @@
 # aide
+
 A modern, C++ native GUI application framework based on QT5 - using C++11 and later
 
 [![Build Status](https://travis-ci.com/mrpilot2/aide.svg?branch=develop)](https://travis-ci.com/mrpilot2/aide)
@@ -10,9 +11,20 @@ A modern, C++ native GUI application framework based on QT5 - using C++11 and la
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/mrpilot2/aide.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/mrpilot2/aide/alerts/)
 [![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/mrpilot2/aide.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/mrpilot2/aide/context:cpp)
 
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 ## Table of contents
 
+- [Contributors](#contributors)
 - [License](#license)
+
+## Contributors ✨
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification and is 
+developed by these [contributors](https://github.com/mrpilot2/aide/blob/develop/Contributors.md).
+Contributions of any kind welcome!
 
 ## License
 
@@ -20,4 +32,3 @@ This project is licensed under the terms of the [GPLv3](https://github.com/mrpil
 
 However, aIDE includes several third-party Open-Source libraries, which are licensed under their own respective Open-Source licenses.
 These licenses can be found in the [3rd Party Licenses](https://github.com/mrpilot2/aide/blob/develop/3rd-party-licenses.md)
-
