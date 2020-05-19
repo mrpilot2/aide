@@ -23,7 +23,7 @@ A modern, C++ native GUI application framework based on QT5 - using C++11 and la
 ## Contributors ✨
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification and is 
-developed by these [contributors](https://github.com/mrpilot2/aide/blob/develop/Contributers.md).
+developed by these [contributors](https://github.com/mrpilot2/aide/blob/develop/Contributors.md).
 Contributions of any kind welcome!
 
 ## License
