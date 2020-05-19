@@ -3,7 +3,9 @@ option(ENABLE_CLANG_TIDY "Enable static analysis with clang-tidy" OFF)
 if(ENABLE_CPPCHECK)
   find_program(CPPCHECK cppcheck)
   if(CPPCHECK)
-    set(CMAKE_CXX_CPPCHECK ${CPPCHECK} --enable=all --inconclusive)
+    set(CMAKE_CXX_CPPCHECK ${CPPCHECK} --enable=all --inconclusive
+                           --suppress=missingIncludeSystem
+    )
   else()
     message(SEND_ERROR "cppcheck requested but executable not found")
   endif()
