@@ -24,7 +24,7 @@ Application::Application(int argc, char* argv[])
 
     setupLogger();
 
-    m_mainWindow->show();
+    m_mainWindow->showMaximized();
 }
 
 std::shared_ptr<Logger> aide::Application::logger() const
