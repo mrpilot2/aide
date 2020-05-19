@@ -13,12 +13,13 @@ target_sources(
 target_include_directories(
   AideCore
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/>
+  PUBLIC $<INSTALL_INTERFACE:include/aide/>
   PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/aide/>
 )
 
 target_link_libraries(
   AideCore
-  PUBLIC CONAN_PKG::spdlog
+  PUBLIC CONAN_PKG::spdlog Qt5::Core Qt5::Widgets
   PRIVATE project_coverage project_sanitizers
 )
 
