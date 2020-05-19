@@ -1,12 +1,13 @@
 add_subdirectory(application)
 add_subdirectory(buildinformation)
+add_subdirectory(gui)
 add_subdirectory(logger)
 
 add_library(AideCore)
 add_library(Aide::AideCore ALIAS AideCore)
 
 target_sources(
-  AideCore PRIVATE $<TARGET_OBJECTS:AideApplication>
+  AideCore PRIVATE $<TARGET_OBJECTS:AideApplication> $<TARGET_OBJECTS:AideGui>
                    $<TARGET_OBJECTS:AideLogger>
 )
 

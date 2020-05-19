@@ -2,17 +2,19 @@
 #include "application.hpp"
 
 #include <QDir>
-#include <QMainWindow>
 #include <QStandardPaths>
 #include <QString>
 
+#include <gui/mainwindow.hpp>
+
 using aide::Application;
 using aide::Logger;
+using aide::gui::MainWindow;
 
 // NOLINTNEXTLINE
 Application::Application(int argc, char* argv[])
     : QApplication(argc, argv)
-    , m_mainWindow(new QMainWindow(nullptr))
+    , m_mainWindow(new MainWindow(nullptr))
 {
     if (!isOrganizationNameSet()) {
         throw std::runtime_error(
