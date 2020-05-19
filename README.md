@@ -24,7 +24,6 @@ This project is licensed under the terms of the [GPLv3](https://github.com/mrpil
 However, aIDE includes several third-party Open-Source libraries, which are licensed under their own respective Open-Source licenses.
 These licenses can be found in the [3rd Party Licenses](https://github.com/mrpilot2/aide/blob/develop/3rd-party-licenses.md)
 
-
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
