@@ -1,7 +1,7 @@
 ---
 Checks:          '*,-android-*,-abseil-*,-fuchsia-*,-llvm-header-guard,-modernize-use-trailing-return-type'
-WarningsAsErrors: '*'
-HeaderFilterRegex: ''
+WarningsAsErrors: ''
+HeaderFilterRegex: '^((?!ui_).)*$'
 FormatStyle:     none
 CheckOptions:    
   - key:             google-readability-braces-around-statements.ShortStatementLines
