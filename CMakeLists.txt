@@ -20,3 +20,9 @@ add_subdirectory(aide)
 
 enable_testing()
 add_subdirectory(tests)
+
+option(ENABLE_DEMO "Builds a small demo application" ON)
+
+if(ENABLE_DEMO)
+  add_subdirectory(demo)
+endif()
