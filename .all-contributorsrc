@@ -1,25 +1,27 @@
 {
-  "files": [
-    "README.md"
-  ],
-  "imageSize": 100,
-  "commit": false,
-  "contributors": [
-    {
-      "login": "mrpilot2",
-      "name": "Markus Reitboeck",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/12819580?v=4",
-      "profile": "https://github.com/mrpilot2",
-      "contributions": [
-        "code",
-        "doc"
-      ]
-    }
-  ],
-  "contributorsPerLine": 7,
-  "projectName": "aide",
-  "projectOwner": "mrpilot2",
-  "repoType": "github",
-  "repoHost": "https://github.com",
-  "skipCi": true
+    "files"
+        : ["README.md"
+           "Contributers.md"]
+        , "imageSize" : 100
+        , "commit"
+        : false
+        , "contributors"
+        : [ {
+            "login" : "mrpilot2",
+            "name" : "Markus Reitboeck",
+            "avatar_url" :
+                "https://avatars0.githubusercontent.com/u/12819580?v=4",
+            "profile" : "https://github.com/mrpilot2",
+            "contributions" : [ "code", "doc" ]
+        } ]
+        , "contributorsPerLine" : 7
+        , "projectName"
+        : "aide"
+        , "projectOwner"
+        : "mrpilot2"
+        , "repoType"
+        : "github"
+        , "repoHost"
+        : "https://github.com"
+        , "skipCi" : true
 }
