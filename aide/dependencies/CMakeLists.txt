@@ -32,3 +32,5 @@ find_package(
   COMPONENTS Core Widgets
   REQUIRED
 )
+
+find_package(Qt5LinguistTools REQUIRED)
