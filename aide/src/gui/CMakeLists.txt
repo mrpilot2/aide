@@ -12,7 +12,10 @@ qt5_create_translation(
   none
 )
 
-configure_file(translations.qrc.in ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc)
+configure_file(
+  res/translations/translations.qrc.in
+  ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc
+)
 
 add_library(AideGui OBJECT)
 add_library(Aide::AideGui ALIAS AideGui)
