@@ -3,8 +3,13 @@ set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_LIST_DIR}/res/forms)
 set(CMAKE_AUTORCC ON)
 
 qt5_create_translation(
-  QM_FILES ${CMAKE_SOURCE_DIR} res/translations/aide_en.ts
+  QM_FILES
+  ${CMAKE_SOURCE_DIR}
+  res/translations/aide_en.ts
   res/translations/aide_de.ts
+  OPTIONS
+  -locations
+  none
 )
 
 configure_file(translations.qrc.in ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc)
