@@ -5,7 +5,6 @@ set(CMAKE_AUTORCC ON)
 qt5_create_translation(
   QM_FILES
   ${CMAKE_SOURCE_DIR}
-  res/translations/aide_en.ts
   res/translations/aide_de.ts
   OPTIONS
   -locations
