@@ -12,7 +12,7 @@ using aide::Logger;
 using aide::gui::MainWindow;
 
 // NOLINTNEXTLINE
-Application::Application(int argc, char* argv[])
+Application::Application(int& argc, char* argv[])
     : QApplication(argc, argv)
     , m_mainWindow(new MainWindow(nullptr))
 {

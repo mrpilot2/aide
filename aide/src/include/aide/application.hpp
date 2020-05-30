@@ -26,7 +26,7 @@ namespace aide
     {
     public:
         // NOLINTNEXTLINE
-        explicit Application(int argc, char* argv[]);
+        explicit Application(int& argc, char* argv[]);
 
         [[nodiscard]] std::shared_ptr<Logger> logger() const;
 
