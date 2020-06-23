@@ -1,5 +1,6 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource prefix="/translations">
     <file alias="aide_de.qm">${CMAKE_CURRENT_BINARY_DIR}/aide_de.qm</file>
+    <file alias="aide_en.qm">${CMAKE_CURRENT_BINARY_DIR}/aide_en.qm</file>
 </qresource>
 </RCC>
