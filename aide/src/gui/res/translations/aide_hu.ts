@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de" sourcelanguage="en">
+<TS version="2.1" language="hu" sourcelanguage="en">
   <context>
     <name>MainWindow</name>
     <message>
       <source>MainWindow</source>
-      <translation>Hauptfenster</translation>
+      <translation type="unfinished">MainWindow</translation>
     </message>
     <message>
       <source>File</source>
-      <translation>Datei</translation>
+      <translation type="unfinished">File</translation>
     </message>
     <message>
       <source>Quit</source>
-      <translation>Beenden</translation>
+      <translation type="unfinished">Quit</translation>
     </message>
     <message>
       <source>Help</source>
-      <translation>Hilfe</translation>
+      <translation type="unfinished">Help</translation>
     </message>
     <message>
       <source>About Qt</source>
-      <translation>Über Qt</translation>
+      <translation type="unfinished">About Qt</translation>
     </message>
     <message>
       <source>About aIDE</source>
-      <translation>Über aIDE</translation>
+      <translation type="unfinished">About aIDE</translation>
     </message>
   </context>
 </TS>
