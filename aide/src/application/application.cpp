@@ -24,8 +24,6 @@ Application::Application(int& argc, char* argv[])
             "meaningful location.");
     }
 
-    setupLogger();
-
     m_mainWindow->showMaximized();
 }
 
@@ -39,7 +37,7 @@ bool Application::isOrganizationNameSet()
     return !organizationName().isEmpty();
 }
 
-void Application::setupLogger()
+std::shared_ptr<Logger> Application::setupLogger()
 {
     QString logLocation(
         QStandardPaths::writableLocation(QStandardPaths::CacheLocation));
@@ -58,13 +56,11 @@ void Application::setupLogger()
                              .append(".log")
                              .toStdString());
 
-        m_logger = std::make_shared<aide::Logger>(logPath);
-
-        m_logger->info("Configured logger to log to file {}", logPath());
-    } else {
-        m_logger = std::make_shared<Logger>();
+        return  std::make_shared<aide::Logger>(logPath);
     }
+    return std::make_shared<Logger>();
 }
+
 bool Application::tryToCreateLogLocationIfItDoesNotExist(
     const QString& logLocation)
 {

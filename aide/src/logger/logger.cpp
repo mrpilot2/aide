@@ -45,6 +45,8 @@ Logger::Logger(const FileName& logFileName, const LoggerName& loggerName)
 
     registerLogger(m_logger);
     registerLogger(m_macroLogger);
+
+    m_logger->info("Configured logger to log to file {}", logFileName());
 }
 
 void Logger::flush()

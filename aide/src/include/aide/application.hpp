@@ -33,12 +33,12 @@ namespace aide
     private:
         static bool isOrganizationNameSet();
 
-        void setupLogger();
+        static std::shared_ptr<aide::Logger> setupLogger();
 
         [[nodiscard]] static bool tryToCreateLogLocationIfItDoesNotExist(
             const QString& logLocation);
 
-        std::shared_ptr<aide::Logger> m_logger;
+        std::shared_ptr<aide::Logger> m_logger{setupLogger()};
 
         std::shared_ptr<QMainWindow> m_mainWindow;
     };
