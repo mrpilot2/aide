@@ -33,4 +33,4 @@ find_package(
   REQUIRED
 )
 
-find_package(Qt5LinguistTools REQUIRED)
+find_package(Qt5LinguistTools)

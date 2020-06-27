@@ -2,27 +2,34 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_LIST_DIR}/res/forms)
 set(CMAKE_AUTORCC ON)
 
-qt5_create_translation(
-  QM_FILES
-  ${CMAKE_CURRENT_SOURCE_DIR}
-  res/translations/aide_de.ts
-  res/translations/aide_en.ts
-  OPTIONS
-  -locations
-  none
-)
+if(TARGET Qt5::lrelease)
+  qt5_create_translation(
+    QM_FILES
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    res/translations/aide_de.ts
+    res/translations/aide_en.ts
+    OPTIONS
+    -locations
+    none
+  )
 
-configure_file(
-  res/translations/translations.qrc.in
-  ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc
-)
+  configure_file(
+    res/translations/translations.qrc.in
+    ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc
+  )
+endif()
 
 add_library(AideGui OBJECT)
 add_library(Aide::AideGui ALIAS AideGui)
 
 target_sources(
-  AideGui PRIVATE applicationtranslator.cpp mainwindow.cpp
-                  ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc ${QM_FILES}
+  AideGui
+  PRIVATE
+    mainwindow.cpp
+    $<$<TARGET_EXISTS:Qt5::lrelease>:applicationtranslator.cpp>
+    $<$<NOT:$<TARGET_EXISTS:Qt5::lrelease>>:nullapplicationtranslator.cpp>
+    $<$<TARGET_EXISTS:Qt5::lrelease>:${CMAKE_CURRENT_BINARY_DIR}/translations.qrc
+    ${QM_FILES}>
 )
 
 target_include_directories(
