@@ -1,5 +1,5 @@
-commit_message: "[ci skip]"
-
+commit_message: '[ci skip]'
 files:
   - source: aide/src/gui/res/translations/aide_en.ts
-    translation: /**/aide/src/gui/res/translations/aide_%two_letters_code%.%file_extension%
+    translation: >-
+      /**/aide/src/gui/res/translations/aide_%locale_with_underscore%.%file_extension%
