@@ -1,0 +1,3 @@
+files:
+  - source: aide/src/gui/res/translations/aide_en.ts
+    translation: /**/aide_%two_letters_code%.%file_extension%
