@@ -5,7 +5,6 @@
 #include <memory>
 
 #include <QMainWindow>
-#include <QtCore/QTranslator>
 
 namespace Ui
 {
@@ -18,6 +17,8 @@ namespace aide
 {
     namespace gui
     {
+        class TranslatorInterface;
+
         class MainWindow : public QMainWindow
         {
         public:
@@ -29,8 +30,8 @@ namespace aide
             MainWindow& operator=(const MainWindow&&) = delete;
 
         private:
-            QTranslator qtTranslator;
-            QTranslator translator;
+
+            std::shared_ptr<TranslatorInterface> m_translator;
 
             std::unique_ptr<Ui::MainWindow> m_ui;
         };

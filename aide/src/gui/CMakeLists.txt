@@ -21,8 +21,8 @@ add_library(AideGui OBJECT)
 add_library(Aide::AideGui ALIAS AideGui)
 
 target_sources(
-  AideGui PRIVATE mainwindow.cpp ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc
-                  ${QM_FILES}
+  AideGui PRIVATE applicationtranslator.cpp mainwindow.cpp
+                  ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc ${QM_FILES}
 )
 
 target_include_directories(
@@ -30,4 +30,8 @@ target_include_directories(
                   ${CMAKE_CURRENT_LIST_DIR}/../include/gui
 )
 
-target_link_libraries(AideGui PRIVATE Qt5::Widgets project_coverage)
+target_compile_features(AideGui PUBLIC cxx_std_17)
+
+target_link_libraries(
+  AideGui PRIVATE Aide::AideLogger Qt5::Widgets project_coverage
+)
