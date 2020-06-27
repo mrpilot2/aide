@@ -15,5 +15,17 @@
         <source>Quit</source>
         <translation></translation>
     </message>
+    <message>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Qt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About aIDE</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
