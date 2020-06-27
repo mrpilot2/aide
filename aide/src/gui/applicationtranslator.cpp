@@ -28,3 +28,11 @@ ApplicationTranslator::ApplicationTranslator()
         QApplication::installTranslator(&m_translator);
     }
 }
+
+std::vector<std::string>
+aide::gui::ApplicationTranslator::getAvailableTranslations() const
+{
+    std::vector<std::string> languages{"English", "Deutsch"};
+
+    return languages;
+}

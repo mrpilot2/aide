@@ -1,9 +1,9 @@
 #ifndef AIDE_APPLICATIONTRANSLATOR_HPP
 #define AIDE_APPLICATIONTRANSLATOR_HPP
 
-#include <gui/translatorinterface.hpp>
-
 #include <QTranslator>
+
+#include <gui/translatorinterface.hpp>
 
 namespace aide::gui
 {
@@ -11,6 +11,9 @@ namespace aide::gui
     {
     public:
         ApplicationTranslator();
+
+        [[nodiscard]] std::vector<std::string> getAvailableTranslations()
+            const override;
 
     private:
         QTranslator m_qtTranslator;

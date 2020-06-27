@@ -15,16 +15,21 @@ target_sources(
   ut.aide PRIVATE applicationtest.cpp buildinformationtest.cpp loggertest.cpp
 )
 
+if(NOT ${TEST_AGAINST_INSTALLED})
+  target_sources(ut.aide PRIVATE applicationtranslatortest.cpp)
+endif()
+
 target_link_libraries(
-  ut.aide
-  PRIVATE catch_main
-          Qt5::Core
-          project_sanitizers
-          project_coverage
-          Aide::AideApplication
-          Aide::AideBuildInformation
-          Aide::AideCore
+  ut.aide PRIVATE catch_main Qt5::Core project_sanitizers project_coverage
+                  Aide::AideBuildInformation Aide::AideCore
 )
+
+if(NOT ${TEST_AGAINST_INSTALLED})
+  target_include_directories(
+    ut.aide PRIVATE ${CMAKE_SOURCE_DIR}/aide/src/include
+                    ${CMAKE_SOURCE_DIR}/aide/src/include/aide
+  )
+endif()
 
 enable_testing()
 catch_discover_tests(ut.aide EXTRA_ARGS --reporter=junit --out=test_result.xml)

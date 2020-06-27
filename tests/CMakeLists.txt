@@ -16,11 +16,19 @@ include(dependencies/CMakeLists.txt)
 # In standalone mode we need to find our library
 if(NOT TARGET Aide::AideCore)
   find_package(Aide CONFIG REQUIRED)
+  set(TEST_AGAINST_INSTALLED TRUE)
+else()
+  set(TEST_AGAINST_INSTALLED FALSE)
 endif()
 
 # target does not exist in standalone mode, only when built from top-level
 if(NOT TARGET project_sanitizers)
   add_library(project_sanitizers INTERFACE IMPORTED)
+endif()
+
+# target does not exist in standalone mode, only when built from top-level
+if(NOT TARGET project_coverage)
+  add_library(project_coverage INTERFACE IMPORTED)
 endif()
 
 enable_testing()

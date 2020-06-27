@@ -33,8 +33,10 @@ target_sources(
 )
 
 target_include_directories(
-  AideGui PRIVATE ${CMAKE_CURRENT_LIST_DIR}/../include
-                  ${CMAKE_CURRENT_LIST_DIR}/../include/gui
+  AideGui
+  PUBLIC ${CMAKE_CURRENT_LIST_DIR}/../include
+         ${CMAKE_CURRENT_LIST_DIR}/../include/aide
+  PRIVATE ${CMAKE_CURRENT_LIST_DIR}/../include/aide/gui
 )
 
 target_compile_features(AideGui PUBLIC cxx_std_17)
