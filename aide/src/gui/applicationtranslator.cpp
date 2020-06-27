@@ -2,7 +2,10 @@
 
 #include <QApplication>
 #include <QLibraryInfo>
+#include <QtCore/QDirIterator>
 #include <QtGlobal>
+
+#include <aide/logger.hpp>
 
 using aide::gui::ApplicationTranslator;
 
@@ -21,7 +24,7 @@ ApplicationTranslator::ApplicationTranslator()
     QApplication::installTranslator(&m_qtTranslator);
 
     if (m_translator.load(QLocale(), QLatin1String("aide"), QLatin1String("_"),
-                          QLatin1String(":/translations"))) {
+                          QLatin1String(":/aide_library_translations"))) {
         QApplication::installTranslator(&m_translator);
     }
 }
