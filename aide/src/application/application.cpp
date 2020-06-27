@@ -64,7 +64,7 @@ std::shared_ptr<Logger> Application::setupLogger()
 bool Application::tryToCreateLogLocationIfItDoesNotExist(
     const QString& logLocation)
 {
-    if (logLocation.isEmpty()) {
+    if (!logLocation.isEmpty()) {
         QDir d;
         if (!d.mkpath(logLocation)) {
             std::cerr << "Could not create standard log directory: "
@@ -75,5 +75,5 @@ bool Application::tryToCreateLogLocationIfItDoesNotExist(
         }
         return true;
     }
-    return true;
+    return false;
 }
