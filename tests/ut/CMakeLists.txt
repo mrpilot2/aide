@@ -50,4 +50,4 @@ if(NOT ${TEST_AGAINST_INSTALLED})
 endif()
 
 enable_testing()
-catch_discover_tests(ut.aide EXTRA_ARGS --reporter=junit --out=test_result.xml)
+catch_discover_tests(ut.aide EXTRA_ARGS --reporter=console)
