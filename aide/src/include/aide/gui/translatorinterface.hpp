@@ -1,8 +1,8 @@
 #ifndef AIDE_TRANSLATORINTERFACE_HPP
 #define AIDE_TRANSLATORINTERFACE_HPP
 
+#include <set>
 #include <string>
-#include <vector>
 
 namespace aide::gui
 {
@@ -11,7 +11,7 @@ namespace aide::gui
     public:
         virtual ~TranslatorInterface() = default;
 
-        virtual std::vector<std::string> getAvailableTranslations() const = 0;
+        virtual std::set<std::string> getAvailableTranslations() const = 0;
     };
 } // namespace aide::gui
 
