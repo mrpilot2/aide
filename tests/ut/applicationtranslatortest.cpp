@@ -1,3 +1,5 @@
+#include <array>
+
 #include <QApplication>
 
 #include "applicationtranslator.hpp"
