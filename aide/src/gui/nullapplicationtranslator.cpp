@@ -1,3 +1,8 @@
+/*
+ * NOTE: this file is required for CI systems that do not have QLinguistTools
+ * installed. This is for example the case on lgtm.com
+ */
+
 #include <QApplication>
 #include <QLibraryInfo>
 #include <QtCore/QDirIterator>
@@ -11,8 +16,11 @@ using aide::gui::ApplicationTranslator;
 
 ApplicationTranslator::ApplicationTranslator() = default;
 
-std::set<std::string>
-aide::gui::ApplicationTranslator::getAvailableTranslations() const
+std::set<std::string> ApplicationTranslator::getAvailableTranslations() const
 {
-    return std::vector<std::string>();
+    return std::set<std::string>();
 }
+
+void ApplicationTranslator::addAdditionalTranslationFilePath(
+    const QDir &path, const QString &fileName)
+{}
