@@ -52,7 +52,8 @@ TEST_CASE("Application constructor does not throw an exception")
         aide::Application::setOrganizationName("aide_company");
 
         int argc{1};
-        REQUIRE_NOTHROW(std::make_unique<aide::Application>(argc, appName.data()));
+        REQUIRE_NOTHROW(
+            std::make_unique<aide::Application>(argc, appName.data()));
     }
 }
 
@@ -78,4 +79,30 @@ TEST_CASE("Logger logs into cache directory")
     app.logger()->flush();
     REQUIRE(::lookForContentInFile(logFileLocation.c_str(), "Configured") !=
             std::string::npos);
+}
+
+TEST_CASE("Application translator interface is never null")
+{
+    aide::Application::setApplicationName("aide_test");
+    aide::Application::setOrganizationName("aide_company");
+
+    int numberOfArgs{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+    aide::Application app(numberOfArgs, appName.data());
+
+    REQUIRE(app.translator() != nullptr);
+}
+
+TEST_CASE("Application main window is never null")
+{
+    aide::Application::setApplicationName("aide_test");
+    aide::Application::setOrganizationName("aide_company");
+
+    int numberOfArgs{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+    aide::Application app(numberOfArgs, appName.data());
+
+    REQUIRE(app.mainWindow() != nullptr);
 }
