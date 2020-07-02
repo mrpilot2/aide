@@ -1,4 +1,5 @@
 #include <array>
+#include <iostream>
 
 #include <QApplication>
 
@@ -28,8 +29,12 @@ TEST_CASE("Default ApplicationTranslator")
         const std::set<std::string> availableTranslations{
             translator.getAvailableTranslations()};
 
-        REQUIRE(availableTranslations.find("English (United States)") !=
-                availableTranslations.end());
+        // On Ubuntu 20.04 United States is written with a space, on older
+        // ubuntu version, there is no space
+        REQUIRE((availableTranslations.find("English (United States)") !=
+                     availableTranslations.end() ||
+                 availableTranslations.find("English (UnitedStates)") !=
+                     availableTranslations.end()));
         REQUIRE(availableTranslations.find("German (Germany)") !=
                 availableTranslations.end());
     }
