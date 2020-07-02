@@ -86,18 +86,23 @@ std::set<std::string> ApplicationTranslator::fetchLanguages(
     std::set<std::string> languages;
 
     for (const auto& languageFile : languageFiles) {
-        const int start            = languageFile.indexOf(QLatin1Char('_')) + 1;
-        const int end              = languageFile.lastIndexOf(QLatin1Char('.'));
-        const QString localeString = languageFile.mid(start, end - start);
-
-        const QLocale locale{localeString};
+        const QLocale locale{extractLocaleFromFileName(languageFile)};
 
         const QString languageString(
             QLocale::languageToString(locale.language()) + QLatin1String(" (") +
             QLocale::countryToString(locale.country()) + QLatin1Char(')'));
+
         languages.emplace(languageString.toStdString());
         AIDE_LOG_DEBUG("Found language {} in file {}",
                        languageString.toStdString(), languageFile.toStdString())
     }
     return languages;
+}
+
+QString ApplicationTranslator::extractLocaleFromFileName(
+    const QString& languageFile)
+{
+    const int start = languageFile.indexOf(QLatin1Char('_')) + 1;
+    const int end   = languageFile.lastIndexOf(QLatin1Char('.'));
+    return languageFile.mid(start, end - start);
 }

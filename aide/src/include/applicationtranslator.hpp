@@ -29,8 +29,9 @@ namespace aide::gui
 
         void installNewTranslator(const QDir& path, const QString& fileName);
 
-        QTranslator m_qtTranslator;
+        static QString extractLocaleFromFileName(const QString& languageFile);
 
+        QTranslator m_qtTranslator;
         std::vector<std::shared_ptr<QTranslator>> m_translator;
         std::map<std::string, std::string> m_translationFilePaths;
     };
