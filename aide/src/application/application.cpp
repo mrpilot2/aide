@@ -2,17 +2,20 @@
 #include "application.hpp"
 
 #include <QDir>
-#include <QMainWindow>
 #include <QStandardPaths>
 #include <QString>
 
+#include <gui/mainwindow.hpp>
+
 using aide::Application;
 using aide::Logger;
+using aide::gui::MainWindow;
+using aide::gui::TranslatorInterface;
 
 // NOLINTNEXTLINE
-Application::Application(int argc, char* argv[])
+Application::Application(int& argc, char* argv[])
     : QApplication(argc, argv)
-    , m_mainWindow(new QMainWindow(nullptr))
+    , m_mainWindow(new MainWindow(nullptr))
 {
     if (!isOrganizationNameSet()) {
         throw std::runtime_error(
@@ -22,9 +25,7 @@ Application::Application(int argc, char* argv[])
             "meaningful location.");
     }
 
-    setupLogger();
-
-    m_mainWindow->show();
+    m_mainWindow->showMaximized();
 }
 
 std::shared_ptr<Logger> aide::Application::logger() const
@@ -32,12 +33,17 @@ std::shared_ptr<Logger> aide::Application::logger() const
     return m_logger;
 }
 
+std::shared_ptr<QMainWindow> aide::Application::mainWindow() const
+{
+    return m_mainWindow;
+}
+
 bool Application::isOrganizationNameSet()
 {
     return !organizationName().isEmpty();
 }
 
-void Application::setupLogger()
+std::shared_ptr<Logger> Application::setupLogger()
 {
     QString logLocation(
         QStandardPaths::writableLocation(QStandardPaths::CacheLocation));
@@ -56,17 +62,15 @@ void Application::setupLogger()
                              .append(".log")
                              .toStdString());
 
-        m_logger = std::make_shared<aide::Logger>(logPath);
-
-        m_logger->info("Configured logger to log to file {}", logPath());
-    } else {
-        m_logger = std::make_shared<Logger>();
+        return std::make_shared<aide::Logger>(logPath);
     }
+    return std::make_shared<Logger>();
 }
+
 bool Application::tryToCreateLogLocationIfItDoesNotExist(
     const QString& logLocation)
 {
-    if (logLocation.isEmpty()) {
+    if (!logLocation.isEmpty()) {
         QDir d;
         if (!d.mkpath(logLocation)) {
             std::cerr << "Could not create standard log directory: "
@@ -77,5 +81,10 @@ bool Application::tryToCreateLogLocationIfItDoesNotExist(
         }
         return true;
     }
-    return true;
+    return false;
+}
+
+std::shared_ptr<TranslatorInterface> Application::translator() const
+{
+    return m_mainWindow->translator();
 }

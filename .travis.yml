@@ -89,6 +89,7 @@ matrix:
           packages:
             - *common_packages
             - qt5-default
+            - qttools5-dev-tools
             - clang-9
             - g++-7
 
@@ -109,6 +110,7 @@ matrix:
           packages:
             - *common_packages
             - qt5-default
+            - qttools5-dev-tools
             - clang-9
             - g++-7
 
@@ -125,6 +127,8 @@ matrix:
           packages:
             - *common_packages
             - qt5-default
+            - qttools5-dev-tools
+            - qttools5-dev
 
     - env:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
@@ -139,6 +143,8 @@ matrix:
           packages:
             - *common_packages
             - qt5-default
+            - qttools5-dev-tools
+            - qttools5-dev
 
     ##########################################################################
     # GCC on Linux
@@ -159,6 +165,7 @@ matrix:
           packages:
             - *common_packages
             - qt5-default
+            - qttools5-dev-tools
             - g++-7
 
     - env:
@@ -177,6 +184,7 @@ matrix:
           packages:
             - *common_packages
             - qt5-default
+            - qttools5-dev-tools
             - g++-7
 
     - env:
@@ -193,6 +201,8 @@ matrix:
           packages:
             - *common_packages
             - qt5-default
+            - qttools5-dev-tools
+            - qttools5-dev
 
     - env:
         - MATRIX_EVAL="CC=gcc && CXX=g++"
@@ -208,6 +218,8 @@ matrix:
           packages:
             - *common_packages
             - qt5-default
+            - qttools5-dev-tools
+            - qttools5-dev
 
 install:
   - JOBS=2
@@ -222,7 +234,9 @@ install:
       pip3 install -r requirements.txt
       brew install cmake || brew upgrade cmake
       QT5_CMAKE_PREFIX=/usr/local/opt/qt/lib/cmake/Qt5
+      QT5_LINGUIST_CMAKE_PREFIX=/usr/local/opt/qt/lib/cmake/Qt5LinguistTools
       export QT5_CMAKE_PREFIX
+      export QT5_LINGUIST_CMAKE_PREFIX
     fi
   - cmake --version
   - export COVERAGE
@@ -232,7 +246,7 @@ script:
   - mkdir build
   - cd build
   - echo "Building $BUILD_TYPE with QT prefix $QT5_CMAKE_PREFIX - Coverage is $COVERAGE"
-  - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DENABLE_COVERAGE=$COVERAGE -DQt5_DIR=$QT5_CMAKE_PREFIX -DBUILD_SHARED_LIBS=$BUILD_SHARED_LIBS
+  - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DENABLE_COVERAGE=$COVERAGE -DQt5_DIR=$QT5_CMAKE_PREFIX -DQt5LinguistTools_DIR=$QT5_LINGUIST_CMAKE_PREFIX -DBUILD_SHARED_LIBS=$BUILD_SHARED_LIBS
   - cmake --build . -- -j 2
 
   - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then ( sudo Xvfb :99 -ac -screen 0 1024x768x8; ctest )& fi

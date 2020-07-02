@@ -33,9 +33,3 @@ build:
 test_script:
   - cd build
   - ctest -V
-
-on_success:
-  - appveyor PushArtifact tests\ut\test_result.xml
-  - sh: |
-      echo "Test $APPVEYOR_JOB_ID"
-      find "tests/ut" -type f -name 'test_result.xml' -print0 | xargs -0 -I '{}' curl -F 'file=@{}' "https://ci.appveyor.com/api/testresults/junit/$APPVEYOR_JOB_ID"

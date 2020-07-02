@@ -1,0 +1,5 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/ut_translations">
+    <file alias="ut_sv.qm">${CMAKE_CURRENT_BINARY_DIR}/ut_sv.qm</file>
+</qresource>
+</RCC>

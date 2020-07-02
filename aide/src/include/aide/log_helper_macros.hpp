@@ -9,12 +9,14 @@ const char* const AIDE_DEFAULT_MACRO_LOGGER{"aide_macro"};
 
 // NOLINTNEXTLINE
 #define INVALID_LOGGER_REQUEST(logger_name)                                    \
-    SPDLOG_LOGGER_ERROR(spdlog::get(AIDE_DEFAULT_MACRO_LOGGER),                \
-                        "You are trying to access logger \"{}\" with "         \
-                        "AIDE_CUSTOM_LOG_INFO that does not exists. "          \
-                        "Cannot use the requested logger, using default "      \
-                        "as fallback.\nRelevant code  position: {}:{}",        \
-                        logger_name, __FILE__, __LINE__);
+    if (spdlog::get(AIDE_DEFAULT_MACRO_LOGGER) != nullptr) {                   \
+        SPDLOG_LOGGER_ERROR(spdlog::get(AIDE_DEFAULT_MACRO_LOGGER),            \
+                            "You are trying to access logger \"{}\" with "     \
+                            "AIDE_CUSTOM_LOG_INFO that does not exists. "      \
+                            "Cannot use the requested logger, using default "  \
+                            "as fallback.\nRelevant code  position: {}:{}",    \
+                            logger_name, __FILE__, __LINE__);                  \
+    }
 
 // NOLINTNEXTLINE
 #define AIDE_CUSTOM_LOG_TRACE(logger_name, ...)                                \
@@ -22,8 +24,10 @@ const char* const AIDE_DEFAULT_MACRO_LOGGER{"aide_macro"};
         SPDLOG_LOGGER_TRACE(spdlog::get(logger_name), __VA_ARGS__);            \
     } else {                                                                   \
         INVALID_LOGGER_REQUEST(logger_name)                                    \
-        SPDLOG_LOGGER_TRACE(spdlog::get(AIDE_DEFAULT_MACRO_LOGGER),            \
-                            __VA_ARGS__);                                      \
+        if (spdlog::get(AIDE_DEFAULT_MACRO_LOGGER) != nullptr) {               \
+            SPDLOG_LOGGER_TRACE(spdlog::get(AIDE_DEFAULT_MACRO_LOGGER),        \
+                                __VA_ARGS__);                                  \
+        }                                                                      \
     }
 
 // NOLINTNEXTLINE
@@ -36,8 +40,10 @@ const char* const AIDE_DEFAULT_MACRO_LOGGER{"aide_macro"};
         SPDLOG_LOGGER_DEBUG(spdlog::get(logger_name), __VA_ARGS__);            \
     } else {                                                                   \
         INVALID_LOGGER_REQUEST(logger_name)                                    \
-        SPDLOG_LOGGER_DEBUG(spdlog::get(AIDE_DEFAULT_MACRO_LOGGER),            \
-                            __VA_ARGS__);                                      \
+        if (spdlog::get(AIDE_DEFAULT_MACRO_LOGGER) != nullptr) {               \
+            SPDLOG_LOGGER_DEBUG(spdlog::get(AIDE_DEFAULT_MACRO_LOGGER),        \
+                                __VA_ARGS__);                                  \
+        }                                                                      \
     }
 
 // NOLINTNEXTLINE
@@ -50,10 +56,11 @@ const char* const AIDE_DEFAULT_MACRO_LOGGER{"aide_macro"};
         SPDLOG_LOGGER_INFO(spdlog::get(logger_name), __VA_ARGS__);             \
     } else {                                                                   \
         INVALID_LOGGER_REQUEST(logger_name)                                    \
-        SPDLOG_LOGGER_INFO(spdlog::get(AIDE_DEFAULT_MACRO_LOGGER),             \
-                           __VA_ARGS__);                                       \
+        if (spdlog::get(AIDE_DEFAULT_MACRO_LOGGER) != nullptr) {               \
+            SPDLOG_LOGGER_INFO(spdlog::get(AIDE_DEFAULT_MACRO_LOGGER),         \
+                               __VA_ARGS__);                                   \
+        }                                                                      \
     }
-
 // NOLINTNEXTLINE
 #define AIDE_LOG_INFO(...)                                                     \
     AIDE_CUSTOM_LOG_INFO(AIDE_DEFAULT_MACRO_LOGGER, __VA_ARGS__);
@@ -64,8 +71,10 @@ const char* const AIDE_DEFAULT_MACRO_LOGGER{"aide_macro"};
         SPDLOG_LOGGER_WARN(spdlog::get(logger_name), __VA_ARGS__);             \
     } else {                                                                   \
         INVALID_LOGGER_REQUEST(logger_name)                                    \
-        SPDLOG_LOGGER_WARN(spdlog::get(AIDE_DEFAULT_MACRO_LOGGER),             \
-                           __VA_ARGS__);                                       \
+        if (spdlog::get(AIDE_DEFAULT_MACRO_LOGGER) != nullptr) {               \
+            SPDLOG_LOGGER_WARN(spdlog::get(AIDE_DEFAULT_MACRO_LOGGER),         \
+                               __VA_ARGS__);                                   \
+        }                                                                      \
     }
 
 // NOLINTNEXTLINE
@@ -78,8 +87,10 @@ const char* const AIDE_DEFAULT_MACRO_LOGGER{"aide_macro"};
         SPDLOG_LOGGER_ERROR(spdlog::get(logger_name), __VA_ARGS__);            \
     } else {                                                                   \
         INVALID_LOGGER_REQUEST(logger_name)                                    \
-        SPDLOG_LOGGER_ERROR(spdlog::get(AIDE_DEFAULT_MACRO_LOGGER),            \
-                            __VA_ARGS__);                                      \
+        if (spdlog::get(AIDE_DEFAULT_MACRO_LOGGER) != nullptr) {               \
+            SPDLOG_LOGGER_ERROR(spdlog::get(AIDE_DEFAULT_MACRO_LOGGER),        \
+                                __VA_ARGS__);                                  \
+        }                                                                      \
     }
 
 // NOLINTNEXTLINE
@@ -92,8 +103,10 @@ const char* const AIDE_DEFAULT_MACRO_LOGGER{"aide_macro"};
         SPDLOG_LOGGER_CRITICAL(spdlog::get(logger_name), __VA_ARGS__);         \
     } else {                                                                   \
         INVALID_LOGGER_REQUEST(logger_name)                                    \
-        SPDLOG_LOGGER_CRITICAL(spdlog::get(AIDE_DEFAULT_MACRO_LOGGER),         \
-                               __VA_ARGS__);                                   \
+        if (spdlog::get(AIDE_DEFAULT_MACRO_LOGGER) != nullptr) {               \
+            SPDLOG_LOGGER_CRITICAL(spdlog::get(AIDE_DEFAULT_MACRO_LOGGER),     \
+                                   __VA_ARGS__);                               \
+        }                                                                      \
     }
 
 // NOLINTNEXTLINE
