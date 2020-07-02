@@ -23,4 +23,8 @@ if(NOT TARGET Aide::AideCore)
   find_package(Aide 0.1 REQUIRED)
 endif()
 
+find_package(Qt5Core)
+find_package(Qt5Widgets)
+find_package(Qt5LinguistTools)
+
 add_subdirectory(src)

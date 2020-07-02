@@ -10,6 +10,7 @@
 using aide::Application;
 using aide::Logger;
 using aide::gui::MainWindow;
+using aide::gui::TranslatorInterface;
 
 // NOLINTNEXTLINE
 Application::Application(int& argc, char* argv[])
@@ -30,6 +31,11 @@ Application::Application(int& argc, char* argv[])
 std::shared_ptr<Logger> aide::Application::logger() const
 {
     return m_logger;
+}
+
+std::shared_ptr<QMainWindow> aide::Application::mainWindow() const
+{
+    return m_mainWindow;
 }
 
 bool Application::isOrganizationNameSet()
@@ -56,7 +62,7 @@ std::shared_ptr<Logger> Application::setupLogger()
                              .append(".log")
                              .toStdString());
 
-        return  std::make_shared<aide::Logger>(logPath);
+        return std::make_shared<aide::Logger>(logPath);
     }
     return std::make_shared<Logger>();
 }
@@ -76,4 +82,9 @@ bool Application::tryToCreateLogLocationIfItDoesNotExist(
         return true;
     }
     return false;
+}
+
+std::shared_ptr<TranslatorInterface> Application::translator() const
+{
+    return m_mainWindow->translator();
 }

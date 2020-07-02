@@ -12,6 +12,12 @@ class QMainWindow;
 
 namespace aide
 {
+    namespace gui
+    {
+        class MainWindow;
+        class TranslatorInterface;
+    } // namespace gui
+
     /**
      * @brief The aide::Application class manages the GUI application
      *
@@ -30,6 +36,11 @@ namespace aide
 
         [[nodiscard]] std::shared_ptr<Logger> logger() const;
 
+        [[nodiscard]] std::shared_ptr<QMainWindow> mainWindow() const;
+
+        [[nodiscard]] std::shared_ptr<gui::TranslatorInterface> translator()
+            const;
+
     private:
         static bool isOrganizationNameSet();
 
@@ -40,7 +51,7 @@ namespace aide
 
         std::shared_ptr<aide::Logger> m_logger{setupLogger()};
 
-        std::shared_ptr<QMainWindow> m_mainWindow;
+        std::shared_ptr<aide::gui::MainWindow> m_mainWindow;
     };
 } // namespace aide
 #endif // AIDE_APPLICATION_HPP

@@ -29,8 +29,10 @@ namespace aide
             MainWindow(const MainWindow&&)           = delete;
             MainWindow& operator=(const MainWindow&&) = delete;
 
-        private:
+            [[nodiscard]] std::shared_ptr<TranslatorInterface> translator()
+                const;
 
+        private:
             std::shared_ptr<TranslatorInterface> m_translator;
 
             std::unique_ptr<Ui::MainWindow> m_ui;

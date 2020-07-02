@@ -8,6 +8,7 @@
 #include "ui_mainwindow.h"
 
 using aide::gui::MainWindow;
+using aide::gui::TranslatorInterface;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -16,5 +17,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     m_ui->setupUi(this);
 }
-
 MainWindow::~MainWindow() = default;
+
+std::shared_ptr<TranslatorInterface> MainWindow::translator() const
+{
+    return m_translator;
+}
