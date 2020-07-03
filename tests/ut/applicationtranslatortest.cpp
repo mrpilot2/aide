@@ -1,10 +1,10 @@
 #include <array>
-#include <iostream>
+
+#include <catch2/catch.hpp>
 
 #include <QApplication>
 
 #include "applicationtranslator.hpp"
-#include "catch2/catch.hpp"
 
 using aide::gui::ApplicationTranslator;
 

@@ -34,7 +34,9 @@ target_sources(
 )
 
 if(NOT ${TEST_AGAINST_INSTALLED})
-  target_sources(ut.aide PRIVATE applicationtranslatortest.cpp)
+  target_sources(
+    ut.aide PRIVATE applicationtranslatortest.cpp hierarchicalidtest.cpp
+  )
 endif()
 
 target_link_libraries(
