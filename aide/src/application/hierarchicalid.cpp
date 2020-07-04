@@ -6,15 +6,31 @@ HierarchicalId::HierarchicalId(const char* level)
     : m_id{level}
 {}
 
-HierarchicalId& aide::HierarchicalId::operator()(const char* level)
+HierarchicalId::HierarchicalId(std::vector<const char*> ids)
+    : m_id{ids}
+{}
+
+HierarchicalId& HierarchicalId::operator()(const char* level)
+{
+    return addLevel(level);
+}
+
+HierarchicalId HierarchicalId::operator()(const char* level) const
 {
     return addLevel(level);
 }
 
 HierarchicalId& HierarchicalId::addLevel(const char* level)
 {
-    m_id.push_back(level);
+    m_id.emplace_back(level);
     return *this;
+}
+
+HierarchicalId HierarchicalId::addLevel(const char* level) const
+{
+    std::vector<const char*> newId{m_id};
+    newId.emplace_back(level);
+    return HierarchicalId(newId);
 }
 
 std::string HierarchicalId::name() const

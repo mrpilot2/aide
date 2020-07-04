@@ -19,4 +19,12 @@ TEST_CASE("Hierarchical Id ")
 
         REQUIRE("Main Menu/File/Quit" == id.name());
     }
+
+    SECTION("can be extended")
+    {
+        const auto mainMenu(HierarchicalId("Main Menu"));
+        const auto id{mainMenu("File")("Quit")};
+
+        REQUIRE("Main Menu/File/Quit" == id.name());
+    }
 }

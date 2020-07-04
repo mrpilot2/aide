@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     m_ui->setupUi(this);
 }
+
 MainWindow::~MainWindow() = default;
 
 std::shared_ptr<TranslatorInterface> MainWindow::translator() const
