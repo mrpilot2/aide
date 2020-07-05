@@ -35,7 +35,7 @@ TEST_CASE("Any action registry ")
 
     SECTION("can register an action with description and default key sequence")
     {
-        auto action = std::make_shared<QAction>("&File");
+        auto action = std::make_shared<QAction>("&File", nullptr);
         const HierarchicalId id{HierarchicalId("MainMenu")("File")};
         QKeySequence defaultKeySequence(QKeySequence::Quit);
         const std::string description("Quit the application");
@@ -47,7 +47,7 @@ TEST_CASE("Any action registry ")
 
     SECTION("can register an action with description only")
     {
-        auto action = std::make_shared<QAction>("&File");
+        auto action = std::make_shared<QAction>("&File", nullptr);
         const HierarchicalId id{HierarchicalId("MainMenu")("File")};
         const std::string description("Quit the application");
 
@@ -60,7 +60,7 @@ TEST_CASE("Any action registry ")
 
     SECTION("can register an action with key sequence but without description")
     {
-        auto action = std::make_shared<QAction>("&File");
+        auto action = std::make_shared<QAction>("&File", nullptr);
         const HierarchicalId id{HierarchicalId("MainMenu")("File")};
         QKeySequence defaultKeySequence(QKeySequence::Quit);
 
@@ -73,7 +73,7 @@ TEST_CASE("Any action registry ")
 
     SECTION("can register an action without key sequence and description")
     {
-        auto action = std::make_shared<QAction>("&File");
+        auto action = std::make_shared<QAction>("&File", nullptr);
         const HierarchicalId id{HierarchicalId("MainMenu")("File")};
 
         registry.registerAction(action, id);
