@@ -35,13 +35,20 @@ target_sources(
 
 if(NOT ${TEST_AGAINST_INSTALLED})
   target_sources(
-    ut.aide PRIVATE applicationtranslatortest.cpp hierarchicalidtest.cpp
+    ut.aide PRIVATE actionregistrytest.cpp applicationtranslatortest.cpp
+                    hierarchicalidtest.cpp
   )
 endif()
 
 target_link_libraries(
-  ut.aide PRIVATE catch_main Qt5::Core project_sanitizers project_coverage
-                  Aide::AideBuildInformation Aide::AideCore
+  ut.aide
+  PRIVATE catch_main
+          Qt5::Core
+          Qt5::Widgets
+          project_sanitizers
+          project_coverage
+          Aide::AideBuildInformation
+          Aide::AideCore
 )
 
 if(NOT ${TEST_AGAINST_INSTALLED})

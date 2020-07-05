@@ -1,7 +1,9 @@
 add_library(AideApplication OBJECT)
 add_library(Aide::AideApplication ALIAS AideApplication)
 
-target_sources(AideApplication PRIVATE application.cpp hierarchicalid.cpp)
+target_sources(
+  AideApplication PRIVATE actionregistry.cpp application.cpp hierarchicalid.cpp
+)
 
 target_include_directories(
   AideApplication
