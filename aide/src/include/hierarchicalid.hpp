@@ -23,6 +23,9 @@ namespace aide
 
         [[nodiscard]] std::string name() const;
 
+        bool operator<(const HierarchicalId& rhs) const;
+        bool operator>(const HierarchicalId& rhs) const;
+
     private:
         explicit HierarchicalId(std::vector<const char*> ids);
 

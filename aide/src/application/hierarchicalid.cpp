@@ -47,3 +47,13 @@ std::string HierarchicalId::name() const
     }
     return result.erase(result.size() - 1);
 }
+
+bool HierarchicalId::operator<(const HierarchicalId& rhs) const
+{
+    return name() < rhs.name();
+}
+
+bool HierarchicalId::operator>(const HierarchicalId& rhs) const
+{
+    return rhs < *this;
+}
