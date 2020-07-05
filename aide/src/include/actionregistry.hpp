@@ -20,17 +20,21 @@ namespace aide
                             const HierarchicalId& uniqueId,
                             std::string description) override;
 
-        void registerAction(std::weak_ptr<QAction> action,
-                            const HierarchicalId& uniqueId,
-                            QKeySequence defaultKeySequence) override;
+        void registerAction(
+            std::weak_ptr<QAction> action, const HierarchicalId& uniqueId,
+            const std::vector<QKeySequence>& defaultKeySequences) override;
 
-        void registerAction(std::weak_ptr<QAction> action,
-                            const HierarchicalId& uniqueId,
-                            std::string description,
-                            QKeySequence defaultKeySequence) override;
-        std::map<HierarchicalId, Action> actions() const override;
+        void registerAction(
+            std::weak_ptr<QAction> action, const HierarchicalId& uniqueId,
+            std::string description,
+            const std::vector<QKeySequence>& defaultKeySequences) override;
+
+        [[nodiscard]] std::map<HierarchicalId, Action> actions() const override;
 
     private:
+        static std::string printKeySequences(
+            const std::vector<QKeySequence>& keySequences);
+
         std::map<HierarchicalId, Action> m_actions;
     };
 } // namespace aide

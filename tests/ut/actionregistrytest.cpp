@@ -40,7 +40,7 @@ TEST_CASE("Any action registry ")
         QKeySequence defaultKeySequence(QKeySequence::Quit);
         const std::string description("Quit the application");
 
-        registry.registerAction(action, id, description, defaultKeySequence);
+        registry.registerAction(action, id, description, {defaultKeySequence});
 
         REQUIRE(registry.actions().size() == 1);
     }
@@ -64,7 +64,7 @@ TEST_CASE("Any action registry ")
         const HierarchicalId id{HierarchicalId("MainMenu")("File")};
         QKeySequence defaultKeySequence(QKeySequence::Quit);
 
-        registry.registerAction(action, id, defaultKeySequence);
+        registry.registerAction(action, id, {defaultKeySequence});
 
         REQUIRE(registry.actions().size() == 1);
         REQUIRE(action->shortcut() == QKeySequence(QKeySequence::Quit));
@@ -79,18 +79,31 @@ TEST_CASE("Any action registry ")
         registry.registerAction(action, id);
 
         REQUIRE(registry.actions().size() == 1);
-        REQUIRE(registry.actions().at(id).defaultKeySequence.isEmpty());
+        REQUIRE(registry.actions().at(id).defaultKeySequences.isEmpty());
         REQUIRE(registry.actions().at(id).description.empty());
     }
 
     SECTION("does not allow duplicate actions")
     {
-        auto action = std::make_shared<QAction>("&File");
+        auto action = std::make_shared<QAction>("&File", nullptr);
         const HierarchicalId id{HierarchicalId("MainMenu")("File")};
 
         registry.registerAction(action, id);
         registry.registerAction(action, id);
 
         REQUIRE(registry.actions().size() == 1);
+    }
+
+    SECTION("allows multiple key sequences")
+    {
+        auto action = std::make_shared<QAction>("&File", nullptr);
+        const HierarchicalId id{HierarchicalId("MainMenu")("File")};
+
+        registry.registerAction(
+            action, id,
+            std::vector<QKeySequence>(
+                {QKeySequence("Alt+F4"), QKeySequence("Alt+F3")}));
+
+        REQUIRE(registry.actions().at(id).defaultKeySequences.size() == 2);
     }
 }

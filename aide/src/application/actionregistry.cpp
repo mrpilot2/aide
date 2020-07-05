@@ -9,27 +9,27 @@ using aide::HierarchicalId;
 void ActionRegistry::registerAction(std::weak_ptr<QAction> action,
                                     const HierarchicalId& uniqueId)
 {
-    registerAction(action, uniqueId, "", QKeySequence());
+    registerAction(action, uniqueId, "", {});
 }
 
 void ActionRegistry::registerAction(std::weak_ptr<QAction> action,
                                     const HierarchicalId& uniqueId,
                                     std::string description)
 {
-    registerAction(action, uniqueId, description, QKeySequence());
+    registerAction(action, uniqueId, description, {});
 }
 
-void ActionRegistry::registerAction(std::weak_ptr<QAction> action,
-                                    const HierarchicalId& uniqueId,
-                                    QKeySequence defaultKeySequence)
+void ActionRegistry::registerAction(
+    std::weak_ptr<QAction> action, const HierarchicalId& uniqueId,
+    const std::vector<QKeySequence>& defaultKeySequences)
 {
-    registerAction(action, uniqueId, "", defaultKeySequence);
+    registerAction(action, uniqueId, "", defaultKeySequences);
 }
 
-void ActionRegistry::registerAction(std::weak_ptr<QAction> action,
-                                    const HierarchicalId& uniqueId,
-                                    std::string description,
-                                    QKeySequence defaultKeySequence)
+void ActionRegistry::registerAction(
+    std::weak_ptr<QAction> action, const HierarchicalId& uniqueId,
+    std::string description,
+    const std::vector<QKeySequence>& defaultKeySequences)
 {
     if (m_actions.find(uniqueId) != m_actions.end()) {
         AIDE_LOG_WARN(
@@ -43,14 +43,18 @@ void ActionRegistry::registerAction(std::weak_ptr<QAction> action,
 
     AIDE_LOG_TRACE(
         R"(Register new action "{}" with description "{}" and default sequence "{}")",
-        uniqueId.name(), description,
-        defaultKeySequence.toString().toStdString())
+        uniqueId.name(), description, printKeySequences(defaultKeySequences))
 
-    Action detailedAction{action, description, defaultKeySequence};
+    QList<QKeySequence> qtDefaultKeySequences;
+    for (const auto& seq : defaultKeySequences) {
+        qtDefaultKeySequences << seq;
+    }
+
+    Action detailedAction{action, description, qtDefaultKeySequences};
     if (!action.expired()) {
         auto sharedAction = action.lock();
         sharedAction->setStatusTip(QString::fromStdString(description));
-        sharedAction->setShortcut(defaultKeySequence);
+        sharedAction->setShortcuts(qtDefaultKeySequences);
     }
     m_actions.insert({uniqueId, detailedAction});
 }
@@ -58,4 +62,18 @@ void ActionRegistry::registerAction(std::weak_ptr<QAction> action,
 std::map<HierarchicalId, Action> ActionRegistry::actions() const
 {
     return m_actions;
+}
+
+std::string ActionRegistry::printKeySequences(
+    const std::vector<QKeySequence>& keySequences)
+{
+    if (keySequences.empty()) { return ""; }
+
+    std::string combined;
+
+    for (const auto& seq : keySequences) {
+        combined += seq.toString().toStdString();
+        combined += ", ";
+    }
+    return combined.erase(combined.size() - 2);
 }

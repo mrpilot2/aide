@@ -4,6 +4,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 class QAction;
 class QKeySequence;
@@ -16,7 +17,7 @@ namespace aide
     {
         std::weak_ptr<QAction> action;
         std::string description;
-        QKeySequence defaultKeySequence;
+        QList<QKeySequence> defaultKeySequences;
     };
 
     class ActionRegistryInterface
@@ -31,14 +32,14 @@ namespace aide
                                     const HierarchicalId& uniqueId,
                                     std::string description) = 0;
 
-        virtual void registerAction(std::weak_ptr<QAction> action,
-                                    const HierarchicalId& uniqueId,
-                                    QKeySequence defaultKeySequence) = 0;
+        virtual void registerAction(
+            std::weak_ptr<QAction> action, const HierarchicalId& uniqueId,
+            const std::vector<QKeySequence>& defaultKeySequences) = 0;
 
-        virtual void registerAction(std::weak_ptr<QAction> action,
-                                    const HierarchicalId& uniqueId,
-                                    std::string description,
-                                    QKeySequence defaultKeySequence) = 0;
+        virtual void registerAction(
+            std::weak_ptr<QAction> action, const HierarchicalId& uniqueId,
+            std::string description,
+            const std::vector<QKeySequence>& defaultKeySequences) = 0;
 
         virtual std::map<HierarchicalId, Action> actions() const = 0;
     };

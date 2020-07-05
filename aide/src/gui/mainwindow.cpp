@@ -45,7 +45,7 @@ void MainWindow::registerActions(
     actionRegistry->registerAction(
         m_actionQuit, MAIN_MENU_FILE_QUIT,
         QApplication::tr("Quits the application").toStdString(),
-        QKeySequence(QKeySequence::Quit));
+        {QKeySequence(QKeySequence::Quit), QKeySequence("Alt+F4")});
 
     m_actionAboutQt =
         std::make_shared<QAction>(QApplication::tr("About Qt"), this);
