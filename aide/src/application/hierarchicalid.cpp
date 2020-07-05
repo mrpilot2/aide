@@ -48,6 +48,16 @@ std::string HierarchicalId::name() const
     return result.erase(result.size() - 1);
 }
 
+bool aide::HierarchicalId::operator==(const HierarchicalId& rhs) const
+{
+    return name() == rhs.name();
+}
+
+bool aide::HierarchicalId::operator!=(const HierarchicalId& rhs) const
+{
+    return !(rhs == *this);
+}
+
 bool HierarchicalId::operator<(const HierarchicalId& rhs) const
 {
     return name() < rhs.name();

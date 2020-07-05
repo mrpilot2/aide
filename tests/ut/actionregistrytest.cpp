@@ -82,4 +82,15 @@ TEST_CASE("Any action registry ")
         REQUIRE(registry.actions().at(id).defaultKeySequence.isEmpty());
         REQUIRE(registry.actions().at(id).description.empty());
     }
+
+    SECTION("does not allow duplicate actions")
+    {
+        auto action = std::make_shared<QAction>("&File");
+        const HierarchicalId id{HierarchicalId("MainMenu")("File")};
+
+        registry.registerAction(action, id);
+        registry.registerAction(action, id);
+
+        REQUIRE(registry.actions().size() == 1);
+    }
 }

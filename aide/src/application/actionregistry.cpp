@@ -31,6 +31,16 @@ void ActionRegistry::registerAction(std::weak_ptr<QAction> action,
                                     std::string description,
                                     QKeySequence defaultKeySequence)
 {
+    if (m_actions.find(uniqueId) != m_actions.end()) {
+        AIDE_LOG_WARN(
+            "Action with id \"{}\" is already registered. This is either a "
+            "programming error or results from conflicting plugins. This "
+            "action cannot be found with \"Find Action\"  and will not be "
+            "displayed in the keymap.",
+            uniqueId.name())
+        return;
+    }
+
     AIDE_LOG_TRACE(
         R"(Register new action "{}" with description "{}" and default sequence "{}")",
         uniqueId.name(), description,

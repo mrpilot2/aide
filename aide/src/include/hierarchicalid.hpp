@@ -23,6 +23,8 @@ namespace aide
 
         [[nodiscard]] std::string name() const;
 
+        bool operator==(const HierarchicalId& rhs) const;
+        bool operator!=(const HierarchicalId& rhs) const;
         bool operator<(const HierarchicalId& rhs) const;
         bool operator>(const HierarchicalId& rhs) const;
 

@@ -16,8 +16,8 @@ using aide::gui::TranslatorInterface;
 
 static const auto MAIN_MENU_FILE_QUIT{
     HierarchicalId("Main Menu")("File")("Quit")};
-static const auto MAIN_MENU_HELP_ABOUT_AIDE{
-    HierarchicalId("Main Menu")("Help")("About Aide")};
+static const auto MAIN_MENU_HELP_ABOUT_QT{
+    HierarchicalId("Main Menu")("Help")("About Qt")};
 
 MainWindow::MainWindow(std::shared_ptr<ActionRegistry> actionRegistry,
                        QWidget* parent)
@@ -53,7 +53,7 @@ void MainWindow::registerActions(
             QApplication::instance(), &QApplication::aboutQt);
     m_ui->menuHelp->addAction(m_actionAboutQt.get());
 
-    actionRegistry->registerAction(m_actionAboutQt, MAIN_MENU_HELP_ABOUT_AIDE);
+    actionRegistry->registerAction(m_actionAboutQt, MAIN_MENU_HELP_ABOUT_QT);
 }
 
 std::shared_ptr<TranslatorInterface> MainWindow::translator() const
