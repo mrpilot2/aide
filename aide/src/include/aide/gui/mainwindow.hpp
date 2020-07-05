@@ -11,10 +11,13 @@ namespace Ui
     class MainWindow;
 } // namespace Ui
 
+class QIcon;
 class QWidget;
 
 namespace aide
 {
+    class ActionRegistry;
+
     namespace gui
     {
         class TranslatorInterface;
@@ -22,7 +25,8 @@ namespace aide
         class MainWindow : public QMainWindow
         {
         public:
-            explicit MainWindow(QWidget* parent = nullptr);
+            explicit MainWindow(std::shared_ptr<ActionRegistry> actionRegistry,
+                                QWidget* parent = nullptr);
             ~MainWindow() override;
             MainWindow(const MainWindow&) = delete;
             MainWindow& operator=(const MainWindow&) = delete;
@@ -33,9 +37,16 @@ namespace aide
                 const;
 
         private:
-            std::shared_ptr<TranslatorInterface> m_translator;
+            void registerActions(
+                const std::shared_ptr<ActionRegistry>& actionRegistry);
 
+            [[nodiscard]] static QIcon createIconFromTheme(
+                const std::string& iconName);
+
+            std::shared_ptr<TranslatorInterface> m_translator;
             std::unique_ptr<Ui::MainWindow> m_ui;
+            std::shared_ptr<QAction> m_actionQuit;
+            std::shared_ptr<QAction> m_actionAboutQt;
         };
     } // namespace gui
 

@@ -1,6 +1,9 @@
 
 #include "application.hpp"
 
+#include <actionregistry.hpp>
+#include <utility>
+
 #include <QDir>
 #include <QStandardPaths>
 #include <QString>
@@ -15,7 +18,8 @@ using aide::gui::TranslatorInterface;
 // NOLINTNEXTLINE
 Application::Application(int& argc, char* argv[])
     : QApplication(argc, argv)
-    , m_mainWindow(new MainWindow(nullptr))
+    , m_actionRegistry{std::make_shared<ActionRegistry>()}
+    , m_mainWindow(new MainWindow(m_actionRegistry, nullptr))
 {
     if (!isOrganizationNameSet()) {
         throw std::runtime_error(

@@ -12,6 +12,7 @@ class QMainWindow;
 
 namespace aide
 {
+    class ActionRegistry;
     namespace gui
     {
         class MainWindow;
@@ -50,6 +51,8 @@ namespace aide
             const QString& logLocation);
 
         std::shared_ptr<aide::Logger> m_logger{setupLogger()};
+
+        std::shared_ptr<aide::ActionRegistry> m_actionRegistry;
 
         std::shared_ptr<aide::gui::MainWindow> m_mainWindow;
     };

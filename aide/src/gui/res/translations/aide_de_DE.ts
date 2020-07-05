@@ -28,4 +28,19 @@
         <translation>Über aIDE</translation>
     </message>
 </context>
+<context>
+    <name>QApplication</name>
+    <message>
+        <source>Quits the application</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation type="unfinished">Beenden</translation>
+    </message>
+    <message>
+        <source>About Qt</source>
+        <translation type="unfinished">Über Qt</translation>
+    </message>
+</context>
 </TS>
