@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QPushButton>
 
+#include <aide/logger.hpp>
+
 #include "actionregistry.hpp"
 #include "applicationtranslator.hpp"
 #include "hierarchicalid.hpp"
@@ -14,12 +16,30 @@ using aide::HierarchicalId;
 using aide::gui::MainWindow;
 using aide::gui::TranslatorInterface;
 
-static const auto MAIN_MENU_FILE_QUIT{
-    HierarchicalId("Main Menu")("File")("Quit")};
-static const auto MAIN_MENU_HELP_ABOUT_QT{
-    HierarchicalId("Main Menu")("Help")("About Qt")};
+struct ActionIds
+{
+    const HierarchicalId MAIN_MENU_FILE_QUIT{
+        HierarchicalId("Main Menu")("File")("Quit")};
+    const HierarchicalId MAIN_MENU_HELP_ABOUT_QT{
+        HierarchicalId("Main Menu")("Help")("About Qt")};
+};
 
-MainWindow::MainWindow(std::shared_ptr<ActionRegistry> actionRegistry,
+const ActionIds& ACTION_IDS()
+{
+    try {
+        static ActionIds ids;
+        return ids;
+    }
+    catch (...) {
+        AIDE_LOG_CRITICAL(
+            "MainWindow: could not create hierarchical menu Ids with static "
+            "storage duration. This should only happen if the application is "
+            "already out of memory at startup")
+        std::terminate();
+    }
+}
+
+MainWindow::MainWindow(const std::shared_ptr<ActionRegistry>& actionRegistry,
                        QWidget* parent)
     : QMainWindow(parent)
     , m_translator{new ApplicationTranslator}
@@ -43,7 +63,7 @@ void MainWindow::registerActions(
     m_ui->menuFile->addAction(m_actionQuit.get());
 
     actionRegistry->registerAction(
-        m_actionQuit, MAIN_MENU_FILE_QUIT,
+        m_actionQuit, ACTION_IDS().MAIN_MENU_FILE_QUIT,
         QApplication::tr("Quits the application").toStdString(),
         {QKeySequence(QKeySequence::Quit), QKeySequence("Alt+F4")});
 
@@ -53,7 +73,8 @@ void MainWindow::registerActions(
             QApplication::instance(), &QApplication::aboutQt);
     m_ui->menuHelp->addAction(m_actionAboutQt.get());
 
-    actionRegistry->registerAction(m_actionAboutQt, MAIN_MENU_HELP_ABOUT_QT);
+    actionRegistry->registerAction(m_actionAboutQt,
+                                   ACTION_IDS().MAIN_MENU_HELP_ABOUT_QT);
 }
 
 std::shared_ptr<TranslatorInterface> MainWindow::translator() const

@@ -25,8 +25,9 @@ namespace aide
         class MainWindow : public QMainWindow
         {
         public:
-            explicit MainWindow(std::shared_ptr<ActionRegistry> actionRegistry,
-                                QWidget* parent = nullptr);
+            explicit MainWindow(
+                const std::shared_ptr<ActionRegistry>& actionRegistry,
+                QWidget* parent = nullptr);
             ~MainWindow() override;
             MainWindow(const MainWindow&) = delete;
             MainWindow& operator=(const MainWindow&) = delete;

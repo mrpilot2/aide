@@ -9,7 +9,19 @@
 
 using aide::gui::ApplicationTranslator;
 
-const QDir libraryTranslationPath{":/aide_library_translations"};
+const QDir& libraryTranslationPath()
+{
+    try {
+        static const QDir libraryTranslationPath{":/aide_library_translations"};
+        return libraryTranslationPath;
+    }
+    catch (...) {
+        AIDE_LOG_ERROR(
+            "ApplicationTranslator: Could not create static storage duration "
+            "library translation path")
+        std::terminate();
+    }
+}
 
 inline void initResources()
 {
@@ -29,7 +41,7 @@ ApplicationTranslator::ApplicationTranslator()
 
     QApplication::installTranslator(&m_qtTranslator);
 
-    installNewTranslator(libraryTranslationPath, QLatin1String("aide"));
+    installNewTranslator(libraryTranslationPath(), QLatin1String("aide"));
 }
 
 void ApplicationTranslator::addAdditionalTranslationFilePath(
@@ -70,7 +82,7 @@ std::set<std::string> ApplicationTranslator::getAvailableTranslations() const
         std::set<std::string> languages{};
 
         auto languageFiles =
-            libraryTranslationPath.entryList(QStringList("*.qm"));
+            libraryTranslationPath().entryList(QStringList("*.qm"));
 
         const auto languagesInCurrentPath{fetchLanguages(languageFiles)};
         languages.insert(languagesInCurrentPath.begin(),

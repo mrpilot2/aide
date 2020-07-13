@@ -1,6 +1,6 @@
 ---
-Checks:          '*,-android-*,-abseil-*,-fuchsia-*,-llvm-header-guard,-modernize-use-trailing-return-type'
-WarningsAsErrors: ''
+Checks:          '*,-android-*,-abseil-*,-fuchsia-*,-llvm-header-guard,-llvmlibc-*,-modernize-use-trailing-return-type'
+WarningsAsErrors: '*'
 HeaderFilterRegex: '^((?!ui_).)*$'
 FormatStyle:     none
 CheckOptions:    
