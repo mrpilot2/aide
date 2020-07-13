@@ -3,6 +3,8 @@ set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_LIST_DIR}/res/forms)
 set(CMAKE_AUTORCC ON)
 
 if(TARGET Qt5::lrelease)
+  set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
+
   qt5_create_translation(
     QM_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}
