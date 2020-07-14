@@ -1,3 +1,5 @@
+#include <array>
+
 #include <QApplication>
 #include <QIcon>
 #include <QLabel>
@@ -35,8 +37,13 @@ TEST_CASE("Any search line edit ")
         const auto* child = searchLineEdit.findChild<QLabel*>("searchIcon");
 
         REQUIRE(child != nullptr);
+#if QT_VERSION > QT_VERSION_CHECK(5, 15, 0)
+        REQUIRE(0 == child->pixmap(Qt::ReturnByValue).size().width());
+        REQUIRE(0 == child->pixmap(Qt::ReturnByValue).size().height());
+#else
         REQUIRE(0 == child->pixmap()->size().width());
         REQUIRE(0 == child->pixmap()->size().height());
+#endif
     }
 
     SECTION(" displays a custom search icon")
@@ -46,7 +53,12 @@ TEST_CASE("Any search line edit ")
         const auto* child = searchLineEdit.findChild<QLabel*>("searchIcon");
 
         REQUIRE(child != nullptr);
+#if QT_VERSION > QT_VERSION_CHECK(5, 15, 0)
+        REQUIRE(16 == child->pixmap(Qt::ReturnByValue).size().width());
+        REQUIRE(16 == child->pixmap(Qt::ReturnByValue).size().height());
+#else
         REQUIRE(16 == child->pixmap()->size().width());
         REQUIRE(16 == child->pixmap()->size().height());
+#endif
     }
 }
