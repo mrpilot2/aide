@@ -1,0 +1,5 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/icons/unit-test">
+        <file alias="system-search">system-search.png</file>
+    </qresource>
+</RCC>

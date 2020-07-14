@@ -10,7 +10,7 @@ namespace Ui
     class SearchLineEdit;
 } // namespace Ui
 
-namespace aide
+namespace aide::gui
 {
     class SearchLineEdit : public QWidget
     {
@@ -26,6 +26,6 @@ namespace aide
     private:
         std::unique_ptr<Ui::SearchLineEdit> m_ui;
     };
-} // namespace aide
+} // namespace aide::gui
 
 #endif // AIDE_SEARCHLINEEDIT_HPP

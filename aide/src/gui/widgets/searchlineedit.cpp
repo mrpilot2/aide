@@ -1,8 +1,12 @@
-#include "searchlineedit.hpp"
+#include "widgets/searchlineedit.hpp"
+
+#include <QIcon>
 
 #include "ui_searchlineedit.h"
 
-using aide::SearchLineEdit;
+using aide::gui::SearchLineEdit;
+
+const int ICON_SIZE{16};
 
 SearchLineEdit::SearchLineEdit(QWidget* parent)
     : QWidget(parent)
@@ -10,6 +14,7 @@ SearchLineEdit::SearchLineEdit(QWidget* parent)
 {
     m_ui->setupUi(this);
 }
+
 SearchLineEdit::~SearchLineEdit() = default;
 
 void SearchLineEdit::setSearchHint(const std::string& searchHint)
@@ -19,5 +24,5 @@ void SearchLineEdit::setSearchHint(const std::string& searchHint)
 
 void SearchLineEdit::setSearchIcon(const QIcon& icon)
 {
-    m_ui->searchIcon->setPixmap(icon.pixmap(16, 16));
+    m_ui->searchIcon->setPixmap(icon.pixmap(ICON_SIZE, ICON_SIZE));
 }

@@ -1,9 +1,13 @@
 add_library(AideWidgets OBJECT)
 add_library(Aide::Widgets ALIAS AideWidgets)
 
-target_sources(AideWidgets
-    PRIVATE
-        searchlineedit.cpp)
+target_sources(AideWidgets PRIVATE searchlineedit.cpp)
 
-target_link_libraries(AideWidgets
-    PUBLIC Qt5::Widgets)
+target_include_directories(
+  AideWidgets PRIVATE ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets
+                      ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/
+)
+
+target_link_libraries(AideWidgets PUBLIC Qt5::Widgets)
+
+target_compile_features(AideWidgets PUBLIC cxx_std_17)

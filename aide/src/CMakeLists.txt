@@ -8,7 +8,7 @@ add_library(Aide::AideCore ALIAS AideCore)
 
 target_sources(
   AideCore PRIVATE $<TARGET_OBJECTS:AideApplication> $<TARGET_OBJECTS:AideGui>
-                   $<TARGET_OBJECTS:AideLogger>
+                   $<TARGET_OBJECTS:AideWidgets> $<TARGET_OBJECTS:AideLogger>
 )
 
 target_include_directories(

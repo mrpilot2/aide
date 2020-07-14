@@ -31,8 +31,10 @@ target_sources(
     applicationtest.cpp
     buildinformationtest.cpp
     loggertest.cpp
+    searchlineedittest.cpp
     $<$<TARGET_EXISTS:Qt5::lrelease>:${CMAKE_CURRENT_BINARY_DIR}/ut_translations.qrc
     ${QM_FILES}>
+    res/ut_icons.qrc
 )
 
 if(NOT ${TEST_AGAINST_INSTALLED})
