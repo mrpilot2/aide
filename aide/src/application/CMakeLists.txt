@@ -14,7 +14,7 @@ target_include_directories(
 target_link_libraries(
   AideApplication
   PUBLIC Qt5::Core Qt5::Widgets AideLogger
-  PRIVATE AideGui project_coverage project_sanitizers
+  PRIVATE AideGui project_coverage project_sanitizers project_warnings
 )
 
 target_compile_features(AideApplication PRIVATE cxx_std_17)

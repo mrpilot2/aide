@@ -13,6 +13,10 @@ target_include_directories(
                       ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/
 )
 
-target_link_libraries(AideWidgets PUBLIC Qt5::Widgets)
+target_link_libraries(
+  AideWidgets
+  PUBLIC Qt5::Widgets
+  PRIVATE project_coverage project_sanitizers project_warnings
+)
 
 target_compile_features(AideWidgets PUBLIC cxx_std_17)

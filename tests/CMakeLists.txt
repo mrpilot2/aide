@@ -31,5 +31,10 @@ if(NOT TARGET project_coverage)
   add_library(project_coverage INTERFACE IMPORTED)
 endif()
 
+# target does not exist in standalone mode, only when built from top-level
+if(NOT TARGET project_warnings)
+  add_library(project_warnings INTERFACE IMPORTED)
+endif()
+
 enable_testing()
 add_subdirectory(ut)

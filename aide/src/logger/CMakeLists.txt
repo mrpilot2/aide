@@ -12,7 +12,7 @@ target_include_directories(
 target_link_libraries(
   AideLogger
   PUBLIC CONAN_PKG::spdlog
-  PRIVATE project_coverage
+  PRIVATE project_coverage project_sanitizers project_warnings
 )
 
 set_target_properties(AideLogger PROPERTIES POSITION_INDEPENDENT_CODE ON)

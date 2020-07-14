@@ -86,4 +86,5 @@ else()
   set(PROJECT_WARNINGS ${GCC_WARNINGS})
 endif()
 
-add_compile_options(${PROJECT_WARNINGS})
+add_library(project_warnings INTERFACE)
+target_compile_options(project_warnings INTERFACE ${PROJECT_WARNINGS})

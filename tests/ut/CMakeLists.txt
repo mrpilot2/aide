@@ -52,6 +52,7 @@ target_link_libraries(
           Qt5::Test
           project_sanitizers
           project_coverage
+          project_warnings
           Aide::AideBuildInformation
           Aide::AideCore
 )

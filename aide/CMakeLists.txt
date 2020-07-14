@@ -19,6 +19,10 @@ if(NOT TARGET project_coverage)
   add_library(project_coverage INTERFACE IMPORTED)
 endif()
 
+if(NOT TARGET project_warnings)
+  add_library(project_warnings INTERFACE IMPORTED)
+endif()
+
 include(dependencies/CMakeLists.txt)
 
 add_subdirectory(doc)

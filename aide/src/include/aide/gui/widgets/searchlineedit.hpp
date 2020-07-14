@@ -10,26 +10,29 @@ namespace Ui
     class SearchLineEdit;
 } // namespace Ui
 
-namespace aide::gui
+namespace aide
 {
-    class SearchLineEdit : public QWidget
+    namespace gui
     {
-        Q_OBJECT
-    public:
-        explicit SearchLineEdit(QWidget* parent);
+        class SearchLineEdit : public QWidget
+        {
+            Q_OBJECT
+        public:
+            explicit SearchLineEdit(QWidget* parent);
 
-        ~SearchLineEdit() override;
+            ~SearchLineEdit() override;
 
-        void setSearchHint(const std::string& searchHint);
+            void setSearchHint(const std::string& searchHint);
 
-        void setSearchIcon(const QIcon& icon);
+            void setSearchIcon(const QIcon& icon);
 
-    signals:
-        void textChanged(const QString& text);
+        signals:
+            void textChanged(const QString& text);
 
-    private:
-        std::unique_ptr<Ui::SearchLineEdit> m_ui;
-    };
-} // namespace aide::gui
+        private:
+            std::unique_ptr<Ui::SearchLineEdit> m_ui;
+        };
+    } // namespace gui
+} // namespace aide
 
 #endif // AIDE_SEARCHLINEEDIT_HPP
