@@ -40,7 +40,7 @@ TEST_CASE("Any search line edit ")
         const auto* child = searchLineEdit.findChild<QLabel*>("searchIcon");
 
         REQUIRE(child != nullptr);
-#if QT_VERSION > QT_VERSION_CHECK(5, 15, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
         REQUIRE(0 == child->pixmap(Qt::ReturnByValue).size().width());
         REQUIRE(0 == child->pixmap(Qt::ReturnByValue).size().height());
 #else
@@ -56,7 +56,7 @@ TEST_CASE("Any search line edit ")
         const auto* child = searchLineEdit.findChild<QLabel*>("searchIcon");
 
         REQUIRE(child != nullptr);
-#if QT_VERSION > QT_VERSION_CHECK(5, 15, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
         REQUIRE(16 == child->pixmap(Qt::ReturnByValue).size().width());
         REQUIRE(16 == child->pixmap(Qt::ReturnByValue).size().height());
 #else
