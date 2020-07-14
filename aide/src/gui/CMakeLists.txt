@@ -50,3 +50,8 @@ target_link_libraries(
   AideGui PRIVATE Aide::AideLogger Qt5::Widgets project_coverage
                   project_sanitizers project_warnings
 )
+
+set_source_files_properties(
+  ${CMAKE_CURRENT_BINARY_DIR}/AideGui_autogen/mocs_compilation.cpp
+  PROPERTIES COMPILE_FLAGS "$<$<CXX_COMPILER_ID:GNU>:-Wno-useless-cast>"
+)
