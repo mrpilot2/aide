@@ -49,6 +49,7 @@ target_link_libraries(
   PRIVATE catch_main
           Qt5::Core
           Qt5::Widgets
+          Qt5::Test
           project_sanitizers
           project_coverage
           Aide::AideBuildInformation

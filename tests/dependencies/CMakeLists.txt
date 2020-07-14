@@ -29,7 +29,7 @@ conan_cmake_run(
 
 find_package(
   Qt5
-  COMPONENTS Widgets
+  COMPONENTS Widgets Test
   REQUIRED
 )
 

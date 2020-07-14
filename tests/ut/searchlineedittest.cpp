@@ -3,6 +3,9 @@
 #include <QApplication>
 #include <QIcon>
 #include <QLabel>
+#include <QLineEdit>
+#include <QSignalSpy>
+#include <QtTest/qtestkeyboard.h>
 
 #include "aide/gui/widgets/searchlineedit.hpp"
 #include "catch2/catch.hpp"
@@ -60,5 +63,16 @@ TEST_CASE("Any search line edit ")
         REQUIRE(16 == child->pixmap()->size().width());
         REQUIRE(16 == child->pixmap()->size().height());
 #endif
+    }
+
+    SECTION(" emit the textChanged signal if text in the search box is entered")
+    {
+        auto* child = searchLineEdit.findChild<QLineEdit*>("searchField");
+
+        QSignalSpy spy(child, SIGNAL(textChanged(const QString&)));
+
+        QTest::keyClicks(child, "hello world");
+
+        REQUIRE(spy.count() > 0);
     }
 }

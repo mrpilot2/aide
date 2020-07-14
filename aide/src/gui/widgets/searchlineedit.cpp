@@ -1,6 +1,7 @@
 #include "widgets/searchlineedit.hpp"
 
 #include <QIcon>
+#include <QObject>
 
 #include "ui_searchlineedit.h"
 
@@ -13,6 +14,9 @@ SearchLineEdit::SearchLineEdit(QWidget* parent)
     , m_ui{new Ui::SearchLineEdit}
 {
     m_ui->setupUi(this);
+
+    connect(m_ui->searchField, &QLineEdit::textChanged, this,
+            &SearchLineEdit::textChanged);
 }
 
 SearchLineEdit::~SearchLineEdit() = default;

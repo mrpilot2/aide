@@ -14,6 +14,7 @@ namespace aide::gui
 {
     class SearchLineEdit : public QWidget
     {
+        Q_OBJECT
     public:
         explicit SearchLineEdit(QWidget* parent);
 
@@ -22,6 +23,9 @@ namespace aide::gui
         void setSearchHint(const std::string& searchHint);
 
         void setSearchIcon(const QIcon& icon);
+
+    signals:
+        void textChanged(const QString& text);
 
     private:
         std::unique_ptr<Ui::SearchLineEdit> m_ui;
