@@ -28,6 +28,22 @@ TEST_CASE("Hierarchical Id ")
         REQUIRE("Main Menu/File/Quit" == id.name());
     }
 
+    SECTION("can be compared with equal operator")
+    {
+        const auto id1{HierarchicalId("Main Menu")("File")("New")};
+        const auto id2{HierarchicalId("Main Menu")("File")("New")};
+
+        REQUIRE(id1 == id2);
+    }
+
+    SECTION("can be compared with not operator")
+    {
+        const auto id1{HierarchicalId("Main Menu")("File")("New")};
+        const auto id2{HierarchicalId("Main Menu")("File")("Newa")};
+
+        REQUIRE(id1 != id2);
+    }
+
     SECTION("can be compared with less than operator")
     {
         const auto id1{HierarchicalId("Main Menu")("File")("New")};
