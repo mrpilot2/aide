@@ -17,8 +17,8 @@ A modern, C++ native GUI application framework based on QT5 - using C++11 and la
 
 ## Table of contents
 
-- [Contributors](#contributors)
-- [License](#license)
+-   [Contributors](#contributors-)
+-   [License](#license)
 
 ## Contributors ✨
 
