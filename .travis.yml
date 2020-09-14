@@ -146,6 +146,22 @@ matrix:
             - qttools5-dev-tools
             - qttools5-dev
 
+    - env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - BUILD_TYPE=Release
+        - COVERAGE=OFF
+        - BUILD_SHARED_LIBS=ON
+      os: linux
+      dist: focal
+      name: "Clang Focal Release"
+      addons:
+        apt:
+          packages:
+            - *common_packages
+            - qt5-default
+            - qttools5-dev-tools
+            - qttools5-dev
+
     ##########################################################################
     # GCC on Linux
     ##########################################################################
