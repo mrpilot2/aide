@@ -9,7 +9,7 @@
 
 using aide::gui::ApplicationTranslator;
 
-const QDir& libraryTranslationPath()
+const static QDir& libraryTranslationPath()
 {
     try {
         static const QDir libraryTranslationPath{":/aide_library_translations"};
