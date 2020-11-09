@@ -67,3 +67,13 @@ bool HierarchicalId::operator>(const HierarchicalId& rhs) const
 {
     return rhs < *this;
 }
+
+HierarchicalId::const_iterator HierarchicalId::begin() const noexcept
+{
+    return m_id.begin();
+}
+
+HierarchicalId::const_iterator HierarchicalId::end() const noexcept
+{
+    return m_id.end();
+}

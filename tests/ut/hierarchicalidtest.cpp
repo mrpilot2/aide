@@ -59,4 +59,15 @@ TEST_CASE("Hierarchical Id ")
 
         REQUIRE(id1 > id2);
     }
+
+    SECTION("can be iterated")
+    {
+        const auto id{HierarchicalId("Main Menu")("File")("Quit")};
+
+        const auto first = id.begin();
+        REQUIRE(std::string(*first) == "Main Menu");
+        REQUIRE(std::string(*(first + 1)) == "File");
+        REQUIRE(std::string(*(first + 2)) == "Quit");
+        REQUIRE(*(first + 2) == *(id.end() - 1));
+    }
 }

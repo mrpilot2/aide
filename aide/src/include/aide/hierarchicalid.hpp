@@ -7,8 +7,16 @@
 namespace aide
 {
     class HierarchicalId
+        : public std::iterator<std::input_iterator_tag,
+                               const char*,  // value_type
+                               const char*,  // difference_type
+                               const char**, // pointer
+                               const char*   // reference
+                               >
     {
     public:
+        using const_iterator = std::vector<const char*>::const_iterator;
+
         explicit HierarchicalId(const char* level);
 
         HierarchicalId() = delete;
@@ -27,6 +35,10 @@ namespace aide
         bool operator!=(const HierarchicalId& rhs) const;
         bool operator<(const HierarchicalId& rhs) const;
         bool operator>(const HierarchicalId& rhs) const;
+
+        [[nodiscard]] const_iterator begin() const noexcept;
+
+        [[nodiscard]] const_iterator end() const noexcept;
 
     private:
         explicit HierarchicalId(std::vector<const char*> ids);
