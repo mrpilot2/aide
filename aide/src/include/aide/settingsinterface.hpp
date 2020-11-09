@@ -14,12 +14,15 @@ namespace aide
     public:
         virtual ~SettingsInterface();
 
-        virtual void setValue(const HierarchicalId& group, std::string key,
+        virtual void setValue(const HierarchicalId& group,
+                              const std::string& key,
                               const QVariant& value) = 0;
 
-        virtual QVariant value(const HierarchicalId& group)    = 0;
         virtual QVariant value(const HierarchicalId& group,
-                               const QVariant& defaultValue()) = 0;
+                               const std::string& key) = 0;
+
+        virtual QVariant value(const HierarchicalId& group, std::string key,
+                               const QVariant& defaultValue) = 0;
 
         virtual void save() = 0;
         virtual void load() = 0;
