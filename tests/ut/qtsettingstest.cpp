@@ -1,3 +1,4 @@
+#include <array>
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -53,8 +54,11 @@ TEST_CASE("Versionable Qt Settings")
         QSettings s;
         auto fileName = s.fileName().toStdString();
 
+#ifndef Q_OS_WIN
+        // Windows uses Registry by default
         REQUIRE(::lookForContentInFile(fileName.c_str(), "Font\\Size=10") !=
                 std::string::npos);
+#endif
     }
 
     SECTION("returns default value if key does not exist and default given")
@@ -105,9 +109,12 @@ TEST_CASE("Un-Versionable Qt Settings")
 
         settings.load();
 
+#ifndef Q_OS_WIN
+        // Windows uses Registry by default
         REQUIRE(::lookForContentInFile(
                     fileName.c_str(),
                     ("MainWindow\\Position=\"" + std::string(geom) + "\"")
                         .c_str()) != std::string::npos);
+#endif
     }
 }
