@@ -1,5 +1,6 @@
 #include <fstream>
 #include <sstream>
+#include <string>
 
 #include <catch2/catch.hpp>
 
@@ -104,9 +105,9 @@ TEST_CASE("Un-Versionable Qt Settings")
 
         settings.load();
 
-        REQUIRE(::lookForContentInFile(fileName.c_str(),
-                                       std::string("MainWindow\\Position=\"" +
-                                                   std::string(geom) + "\"")
-                                           .c_str()) != std::string::npos);
+        REQUIRE(::lookForContentInFile(
+                    fileName.c_str(),
+                    ("MainWindow\\Position=\"" + std::string(geom) + "\"")
+                        .c_str()) != std::string::npos);
     }
 }
