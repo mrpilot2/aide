@@ -42,9 +42,11 @@ jobs:
         cmake --build . --config Release -j 4
 
     - name: Test the project
-      working-directory: build
-      run: |
-        ctest
+      uses: GabrielBB/xvfb-action@v1
+      with:
+        working-directory: build
+        run: |
+          ctest
 
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1.4
