@@ -4,8 +4,11 @@ on: [push]
 
 jobs:
   build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-10.15]
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v2
@@ -36,4 +39,4 @@ jobs:
         mkdir build
         cd build
         cmake ..
-        make
+        cmake --build . --config Release -j 4
