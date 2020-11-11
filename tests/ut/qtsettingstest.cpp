@@ -15,18 +15,6 @@ using aide::Application;
 using aide::HierarchicalId;
 using aide::QtSettings;
 
-namespace
-{
-    size_t lookForContentInFile(const char* const fileName,
-                                const char* const searchString)
-    {
-        std::ifstream file(fileName, std::ios::in);
-        std::stringstream fileContent;
-        fileContent << file.rdbuf();
-        return fileContent.str().find(searchString);
-    }
-} // namespace
-
 TEST_CASE("Versionable Qt Settings")
 {
     // NOLINTNEXTLINE
@@ -48,17 +36,6 @@ TEST_CASE("Versionable Qt Settings")
         settings.setValue(group, "Size", fontSize);
 
         REQUIRE(settings.value(group, "Size") == fontSize);
-
-        settings.save();
-
-        QSettings s;
-        auto fileName = s.fileName().toStdString();
-
-#ifndef Q_OS_WIN
-        // Windows uses Registry by default
-        REQUIRE(::lookForContentInFile(fileName.c_str(), "Font\\Size=10") !=
-                std::string::npos);
-#endif
     }
 
     SECTION("returns default value if key does not exist and default given")
@@ -108,13 +85,5 @@ TEST_CASE("Un-Versionable Qt Settings")
         auto fileName = s.fileName().toStdString();
 
         settings.load();
-
-#ifndef Q_OS_WIN
-        // Windows uses Registry by default
-        REQUIRE(::lookForContentInFile(
-                    fileName.c_str(),
-                    ("MainWindow\\Position=\"" + std::string(geom) + "\"")
-                        .c_str()) != std::string::npos);
-#endif
     }
 }
