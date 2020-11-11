@@ -1,8 +1,5 @@
 language: cpp
 
-before_cache:
-  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew cleanup; fi
-
 cache:
   - pip
   - ccache
@@ -20,54 +17,6 @@ addons:
 matrix:
   fast_finish: true
   include:
-
-    ##########################################################################
-    # Clang on OSX
-    ##########################################################################
-
-    # XCode 9.4
-    - env: COMPILER=clang++ BUILD_TYPE=Debug COVERAGE=OFF
-      os: osx
-      osx_image: xcode9.4
-      compiler: clang
-      addons:
-        homebrew:
-          update: true
-          packages:
-            - *common_packages
-            - qt
-
-    - env: COMPILER=clang++ BUILD_TYPE=Release COVERAGE=OFF
-      os: osx
-      osx_image: xcode9.4
-      compiler: clang
-      addons:
-        homebrew:
-          update: true
-          packages:
-            - *common_packages
-            - qt
-
-    # XCode 11
-    - env: COMPILER=clang++ BUILD_TYPE=Debug COVERAGE=OFF
-      os: osx
-      osx_image: xcode11
-      compiler: clang
-      addons:
-        homebrew:
-          packages:
-            - *common_packages
-            - qt
-
-    - env: COMPILER=clang++ BUILD_TYPE=Release COVERAGE=OFF
-      os: osx
-      osx_image: xcode11
-      compiler: clang
-      addons:
-        homebrew:
-          packages:
-            - *common_packages
-            - qt
 
     ##########################################################################
     # Clang on Linux
@@ -240,20 +189,10 @@ matrix:
 install:
   - JOBS=2
   - |
-    if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
       pip install --user -r requirements.txt
       wget -O cmake.sh https://cmake.org/files/v3.15/cmake-3.15.7-Linux-x86_64.sh
       sudo sh cmake.sh --skip-license --exclude-subdir --prefix=/usr/local
       export PATH=/usr/local/bin:${PATH}
-    else
-      python -m pip install --upgrade pip3
-      pip3 install -r requirements.txt
-      brew install cmake || brew upgrade cmake
-      QT5_CMAKE_PREFIX=/usr/local/opt/qt/lib/cmake/Qt5
-      QT5_LINGUIST_CMAKE_PREFIX=/usr/local/opt/qt/lib/cmake/Qt5LinguistTools
-      export QT5_CMAKE_PREFIX
-      export QT5_LINGUIST_CMAKE_PREFIX
-    fi
   - cmake --version
   - export COVERAGE
   - eval "${MATRIX_EVAL}"
@@ -261,11 +200,10 @@ install:
 script:
   - mkdir build
   - cd build
-  - echo "Building $BUILD_TYPE with QT prefix $QT5_CMAKE_PREFIX - Coverage is $COVERAGE"
-  - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DENABLE_COVERAGE=$COVERAGE -DQt5_DIR=$QT5_CMAKE_PREFIX -DQt5LinguistTools_DIR=$QT5_LINGUIST_CMAKE_PREFIX -DBUILD_SHARED_LIBS=$BUILD_SHARED_LIBS
+  - echo "Building $BUILD_TYPE - Coverage is $COVERAGE"
+  - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DENABLE_COVERAGE=$COVERAGE -DBUILD_SHARED_LIBS=$BUILD_SHARED_LIBS
   - cmake --build . -- -j 2
 
-  - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then ( sudo Xvfb :99 -ac -screen 0 1024x768x8; ctest )& fi
   - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then (CTEST_OUTPUT_ON_FAILURE=1 xvfb-run ctest) fi
 
 after_success:
