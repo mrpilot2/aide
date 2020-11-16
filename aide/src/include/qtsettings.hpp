@@ -12,7 +12,7 @@ namespace aide
     class QtSettings : public SettingsInterface
     {
     public:
-        QtSettings(bool versionable);
+        explicit QtSettings(bool versionable);
         ~QtSettings() override;
 
         void setValue(const HierarchicalId& group, const std::string& key,

@@ -12,8 +12,8 @@ using aide::gui::ApplicationTranslator;
 const static QDir& libraryTranslationPath()
 {
     try {
-        static const QDir libraryTranslationPath{":/aide_library_translations"};
-        return libraryTranslationPath;
+        static const QDir libTranslationPath{":/aide_library_translations"};
+        return libTranslationPath;
     }
     catch (...) {
         AIDE_LOG_ERROR(
