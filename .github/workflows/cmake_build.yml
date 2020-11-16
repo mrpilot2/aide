@@ -89,7 +89,7 @@ jobs:
         path: build/**/*.xml
 
     - name: Generate coverage reports
-      if: matrix.COVERAGE == "ON"
+      if: matrix.COVERAGE == 'ON'
       working-directory: build
       run: |
         lcov --gcov-tool ${{ matrix.GCOV_TOOL }} --directory . --capture --output-file coverage.info # capture coverage info
