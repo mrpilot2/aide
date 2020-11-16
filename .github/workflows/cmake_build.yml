@@ -41,7 +41,7 @@ jobs:
 
     - name: Install lcov
       if: runner.os == 'Linux'
-      run: apt install lcov
+      run: sudo apt install lcov
 
     - name: Cache Qt
       id: cache-qt
