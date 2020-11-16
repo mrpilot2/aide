@@ -7,16 +7,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        - os: ubuntu-16.04
-          COMPILER: g++-9
+        include:
+          - os: ubuntu-16.04
+            COMPILER: g++-9
 
-        - os: ubuntu-18.04
-          COMPILER: g++-9
+          - os: ubuntu-18.04
+            COMPILER: g++-9
 
-        - os: ubuntu-20.04
-          COMPILER: g++-9
+          - os: ubuntu-20.04
+            COMPILER: g++-9
 
-        - os: macos-10.15
+          - os: macos-10.15
 
     runs-on: ${{ matrix.os }}
 
