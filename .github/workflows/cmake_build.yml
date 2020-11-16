@@ -77,30 +77,33 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v2
       with:
-        name: test_results_$
+        name: test_results_${{ matrix.os }}
         path: build/**/*.xml
 
 
 
   publish-test-results:
-    name: "Publish Unit Test Results"
+    name: "Publish Unit Test Results from ${{ matrix. os }}"
     needs: build
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-16.04, ubuntu-18.04, ubuntu-20.04]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Download Artifacts
         uses: actions/download-artifact@v2
         with:
           path: artifacts
 
-      - name: Publish Unit Test Results
+      - name: Publish Unit Test Results ${{ matrix.os }}
         uses: EnricoMi/publish-unit-test-result-action@v1.4
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          check_name: Unit Test Results
+          check_name: Unit Test Results ${{ matrix.os }}
           hide_comments: all but latest
           comment_on_pr: true
-          files: artifacts/test_results/tests/ut/*.xml
+          files: artifacts/test_results_${{ matrix. os}}/tests/ut/*.xml
           report_individual_runs: true
           deduplicate_classes_by_file_name: false
 
