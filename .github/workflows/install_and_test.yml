@@ -58,7 +58,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: test_results_installed_lib
-        path: build/**/*.xml
+        path: tests/build_standalone/**/*.xml
 
   publish-test-results:
     name: "Publish Unit Test Results from installed lib"
