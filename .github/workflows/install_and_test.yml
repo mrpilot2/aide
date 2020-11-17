@@ -31,14 +31,13 @@ jobs:
       with:
         cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
-    - name: Build the library
-      if: runner.os == 'Linux'
+    - name: Build and install the library
       working-directory: aide
       run: |
         mkdir build_standalone
         cd build_standalone
         cmake -DCMAKE_INSTALL_PREFIX=~/.local/ -DUNIT_TESTS_RUN_ON_CI=1 ..
-        cmake --build . --config Release -j 4
+        cmake --build . --target install --config Release -j 4
 
     - name: Build the tests
       working-directory: tests
