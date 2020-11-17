@@ -1,6 +1,8 @@
 #ifndef AIDE_SETTINGS_PROVIDER_HPP
 #define AIDE_SETTINGS_PROVIDER_HPP
 
+#include <memory>
+
 namespace aide
 {
     class SettingsInterface;
@@ -24,8 +26,8 @@ namespace aide
          * the window geometry, as it might change with every application exit.
          * @return current implementation of SettingsInterface
          */
-        [[nodiscard]] virtual SettingsInterface& versionableSettings()
-            const = 0;
+        [[nodiscard]] virtual std::shared_ptr<SettingsInterface>
+        versionableSettings() const = 0;
 
         /**
          * use this for settings that should not be stored in a version control
@@ -42,8 +44,8 @@ namespace aide
          * the window geometry, as it might change with every application exit.
          * @return current implementation of SettingsInterface
          */
-        [[nodiscard]] virtual SettingsInterface& unversionableSettings()
-            const = 0;
+        [[nodiscard]] virtual std::shared_ptr<SettingsInterface>
+        unversionableSettings() const = 0;
     };
 } // namespace aide
 

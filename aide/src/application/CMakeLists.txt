@@ -3,8 +3,13 @@ add_library(Aide::AideApplication ALIAS AideApplication)
 
 target_sources(
   AideApplication
-  PRIVATE actionregistry.cpp application.cpp hierarchicalid.cpp qtsettings.cpp
-          settingsinterface.cpp settingsproviderinterface.cpp
+  PRIVATE aidesettingsprovider.cpp
+          actionregistry.cpp
+          application.cpp
+          hierarchicalid.cpp
+          qtsettings.cpp
+          settingsinterface.cpp
+          settingsproviderinterface.cpp
 )
 
 target_include_directories(

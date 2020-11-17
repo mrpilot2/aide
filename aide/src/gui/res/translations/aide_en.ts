@@ -11,14 +11,6 @@
         <source>Actions</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Press Alt Enter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>MainWindow</name>
