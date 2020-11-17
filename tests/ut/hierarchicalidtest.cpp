@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 
-#include "hierarchicalid.hpp"
+#include <aide/hierarchicalid.hpp>
 
 using aide::HierarchicalId;
 
@@ -58,5 +58,16 @@ TEST_CASE("Hierarchical Id ")
         const auto id2{HierarchicalId("Main Menu")("File")("New")};
 
         REQUIRE(id1 > id2);
+    }
+
+    SECTION("can be iterated")
+    {
+        const auto id{HierarchicalId("Main Menu")("File")("Quit")};
+
+        const auto first = id.begin();
+        REQUIRE(std::string(*first) == "Main Menu");
+        REQUIRE(std::string(*(first + 1)) == "File");
+        REQUIRE(std::string(*(first + 2)) == "Quit");
+        REQUIRE(*(first + 2) == *(id.end() - 1));
     }
 }

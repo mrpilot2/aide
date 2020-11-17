@@ -24,7 +24,7 @@ struct ActionIds
         HierarchicalId("Main Menu")("Help")("About Qt")};
 };
 
-const ActionIds& ACTION_IDS()
+const static ActionIds& ACTION_IDS()
 {
     try {
         static ActionIds ids;

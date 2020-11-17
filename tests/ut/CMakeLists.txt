@@ -34,6 +34,7 @@ target_sources(
   PRIVATE
     applicationtest.cpp
     buildinformationtest.cpp
+    hierarchicalidtest.cpp
     loggertest.cpp
     searchlineedittest.cpp
     $<$<TARGET_EXISTS:Qt5::lrelease>:${CMAKE_CURRENT_BINARY_DIR}/ut_translations.qrc
@@ -43,8 +44,8 @@ target_sources(
 
 if(NOT ${TEST_AGAINST_INSTALLED})
   target_sources(
-    ut.aide PRIVATE actionregistrytest.cpp applicationtranslatortest.cpp
-                    hierarchicalidtest.cpp
+    ut.aide PRIVATE aidesettingsprovidertest.cpp actionregistrytest.cpp
+                    applicationtranslatortest.cpp qtsettingstest.cpp
   )
 endif()
 

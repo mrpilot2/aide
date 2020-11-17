@@ -48,7 +48,7 @@ namespace aide
     {
     public:
         Logger();
-        explicit Logger(const FileName& logFileName);
+        explicit Logger(const FileName& fileName);
         explicit Logger(const LoggerName& loggerName);
         explicit Logger(const FileName& logFileName,
                         const LoggerName& loggerName);
