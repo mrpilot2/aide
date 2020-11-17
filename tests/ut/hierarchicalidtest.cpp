@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 
-#include "hierarchicalid.hpp"
+#include <aide/hierarchicalid.hpp>
 
 using aide::HierarchicalId;
 
