@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['filename',['FileName',['../structaide_1_1FileName.html#a9f2b3ee4b6a7c8442645ff6fb202680d',1,'aide::FileName']]],
-  ['flush',['flush',['../classaide_1_1Logger.html#a5cc08473729523bb4bde48459f2ac468',1,'aide::Logger']]]
+  ['end',['end',['../classaide_1_1HierarchicalId.html#ae4dd5dc79e89c8b84e4bd0f7e1c56e18',1,'aide::HierarchicalId']]],
+  ['error',['error',['../classaide_1_1Logger.html#ae07b0a8a6ebf7fd8af6eaab93e915e82',1,'aide::Logger']]]
 ];

@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['icon_5fsize',['ICON_SIZE',['../searchlineedit_8cpp.html#a37556d5306a8fba67bed8d0f3fa81871',1,'searchlineedit.cpp']]],
-  ['info',['info',['../classaide_1_1Logger.html#a456ab72f6a04792f284976eff642b402',1,'aide::Logger']]],
-  ['initresources',['initResources',['../applicationtranslator_8cpp.html#ac574253826b0b2a23c4c9bcf2ec89f62',1,'applicationtranslator.cpp']]],
-  ['invalid_5flogger_5frequest',['INVALID_LOGGER_REQUEST',['../log__helper__macros_8hpp.html#af77e43106e49bb5ecb6e6ffb13a39ac1',1,'log_helper_macros.hpp']]]
+  ['hierarchicalid',['HierarchicalId',['../classaide_1_1HierarchicalId.html',1,'aide::HierarchicalId'],['../classaide_1_1HierarchicalId.html#a25d687453dc08dfb31c24d9bb1176b46',1,'aide::HierarchicalId::HierarchicalId(const char *level)'],['../classaide_1_1HierarchicalId.html#ac480491dcd047fedb7ea2ce538633cc1',1,'aide::HierarchicalId::HierarchicalId()=delete']]],
+  ['hierarchicalid_2ecpp',['hierarchicalid.cpp',['../hierarchicalid_8cpp.html',1,'']]],
+  ['hierarchicalid_2ehpp',['hierarchicalid.hpp',['../hierarchicalid_8hpp.html',1,'']]]
 ];

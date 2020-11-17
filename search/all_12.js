@@ -1,0 +1,5 @@
+var searchData=
+[
+  ['value',['value',['../classaide_1_1SettingsInterface.html#a60f58748235f64fecc7b808116132544',1,'aide::SettingsInterface::value(const HierarchicalId &amp;group, const std::string &amp;key)=0'],['../classaide_1_1SettingsInterface.html#a51334b404b1cc525091a457e45523a74',1,'aide::SettingsInterface::value(const HierarchicalId &amp;group, std::string key, const QVariant &amp;defaultValue)=0'],['../classaide_1_1QtSettings.html#a59910cc6ffc78e387c94e7041f843ee4',1,'aide::QtSettings::value(const HierarchicalId &amp;group, const std::string &amp;key) override'],['../classaide_1_1QtSettings.html#af501f40b34673d2afbfa2f2f9ba971f1',1,'aide::QtSettings::value(const HierarchicalId &amp;group, std::string key, const QVariant &amp;defaultValue) override']]],
+  ['versionablesettings',['versionableSettings',['../classaide_1_1AideSettingsProvider.html#a7a84bb6cb656132f9ba7b4aed13e40f9',1,'aide::AideSettingsProvider::versionableSettings()'],['../classaide_1_1SettingsProviderInterface.html#a5ceb3cd33f8ac8c0d77e6c1339ce1ca7',1,'aide::SettingsProviderInterface::versionableSettings()']]]
+];

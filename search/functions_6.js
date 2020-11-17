@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hierarchicalid',['HierarchicalId',['../classaide_1_1HierarchicalId.html#a25d687453dc08dfb31c24d9bb1176b46',1,'aide::HierarchicalId::HierarchicalId(const char *level)'],['../classaide_1_1HierarchicalId.html#ac480491dcd047fedb7ea2ce538633cc1',1,'aide::HierarchicalId::HierarchicalId()=delete']]]
+  ['getavailabletranslations',['getAvailableTranslations',['../classaide_1_1gui_1_1TranslatorInterface.html#ae7a883e6a76bab1df89c06449ca01776',1,'aide::gui::TranslatorInterface::getAvailableTranslations()'],['../classaide_1_1gui_1_1ApplicationTranslator.html#a843a13aa2d9ddfa7de7f08a938ce5ec3',1,'aide::gui::ApplicationTranslator::getAvailableTranslations()']]]
 ];

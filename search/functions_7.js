@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['info',['info',['../classaide_1_1Logger.html#a456ab72f6a04792f284976eff642b402',1,'aide::Logger']]],
-  ['initresources',['initResources',['../applicationtranslator_8cpp.html#ac574253826b0b2a23c4c9bcf2ec89f62',1,'applicationtranslator.cpp']]]
+  ['hierarchicalid',['HierarchicalId',['../classaide_1_1HierarchicalId.html#a25d687453dc08dfb31c24d9bb1176b46',1,'aide::HierarchicalId::HierarchicalId(const char *level)'],['../classaide_1_1HierarchicalId.html#ac480491dcd047fedb7ea2ce538633cc1',1,'aide::HierarchicalId::HierarchicalId()=delete']]]
 ];

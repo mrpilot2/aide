@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['error',['error',['../classaide_1_1Logger.html#ae07b0a8a6ebf7fd8af6eaab93e915e82',1,'aide::Logger']]]
+  ['debug',['debug',['../classaide_1_1Logger.html#a0876bf73e30d65196e199a90fe9bdb0d',1,'aide::Logger']]]
 ];

@@ -1,7 +1,6 @@
 var searchData=
 [
   ['action',['Action',['../structaide_1_1Action.html',1,'aide::Action'],['../structaide_1_1Action.html#a0aa006222a41a280788a17d28f4bf3ea',1,'aide::Action::action()']]],
-  ['action_5fids',['ACTION_IDS',['../mainwindow_8cpp.html#ae07416713d7ea1bf9c940ad634b63b4d',1,'mainwindow.cpp']]],
   ['actionids',['ActionIds',['../structActionIds.html',1,'']]],
   ['actionregistry',['ActionRegistry',['../classaide_1_1ActionRegistry.html',1,'aide']]],
   ['actionregistry_2ecpp',['actionregistry.cpp',['../actionregistry_8cpp.html',1,'']]],
@@ -25,6 +24,9 @@ var searchData=
   ['aide_5flog_5finfo',['AIDE_LOG_INFO',['../log__helper__macros_8hpp.html#aded105249af549039921e1e5d3c48b40',1,'log_helper_macros.hpp']]],
   ['aide_5flog_5ftrace',['AIDE_LOG_TRACE',['../log__helper__macros_8hpp.html#a2f62d9a1c63c5543d4c64fe329f2115c',1,'log_helper_macros.hpp']]],
   ['aide_5flog_5fwarn',['AIDE_LOG_WARN',['../log__helper__macros_8hpp.html#acdc162fe711aa610ff380e697c198640',1,'log_helper_macros.hpp']]],
+  ['aidesettingsprovider',['AideSettingsProvider',['../classaide_1_1AideSettingsProvider.html',1,'aide::AideSettingsProvider'],['../classaide_1_1AideSettingsProvider.html#a729ef094bf96430256cba6a1aa65c077',1,'aide::AideSettingsProvider::AideSettingsProvider()']]],
+  ['aidesettingsprovider_2ecpp',['aidesettingsprovider.cpp',['../aidesettingsprovider_8cpp.html',1,'']]],
+  ['aidesettingsprovider_2ehpp',['aidesettingsprovider.hpp',['../aidesettingsprovider_8hpp.html',1,'']]],
   ['application',['Application',['../classaide_1_1Application.html',1,'aide::Application'],['../classaide_1_1Application.html#a45b8f2a74ef149181b7ffe0909e55afe',1,'aide::Application::Application()']]],
   ['application_2ecpp',['application.cpp',['../application_8cpp.html',1,'']]],
   ['application_2ehpp',['application.hpp',['../application_8hpp.html',1,'']]],

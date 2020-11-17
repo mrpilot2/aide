@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['getavailabletranslations',['getAvailableTranslations',['../classaide_1_1gui_1_1TranslatorInterface.html#ae7a883e6a76bab1df89c06449ca01776',1,'aide::gui::TranslatorInterface::getAvailableTranslations()'],['../classaide_1_1gui_1_1ApplicationTranslator.html#a843a13aa2d9ddfa7de7f08a938ce5ec3',1,'aide::gui::ApplicationTranslator::getAvailableTranslations()']]]
+  ['filename',['FileName',['../structaide_1_1FileName.html#a9f2b3ee4b6a7c8442645ff6fb202680d',1,'aide::FileName']]],
+  ['flush',['flush',['../classaide_1_1Logger.html#a5cc08473729523bb4bde48459f2ac468',1,'aide::Logger']]]
 ];
