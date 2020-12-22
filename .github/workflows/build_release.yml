@@ -33,15 +33,15 @@ jobs:
       with:
         python-version: 3.6
 
-    - name: Install dependencies
+    - name: Install pip dependencies
       run: |
         pip3 install wheel setuptools
         pip3 install --upgrade -r requirements.txt
         mkdir build
 
-    - name: Install lcov
+    - name: Install apt dependencies
       if: runner.os == 'Linux'
-      run: sudo apt install lcov
+      run: sudo apt install lcov ^libxcb-*
 
     - name: Cache Qt
       id: cache-qt
