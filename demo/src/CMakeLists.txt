@@ -25,4 +25,4 @@ add_executable(
   ${QM_FILES}>
 )
 
-target_link_libraries(aide_demo PRIVATE Aide::AideCore)
+target_link_libraries(aide_demo PRIVATE Aide::AideApplication)

@@ -19,7 +19,7 @@ if(NOT TARGET project_coverage)
   add_library(project_coverage INTERFACE IMPORTED)
 endif()
 
-if(NOT TARGET Aide::AideCore)
+if(NOT TARGET Aide::AideApplication)
   find_package(Aide 0.1 REQUIRED)
 endif()
 

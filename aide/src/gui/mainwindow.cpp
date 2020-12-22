@@ -6,7 +6,7 @@
 
 #include <aide/logger.hpp>
 
-#include "../application/actionregistry.hpp"
+#include "../core/actionregistry.hpp"
 #include "applicationtranslator.hpp"
 #include "hierarchicalid.hpp"
 #include "ui_mainwindow.h"

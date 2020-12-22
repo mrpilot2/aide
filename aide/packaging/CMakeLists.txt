@@ -1,7 +1,7 @@
 include(GNUInstallDirs)
 
 install(
-  TARGETS AideCore AideBuildInformation
+  TARGETS AideApplication AideBuildInformation
   EXPORT AideTargets
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )

@@ -59,11 +59,11 @@ target_link_libraries(
           project_coverage
           project_warnings
           Aide::AideBuildInformation
-          Aide::AideCore
+          Aide::AideApplication
 )
 
 if(NOT ${TEST_AGAINST_INSTALLED})
-  target_link_libraries(ut.aide PRIVATE Aide::AideApplication)
+  target_link_libraries(ut.aide PRIVATE Aide::AideCore)
   target_include_directories(
     ut.aide PRIVATE ${CMAKE_SOURCE_DIR}/aide/src/include
                     ${CMAKE_SOURCE_DIR}/aide/src/include/aide
