@@ -11,7 +11,6 @@
 #include "hierarchicalid.hpp"
 #include "ui_mainwindow.h"
 
-using aide::ActionRegistry;
 using aide::HierarchicalId;
 using aide::gui::MainWindow;
 using aide::gui::TranslatorInterface;
@@ -39,7 +38,7 @@ const static ActionIds& ACTION_IDS()
     }
 }
 
-MainWindow::MainWindow(const std::shared_ptr<ActionRegistry>& actionRegistry,
+MainWindow::MainWindow(const ActionRegistryInterfacePtr& actionRegistry,
                        QWidget* parent)
     : QMainWindow(parent)
     , m_translator{new ApplicationTranslator}
@@ -53,7 +52,7 @@ MainWindow::MainWindow(const std::shared_ptr<ActionRegistry>& actionRegistry,
 MainWindow::~MainWindow() = default;
 
 void MainWindow::registerActions(
-    const std::shared_ptr<ActionRegistry>& actionRegistry)
+    const ActionRegistryInterfacePtr& actionRegistry)
 {
     m_actionQuit =
         std::make_shared<QAction>(createIconFromTheme("application-exit"),

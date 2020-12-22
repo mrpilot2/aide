@@ -43,6 +43,8 @@ namespace aide
 
         virtual std::map<HierarchicalId, Action> actions() const = 0;
     };
+
+    using ActionRegistryInterfacePtr = std::shared_ptr<ActionRegistryInterface>;
 } // namespace aide
 
 #endif // AIDE_ACTIONREGISTRYINTERFACE_HPP

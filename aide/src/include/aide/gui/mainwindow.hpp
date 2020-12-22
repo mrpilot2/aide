@@ -6,6 +6,8 @@
 
 #include <QMainWindow>
 
+#include <aide/actionregistryinterface.hpp>
+
 namespace Ui
 {
     class MainWindow;
@@ -16,8 +18,6 @@ class QWidget;
 
 namespace aide
 {
-    class ActionRegistry;
-
     namespace gui
     {
         class TranslatorInterface;
@@ -26,7 +26,7 @@ namespace aide
         {
         public:
             explicit MainWindow(
-                const std::shared_ptr<ActionRegistry>& actionRegistry,
+                const ActionRegistryInterfacePtr& actionRegistry,
                 QWidget* parent = nullptr);
             ~MainWindow() override;
             MainWindow(const MainWindow&) = delete;
@@ -39,7 +39,7 @@ namespace aide
 
         private:
             void registerActions(
-                const std::shared_ptr<ActionRegistry>& actionRegistry);
+                const ActionRegistryInterfacePtr& actionRegistry);
 
             [[nodiscard]] static QIcon createIconFromTheme(
                 const std::string& iconName);
