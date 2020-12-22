@@ -4,7 +4,7 @@
 
 #include <QApplication>
 
-#include "applicationtranslator.hpp"
+#include "../../aide/src/gui/applicationtranslator.hpp"
 
 using aide::gui::ApplicationTranslator;
 

@@ -63,6 +63,7 @@ target_link_libraries(
 )
 
 if(NOT ${TEST_AGAINST_INSTALLED})
+  target_link_libraries(ut.aide PRIVATE Aide::AideApplication)
   target_include_directories(
     ut.aide PRIVATE ${CMAKE_SOURCE_DIR}/aide/src/include
                     ${CMAKE_SOURCE_DIR}/aide/src/include/aide
