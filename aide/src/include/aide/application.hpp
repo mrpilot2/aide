@@ -8,14 +8,11 @@
 
 #include <aide/logger.hpp>
 
-#include "../core/aidesettingsprovider.hpp"
-#include "../core/applicationclose.hpp"
-#include "../gui/mainwindowcontroller.hpp"
-
 class QMainWindow;
 
 namespace aide
 {
+    class ApplicationBuilder;
     class ActionRegistry;
     namespace gui
     {
@@ -49,22 +46,7 @@ namespace aide
     private:
         static bool isOrganizationNameSet();
 
-        static std::shared_ptr<aide::Logger> setupLogger();
-
-        [[nodiscard]] static bool tryToCreateLogLocationIfItDoesNotExist(
-            const QString& logLocation);
-
-        std::shared_ptr<aide::Logger> m_logger{setupLogger()};
-
-        std::shared_ptr<aide::ActionRegistry> m_actionRegistry;
-
-        std::shared_ptr<aide::gui::MainWindow> m_mainWindow;
-
-        AideSettingsProvider settingsProvider;
-
-        aide::core::ApplicationClose m_applicationClose;
-
-        aide::gui::MainWindowControllerPtr m_mainController;
+        std::shared_ptr<aide::ApplicationBuilder> m_appBuilder;
     };
 } // namespace aide
 #endif // AIDE_APPLICATION_HPP

@@ -10,7 +10,7 @@ target_sources(
   AideApplication
   PRIVATE $<TARGET_OBJECTS:AideCore> $<TARGET_OBJECTS:AideGui>
           $<TARGET_OBJECTS:AideWidgets> $<TARGET_OBJECTS:AideLogger>
-          application.cpp
+          application.cpp applicationbuilder.cpp
 )
 
 target_include_directories(
