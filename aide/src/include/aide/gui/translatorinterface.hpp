@@ -12,7 +12,7 @@ namespace aide::gui
         virtual ~TranslatorInterface() = default;
 
         virtual void addAdditionalTranslationFilePath(
-            const QDir &path, const QString &fileName) = 0;
+            const QDir& path, const QString& fileName) = 0;
 
         [[nodiscard]] virtual std::set<std::string> getAvailableTranslations()
             const = 0;
