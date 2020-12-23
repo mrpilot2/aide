@@ -6,6 +6,7 @@ target_sources(
   PRIVATE aidesettingsprovider.cpp
           actionregistry.cpp
           application.cpp
+          applicationclose.cpp
           hierarchicalid.cpp
           qtsettings.cpp
           settingsinterface.cpp
@@ -22,7 +23,7 @@ target_include_directories(
 target_link_libraries(
   AideCore
   PUBLIC Qt5::Core Qt5::Widgets AideLogger
-  PRIVATE AideGui project_coverage project_sanitizers project_warnings
+  PRIVATE project_coverage project_sanitizers project_warnings
 )
 
 target_compile_features(AideCore PRIVATE cxx_std_17)
