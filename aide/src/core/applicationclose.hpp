@@ -4,17 +4,25 @@
 #include "applicationclosecontroller.hpp"
 #include "applicationcloseview.hpp"
 
+namespace aide
+{
+    class SettingsInterface;
+} // namespace aide
+
 namespace aide::core
 {
     class ApplicationClose : public ApplicationCloseController
     {
     public:
-        ApplicationClose(ApplicationCloseViewWeakPtr v);
+        ApplicationClose(ApplicationCloseViewWeakPtr v,
+                         SettingsInterface& settings);
 
         [[nodiscard]] bool isCloseAllowed() const override;
 
     private:
         ApplicationCloseViewWeakPtr view;
+
+        SettingsInterface& settings;
     };
 } // namespace aide::core
 

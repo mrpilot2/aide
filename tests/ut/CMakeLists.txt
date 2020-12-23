@@ -45,9 +45,13 @@ target_sources(
 if(NOT ${TEST_AGAINST_INSTALLED})
   target_sources(
     ut.aide
-    PRIVATE aidesettingsprovidertest.cpp actionregistrytest.cpp
-            applicationcloseinteractortest.cpp mockapplicationcloseview.cpp
-            applicationtranslatortest.cpp qtsettingstest.cpp
+    PRIVATE actionregistrytest.cpp
+            aidesettingsprovidertest.cpp
+            applicationcloseinteractortest.cpp
+            applicationtranslatortest.cpp
+            mockapplicationcloseview.cpp
+            mocksettings.cpp
+            qtsettingstest.cpp
   )
 endif()
 
