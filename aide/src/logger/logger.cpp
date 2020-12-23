@@ -30,19 +30,24 @@ Logger::Logger(const LoggerName& loggerName)
 Logger::Logger(const FileName& logFileName, const LoggerName& loggerName)
 {
     auto logSinks = createSinks(logFileName());
+
+    const std::string commonLogPattern =
+        "%b %d %H:%M:%S.%e [%8t] - %^%8l%$ - %10n - %v";
     m_logger = std::make_shared<spdlog::logger>(loggerName(), begin(logSinks),
                                                 end(logSinks));
     m_logger->set_level(spdlog::level::trace);
-    m_logger->set_pattern("%Y-%m-%d %H:%M:%S%e [%8t] - %8l - %n - %v");
+    m_logger->set_pattern(commonLogPattern);
 
     auto macroLogSinks = createSinks(logFileName());
     m_macroLogger      = std::make_shared<spdlog::logger>(
         loggerName() + std::string("_macro"), begin(macroLogSinks),
         end(macroLogSinks));
     m_macroLogger->set_level(spdlog::level::trace);
-    m_macroLogger->set_pattern(
-        "%Y-%m-%d %H:%M:%S%e [%8t] - %8l - %n - %g:%# - %v");
-
+#ifdef NDEBUG
+    m_macroLogger->set_pattern(commonLogPattern);
+#else
+    m_macroLogger->set_pattern(commonLogPattern + " - %@");
+#endif
     registerLogger(m_logger);
     registerLogger(m_macroLogger);
 
