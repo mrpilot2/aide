@@ -49,6 +49,7 @@ if(NOT ${TEST_AGAINST_INSTALLED})
             aidesettingsprovidertest.cpp
             applicationcloseinteractortest.cpp
             applicationtranslatortest.cpp
+            mainwindowtest.cpp
             mockapplicationcloseview.cpp
             mocksettings.cpp
             qtsettingstest.cpp
@@ -68,7 +69,7 @@ target_link_libraries(
 )
 
 if(NOT ${TEST_AGAINST_INSTALLED})
-  target_link_libraries(ut.aide PRIVATE Aide::AideCore)
+  target_link_libraries(ut.aide PRIVATE Aide::AideCore Aide::AideGui)
   target_include_directories(
     ut.aide PRIVATE ${CMAKE_SOURCE_DIR}/aide/src/include
                     ${CMAKE_SOURCE_DIR}/aide/src/include/aide

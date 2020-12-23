@@ -42,6 +42,7 @@ target_include_directories(
   AideGui
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/aide>
+         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}/../include/aide/gui
 )
 
