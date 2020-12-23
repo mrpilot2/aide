@@ -3,6 +3,8 @@
 
 #include <utility>
 
+#include <QTimer>
+
 #include "applicationbuilder.hpp"
 #include "core/actionregistry.hpp"
 #include "gui/mainwindow.hpp"
@@ -26,6 +28,16 @@ Application::Application(int& argc, char* argv[])
     }
 
     m_appBuilder->mainWindow()->showMaximized();
+
+    const int delayedSetupTimeInMs(1000);
+    // NOLINTNEXTLINE
+    auto* timer = new QTimer();
+    timer->setSingleShot(true);
+    connect(timer, &QTimer::timeout, [=]() {
+        QApplication::setApplicationDisplayName("");
+        timer->deleteLater();
+    });
+    timer->start(delayedSetupTimeInMs);
 }
 
 std::shared_ptr<Logger> aide::Application::logger() const

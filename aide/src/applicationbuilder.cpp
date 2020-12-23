@@ -48,6 +48,7 @@ std::shared_ptr<Logger> ApplicationBuilder::setupLogger()
     }
     return std::make_shared<Logger>();
 }
+
 bool ApplicationBuilder::tryToCreateLogLocationIfItDoesNotExist(
     const QString& logLocation)
 {

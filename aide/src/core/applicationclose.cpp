@@ -27,7 +27,6 @@ bool ApplicationClose::isCloseAllowed() const
 
     if (settings.value(askExitConfirmationKeyGroup, "AskExitConfirmation", true)
             .toBool()) {
-        QApplication::setApplicationDisplayName("");
         return ptr->letUserConfirmApplicationClose();
     }
 
