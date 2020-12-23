@@ -1,5 +1,7 @@
 #include "applicationbuilder.hpp"
 
+#include <iostream>
+
 #include <QApplication>
 #include <QDir>
 #include <QStandardPaths>

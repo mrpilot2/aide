@@ -1,7 +1,6 @@
 #ifndef AIDE_LOGGER_HPP
 #define AIDE_LOGGER_HPP
 
-#include <iostream>
 #include <memory>
 
 #include <spdlog/spdlog.h>

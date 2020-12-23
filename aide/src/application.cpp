@@ -1,12 +1,9 @@
 
 #include "application.hpp"
 
-#include <utility>
-
 #include <QTimer>
 
 #include "applicationbuilder.hpp"
-#include "core/actionregistry.hpp"
 #include "gui/mainwindow.hpp"
 
 using aide::Application;

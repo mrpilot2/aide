@@ -6,9 +6,6 @@
 #include <QApplication>
 #include <QLibraryInfo>
 #include <QtCore/QDirIterator>
-#include <QtGlobal>
-
-#include <aide/logger.hpp>
 
 #include "applicationtranslator.hpp"
 
