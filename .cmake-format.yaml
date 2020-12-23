@@ -7,3 +7,4 @@ line_ending: unix
 command_case: 'canonical'
 bullet_char: '*'
 enum_char: .
+autosort: true
