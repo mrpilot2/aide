@@ -32,7 +32,8 @@ TEST_CASE("Any application close interactor")
         settings.setValue(askExitConfirmationKeyGroup, "AskExitConfirmation",
                           false);
 
-        [[maybe_unused]] auto res = appClose.isCloseAllowed();
-        REQUIRE(not appCloseView->wasUserAsked());
+        auto res = appClose.isCloseAllowed();
+        REQUIRE(appCloseView->wasUserAsked() == false);
+        REQUIRE(res == true);
     }
 }

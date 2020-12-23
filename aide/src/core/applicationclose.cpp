@@ -2,6 +2,8 @@
 
 #include <utility>
 
+#include <QApplication>
+
 #include "hierarchicalid.hpp"
 #include "settingsinterface.hpp"
 
@@ -11,15 +13,13 @@ using aide::core::ApplicationClose;
 using aide::core::ApplicationCloseViewWeakPtr;
 
 ApplicationClose::ApplicationClose(ApplicationCloseViewWeakPtr v,
-                                   SettingsInterface& settings)
+                                   SettingsInterface& s)
     : view{std::move(v)}
-    , settings{settings}
+    , settings{s}
 {}
 
 bool ApplicationClose::isCloseAllowed() const
 {
-    if (view.expired()) { return true; }
-
     auto ptr = view.lock();
 
     const auto askExitConfirmationKeyGroup =
@@ -27,6 +27,7 @@ bool ApplicationClose::isCloseAllowed() const
 
     if (settings.value(askExitConfirmationKeyGroup, "AskExitConfirmation", true)
             .toBool()) {
+        QApplication::setApplicationDisplayName("");
         return ptr->letUserConfirmApplicationClose();
     }
 

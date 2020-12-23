@@ -8,6 +8,10 @@
 
 #include <aide/logger.hpp>
 
+#include "../core/aidesettingsprovider.hpp"
+#include "../core/applicationclose.hpp"
+#include "../gui/mainwindowcontroller.hpp"
+
 class QMainWindow;
 
 namespace aide
@@ -55,6 +59,12 @@ namespace aide
         std::shared_ptr<aide::ActionRegistry> m_actionRegistry;
 
         std::shared_ptr<aide::gui::MainWindow> m_mainWindow;
+
+        AideSettingsProvider settingsProvider;
+
+        aide::core::ApplicationClose m_applicationClose;
+
+        aide::gui::MainWindowControllerPtr m_mainController;
     };
 } // namespace aide
 #endif // AIDE_APPLICATION_HPP

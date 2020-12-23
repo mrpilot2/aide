@@ -31,6 +31,7 @@ target_sources(
   AideGui
   PRIVATE
     mainwindow.cpp
+    mainwindowcontroller.cpp
     $<$<TARGET_EXISTS:Qt5::lrelease>:applicationtranslator.cpp>
     $<$<NOT:$<TARGET_EXISTS:Qt5::lrelease>>:nullapplicationtranslator.cpp>
     $<$<TARGET_EXISTS:Qt5::lrelease>:${CMAKE_CURRENT_BINARY_DIR}/translations.qrc
@@ -39,15 +40,15 @@ target_sources(
 
 target_include_directories(
   AideGui
-  PUBLIC ${CMAKE_CURRENT_LIST_DIR}/../include
-         ${CMAKE_CURRENT_LIST_DIR}/../include/aide
+  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/>
+         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/aide>
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}/../include/aide/gui
 )
 
 target_compile_features(AideGui PUBLIC cxx_std_17)
 
 target_link_libraries(
-  AideGui PRIVATE Aide::AideLogger Qt5::Widgets project_coverage
+  AideGui PRIVATE Aide::AideCore Aide::AideLogger Qt5::Widgets project_coverage
                   project_sanitizers project_warnings
 )
 

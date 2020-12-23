@@ -50,4 +50,15 @@
         <translation type="unfinished"></translation>
     </message>
 </context>
+<context>
+    <name>aide::gui::MainWindow</name>
+    <message>
+        <source>Are you sure you want to exit?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirm exit</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>

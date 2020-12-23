@@ -1,18 +1,19 @@
 
 #include "application.hpp"
 
-#include <actionregistry.hpp>
 #include <utility>
 
 #include <QDir>
 #include <QStandardPaths>
 #include <QString>
 
-#include <gui/mainwindow.hpp>
+#include "core/actionregistry.hpp"
+#include "gui/mainwindow.hpp"
 
 using aide::Application;
 using aide::Logger;
 using aide::gui::MainWindow;
+using aide::gui::MainWindowController;
 using aide::gui::TranslatorInterface;
 
 // NOLINTNEXTLINE
@@ -20,6 +21,9 @@ Application::Application(int& argc, char* argv[])
     : QApplication(argc, argv)
     , m_actionRegistry{std::make_shared<ActionRegistry>()}
     , m_mainWindow(new MainWindow(m_actionRegistry, nullptr))
+    , m_applicationClose(m_mainWindow, *settingsProvider.versionableSettings())
+    , m_mainController(
+          std::make_shared<MainWindowController>(m_applicationClose))
 {
     if (!isOrganizationNameSet()) {
         throw std::runtime_error(
@@ -29,6 +33,7 @@ Application::Application(int& argc, char* argv[])
             "meaningful location.");
     }
 
+    m_mainWindow->setMainWindowController(m_mainController);
     m_mainWindow->showMaximized();
 }
 

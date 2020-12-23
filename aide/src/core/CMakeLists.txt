@@ -5,9 +5,9 @@ target_sources(
   AideCore
   PRIVATE aidesettingsprovider.cpp
           actionregistry.cpp
-          application.cpp
           applicationclose.cpp
           hierarchicalid.cpp
+          mainwindowinterface.cpp
           qtsettings.cpp
           settingsinterface.cpp
           settingsproviderinterface.cpp

@@ -14,8 +14,7 @@ namespace aide::core
     class ApplicationClose : public ApplicationCloseController
     {
     public:
-        ApplicationClose(ApplicationCloseViewWeakPtr v,
-                         SettingsInterface& settings);
+        ApplicationClose(ApplicationCloseViewWeakPtr v, SettingsInterface& s);
 
         [[nodiscard]] bool isCloseAllowed() const override;
 

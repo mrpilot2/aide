@@ -7,8 +7,10 @@ add_library(AideApplication)
 add_library(Aide::AideApplication ALIAS AideApplication)
 
 target_sources(
-  AideApplication PRIVATE $<TARGET_OBJECTS:AideCore> $<TARGET_OBJECTS:AideGui>
-                   $<TARGET_OBJECTS:AideWidgets> $<TARGET_OBJECTS:AideLogger>
+  AideApplication
+  PRIVATE $<TARGET_OBJECTS:AideCore> $<TARGET_OBJECTS:AideGui>
+          $<TARGET_OBJECTS:AideWidgets> $<TARGET_OBJECTS:AideLogger>
+          application.cpp
 )
 
 target_include_directories(
@@ -21,7 +23,7 @@ target_include_directories(
 target_link_libraries(
   AideApplication
   PUBLIC CONAN_PKG::spdlog Qt5::Core Qt5::Widgets
-  PRIVATE project_coverage project_sanitizers
+  PRIVATE Aide::AideCore Aide::AideGui project_coverage project_sanitizers
 )
 
 target_compile_features(AideApplication PUBLIC cxx_std_17)

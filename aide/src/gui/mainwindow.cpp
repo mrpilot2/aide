@@ -1,6 +1,9 @@
 
 #include "mainwindow.hpp"
 
+#include <utility>
+
+#include <QMessageBox>
 #include <QObject>
 #include <QPushButton>
 
@@ -9,10 +12,13 @@
 #include "../core/actionregistry.hpp"
 #include "applicationtranslator.hpp"
 #include "hierarchicalid.hpp"
+#include "mainwindowcontroller.hpp"
 #include "ui_mainwindow.h"
 
 using aide::HierarchicalId;
+using aide::core::MainWindowInterface;
 using aide::gui::MainWindow;
+using aide::gui::MainWindowControllerPtr;
 using aide::gui::TranslatorInterface;
 
 struct ActionIds
@@ -40,7 +46,7 @@ const static ActionIds& ACTION_IDS()
 
 MainWindow::MainWindow(const ActionRegistryInterfacePtr& actionRegistry,
                        QWidget* parent)
-    : QMainWindow(parent)
+    : MainWindowInterface(parent)
     , m_translator{new ApplicationTranslator}
     , m_ui(new Ui::MainWindow)
 {
@@ -50,6 +56,11 @@ MainWindow::MainWindow(const ActionRegistryInterfacePtr& actionRegistry,
 }
 
 MainWindow::~MainWindow() = default;
+
+void MainWindow::setMainWindowController(MainWindowControllerPtr controller)
+{
+    m_controller = std::move(controller);
+}
 
 void MainWindow::registerActions(
     const ActionRegistryInterfacePtr& actionRegistry)
@@ -91,4 +102,22 @@ QIcon MainWindow::createIconFromTheme(const std::string& iconName)
         icon.addFile(QString::fromUtf8(""), QSize(), QIcon::Normal, QIcon::Off);
     }
     return icon;
+}
+
+void MainWindow::closeEvent([[maybe_unused]] QCloseEvent* event)
+{
+    AIDE_LOG_TRACE("User requested to close application")
+    m_controller->onUserWantsToQuitApplication(event);
+}
+
+bool MainWindow::letUserConfirmApplicationClose()
+{
+    AIDE_LOG_DEBUG("Asking user for confirmation to close application")
+    auto messageBox = std::make_unique<QMessageBox>(this);
+
+    const auto reply = messageBox->question(
+        this, tr("Confirm exit"), tr("Are you sure you want to exit?"),
+        QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+
+    return reply == QMessageBox::Yes;
 }

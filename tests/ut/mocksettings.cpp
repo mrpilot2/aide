@@ -1,5 +1,7 @@
 #include "mocksettings.hpp"
 
+#include <stdexcept>
+
 #include <QVariant>
 
 #include "hierarchicalid.hpp"
@@ -10,7 +12,7 @@ void MockSettings::setValue(const aide::HierarchicalId& group,
                             const std::string& key, const QVariant& value)
 {
     auto res = inMemorySettings.emplace(std::make_pair(group, key), value);
-    if (not res.second) {
+    if (!res.second) {
         throw std::runtime_error("Cannot insert into in memory settings");
     }
 }
