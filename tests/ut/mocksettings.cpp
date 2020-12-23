@@ -25,7 +25,8 @@ QVariant MockSettings::value(const aide::HierarchicalId& group,
     return QVariant();
 }
 
-QVariant MockSettings::value(const aide::HierarchicalId& group, std::string key,
+QVariant MockSettings::value(const aide::HierarchicalId& group,
+                             const std::string& key,
                              const QVariant& defaultValue)
 {
     if (inMemorySettings.find(std::make_pair(group, key)) !=
