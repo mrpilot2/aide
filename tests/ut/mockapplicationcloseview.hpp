@@ -13,8 +13,20 @@ namespace aide::test
 
         [[nodiscard]] bool wasUserAsked() const;
 
+        void userShallClickExit();
+
+        void userShallClickCancel();
+
+        void userShallSelectToNotBeAskedAgain();
+
+        void userShallSelectToBeAskedAgain();
+
     private:
         bool hasAsked{false};
+
+        bool simulateExitReply{false};
+
+        bool doNotAskAgain{false};
     };
 } // namespace aide::test
 
