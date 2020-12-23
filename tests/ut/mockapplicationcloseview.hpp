@@ -8,7 +8,8 @@ namespace aide::test
     class MockApplicationCloseView : public aide::core::ApplicationCloseView
     {
     public:
-        bool letUserConfirmApplicationClose() override;
+        std::tuple<aide::core::UserSelection, bool>
+        letUserConfirmApplicationClose() override;
 
         [[nodiscard]] bool wasUserAsked() const;
 

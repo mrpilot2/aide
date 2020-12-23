@@ -45,7 +45,8 @@ namespace aide
             [[nodiscard]] std::shared_ptr<TranslatorInterface> translator()
                 const;
 
-            bool letUserConfirmApplicationClose() override;
+            std::tuple<aide::core::UserSelection, bool>
+            letUserConfirmApplicationClose() override;
 
         private:
             void closeEvent(QCloseEvent* event) override;

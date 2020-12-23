@@ -60,5 +60,9 @@
         <source>Confirm exit</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Don&apos;t ask again</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

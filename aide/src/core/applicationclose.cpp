@@ -27,7 +27,14 @@ bool ApplicationClose::isCloseAllowed() const
 
     if (settings.value(askExitConfirmationKeyGroup, "AskExitConfirmation", true)
             .toBool()) {
-        return ptr->letUserConfirmApplicationClose();
+        const auto& [userSelection, dontAskAgain] =
+            ptr->letUserConfirmApplicationClose();
+
+        if (dontAskAgain) {
+            settings.setValue(askExitConfirmationKeyGroup,
+                              "AskExitConfirmation", false);
+        }
+        return userSelection == UserSelection::Exit;
     }
 
     return true;

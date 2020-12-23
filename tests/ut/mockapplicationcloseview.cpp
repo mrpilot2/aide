@@ -2,10 +2,11 @@
 
 using aide::test::MockApplicationCloseView;
 
-bool MockApplicationCloseView::letUserConfirmApplicationClose()
+std::tuple<aide::core::UserSelection, bool>
+MockApplicationCloseView::letUserConfirmApplicationClose()
 {
     hasAsked = true;
-    return false;
+    return std::make_tuple(aide::core::UserSelection::Cancel, false);
 }
 
 bool MockApplicationCloseView::wasUserAsked() const
