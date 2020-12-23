@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['onuserwantstoquitapplication',['onUserWantsToQuitApplication',['../classaide_1_1gui_1_1MainWindowController.html#a9f99b6439988cd8bc8b3edbcc12fc603',1,'aide::gui::MainWindowController']]],
   ['operator_21_3d',['operator!=',['../classaide_1_1HierarchicalId.html#a6d37d1c3ec463b8d5dd93dbc0bc80705',1,'aide::HierarchicalId']]],
   ['operator_28_29',['operator()',['../classaide_1_1HierarchicalId.html#a5ace7786652aaf8b46f3aac170c117f0',1,'aide::HierarchicalId::operator()(const char *level)'],['../classaide_1_1HierarchicalId.html#a88d1e81222fd742567b36cc6be7c8d79',1,'aide::HierarchicalId::operator()(const char *level) const'],['../structaide_1_1FileName.html#a1239513e70956bb5feacf8350377f5bb',1,'aide::FileName::operator()()'],['../structaide_1_1LoggerName.html#ab4775291240e311f46c6347759874625',1,'aide::LoggerName::operator()()']]],
   ['operator_3c',['operator&lt;',['../classaide_1_1HierarchicalId.html#acd8f9520dc74fd4a96aedaf74fb63ea1',1,'aide::HierarchicalId']]],

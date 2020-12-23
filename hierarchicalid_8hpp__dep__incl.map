@@ -1,8 +1,11 @@
 <map id="/home/runner/work/aide/aide/aide/src/include/aide/hierarchicalid.hpp" name="/home/runner/work/aide/aide/aide/src/include/aide/hierarchicalid.hpp">
-<area shape="rect" id="node2" href="$hierarchicalid_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/application\l/hierarchicalid.cpp" alt="" coords="5,109,172,165"/>
-<area shape="rect" id="node3" href="$qtsettings_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/application\l/qtsettings.cpp" alt="" coords="196,109,363,165"/>
-<area shape="rect" id="node4" href="$mainwindow_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/gui/mainwindow.cpp" alt="" coords="264,221,487,262"/>
-<area shape="rect" id="node5" href="$actionregistry_8hpp.html" title="/home/runner/work/aide\l/aide/aide/src/include\l/actionregistry.hpp" alt="" coords="489,109,648,165"/>
-<area shape="rect" id="node6" href="$actionregistry_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/application\l/actionregistry.cpp" alt="" coords="511,213,677,269"/>
-<area shape="rect" id="node7" href="$application_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/application\l/application.cpp" alt="" coords="701,213,868,269"/>
+<area shape="rect" id="node2" href="$actionregistry_8hpp.html" title="/home/runner/work/aide\l/aide/aide/src/core/actionregistry.hpp" alt="" coords="407,109,643,151"/>
+<area shape="rect" id="node7" href="$mainwindow_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/gui/mainwindow.cpp" alt="" coords="617,199,840,240"/>
+<area shape="rect" id="node8" href="$applicationclose_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/core/applicationclose.cpp" alt="" coords="741,109,991,151"/>
+<area shape="rect" id="node9" href="$hierarchicalid_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/core/hierarchicalid.cpp" alt="" coords="1015,109,1250,151"/>
+<area shape="rect" id="node10" href="$qtsettings_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/core/qtsettings.cpp" alt="" coords="1275,109,1489,151"/>
+<area shape="rect" id="node3" href="$applicationbuilder_8hpp.html" title="/home/runner/work/aide\l/aide/aide/src/applicationbuilder.hpp" alt="" coords="103,199,333,240"/>
+<area shape="rect" id="node6" href="$actionregistry_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/core/actionregistry.cpp" alt="" coords="357,199,593,240"/>
+<area shape="rect" id="node4" href="$application_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/application.cpp" alt="" coords="5,288,196,329"/>
+<area shape="rect" id="node5" href="$applicationbuilder_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/applicationbuilder.cpp" alt="" coords="221,288,450,329"/>
 </map>

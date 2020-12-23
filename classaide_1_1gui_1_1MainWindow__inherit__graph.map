@@ -1,2 +1,4 @@
 <map id="aide::gui::MainWindow" name="aide::gui::MainWindow">
+<area shape="rect" id="node2" href="$classaide_1_1core_1_1MainWindowInterface.html" title="aide::core::MainWindowInterface" alt="" coords="5,80,219,107"/>
+<area shape="rect" id="node4" href="$classaide_1_1core_1_1ApplicationCloseView.html" title="aide::core::ApplicationCloseView" alt="" coords="243,80,458,107"/>
 </map>
