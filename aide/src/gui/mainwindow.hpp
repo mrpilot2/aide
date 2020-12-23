@@ -6,6 +6,12 @@
 
 #include <QMainWindow>
 
+#include <aide/actionregistryinterface.hpp>
+
+#include "applicationclose.hpp"
+#include "mainwindowcontroller.hpp"
+#include "mainwindowinterface.hpp"
+
 namespace Ui
 {
     class MainWindow;
@@ -16,17 +22,17 @@ class QWidget;
 
 namespace aide
 {
-    class ActionRegistry;
-
     namespace gui
     {
         class TranslatorInterface;
 
-        class MainWindow : public QMainWindow
+        class MainWindow
+            : public aide::core::MainWindowInterface
+            , public aide::core::ApplicationCloseView
         {
         public:
             explicit MainWindow(
-                const std::shared_ptr<ActionRegistry>& actionRegistry,
+                const ActionRegistryInterfacePtr& actionRegistry,
                 QWidget* parent = nullptr);
             ~MainWindow() override;
             MainWindow(const MainWindow&) = delete;
@@ -34,15 +40,24 @@ namespace aide
             MainWindow(const MainWindow&&)           = delete;
             MainWindow& operator=(const MainWindow&&) = delete;
 
+            void setMainWindowController(MainWindowControllerPtr controller);
+
             [[nodiscard]] std::shared_ptr<TranslatorInterface> translator()
                 const;
 
+            std::tuple<aide::core::UserSelection, bool>
+            letUserConfirmApplicationClose() override;
+
         private:
+            void closeEvent(QCloseEvent* event) override;
+
             void registerActions(
-                const std::shared_ptr<ActionRegistry>& actionRegistry);
+                const ActionRegistryInterfacePtr& actionRegistry);
 
             [[nodiscard]] static QIcon createIconFromTheme(
                 const std::string& iconName);
+
+            MainWindowControllerPtr m_controller;
 
             std::shared_ptr<TranslatorInterface> m_translator;
             std::unique_ptr<Ui::MainWindow> m_ui;

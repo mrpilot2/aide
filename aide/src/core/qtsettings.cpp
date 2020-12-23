@@ -37,6 +37,12 @@ void QtSettings::setValue(const aide::HierarchicalId& group,
 QVariant QtSettings::value(const aide::HierarchicalId& group,
                            const std::string& key)
 {
+    return this->value(group, key, QVariant());
+}
+
+QVariant QtSettings::value(const aide::HierarchicalId& group,
+                           const std::string& key, const QVariant& defaultValue)
+{
     for (const auto* g : group) {
         m_settings->beginGroup(QString::fromLatin1(g));
     }
@@ -47,14 +53,7 @@ QVariant QtSettings::value(const aide::HierarchicalId& group,
         m_settings->endGroup();
     }
 
-    return settingsValue;
-}
-
-QVariant QtSettings::value(const aide::HierarchicalId& group, std::string key,
-                           const QVariant& defaultValue)
-{
-    if (auto val = this->value(group, key) != QVariant()) { return val; }
-    return defaultValue;
+    return settingsValue != QVariant() ? settingsValue : defaultValue;
 }
 
 void aide::QtSettings::save()

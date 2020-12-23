@@ -14,7 +14,7 @@ project(
 include(dependencies/CMakeLists.txt)
 
 # In standalone mode we need to find our library
-if(NOT TARGET Aide::AideCore)
+if(NOT TARGET Aide::AideApplication)
   find_package(Aide CONFIG REQUIRED)
   set(TEST_AGAINST_INSTALLED TRUE)
 else()

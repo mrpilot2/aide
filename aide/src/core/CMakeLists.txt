@@ -1,27 +1,29 @@
-add_library(AideApplication OBJECT)
-add_library(Aide::AideApplication ALIAS AideApplication)
+add_library(AideCore OBJECT)
+add_library(Aide::AideCore ALIAS AideCore)
 
 target_sources(
-  AideApplication
+  AideCore
   PRIVATE aidesettingsprovider.cpp
           actionregistry.cpp
-          application.cpp
+          applicationclose.cpp
           hierarchicalid.cpp
+          mainwindowinterface.cpp
           qtsettings.cpp
           settingsinterface.cpp
           settingsproviderinterface.cpp
 )
 
 target_include_directories(
-  AideApplication
+  AideCore
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/>
+  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
   PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/>
 )
 
 target_link_libraries(
-  AideApplication
+  AideCore
   PUBLIC Qt5::Core Qt5::Widgets AideLogger
-  PRIVATE AideGui project_coverage project_sanitizers project_warnings
+  PRIVATE project_coverage project_sanitizers project_warnings
 )
 
-target_compile_features(AideApplication PRIVATE cxx_std_17)
+target_compile_features(AideCore PRIVATE cxx_std_17)

@@ -1,7 +1,7 @@
 
 #include <catch2/catch.hpp>
 
-#include <aide/aidesettingsprovider.hpp>
+#include "aidesettingsprovider.hpp"
 
 using aide::AideSettingsProvider;
 

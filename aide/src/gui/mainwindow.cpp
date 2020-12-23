@@ -1,19 +1,27 @@
 
 #include "mainwindow.hpp"
 
+#include <utility>
+
+#include <QCheckBox>
+#include <QLayout>
+#include <QMessageBox>
 #include <QObject>
 #include <QPushButton>
 
 #include <aide/logger.hpp>
 
-#include "actionregistry.hpp"
+#include "../core/actionregistry.hpp"
 #include "applicationtranslator.hpp"
 #include "hierarchicalid.hpp"
+#include "mainwindowcontroller.hpp"
 #include "ui_mainwindow.h"
 
-using aide::ActionRegistry;
 using aide::HierarchicalId;
+using aide::core::MainWindowInterface;
+using aide::core::UserSelection;
 using aide::gui::MainWindow;
+using aide::gui::MainWindowControllerPtr;
 using aide::gui::TranslatorInterface;
 
 struct ActionIds
@@ -39,9 +47,9 @@ const static ActionIds& ACTION_IDS()
     }
 }
 
-MainWindow::MainWindow(const std::shared_ptr<ActionRegistry>& actionRegistry,
+MainWindow::MainWindow(const ActionRegistryInterfacePtr& actionRegistry,
                        QWidget* parent)
-    : QMainWindow(parent)
+    : MainWindowInterface(parent)
     , m_translator{new ApplicationTranslator}
     , m_ui(new Ui::MainWindow)
 {
@@ -52,8 +60,13 @@ MainWindow::MainWindow(const std::shared_ptr<ActionRegistry>& actionRegistry,
 
 MainWindow::~MainWindow() = default;
 
+void MainWindow::setMainWindowController(MainWindowControllerPtr controller)
+{
+    m_controller = std::move(controller);
+}
+
 void MainWindow::registerActions(
-    const std::shared_ptr<ActionRegistry>& actionRegistry)
+    const ActionRegistryInterfacePtr& actionRegistry)
 {
     m_actionQuit =
         std::make_shared<QAction>(createIconFromTheme("application-exit"),
@@ -92,4 +105,37 @@ QIcon MainWindow::createIconFromTheme(const std::string& iconName)
         icon.addFile(QString::fromUtf8(""), QSize(), QIcon::Normal, QIcon::Off);
     }
     return icon;
+}
+
+void MainWindow::closeEvent([[maybe_unused]] QCloseEvent* event)
+{
+    AIDE_LOG_TRACE("User requested to close application")
+    m_controller->onUserWantsToQuitApplication(event);
+}
+
+std::tuple<aide::core::UserSelection, bool>
+MainWindow::letUserConfirmApplicationClose()
+{
+    AIDE_LOG_DEBUG("Asking user for confirmation to close application")
+    auto messageBox = std::make_unique<QMessageBox>(this);
+
+    auto checkBox =
+        std::make_unique<QCheckBox>(tr("Don't ask again"), messageBox.get());
+
+    messageBox->setWindowTitle(tr("Confirm exit"));
+    messageBox->setText(tr("Are you sure you want to exit?"));
+    messageBox->setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    messageBox->setDefaultButton(QMessageBox::Yes);
+    messageBox->setIcon(QMessageBox::Question);
+
+    auto* layout = dynamic_cast<QGridLayout*>(messageBox->layout());
+    if (layout != nullptr) { layout->addWidget(checkBox.get(), 2, 0); }
+    auto reply = messageBox->exec();
+
+    AIDE_LOG_DEBUG("User requested to{} ask for exit confirmation again",
+                   checkBox->isChecked() ? " do not" : "");
+
+    return std::make_tuple(
+        reply == QMessageBox::Yes ? UserSelection::Exit : UserSelection::Cancel,
+        checkBox->isChecked());
 }

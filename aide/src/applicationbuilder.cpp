@@ -1,53 +1,33 @@
+#include "applicationbuilder.hpp"
 
-#include "application.hpp"
+#include <iostream>
 
-#include <actionregistry.hpp>
-#include <utility>
-
+#include <QApplication>
 #include <QDir>
 #include <QStandardPaths>
 #include <QString>
 
-#include <gui/mainwindow.hpp>
-
-using aide::Application;
+using aide::ApplicationBuilder;
 using aide::Logger;
 using aide::gui::MainWindow;
-using aide::gui::TranslatorInterface;
+using aide::gui::MainWindowController;
 
-// NOLINTNEXTLINE
-Application::Application(int& argc, char* argv[])
-    : QApplication(argc, argv)
-    , m_actionRegistry{std::make_shared<ActionRegistry>()}
+ApplicationBuilder::ApplicationBuilder()
+    : m_actionRegistry{std::make_shared<ActionRegistry>()}
     , m_mainWindow(new MainWindow(m_actionRegistry, nullptr))
+    , m_applicationClose(m_mainWindow, *settingsProvider.versionableSettings())
+    , m_mainController(
+          std::make_shared<MainWindowController>(m_applicationClose))
 {
-    if (!isOrganizationNameSet()) {
-        throw std::runtime_error(
-            "Application name and organization name need to be set before "
-            "creating an aide::Application. This ensures that the logger uses "
-            "a meaningful file path and that settings are stored in a "
-            "meaningful location.");
-    }
-
-    m_mainWindow->showMaximized();
+    m_mainWindow->setMainWindowController(m_mainController);
 }
 
-std::shared_ptr<Logger> aide::Application::logger() const
+std::shared_ptr<aide::Logger> ApplicationBuilder::logger() const
 {
     return m_logger;
 }
 
-std::shared_ptr<QMainWindow> aide::Application::mainWindow() const
-{
-    return m_mainWindow;
-}
-
-bool Application::isOrganizationNameSet()
-{
-    return !organizationName().isEmpty();
-}
-
-std::shared_ptr<Logger> Application::setupLogger()
+std::shared_ptr<Logger> ApplicationBuilder::setupLogger()
 {
     QString logLocation(
         QStandardPaths::writableLocation(QStandardPaths::CacheLocation));
@@ -62,7 +42,7 @@ std::shared_ptr<Logger> Application::setupLogger()
 
     if (success) {
         FileName logPath(logLocation.append("/")
-                             .append(applicationName())
+                             .append(QApplication::applicationName())
                              .append(".log")
                              .toStdString());
 
@@ -71,7 +51,7 @@ std::shared_ptr<Logger> Application::setupLogger()
     return std::make_shared<Logger>();
 }
 
-bool Application::tryToCreateLogLocationIfItDoesNotExist(
+bool ApplicationBuilder::tryToCreateLogLocationIfItDoesNotExist(
     const QString& logLocation)
 {
     if (!logLocation.isEmpty()) {
@@ -88,7 +68,7 @@ bool Application::tryToCreateLogLocationIfItDoesNotExist(
     return false;
 }
 
-std::shared_ptr<TranslatorInterface> Application::translator() const
+std::shared_ptr<aide::gui::MainWindow> ApplicationBuilder::mainWindow() const
 {
-    return m_mainWindow->translator();
+    return m_mainWindow;
 }

@@ -44,8 +44,15 @@ target_sources(
 
 if(NOT ${TEST_AGAINST_INSTALLED})
   target_sources(
-    ut.aide PRIVATE aidesettingsprovidertest.cpp actionregistrytest.cpp
-                    applicationtranslatortest.cpp qtsettingstest.cpp
+    ut.aide
+    PRIVATE actionregistrytest.cpp
+            aidesettingsprovidertest.cpp
+            applicationcloseinteractortest.cpp
+            applicationtranslatortest.cpp
+            mainwindowtest.cpp
+            mockapplicationcloseview.cpp
+            mocksettings.cpp
+            qtsettingstest.cpp
   )
 endif()
 
@@ -56,13 +63,13 @@ target_link_libraries(
           Qt5::Widgets
           Qt5::Test
           project_sanitizers
-          project_coverage
           project_warnings
           Aide::AideBuildInformation
-          Aide::AideCore
+          Aide::AideApplication
 )
 
 if(NOT ${TEST_AGAINST_INSTALLED})
+  target_link_libraries(ut.aide PRIVATE Aide::AideCore Aide::AideGui)
   target_include_directories(
     ut.aide PRIVATE ${CMAKE_SOURCE_DIR}/aide/src/include
                     ${CMAKE_SOURCE_DIR}/aide/src/include/aide

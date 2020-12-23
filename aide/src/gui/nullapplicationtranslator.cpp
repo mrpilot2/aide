@@ -6,9 +6,6 @@
 #include <QApplication>
 #include <QLibraryInfo>
 #include <QtCore/QDirIterator>
-#include <QtGlobal>
-
-#include <aide/logger.hpp>
 
 #include "applicationtranslator.hpp"
 
@@ -22,5 +19,5 @@ std::set<std::string> ApplicationTranslator::getAvailableTranslations() const
 }
 
 void ApplicationTranslator::addAdditionalTranslationFilePath(
-    const QDir &path, const QString &fileName)
+    const QDir& path, const QString& fileName)
 {}

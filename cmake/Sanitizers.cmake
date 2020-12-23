@@ -1,7 +1,6 @@
-add_library(project_coverage INTERFACE IMPORTED)
-#add_library(aide::project_coverage ALIAS project_coverage)
+add_library(project_coverage INTERFACE)
 
-add_library(project_sanitizers INTERFACE IMPORTED)
+add_library(project_sanitizers INTERFACE)
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL
                                            "Clang"

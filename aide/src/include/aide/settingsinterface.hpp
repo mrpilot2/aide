@@ -21,7 +21,8 @@ namespace aide
         virtual QVariant value(const HierarchicalId& group,
                                const std::string& key) = 0;
 
-        virtual QVariant value(const HierarchicalId& group, std::string key,
+        virtual QVariant value(const HierarchicalId& group,
+                               const std::string& key,
                                const QVariant& defaultValue) = 0;
 
         virtual void save() = 0;

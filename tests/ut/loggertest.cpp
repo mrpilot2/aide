@@ -7,8 +7,8 @@
 #include <aide/logger.hpp>
 
 using aide::FileName;
-using aide::LoggerName;
 using aide::Logger;
+using aide::LoggerName;
 
 namespace
 {

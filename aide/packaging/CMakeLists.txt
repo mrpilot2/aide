@@ -1,7 +1,14 @@
 include(GNUInstallDirs)
 
 install(
-  TARGETS AideCore AideBuildInformation
+  TARGETS AideApplication
+          AideBuildInformation
+          AideCore
+          AideGui
+          AideLogger
+          project_warnings
+          project_coverage
+          project_sanitizers
   EXPORT AideTargets
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
@@ -41,10 +48,8 @@ write_basic_package_version_file(
 configure_package_config_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/AideConfig.cmake.in
   "${CMAKE_BINARY_DIR}/AideConfig.cmake"
-  INSTALL_DESTINATION
-  "${CMAKE_INSTALL_LIBDIR}/cmake/Aide"
-  NO_SET_AND_CHECK_MACRO
-  NO_CHECK_REQUIRED_COMPONENTS_MACRO
+  INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/Aide"
+  NO_SET_AND_CHECK_MACRO NO_CHECK_REQUIRED_COMPONENTS_MACRO
 )
 
 install(FILES ${CMAKE_BINARY_DIR}/AideConfig.cmake

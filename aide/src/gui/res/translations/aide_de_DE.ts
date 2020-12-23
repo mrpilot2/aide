@@ -2,17 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de" sourcelanguage="en">
 <context>
-    <name>FindActionDialog</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Actions</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>MainWindow</name>
     <message>
         <source>MainWindow</source>
@@ -58,6 +47,21 @@
     <name>SearchLineEdit</name>
     <message>
         <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>aide::gui::MainWindow</name>
+    <message>
+        <source>Are you sure you want to exit?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirm exit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t ask again</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

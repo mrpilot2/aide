@@ -21,7 +21,7 @@ namespace aide
         QVariant value(const HierarchicalId& group,
                        const std::string& key) override;
 
-        QVariant value(const HierarchicalId& group, std::string key,
+        QVariant value(const HierarchicalId& group, const std::string& key,
                        const QVariant& defaultValue) override;
 
         void save() override;
