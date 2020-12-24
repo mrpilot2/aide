@@ -12,12 +12,12 @@
       <translation>Datei</translation>
     </message>
     <message>
-      <source>Quit</source>
-      <translation>Beenden</translation>
-    </message>
-    <message>
       <source>Help</source>
       <translation>Hilfe</translation>
+    </message>
+    <message>
+      <source>Quit</source>
+      <translation>Beenden</translation>
     </message>
     <message>
       <source>About Qt</source>
@@ -26,21 +26,6 @@
     <message>
       <source>About aIDE</source>
       <translation>Über aIDE</translation>
-    </message>
-  </context>
-  <context>
-    <name>QApplication</name>
-    <message>
-      <source>Quits the application</source>
-      <translation type="unfinished">Quits the application</translation>
-    </message>
-    <message>
-      <source>Quit</source>
-      <translation>Beenden</translation>
-    </message>
-    <message>
-      <source>About Qt</source>
-      <translation>Über Qt</translation>
     </message>
   </context>
   <context>
@@ -53,16 +38,28 @@
   <context>
     <name>aide::gui::MainWindow</name>
     <message>
-      <source>Are you sure you want to exit?</source>
-      <translation type="unfinished">Are you sure you want to exit?</translation>
+      <source>Quit</source>
+      <translation type="unfinished">Quit</translation>
+    </message>
+    <message>
+      <source>Quits the application</source>
+      <translation type="unfinished">Quits the application</translation>
+    </message>
+    <message>
+      <source>About Qt</source>
+      <translation type="unfinished">About Qt</translation>
+    </message>
+    <message>
+      <source>Don&apos;t ask again</source>
+      <translation type="unfinished">Don&apos;t ask again</translation>
     </message>
     <message>
       <source>Confirm exit</source>
       <translation type="unfinished">Confirm exit</translation>
     </message>
     <message>
-      <source>Don&apos;t ask again</source>
-      <translation type="unfinished">Don&apos;t ask again</translation>
+      <source>Are you sure you want to exit?</source>
+      <translation type="unfinished">Are you sure you want to exit?</translation>
     </message>
   </context>
 </TS>
