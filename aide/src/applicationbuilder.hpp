@@ -10,6 +10,7 @@
 #include "applicationclose.hpp"
 #include "gui/mainwindow.hpp"
 #include "gui/mainwindowcontroller.hpp"
+#include "mainwindowgeometryandstate.hpp"
 
 namespace aide
 {
@@ -37,6 +38,8 @@ namespace aide
         AideSettingsProvider settingsProvider;
 
         aide::core::ApplicationClose m_applicationClose;
+
+        aide::core::MainWindowGeometryAndState m_mainWindowGeometryAndState;
 
         aide::gui::MainWindowControllerPtr m_mainController;
     };

@@ -16,10 +16,14 @@ ApplicationBuilder::ApplicationBuilder()
     : m_actionRegistry{std::make_shared<ActionRegistry>()}
     , m_mainWindow(new MainWindow(m_actionRegistry, nullptr))
     , m_applicationClose(m_mainWindow, *settingsProvider.versionableSettings())
-    , m_mainController(
-          std::make_shared<MainWindowController>(m_applicationClose))
+    , m_mainWindowGeometryAndState(m_mainWindow,
+                                   *settingsProvider.unversionableSettings())
+    , m_mainController(std::make_shared<MainWindowController>(
+          m_applicationClose, m_mainWindowGeometryAndState))
 {
     m_mainWindow->setMainWindowController(m_mainController);
+
+    m_mainWindowGeometryAndState.restoreGeometryAndState();
 }
 
 std::shared_ptr<aide::Logger> ApplicationBuilder::logger() const

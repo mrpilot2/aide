@@ -1,6 +1,7 @@
 #ifndef AIDE_MOCK_SETTINGS_HPP
 #define AIDE_MOCK_SETTINGS_HPP
 
+#include "hierarchicalid.hpp"
 #include "settingsinterface.hpp"
 
 namespace aide::test

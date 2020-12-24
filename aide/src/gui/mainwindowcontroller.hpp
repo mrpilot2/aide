@@ -4,11 +4,13 @@
 
 #include <memory>
 
+class QByteArray;
 class QCloseEvent;
 
 namespace aide::core
 {
     class ApplicationCloseController;
+    class MainWindowGeometryAndStateController;
 } // namespace aide::core
 
 namespace aide::gui
@@ -17,13 +19,18 @@ namespace aide::gui
     {
     public:
         explicit MainWindowController(
-            const aide::core::ApplicationCloseController& useCase);
+            const aide::core::ApplicationCloseController& closeUseCase,
+            aide::core::MainWindowGeometryAndStateController& saveUseCase);
 
-        void onUserWantsToQuitApplication(QCloseEvent* event) const;
+        void onUserWantsToQuitApplication(QCloseEvent* event,
+                                          const QByteArray& geometry,
+                                          const QByteArray& state);
 
     private:
         const aide::core::ApplicationCloseController&
             applicationCloseInteractor;
+        aide::core::MainWindowGeometryAndStateController&
+            saveGeometryAndStateInteractor;
     };
 
     using MainWindowControllerPtr = std::shared_ptr<MainWindowController>;

@@ -65,6 +65,12 @@ void MainWindow::setMainWindowController(MainWindowControllerPtr controller)
     m_controller = std::move(controller);
 }
 
+void MainWindow::restoreGeometryAndState(QByteArray geometry, QByteArray state)
+{
+    this->restoreGeometry(geometry);
+    this->restoreState(state);
+}
+
 void MainWindow::registerActions(
     const ActionRegistryInterfacePtr& actionRegistry)
 {
@@ -107,12 +113,12 @@ QIcon MainWindow::createIconFromTheme(const std::string& iconName)
     return icon;
 }
 
-void MainWindow::closeEvent([[maybe_unused]] QCloseEvent* event)
+void MainWindow::closeEvent(QCloseEvent* event)
 {
     AIDE_LOG_TRACE("User requested to close application")
-    m_controller->onUserWantsToQuitApplication(event);
+    m_controller->onUserWantsToQuitApplication(event, this->saveGeometry(),
+                                               this->saveState());
 }
-
 std::tuple<aide::core::UserSelection, bool>
 MainWindow::letUserConfirmApplicationClose()
 {
@@ -133,7 +139,7 @@ MainWindow::letUserConfirmApplicationClose()
     auto reply = messageBox->exec();
 
     AIDE_LOG_DEBUG("User requested to{} ask for exit confirmation again",
-                   checkBox->isChecked() ? " do not" : "");
+                   checkBox->isChecked() ? " do not" : "")
 
     return std::make_tuple(
         reply == QMessageBox::Yes ? UserSelection::Exit : UserSelection::Cancel,
