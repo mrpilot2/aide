@@ -30,6 +30,7 @@ namespace aide
             : public aide::core::MainWindowInterface
             , public aide::core::ApplicationCloseView
         {
+            Q_OBJECT
         public:
             explicit MainWindow(
                 const ActionRegistryInterfacePtr& actionRegistry,

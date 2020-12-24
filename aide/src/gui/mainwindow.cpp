@@ -74,20 +74,18 @@ void MainWindow::restoreGeometryAndState(QByteArray geometry, QByteArray state)
 void MainWindow::registerActions(
     const ActionRegistryInterfacePtr& actionRegistry)
 {
-    m_actionQuit =
-        std::make_shared<QAction>(createIconFromTheme("application-exit"),
-                                  QApplication::tr("Quit"), this);
+    m_actionQuit = std::make_shared<QAction>(
+        createIconFromTheme("application-exit"), tr("Quit"), this);
     connect(m_actionQuit.get(), &QAction::triggered, QApplication::instance(),
             &QApplication::quit);
     m_ui->menuFile->addAction(m_actionQuit.get());
 
     actionRegistry->registerAction(
         m_actionQuit, ACTION_IDS().MAIN_MENU_FILE_QUIT,
-        QApplication::tr("Quits the application").toStdString(),
+        tr("Quits the application").toStdString(),
         {QKeySequence(QKeySequence::Quit), QKeySequence("Alt+F4")});
 
-    m_actionAboutQt =
-        std::make_shared<QAction>(QApplication::tr("About Qt"), this);
+    m_actionAboutQt = std::make_shared<QAction>(tr("About Qt"), this);
     connect(m_actionAboutQt.get(), &QAction::triggered,
             QApplication::instance(), &QApplication::aboutQt);
     m_ui->menuHelp->addAction(m_actionAboutQt.get());
