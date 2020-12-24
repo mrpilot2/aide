@@ -24,8 +24,6 @@ Application::Application(int& argc, char* argv[])
             "meaningful location.");
     }
 
-    m_appBuilder->mainWindow()->showMaximized();
-
     const int delayedSetupTimeInMs(1000);
     // NOLINTNEXTLINE
     auto* timer = new QTimer(this);

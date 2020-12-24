@@ -49,9 +49,11 @@ if(NOT ${TEST_AGAINST_INSTALLED})
             aidesettingsprovidertest.cpp
             applicationcloseinteractortest.cpp
             applicationtranslatortest.cpp
+            mainwindowgeometryandstatetest.cpp
             mainwindowtest.cpp
             mockapplicationcloseview.cpp
             mocksettings.cpp
+            mockmainwindowview.cpp
             qtsettingstest.cpp
   )
 endif()

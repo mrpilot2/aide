@@ -42,9 +42,11 @@ namespace aide
 
             void setMainWindowController(MainWindowControllerPtr controller);
 
+            void restoreGeometryAndState(QByteArray geometry,
+                                         QByteArray state) override;
+
             [[nodiscard]] std::shared_ptr<TranslatorInterface> translator()
                 const;
-
             std::tuple<aide::core::UserSelection, bool>
             letUserConfirmApplicationClose() override;
 
