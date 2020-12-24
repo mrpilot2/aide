@@ -1,4 +1,6 @@
 
+#include <array>
+
 #include <catch2/catch.hpp>
 
 #include "application.hpp"
