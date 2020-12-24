@@ -27,10 +27,43 @@ conan_cmake_run(
   missing
 )
 
+if(TARGET CONAN_PKG::spdlog)
+  set_target_properties(CONAN_PKG::spdlog PROPERTIES IMPORTED_GLOBAL TRUE)
+endif()
+
 find_package(
   Qt5
   COMPONENTS Core Widgets
   REQUIRED
 )
 
+if(TARGET Qt5::Core)
+  set_target_properties(
+    Qt5::Core Qt5::Widgets Qt5::moc Qt5::uic Qt5::rcc PROPERTIES IMPORTED_GLOBAL
+                                                                 TRUE
+  )
+  set(Qt5Core_VERSION_MAJOR
+      ${Qt5Core_VERSION_MAJOR}
+      PARENT_SCOPE
+  )
+  set(Qt5Core_VERSION_MINOR
+      ${Qt5Core_VERSION_MINOR}
+      PARENT_SCOPE
+  )
+endif()
+
 find_package(Qt5LinguistTools)
+
+if(TARGET Qt5::lrelease)
+  set_target_properties(
+    Qt5::lrelease Qt5::lupdate PROPERTIES IMPORTED_GLOBAL TRUE
+  )
+  set(Qt5_LRELEASE_EXECUTABLE
+      ${Qt5_LRELEASE_EXECUTABLE}
+      PARENT_SCOPE
+  )
+  set(Qt5_LUPDATE_EXECUTABLE
+      ${Qt5_LUPDATE_EXECUTABLE}
+      PARENT_SCOPE
+  )
+endif()

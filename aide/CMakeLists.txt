@@ -23,7 +23,7 @@ if(NOT TARGET project_warnings)
   add_library(project_warnings INTERFACE)
 endif()
 
-include(dependencies/CMakeLists.txt)
+add_subdirectory(dependencies)
 
 add_subdirectory(doc)
 

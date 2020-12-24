@@ -3,10 +3,6 @@
  * installed. This is for example the case on lgtm.com
  */
 
-#include <QApplication>
-#include <QLibraryInfo>
-#include <QtCore/QDirIterator>
-
 #include "applicationtranslator.hpp"
 
 using aide::gui::ApplicationTranslator;
@@ -19,5 +15,5 @@ std::set<std::string> ApplicationTranslator::getAvailableTranslations() const
 }
 
 void ApplicationTranslator::addAdditionalTranslationFilePath(
-    const QDir& path, const QString& fileName)
+    [[maybe_unused]] const QDir& path, [[maybe_unused]] const QString& fileName)
 {}
