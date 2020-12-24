@@ -1,8 +1,10 @@
 <map id="/home/runner/work/aide/aide/aide/src/core/mainwindowinterface.hpp" name="/home/runner/work/aide/aide/aide/src/core/mainwindowinterface.hpp">
-<area shape="rect" id="node2" href="$mainwindow_8hpp.html" title="/home/runner/work/aide\l/aide/aide/src/gui/mainwindow.hpp" alt="" coords="141,95,364,136"/>
-<area shape="rect" id="node7" href="$mainwindowinterface_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/core/mainwindowinterface.cpp" alt="" coords="389,95,669,136"/>
-<area shape="rect" id="node3" href="$applicationbuilder_8hpp.html" title="/home/runner/work/aide\l/aide/aide/src/applicationbuilder.hpp" alt="" coords="138,184,367,225"/>
+<area shape="rect" id="node2" href="$mainwindow_8hpp.html" title="/home/runner/work/aide\l/aide/aide/src/gui/mainwindow.hpp" alt="" coords="55,95,277,136"/>
+<area shape="rect" id="node7" href="$mainwindowgeometryandstate_8hpp.html" title="/home/runner/work/aide\l/aide/aide/src/core/mainwindowgeometryandstate.hpp" alt="" coords="301,95,636,136"/>
+<area shape="rect" id="node9" href="$mainwindowinterface_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/core/mainwindowinterface.cpp" alt="" coords="661,95,941,136"/>
+<area shape="rect" id="node3" href="$applicationbuilder_8hpp.html" title="/home/runner/work/aide\l/aide/aide/src/applicationbuilder.hpp" alt="" coords="302,184,531,225"/>
 <area shape="rect" id="node4" href="$application_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/application.cpp" alt="" coords="5,273,196,315"/>
-<area shape="rect" id="node6" href="$mainwindow_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/gui/mainwindow.cpp" alt="" coords="392,184,615,225"/>
-<area shape="rect" id="node5" href="$applicationbuilder_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/applicationbuilder.cpp" alt="" coords="221,273,450,315"/>
+<area shape="rect" id="node6" href="$mainwindow_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/gui/mainwindow.cpp" alt="" coords="55,184,277,225"/>
+<area shape="rect" id="node5" href="$applicationbuilder_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/applicationbuilder.cpp" alt="" coords="302,273,531,315"/>
+<area shape="rect" id="node8" href="$mainwindowgeometryandstate_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/core/mainwindowgeometryandstate.cpp" alt="" coords="556,184,891,225"/>
 </map>

@@ -1,8 +1,8 @@
 <map id="/home/runner/work/aide/aide/aide/src/gui/mainwindow.hpp" name="/home/runner/work/aide/aide/aide/src/gui/mainwindow.hpp">
-<area shape="rect" id="node4" href="$actionregistryinterface_8hpp.html" title="aide/actionregistryinterface.hpp" alt="" coords="438,95,641,121"/>
-<area shape="rect" id="node7" href="$applicationclose_8hpp.html" title="applicationclose.hpp" alt="" coords="666,95,806,121"/>
-<area shape="rect" id="node11" href="$mainwindowcontroller_8hpp.html" title="mainwindowcontroller.hpp" alt="" coords="242,95,414,121"/>
-<area shape="rect" id="node12" href="$mainwindowinterface_8hpp.html" title="mainwindowinterface.hpp" alt="" coords="48,95,218,121"/>
-<area shape="rect" id="node8" href="$applicationclosecontroller_8hpp.html" title="applicationclosecontroller.hpp" alt="" coords="579,169,772,196"/>
-<area shape="rect" id="node9" href="$applicationcloseview_8hpp.html" title="applicationcloseview.hpp" alt="" coords="796,169,963,196"/>
+<area shape="rect" id="node4" href="$actionregistryinterface_8hpp.html" title="aide/actionregistryinterface.hpp" alt="" coords="5,95,208,121"/>
+<area shape="rect" id="node7" href="$applicationclose_8hpp.html" title="applicationclose.hpp" alt="" coords="727,95,867,121"/>
+<area shape="rect" id="node11" href="$mainwindowcontroller_8hpp.html" title="mainwindowcontroller.hpp" alt="" coords="531,95,703,121"/>
+<area shape="rect" id="node12" href="$mainwindowinterface_8hpp.html" title="mainwindowinterface.hpp" alt="" coords="338,95,507,121"/>
+<area shape="rect" id="node8" href="$applicationclosecontroller_8hpp.html" title="applicationclosecontroller.hpp" alt="" coords="519,169,713,196"/>
+<area shape="rect" id="node9" href="$applicationcloseview_8hpp.html" title="applicationcloseview.hpp" alt="" coords="737,169,903,196"/>
 </map>

@@ -75,14 +75,14 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a214bc2f93f3dd0b35612940119af9f27"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1gui_1_1MainWindowController.html#a214bc2f93f3dd0b35612940119af9f27">MainWindowController</a> (const <a class="el" href="classaide_1_1core_1_1ApplicationCloseController.html">aide::core::ApplicationCloseController</a> &amp;useCase)</td></tr>
-<tr class="separator:a214bc2f93f3dd0b35612940119af9f27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f99b6439988cd8bc8b3edbcc12fc603"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1gui_1_1MainWindowController.html#a9f99b6439988cd8bc8b3edbcc12fc603">onUserWantsToQuitApplication</a> (QCloseEvent *event) const</td></tr>
-<tr class="separator:a9f99b6439988cd8bc8b3edbcc12fc603"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51def5530f43dda4624a37675d063330"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1gui_1_1MainWindowController.html#a51def5530f43dda4624a37675d063330">MainWindowController</a> (const <a class="el" href="classaide_1_1core_1_1ApplicationCloseController.html">aide::core::ApplicationCloseController</a> &amp;closeUseCase, <a class="el" href="classaide_1_1core_1_1MainWindowGeometryAndStateController.html">aide::core::MainWindowGeometryAndStateController</a> &amp;saveUseCase)</td></tr>
+<tr class="separator:a51def5530f43dda4624a37675d063330"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d4a82c15a72a888c9ec6c2b7061dd24"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1gui_1_1MainWindowController.html#a0d4a82c15a72a888c9ec6c2b7061dd24">onUserWantsToQuitApplication</a> (QCloseEvent *event, const QByteArray &amp;geometry, const QByteArray &amp;state)</td></tr>
+<tr class="separator:a0d4a82c15a72a888c9ec6c2b7061dd24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a214bc2f93f3dd0b35612940119af9f27"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a214bc2f93f3dd0b35612940119af9f27">&#9670;&nbsp;</a></span>MainWindowController()</h2>
+<a id="a51def5530f43dda4624a37675d063330"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51def5530f43dda4624a37675d063330">&#9670;&nbsp;</a></span>MainWindowController()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -94,8 +94,18 @@ Public Member Functions</h2></td></tr>
           <td class="memname">MainWindowController::MainWindowController </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classaide_1_1core_1_1ApplicationCloseController.html">aide::core::ApplicationCloseController</a> &amp;&#160;</td>
-          <td class="paramname"><em>useCase</em></td><td>)</td>
+          <td class="paramname"><em>closeUseCase</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="classaide_1_1core_1_1MainWindowGeometryAndStateController.html">aide::core::MainWindowGeometryAndStateController</a> &amp;&#160;</td>
+          <td class="paramname"><em>saveUseCase</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -108,8 +118,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a9f99b6439988cd8bc8b3edbcc12fc603"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f99b6439988cd8bc8b3edbcc12fc603">&#9670;&nbsp;</a></span>onUserWantsToQuitApplication()</h2>
+<a id="a0d4a82c15a72a888c9ec6c2b7061dd24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d4a82c15a72a888c9ec6c2b7061dd24">&#9670;&nbsp;</a></span>onUserWantsToQuitApplication()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -118,17 +128,34 @@ Public Member Functions</h2></td></tr>
           <td class="memname">void MainWindowController::onUserWantsToQuitApplication </td>
           <td>(</td>
           <td class="paramtype">QCloseEvent *&#160;</td>
-          <td class="paramname"><em>event</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramname"><em>event</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QByteArray &amp;&#160;</td>
+          <td class="paramname"><em>geometry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QByteArray &amp;&#160;</td>
+          <td class="paramname"><em>state</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classaide_1_1gui_1_1MainWindowController_a9f99b6439988cd8bc8b3edbcc12fc603_cgraph.png" border="0" usemap="#classaide_1_1gui_1_1MainWindowController_a9f99b6439988cd8bc8b3edbcc12fc603_cgraph" alt=""/></div>
-<map name="classaide_1_1gui_1_1MainWindowController_a9f99b6439988cd8bc8b3edbcc12fc603_cgraph" id="classaide_1_1gui_1_1MainWindowController_a9f99b6439988cd8bc8b3edbcc12fc603_cgraph">
-<area shape="rect" id="node2" href="classaide_1_1core_1_1ApplicationCloseController.html#a2ddf7b892671ec99dc0a4a4172a6e76d" title="aide::core::ApplicationClose\lController::isCloseAllowed" alt="" coords="267,5,452,47"/>
+<div class="center"><img src="classaide_1_1gui_1_1MainWindowController_a0d4a82c15a72a888c9ec6c2b7061dd24_cgraph.png" border="0" usemap="#classaide_1_1gui_1_1MainWindowController_a0d4a82c15a72a888c9ec6c2b7061dd24_cgraph" alt=""/></div>
+<map name="classaide_1_1gui_1_1MainWindowController_a0d4a82c15a72a888c9ec6c2b7061dd24_cgraph" id="classaide_1_1gui_1_1MainWindowController_a0d4a82c15a72a888c9ec6c2b7061dd24_cgraph">
+<area shape="rect" id="node2" href="classaide_1_1core_1_1ApplicationCloseController.html#a2ddf7b892671ec99dc0a4a4172a6e76d" title="aide::core::ApplicationClose\lController::isCloseAllowed" alt="" coords="287,5,472,47"/>
+<area shape="rect" id="node3" href="classaide_1_1core_1_1MainWindowGeometryAndStateController.html#ac8a7d64a87f39617c8ec40290b59d3be" title="aide::core::MainWindowGeometry\lAndStateController::saveGeometry\lAndState" alt="" coords="267,71,492,127"/>
 </map>
 </div>
 

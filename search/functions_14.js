@@ -4,6 +4,7 @@ var searchData=
   ['_7eapplicationclosecontroller',['~ApplicationCloseController',['../classaide_1_1core_1_1ApplicationCloseController.html#a50d2046941b3f64f91611c8d9871363d',1,'aide::core::ApplicationCloseController']]],
   ['_7eapplicationcloseview',['~ApplicationCloseView',['../classaide_1_1core_1_1ApplicationCloseView.html#a36af13abfd17124c09f9243246237dfd',1,'aide::core::ApplicationCloseView']]],
   ['_7emainwindow',['~MainWindow',['../classaide_1_1gui_1_1MainWindow.html#a1f7d2c56410fc1bfa135bb907d43313f',1,'aide::gui::MainWindow']]],
+  ['_7emainwindowgeometryandstatecontroller',['~MainWindowGeometryAndStateController',['../classaide_1_1core_1_1MainWindowGeometryAndStateController.html#abebf51f3986ad3c1f60d0a156a92c896',1,'aide::core::MainWindowGeometryAndStateController']]],
   ['_7emainwindowinterface',['~MainWindowInterface',['../classaide_1_1core_1_1MainWindowInterface.html#a6f4e49532a1b8d949dc5645f64eca30e',1,'aide::core::MainWindowInterface']]],
   ['_7eqtsettings',['~QtSettings',['../classaide_1_1QtSettings.html#ae0b6bb18a0b7f762b67ac28bf3dbbfbc',1,'aide::QtSettings']]],
   ['_7esearchlineedit',['~SearchLineEdit',['../classaide_1_1gui_1_1SearchLineEdit.html#a7742996d79b31dfcd6a822424c39c1a8',1,'aide::gui::SearchLineEdit']]],

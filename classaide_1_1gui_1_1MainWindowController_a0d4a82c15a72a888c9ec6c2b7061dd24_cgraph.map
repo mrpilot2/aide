@@ -1,0 +1,4 @@
+<map id="aide::gui::MainWindowController::onUserWantsToQuitApplication" name="aide::gui::MainWindowController::onUserWantsToQuitApplication">
+<area shape="rect" id="node2" href="$classaide_1_1core_1_1ApplicationCloseController.html#a2ddf7b892671ec99dc0a4a4172a6e76d" title="aide::core::ApplicationClose\lController::isCloseAllowed" alt="" coords="287,5,472,47"/>
+<area shape="rect" id="node3" href="$classaide_1_1core_1_1MainWindowGeometryAndStateController.html#ac8a7d64a87f39617c8ec40290b59d3be" title="aide::core::MainWindowGeometry\lAndStateController::saveGeometry\lAndState" alt="" coords="267,71,492,127"/>
+</map>
