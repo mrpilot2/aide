@@ -28,7 +28,7 @@ Application::Application(int& argc, char* argv[])
 
     const int delayedSetupTimeInMs(1000);
     // NOLINTNEXTLINE
-    auto* timer = new QTimer();
+    auto* timer = new QTimer(this);
     timer->setSingleShot(true);
     connect(timer, &QTimer::timeout, [=]() {
         QApplication::setApplicationDisplayName("");
