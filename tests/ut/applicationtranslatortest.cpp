@@ -44,8 +44,8 @@ TEST_CASE("Default ApplicationTranslator")
         QLocale::setDefault(QLocale(QLocale::German));
         ApplicationTranslator translator;
 
-        REQUIRE(QApplication::translate("MainWindow", "File") ==
-                QString("Datei"));
+        REQUIRE(QApplication::translate("aide::gui::MainWindow", "Quit") ==
+                QString("Beenden"));
     }
 }
 
