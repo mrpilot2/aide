@@ -11,19 +11,26 @@ jobs:
           - os: ubuntu-16.04
             COMPILER: g++-9
             COVERAGE: OFF
+            WARNINGS_AS_ERRORS: ON
 
           - os: ubuntu-18.04
             COMPILER: g++-9
             COVERAGE: OFF
+            WARNINGS_AS_ERRORS: ON
 
           - os: ubuntu-20.04
             COMPILER: g++-9
             COVERAGE: ON
             GCOV_TOOL: gcov-9
+            WARNINGS_AS_ERRORS: ON
 
           - os: macos-10.15
+            COVERAGE: OFF
+            WARNINGS_AS_ERRORS: ON
 
           - os: windows-latest
+            COVERAGE: OFF
+            WARNINGS_AS_ERRORS: OFF
 
     runs-on: ${{ matrix.os }}
 
@@ -53,35 +60,23 @@ jobs:
         key: ${{ runner.os }}-QtCache
 
     - name: Install Qt
-      if: runner.os == 'Linux' || runner.os == 'Windows'
       uses: jurplel/install-qt-action@v2
       with:
         cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
-    - name: Install Qt
-      if: matrix.os == 'macos-10.15'
-      run: |
-        brew install qt5
-
-    - name: Build the project
+    - name: Set CMake arguments for Linux
       if: runner.os == 'Linux'
-      working-directory: build
-      run: |
-        cmake -DCMAKE_CXX_COMPILER=${{ matrix.COMPILER }} -DENABLE_COVERAGE=${{ matrix.COVERAGE }} -DUNIT_TESTS_RUN_ON_CI=1 ..
-        cmake --build . --config Release --parallel
+      id: cmake_args_linux
+      run: echo "::set-output name=CMAKE_ARGS::-DCMAKE_CXX_COMPILER=${{ matrix.COMPILER }} -DENABLE_COVERAGE=${{ matrix.COVERAGE }}"
+
+    - name: Set CMake arguments
+      id: cmake_args
+      run: echo "::set-output name=CMAKE_ARGS::${{ steps.cmake_args_linux.outputs.CMAKE_ARGS }} -DUNIT_TESTS_RUN_ON_CI=1 -DWARNINGS_AS_ERRORS=${{ matrix.WARNINGS_AS_ERRORS }}"
 
     - name: Build the project
-      if: runner.os == 'macOS'
       working-directory: build
       run: |
-        cmake -DUNIT_TESTS_RUN_ON_CI=0 -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5 -DQt5LinguistTools_DIR=$(brew --prefix qt5)/lib/cmake/Qt5LinguistTools -DQt5Test_DIR=$(brew --prefix qt5)/lib/cmake/Qt5Test ..
-        cmake --build . --config Release --parallel
-
-    - name: Build the project
-      if: runner.os == 'Windows'
-      working-directory: build
-      run: |
-        cmake .. -DWARNINGS_AS_ERRORS=0
+        cmake ${{ steps.cmake_args.outputs.CMAKE_ARGS }} ..
         cmake --build . --config Release --parallel
 
     - name: Test the project
