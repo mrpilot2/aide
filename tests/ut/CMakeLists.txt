@@ -78,6 +78,15 @@ if(NOT ${TEST_AGAINST_INSTALLED})
   )
 endif()
 
+if(APPLE)
+  add_custom_command(
+    TARGET ut.aide
+    POST_BUILD
+    COMMAND ${CMAKE_INSTALL_NAME_TOOL} -add_rpath "${Qt5_DIR}/../../"
+            $<TARGET_FILE:ut.aide>
+  )
+endif()
+
 enable_testing()
 
 if(UNIT_TESTS_RUN_ON_CI)

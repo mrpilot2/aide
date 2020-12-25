@@ -20,9 +20,18 @@ endif()
 
 add_executable(
   aide_demo
-  main.cpp
   $<$<TARGET_EXISTS:Qt5::lrelease>:${CMAKE_CURRENT_BINARY_DIR}/demo_translations.qrc
   ${QM_FILES}>
+  main.cpp
 )
 
 target_link_libraries(aide_demo PRIVATE Aide::AideApplication)
+
+if(APPLE)
+  add_custom_command(
+    TARGET aide_demo
+    POST_BUILD
+    COMMAND ${CMAKE_INSTALL_NAME_TOOL} -add_rpath "${Qt5_DIR}/../../"
+            $<TARGET_FILE:aide_demo>
+  )
+endif()
