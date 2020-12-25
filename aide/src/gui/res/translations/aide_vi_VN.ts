@@ -8,24 +8,12 @@
       <translation type="unfinished">MainWindow</translation>
     </message>
     <message>
-      <source>File</source>
-      <translation type="unfinished">File</translation>
+      <source>&amp;File</source>
+      <translation type="unfinished">&amp;File</translation>
     </message>
     <message>
-      <source>Help</source>
-      <translation type="unfinished">Help</translation>
-    </message>
-    <message>
-      <source>Quit</source>
-      <translation type="unfinished">Quit</translation>
-    </message>
-    <message>
-      <source>About Qt</source>
-      <translation type="unfinished">About Qt</translation>
-    </message>
-    <message>
-      <source>About aIDE</source>
-      <translation type="unfinished">About aIDE</translation>
+      <source>&amp;Help</source>
+      <translation type="unfinished">&amp;Help</translation>
     </message>
   </context>
   <context>
