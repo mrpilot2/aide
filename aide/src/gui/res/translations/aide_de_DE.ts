@@ -8,24 +8,12 @@
       <translation>Hauptfenster</translation>
     </message>
     <message>
-      <source>File</source>
-      <translation>Datei</translation>
+      <source>&amp;File</source>
+      <translation type="unfinished">&amp;File</translation>
     </message>
     <message>
-      <source>Help</source>
-      <translation>Hilfe</translation>
-    </message>
-    <message>
-      <source>Quit</source>
-      <translation>Beenden</translation>
-    </message>
-    <message>
-      <source>About Qt</source>
-      <translation>Über Qt</translation>
-    </message>
-    <message>
-      <source>About aIDE</source>
-      <translation>Über aIDE</translation>
+      <source>&amp;Help</source>
+      <translation type="unfinished">&amp;Help</translation>
     </message>
   </context>
   <context>
