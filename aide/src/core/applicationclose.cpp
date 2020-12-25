@@ -25,8 +25,10 @@ bool ApplicationClose::isCloseAllowed() const
     const auto askExitConfirmationKeyGroup =
         HierarchicalId("System")("Behavior");
 
-    if (settings.value(askExitConfirmationKeyGroup, "AskExitConfirmation", true)
-            .toBool()) {
+    const auto askForExitConfirmation = settings.value(
+        askExitConfirmationKeyGroup, "AskExitConfirmation", true);
+
+    if (askForExitConfirmation.toBool()) {
         const auto& [userSelection, dontAskAgain] =
             ptr->letUserConfirmApplicationClose();
 
