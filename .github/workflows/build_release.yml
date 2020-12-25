@@ -66,14 +66,14 @@ jobs:
       working-directory: build
       run: |
         cmake -DCMAKE_CXX_COMPILER=${{ matrix.COMPILER }} -DENABLE_COVERAGE=${{ matrix.COVERAGE }} -DUNIT_TESTS_RUN_ON_CI=1 ..
-        cmake --build . --config Release -j 4
+        cmake --build . --config Release --parallel
 
     - name: Build the project
       if: runner.os == 'macOS'
       working-directory: build
       run: |
         cmake -DUNIT_TESTS_RUN_ON_CI=0 -DQt5_DIR=$(brew --prefix qt5)/lib/cmake/Qt5 -DQt5LinguistTools_DIR=$(brew --prefix qt5)/lib/cmake/Qt5LinguistTools -DQt5Test_DIR=$(brew --prefix qt5)/lib/cmake/Qt5Test ..
-        cmake --build . --config Release -j 4
+        cmake --build . --config Release --parallel
 
     - name: Test the project
       uses: GabrielBB/xvfb-action@v1
