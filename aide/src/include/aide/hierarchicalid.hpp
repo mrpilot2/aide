@@ -7,12 +7,6 @@
 namespace aide
 {
     class HierarchicalId
-        : public std::iterator<std::input_iterator_tag,
-                               const char*,  // value_type
-                               const char*,  // difference_type
-                               const char**, // pointer
-                               const char*   // reference
-                               >
     {
     public:
         using const_iterator = std::vector<const char*>::const_iterator;
