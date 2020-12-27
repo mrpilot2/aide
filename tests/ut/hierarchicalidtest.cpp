@@ -20,6 +20,16 @@ TEST_CASE("Hierarchical Id ")
         REQUIRE("Main Menu/File/Quit" == id.name());
     }
 
+    SECTION("can be constructed from input iterators")
+    {
+        const auto id{HierarchicalId("Main Menu")("File")("Quit")};
+
+        const auto id2{HierarchicalId(id.begin() + 1, id.end())};
+
+        REQUIRE(std::string(*id2.begin()) == "File");
+        REQUIRE(std::string(*(id2.end() - 1)) == "Quit");
+    }
+
     SECTION("can be extended")
     {
         const auto mainMenu(HierarchicalId("Main Menu"));
