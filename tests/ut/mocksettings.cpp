@@ -8,32 +8,25 @@
 
 using aide::test::MockSettings;
 
-void MockSettings::setValue(const aide::HierarchicalId& group,
-                            const std::string& key, const QVariant& value)
+void aide::test::MockSettings::setValue(const aide::HierarchicalId& groupAndKey,
+                                        const QVariant& value)
 {
-    auto res = inMemorySettings.emplace(std::make_pair(group, key), value);
+    auto res = inMemorySettings.emplace(groupAndKey, value);
     if (!res.second) {
         throw std::runtime_error("Cannot insert into in memory settings");
     }
 }
 
-QVariant MockSettings::value(const aide::HierarchicalId& group,
-                             const std::string& key)
+QVariant MockSettings::value(const aide::HierarchicalId& groupAndKey)
 {
-    if (inMemorySettings.find(std::make_pair(group, key)) !=
-        inMemorySettings.end()) {
-        return inMemorySettings.at(std::make_pair(group, key));
-    }
-    return QVariant();
+    return value(groupAndKey, QVariant());
 }
 
-QVariant MockSettings::value(const aide::HierarchicalId& group,
-                             const std::string& key,
+QVariant MockSettings::value(const aide::HierarchicalId& groupAndKey,
                              const QVariant& defaultValue)
 {
-    if (inMemorySettings.find(std::make_pair(group, key)) !=
-        inMemorySettings.end()) {
-        return inMemorySettings.at(std::make_pair(group, key));
+    if (inMemorySettings.find(groupAndKey) != inMemorySettings.end()) {
+        return inMemorySettings.at(groupAndKey);
     }
     return defaultValue;
 }

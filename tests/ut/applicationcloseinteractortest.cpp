@@ -30,9 +30,8 @@ TEST_CASE("Any application close interactor")
     SECTION("does not ask user to confirm close if option is not set")
     {
         const auto askExitConfirmationKeyGroup =
-            HierarchicalId("System")("Behavior");
-        settings.setValue(askExitConfirmationKeyGroup, "AskExitConfirmation",
-                          false);
+            HierarchicalId("System")("Behavior")("AskExitConfirmation");
+        settings.setValue(askExitConfirmationKeyGroup, false);
 
         auto res = appClose.isCloseAllowed();
         REQUIRE(appCloseView->wasUserAsked() == false);
@@ -64,19 +63,17 @@ TEST_CASE("Any application close interactor")
         [[maybe_unused]] auto res = appClose.isCloseAllowed();
 
         const auto askExitConfirmationKeyGroup =
-            HierarchicalId("System")("Behavior");
+            HierarchicalId("System")("Behavior")("AskExitConfirmation");
 
-        REQUIRE(
-            settings.value(askExitConfirmationKeyGroup, "AskExitConfirmation")
-                .toBool() == false);
+        REQUIRE(settings.value(askExitConfirmationKeyGroup).toBool() == false);
     }
 
     SECTION(" does not change setting if user decides to be asked again")
     {
         const auto askExitConfirmationKeyGroup =
-            HierarchicalId("System")("Behavior");
-        settings.setValue(askExitConfirmationKeyGroup, "AskExitConfirmation",
-                          true);
+            HierarchicalId("System")("Behavior")("AskExitConfirmation");
+        settings.setValue(askExitConfirmationKeyGroup, true);
+
         appCloseView->userShallSelectToBeAskedAgain();
 
         [[maybe_unused]] auto res = appClose.isCloseAllowed();

@@ -32,32 +32,30 @@ TEST_CASE("Any main window geometry and state interactor")
 
     SECTION("saves window state in settings")
     {
-        auto stateGroup = HierarchicalId("State");
+        auto stateGroup = HierarchicalId("State")("MainWindow");
         auto state      = QByteArray("def");
 
         interactor.saveGeometryAndState(QByteArray("abc"), state);
 
-        REQUIRE(state ==
-                settings.value(stateGroup, "MainWindow").toByteArray());
+        REQUIRE(state == settings.value(stateGroup).toByteArray());
     }
 
     SECTION("saves window geometry in settings")
     {
-        auto geometryGroup = HierarchicalId("Geometry");
+        auto geometryGroup = HierarchicalId("Geometry")("MainWindow");
         auto geometry      = QByteArray("abc");
 
         interactor.saveGeometryAndState(geometry, QByteArray("def"));
 
-        REQUIRE(geometry ==
-                settings.value(geometryGroup, "MainWindow").toByteArray());
+        REQUIRE(geometry == settings.value(geometryGroup).toByteArray());
     }
 
     SECTION("restores window state from settings")
     {
-        auto stateGroup = HierarchicalId("State");
+        auto stateGroup = HierarchicalId("State")("MainWindow");
         auto state      = QByteArray("def");
 
-        settings.setValue(stateGroup, "MainWindow", state);
+        settings.setValue(stateGroup, state);
 
         interactor.restoreGeometryAndState();
 
@@ -66,10 +64,10 @@ TEST_CASE("Any main window geometry and state interactor")
 
     SECTION("restores window geometry from settings")
     {
-        auto geometryGroup = HierarchicalId("Geometry");
+        auto geometryGroup = HierarchicalId("Geometry")("MainWindow");
         auto geometry      = QByteArray("abc");
 
-        settings.setValue(geometryGroup, "MainWindow", geometry);
+        settings.setValue(geometryGroup, geometry);
 
         interactor.restoreGeometryAndState();
 

@@ -28,29 +28,29 @@ TEST_CASE("Versionable Qt Settings")
 
     SECTION("write to default Qt Settings file")
     {
-        auto group = HierarchicalId("Appearance")("Font");
+        auto group = HierarchicalId("Appearance")("Font")("Size");
         const auto fontSize{10};
 
-        settings.setValue(group, "Size", fontSize);
+        settings.setValue(group, fontSize);
 
-        REQUIRE(settings.value(group, "Size") == fontSize);
+        REQUIRE(settings.value(group) == fontSize);
     }
 
     SECTION("returns default value if key does not exist and default given")
     {
-        auto group = HierarchicalId("Appearance")("Font");
+        auto group = HierarchicalId("Appearance")("Font")("Name");
         const auto* const fontName{"Arial"};
 
-        auto val = settings.value(group, "Name", fontName);
+        auto val = settings.value(group, fontName);
 
         REQUIRE(val.toString().toStdString() == "Arial");
     }
 
     SECTION("returns empty variant if key does not exist and no default given")
     {
-        auto group = HierarchicalId("Appearance")("Font");
+        auto group = HierarchicalId("Appearance")("Font")("Name");
 
-        auto val = settings.value(group, "Name");
+        auto val = settings.value(group);
 
         REQUIRE(val == QVariant());
     }
@@ -71,10 +71,10 @@ TEST_CASE("Un-Versionable Qt Settings")
 
     SECTION("write to default Qt Settings file with suffix _unversionable")
     {
-        auto group = HierarchicalId("Geometry")("MainWindow");
+        auto group = HierarchicalId("Geometry")("MainWindow")("Position");
         const auto* geom{"a;dfjads;fjkads;fjkads;flkj"};
 
-        settings.setValue(group, "Position", geom);
+        settings.setValue(group, geom);
 
         REQUIRE(settings.value(group, "Position") == geom);
 

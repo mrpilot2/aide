@@ -18,24 +18,25 @@ MainWindowGeometryAndState::MainWindowGeometryAndState(
 void MainWindowGeometryAndState::saveGeometryAndState(QByteArray geometry,
                                                       QByteArray state)
 {
-    auto geometryGroup = HierarchicalId("Geometry");
-    auto stateGroup    = HierarchicalId("State");
+    auto geometryKey = HierarchicalId("Geometry")("MainWindow");
+    auto stateKey    = HierarchicalId("State")("MainWindow");
 
-    settings.setValue(geometryGroup, "MainWindow", geometry);
-    settings.setValue(stateGroup, "MainWindow", state);
+    settings.setValue(geometryKey, geometry);
+    settings.setValue(stateKey, state);
 }
 
 void MainWindowGeometryAndState::restoreGeometryAndState()
 {
-    auto geometryGroup = HierarchicalId("Geometry");
-    auto stateGroup    = HierarchicalId("State");
+    auto geometryKey = HierarchicalId("Geometry")("MainWindow");
+    auto stateKey    = HierarchicalId("State")("MainWindow");
 
-    auto geometry = settings.value(geometryGroup, "MainWindow").toByteArray();
-    auto state    = settings.value(stateGroup, "MainWindow").toByteArray();
+    auto geometry = settings.value(geometryKey).toByteArray();
+    auto state    = settings.value(stateKey).toByteArray();
 
     {
         auto ptr = view.lock();
         if (ptr == nullptr) { return; }
+
         if (geometry.isEmpty() && state.isEmpty()) {
             ptr->showMaximized();
         } else {

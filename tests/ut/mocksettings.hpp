@@ -9,18 +9,19 @@ namespace aide::test
     class MockSettings : public aide::SettingsInterface
     {
     public:
-        void setValue(const HierarchicalId& group, const std::string& key,
+        void setValue(const HierarchicalId& groupAndKey,
                       const QVariant& value) override;
-        QVariant value(const HierarchicalId& group,
-                       const std::string& key) override;
-        QVariant value(const HierarchicalId& group, const std::string& key,
+
+        QVariant value(const HierarchicalId& groupAndKey) override;
+
+        QVariant value(const HierarchicalId& groupAndKey,
                        const QVariant& defaultValue) override;
+
         void save() override;
         void load() override;
 
     private:
-        std::map<std::pair<HierarchicalId, std::string>, QVariant>
-            inMemorySettings;
+        std::map<HierarchicalId, QVariant> inMemorySettings;
     };
 } // namespace aide::test
 

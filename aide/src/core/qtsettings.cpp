@@ -22,9 +22,13 @@ QtSettings::QtSettings(bool versionable)
 
 QtSettings::~QtSettings() = default;
 
-void QtSettings::setValue(const aide::HierarchicalId& group,
-                          const std::string& key, const QVariant& value)
+void QtSettings::setValue(const aide::HierarchicalId& groupAndKey,
+                          const QVariant& value)
 {
+    const auto* key = *(groupAndKey.end() - 1);
+    const auto group =
+        HierarchicalId(groupAndKey.begin(), groupAndKey.end() - 1);
+
     for (const auto* g : group) {
         m_settings->beginGroup(QString::fromLatin1(g));
     }
@@ -34,20 +38,24 @@ void QtSettings::setValue(const aide::HierarchicalId& group,
     }
 }
 
-QVariant QtSettings::value(const aide::HierarchicalId& group,
-                           const std::string& key)
+QVariant QtSettings::value(const aide::HierarchicalId& groupAndKey)
 {
-    return this->value(group, key, QVariant());
+    return value(groupAndKey, QVariant());
 }
 
-QVariant QtSettings::value(const aide::HierarchicalId& group,
-                           const std::string& key, const QVariant& defaultValue)
+QVariant QtSettings::value(const aide::HierarchicalId& groupAndKey,
+                           const QVariant& defaultValue)
 {
+    const auto* key = *(groupAndKey.end() - 1);
+    const auto group =
+        HierarchicalId(groupAndKey.begin(), groupAndKey.end() - 1);
+
     for (const auto* g : group) {
         m_settings->beginGroup(QString::fromLatin1(g));
     }
 
-    auto settingsValue = m_settings->value(QString::fromStdString(key));
+    auto settingsValue =
+        m_settings->value(QString::fromStdString(std::string(key)));
 
     for ([[maybe_unused]] const auto* g : group) {
         m_settings->endGroup();
@@ -60,7 +68,6 @@ void aide::QtSettings::save()
 {
     m_settings->sync();
 }
-
 void aide::QtSettings::load()
 {
     m_settings->sync();

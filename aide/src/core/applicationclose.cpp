@@ -22,20 +22,18 @@ bool ApplicationClose::isCloseAllowed() const
 {
     auto ptr = view.lock();
 
-    const auto askExitConfirmationKeyGroup =
-        HierarchicalId("System")("Behavior");
+    const auto askExitConfirmationKey =
+        HierarchicalId("System")("Behavior")("AskExitConfirmation");
 
-    const auto askForExitConfirmation = settings.value(
-        askExitConfirmationKeyGroup, "AskExitConfirmation", true);
+    const auto askForExitConfirmation =
+        settings.value(askExitConfirmationKey, true);
 
     if (askForExitConfirmation.toBool()) {
         const auto& [userSelection, dontAskAgain] =
             ptr->letUserConfirmApplicationClose();
 
-        if (dontAskAgain) {
-            settings.setValue(askExitConfirmationKeyGroup,
-                              "AskExitConfirmation", false);
-        }
+        if (dontAskAgain) { settings.setValue(askExitConfirmationKey, false); }
+
         return userSelection == UserSelection::Exit;
     }
 
