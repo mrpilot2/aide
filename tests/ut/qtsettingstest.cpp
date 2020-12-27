@@ -54,6 +54,15 @@ TEST_CASE("Versionable Qt Settings")
 
         REQUIRE(val == QVariant());
     }
+
+    SECTION("does not segfault if only key is given")
+    {
+        auto key = HierarchicalId("Size");
+
+        settings.setValue(key, "abc");
+        auto val = settings.value(key);
+        REQUIRE(val.toString().toStdString() == "abc");
+    }
 }
 
 TEST_CASE("Un-Versionable Qt Settings")
