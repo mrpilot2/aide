@@ -2,11 +2,12 @@
 
 #include <utility>
 
-#include "hierarchicalid.hpp"
+#include "commonsettingskeys.hpp"
 #include "settingsinterface.hpp"
 
 using aide::core::MainWindowGeometryAndState;
 using aide::core::MainWindowInterfaceWeakPtr;
+using aide::core::settings::KEYS;
 
 MainWindowGeometryAndState::MainWindowGeometryAndState(
     MainWindowInterfaceWeakPtr v,
@@ -18,20 +19,15 @@ MainWindowGeometryAndState::MainWindowGeometryAndState(
 void MainWindowGeometryAndState::saveGeometryAndState(QByteArray geometry,
                                                       QByteArray state)
 {
-    auto geometryKey = HierarchicalId("Geometry")("MainWindow");
-    auto stateKey    = HierarchicalId("State")("MainWindow");
-
-    settings.setValue(geometryKey, geometry);
-    settings.setValue(stateKey, state);
+    settings.setValue(KEYS().UI.MAIN_WINDOW_GEOMETRY_KEY, geometry);
+    settings.setValue(KEYS().UI.MAIN_WINDOW_STATE_KEY, state);
 }
 
 void MainWindowGeometryAndState::restoreGeometryAndState()
 {
-    auto geometryKey = HierarchicalId("Geometry")("MainWindow");
-    auto stateKey    = HierarchicalId("State")("MainWindow");
-
-    auto geometry = settings.value(geometryKey).toByteArray();
-    auto state    = settings.value(stateKey).toByteArray();
+    auto geometry =
+        settings.value(KEYS().UI.MAIN_WINDOW_GEOMETRY_KEY).toByteArray();
+    auto state = settings.value(KEYS().UI.MAIN_WINDOW_STATE_KEY).toByteArray();
 
     {
         auto ptr = view.lock();
