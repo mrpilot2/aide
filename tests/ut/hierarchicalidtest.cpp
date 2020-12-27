@@ -70,4 +70,33 @@ TEST_CASE("Hierarchical Id ")
         REQUIRE(std::string(*(first + 2)) == "Quit");
         REQUIRE(*(first + 2) == *(id.end() - 1));
     }
+
+    SECTION("can be used with range based for loop")
+    {
+        const auto hId{HierarchicalId("Main Menu")("File")("Quit")};
+        const std::array<const char*, 3> expected{
+            {"Main Menu", "File", "Quit"}};
+
+        size_t index{0};
+        for (const auto* id : hId) {
+            REQUIRE(id == expected.at(index));
+            ++index;
+        }
+        REQUIRE(index == 3);
+    }
+
+    SECTION("can be used with iterator for loop")
+    {
+        const auto hId{HierarchicalId("Main Menu")("File")("Quit")};
+        const std::array<const char*, 2> expected{{"File", "Quit"}};
+
+        size_t index{0};
+        for (auto iterator = hId.begin() + 1; iterator != hId.end();
+             ++iterator) {
+            REQUIRE(*iterator == expected.at(index));
+            ++index;
+        }
+
+        REQUIRE(index == 2);
+    }
 }
