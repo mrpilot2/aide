@@ -3,10 +3,10 @@
 
 #include <memory>
 
+#include <aide/log_helper_macros.hpp>
+#include <aide/loggerinterface.hpp>
 #include <spdlog/spdlog.h>
 #include <string_view>
-
-#include "log_helper_macros.hpp"
 
 namespace aide
 {
@@ -43,7 +43,7 @@ namespace aide
      * For Debug the log sinks are console and a log file
      * For Release it's only the log file
      */
-    class Logger
+    class Logger : public LoggerInterface
     {
     public:
         Logger();
@@ -52,45 +52,18 @@ namespace aide
         explicit Logger(const FileName& logFileName,
                         const LoggerName& loggerName);
 
-        template <typename... Args>
-        void trace(std::string_view fmt, const Args&... args)
-        {
-            m_logger->trace(fmt, args...);
-        }
-
-        template <typename... Args>
-        void debug(std::string_view fmt, const Args&... args)
-        {
-            m_logger->debug(fmt, args...);
-        }
-
-        template <typename... Args>
-        void info(std::string_view fmt, const Args&... args)
-        {
-            m_logger->info(fmt, args...);
-        }
-
-        template <typename... Args>
-        void warn(std::string_view fmt, const Args&... args)
-        {
-            m_logger->warn(fmt, args...);
-        }
-
-        template <typename... Args>
-        void error(std::string_view fmt, const Args&... args)
-        {
-            m_logger->error(fmt, args...);
-        }
-
-        template <typename... Args>
-        void critical(std::string_view fmt, const Args&... args)
-        {
-            m_logger->critical(fmt, args...);
-        }
-
-        void flush();
+        void flush() override;
 
     private:
+        void doLogTrace(std::string_view message) override;
+
+        void doLogDebug(std::string_view message) override;
+
+        void doLogInfo(std::string_view message) override;
+        void doLogWarn(std::string_view message) override;
+        void doLogError(std::string_view message) override;
+        void doLogCritical(std::string_view message) override;
+
         static void registerLogger(
             const std::shared_ptr<spdlog::logger>& logger);
 
