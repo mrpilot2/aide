@@ -4,13 +4,13 @@
 
 #include <QApplication>
 
-#include "hierarchicalid.hpp"
+#include "commonsettingskeys.hpp"
 #include "settingsinterface.hpp"
 
-using aide::HierarchicalId;
 using aide::SettingsInterface;
 using aide::core::ApplicationClose;
 using aide::core::ApplicationCloseViewWeakPtr;
+using aide::core::settings::KEYS;
 
 ApplicationClose::ApplicationClose(ApplicationCloseViewWeakPtr v,
                                    SettingsInterface& s)
@@ -22,18 +22,17 @@ bool ApplicationClose::isCloseAllowed() const
 {
     auto ptr = view.lock();
 
-    const auto askExitConfirmationKeyGroup =
-        HierarchicalId("System")("Behavior");
+    const auto askForExitConfirmation =
+        settings.value(KEYS().SYSTEM.ASK_EXIT_CONFIRMATION, true);
 
-    if (settings.value(askExitConfirmationKeyGroup, "AskExitConfirmation", true)
-            .toBool()) {
+    if (askForExitConfirmation.toBool()) {
         const auto& [userSelection, dontAskAgain] =
             ptr->letUserConfirmApplicationClose();
 
         if (dontAskAgain) {
-            settings.setValue(askExitConfirmationKeyGroup,
-                              "AskExitConfirmation", false);
+            settings.setValue(KEYS().SYSTEM.ASK_EXIT_CONFIRMATION, false);
         }
+
         return userSelection == UserSelection::Exit;
     }
 

@@ -13,6 +13,8 @@ namespace aide
 
         explicit HierarchicalId(const char* level);
 
+        HierarchicalId(const_iterator first, const_iterator last);
+
         HierarchicalId() = delete;
 
         HierarchicalId& operator()(const char* level);

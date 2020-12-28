@@ -10,6 +10,10 @@ HierarchicalId::HierarchicalId(const char* level)
     : m_id{level}
 {}
 
+HierarchicalId::HierarchicalId(const_iterator first, const_iterator last)
+    : m_id{first, last}
+{}
+
 HierarchicalId::HierarchicalId(std::vector<const char*> ids)
     : m_id{std::move(ids)}
 {}

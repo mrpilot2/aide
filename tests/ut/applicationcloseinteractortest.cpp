@@ -2,15 +2,13 @@
 
 #include <catch2/catch.hpp>
 
-#include <QVariant>
-
 #include "applicationclose.hpp"
-#include "hierarchicalid.hpp"
+#include "commonsettingskeys.hpp"
 #include "mockapplicationcloseview.hpp"
 #include "mocksettings.hpp"
 
-using aide::HierarchicalId;
 using aide::core::ApplicationClose;
+using aide::core::settings::KEYS;
 using aide::test::MockApplicationCloseView;
 using aide::test::MockSettings;
 
@@ -29,10 +27,7 @@ TEST_CASE("Any application close interactor")
 
     SECTION("does not ask user to confirm close if option is not set")
     {
-        const auto askExitConfirmationKeyGroup =
-            HierarchicalId("System")("Behavior");
-        settings.setValue(askExitConfirmationKeyGroup, "AskExitConfirmation",
-                          false);
+        settings.setValue(KEYS().SYSTEM.ASK_EXIT_CONFIRMATION, false);
 
         auto res = appClose.isCloseAllowed();
         REQUIRE(appCloseView->wasUserAsked() == false);
@@ -63,26 +58,21 @@ TEST_CASE("Any application close interactor")
 
         [[maybe_unused]] auto res = appClose.isCloseAllowed();
 
-        const auto askExitConfirmationKeyGroup =
-            HierarchicalId("System")("Behavior");
-
-        REQUIRE(
-            settings.value(askExitConfirmationKeyGroup, "AskExitConfirmation")
-                .toBool() == false);
+        REQUIRE(settings.value(KEYS().SYSTEM.ASK_EXIT_CONFIRMATION).toBool() ==
+                false);
     }
 
     SECTION(" does not change setting if user decides to be asked again")
     {
-        const auto askExitConfirmationKeyGroup =
-            HierarchicalId("System")("Behavior");
-        settings.setValue(askExitConfirmationKeyGroup, "AskExitConfirmation",
-                          true);
+        settings.setValue(KEYS().SYSTEM.ASK_EXIT_CONFIRMATION, true);
+
         appCloseView->userShallSelectToBeAskedAgain();
 
         [[maybe_unused]] auto res = appClose.isCloseAllowed();
 
-        REQUIRE(
-            settings.value(askExitConfirmationKeyGroup, "AskExitConfirmation")
-                .toBool() == true);
+        REQUIRE(settings
+                    .value(KEYS().SYSTEM.ASK_EXIT_CONFIRMATION,
+                           "AskExitConfirmation")
+                    .toBool() == true);
     }
 }

@@ -2,11 +2,12 @@
 
 #include <utility>
 
-#include "hierarchicalid.hpp"
+#include "commonsettingskeys.hpp"
 #include "settingsinterface.hpp"
 
 using aide::core::MainWindowGeometryAndState;
 using aide::core::MainWindowInterfaceWeakPtr;
+using aide::core::settings::KEYS;
 
 MainWindowGeometryAndState::MainWindowGeometryAndState(
     MainWindowInterfaceWeakPtr v,
@@ -18,24 +19,20 @@ MainWindowGeometryAndState::MainWindowGeometryAndState(
 void MainWindowGeometryAndState::saveGeometryAndState(QByteArray geometry,
                                                       QByteArray state)
 {
-    auto geometryGroup = HierarchicalId("Geometry");
-    auto stateGroup    = HierarchicalId("State");
-
-    settings.setValue(geometryGroup, "MainWindow", geometry);
-    settings.setValue(stateGroup, "MainWindow", state);
+    settings.setValue(KEYS().UI.MAIN_WINDOW_GEOMETRY_KEY, geometry);
+    settings.setValue(KEYS().UI.MAIN_WINDOW_STATE_KEY, state);
 }
 
 void MainWindowGeometryAndState::restoreGeometryAndState()
 {
-    auto geometryGroup = HierarchicalId("Geometry");
-    auto stateGroup    = HierarchicalId("State");
-
-    auto geometry = settings.value(geometryGroup, "MainWindow").toByteArray();
-    auto state    = settings.value(stateGroup, "MainWindow").toByteArray();
+    auto geometry =
+        settings.value(KEYS().UI.MAIN_WINDOW_GEOMETRY_KEY).toByteArray();
+    auto state = settings.value(KEYS().UI.MAIN_WINDOW_STATE_KEY).toByteArray();
 
     {
         auto ptr = view.lock();
         if (ptr == nullptr) { return; }
+
         if (geometry.isEmpty() && state.isEmpty()) {
             ptr->showMaximized();
         } else {

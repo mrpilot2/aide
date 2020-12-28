@@ -1,8 +1,6 @@
 #ifndef AIDE_SETTINGS_INTERFACE_HPP
 #define AIDE_SETTINGS_INTERFACE_HPP
 
-#include <string>
-
 #include <QVariant>
 
 namespace aide
@@ -14,15 +12,12 @@ namespace aide
     public:
         virtual ~SettingsInterface();
 
-        virtual void setValue(const HierarchicalId& group,
-                              const std::string& key,
+        virtual void setValue(const HierarchicalId& key,
                               const QVariant& value) = 0;
 
-        virtual QVariant value(const HierarchicalId& group,
-                               const std::string& key) = 0;
+        virtual QVariant value(const HierarchicalId& key) = 0;
 
-        virtual QVariant value(const HierarchicalId& group,
-                               const std::string& key,
+        virtual QVariant value(const HierarchicalId& key,
                                const QVariant& defaultValue) = 0;
 
         virtual void save() = 0;

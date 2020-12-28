@@ -4,13 +4,13 @@
 #include <catch2/catch.hpp>
 
 #include "application.hpp"
-#include "hierarchicalid.hpp"
+#include "commonsettingskeys.hpp"
 #include "mainwindowgeometryandstate.hpp"
 #include "mockmainwindowview.hpp"
 #include "mocksettings.hpp"
 
-using aide::HierarchicalId;
 using aide::core::MainWindowGeometryAndState;
+using aide::core::settings::KEYS;
 using aide::test::MockMainWindowView;
 using aide::test::MockSettings;
 
@@ -32,32 +32,30 @@ TEST_CASE("Any main window geometry and state interactor")
 
     SECTION("saves window state in settings")
     {
-        auto stateGroup = HierarchicalId("State");
-        auto state      = QByteArray("def");
+        auto state = QByteArray("def");
 
         interactor.saveGeometryAndState(QByteArray("abc"), state);
 
         REQUIRE(state ==
-                settings.value(stateGroup, "MainWindow").toByteArray());
+                settings.value(KEYS().UI.MAIN_WINDOW_STATE_KEY).toByteArray());
     }
 
     SECTION("saves window geometry in settings")
     {
-        auto geometryGroup = HierarchicalId("Geometry");
-        auto geometry      = QByteArray("abc");
+        auto geometry = QByteArray("abc");
 
         interactor.saveGeometryAndState(geometry, QByteArray("def"));
 
-        REQUIRE(geometry ==
-                settings.value(geometryGroup, "MainWindow").toByteArray());
+        REQUIRE(
+            geometry ==
+            settings.value(KEYS().UI.MAIN_WINDOW_GEOMETRY_KEY).toByteArray());
     }
 
     SECTION("restores window state from settings")
     {
-        auto stateGroup = HierarchicalId("State");
-        auto state      = QByteArray("def");
+        auto state = QByteArray("def");
 
-        settings.setValue(stateGroup, "MainWindow", state);
+        settings.setValue(KEYS().UI.MAIN_WINDOW_STATE_KEY, state);
 
         interactor.restoreGeometryAndState();
 
@@ -66,10 +64,9 @@ TEST_CASE("Any main window geometry and state interactor")
 
     SECTION("restores window geometry from settings")
     {
-        auto geometryGroup = HierarchicalId("Geometry");
-        auto geometry      = QByteArray("abc");
+        auto geometry = QByteArray("abc");
 
-        settings.setValue(geometryGroup, "MainWindow", geometry);
+        settings.setValue(KEYS().UI.MAIN_WINDOW_GEOMETRY_KEY, geometry);
 
         interactor.restoreGeometryAndState();
 
