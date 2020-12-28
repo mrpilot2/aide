@@ -35,7 +35,6 @@ target_sources(
     applicationtest.cpp
     buildinformationtest.cpp
     hierarchicalidtest.cpp
-    loggertest.cpp
     searchlineedittest.cpp
     $<$<TARGET_EXISTS:Qt5::lrelease>:${CMAKE_CURRENT_BINARY_DIR}/ut_translations.qrc
     ${QM_FILES}>
@@ -49,11 +48,13 @@ if(NOT ${TEST_AGAINST_INSTALLED})
             aidesettingsprovidertest.cpp
             applicationcloseinteractortest.cpp
             applicationtranslatortest.cpp
+            loggertest.cpp
             mainwindowgeometryandstatetest.cpp
             mainwindowtest.cpp
             mockapplicationcloseview.cpp
             mocksettings.cpp
             mockmainwindowview.cpp
+            nulllogger.cpp
             qtsettingstest.cpp
   )
 endif()
@@ -71,7 +72,9 @@ target_link_libraries(
 )
 
 if(NOT ${TEST_AGAINST_INSTALLED})
-  target_link_libraries(ut.aide PRIVATE Aide::AideCore Aide::AideGui)
+  target_link_libraries(
+    ut.aide PRIVATE Aide::AideCore Aide::AideGui Aide::AideLogger
+  )
   target_include_directories(
     ut.aide PRIVATE ${CMAKE_SOURCE_DIR}/aide/src/include
                     ${CMAKE_SOURCE_DIR}/aide/src/include/aide

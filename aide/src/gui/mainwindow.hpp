@@ -9,6 +9,7 @@
 #include <aide/actionregistryinterface.hpp>
 
 #include "applicationclose.hpp"
+#include "loggerinterface.hpp"
 #include "mainwindowcontroller.hpp"
 #include "mainwindowinterface.hpp"
 
@@ -34,7 +35,7 @@ namespace aide
         public:
             explicit MainWindow(
                 const ActionRegistryInterfacePtr& actionRegistry,
-                QWidget* parent = nullptr);
+                aide::LoggerPtr loggerInterface, QWidget* parent = nullptr);
             ~MainWindow() override;
             MainWindow(const MainWindow&) = delete;
             MainWindow& operator=(const MainWindow&) = delete;
@@ -60,6 +61,8 @@ namespace aide
             [[nodiscard]] static QIcon createIconFromTheme(
                 const std::string& iconName);
 
+            LoggerPtr logger;
+
             MainWindowControllerPtr m_controller;
 
             std::shared_ptr<TranslatorInterface> m_translator;
@@ -67,8 +70,7 @@ namespace aide
             std::shared_ptr<QAction> m_actionQuit;
             std::shared_ptr<QAction> m_actionAboutQt;
         };
+
     } // namespace gui
-
 } // namespace aide
-
 #endif // AIDE_MAINWINDOW_HPP

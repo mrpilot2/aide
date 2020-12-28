@@ -8,6 +8,7 @@
 #include <QMap>
 #include <QTranslator>
 
+#include <aide/loggerinterface.hpp>
 #include <gui/translatorinterface.hpp>
 
 namespace aide::gui
@@ -15,7 +16,7 @@ namespace aide::gui
     class ApplicationTranslator : public TranslatorInterface
     {
     public:
-        ApplicationTranslator();
+        explicit ApplicationTranslator(LoggerPtr loggerInterface);
 
         void addAdditionalTranslationFilePath(const QDir& path,
                                               const QString& fileName) override;
@@ -24,12 +25,14 @@ namespace aide::gui
             const override;
 
     private:
-        [[nodiscard]] static std::set<std::string> fetchLanguages(
-            const QStringList& languageFiles);
+        [[nodiscard]] std::set<std::string> fetchLanguages(
+            const QStringList& languageFiles) const;
 
         void installNewTranslator(const QDir& path, const QString& fileName);
 
         static QString extractLocaleFromFileName(const QString& languageFile);
+
+        LoggerPtr logger;
 
         QTranslator m_qtTranslator;
         std::vector<std::shared_ptr<QTranslator>> m_translator;

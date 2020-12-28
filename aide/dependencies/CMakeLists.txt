@@ -18,7 +18,8 @@ conan_add_remote(
 conan_cmake_run(
   REQUIRES
   ${CONAN_EXTRA_REQUIRES}
-  spdlog/1.5.0
+  spdlog/1.8.2
+  fmt/7.1.2
   OPTIONS
   ${CONAN_EXTRA_OPTIONS}
   BASIC_SETUP
@@ -29,6 +30,10 @@ conan_cmake_run(
 
 if(TARGET CONAN_PKG::spdlog)
   set_target_properties(CONAN_PKG::spdlog PROPERTIES IMPORTED_GLOBAL TRUE)
+endif()
+
+if(TARGET CONAN_PKG::fmt)
+  set_target_properties(CONAN_PKG::fmt PROPERTIES IMPORTED_GLOBAL TRUE)
 endif()
 
 find_package(

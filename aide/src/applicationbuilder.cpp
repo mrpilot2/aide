@@ -7,14 +7,17 @@
 #include <QStandardPaths>
 #include <QString>
 
+#include "logger/logger.hpp"
+
 using aide::ApplicationBuilder;
 using aide::Logger;
+using aide::LoggerPtr;
 using aide::gui::MainWindow;
 using aide::gui::MainWindowController;
 
 ApplicationBuilder::ApplicationBuilder()
-    : m_actionRegistry{std::make_shared<ActionRegistry>()}
-    , m_mainWindow(new MainWindow(m_actionRegistry, nullptr))
+    : m_actionRegistry{std::make_shared<ActionRegistry>(m_logger)}
+    , m_mainWindow(new MainWindow(m_actionRegistry, m_logger, nullptr))
     , m_applicationClose(m_mainWindow, *settingsProvider.versionableSettings())
     , m_mainWindowGeometryAndState(m_mainWindow,
                                    *settingsProvider.unversionableSettings())
@@ -26,12 +29,12 @@ ApplicationBuilder::ApplicationBuilder()
     m_mainWindowGeometryAndState.restoreGeometryAndState();
 }
 
-std::shared_ptr<aide::Logger> ApplicationBuilder::logger() const
+LoggerPtr ApplicationBuilder::logger() const
 {
     return m_logger;
 }
 
-std::shared_ptr<Logger> ApplicationBuilder::setupLogger()
+LoggerPtr ApplicationBuilder::setupLogger()
 {
     QString logLocation(
         QStandardPaths::writableLocation(QStandardPaths::CacheLocation));

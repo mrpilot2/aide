@@ -2,12 +2,15 @@
 
 #include <catch2/catch.hpp>
 
+#include <QApplication>
+
 #include "actionregistry.hpp"
-#include "application.hpp"
 #include "mainwindow.hpp"
+#include "nulllogger.hpp"
 
 using aide::ActionRegistry;
 using aide::gui::MainWindow;
+using aide::test::NullLogger;
 
 TEST_CASE("Any main window")
 {
@@ -15,13 +18,14 @@ TEST_CASE("Any main window")
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
     int numberOfArgs{1};
 
-    aide::Application::setApplicationName("aide_test");
-    aide::Application::setOrganizationName("aide_company");
+    QApplication::setApplicationName("aide_test");
+    QApplication::setOrganizationName("aide_company");
 
-    aide::Application app(numberOfArgs, appName.data());
+    QApplication app(numberOfArgs, appName.data());
 
-    auto registry = std::make_shared<ActionRegistry>();
-    MainWindow mainWindow(registry);
+    auto registry =
+        std::make_shared<ActionRegistry>(std::make_shared<NullLogger>());
+    MainWindow mainWindow(registry, std::make_shared<NullLogger>());
 
     SECTION("registers actions on construction")
     {

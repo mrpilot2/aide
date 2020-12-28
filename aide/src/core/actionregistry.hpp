@@ -5,14 +5,16 @@
 #include <QKeySequence>
 
 #include <aide/actionregistryinterface.hpp>
-
-#include "hierarchicalid.hpp"
+#include <aide/hierarchicalid.hpp>
+#include <aide/loggerinterface.hpp>
 
 namespace aide
 {
     class ActionRegistry : public ActionRegistryInterface
     {
     public:
+        explicit ActionRegistry(LoggerPtr loggerInterface);
+
         void registerAction(std::weak_ptr<QAction> action,
                             const HierarchicalId& uniqueId) override;
 
@@ -34,6 +36,8 @@ namespace aide
     private:
         static std::string printKeySequences(
             const std::vector<QKeySequence>& keySequences);
+
+        LoggerPtr logger;
 
         std::map<HierarchicalId, Action> m_actions;
     };

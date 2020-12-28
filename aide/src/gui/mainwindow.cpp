@@ -9,9 +9,9 @@
 #include <QObject>
 #include <QPushButton>
 
-#include <aide/logger.hpp>
+#include <aide/log_helper_macros.hpp>
 
-#include "../core/actionregistry.hpp"
+#include "actionregistry.hpp"
 #include "applicationtranslator.hpp"
 #include "hierarchicalid.hpp"
 #include "mainwindowcontroller.hpp"
@@ -48,9 +48,10 @@ const static ActionIds& ACTION_IDS()
 }
 
 MainWindow::MainWindow(const ActionRegistryInterfacePtr& actionRegistry,
-                       QWidget* parent)
+                       LoggerPtr loggerInterface, QWidget* parent)
     : MainWindowInterface(parent)
-    , m_translator{new ApplicationTranslator}
+    , logger{std::move(loggerInterface)}
+    , m_translator{new ApplicationTranslator(logger)}
     , m_ui(new Ui::MainWindow)
 {
     m_ui->setupUi(this);
@@ -113,14 +114,14 @@ QIcon MainWindow::createIconFromTheme(const std::string& iconName)
 
 void MainWindow::closeEvent(QCloseEvent* event)
 {
-    AIDE_LOG_TRACE("User requested to close application")
+    logger->trace("User requested to close application");
     m_controller->onUserWantsToQuitApplication(event, this->saveGeometry(),
                                                this->saveState());
 }
 std::tuple<aide::core::UserSelection, bool>
 MainWindow::letUserConfirmApplicationClose()
 {
-    AIDE_LOG_DEBUG("Asking user for confirmation to close application")
+    logger->debug("Asking user for confirmation to close application");
     auto messageBox = std::make_unique<QMessageBox>(this);
 
     auto checkBox =
@@ -136,8 +137,8 @@ MainWindow::letUserConfirmApplicationClose()
     if (layout != nullptr) { layout->addWidget(checkBox.get(), 2, 0); }
     auto reply = messageBox->exec();
 
-    AIDE_LOG_DEBUG("User requested to{} ask for exit confirmation again",
-                   checkBox->isChecked() ? " do not" : "")
+    logger->debug("User requested to{} ask for exit confirmation again",
+                  checkBox->isChecked() ? " do not" : "");
 
     return std::make_tuple(
         reply == QMessageBox::Yes ? UserSelection::Exit : UserSelection::Cancel,

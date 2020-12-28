@@ -6,7 +6,7 @@
 
 #include <QApplication>
 
-#include <aide/logger.hpp>
+#include <aide/loggerinterface.hpp>
 
 class QMainWindow;
 
@@ -36,7 +36,7 @@ namespace aide
         // NOLINTNEXTLINE
         explicit Application(int& argc, char* argv[]);
 
-        [[nodiscard]] std::shared_ptr<Logger> logger() const;
+        [[nodiscard]] aide::LoggerPtr logger() const;
 
         [[nodiscard]] std::shared_ptr<QMainWindow> mainWindow() const;
 

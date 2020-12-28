@@ -21,7 +21,7 @@ namespace
     }
 } // namespace
 
-TEST_CASE("Application constructor throws an exception")
+TEST_CASE("Application constructor throws an exception", "[Application]")
 {
     // NOLINTNEXTLINE
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
@@ -40,7 +40,8 @@ TEST_CASE("Application constructor throws an exception")
     }
 }
 
-TEST_CASE("Application constructor does not throw an exception")
+TEST_CASE("Application constructor does not throw an exception",
+          "[Application]")
 {
     // NOLINTNEXTLINE
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
@@ -57,7 +58,7 @@ TEST_CASE("Application constructor does not throw an exception")
     }
 }
 
-TEST_CASE("Logger logs into cache directory")
+TEST_CASE("Logger logs into cache directory", "[Application]")
 {
     aide::Application::setApplicationName("aide_test");
     aide::Application::setOrganizationName("aide_company");
@@ -81,7 +82,7 @@ TEST_CASE("Logger logs into cache directory")
             std::string::npos);
 }
 
-TEST_CASE("Application translator interface is never null")
+TEST_CASE("Application translator interface is never null", "[Application]")
 {
     aide::Application::setApplicationName("aide_test");
     aide::Application::setOrganizationName("aide_company");
@@ -94,7 +95,7 @@ TEST_CASE("Application translator interface is never null")
     REQUIRE(app.translator() != nullptr);
 }
 
-TEST_CASE("Application main window is never null")
+TEST_CASE("Application main window is never null", "[Application]")
 {
     aide::Application::setApplicationName("aide_test");
     aide::Application::setOrganizationName("aide_company");

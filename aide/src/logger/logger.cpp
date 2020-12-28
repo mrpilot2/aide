@@ -83,3 +83,33 @@ std::vector<spdlog::sink_ptr> Logger::createSinks(std::string logFileName)
 
     return sinks;
 }
+
+void Logger::doLogTrace(std::string_view message) const
+{
+    m_logger->trace(message);
+}
+
+void Logger::doLogDebug(std::string_view message) const
+{
+    m_logger->debug(message);
+}
+
+void aide::Logger::doLogInfo(std::string_view message) const
+{
+    m_logger->info(message);
+}
+
+void aide::Logger::doLogWarn(std::string_view message) const
+{
+    m_logger->warn(message);
+}
+
+void aide::Logger::doLogError(std::string_view message) const
+{
+    m_logger->error(message);
+}
+
+void aide::Logger::doLogCritical(std::string_view message) const
+{
+    m_logger->critical(message);
+}

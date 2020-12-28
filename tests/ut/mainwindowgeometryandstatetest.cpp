@@ -3,7 +3,8 @@
 
 #include <catch2/catch.hpp>
 
-#include "application.hpp"
+#include <QApplication>
+
 #include "commonsettingskeys.hpp"
 #include "mainwindowgeometryandstate.hpp"
 #include "mockmainwindowview.hpp"
@@ -20,10 +21,7 @@ TEST_CASE("Any main window geometry and state interactor")
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
     int numberOfArgs{1};
 
-    aide::Application::setApplicationName("aide_test");
-    aide::Application::setOrganizationName("aide_company");
-
-    aide::Application app(numberOfArgs, appName.data());
+    QApplication app(numberOfArgs, appName.data());
 
     auto mainWindowView = std::make_shared<MockMainWindowView>();
     auto settings       = MockSettings();
