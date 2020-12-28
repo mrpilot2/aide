@@ -9,9 +9,8 @@
 #include <QObject>
 #include <QPushButton>
 
-#include <aide/logger.hpp>
-
 #include "../core/actionregistry.hpp"
+#include "../logger/logger.hpp"
 #include "applicationtranslator.hpp"
 #include "hierarchicalid.hpp"
 #include "mainwindowcontroller.hpp"

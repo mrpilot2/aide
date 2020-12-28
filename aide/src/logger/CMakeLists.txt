@@ -6,6 +6,7 @@ target_sources(AideLogger PRIVATE logger.cpp)
 target_include_directories(
   AideLogger
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/>
+         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/>
   PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/>
 )
 

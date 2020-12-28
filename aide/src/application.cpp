@@ -8,7 +8,7 @@
 
 using aide::Application;
 using aide::ApplicationBuilder;
-using aide::Logger;
+using aide::LoggerPtr;
 using aide::gui::TranslatorInterface;
 
 // NOLINTNEXTLINE
@@ -35,7 +35,7 @@ Application::Application(int& argc, char* argv[])
     timer->start(delayedSetupTimeInMs);
 }
 
-std::shared_ptr<Logger> aide::Application::logger() const
+LoggerPtr aide::Application::logger() const
 {
     return m_appBuilder->logger();
 }

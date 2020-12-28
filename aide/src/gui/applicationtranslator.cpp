@@ -5,7 +5,7 @@
 #include <QtCore/QDirIterator>
 #include <QtGlobal>
 
-#include <aide/logger.hpp>
+#include "../logger/logger.hpp"
 
 using aide::gui::ApplicationTranslator;
 

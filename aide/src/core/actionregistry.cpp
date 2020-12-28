@@ -1,6 +1,6 @@
 #include "actionregistry.hpp"
 
-#include <aide/logger.hpp>
+#include "../logger/logger.hpp"
 
 using aide::Action;
 using aide::ActionRegistry;

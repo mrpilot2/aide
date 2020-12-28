@@ -55,14 +55,14 @@ namespace aide
         void flush() override;
 
     private:
-        void doLogTrace(std::string_view message) override;
+        void doLogTrace(std::string_view message) const override;
 
-        void doLogDebug(std::string_view message) override;
+        void doLogDebug(std::string_view message) const override;
 
-        void doLogInfo(std::string_view message) override;
-        void doLogWarn(std::string_view message) override;
-        void doLogError(std::string_view message) override;
-        void doLogCritical(std::string_view message) override;
+        void doLogInfo(std::string_view message) const override;
+        void doLogWarn(std::string_view message) const override;
+        void doLogError(std::string_view message) const override;
+        void doLogCritical(std::string_view message) const override;
 
         static void registerLogger(
             const std::shared_ptr<spdlog::logger>& logger);

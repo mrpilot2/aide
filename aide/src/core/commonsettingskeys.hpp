@@ -2,7 +2,8 @@
 #define AIDE_COMMON_SETTINGS_KEYS_HPP
 
 #include <aide/hierarchicalid.hpp>
-#include <aide/logger.hpp>
+
+#include "../logger/logger.hpp"
 
 #if defined(_MSC_VER)
 #define ALIGNMENT(size) __declspec(align(size))
