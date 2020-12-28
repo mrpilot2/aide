@@ -52,6 +52,9 @@ namespace aide
             std::tuple<aide::core::UserSelection, bool>
             letUserConfirmApplicationClose() override;
 
+        private slots:
+            void showSettingsDialog();
+
         private:
             void closeEvent(QCloseEvent* event) override;
 
@@ -67,6 +70,7 @@ namespace aide
 
             std::shared_ptr<TranslatorInterface> m_translator;
             std::unique_ptr<Ui::MainWindow> m_ui;
+            std::shared_ptr<QAction> m_actionSettings;
             std::shared_ptr<QAction> m_actionQuit;
             std::shared_ptr<QAction> m_actionAboutQt;
         };

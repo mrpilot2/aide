@@ -15,6 +15,7 @@
 #include "applicationtranslator.hpp"
 #include "hierarchicalid.hpp"
 #include "mainwindowcontroller.hpp"
+#include "settingsdialog.hpp"
 #include "ui_mainwindow.h"
 
 using aide::HierarchicalId;
@@ -26,6 +27,8 @@ using aide::gui::TranslatorInterface;
 
 struct ActionIds
 {
+    const HierarchicalId MAIN_MENU_FILE_SETTINGS{
+        HierarchicalId("Main Menu")("File")("Settings")};
     const HierarchicalId MAIN_MENU_FILE_QUIT{
         HierarchicalId("Main Menu")("File")("Quit")};
     const HierarchicalId MAIN_MENU_HELP_ABOUT_QT{
@@ -75,6 +78,17 @@ void MainWindow::restoreGeometryAndState(QByteArray geometry, QByteArray state)
 void MainWindow::registerActions(
     const ActionRegistryInterfacePtr& actionRegistry)
 {
+    m_actionSettings = std::make_shared<QAction>(tr("Settings"), this);
+    connect(m_actionSettings.get(), &QAction::triggered, this,
+            &MainWindow::showSettingsDialog);
+    m_ui->menuFile->addAction(m_actionSettings.get());
+
+    actionRegistry->registerAction(
+        m_actionSettings, ACTION_IDS().MAIN_MENU_FILE_SETTINGS,
+        tr("Edit application settings").toStdString(),
+        {QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_S)});
+    m_ui->menuFile->addSeparator();
+
     m_actionQuit = std::make_shared<QAction>(
         createIconFromTheme("application-exit"), tr("Quit"), this);
     connect(m_actionQuit.get(), &QAction::triggered, QApplication::instance(),
@@ -143,4 +157,11 @@ MainWindow::letUserConfirmApplicationClose()
     return std::make_tuple(
         reply == QMessageBox::Yes ? UserSelection::Exit : UserSelection::Cancel,
         checkBox->isChecked());
+}
+
+void MainWindow::showSettingsDialog()
+{
+    auto settingsDialog = std::make_unique<SettingsDialog>(this);
+
+    settingsDialog->exec();
 }
