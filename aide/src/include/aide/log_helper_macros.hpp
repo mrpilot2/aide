@@ -5,6 +5,8 @@
 #ifndef AIDE_LOG_HELPER_MACROS_HPP
 #define AIDE_LOG_HELPER_MACROS_HPP
 
+#include <spdlog/spdlog.h>
+
 const char* const AIDE_DEFAULT_MACRO_LOGGER{"aide_macro"};
 
 // NOLINTNEXTLINE

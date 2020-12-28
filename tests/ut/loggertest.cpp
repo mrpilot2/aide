@@ -22,12 +22,12 @@ namespace
     }
 } // namespace
 
-TEST_CASE("Test construction of logger")
+TEST_CASE("Test construction of logger", "[Logger]")
 {
     Logger logger;
 }
 
-TEST_CASE("Test different log levels")
+TEST_CASE("Test different log levels", "[Logger]")
 {
     const char* const logFileName = "aide_test.log";
 
@@ -90,7 +90,7 @@ TEST_CASE("Test different log levels")
     }
 }
 
-TEST_CASE("Test log macros")
+TEST_CASE("Test log macros", "[Logger]")
 {
     spdlog::drop_all();
     const char* const logFileName = "aide_test.log";

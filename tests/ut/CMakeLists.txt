@@ -54,6 +54,7 @@ if(NOT ${TEST_AGAINST_INSTALLED})
             mockapplicationcloseview.cpp
             mocksettings.cpp
             mockmainwindowview.cpp
+            nulllogger.cpp
             qtsettingstest.cpp
   )
 endif()

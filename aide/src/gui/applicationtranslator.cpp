@@ -5,20 +5,18 @@
 #include <QtCore/QDirIterator>
 #include <QtGlobal>
 
-#include "../logger/logger.hpp"
-
 using aide::gui::ApplicationTranslator;
 
-const static QDir& libraryTranslationPath()
+const static QDir& libraryTranslationPath(const aide::LoggerPtr& logger)
 {
     try {
         static const QDir libTranslationPath{":/aide_library_translations"};
         return libTranslationPath;
     }
     catch (...) {
-        AIDE_LOG_ERROR(
+        logger->critical(
             "ApplicationTranslator: Could not create static storage duration "
-            "library translation path")
+            "library translation path");
         std::terminate();
     }
 }
@@ -28,20 +26,21 @@ inline void initResources()
     Q_INIT_RESOURCE(translations);
 }
 
-ApplicationTranslator::ApplicationTranslator()
+ApplicationTranslator::ApplicationTranslator(LoggerPtr loggerInterface)
+    : logger{std::move(loggerInterface)}
 {
     initResources();
 
-    AIDE_LOG_INFO(
+    logger->info(
         "Current application language is {}",
-        QLocale::languageToString(QLocale::system().language()).toStdString())
+        QLocale::languageToString(QLocale::system().language()).toStdString());
 
     m_qtTranslator.load("qt_" + QLocale::system().name(),
                         QLibraryInfo::location(QLibraryInfo::TranslationsPath));
 
     QApplication::installTranslator(&m_qtTranslator);
 
-    installNewTranslator(libraryTranslationPath(), QLatin1String("aide"));
+    installNewTranslator(libraryTranslationPath(logger), QLatin1String("aide"));
 }
 
 void ApplicationTranslator::addAdditionalTranslationFilePath(
@@ -82,7 +81,7 @@ std::set<std::string> ApplicationTranslator::getAvailableTranslations() const
         std::set<std::string> languages{};
 
         auto languageFiles =
-            libraryTranslationPath().entryList(QStringList("*.qm"));
+            libraryTranslationPath(logger).entryList(QStringList("*.qm"));
 
         const auto languagesInCurrentPath{fetchLanguages(languageFiles)};
         languages.insert(languagesInCurrentPath.begin(),
@@ -93,7 +92,7 @@ std::set<std::string> ApplicationTranslator::getAvailableTranslations() const
 }
 
 std::set<std::string> ApplicationTranslator::fetchLanguages(
-    const QStringList& languageFiles)
+    const QStringList& languageFiles) const
 {
     std::set<std::string> languages;
 
@@ -105,8 +104,8 @@ std::set<std::string> ApplicationTranslator::fetchLanguages(
             QLocale::countryToString(locale.country()) + QLatin1Char(')'));
 
         languages.emplace(languageString.toStdString());
-        AIDE_LOG_DEBUG("Found language {} in file {}",
-                       languageString.toStdString(), languageFile.toStdString())
+        logger->debug("Found language {} in file {}",
+                      languageString.toStdString(), languageFile.toStdString());
     }
     return languages;
 }

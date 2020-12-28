@@ -1,10 +1,12 @@
 #include "actionregistry.hpp"
 
-#include "../logger/logger.hpp"
-
 using aide::Action;
 using aide::ActionRegistry;
 using aide::HierarchicalId;
+
+ActionRegistry::ActionRegistry(aide::LoggerPtr loggerInterface)
+    : logger{std::move(loggerInterface)}
+{}
 
 void ActionRegistry::registerAction(std::weak_ptr<QAction> action,
                                     const HierarchicalId& uniqueId)
@@ -32,18 +34,18 @@ void ActionRegistry::registerAction(
     const std::vector<QKeySequence>& defaultKeySequences)
 {
     if (m_actions.find(uniqueId) != m_actions.end()) {
-        AIDE_LOG_WARN(
+        logger->warn(
             "Action with id \"{}\" is already registered. This is either a "
             "programming error or results from conflicting plugins. This "
             "action cannot be found with \"Find Action\"  and will not be "
             "displayed in the keymap.",
-            uniqueId.name())
+            uniqueId.name());
         return;
     }
 
-    AIDE_LOG_TRACE(
+    logger->trace(
         R"(Register new action "{}" with description "{}" and default sequence "{}")",
-        uniqueId.name(), description, printKeySequences(defaultKeySequences))
+        uniqueId.name(), description, printKeySequences(defaultKeySequences));
 
     QList<QKeySequence> qtDefaultKeySequences;
     for (const auto& seq : defaultKeySequences) {
@@ -63,7 +65,6 @@ std::map<HierarchicalId, Action> ActionRegistry::actions() const
 {
     return m_actions;
 }
-
 std::string ActionRegistry::printKeySequences(
     const std::vector<QKeySequence>& keySequences)
 {

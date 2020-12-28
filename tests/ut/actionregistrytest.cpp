@@ -9,15 +9,17 @@
 
 #include "actionregistry.hpp"
 #include "hierarchicalid.hpp"
+#include "nulllogger.hpp"
 
 using aide::ActionRegistry;
 using aide::HierarchicalId;
+using aide::test::NullLogger;
 
 TEST_CASE("A new action registry ")
 {
     SECTION(" has no actions registered")
     {
-        ActionRegistry registry;
+        ActionRegistry registry{std::make_shared<NullLogger>()};
 
         REQUIRE(registry.actions().empty());
     }
@@ -25,11 +27,14 @@ TEST_CASE("A new action registry ")
 
 TEST_CASE("Any action registry ")
 {
-    ActionRegistry registry;
+    ActionRegistry registry{std::make_shared<NullLogger>()};
 
     int numberOfArgs{1};
     // NOLINTNEXTLINE
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+
+    QApplication::setApplicationName("aide_test");
+    QApplication::setOrganizationName("aide_company");
 
     QApplication app{numberOfArgs, appName.data()};
 

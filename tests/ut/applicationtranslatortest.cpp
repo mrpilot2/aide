@@ -1,12 +1,15 @@
+#include <applicationtranslator.hpp>
 #include <array>
 
 #include <catch2/catch.hpp>
 
 #include <QApplication>
 
-#include "../../aide/src/gui/applicationtranslator.hpp"
+#include "applicationtranslator.hpp"
+#include "nulllogger.hpp"
 
 using aide::gui::ApplicationTranslator;
+using aide::test::NullLogger;
 
 TEST_CASE("Default ApplicationTranslator")
 {
@@ -17,14 +20,14 @@ TEST_CASE("Default ApplicationTranslator")
 
     SECTION(" finds at least two languages by default")
     {
-        ApplicationTranslator translator;
+        ApplicationTranslator translator(std::make_shared<NullLogger>());
 
         REQUIRE(translator.getAvailableTranslations().size() >= 2);
     }
 
     SECTION(" finds at least german and english by default")
     {
-        ApplicationTranslator translator;
+        ApplicationTranslator translator(std::make_shared<NullLogger>());
 
         const std::set<std::string> availableTranslations{
             translator.getAvailableTranslations()};
@@ -42,7 +45,7 @@ TEST_CASE("Default ApplicationTranslator")
     SECTION(" allows to translate a standard library string")
     {
         QLocale::setDefault(QLocale(QLocale::German));
-        ApplicationTranslator translator;
+        ApplicationTranslator translator(std::make_shared<NullLogger>());
 
         REQUIRE(QApplication::translate("aide::gui::MainWindow", "Quit") ==
                 QString("Beenden"));
@@ -58,7 +61,7 @@ TEST_CASE("ApplicationTranslator with additional path")
 
     SECTION(" finds only application languages")
     {
-        ApplicationTranslator translator;
+        ApplicationTranslator translator(std::make_shared<NullLogger>());
 
         translator.addAdditionalTranslationFilePath(QDir(":/ut_translations"),
                                                     QString("ut"));
@@ -73,7 +76,7 @@ TEST_CASE("ApplicationTranslator with additional path")
     SECTION(" is able to translate to application language")
     {
         QLocale::setDefault(QLocale(QLocale::Swedish));
-        ApplicationTranslator translator;
+        ApplicationTranslator translator(std::make_shared<NullLogger>());
 
         translator.addAdditionalTranslationFilePath(QDir(":/ut_translations"),
                                                     QString("ut"));

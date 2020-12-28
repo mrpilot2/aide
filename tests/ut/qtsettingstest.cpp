@@ -3,13 +3,12 @@
 
 #include <catch2/catch.hpp>
 
+#include <QApplication>
 #include <QSettings>
 
-#include "application.hpp"
 #include "hierarchicalid.hpp"
 #include "qtsettings.hpp"
 
-using aide::Application;
 using aide::HierarchicalId;
 using aide::QtSettings;
 
@@ -19,10 +18,10 @@ TEST_CASE("Versionable Qt Settings")
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
     int numberOfArgs{1};
 
-    aide::Application::setApplicationName("aide_test");
-    aide::Application::setOrganizationName("aide_company");
+    QApplication::setApplicationName("aide_test");
+    QApplication::setOrganizationName("aide_company");
 
-    aide::Application app(numberOfArgs, appName.data());
+    QApplication app(numberOfArgs, appName.data());
 
     auto settings = QtSettings(true);
 
@@ -71,10 +70,10 @@ TEST_CASE("Un-Versionable Qt Settings")
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
     int numberOfArgs{1};
 
-    aide::Application::setApplicationName("aide_test");
-    aide::Application::setOrganizationName("aide_company");
+    QApplication::setApplicationName("aide_test");
+    QApplication::setOrganizationName("aide_company");
 
-    aide::Application app(numberOfArgs, appName.data());
+    QApplication app(numberOfArgs, appName.data());
 
     auto settings = QtSettings(false);
 
@@ -87,8 +86,8 @@ TEST_CASE("Un-Versionable Qt Settings")
 
         REQUIRE(settings.value(group, "Position") == geom);
 
-        QSettings s(aide::Application::organizationName(),
-                    aide::Application::applicationName() + "_unversionable");
+        QSettings s(QApplication::organizationName(),
+                    QApplication::applicationName() + "_unversionable");
         auto fileName = s.fileName().toStdString();
 
         settings.load();

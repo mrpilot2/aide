@@ -16,8 +16,8 @@ using aide::gui::MainWindow;
 using aide::gui::MainWindowController;
 
 ApplicationBuilder::ApplicationBuilder()
-    : m_actionRegistry{std::make_shared<ActionRegistry>()}
-    , m_mainWindow(new MainWindow(m_actionRegistry, nullptr))
+    : m_actionRegistry{std::make_shared<ActionRegistry>(m_logger)}
+    , m_mainWindow(new MainWindow(m_actionRegistry, m_logger, nullptr))
     , m_applicationClose(m_mainWindow, *settingsProvider.versionableSettings())
     , m_mainWindowGeometryAndState(m_mainWindow,
                                    *settingsProvider.unversionableSettings())

@@ -7,7 +7,7 @@
 
 using aide::gui::ApplicationTranslator;
 
-ApplicationTranslator::ApplicationTranslator() = default;
+ApplicationTranslator::ApplicationTranslator(LoggerPtr loggerInterface) {}
 
 std::set<std::string> ApplicationTranslator::getAvailableTranslations() const
 {
