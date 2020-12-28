@@ -1,22 +1,10 @@
 var searchData=
 [
-  ['main_2edox',['main.dox',['../main_8dox.html',1,'']]],
-  ['main_5fmenu_5ffile_5fquit',['MAIN_MENU_FILE_QUIT',['../structActionIds.html#a100693fbd408ae3f8367378398fce66f',1,'ActionIds']]],
-  ['main_5fmenu_5fhelp_5fabout_5fqt',['MAIN_MENU_HELP_ABOUT_QT',['../structActionIds.html#a3fad439c4ecd710d4b626513c3d566d3',1,'ActionIds']]],
-  ['mainwindow',['MainWindow',['../classaide_1_1gui_1_1MainWindow.html',1,'aide::gui::MainWindow'],['../classaide_1_1gui_1_1MainWindow.html#a802846dc7b1334fbd56c85f47ec9b5c5',1,'aide::gui::MainWindow::MainWindow(const ActionRegistryInterfacePtr &amp;actionRegistry, QWidget *parent=nullptr)'],['../classaide_1_1gui_1_1MainWindow.html#af1c0aa2960657685a15733e3bb61cad4',1,'aide::gui::MainWindow::MainWindow(const MainWindow &amp;)=delete'],['../classaide_1_1gui_1_1MainWindow.html#ab72968ce72987b8ac3760b8e6f5f2928',1,'aide::gui::MainWindow::MainWindow(const MainWindow &amp;&amp;)=delete'],['../classaide_1_1ApplicationBuilder.html#a4105a1f5c58481f1362e17e75136f69c',1,'aide::ApplicationBuilder::mainWindow()'],['../classaide_1_1Application.html#a1dd1657d55e133a45ae39f9546991671',1,'aide::Application::mainWindow()']]],
-  ['mainwindow_2ecpp',['mainwindow.cpp',['../mainwindow_8cpp.html',1,'']]],
-  ['mainwindow_2ehpp',['mainwindow.hpp',['../mainwindow_8hpp.html',1,'']]],
-  ['mainwindowcontroller',['MainWindowController',['../classaide_1_1gui_1_1MainWindowController.html',1,'aide::gui::MainWindowController'],['../classaide_1_1gui_1_1MainWindowController.html#a51def5530f43dda4624a37675d063330',1,'aide::gui::MainWindowController::MainWindowController()']]],
-  ['mainwindowcontroller_2ecpp',['mainwindowcontroller.cpp',['../mainwindowcontroller_8cpp.html',1,'']]],
-  ['mainwindowcontroller_2ehpp',['mainwindowcontroller.hpp',['../mainwindowcontroller_8hpp.html',1,'']]],
-  ['mainwindowcontrollerptr',['MainWindowControllerPtr',['../namespaceaide_1_1gui.html#a1936f2b862673fedef3e57c60db70b76',1,'aide::gui']]],
-  ['mainwindowgeometryandstate',['MainWindowGeometryAndState',['../classaide_1_1core_1_1MainWindowGeometryAndState.html',1,'aide::core::MainWindowGeometryAndState'],['../classaide_1_1core_1_1MainWindowGeometryAndState.html#aa484f1fba4be925f889171ba974b6159',1,'aide::core::MainWindowGeometryAndState::MainWindowGeometryAndState()']]],
-  ['mainwindowgeometryandstate_2ecpp',['mainwindowgeometryandstate.cpp',['../mainwindowgeometryandstate_8cpp.html',1,'']]],
-  ['mainwindowgeometryandstate_2ehpp',['mainwindowgeometryandstate.hpp',['../mainwindowgeometryandstate_8hpp.html',1,'']]],
-  ['mainwindowgeometryandstatecontroller',['MainWindowGeometryAndStateController',['../classaide_1_1core_1_1MainWindowGeometryAndStateController.html',1,'aide::core']]],
-  ['mainwindowgeometryandstatecontroller_2ehpp',['mainwindowgeometryandstatecontroller.hpp',['../mainwindowgeometryandstatecontroller_8hpp.html',1,'']]],
-  ['mainwindowinterface',['MainWindowInterface',['../classaide_1_1core_1_1MainWindowInterface.html',1,'aide::core::MainWindowInterface'],['../classaide_1_1core_1_1MainWindowInterface.html#a36d47058b8964e102baf72596fd512f8',1,'aide::core::MainWindowInterface::MainWindowInterface()']]],
-  ['mainwindowinterface_2ecpp',['mainwindowinterface.cpp',['../mainwindowinterface_8cpp.html',1,'']]],
-  ['mainwindowinterface_2ehpp',['mainwindowinterface.hpp',['../mainwindowinterface_8hpp.html',1,'']]],
-  ['mainwindowinterfaceweakptr',['MainWindowInterfaceWeakPtr',['../namespaceaide_1_1core.html#aa8cd66c7b24f003c18a9f7ad7eee5e65',1,'aide::core']]]
+  ['letuserconfirmapplicationclose',['letUserConfirmApplicationClose',['../classaide_1_1core_1_1ApplicationCloseView.html#a2d96afd785d818d2b0cc0822219b7cb9',1,'aide::core::ApplicationCloseView::letUserConfirmApplicationClose()'],['../classaide_1_1gui_1_1MainWindow.html#a13aaaaf5dc829770ac7bd7c5abcd48cc',1,'aide::gui::MainWindow::letUserConfirmApplicationClose()']]],
+  ['load',['load',['../classaide_1_1QtSettings.html#a6ad3f4ff866a033c6f2a117d8175a698',1,'aide::QtSettings::load()'],['../classaide_1_1SettingsInterface.html#aa2216d31d780cd44858c586553e7d1b0',1,'aide::SettingsInterface::load()']]],
+  ['log_5fhelper_5fmacros_2ehpp',['log_helper_macros.hpp',['../log__helper__macros_8hpp.html',1,'']]],
+  ['logger',['Logger',['../classaide_1_1Logger.html',1,'aide::Logger'],['../classaide_1_1ApplicationBuilder.html#aec403ea0466f56c93b98e89196f4dcef',1,'aide::ApplicationBuilder::logger()'],['../classaide_1_1Application.html#abcbdeedf09b0c03504a8a695746eaa0e',1,'aide::Application::logger()'],['../classaide_1_1Logger.html#abc41bfb031d896170c7675fa96a6b30c',1,'aide::Logger::Logger()'],['../classaide_1_1Logger.html#aefdeee624e8866e4615b72ee7a68ef52',1,'aide::Logger::Logger(const FileName &amp;fileName)'],['../classaide_1_1Logger.html#aa459cb911e84ed11ad3ab3c77bafcc8c',1,'aide::Logger::Logger(const LoggerName &amp;loggerName)'],['../classaide_1_1Logger.html#a735ae6967b5af66562456e84e55630f7',1,'aide::Logger::Logger(const FileName &amp;logFileName, const LoggerName &amp;loggerName)']]],
+  ['logger_2ecpp',['logger.cpp',['../logger_8cpp.html',1,'']]],
+  ['logger_2ehpp',['logger.hpp',['../logger_8hpp.html',1,'']]],
+  ['loggername',['LoggerName',['../structaide_1_1LoggerName.html',1,'aide::LoggerName'],['../structaide_1_1LoggerName.html#aefd5879d9f524eac2f1297a453815e9d',1,'aide::LoggerName::LoggerName()']]]
 ];

@@ -6,5 +6,5 @@ var searchData=
   ['setmainwindowcontroller',['setMainWindowController',['../classaide_1_1gui_1_1MainWindow.html#a7ee723ac70061ba211a5a2a4e1620968',1,'aide::gui::MainWindow']]],
   ['setsearchhint',['setSearchHint',['../classaide_1_1gui_1_1SearchLineEdit.html#a86d47f3873c745587a40c470794bfb42',1,'aide::gui::SearchLineEdit']]],
   ['setsearchicon',['setSearchIcon',['../classaide_1_1gui_1_1SearchLineEdit.html#a5431bdfdfca6309f0900f43aefbb04ce',1,'aide::gui::SearchLineEdit']]],
-  ['setvalue',['setValue',['../classaide_1_1QtSettings.html#a5fdb1c2608273e5cc2a89d7770d079b5',1,'aide::QtSettings::setValue()'],['../classaide_1_1SettingsInterface.html#a67bbae482a4ac8e03a3a3dd8a3a5869f',1,'aide::SettingsInterface::setValue()']]]
+  ['setvalue',['setValue',['../classaide_1_1QtSettings.html#a4ffbe9ec12efcfe28ebc0009b7dc756c',1,'aide::QtSettings::setValue()'],['../classaide_1_1SettingsInterface.html#a9f625e3fabeaf8b42444e8f03cc82c6b',1,'aide::SettingsInterface::setValue()']]]
 ];

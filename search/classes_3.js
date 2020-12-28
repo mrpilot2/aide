@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['logger',['Logger',['../classaide_1_1Logger.html',1,'aide']]],
-  ['loggername',['LoggerName',['../structaide_1_1LoggerName.html',1,'aide']]]
+  ['keys',['Keys',['../structaide_1_1core_1_1settings_1_1Keys.html',1,'aide::core::settings']]]
 ];

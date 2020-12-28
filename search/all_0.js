@@ -28,6 +28,7 @@ var searchData=
   ['aidesettingsprovider',['AideSettingsProvider',['../classaide_1_1AideSettingsProvider.html',1,'aide::AideSettingsProvider'],['../classaide_1_1AideSettingsProvider.html#a729ef094bf96430256cba6a1aa65c077',1,'aide::AideSettingsProvider::AideSettingsProvider()']]],
   ['aidesettingsprovider_2ecpp',['aidesettingsprovider.cpp',['../aidesettingsprovider_8cpp.html',1,'']]],
   ['aidesettingsprovider_2ehpp',['aidesettingsprovider.hpp',['../aidesettingsprovider_8hpp.html',1,'']]],
+  ['alignment',['ALIGNMENT',['../structaide_1_1core_1_1settings_1_1Keys.html#a78f1b2d1c63154d6f928bdcc0411cedb',1,'aide::core::settings::Keys::ALIGNMENT(32)'],['../structaide_1_1core_1_1settings_1_1Keys.html#a17df5f2242a25984bf1a01a440341ba0',1,'aide::core::settings::Keys::ALIGNMENT(64)'],['../namespaceaide_1_1core.html#a08d9e3059cf81d707f3a46c18732680b',1,'aide::core::ALIGNMENT()'],['../namespaceaide_1_1core_1_1settings.html#a5add639057fef6753fdc81056d7e7a55',1,'aide::core::settings::ALIGNMENT()'],['../commonsettingskeys_8hpp.html#a045cef8a03a712e089b49f5f6dd9dc9b',1,'ALIGNMENT(32):&#160;commonsettingskeys.hpp'],['../commonsettingskeys_8hpp.html#a11b28388e25ac0e0dcbe6ea80ebc2cc6',1,'ALIGNMENT(64):&#160;commonsettingskeys.hpp']]],
   ['application',['Application',['../classaide_1_1Application.html',1,'aide::Application'],['../classaide_1_1Application.html#a45b8f2a74ef149181b7ffe0909e55afe',1,'aide::Application::Application()']]],
   ['application_2ecpp',['application.cpp',['../application_8cpp.html',1,'']]],
   ['application_2ehpp',['application.hpp',['../application_8hpp.html',1,'']]],
@@ -46,7 +47,9 @@ var searchData=
   ['applicationtranslator',['ApplicationTranslator',['../classaide_1_1gui_1_1ApplicationTranslator.html',1,'aide::gui::ApplicationTranslator'],['../classaide_1_1gui_1_1ApplicationTranslator.html#a9ce16820d12288c7d24423a8fc34cd63',1,'aide::gui::ApplicationTranslator::ApplicationTranslator()']]],
   ['applicationtranslator_2ecpp',['applicationtranslator.cpp',['../applicationtranslator_8cpp.html',1,'']]],
   ['applicationtranslator_2ehpp',['applicationtranslator.hpp',['../applicationtranslator_8hpp.html',1,'']]],
+  ['ask_5fexit_5fconfirmation',['ASK_EXIT_CONFIRMATION',['../structaide_1_1core_1_1settings_1_1Keys_1_1System.html#a0a4e5c71a3b1a3a3bea45a5c2e668a4d',1,'aide::core::settings::Keys::System::ASK_EXIT_CONFIRMATION()'],['../structSystem.html#a606089269ead6518a68e981b1fe1f745',1,'System::ASK_EXIT_CONFIRMATION()'],['../commonsettingskeys_8hpp.html#a46bd781c630ef22e81bee0cb95aea4b4',1,'ASK_EXIT_CONFIRMATION():&#160;commonsettingskeys.hpp']]],
   ['core',['core',['../namespaceaide_1_1core.html',1,'aide']]],
   ['gui',['gui',['../namespaceaide_1_1gui.html',1,'aide']]],
-  ['aide',['aIDE',['../index.html',1,'']]]
+  ['aide',['aIDE',['../index.html',1,'']]],
+  ['settings',['settings',['../namespaceaide_1_1core_1_1settings.html',1,'aide::core']]]
 ];
