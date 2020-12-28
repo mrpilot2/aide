@@ -41,12 +41,12 @@ TEST_CASE("Any search line edit ")
 
         REQUIRE(child != nullptr);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-        REQUIRE(0 == child->pixmap(Qt::ReturnByValue).size().width());
-        REQUIRE(0 == child->pixmap(Qt::ReturnByValue).size().height());
+        auto pixmapSize{child->pixmap(Qt::ReturnByValue).size()};
 #else
-        REQUIRE(0 == child->pixmap()->size().width());
-        REQUIRE(0 == child->pixmap()->size().height());
+        auto pixmapSize{child->pixmap()->size()};
 #endif
+        REQUIRE(0 == pixmapSize.width());
+        REQUIRE(0 == pixmapSize.height());
     }
 
     SECTION(" displays a custom search icon")
@@ -57,12 +57,12 @@ TEST_CASE("Any search line edit ")
 
         REQUIRE(child != nullptr);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-        REQUIRE(16 == child->pixmap(Qt::ReturnByValue).size().width());
-        REQUIRE(16 == child->pixmap(Qt::ReturnByValue).size().height());
+        auto pixmapSize{child->pixmap(Qt::ReturnByValue).size()};
 #else
-        REQUIRE(16 == child->pixmap()->size().width());
-        REQUIRE(16 == child->pixmap()->size().height());
+        auto pixmapSize{child->pixmap()->size()};
 #endif
+        REQUIRE(16 == pixmapSize.width());
+        REQUIRE(16 == pixmapSize.height());
     }
 
     SECTION(" emit the textChanged signal if text in the search box is entered")

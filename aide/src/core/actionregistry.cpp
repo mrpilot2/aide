@@ -18,7 +18,7 @@ void ActionRegistry::registerAction(std::weak_ptr<QAction> action,
                                     const HierarchicalId& uniqueId,
                                     std::string description)
 {
-    registerAction(action, uniqueId, description, {});
+    registerAction(action, uniqueId, std::move(description), {});
 }
 
 void ActionRegistry::registerAction(
