@@ -18,8 +18,8 @@ conan_add_remote(
 conan_cmake_run(
   REQUIRES
   ${CONAN_EXTRA_REQUIRES}
-  spdlog/1.5.0
-  fmt/6.2.0
+  spdlog/1.8.2
+  fmt/7.1.2
   OPTIONS
   ${CONAN_EXTRA_OPTIONS}
   BASIC_SETUP
