@@ -1,6 +1,5 @@
 <map id="/home/runner/work/aide/aide/aide/src/gui/applicationtranslator.cpp" name="/home/runner/work/aide/aide/aide/src/gui/applicationtranslator.cpp">
-<area shape="rect" id="node2" href="$applicationtranslator_8hpp.html" title="applicationtranslator.hpp" alt="" coords="44,95,207,121"/>
-<area shape="rect" id="node14" href="$logger_8hpp.html" title="aide/logger.hpp" alt="" coords="726,95,837,121"/>
-<area shape="rect" id="node8" href="$translatorinterface_8hpp.html" title="gui/translatorinterface.hpp" alt="" coords="294,169,466,196"/>
-<area shape="rect" id="node17" href="$log__helper__macros_8hpp.html" title="log_helper_macros.hpp" alt="" coords="850,169,1006,196"/>
+<area shape="rect" id="node2" href="$applicationtranslator_8hpp.html" title="applicationtranslator.hpp" alt="" coords="276,95,439,121"/>
+<area shape="rect" id="node8" href="$loggerinterface_8hpp.html" title="aide/loggerinterface.hpp" alt="" coords="71,169,231,196"/>
+<area shape="rect" id="node10" href="$translatorinterface_8hpp.html" title="gui/translatorinterface.hpp" alt="" coords="577,169,749,196"/>
 </map>

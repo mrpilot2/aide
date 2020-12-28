@@ -3,6 +3,7 @@ var searchData=
   ['_7eactionregistryinterface',['~ActionRegistryInterface',['../classaide_1_1ActionRegistryInterface.html#ad7be1f80ebd8808f5babe3c81c03db01',1,'aide::ActionRegistryInterface']]],
   ['_7eapplicationclosecontroller',['~ApplicationCloseController',['../classaide_1_1core_1_1ApplicationCloseController.html#a50d2046941b3f64f91611c8d9871363d',1,'aide::core::ApplicationCloseController']]],
   ['_7eapplicationcloseview',['~ApplicationCloseView',['../classaide_1_1core_1_1ApplicationCloseView.html#a36af13abfd17124c09f9243246237dfd',1,'aide::core::ApplicationCloseView']]],
+  ['_7eloggerinterface',['~LoggerInterface',['../classaide_1_1LoggerInterface.html#ac77b8160ee1efde646ccb955ff96cc6e',1,'aide::LoggerInterface']]],
   ['_7emainwindow',['~MainWindow',['../classaide_1_1gui_1_1MainWindow.html#a1f7d2c56410fc1bfa135bb907d43313f',1,'aide::gui::MainWindow']]],
   ['_7emainwindowgeometryandstatecontroller',['~MainWindowGeometryAndStateController',['../classaide_1_1core_1_1MainWindowGeometryAndStateController.html#abebf51f3986ad3c1f60d0a156a92c896',1,'aide::core::MainWindowGeometryAndStateController']]],
   ['_7emainwindowinterface',['~MainWindowInterface',['../classaide_1_1core_1_1MainWindowInterface.html#a6f4e49532a1b8d949dc5645f64eca30e',1,'aide::core::MainWindowInterface']]],

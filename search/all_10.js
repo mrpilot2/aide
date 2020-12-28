@@ -15,5 +15,5 @@ var searchData=
   ['settingsproviderinterface_2ecpp',['settingsproviderinterface.cpp',['../settingsproviderinterface_8cpp.html',1,'']]],
   ['settingsproviderinterface_2ehpp',['settingsproviderinterface.hpp',['../settingsproviderinterface_8hpp.html',1,'']]],
   ['setvalue',['setValue',['../classaide_1_1QtSettings.html#a4ffbe9ec12efcfe28ebc0009b7dc756c',1,'aide::QtSettings::setValue()'],['../classaide_1_1SettingsInterface.html#a9f625e3fabeaf8b42444e8f03cc82c6b',1,'aide::SettingsInterface::setValue()']]],
-  ['system',['System',['../structaide_1_1core_1_1settings_1_1Keys_1_1System.html',1,'aide::core::settings::Keys::System'],['../structSystem.html',1,'System'],['../structaide_1_1core_1_1settings_1_1Keys.html#a153df5a0f97b77b45be5b9d46b782315',1,'aide::core::settings::Keys::SYSTEM()'],['../commonsettingskeys_8hpp.html#a26137aacbef29f0fde774ff1d01db90c',1,'SYSTEM():&#160;commonsettingskeys.hpp']]]
+  ['system',['System',['../structSystem.html',1,'System'],['../structaide_1_1core_1_1settings_1_1Keys_1_1System.html',1,'aide::core::settings::Keys::System'],['../structaide_1_1core_1_1settings_1_1Keys.html#a153df5a0f97b77b45be5b9d46b782315',1,'aide::core::settings::Keys::SYSTEM()'],['../commonsettingskeys_8hpp.html#a26137aacbef29f0fde774ff1d01db90c',1,'SYSTEM():&#160;commonsettingskeys.hpp']]]
 ];

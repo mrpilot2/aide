@@ -2,7 +2,7 @@ var searchData=
 [
   ['action',['Action',['../structaide_1_1Action.html',1,'aide::Action'],['../structaide_1_1Action.html#a0aa006222a41a280788a17d28f4bf3ea',1,'aide::Action::action()']]],
   ['actionids',['ActionIds',['../structActionIds.html',1,'']]],
-  ['actionregistry',['ActionRegistry',['../classaide_1_1ActionRegistry.html',1,'aide']]],
+  ['actionregistry',['ActionRegistry',['../classaide_1_1ActionRegistry.html',1,'aide::ActionRegistry'],['../classaide_1_1ActionRegistry.html#ae6d6e59cf78b6c58f1639bc7ea2831f9',1,'aide::ActionRegistry::ActionRegistry()']]],
   ['actionregistry_2ecpp',['actionregistry.cpp',['../actionregistry_8cpp.html',1,'']]],
   ['actionregistry_2ehpp',['actionregistry.hpp',['../actionregistry_8hpp.html',1,'']]],
   ['actionregistryinterface',['ActionRegistryInterface',['../classaide_1_1ActionRegistryInterface.html',1,'aide']]],
@@ -44,7 +44,7 @@ var searchData=
   ['applicationcloseview_2ehpp',['applicationcloseview.hpp',['../applicationcloseview_8hpp.html',1,'']]],
   ['applicationcloseviewptr',['ApplicationCloseViewPtr',['../namespaceaide_1_1core.html#ac050660b4c7d2d539a6a2d8c180ec972',1,'aide::core']]],
   ['applicationcloseviewweakptr',['ApplicationCloseViewWeakPtr',['../namespaceaide_1_1core.html#a849dc653ee4b4bd32b1fddcb35258869',1,'aide::core']]],
-  ['applicationtranslator',['ApplicationTranslator',['../classaide_1_1gui_1_1ApplicationTranslator.html',1,'aide::gui::ApplicationTranslator'],['../classaide_1_1gui_1_1ApplicationTranslator.html#a9ce16820d12288c7d24423a8fc34cd63',1,'aide::gui::ApplicationTranslator::ApplicationTranslator()']]],
+  ['applicationtranslator',['ApplicationTranslator',['../classaide_1_1gui_1_1ApplicationTranslator.html',1,'aide::gui::ApplicationTranslator'],['../classaide_1_1gui_1_1ApplicationTranslator.html#acbdaae0f3a7c18456c67489d40bb34dd',1,'aide::gui::ApplicationTranslator::ApplicationTranslator()']]],
   ['applicationtranslator_2ecpp',['applicationtranslator.cpp',['../applicationtranslator_8cpp.html',1,'']]],
   ['applicationtranslator_2ehpp',['applicationtranslator.hpp',['../applicationtranslator_8hpp.html',1,'']]],
   ['ask_5fexit_5fconfirmation',['ASK_EXIT_CONFIRMATION',['../structaide_1_1core_1_1settings_1_1Keys_1_1System.html#a0a4e5c71a3b1a3a3bea45a5c2e668a4d',1,'aide::core::settings::Keys::System::ASK_EXIT_CONFIRMATION()'],['../structSystem.html#a606089269ead6518a68e981b1fe1f745',1,'System::ASK_EXIT_CONFIRMATION()'],['../commonsettingskeys_8hpp.html#a46bd781c630ef22e81bee0cb95aea4b4',1,'ASK_EXIT_CONFIRMATION():&#160;commonsettingskeys.hpp']]],
