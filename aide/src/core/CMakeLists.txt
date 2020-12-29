@@ -12,6 +12,7 @@ target_sources(
           qtsettings.cpp
           settingsinterface.cpp
           settingsproviderinterface.cpp
+          settings/showsettingsdialog.cpp
 )
 
 target_include_directories(

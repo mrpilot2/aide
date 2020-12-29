@@ -30,7 +30,8 @@ TEST_CASE("Any search line edit ")
         const auto* child = searchLineEdit.findChild<QLabel*>("searchHint");
 
         REQUIRE(child != nullptr);
-        REQUIRE("finds actions" == child->text().toStdString());
+        const auto text{child->text()};
+        REQUIRE("finds actions" == text.toStdString());
     }
 
     SECTION(" allows empty search icon")

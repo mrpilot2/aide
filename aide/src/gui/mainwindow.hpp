@@ -33,16 +33,16 @@ namespace aide
         {
             Q_OBJECT
         public:
-            explicit MainWindow(
-                const ActionRegistryInterfacePtr& actionRegistry,
-                aide::LoggerPtr loggerInterface, QWidget* parent = nullptr);
+            explicit MainWindow(LoggerPtr loggerInterface, QWidget* parent);
             ~MainWindow() override;
             MainWindow(const MainWindow&) = delete;
             MainWindow& operator=(const MainWindow&) = delete;
             MainWindow(const MainWindow&&)           = delete;
             MainWindow& operator=(const MainWindow&&) = delete;
 
-            void setMainWindowController(MainWindowControllerPtr controller);
+            void setMainWindowController(
+                MainWindowControllerPtr controller,
+                const ActionRegistryInterfacePtr& actionRegistry);
 
             void restoreGeometryAndState(QByteArray geometry,
                                          QByteArray state) override;
@@ -51,9 +51,6 @@ namespace aide
                 const;
             std::tuple<aide::core::UserSelection, bool>
             letUserConfirmApplicationClose() override;
-
-        private slots:
-            void showSettingsDialog();
 
         private:
             void closeEvent(QCloseEvent* event) override;

@@ -15,7 +15,7 @@
 #include "applicationtranslator.hpp"
 #include "hierarchicalid.hpp"
 #include "mainwindowcontroller.hpp"
-#include "settingsdialog.hpp"
+#include "settings/settingsdialog.hpp"
 #include "ui_mainwindow.h"
 
 using aide::HierarchicalId;
@@ -50,23 +50,23 @@ const static ActionIds& ACTION_IDS()
     }
 }
 
-MainWindow::MainWindow(const ActionRegistryInterfacePtr& actionRegistry,
-                       LoggerPtr loggerInterface, QWidget* parent)
+MainWindow::MainWindow(LoggerPtr loggerInterface, QWidget* parent)
     : MainWindowInterface(parent)
     , logger{std::move(loggerInterface)}
     , m_translator{new ApplicationTranslator(logger)}
     , m_ui(new Ui::MainWindow)
 {
     m_ui->setupUi(this);
-
-    registerActions(actionRegistry);
 }
 
 MainWindow::~MainWindow() = default;
 
-void MainWindow::setMainWindowController(MainWindowControllerPtr controller)
+void MainWindow::setMainWindowController(
+    MainWindowControllerPtr controller,
+    const ActionRegistryInterfacePtr& actionRegistry)
 {
     m_controller = std::move(controller);
+    registerActions(actionRegistry);
 }
 
 void MainWindow::restoreGeometryAndState(QByteArray geometry, QByteArray state)
@@ -79,8 +79,8 @@ void MainWindow::registerActions(
     const ActionRegistryInterfacePtr& actionRegistry)
 {
     m_actionSettings = std::make_shared<QAction>(tr("Settings"), this);
-    connect(m_actionSettings.get(), &QAction::triggered, this,
-            &MainWindow::showSettingsDialog);
+    connect(m_actionSettings.get(), &QAction::triggered, m_controller.get(),
+            &MainWindowController::onUserWantsToShowSettingsDialog);
     m_ui->menuFile->addAction(m_actionSettings.get());
 
     actionRegistry->registerAction(
@@ -157,11 +157,4 @@ MainWindow::letUserConfirmApplicationClose()
     return std::make_tuple(
         reply == QMessageBox::Yes ? UserSelection::Exit : UserSelection::Cancel,
         checkBox->isChecked());
-}
-
-void MainWindow::showSettingsDialog()
-{
-    auto settingsDialog = std::make_unique<SettingsDialog>(this);
-
-    settingsDialog->exec();
 }

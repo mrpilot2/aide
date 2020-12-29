@@ -25,10 +25,11 @@ TEST_CASE("Any main window")
 
     auto registry =
         std::make_shared<ActionRegistry>(std::make_shared<NullLogger>());
-    MainWindow mainWindow(registry, std::make_shared<NullLogger>());
+    MainWindow mainWindow(std::make_shared<NullLogger>(), nullptr);
 
-    SECTION("registers actions on construction")
+    SECTION("registers actions")
     {
+        mainWindow.setMainWindowController(nullptr, registry);
         REQUIRE(registry->actions().size() >= 2);
     }
 }

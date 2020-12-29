@@ -14,17 +14,21 @@ using aide::Logger;
 using aide::LoggerPtr;
 using aide::gui::MainWindow;
 using aide::gui::MainWindowController;
+using aide::gui::SettingsDialog;
 
 ApplicationBuilder::ApplicationBuilder()
     : m_actionRegistry{std::make_shared<ActionRegistry>(m_logger)}
-    , m_mainWindow(new MainWindow(m_actionRegistry, m_logger, nullptr))
+    , m_mainWindow(new MainWindow(m_logger, nullptr))
+    , m_settingsDialog(std::make_shared<SettingsDialog>(m_mainWindow.get()))
     , m_applicationClose(m_mainWindow, *settingsProvider.versionableSettings())
     , m_mainWindowGeometryAndState(m_mainWindow,
                                    *settingsProvider.unversionableSettings())
+    , m_showSettingsDialog(m_settingsDialog)
     , m_mainController(std::make_shared<MainWindowController>(
-          m_applicationClose, m_mainWindowGeometryAndState))
+          m_applicationClose, m_mainWindowGeometryAndState,
+          m_showSettingsDialog))
 {
-    m_mainWindow->setMainWindowController(m_mainController);
+    m_mainWindow->setMainWindowController(m_mainController, m_actionRegistry);
 
     m_mainWindowGeometryAndState.restoreGeometryAndState();
 }

@@ -5,7 +5,7 @@
 
 #include <QDialog>
 
-#include "settingsdialoginterface.hpp"
+#include "settings/settingsdialoginterface.hpp"
 
 namespace Ui
 {
@@ -27,6 +27,8 @@ namespace aide::gui
         SettingsDialog& operator=(const SettingsDialog&) = delete;
         SettingsDialog(SettingsDialog&&)                 = delete;
         SettingsDialog& operator=(SettingsDialog&&) = delete;
+
+        void executeDialog() override;
 
     private:
         std::unique_ptr<Ui::SettingsDialog> m_ui;

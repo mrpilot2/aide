@@ -8,8 +8,10 @@
 #include "applicationclose.hpp"
 #include "gui/mainwindow.hpp"
 #include "gui/mainwindowcontroller.hpp"
+#include "gui/settings/settingsdialog.hpp"
 #include "loggerinterface.hpp"
 #include "mainwindowgeometryandstate.hpp"
+#include "settings/showsettingsdialog.hpp"
 
 namespace aide
 {
@@ -34,11 +36,15 @@ namespace aide
 
         std::shared_ptr<aide::gui::MainWindow> m_mainWindow;
 
+        std::shared_ptr<aide::gui::SettingsDialog> m_settingsDialog;
+
         AideSettingsProvider settingsProvider;
 
         aide::core::ApplicationClose m_applicationClose;
 
         aide::core::MainWindowGeometryAndState m_mainWindowGeometryAndState;
+
+        aide::core::ShowSettingsDialog m_showSettingsDialog;
 
         aide::gui::MainWindowControllerPtr m_mainController;
     };

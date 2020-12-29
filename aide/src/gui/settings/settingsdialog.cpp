@@ -17,5 +17,9 @@ SettingsDialog::SettingsDialog(QWidget* parent)
         ->setEnabled(false);
     m_ui->helpButtonBox->button(QDialogButtonBox::Help)->setEnabled(false);
 }
-
 SettingsDialog::~SettingsDialog() = default;
+
+void SettingsDialog::executeDialog()
+{
+    this->exec();
+}
