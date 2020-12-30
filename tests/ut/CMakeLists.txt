@@ -55,10 +55,12 @@ if(NOT ${TEST_AGAINST_INSTALLED})
             mainwindowgeometryandstatetest.cpp
             mainwindowtest.cpp
             mockapplicationcloseview.cpp
-            mocksettings.cpp
             mockmainwindowview.cpp
+            mocksettings.cpp
+            mocksettingsdialog.cpp
             nulllogger.cpp
             qtsettingstest.cpp
+            showsettingsdialogtest.cpp
   )
 endif()
 
