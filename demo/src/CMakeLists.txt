@@ -22,6 +22,7 @@ add_executable(
   aide_demo
   $<$<TARGET_EXISTS:Qt5::lrelease>:${CMAKE_CURRENT_BINARY_DIR}/demo_translations.qrc
   ${QM_FILES}>
+  demosettingspage.cpp
   main.cpp
 )
 
