@@ -60,7 +60,9 @@ if(NOT ${TEST_AGAINST_INSTALLED})
             mocksettingsdialog.cpp
             nulllogger.cpp
             qtsettingstest.cpp
+            settingspagegrouptreemodeltest.cpp
             showsettingsdialogtest.cpp
+            treeitemtest.cpp
   )
 endif()
 

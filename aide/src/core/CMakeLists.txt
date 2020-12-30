@@ -1,3 +1,5 @@
+set(CMAKE_AUTOMOC ON)
+
 add_library(AideCore OBJECT)
 add_library(Aide::AideCore ALIAS AideCore)
 
@@ -13,8 +15,11 @@ target_sources(
           settingsinterface.cpp
           settingsproviderinterface.cpp
           settings/settingspage.cpp
+          settings/settingspagegrouptreemodel.cpp
+          settings/settingspagegrouptreemodel.hpp
           settings/settingspageregistry.cpp
           settings/showsettingsdialog.cpp
+          treeitem.cpp
 )
 
 target_include_directories(

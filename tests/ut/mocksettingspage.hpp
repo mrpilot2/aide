@@ -3,12 +3,19 @@
 
 #include <aide/settings/settingspage.hpp>
 
+namespace aide
+{
+    class HierarchicalId;
+} // namespace aide
+
 namespace aide::test
 {
     class MockSettingsPage : public aide::core::SettingsPage
     {
     public:
         MockSettingsPage();
+        MockSettingsPage(const HierarchicalId& group);
+
         ~MockSettingsPage() override = default;
     };
 } // namespace aide::test
