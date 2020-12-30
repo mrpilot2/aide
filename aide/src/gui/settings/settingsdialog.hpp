@@ -28,6 +28,7 @@ namespace aide::gui
         SettingsDialog(SettingsDialog&&)                 = delete;
         SettingsDialog& operator=(SettingsDialog&&) = delete;
 
+        void setTreeModel(std::shared_ptr<QAbstractItemModel> model) override;
         void executeDialog() override;
 
     private:

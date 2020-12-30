@@ -11,6 +11,7 @@ namespace aide::test
         void executeDialog() override;
 
         [[nodiscard]] bool wasSettingsDialogExecuted() const;
+        void setTreeModel(std::shared_ptr<QAbstractItemModel> model) override;
 
     private:
         bool settingsDialogWasExecuted{false};

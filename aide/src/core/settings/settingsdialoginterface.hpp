@@ -3,12 +3,17 @@
 
 #include <memory>
 
+class QAbstractItemModel;
+
 namespace aide::core
 {
     class SettingsDialogInterface
     {
     public:
         virtual ~SettingsDialogInterface() = default;
+
+        virtual void setTreeModel(
+            std::shared_ptr<QAbstractItemModel> model) = 0;
 
         virtual void executeDialog() = 0;
     };

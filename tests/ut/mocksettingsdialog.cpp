@@ -11,3 +11,7 @@ bool MockSettingsDialog::wasSettingsDialogExecuted() const
 {
     return settingsDialogWasExecuted;
 }
+
+void MockSettingsDialog::setTreeModel(
+    std::shared_ptr<QAbstractItemModel> /*model*/)
+{}

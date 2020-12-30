@@ -1,5 +1,8 @@
 #include "showsettingsdialog.hpp"
 
+#include "settingspagegrouptreemodel.hpp"
+
+using aide::core::SettingsPageGroupTreeModel;
 using aide::core::ShowSettingsDialog;
 
 aide::core::ShowSettingsDialog::ShowSettingsDialog(
@@ -13,5 +16,7 @@ void ShowSettingsDialog::showSettingsDialog() const
 
     if (dialog == nullptr) { return; }
 
+    auto treeModel = std::make_shared<SettingsPageGroupTreeModel>();
+    dialog->setTreeModel(treeModel);
     dialog->executeDialog();
 }

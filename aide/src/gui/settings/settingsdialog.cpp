@@ -23,3 +23,8 @@ void SettingsDialog::executeDialog()
 {
     this->exec();
 }
+
+void SettingsDialog::setTreeModel(std::shared_ptr<QAbstractItemModel> model)
+{
+    m_ui->treeView->setModel(model.get());
+}
