@@ -12,7 +12,7 @@ namespace aide::core
     public:
         explicit MainWindowInterface(QWidget* parent = nullptr);
 
-        virtual ~MainWindowInterface() = default;
+        virtual ~MainWindowInterface();
 
         virtual void restoreGeometryAndState(QByteArray geometry,
                                              QByteArray state) = 0;
