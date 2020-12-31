@@ -2,6 +2,7 @@
 #define AIDE_SETTINGS_DIALOG_INTERFACE_HPP
 
 #include <memory>
+#include <string>
 
 class QAbstractItemModel;
 
@@ -16,6 +17,9 @@ namespace aide::core
             std::shared_ptr<QAbstractItemModel> model) = 0;
 
         virtual void executeDialog() = 0;
+
+        virtual void setSelectedPageDisplayName(
+            const std::string& displayName) = 0;
     };
 
     using SettingsDialogWeakPtr = std::weak_ptr<SettingsDialogInterface>;

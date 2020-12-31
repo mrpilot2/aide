@@ -10,7 +10,8 @@ using aide::core::TreeItemPtr;
 
 SettingsPageGroupTreeModel::SettingsPageGroupTreeModel(QObject* parent)
     : QAbstractItemModel(parent)
-    , rootItem(std::make_shared<TreeItem>(std::vector<QVariant>({{"Group"}})))
+    , rootItem(std::make_shared<TreeItem>(
+          std::vector<QVariant>({{"Group", "Complete"}})))
 {
     setupModelData(rootItem);
 }
@@ -30,14 +31,21 @@ void SettingsPageGroupTreeModel::setupModelData(const TreeItemPtr& parent)
 
     for (const auto& page : pages) {
         TreeItemPtr current = parent;
-        for (const auto* const groupPart : page->group()) {
-            if (auto item = existingTreeItemForGroup(current, groupPart)) {
+        auto groups         = page->group();
+
+        for (auto iterator = groups.begin(); iterator != groups.end();
+             ++iterator) {
+            if (auto item = existingTreeItemForGroup(current, *iterator)) {
                 current = std::move(*item);
                 continue;
             }
 
+            auto currentSubGroup = HierarchicalId(groups.begin(), iterator + 1);
+
             auto child = std::make_shared<TreeItem>(
-                std::vector<QVariant>({groupPart}), current);
+                std::vector<QVariant>({*iterator, QString::fromStdString(
+                                                      currentSubGroup.name())}),
+                current);
             current->appendChild(child);
             current = std::move(child);
         }
@@ -47,7 +55,8 @@ void SettingsPageGroupTreeModel::setupModelData(const TreeItemPtr& parent)
 QVariant aide::core::SettingsPageGroupTreeModel::headerData(
     int section, Qt::Orientation orientation, int role) const
 {
-    if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
+    if (orientation == Qt::Horizontal && role == Qt::DisplayRole &&
+        section == 0) {
         return rootItem->data(static_cast<size_t>(section));
     }
 

@@ -46,6 +46,8 @@ namespace aide
 
         aide::core::ShowSettingsDialog m_showSettingsDialog;
 
+        aide::gui::SettingsDialogControllerPtr m_settingsDialogController;
+
         aide::gui::MainWindowControllerPtr m_mainController;
     };
 } // namespace aide

@@ -29,7 +29,10 @@ TEST_CASE("A new settings page group tree model with one registered page")
 
     SECTION("has one row") { REQUIRE(treeModel.rowCount() == 1); }
 
-    SECTION("has one column") { REQUIRE(treeModel.columnCount() == 1); }
+    SECTION("has two columns (hidden complete hierarchical id)")
+    {
+        REQUIRE(treeModel.columnCount() == 2);
+    }
 
     SECTION("provides group in first column and first row")
     {

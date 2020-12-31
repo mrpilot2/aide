@@ -11,10 +11,18 @@ namespace aide::test
         void executeDialog() override;
 
         [[nodiscard]] bool wasSettingsDialogExecuted() const;
+
         void setTreeModel(std::shared_ptr<QAbstractItemModel> model) override;
+
+        void setSelectedPageDisplayName(
+            const std::string& displayName) override;
+
+        const std::string& displayName() const;
 
     private:
         bool settingsDialogWasExecuted{false};
+
+        std::string currentDisplayName;
     };
 } // namespace aide::test
 

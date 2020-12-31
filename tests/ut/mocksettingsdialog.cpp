@@ -15,3 +15,14 @@ bool MockSettingsDialog::wasSettingsDialogExecuted() const
 void MockSettingsDialog::setTreeModel(
     std::shared_ptr<QAbstractItemModel> /*model*/)
 {}
+
+void MockSettingsDialog::setSelectedPageDisplayName(
+    const std::string& displayName)
+{
+    currentDisplayName = displayName;
+}
+
+const std::string& MockSettingsDialog::displayName() const
+{
+    return currentDisplayName;
+}

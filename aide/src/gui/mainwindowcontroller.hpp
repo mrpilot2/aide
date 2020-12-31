@@ -26,15 +26,14 @@ namespace aide::gui
         explicit MainWindowController(
             const aide::core::ApplicationCloseController& closeUseCase,
             aide::core::MainWindowGeometryAndStateController& saveUseCase,
-            const aide::core::ShowSettingsDialogController&
-                settingsDialogUseCase);
+            core::ShowSettingsDialogController& settingsDialogUseCase);
 
         void onUserWantsToQuitApplication(QCloseEvent* event,
                                           const QByteArray& geometry,
                                           const QByteArray& state);
 
     public slots:
-        void onUserWantsToShowSettingsDialog() const;
+        void onUserWantsToShowSettingsDialog();
 
     private:
         const aide::core::ApplicationCloseController&
@@ -42,8 +41,7 @@ namespace aide::gui
         aide::core::MainWindowGeometryAndStateController&
             saveGeometryAndStateInteractor;
 
-        const aide::core::ShowSettingsDialogController&
-            showSettingsDialogInteractor;
+        aide::core::ShowSettingsDialogController& showSettingsDialogInteractor;
     };
 
     using MainWindowControllerPtr = std::shared_ptr<MainWindowController>;

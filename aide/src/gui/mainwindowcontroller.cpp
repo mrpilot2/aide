@@ -13,7 +13,7 @@ using aide::gui::MainWindowController;
 MainWindowController::MainWindowController(
     const ApplicationCloseController& closeUseCase,
     MainWindowGeometryAndStateController& saveUseCase,
-    const ShowSettingsDialogController& settingsDialogUseCase)
+    ShowSettingsDialogController& settingsDialogUseCase)
     : applicationCloseInteractor(closeUseCase)
     , saveGeometryAndStateInteractor(saveUseCase)
     , showSettingsDialogInteractor(settingsDialogUseCase)
@@ -32,7 +32,7 @@ void MainWindowController::onUserWantsToQuitApplication(
     }
 }
 
-void MainWindowController::onUserWantsToShowSettingsDialog() const
+void MainWindowController::onUserWantsToShowSettingsDialog()
 {
     showSettingsDialogInteractor.showSettingsDialog();
 }

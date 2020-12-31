@@ -6,6 +6,7 @@
 #include <QDialog>
 
 #include "settings/settingsdialoginterface.hpp"
+#include "settingsdialogcontroller.hpp"
 
 namespace Ui
 {
@@ -28,11 +29,21 @@ namespace aide::gui
         SettingsDialog(SettingsDialog&&)                 = delete;
         SettingsDialog& operator=(SettingsDialog&&) = delete;
 
+        void setController(SettingsDialogControllerPtr controller);
+
         void setTreeModel(std::shared_ptr<QAbstractItemModel> model) override;
+
         void executeDialog() override;
 
+        void setSelectedPageDisplayName(
+            const std::string& displayName) override;
+
     private:
-        std::unique_ptr<Ui::SettingsDialog> m_ui;
+        void connectSignals();
+
+        std::unique_ptr<Ui::SettingsDialog> ui;
+
+        SettingsDialogControllerPtr settingsController;
     };
 
 } // namespace aide::gui

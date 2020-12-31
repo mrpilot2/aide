@@ -1,6 +1,8 @@
 #ifndef AIDE_SHOW_SETTINGS_DIALOG_CONTROLLER_HPP
 #define AIDE_SHOW_SETTINGS_DIALOG_CONTROLLER_HPP
 
+class QItemSelection;
+
 namespace aide::core
 {
     class ShowSettingsDialogController
@@ -8,7 +10,7 @@ namespace aide::core
     public:
         virtual ~ShowSettingsDialogController() = default;
 
-        virtual void showSettingsDialog() const = 0;
+        virtual void showSettingsDialog() = 0;
     };
 } // namespace aide::core
 

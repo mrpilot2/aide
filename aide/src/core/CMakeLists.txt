@@ -14,6 +14,7 @@ target_sources(
           qtsettings.cpp
           settingsinterface.cpp
           settingsproviderinterface.cpp
+          settings/settingsdialogchangepagecontroller.cpp
           settings/settingspage.cpp
           settings/settingspagegrouptreemodel.cpp
           settings/settingspagegrouptreemodel.hpp

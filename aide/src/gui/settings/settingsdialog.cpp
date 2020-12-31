@@ -1,23 +1,35 @@
 #include "settingsdialog.hpp"
 
+#include <utility>
+
 #include <QPushButton>
 #include <QWidget>
 
 #include "ui_settingsdialog.h"
 
 using aide::gui::SettingsDialog;
+using aide::gui::SettingsDialogController;
 
 SettingsDialog::SettingsDialog(QWidget* parent)
     : QDialog(parent)
-    , m_ui(std::make_unique<Ui::SettingsDialog>())
+    , ui(std::make_unique<Ui::SettingsDialog>())
 {
-    m_ui->setupUi(this);
+    ui->setupUi(this);
 
-    m_ui->leaveDialogButtonBox->button(QDialogButtonBox::Apply)
+    ui->leaveDialogButtonBox->button(QDialogButtonBox::Apply)
         ->setEnabled(false);
-    m_ui->helpButtonBox->button(QDialogButtonBox::Help)->setEnabled(false);
+    ui->helpButtonBox->button(QDialogButtonBox::Help)->setEnabled(false);
 }
+
 SettingsDialog::~SettingsDialog() = default;
+
+void SettingsDialog::setController(SettingsDialogControllerPtr controller)
+{
+    settingsController = std::move(controller);
+    connectSignals();
+}
+
+void SettingsDialog::connectSignals() {}
 
 void SettingsDialog::executeDialog()
 {
@@ -26,5 +38,15 @@ void SettingsDialog::executeDialog()
 
 void SettingsDialog::setTreeModel(std::shared_ptr<QAbstractItemModel> model)
 {
-    m_ui->treeView->setModel(model.get());
+    ui->treeView->setModel(model.get());
+    ui->treeView->hideColumn(1);
+
+    connect(ui->treeView->selectionModel(),
+            &QItemSelectionModel::selectionChanged, settingsController.get(),
+            &SettingsDialogController::onUserChangedSelectedPage);
+}
+
+void SettingsDialog::setSelectedPageDisplayName(const std::string& displayName)
+{
+    ui->displayNameLabel->setText(QString::fromStdString(displayName));
 }
