@@ -2,6 +2,7 @@
 
 #include <utility>
 
+#include <QList>
 #include <QPushButton>
 #include <QWidget>
 
@@ -19,6 +20,10 @@ SettingsDialog::SettingsDialog(QWidget* parent)
     ui->leaveDialogButtonBox->button(QDialogButtonBox::Apply)
         ->setEnabled(false);
     ui->helpButtonBox->button(QDialogButtonBox::Help)->setEnabled(false);
+
+    ui->treeView->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    ui->treeView->header()->setStretchLastSection(false);
+    ui->treeView->header()->setVisible(false);
 }
 
 SettingsDialog::~SettingsDialog() = default;
@@ -40,6 +45,9 @@ void SettingsDialog::setTreeModel(std::shared_ptr<QAbstractItemModel> model)
 {
     ui->treeView->setModel(model.get());
     ui->treeView->hideColumn(1);
+    ui->treeView->resizeColumnToContents(0);
+    ui->splitter->setSizes({ui->treeView->size().width(),
+                            ui->settingsPageLayout->sizeHint().width()});
 
     connect(ui->treeView->selectionModel(),
             &QItemSelectionModel::selectionChanged, settingsController.get(),
