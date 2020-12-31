@@ -38,6 +38,10 @@ namespace aide::gui
         void setSelectedPageDisplayName(
             const std::string& displayName) override;
 
+        void showSelectedPageWidget(QWidget* widget) override;
+
+        void showEmptyPageWidget() override;
+
     private:
         void connectSignals();
 

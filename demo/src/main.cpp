@@ -31,19 +31,11 @@ int main(int argc, char* argv[])
     mainWindow->setCentralWidget(description);
 
     aide::core::SettingsPageRegistry::addPage(
-        std::make_unique<DemoSettingsPage>(
-            aide::HierarchicalId("Demo Page 1")("Demo Subpage 1")));
-
-    aide::core::SettingsPageRegistry::addPage(
         std::make_unique<DemoSettingsPage>(aide::HierarchicalId("Demo Page 1")(
             "Demo Subpage 1")("Demo Subpage 1.1")));
     aide::core::SettingsPageRegistry::addPage(
         std::make_unique<DemoSettingsPage>(aide::HierarchicalId("Demo Page 1")(
             "Demo Subpage 1")("Demo Subpage 1.2")));
-
-    aide::core::SettingsPageRegistry::addPage(
-        std::make_unique<DemoSettingsPage>(
-            aide::HierarchicalId("Demo Page 1")("Demo Subpage 2")));
 
     aide::core::SettingsPageRegistry::addPage(
         std::make_unique<DemoSettingsPage>(aide::HierarchicalId("Demo Page 1")(

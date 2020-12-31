@@ -5,6 +5,7 @@
 #include <string>
 
 class QAbstractItemModel;
+class QWidget;
 
 namespace aide::core
 {
@@ -20,6 +21,10 @@ namespace aide::core
 
         virtual void setSelectedPageDisplayName(
             const std::string& displayName) = 0;
+
+        virtual void showSelectedPageWidget(QWidget* widget) = 0;
+
+        virtual void showEmptyPageWidget() = 0;
     };
 
     using SettingsDialogWeakPtr = std::weak_ptr<SettingsDialogInterface>;

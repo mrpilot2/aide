@@ -5,6 +5,8 @@
 
 #include <aide/hierarchicalid.hpp>
 
+class QWidget;
+
 namespace aide::core
 {
     class SettingsPage
@@ -21,11 +23,13 @@ namespace aide::core
 
         [[nodiscard]] const HierarchicalId& group() const;
 
+        [[nodiscard]] virtual QWidget* widget() = 0;
+
     private:
         HierarchicalId settingsGroup;
     };
 
-    using SettingsPageUniquePtr = std::unique_ptr<SettingsPage>;
+    using SettingsPagePtr = std::shared_ptr<SettingsPage>;
 } // namespace aide::core
 
 #endif // AIDE_SETTINGS_PAGE_HPP

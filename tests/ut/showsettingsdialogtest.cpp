@@ -99,4 +99,26 @@ TEST_CASE("Any show settings dialog use case")
                                treeModel.index(-1, -1, QModelIndex()))),
             std::logic_error);
     }
+
+    SECTION("show selected page widget")
+    {
+        SettingsPageRegistry::deleteAllPages();
+
+        SettingsPageRegistry::addPage(
+            std::make_unique<MockSettingsPage>(HierarchicalId("MockTestPage")));
+
+        aide::core::SettingsPageGroupTreeModel treeModel;
+
+        useCase.showSettingsDialog();
+
+        REQUIRE(view->currentlyShownWidget() == nullptr);
+
+        useCase.changeSelectedPage(
+            QItemSelection(treeModel.index(0, 0, QModelIndex()),
+                           treeModel.index(0, 0, QModelIndex())),
+            QItemSelection(treeModel.index(-1, -1, QModelIndex()),
+                           treeModel.index(-1, -1, QModelIndex())));
+
+        REQUIRE(view->currentlyShownWidget() != nullptr);
+    }
 }

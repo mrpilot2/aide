@@ -1,6 +1,8 @@
 #ifndef AIDE_SHOW_SETTINGS_DIALOG_HPP
 #define AIDE_SHOW_SETTINGS_DIALOG_HPP
 
+#include <settings/settingspage.hpp>
+
 #include "loggerinterface.hpp"
 #include "settingsdialogchangepagecontroller.hpp"
 #include "settingsdialoginterface.hpp"
@@ -26,11 +28,19 @@ namespace aide::core
         void checkChangeSelectedPagePreConditions(
             const QItemSelection& selected) const;
 
+        void updateDisplayName(const QModelIndex& selectedIndex) const;
+
+        aide::core::SettingsPagePtr findCorrespondingSettingsPage(
+            const QModelIndex& selectedIndex) const;
+
+        void showSelectedPageWidget(QWidget* widget) const;
+
+        void showEmptyPageWidget() const;
+
         SettingsDialogWeakPtr settingsDialog;
 
         std::shared_ptr<SettingsPageGroupTreeModel> treeModel;
         const LoggerPtr logger;
-        void updateDisplayName(const QModelIndex& selectedIndex) const;
     };
 } // namespace aide::core
 

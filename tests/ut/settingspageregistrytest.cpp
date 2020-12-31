@@ -4,8 +4,8 @@
 
 #include "mocksettingspage.hpp"
 
+using aide::core::SettingsPagePtr;
 using aide::core::SettingsPageRegistry;
-using aide::core::SettingsPageUniquePtr;
 using aide::test::MockSettingsPage;
 
 TEST_CASE("A new settings page registry")

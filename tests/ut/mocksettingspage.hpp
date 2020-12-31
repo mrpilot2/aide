@@ -17,6 +17,11 @@ namespace aide::test
         MockSettingsPage(const HierarchicalId& group);
 
         ~MockSettingsPage() override = default;
+
+        QWidget* widget() override;
+
+    private:
+        std::shared_ptr<QWidget> mockWidget;
     };
 } // namespace aide::test
 

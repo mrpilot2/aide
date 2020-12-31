@@ -7,8 +7,8 @@
 #include "settings/settingspage.hpp"
 
 using aide::core::SettingsPageList;
+using aide::core::SettingsPagePtr;
 using aide::core::SettingsPageRegistry;
-using aide::core::SettingsPageUniquePtr;
 
 class SettingsPageRegistryPrivate
 {
@@ -27,7 +27,7 @@ public:
         return privateRegistry;
     }
 
-    void addPage(SettingsPageUniquePtr page)
+    void addPage(SettingsPagePtr page)
     {
         auto group = page->group();
         if (std::find_if(m_settingsPages.begin(), m_settingsPages.end(),
@@ -54,7 +54,7 @@ private:
     SettingsPageList m_settingsPages;
 };
 
-void SettingsPageRegistry::addPage(SettingsPageUniquePtr page)
+void SettingsPageRegistry::addPage(SettingsPagePtr page)
 {
     SettingsPageRegistryPrivate::instance().addPage(std::move(page));
 }

@@ -7,7 +7,7 @@
 
 namespace aide::core
 {
-    using SettingsPageList = std::vector<SettingsPageUniquePtr>;
+    using SettingsPageList = std::vector<SettingsPagePtr>;
 
     class SettingsPageRegistry
     {
@@ -19,7 +19,7 @@ namespace aide::core
         SettingsPageRegistry(SettingsPageRegistry&&)                 = delete;
         SettingsPageRegistry& operator=(SettingsPageRegistry&&) = delete;
 
-        static void addPage(SettingsPageUniquePtr page);
+        static void addPage(SettingsPagePtr page);
 
         static const SettingsPageList& settingsPages();
 

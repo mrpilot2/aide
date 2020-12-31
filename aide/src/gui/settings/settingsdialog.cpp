@@ -58,3 +58,17 @@ void SettingsDialog::setSelectedPageDisplayName(const std::string& displayName)
 {
     ui->displayNameLabel->setText(QString::fromStdString(displayName));
 }
+
+void SettingsDialog::showSelectedPageWidget(QWidget* widget)
+{
+    ui->settingsPageScrollArea->takeWidget();
+
+    ui->settingsPageScrollArea->setWidget(widget);
+}
+
+void SettingsDialog::showEmptyPageWidget()
+{
+    ui->settingsPageScrollArea->takeWidget();
+
+    ui->settingsPageScrollArea->setWidget(ui->defaultScrollAreaWidget);
+}

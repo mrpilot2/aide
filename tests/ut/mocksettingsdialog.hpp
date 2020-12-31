@@ -17,12 +17,20 @@ namespace aide::test
         void setSelectedPageDisplayName(
             const std::string& displayName) override;
 
-        const std::string& displayName() const;
+        [[nodiscard]] const std::string& displayName() const;
+
+        void showSelectedPageWidget(QWidget* widget) override;
+
+        void showEmptyPageWidget() override;
+
+        [[nodiscard]] QWidget* currentlyShownWidget() const;
 
     private:
         bool settingsDialogWasExecuted{false};
 
         std::string currentDisplayName;
+
+        QWidget* settingsWidget{nullptr};
     };
 } // namespace aide::test
 

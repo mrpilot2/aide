@@ -5,6 +5,9 @@
 
 #include <QItemSelection>
 
+#include "settings/settingspage.hpp"
+#include "settings/settingspageregistry.hpp"
+
 using aide::core::SettingsPageGroupTreeModel;
 using aide::core::ShowSettingsDialog;
 
@@ -34,6 +37,14 @@ void ShowSettingsDialog::changeSelectedPage(
     auto selectedIndex = selected.indexes().at(0);
 
     updateDisplayName(selectedIndex);
+
+    const auto settingsPage = findCorrespondingSettingsPage(selectedIndex);
+
+    if (settingsPage != nullptr) {
+        showSelectedPageWidget(settingsPage->widget());
+    } else {
+        showEmptyPageWidget();
+    }
 }
 
 void ShowSettingsDialog::checkChangeSelectedPagePreConditions(
@@ -57,6 +68,28 @@ void ShowSettingsDialog::checkChangeSelectedPagePreConditions(
     }
 }
 
+aide::core::SettingsPagePtr ShowSettingsDialog::findCorrespondingSettingsPage(
+    const QModelIndex& selectedIndex) const
+{
+    auto completeGroupIndex =
+        treeModel->index(selectedIndex.row(), 1, selectedIndex.parent());
+    auto completeGroupName{treeModel->data(completeGroupIndex, Qt::DisplayRole)
+                               .toString()
+                               .toStdString()};
+
+    const auto& pages = SettingsPageRegistry::settingsPages();
+
+    if (auto it = std::find_if(pages.begin(), pages.end(),
+                               [completeGroupName](const auto& page) {
+                                   return page->group().name() ==
+                                          completeGroupName;
+                               });
+        it != pages.end()) {
+        return *it;
+    }
+    return nullptr;
+}
+
 void ShowSettingsDialog::updateDisplayName(
     const QModelIndex& selectedIndex) const
 {
@@ -71,5 +104,19 @@ void ShowSettingsDialog::updateDisplayName(
 
     if (auto d = settingsDialog.lock(); d != nullptr) {
         d->setSelectedPageDisplayName(completeGroupString);
+    }
+}
+
+void ShowSettingsDialog::showSelectedPageWidget(QWidget* widget) const
+{
+    if (auto d = settingsDialog.lock(); d != nullptr) {
+        d->showSelectedPageWidget(widget);
+    }
+}
+
+void ShowSettingsDialog::showEmptyPageWidget() const
+{
+    if (auto d = settingsDialog.lock(); d != nullptr) {
+        d->showEmptyPageWidget();
     }
 }

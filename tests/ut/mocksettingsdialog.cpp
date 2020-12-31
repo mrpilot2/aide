@@ -26,3 +26,15 @@ const std::string& MockSettingsDialog::displayName() const
 {
     return currentDisplayName;
 }
+
+void MockSettingsDialog::showSelectedPageWidget(QWidget* widget)
+{
+    settingsWidget = widget;
+}
+
+void MockSettingsDialog::showEmptyPageWidget() {}
+
+QWidget* MockSettingsDialog::currentlyShownWidget() const
+{
+    return settingsWidget;
+}
