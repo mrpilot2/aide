@@ -23,11 +23,14 @@ namespace aide::core
                                 const QItemSelection& deselected) override;
 
     private:
+        void checkChangeSelectedPagePreConditions(
+            const QItemSelection& selected) const;
+
         SettingsDialogWeakPtr settingsDialog;
 
         std::shared_ptr<SettingsPageGroupTreeModel> treeModel;
-
         const LoggerPtr logger;
+        void updateDisplayName(const QModelIndex& selectedIndex) const;
     };
 } // namespace aide::core
 

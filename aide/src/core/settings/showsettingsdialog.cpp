@@ -29,6 +29,16 @@ void ShowSettingsDialog::changeSelectedPage(
     const QItemSelection& selected,
     [[maybe_unused]] const QItemSelection& deselected)
 {
+    checkChangeSelectedPagePreConditions(selected);
+
+    auto selectedIndex = selected.indexes().at(0);
+
+    updateDisplayName(selectedIndex);
+}
+
+void ShowSettingsDialog::checkChangeSelectedPagePreConditions(
+    const QItemSelection& selected) const
+{
     if (selected.indexes().empty()) {
         const auto* message{
             "ShowSettingsDialog: selected group index (QItemSelection) is "
@@ -45,10 +55,13 @@ void ShowSettingsDialog::changeSelectedPage(
         logger->critical(message);
         throw std::logic_error(message);
     }
+}
 
-    auto index = selected.indexes().at(0);
-
-    auto completeGroupIndex = treeModel->index(index.row(), 1, index.parent());
+void ShowSettingsDialog::updateDisplayName(
+    const QModelIndex& selectedIndex) const
+{
+    auto completeGroupIndex =
+        treeModel->index(selectedIndex.row(), 1, selectedIndex.parent());
     auto completeGroupString{
         treeModel->data(completeGroupIndex, Qt::DisplayRole)
             .toString()
