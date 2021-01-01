@@ -8,6 +8,11 @@ class QCheckBox;
 class QFormLayout;
 class QLabel;
 
+namespace Ui
+{
+    class DemoSettingsPage;
+} // namespace Ui
+
 class DemoSettingsPage : public aide::core::SettingsPage
 {
 public:
@@ -20,13 +25,9 @@ public:
 private:
     void createWidget();
 
+    std::unique_ptr<Ui::DemoSettingsPage> m_ui;
+
     QWidget* m_widget;
-
-    QLabel* m_label;
-
-    QCheckBox* m_checkbox;
-
-    QFormLayout* m_layout;
 };
 
 #endif // AIDE_DEMO_SETTINGS_PAGE_HPP

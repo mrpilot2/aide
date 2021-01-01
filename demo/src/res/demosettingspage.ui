@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DemoSettingsPage</class>
+ <widget class="QWidget" name="DemoSettingsPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>910</width>
+    <height>724</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <widget class="QRadioButton" name="radioButton">
+     <property name="text">
+      <string>RadioB&amp;utton</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QCheckBox" name="checkBox">
+     <property name="text">
+      <string>CheckBox</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2" colspan="2">
+    <widget class="QFontComboBox" name="fontComboBox"/>
+   </item>
+   <item row="1" column="0">
+    <widget class="QRadioButton" name="radioButton_2">
+     <property name="text">
+      <string>RadioBu&amp;tton</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QComboBox" name="comboBox">
+     <item>
+      <property name="text">
+       <string>1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>2</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>3</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="1" column="2" colspan="2">
+    <widget class="QLineEdit" name="lineEdit"/>
+   </item>
+   <item row="2" column="5" rowspan="6">
+    <widget class="QSlider" name="verticalSlider">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="6">
+    <widget class="QSlider" name="horizontalSlider">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" rowspan="5">
+    <widget class="QTextEdit" name="textEdit"/>
+   </item>
+   <item row="3" column="1" rowspan="5" colspan="2">
+    <widget class="QPlainTextEdit" name="plainTextEdit_2"/>
+   </item>
+   <item row="3" column="3" rowspan="5">
+    <widget class="QTableWidget" name="tableWidget"/>
+   </item>
+   <item row="3" column="4">
+    <widget class="QSpinBox" name="spinBox"/>
+   </item>
+   <item row="3" column="6" rowspan="2">
+    <widget class="QKeySequenceEdit" name="keySequenceEdit">
+     <property name="keySequence">
+      <string>Ctrl+F</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="4">
+    <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
+   </item>
+   <item row="5" column="4">
+    <widget class="QTimeEdit" name="timeEdit"/>
+   </item>
+   <item row="5" column="6" rowspan="2">
+    <widget class="QDial" name="dial_2"/>
+   </item>
+   <item row="6" column="4">
+    <widget class="QDateEdit" name="dateEdit"/>
+   </item>
+   <item row="7" column="4">
+    <widget class="QDateTimeEdit" name="dateTimeEdit"/>
+   </item>
+   <item row="8" column="0" colspan="7">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>GroupBox</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="3" column="1" rowspan="5" colspan="2">
+       <widget class="QPlainTextEdit" name="plainTextEdit"/>
+      </item>
+      <item row="3" column="4">
+       <widget class="QSpinBox" name="spinBox_2"/>
+      </item>
+      <item row="4" column="6">
+       <widget class="QKeySequenceEdit" name="keySequenceEdit_2">
+        <property name="keySequence">
+         <string>Ctrl+F</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2" colspan="2">
+       <widget class="QFontComboBox" name="fontComboBox_2"/>
+      </item>
+      <item row="6" column="4">
+       <widget class="QDateEdit" name="dateEdit_2"/>
+      </item>
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="checkBox_2">
+        <property name="text">
+         <string>CheckBox</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="4">
+       <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+      </item>
+      <item row="5" column="6" rowspan="3">
+       <widget class="QDial" name="dial"/>
+      </item>
+      <item row="5" column="4">
+       <widget class="QTimeEdit" name="timeEdit_2"/>
+      </item>
+      <item row="3" column="0" rowspan="5">
+       <widget class="QTextEdit" name="textEdit_2"/>
+      </item>
+      <item row="7" column="4">
+       <widget class="QDateTimeEdit" name="dateTimeEdit_2"/>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="comboBox_2">
+        <item>
+         <property name="text">
+          <string>1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>3</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="radioButton_3">
+        <property name="text">
+         <string>RadioButton</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="6">
+       <widget class="QSlider" name="horizontalSlider_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="3" rowspan="5">
+       <widget class="QTableWidget" name="tableWidget_2"/>
+      </item>
+      <item row="3" column="5" rowspan="5">
+       <widget class="QSlider" name="verticalSlider_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLineEdit" name="lineEdit_2"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QRadioButton" name="radioButton_4">
+        <property name="text">
+         <string>RadioButton</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="3">
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="text">
+         <string>Add to table after 1 second</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="3">
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>Add to table after 1 second</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -9,15 +9,15 @@
 
 #include <aide/hierarchicalid.hpp>
 
+#include "ui_demosettingspage.h"
+
 using aide::HierarchicalId;
 using aide::core::SettingsPage;
 
 DemoSettingsPage::DemoSettingsPage(aide::HierarchicalId group)
     : SettingsPage(std::move(group))
+    , m_ui{std::make_unique<Ui::DemoSettingsPage>()}
     , m_widget(nullptr)
-    , m_label(nullptr)
-    , m_checkbox(nullptr)
-    , m_layout(nullptr)
 {}
 
 DemoSettingsPage::~DemoSettingsPage() = default;
@@ -33,15 +33,5 @@ void DemoSettingsPage::createWidget()
     // NOLINTNEXTLINE
     m_widget = new QWidget();
 
-    // NOLINTNEXTLINE
-    m_label = new QLabel("Test label", m_widget);
-    // NOLINTNEXTLINE
-    m_checkbox = new QCheckBox("Test checkbox", m_widget);
-    // NOLINTNEXTLINE
-    m_layout = new QFormLayout(m_widget);
-
-    m_layout->addWidget(m_label);
-    m_layout->addWidget(m_checkbox);
-
-    m_widget->setLayout(m_layout);
+    m_ui->setupUi(m_widget);
 }

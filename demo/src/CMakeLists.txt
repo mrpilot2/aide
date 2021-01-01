@@ -1,4 +1,6 @@
 set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOUIC_SEARCH_PATHS "res")
 
 if(TARGET Qt5::lrelease)
   set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
