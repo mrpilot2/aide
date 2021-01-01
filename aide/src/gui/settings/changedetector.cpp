@@ -121,8 +121,9 @@ void installChangeDetectorForSpinBoxes(
             settingsController,
             &aide::gui::SettingsDialogController::onUserChangedAGuiElement);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-        QObject::connect(spinBox, &QSpinBox::textChanged, settingsController,
-                         &SettingsDialogController::onUserChangedAGuiElement);
+        QObject::connect(
+            spinBox, &QSpinBox::textChanged, settingsController,
+            &aide::gui::SettingsDialogController::onUserChangedAGuiElement);
 #else
         QObject::connect(
             spinBox, qOverload<const QString&>(&QSpinBox::valueChanged),
@@ -137,9 +138,9 @@ void installChangeDetectorForSpinBoxes(
             settingsController,
             &aide::gui::SettingsDialogController::onUserChangedAGuiElement);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-        QObject::connect(spinBox, &QDoubleSpinBox::textChanged,
-                         settingsController,
-                         &SettingsDialogController::onUserChangedAGuiElement);
+        QObject::connect(
+            spinBox, &QDoubleSpinBox::textChanged, settingsController,
+            &aide::gui::SettingsDialogController::onUserChangedAGuiElement);
 #else
         QObject::connect(
             spinBox, qOverload<const QString&>(&QDoubleSpinBox::valueChanged),
