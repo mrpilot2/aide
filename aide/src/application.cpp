@@ -9,6 +9,7 @@
 using aide::Application;
 using aide::ApplicationBuilder;
 using aide::LoggerPtr;
+using aide::SettingsProviderInterface;
 using aide::gui::TranslatorInterface;
 
 // NOLINTNEXTLINE
@@ -53,4 +54,9 @@ bool Application::isOrganizationNameSet()
 std::shared_ptr<TranslatorInterface> Application::translator() const
 {
     return m_appBuilder->mainWindow()->translator();
+}
+
+std::shared_ptr<SettingsProviderInterface> aide::Application::settingsProvider()
+{
+    return m_appBuilder->settingsProvider();
 }

@@ -24,6 +24,9 @@ namespace aide
 
         [[nodiscard]] std::shared_ptr<aide::gui::MainWindow> mainWindow() const;
 
+        [[nodiscard]] std::shared_ptr<SettingsProviderInterface>
+        settingsProvider() const;
+
     private:
         static aide::LoggerPtr setupLogger();
 
@@ -38,7 +41,7 @@ namespace aide
 
         std::shared_ptr<aide::gui::SettingsDialog> m_settingsDialog;
 
-        AideSettingsProvider settingsProvider;
+        std::shared_ptr<AideSettingsProvider> m_settingsProvider;
 
         aide::core::ApplicationClose m_applicationClose;
 

@@ -21,9 +21,11 @@ ApplicationBuilder::ApplicationBuilder()
     : m_actionRegistry{std::make_shared<ActionRegistry>(m_logger)}
     , m_mainWindow(new MainWindow(m_logger, nullptr))
     , m_settingsDialog(std::make_shared<SettingsDialog>(m_mainWindow.get()))
-    , m_applicationClose(m_mainWindow, *settingsProvider.versionableSettings())
-    , m_mainWindowGeometryAndState(m_mainWindow,
-                                   *settingsProvider.unversionableSettings())
+    , m_settingsProvider(std::make_shared<AideSettingsProvider>())
+    , m_applicationClose(m_mainWindow,
+                         *(m_settingsProvider->versionableSettings()))
+    , m_mainWindowGeometryAndState(
+          m_mainWindow, *(m_settingsProvider->unversionableSettings()))
     , m_showSettingsDialog(m_settingsDialog, m_logger)
     , m_settingsDialogController(
           std::make_shared<SettingsDialogController>(m_showSettingsDialog))
@@ -86,4 +88,10 @@ bool ApplicationBuilder::tryToCreateLogLocationIfItDoesNotExist(
 std::shared_ptr<aide::gui::MainWindow> ApplicationBuilder::mainWindow() const
 {
     return m_mainWindow;
+}
+
+std::shared_ptr<aide::SettingsProviderInterface>
+ApplicationBuilder::settingsProvider() const
+{
+    return m_settingsProvider;
 }
