@@ -32,9 +32,6 @@ namespace aide::core
 
         void updateDisplayName(const QModelIndex& selectedIndex) const;
 
-        aide::core::SettingsPagePtr findCorrespondingSettingsPage(
-            const QModelIndex& selectedIndex) const;
-
         void showSelectedPageWidget(QWidget* widget) const;
 
         void showEmptyPageWidget() const;

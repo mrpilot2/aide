@@ -1,10 +1,13 @@
 #include "settingspagegrouptreemodel.hpp"
 
+#include <QColor>
+
 #include "hierarchicalid.hpp"
 #include "settings/settingspage.hpp"
 #include "settings/settingspageregistry.hpp"
 
 using aide::core::SettingsPageGroupTreeModel;
+using aide::core::SettingsPagePtr;
 using aide::core::SettingsPageRegistry;
 using aide::core::TreeItemPtr;
 
@@ -68,11 +71,19 @@ QVariant SettingsPageGroupTreeModel::data(const QModelIndex& index,
 {
     if (!index.isValid()) { return QVariant(); }
 
-    if (role != Qt::DisplayRole) { return QVariant(); }
+    if (role == Qt::DisplayRole) {
+        auto* item = static_cast<TreeItem*>(index.internalPointer());
 
-    auto* item = static_cast<TreeItem*>(index.internalPointer());
+        return item->data(static_cast<size_t>(index.column()));
+    }
+    if (role == Qt::ForegroundRole) {
+        auto page = findCorrespondingSettingsPage(index);
 
-    return item->data(static_cast<size_t>(index.column()));
+        return page != nullptr && page->isModified() ? QColor(Qt::blue)
+                                                     : QVariant();
+    }
+
+    return QVariant();
 }
 
 Qt::ItemFlags SettingsPageGroupTreeModel::flags(const QModelIndex& index) const
@@ -132,4 +143,25 @@ int SettingsPageGroupTreeModel::columnCount(const QModelIndex& parent) const
                              : static_cast<int>(static_cast<TreeItem*>(
                                                     parent.internalPointer())
                                                     ->columnCount());
+}
+
+SettingsPagePtr SettingsPageGroupTreeModel::findCorrespondingSettingsPage(
+    const QModelIndex& selectedIndex) const
+{
+    auto completeGroupIndex =
+        index(selectedIndex.row(), 1, selectedIndex.parent());
+    auto completeGroupName{
+        data(completeGroupIndex, Qt::DisplayRole).toString().toStdString()};
+
+    const auto& pages = SettingsPageRegistry::settingsPages();
+
+    if (auto it = std::find_if(pages.begin(), pages.end(),
+                               [completeGroupName](const auto& page) {
+                                   return page->group().name() ==
+                                          completeGroupName;
+                               });
+        it != pages.end()) {
+        return *it;
+    }
+    return nullptr;
 }

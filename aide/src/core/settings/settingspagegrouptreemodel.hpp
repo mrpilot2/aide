@@ -6,6 +6,7 @@
 #include <QAbstractItemModel>
 #include <QObject>
 
+#include "settings/settingspage.hpp"
 #include "treeitem.hpp"
 
 namespace aide::core
@@ -39,6 +40,9 @@ namespace aide::core
 
         [[nodiscard]] int columnCount(
             const QModelIndex& parent = QModelIndex()) const override;
+
+        SettingsPagePtr findCorrespondingSettingsPage(
+            const QModelIndex& selectedIndex) const;
 
     private:
         static void setupModelData(const TreeItemPtr& parent);

@@ -1,5 +1,7 @@
 #include <catch2/catch.hpp>
 
+#include <QColor>
+
 #include "hierarchicalid.hpp"
 #include "mocksettingspage.hpp"
 #include "settings/settingspagegrouptreemodel.hpp"
@@ -103,8 +105,10 @@ TEST_CASE("Any settings page group tree model")
 {
     SettingsPageRegistry::deleteAllPages();
 
-    SettingsPageRegistry::addPage(
-        std::make_unique<MockSettingsPage>(HierarchicalId("MockTestPage")));
+    auto mockPage =
+        std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
+
+    SettingsPageRegistry::addPage(mockPage);
 
     SettingsPageGroupTreeModel treeModel;
 
@@ -133,5 +137,23 @@ TEST_CASE("Any settings page group tree model")
         QModelIndex index = treeModel.index(5, 0);
 
         REQUIRE(treeModel.flags(index).testFlag(Qt::NoItemFlags));
+    }
+
+    SECTION("highlights modified settings page")
+    {
+        mockPage->simulateModified(true);
+
+        QModelIndex index = treeModel.index(0, 0);
+
+        REQUIRE(treeModel.data(index, Qt::ForegroundRole) == QColor(Qt::blue));
+    }
+
+    SECTION("does not highlight unmodified settings page")
+    {
+        mockPage->simulateModified(false);
+
+        QModelIndex index = treeModel.index(0, 0);
+
+        REQUIRE(treeModel.data(index, Qt::ForegroundRole) == QVariant());
     }
 }

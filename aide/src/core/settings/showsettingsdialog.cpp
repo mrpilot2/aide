@@ -39,7 +39,8 @@ void ShowSettingsDialog::changeSelectedPage(
     if (auto view = settingsDialog.lock(); view != nullptr) {
         updateDisplayName(selectedIndex);
 
-        currentlySelectedPage = findCorrespondingSettingsPage(selectedIndex);
+        currentlySelectedPage =
+            treeModel->findCorrespondingSettingsPage(selectedIndex);
 
         if (currentlySelectedPage != nullptr) {
             showSelectedPageWidget(currentlySelectedPage->widget());
@@ -70,28 +71,6 @@ void ShowSettingsDialog::checkChangeSelectedPagePreConditions(
         logger->critical(message);
         throw std::logic_error(message);
     }
-}
-
-aide::core::SettingsPagePtr ShowSettingsDialog::findCorrespondingSettingsPage(
-    const QModelIndex& selectedIndex) const
-{
-    auto completeGroupIndex =
-        treeModel->index(selectedIndex.row(), 1, selectedIndex.parent());
-    auto completeGroupName{treeModel->data(completeGroupIndex, Qt::DisplayRole)
-                               .toString()
-                               .toStdString()};
-
-    const auto& pages = SettingsPageRegistry::settingsPages();
-
-    if (auto it = std::find_if(pages.begin(), pages.end(),
-                               [completeGroupName](const auto& page) {
-                                   return page->group().name() ==
-                                          completeGroupName;
-                               });
-        it != pages.end()) {
-        return *it;
-    }
-    return nullptr;
 }
 
 void ShowSettingsDialog::updateDisplayName(
