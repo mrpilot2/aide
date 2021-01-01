@@ -121,4 +121,148 @@ TEST_CASE("Any show settings dialog use case")
 
         REQUIRE(view->currentlyShownWidget() != nullptr);
     }
+
+    SECTION(
+        "shows reset label if any GUI element has changed and page is modified")
+    {
+        SettingsPageRegistry::deleteAllPages();
+
+        auto page =
+            std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
+        SettingsPageRegistry::addPage(page);
+
+        aide::core::SettingsPageGroupTreeModel treeModel;
+
+        useCase.showSettingsDialog();
+
+        useCase.changeSelectedPage(
+            QItemSelection(treeModel.index(0, 0, QModelIndex()),
+                           treeModel.index(0, 0, QModelIndex())),
+            QItemSelection(treeModel.index(-1, -1, QModelIndex()),
+                           treeModel.index(-1, -1, QModelIndex())));
+
+        page->simulateModified(true);
+
+        useCase.anyGuiElementHasChanged();
+
+        REQUIRE(view->isResetLabelVisible());
+    }
+
+    SECTION(
+        "hide reset label if any GUI element has changed and page is not "
+        "modified")
+    {
+        SettingsPageRegistry::deleteAllPages();
+
+        auto page =
+            std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
+        SettingsPageRegistry::addPage(page);
+
+        aide::core::SettingsPageGroupTreeModel treeModel;
+
+        useCase.showSettingsDialog();
+
+        useCase.changeSelectedPage(
+            QItemSelection(treeModel.index(0, 0, QModelIndex()),
+                           treeModel.index(0, 0, QModelIndex())),
+            QItemSelection(treeModel.index(-1, -1, QModelIndex()),
+                           treeModel.index(-1, -1, QModelIndex())));
+
+        page->simulateModified(false);
+
+        useCase.anyGuiElementHasChanged();
+
+        REQUIRE(!view->isResetLabelVisible());
+    }
+
+    SECTION(
+        "enables apply button if any GUI element has changed and page is "
+        "modified")
+    {
+        SettingsPageRegistry::deleteAllPages();
+
+        auto page =
+            std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
+        SettingsPageRegistry::addPage(page);
+
+        aide::core::SettingsPageGroupTreeModel treeModel;
+
+        useCase.showSettingsDialog();
+
+        useCase.changeSelectedPage(
+            QItemSelection(treeModel.index(0, 0, QModelIndex()),
+                           treeModel.index(0, 0, QModelIndex())),
+            QItemSelection(treeModel.index(-1, -1, QModelIndex()),
+                           treeModel.index(-1, -1, QModelIndex())));
+
+        page->simulateModified(true);
+
+        useCase.anyGuiElementHasChanged();
+
+        REQUIRE(view->isApplyButtonEnabled());
+    }
+
+    SECTION(
+        "disables apply button if any GUI element has changed and no page is "
+        "modified")
+    {
+        SettingsPageRegistry::deleteAllPages();
+
+        auto page1 =
+            std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
+        auto page2 =
+            std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage2"));
+
+        SettingsPageRegistry::addPage(page1);
+        SettingsPageRegistry::addPage(page2);
+
+        aide::core::SettingsPageGroupTreeModel treeModel;
+
+        useCase.showSettingsDialog();
+
+        useCase.changeSelectedPage(
+            QItemSelection(treeModel.index(0, 0, QModelIndex()),
+                           treeModel.index(0, 0, QModelIndex())),
+            QItemSelection(treeModel.index(-1, -1, QModelIndex()),
+                           treeModel.index(-1, -1, QModelIndex())));
+
+        page1->simulateModified(false);
+        page2->simulateModified(false);
+
+        useCase.anyGuiElementHasChanged();
+
+        REQUIRE(!view->isApplyButtonEnabled());
+    }
+
+    SECTION(
+        "does not disable apply button if any GUI element has changed and is "
+        "modified but another page is modified")
+    {
+        SettingsPageRegistry::deleteAllPages();
+
+        auto page1 =
+            std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
+        auto page2 =
+            std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage2"));
+
+        SettingsPageRegistry::addPage(page1);
+        SettingsPageRegistry::addPage(page2);
+
+        aide::core::SettingsPageGroupTreeModel treeModel;
+
+        useCase.showSettingsDialog();
+
+        useCase.changeSelectedPage(
+            QItemSelection(treeModel.index(0, 0, QModelIndex()),
+                           treeModel.index(0, 0, QModelIndex())),
+            QItemSelection(treeModel.index(-1, -1, QModelIndex()),
+                           treeModel.index(-1, -1, QModelIndex())));
+
+        page1->simulateModified(false);
+        page2->simulateModified(true);
+
+        useCase.anyGuiElementHasChanged();
+
+        REQUIRE(view->isApplyButtonEnabled());
+    }
 }

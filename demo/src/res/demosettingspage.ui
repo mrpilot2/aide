@@ -114,13 +114,13 @@
       <string>GroupBox</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="3" column="1" rowspan="5" colspan="2">
+      <item row="2" column="1" rowspan="5" colspan="2">
        <widget class="QPlainTextEdit" name="plainTextEdit"/>
       </item>
-      <item row="3" column="4">
+      <item row="2" column="4">
        <widget class="QSpinBox" name="spinBox_2"/>
       </item>
-      <item row="4" column="6">
+      <item row="3" column="6">
        <widget class="QKeySequenceEdit" name="keySequenceEdit_2">
         <property name="keySequence">
          <string>Ctrl+F</string>
@@ -130,7 +130,7 @@
       <item row="0" column="2" colspan="2">
        <widget class="QFontComboBox" name="fontComboBox_2"/>
       </item>
-      <item row="6" column="4">
+      <item row="5" column="4">
        <widget class="QDateEdit" name="dateEdit_2"/>
       </item>
       <item row="0" column="1">
@@ -140,19 +140,19 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="4">
+      <item row="3" column="4">
        <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
       </item>
-      <item row="5" column="6" rowspan="3">
+      <item row="4" column="6" rowspan="3">
        <widget class="QDial" name="dial"/>
       </item>
-      <item row="5" column="4">
+      <item row="4" column="4">
        <widget class="QTimeEdit" name="timeEdit_2"/>
       </item>
-      <item row="3" column="0" rowspan="5">
+      <item row="2" column="0" rowspan="5">
        <widget class="QTextEdit" name="textEdit_2"/>
       </item>
-      <item row="7" column="4">
+      <item row="6" column="4">
        <widget class="QDateTimeEdit" name="dateTimeEdit_2"/>
       </item>
       <item row="1" column="1">
@@ -181,17 +181,14 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="6">
+      <item row="2" column="6">
        <widget class="QSlider" name="horizontalSlider_2">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
        </widget>
       </item>
-      <item row="3" column="3" rowspan="5">
-       <widget class="QTableWidget" name="tableWidget_2"/>
-      </item>
-      <item row="3" column="5" rowspan="5">
+      <item row="2" column="5" rowspan="5">
        <widget class="QSlider" name="verticalSlider_2">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -205,13 +202,6 @@
        <widget class="QRadioButton" name="radioButton_4">
         <property name="text">
          <string>RadioButton</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="3">
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="text">
-         <string>Add to table after 1 second</string>
         </property>
        </widget>
       </item>

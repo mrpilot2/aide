@@ -25,6 +25,10 @@ namespace aide::core
         virtual void showSelectedPageWidget(QWidget* widget) = 0;
 
         virtual void showEmptyPageWidget() = 0;
+
+        virtual void showResetLabel(bool show) = 0;
+
+        virtual void enableApplyButton(bool enable) = 0;
     };
 
     using SettingsDialogWeakPtr = std::weak_ptr<SettingsDialogInterface>;

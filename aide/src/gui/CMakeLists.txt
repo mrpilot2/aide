@@ -32,6 +32,7 @@ target_sources(
   PRIVATE
     mainwindow.cpp
     mainwindowcontroller.cpp
+    settings/changedetector.cpp
     settings/settingsdialog.cpp
     settings/settingsdialogcontroller.cpp
     $<$<TARGET_EXISTS:Qt5::lrelease>:applicationtranslator.cpp>

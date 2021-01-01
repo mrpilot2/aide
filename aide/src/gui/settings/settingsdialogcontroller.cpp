@@ -12,3 +12,8 @@ void SettingsDialogController::onUserChangedSelectedPage(
 {
     controller.changeSelectedPage(selected, deselected);
 }
+
+void SettingsDialogController::onUserChangedAGuiElement()
+{
+    controller.anyGuiElementHasChanged();
+}

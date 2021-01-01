@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <QWidget>
 
+#include "changedetector.hpp"
 #include "ui_settingsdialog.h"
 
 using aide::gui::SettingsDialog;
@@ -24,6 +25,8 @@ SettingsDialog::SettingsDialog(QWidget* parent)
     ui->treeView->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
     ui->treeView->header()->setStretchLastSection(false);
     ui->treeView->header()->setVisible(false);
+
+    ui->resetLabel->hide();
 }
 
 SettingsDialog::~SettingsDialog() = default;
@@ -64,6 +67,8 @@ void SettingsDialog::showSelectedPageWidget(QWidget* widget)
     ui->settingsPageScrollArea->takeWidget();
 
     ui->settingsPageScrollArea->setWidget(widget);
+
+    installChangeDetector(widget);
 }
 
 void SettingsDialog::showEmptyPageWidget()
@@ -71,4 +76,20 @@ void SettingsDialog::showEmptyPageWidget()
     ui->settingsPageScrollArea->takeWidget();
 
     ui->settingsPageScrollArea->setWidget(ui->defaultScrollAreaWidget);
+}
+
+void SettingsDialog::showResetLabel(bool show)
+{
+    ui->resetLabel->setVisible(show);
+}
+
+void SettingsDialog::enableApplyButton(bool enable)
+{
+    ui->leaveDialogButtonBox->button(QDialogButtonBox::Apply)
+        ->setEnabled(enable);
+}
+
+void SettingsDialog::installChangeDetector(QObject* widget)
+{
+    aide::gui::installChangeDetector(widget, settingsController);
 }

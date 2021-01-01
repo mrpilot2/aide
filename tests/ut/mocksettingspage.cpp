@@ -27,3 +27,13 @@ QWidget* MockSettingsPage::widget()
 {
     return mockWidget.get();
 }
+
+void MockSettingsPage::simulateModified(bool modified)
+{
+    pageIsModified = modified;
+}
+
+bool MockSettingsPage::isModified() const
+{
+    return pageIsModified;
+}

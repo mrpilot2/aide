@@ -1,32 +1,40 @@
 #ifndef AIDE_DEMO_SETTINGS_PAGE_HPP
 #define AIDE_DEMO_SETTINGS_PAGE_HPP
 
+#include <QTimer>
+
 #include <aide/hierarchicalid.hpp>
 #include <aide/settings/settingspage.hpp>
-
-class QCheckBox;
-class QFormLayout;
-class QLabel;
 
 namespace Ui
 {
     class DemoSettingsPage;
 } // namespace Ui
 
-class DemoSettingsPage : public aide::core::SettingsPage
+class DemoSettingsPage
+    : public QObject
+    , public aide::core::SettingsPage
 {
+    Q_OBJECT
 public:
     DemoSettingsPage(aide::HierarchicalId group);
 
-    ~DemoSettingsPage() override;
+    ~DemoSettingsPage();
 
     [[nodiscard]] QWidget* widget() override;
+
+    bool isModified() const override;
+
+private slots:
+
+    void insertIntoTableWidget();
 
 private:
     void createWidget();
 
     std::unique_ptr<Ui::DemoSettingsPage> m_ui;
 
+    std::unique_ptr<QTimer> m_tableInsertTimer;
     QWidget* m_widget;
 };
 

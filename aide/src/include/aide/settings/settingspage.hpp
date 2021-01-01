@@ -25,6 +25,8 @@ namespace aide::core
 
         [[nodiscard]] virtual QWidget* widget() = 0;
 
+        [[nodiscard]] virtual bool isModified() const = 0;
+
     private:
         HierarchicalId settingsGroup;
     };

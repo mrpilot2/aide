@@ -38,3 +38,23 @@ QWidget* MockSettingsDialog::currentlyShownWidget() const
 {
     return settingsWidget;
 }
+
+void MockSettingsDialog::showResetLabel(bool show)
+{
+    resetLabelIsVisible = show;
+}
+
+bool MockSettingsDialog::isResetLabelVisible() const
+{
+    return resetLabelIsVisible;
+}
+
+void MockSettingsDialog::enableApplyButton(bool enable)
+{
+    applyButtonIsEnabled = enable;
+}
+
+bool MockSettingsDialog::isApplyButtonEnabled() const
+{
+    return applyButtonIsEnabled;
+}

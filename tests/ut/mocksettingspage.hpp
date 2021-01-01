@@ -20,8 +20,14 @@ namespace aide::test
 
         QWidget* widget() override;
 
+        void simulateModified(bool modified);
+
+        [[nodiscard]] bool isModified() const override;
+
     private:
         std::shared_ptr<QWidget> mockWidget;
+
+        bool pageIsModified{false};
     };
 } // namespace aide::test
 

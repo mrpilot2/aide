@@ -24,6 +24,8 @@ namespace aide::gui
         void onUserChangedSelectedPage(const QItemSelection& selected,
                                        const QItemSelection& deselected);
 
+        void onUserChangedAGuiElement();
+
     private:
         aide::core::SettingsDialogChangePageController& controller;
     };

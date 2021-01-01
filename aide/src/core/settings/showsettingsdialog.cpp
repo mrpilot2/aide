@@ -36,14 +36,18 @@ void ShowSettingsDialog::changeSelectedPage(
 
     auto selectedIndex = selected.indexes().at(0);
 
-    updateDisplayName(selectedIndex);
+    if (auto view = settingsDialog.lock(); view != nullptr) {
+        updateDisplayName(selectedIndex);
 
-    const auto settingsPage = findCorrespondingSettingsPage(selectedIndex);
+        currentlySelectedPage = findCorrespondingSettingsPage(selectedIndex);
 
-    if (settingsPage != nullptr) {
-        showSelectedPageWidget(settingsPage->widget());
-    } else {
-        showEmptyPageWidget();
+        if (currentlySelectedPage != nullptr) {
+            showSelectedPageWidget(currentlySelectedPage->widget());
+            view->showResetLabel(currentlySelectedPage->isModified());
+        } else {
+            showEmptyPageWidget();
+            view->showResetLabel(false);
+        }
     }
 }
 
@@ -118,5 +122,17 @@ void ShowSettingsDialog::showEmptyPageWidget() const
 {
     if (auto d = settingsDialog.lock(); d != nullptr) {
         d->showEmptyPageWidget();
+    }
+}
+
+void ShowSettingsDialog::anyGuiElementHasChanged()
+{
+    if (auto d = settingsDialog.lock(); d != nullptr) {
+        d->showResetLabel(currentlySelectedPage->isModified());
+        const auto& pages = SettingsPageRegistry::settingsPages();
+
+        d->enableApplyButton(
+            std::any_of(pages.begin(), pages.end(),
+                        [](const auto& p) { return p->isModified(); }));
     }
 }

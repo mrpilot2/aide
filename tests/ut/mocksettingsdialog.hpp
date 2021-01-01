@@ -25,12 +25,24 @@ namespace aide::test
 
         [[nodiscard]] QWidget* currentlyShownWidget() const;
 
+        void showResetLabel(bool show) override;
+
+        [[nodiscard]] bool isResetLabelVisible() const;
+
+        void enableApplyButton(bool enable) override;
+
+        [[nodiscard]] bool isApplyButtonEnabled() const;
+
     private:
         bool settingsDialogWasExecuted{false};
 
         std::string currentDisplayName;
 
         QWidget* settingsWidget{nullptr};
+
+        bool resetLabelIsVisible{false};
+
+        bool applyButtonIsEnabled{false};
     };
 } // namespace aide::test
 

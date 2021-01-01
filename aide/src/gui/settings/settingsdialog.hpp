@@ -42,12 +42,17 @@ namespace aide::gui
 
         void showEmptyPageWidget() override;
 
+        void showResetLabel(bool show) override;
+
+        void enableApplyButton(bool enable) override;
+
     private:
         void connectSignals();
 
         std::unique_ptr<Ui::SettingsDialog> ui;
 
         SettingsDialogControllerPtr settingsController;
+        void installChangeDetector(QObject* widget);
     };
 
 } // namespace aide::gui

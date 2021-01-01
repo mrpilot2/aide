@@ -21,6 +21,8 @@ namespace aide::core
 
         virtual void changeSelectedPage(const QItemSelection& selected,
                                         const QItemSelection& deselected) = 0;
+
+        virtual void anyGuiElementHasChanged() = 0;
     };
 } // namespace aide::core
 
