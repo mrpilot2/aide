@@ -28,6 +28,9 @@ SettingsDialog::SettingsDialog(QWidget* parent)
     ui->treeView->header()->setVisible(false);
 
     ui->resetLabel->hide();
+
+    ui->splitter->setStretchFactor(0, 0);
+    ui->splitter->setStretchFactor(1, 3);
 }
 
 SettingsDialog::~SettingsDialog() = default;
@@ -58,8 +61,6 @@ void SettingsDialog::setTreeModel(std::shared_ptr<QAbstractItemModel> model)
     ui->treeView->setModel(model.get());
     ui->treeView->hideColumn(1);
     ui->treeView->resizeColumnToContents(0);
-    ui->splitter->setSizes({ui->treeView->size().width(),
-                            ui->settingsPageLayout->sizeHint().width()});
 
     connect(ui->treeView->selectionModel(),
             &QItemSelectionModel::selectionChanged, settingsController.get(),
