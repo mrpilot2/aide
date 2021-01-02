@@ -7,6 +7,7 @@
 
 #include "settings/settingsdialoginterface.hpp"
 #include "settingsdialogcontroller.hpp"
+#include "userselection.hpp"
 
 namespace Ui
 {
@@ -33,7 +34,7 @@ namespace aide::gui
 
         void setTreeModel(std::shared_ptr<QAbstractItemModel> model) override;
 
-        void executeDialog() override;
+        aide::core::UserSelection executeDialog() override;
 
         void setSelectedPageDisplayName(
             const std::string& displayName) override;
@@ -49,10 +50,11 @@ namespace aide::gui
     private:
         void connectSignals();
 
+        void installChangeDetector(QObject* widget);
+
         std::unique_ptr<Ui::SettingsDialog> ui;
 
         SettingsDialogControllerPtr settingsController;
-        void installChangeDetector(QObject* widget);
     };
 
 } // namespace aide::gui

@@ -37,3 +37,34 @@ bool MockSettingsPage::isModified() const
 {
     return pageIsModified;
 }
+
+void MockSettingsPage::reset()
+{
+    ++resetCounter;
+    resetWasCalled = true;
+}
+
+bool MockSettingsPage::wasResetCalled() const
+{
+    return resetWasCalled;
+}
+
+void MockSettingsPage::clearResetWasCalled()
+{
+    resetCounter   = 0;
+    resetWasCalled = false;
+}
+
+uint16_t MockSettingsPage::numberOfTimesResetWasCalled() const
+{
+    return resetCounter;
+}
+
+void MockSettingsPage::apply()
+{
+    applyWasCalled = true;
+}
+bool MockSettingsPage::wasApplyCalled() const
+{
+    return applyWasCalled;
+}

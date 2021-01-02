@@ -25,7 +25,21 @@ void ShowSettingsDialog::showSettingsDialog()
 
     treeModel = std::make_shared<SettingsPageGroupTreeModel>();
     dialog->setTreeModel(treeModel);
-    dialog->executeDialog();
+
+    const auto& pages = SettingsPageRegistry::settingsPages();
+    std::for_each(pages.begin(), pages.end(),
+                  [](const auto& p) { p->reset(); });
+
+    auto result = dialog->executeDialog();
+
+    if (result == UserSelection::Ok) {
+        applyModifiedSettingsPages();
+    } else {
+        resetModifiedSettingsPages();
+    }
+
+    dialog->showEmptyPageWidget();
+    dialog->setSelectedPageDisplayName("");
 }
 
 void ShowSettingsDialog::changeSelectedPage(
@@ -113,5 +127,32 @@ void ShowSettingsDialog::anyGuiElementHasChanged()
         d->enableApplyButton(
             std::any_of(pages.begin(), pages.end(),
                         [](const auto& p) { return p->isModified(); }));
+    }
+}
+
+void ShowSettingsDialog::resetCurrentPage()
+{
+    if (currentlySelectedPage != nullptr) {
+        currentlySelectedPage->reset();
+        anyGuiElementHasChanged();
+    }
+}
+
+void ShowSettingsDialog::resetModifiedSettingsPages()
+{
+    const auto& pages = SettingsPageRegistry::settingsPages();
+    for (const auto& page : pages) {
+        if (page->isModified()) { page->reset(); }
+    }
+}
+
+void ShowSettingsDialog::applyModifiedSettingsPages()
+{
+    const auto& pages = SettingsPageRegistry::settingsPages();
+    for (const auto& page : pages) {
+        if (page->isModified()) {
+            page->apply();
+            if (page == currentlySelectedPage) { anyGuiElementHasChanged(); }
+        }
     }
 }

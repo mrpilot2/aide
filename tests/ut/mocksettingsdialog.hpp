@@ -2,13 +2,13 @@
 #define AIDE_MOCK_SETTINGS_DIALOG_HPP
 
 #include "settings/settingsdialoginterface.hpp"
-
+#include "userselection.hpp"
 namespace aide::test
 {
     class MockSettingsDialog : public aide::core::SettingsDialogInterface
     {
     public:
-        void executeDialog() override;
+        aide::core::UserSelection executeDialog() override;
 
         [[nodiscard]] bool wasSettingsDialogExecuted() const;
 
@@ -33,6 +33,8 @@ namespace aide::test
 
         [[nodiscard]] bool isApplyButtonEnabled() const;
 
+        void simulateUserAcceptsDialog(bool accept);
+
     private:
         bool settingsDialogWasExecuted{false};
 
@@ -43,6 +45,8 @@ namespace aide::test
         bool resetLabelIsVisible{false};
 
         bool applyButtonIsEnabled{false};
+
+        bool userShallAcceptDialog{false};
     };
 } // namespace aide::test
 

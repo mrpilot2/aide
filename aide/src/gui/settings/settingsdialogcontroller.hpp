@@ -26,6 +26,10 @@ namespace aide::gui
 
         void onUserChangedAGuiElement();
 
+        void onUserWantsToResetCurrentPage();
+
+        void onUserWantsToApplySettingsPages();
+
     private:
         aide::core::SettingsDialogChangePageController& controller;
     };

@@ -265,4 +265,122 @@ TEST_CASE("Any show settings dialog use case")
 
         REQUIRE(view->isApplyButtonEnabled());
     }
+
+    SECTION("applies settings for modified pages if user presses apply button")
+    {
+        SettingsPageRegistry::deleteAllPages();
+
+        auto page1 =
+            std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
+        auto page2 =
+            std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage2"));
+
+        SettingsPageRegistry::addPage(page1);
+        SettingsPageRegistry::addPage(page2);
+
+        aide::core::SettingsPageGroupTreeModel treeModel;
+
+        useCase.showSettingsDialog();
+
+        useCase.changeSelectedPage(
+            QItemSelection(treeModel.index(0, 0, QModelIndex()),
+                           treeModel.index(0, 0, QModelIndex())),
+            QItemSelection(treeModel.index(-1, -1, QModelIndex()),
+                           treeModel.index(-1, -1, QModelIndex())));
+
+        page1->simulateModified(false);
+        page2->simulateModified(true);
+
+        useCase.applyModifiedSettingsPages();
+
+        REQUIRE(!page1->wasApplyCalled());
+        REQUIRE(page2->wasApplyCalled());
+    }
+
+    SECTION("applies settings for modified pages if user presses Ok button")
+    {
+        SettingsPageRegistry::deleteAllPages();
+
+        auto page1 =
+            std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
+        auto page2 =
+            std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage2"));
+
+        SettingsPageRegistry::addPage(page1);
+        SettingsPageRegistry::addPage(page2);
+
+        aide::core::SettingsPageGroupTreeModel treeModel;
+
+        page1->simulateModified(false);
+        page2->simulateModified(true);
+
+        view->simulateUserAcceptsDialog(true);
+
+        useCase.showSettingsDialog();
+
+        REQUIRE(!page1->wasApplyCalled());
+        REQUIRE(page2->wasApplyCalled());
+    }
+
+    SECTION("resets currently shown page if user presses reset label")
+    {
+        SettingsPageRegistry::deleteAllPages();
+
+        auto page1 =
+            std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
+        auto page2 =
+            std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage2"));
+
+        SettingsPageRegistry::addPage(page1);
+        SettingsPageRegistry::addPage(page2);
+
+        aide::core::SettingsPageGroupTreeModel treeModel;
+
+        useCase.showSettingsDialog();
+
+        useCase.changeSelectedPage(
+            QItemSelection(treeModel.index(1, 1, QModelIndex()),
+                           treeModel.index(1, 1, QModelIndex())),
+            QItemSelection(treeModel.index(-1, -1, QModelIndex()),
+                           treeModel.index(-1, -1, QModelIndex())));
+
+        page1->simulateModified(true);
+        page2->simulateModified(true);
+
+        // reset is also called when dialog is shown for the first time
+        page1->clearResetWasCalled();
+        page2->clearResetWasCalled();
+
+        useCase.resetCurrentPage();
+
+        REQUIRE(!page1->wasResetCalled());
+        REQUIRE(page2->wasResetCalled());
+    }
+
+    SECTION("resets all modified pages if user cancels")
+    {
+        SettingsPageRegistry::deleteAllPages();
+
+        auto page1 =
+            std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
+        auto page2 =
+            std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage2"));
+
+        SettingsPageRegistry::addPage(page1);
+        SettingsPageRegistry::addPage(page2);
+
+        aide::core::SettingsPageGroupTreeModel treeModel;
+
+        page1->simulateModified(true);
+        page2->simulateModified(false);
+
+        view->simulateUserAcceptsDialog(false);
+
+        useCase.showSettingsDialog();
+
+        // once when dialog is shown for the first time and once when dialog
+        // is canceled
+        REQUIRE(page1->numberOfTimesResetWasCalled() == 2);
+        REQUIRE(page2->numberOfTimesResetWasCalled() == 1);
+    }
 }

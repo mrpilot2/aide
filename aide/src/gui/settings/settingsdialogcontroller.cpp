@@ -17,3 +17,13 @@ void SettingsDialogController::onUserChangedAGuiElement()
 {
     controller.anyGuiElementHasChanged();
 }
+
+void SettingsDialogController::onUserWantsToResetCurrentPage()
+{
+    controller.resetCurrentPage();
+}
+
+void SettingsDialogController::onUserWantsToApplySettingsPages()
+{
+    controller.applyModifiedSettingsPages();
+}

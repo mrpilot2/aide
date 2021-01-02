@@ -9,6 +9,7 @@
 #include "changedetector.hpp"
 #include "ui_settingsdialog.h"
 
+using aide::core::UserSelection;
 using aide::gui::SettingsDialog;
 using aide::gui::SettingsDialogController;
 
@@ -37,11 +38,19 @@ void SettingsDialog::setController(SettingsDialogControllerPtr controller)
     connectSignals();
 }
 
-void SettingsDialog::connectSignals() {}
-
-void SettingsDialog::executeDialog()
+void SettingsDialog::connectSignals()
 {
-    this->exec();
+    connect(ui->resetLabel, &QLabel::linkActivated, settingsController.get(),
+            &SettingsDialogController::onUserWantsToResetCurrentPage);
+    connect(ui->leaveDialogButtonBox->button(QDialogButtonBox::Apply),
+            &QPushButton::clicked, settingsController.get(),
+            &SettingsDialogController::onUserWantsToApplySettingsPages);
+}
+
+UserSelection SettingsDialog::executeDialog()
+{
+    return (this->exec() == QDialog::Accepted) ? UserSelection::Ok
+                                               : UserSelection::Cancel;
 }
 
 void SettingsDialog::setTreeModel(std::shared_ptr<QAbstractItemModel> model)

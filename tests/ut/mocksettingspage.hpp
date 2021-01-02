@@ -24,10 +24,28 @@ namespace aide::test
 
         [[nodiscard]] bool isModified() const override;
 
+        void reset() override;
+
+        [[nodiscard]] bool wasResetCalled() const;
+
+        void clearResetWasCalled();
+
+        uint16_t numberOfTimesResetWasCalled() const;
+
+        void apply() override;
+
+        [[nodiscard]] bool wasApplyCalled() const;
+
     private:
         std::shared_ptr<QWidget> mockWidget;
 
         bool pageIsModified{false};
+
+        bool applyWasCalled{false};
+
+        bool resetWasCalled{false};
+
+        uint16_t resetCounter{0};
     };
 } // namespace aide::test
 

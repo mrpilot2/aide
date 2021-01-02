@@ -1,10 +1,12 @@
 #include "mocksettingsdialog.hpp"
 
+using aide::core::UserSelection;
 using aide::test::MockSettingsDialog;
 
-void MockSettingsDialog::executeDialog()
+UserSelection MockSettingsDialog::executeDialog()
 {
     settingsDialogWasExecuted = true;
+    return userShallAcceptDialog ? UserSelection::Ok : UserSelection::Cancel;
 }
 
 bool MockSettingsDialog::wasSettingsDialogExecuted() const
@@ -57,4 +59,9 @@ void MockSettingsDialog::enableApplyButton(bool enable)
 bool MockSettingsDialog::isApplyButtonEnabled() const
 {
     return applyButtonIsEnabled;
+}
+
+void MockSettingsDialog::simulateUserAcceptsDialog(bool accept)
+{
+    userShallAcceptDialog = accept;
 }

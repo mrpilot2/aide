@@ -23,6 +23,10 @@ namespace aide::core
                                         const QItemSelection& deselected) = 0;
 
         virtual void anyGuiElementHasChanged() = 0;
+
+        virtual void resetCurrentPage() = 0;
+
+        virtual void applyModifiedSettingsPages() = 0;
     };
 } // namespace aide::core
 

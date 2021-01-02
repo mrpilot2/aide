@@ -4,6 +4,8 @@
 #include <memory>
 #include <string>
 
+#include "userselection.hpp"
+
 class QAbstractItemModel;
 class QWidget;
 
@@ -17,7 +19,7 @@ namespace aide::core
         virtual void setTreeModel(
             std::shared_ptr<QAbstractItemModel> model) = 0;
 
-        virtual void executeDialog() = 0;
+        virtual aide::core::UserSelection executeDialog() = 0;
 
         virtual void setSelectedPageDisplayName(
             const std::string& displayName) = 0;

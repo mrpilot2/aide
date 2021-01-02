@@ -4,14 +4,10 @@
 #include <memory>
 #include <tuple>
 
+#include "userselection.hpp"
+
 namespace aide::core
 {
-    enum class UserSelection
-    {
-        Exit = 0,
-        Cancel
-    };
-
     class ApplicationCloseView
     {
     public:

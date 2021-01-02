@@ -27,6 +27,10 @@ namespace aide::core
 
         [[nodiscard]] virtual bool isModified() const = 0;
 
+        virtual void reset() = 0;
+
+        virtual void apply() = 0;
+
     private:
         HierarchicalId settingsGroup;
     };

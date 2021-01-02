@@ -26,6 +26,10 @@ namespace aide::core
 
         void anyGuiElementHasChanged() override;
 
+        void resetCurrentPage() override;
+
+        void applyModifiedSettingsPages() override;
+
     private:
         void checkChangeSelectedPagePreConditions(
             const QItemSelection& selected) const;
@@ -36,11 +40,12 @@ namespace aide::core
 
         void showEmptyPageWidget() const;
 
+        void resetModifiedSettingsPages();
+
         SettingsDialogWeakPtr settingsDialog;
-
         std::shared_ptr<SettingsPageGroupTreeModel> treeModel;
-        const LoggerPtr logger;
 
+        const LoggerPtr logger;
         SettingsPagePtr currentlySelectedPage{nullptr};
     };
 } // namespace aide::core
