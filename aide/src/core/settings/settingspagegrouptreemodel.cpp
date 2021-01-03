@@ -165,3 +165,22 @@ SettingsPagePtr SettingsPageGroupTreeModel::findCorrespondingSettingsPage(
     }
     return nullptr;
 }
+
+QModelIndex SettingsPageGroupTreeModel::recursivelyFindSelectedTreeItemIndex(
+    const QString& groupName, const QModelIndex& parent) const
+{
+    QModelIndex index;
+    for (int i = 0; i < rowCount(parent); ++i) {
+        index                          = this->index(i, 0, parent);
+        QModelIndex completeGroupIndex = this->index(i, 1, parent);
+
+        if (completeGroupIndex.data(Qt::DisplayRole).toString() == groupName) {
+            return index;
+        }
+
+        index = recursivelyFindSelectedTreeItemIndex(groupName, index);
+        if (index.isValid()) { break; }
+    }
+
+    return index;
+}

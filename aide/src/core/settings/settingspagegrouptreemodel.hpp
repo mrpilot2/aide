@@ -44,6 +44,9 @@ namespace aide::core
         SettingsPagePtr findCorrespondingSettingsPage(
             const QModelIndex& selectedIndex) const;
 
+        QModelIndex recursivelyFindSelectedTreeItemIndex(
+            const QString& groupName, const QModelIndex& parent) const;
+
     private:
         static void setupModelData(const TreeItemPtr& parent);
 
