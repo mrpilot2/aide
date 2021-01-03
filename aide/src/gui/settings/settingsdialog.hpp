@@ -5,6 +5,7 @@
 
 #include <QDialog>
 
+#include "settings/settingsdialoggeometryandstatecontroller.hpp"
 #include "settings/settingsdialoginterface.hpp"
 #include "settingsdialogcontroller.hpp"
 #include "userselection.hpp"
@@ -24,7 +25,7 @@ namespace aide::gui
     {
     public:
         explicit SettingsDialog(QWidget* parent = nullptr);
-        ~SettingsDialog();
+        ~SettingsDialog() override;
         SettingsDialog(const SettingsDialog&) = delete;
         SettingsDialog& operator=(const SettingsDialog&) = delete;
         SettingsDialog(SettingsDialog&&)                 = delete;
@@ -33,6 +34,15 @@ namespace aide::gui
         void setController(SettingsDialogControllerPtr controller);
 
         void setTreeModel(std::shared_ptr<QAbstractItemModel> model) override;
+
+        void restoreGeometryAndState(
+            aide::core::SettingsDialogGeometryAndStateData geometryAndStateData)
+            override;
+
+        void setSelectedGroupIndex(const QModelIndex& index) override;
+
+        [[nodiscard]] aide::core::SettingsDialogGeometryAndStateData
+        currentGeometry() const override;
 
         aide::core::UserSelection executeDialog() override;
 

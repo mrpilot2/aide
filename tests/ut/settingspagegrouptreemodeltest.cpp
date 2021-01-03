@@ -177,4 +177,27 @@ TEST_CASE("Any settings page group tree model")
                     QString::fromStdString(subSubPage2->group().name()),
                     QModelIndex()) == expectedIndex);
     }
+
+    SECTION("can recursively be search for a ModelIndex by group name test 2")
+    {
+        SettingsPageRegistry::deleteAllPages();
+
+        auto subSubPage1 =
+            std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
+        auto subSubPage2 = std::make_shared<MockSettingsPage>(
+            HierarchicalId("MockTestPage2")("SubPage")("SubSubPage2"));
+
+        SettingsPageRegistry::addPage(subSubPage1);
+        SettingsPageRegistry::addPage(subSubPage2);
+
+        SettingsPageGroupTreeModel recursiveTreeModel;
+
+        auto root          = recursiveTreeModel.index(1, 0, QModelIndex());
+        auto subPage       = recursiveTreeModel.index(0, 0, root);
+        auto expectedIndex = recursiveTreeModel.index(0, 0, subPage);
+
+        REQUIRE(recursiveTreeModel.recursivelyFindSelectedTreeItemIndex(
+                    QString::fromStdString(subSubPage2->group().name()),
+                    QModelIndex()) == expectedIndex);
+    }
 }

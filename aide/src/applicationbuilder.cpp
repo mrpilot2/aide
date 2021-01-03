@@ -26,7 +26,9 @@ ApplicationBuilder::ApplicationBuilder()
                          *(m_settingsProvider->versionableSettings()))
     , m_mainWindowGeometryAndState(
           m_mainWindow, *(m_settingsProvider->unversionableSettings()))
-    , m_showSettingsDialog(m_settingsDialog, m_logger)
+    , m_showSettingsDialog(m_settingsDialog,
+                           *(m_settingsProvider->unversionableSettings()),
+                           m_logger)
     , m_settingsDialogController(
           std::make_shared<SettingsDialogController>(m_showSettingsDialog))
     , m_mainController(std::make_shared<MainWindowController>(

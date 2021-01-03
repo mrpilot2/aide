@@ -11,10 +11,10 @@ using aide::test::MockSettings;
 void aide::test::MockSettings::setValue(const aide::HierarchicalId& groupAndKey,
                                         const QVariant& value)
 {
-    auto res = inMemorySettings.emplace(groupAndKey, value);
-    if (!res.second) {
-        throw std::runtime_error("Cannot insert into in memory settings");
-    }
+    [[maybe_unused]] auto res = inMemorySettings.emplace(groupAndKey, value);
+    //    if (!res.second) {
+    //        throw std::runtime_error("Cannot insert into in memory settings");
+    //    }
 }
 
 QVariant MockSettings::value(const aide::HierarchicalId& groupAndKey)

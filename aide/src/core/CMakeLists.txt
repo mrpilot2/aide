@@ -15,6 +15,7 @@ target_sources(
           settingsinterface.cpp
           settingsproviderinterface.cpp
           settings/settingsdialogchangepagecontroller.cpp
+          settings/settingsdialoggeometryandstate.cpp
           settings/settingspage.cpp
           settings/settingspagegrouptreemodel.cpp
           settings/settingspagegrouptreemodel.hpp

@@ -4,6 +4,7 @@
 #include <utility>
 
 #include <QItemSelection>
+#include <QPersistentModelIndex>
 
 #include "settings/settingspage.hpp"
 #include "settings/settingspageregistry.hpp"
@@ -12,9 +13,11 @@ using aide::core::SettingsPageGroupTreeModel;
 using aide::core::ShowSettingsDialog;
 
 aide::core::ShowSettingsDialog::ShowSettingsDialog(
-    aide::core::SettingsDialogWeakPtr dialog, LoggerPtr loggerInterface)
+    aide::core::SettingsDialogWeakPtr dialog, SettingsInterface& settings,
+    LoggerPtr loggerInterface)
     : settingsDialog{std::move(dialog)}
     , logger{std::move(loggerInterface)}
+    , saveGeometryAndState(settingsDialog, settings)
 {}
 
 void ShowSettingsDialog::showSettingsDialog()
@@ -23,8 +26,24 @@ void ShowSettingsDialog::showSettingsDialog()
 
     if (dialog == nullptr) { return; }
 
+    dialog->showEmptyPageWidget();
+    dialog->setSelectedPageDisplayName("");
+
     treeModel = std::make_shared<SettingsPageGroupTreeModel>();
     dialog->setTreeModel(treeModel);
+
+    saveGeometryAndState.restoreGeometryAndState();
+
+    auto lastSelectedTreeItem = saveGeometryAndState.selectedTreeViewItem();
+
+    if (!lastSelectedTreeItem.isEmpty()) {
+        auto index = treeModel->recursivelyFindSelectedTreeItemIndex(
+            lastSelectedTreeItem, QModelIndex());
+
+        dialog->setSelectedGroupIndex(index);
+    } else {
+        dialog->setSelectedGroupIndex(treeModel->index(0, 0, QModelIndex()));
+    }
 
     const auto& pages = SettingsPageRegistry::settingsPages();
     std::for_each(pages.begin(), pages.end(),
@@ -32,14 +51,13 @@ void ShowSettingsDialog::showSettingsDialog()
 
     auto result = dialog->executeDialog();
 
+    saveGeometryAndState.saveGeometryAndState(dialog->currentGeometry());
+
     if (result == UserSelection::Ok) {
         applyModifiedSettingsPages();
     } else {
         resetModifiedSettingsPages();
     }
-
-    dialog->showEmptyPageWidget();
-    dialog->setSelectedPageDisplayName("");
 }
 
 void ShowSettingsDialog::changeSelectedPage(
@@ -95,6 +113,7 @@ void ShowSettingsDialog::updateDisplayName(
     auto completeGroupString{
         treeModel->data(completeGroupIndex, Qt::DisplayRole)
             .toString()
+            .replace("/", " > ")
             .toStdString()};
 
     logger->trace("User changed settings page to {} ", completeGroupString);

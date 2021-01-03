@@ -4,10 +4,12 @@
 #include <memory>
 #include <string>
 
+#include "settings/geometryandstatedata.hpp"
 #include "userselection.hpp"
 
 class QAbstractItemModel;
 class QWidget;
+class QByteArray;
 
 namespace aide::core
 {
@@ -18,6 +20,13 @@ namespace aide::core
 
         virtual void setTreeModel(
             std::shared_ptr<QAbstractItemModel> model) = 0;
+
+        virtual void restoreGeometryAndState(
+            SettingsDialogGeometryAndStateData geometryAndStateData) = 0;
+
+        virtual void setSelectedGroupIndex(const QModelIndex& index) = 0;
+
+        virtual SettingsDialogGeometryAndStateData currentGeometry() const = 0;
 
         virtual aide::core::UserSelection executeDialog() = 0;
 

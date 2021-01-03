@@ -1,5 +1,6 @@
 #include "settingsdialog.hpp"
 
+#include <iostream>
 #include <utility>
 
 #include <QList>
@@ -9,6 +10,7 @@
 #include "changedetector.hpp"
 #include "ui_settingsdialog.h"
 
+using aide::core::SettingsDialogGeometryAndStateData;
 using aide::core::UserSelection;
 using aide::gui::SettingsDialog;
 using aide::gui::SettingsDialogController;
@@ -48,6 +50,49 @@ void SettingsDialog::connectSignals()
     connect(ui->leaveDialogButtonBox->button(QDialogButtonBox::Apply),
             &QPushButton::clicked, settingsController.get(),
             &SettingsDialogController::onUserWantsToApplySettingsPages);
+}
+
+void SettingsDialog::restoreGeometryAndState(
+    SettingsDialogGeometryAndStateData geometryAndStateData)
+{
+    this->restoreGeometry(geometryAndStateData.dialogGeometry);
+    ui->splitter->restoreGeometry(geometryAndStateData.splitterGeometry);
+    ui->splitter->restoreState(geometryAndStateData.splitterState);
+    ui->treeView->restoreGeometry(geometryAndStateData.treeViewGeometry);
+}
+
+void SettingsDialog::setSelectedGroupIndex(const QModelIndex& index)
+{
+    if (!index.isValid()) { return; }
+    ui->treeView->selectionModel()->setCurrentIndex(
+        index, QItemSelectionModel::SelectionFlag::SelectCurrent);
+}
+
+SettingsDialogGeometryAndStateData SettingsDialog::currentGeometry() const
+{
+    SettingsDialogGeometryAndStateData dialogGeometryAndStateData;
+    dialogGeometryAndStateData.dialogGeometry   = this->saveGeometry();
+    dialogGeometryAndStateData.splitterGeometry = ui->splitter->saveGeometry();
+    dialogGeometryAndStateData.splitterState    = ui->splitter->saveState();
+    dialogGeometryAndStateData.treeViewGeometry = ui->treeView->saveGeometry();
+
+    auto selectedIndexes = ui->treeView->selectionModel()->selectedIndexes();
+    if (!selectedIndexes.empty()) {
+        auto index = selectedIndexes.at(0);
+
+        if (index.isValid()) {
+            auto completeGroupIndex =
+                ui->treeView->model()->index(index.row(), 1, index.parent());
+            auto completeGroupString{
+                ui->treeView->model()
+                    ->data(completeGroupIndex, Qt::DisplayRole)
+                    .toString()};
+            dialogGeometryAndStateData.selectedTreeViewItem =
+                completeGroupString;
+        }
+    }
+
+    return dialogGeometryAndStateData;
 }
 
 UserSelection SettingsDialog::executeDialog()
@@ -98,7 +143,6 @@ void SettingsDialog::enableApplyButton(bool enable)
     ui->leaveDialogButtonBox->button(QDialogButtonBox::Apply)
         ->setEnabled(enable);
 }
-
 void SettingsDialog::installChangeDetector(QObject* widget)
 {
     aide::gui::installChangeDetector(widget, settingsController);

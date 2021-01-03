@@ -4,7 +4,9 @@
 
 #include <QItemSelection>
 
+#include "commonsettingskeys.hpp"
 #include "hierarchicalid.hpp"
+#include "mocksettings.hpp"
 #include "mocksettingsdialog.hpp"
 #include "mocksettingspage.hpp"
 #include "nulllogger.hpp"
@@ -16,15 +18,18 @@ using aide::HierarchicalId;
 using aide::core::SettingsPageRegistry;
 using aide::core::ShowSettingsDialog;
 using aide::core::ShowSettingsDialogController;
+using aide::core::settings::KEYS;
+using aide::test::MockSettings;
 using aide::test::MockSettingsDialog;
 using aide::test::MockSettingsPage;
 using aide::test::NullLogger;
 
 TEST_CASE("Any show settings dialog use case")
 {
-    auto view   = std::make_shared<MockSettingsDialog>();
+    auto view = std::make_shared<MockSettingsDialog>();
+    MockSettings settings;
     auto logger = std::make_shared<NullLogger>();
-    ShowSettingsDialog useCase{view, logger};
+    ShowSettingsDialog useCase{view, settings, logger};
 
     SECTION("shows settings dialog if requested by user")
     {
@@ -36,7 +41,7 @@ TEST_CASE("Any show settings dialog use case")
     SECTION("works with base class pointer")
     {
         std::unique_ptr<ShowSettingsDialogController> base =
-            std::make_unique<ShowSettingsDialog>(view, logger);
+            std::make_unique<ShowSettingsDialog>(view, settings, logger);
 
         base->showSettingsDialog();
 
@@ -87,7 +92,7 @@ TEST_CASE("Any show settings dialog use case")
     {
         auto base =
             std::shared_ptr<aide::core::SettingsDialogChangePageController>(
-                std::make_shared<ShowSettingsDialog>(view, logger));
+                std::make_shared<ShowSettingsDialog>(view, settings, logger));
 
         aide::core::SettingsPageGroupTreeModel treeModel;
 
@@ -382,5 +387,43 @@ TEST_CASE("Any show settings dialog use case")
         // is canceled
         REQUIRE(page1->numberOfTimesResetWasCalled() == 2);
         REQUIRE(page2->numberOfTimesResetWasCalled() == 1);
+    }
+
+    SECTION("selects first item when executed if none was save")
+    {
+        useCase.showSettingsDialog();
+
+        REQUIRE(view->getSelectedGroupIndex().row() == 0);
+        REQUIRE(view->getSelectedGroupIndex().column() == 0);
+        REQUIRE(view->getSelectedGroupIndex().parent() == QModelIndex());
+    }
+
+    SECTION("selects last selected when executed if it was saved")
+    {
+        SettingsPageRegistry::deleteAllPages();
+
+        auto page1 =
+            std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
+        auto page2 = std::make_shared<MockSettingsPage>(
+            HierarchicalId("MockTestPage2")("Subpage1")("Subpage2"));
+
+        SettingsPageRegistry::addPage(page1);
+        SettingsPageRegistry::addPage(page2);
+
+        QString dataToBeSaved{QString::fromStdString(page2->group().name())};
+
+        settings.setValue(KEYS().UI.SETTINGS_DIALOG_TREE_VIEW_SELECTED_ITEM_KEY,
+                          dataToBeSaved);
+
+        useCase.showSettingsDialog();
+
+        REQUIRE(view->getSelectedGroupIndex().row() == 0);
+        REQUIRE(view->getSelectedGroupIndex().column() == 0);
+        REQUIRE(view->getSelectedGroupIndex().parent().row() == 0);
+        REQUIRE(view->getSelectedGroupIndex().parent().column() == 0);
+        REQUIRE(view->getSelectedGroupIndex().parent().parent().row() == 1);
+        REQUIRE(view->getSelectedGroupIndex().parent().parent().column() == 0);
+        REQUIRE(view->getSelectedGroupIndex().parent().parent().parent() ==
+                QModelIndex());
     }
 }

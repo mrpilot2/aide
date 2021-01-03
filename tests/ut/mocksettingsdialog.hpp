@@ -14,6 +14,16 @@ namespace aide::test
 
         void setTreeModel(std::shared_ptr<QAbstractItemModel> model) override;
 
+        void restoreGeometryAndState(
+            core::SettingsDialogGeometryAndStateData data) override;
+
+        void setSelectedGroupIndex(const QModelIndex& index) override;
+
+        [[nodiscard]] const QModelIndex& getSelectedGroupIndex() const;
+
+        [[nodiscard]] core::SettingsDialogGeometryAndStateData currentGeometry()
+            const override;
+
         void setSelectedPageDisplayName(
             const std::string& displayName) override;
 
@@ -47,6 +57,10 @@ namespace aide::test
         bool applyButtonIsEnabled{false};
 
         bool userShallAcceptDialog{false};
+
+        core::SettingsDialogGeometryAndStateData geometryAndStateData;
+
+        QModelIndex selectedGroupIndex{QModelIndex()};
     };
 } // namespace aide::test
 

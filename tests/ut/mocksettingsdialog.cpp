@@ -1,5 +1,7 @@
 #include "mocksettingsdialog.hpp"
 
+#include <iostream>
+
 using aide::core::UserSelection;
 using aide::test::MockSettingsDialog;
 
@@ -64,4 +66,26 @@ bool MockSettingsDialog::isApplyButtonEnabled() const
 void MockSettingsDialog::simulateUserAcceptsDialog(bool accept)
 {
     userShallAcceptDialog = accept;
+}
+void aide::test::MockSettingsDialog::restoreGeometryAndState(
+    aide::core::SettingsDialogGeometryAndStateData data)
+{
+    geometryAndStateData = data;
+}
+
+void aide::test::MockSettingsDialog::setSelectedGroupIndex(
+    const QModelIndex& index)
+{
+    selectedGroupIndex = index;
+}
+
+const QModelIndex& aide::test::MockSettingsDialog::getSelectedGroupIndex() const
+{
+    return selectedGroupIndex;
+}
+
+aide::core::SettingsDialogGeometryAndStateData
+aide::test::MockSettingsDialog::currentGeometry() const
+{
+    return geometryAndStateData;
 }

@@ -5,6 +5,7 @@
 
 #include "loggerinterface.hpp"
 #include "settingsdialogchangepagecontroller.hpp"
+#include "settingsdialoggeometryandstate.hpp"
 #include "settingsdialoginterface.hpp"
 #include "settingspagegrouptreemodel.hpp"
 #include "showsettingsdialogcontroller.hpp"
@@ -17,6 +18,7 @@ namespace aide::core
     {
     public:
         explicit ShowSettingsDialog(SettingsDialogWeakPtr dialog,
+                                    SettingsInterface& settings,
                                     LoggerPtr loggerInterface);
 
         void showSettingsDialog() override;
@@ -40,13 +42,15 @@ namespace aide::core
 
         void showEmptyPageWidget() const;
 
-        void resetModifiedSettingsPages();
+        static void resetModifiedSettingsPages();
 
         SettingsDialogWeakPtr settingsDialog;
         std::shared_ptr<SettingsPageGroupTreeModel> treeModel;
 
         const LoggerPtr logger;
         SettingsPagePtr currentlySelectedPage{nullptr};
+
+        SettingsDialogGeometryAndState saveGeometryAndState;
     };
 } // namespace aide::core
 
