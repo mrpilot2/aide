@@ -1,0 +1,9 @@
+<map id="aide::core::SettingsPageGroupTreeModel::data" name="aide::core::SettingsPageGroupTreeModel::data">
+<area shape="rect" id="node2" href="$classaide_1_1core_1_1TreeItem.html#a96dce16fe3f78f82c0f56b9a3ee135e9" title="aide::core::TreeItem\l::data" alt="" coords="265,5,403,47"/>
+<area shape="rect" id="node3" href="$classaide_1_1core_1_1SettingsPageGroupTreeModel.html#a2a4eb35c6dc13c6f8cb42282c36fc3e9" title="aide::core::SettingsPage\lGroupTreeModel::findCorresponding\lSettingsPage" alt="" coords="219,71,449,127"/>
+<area shape="rect" id="node4" href="$classaide_1_1core_1_1SettingsPageGroupTreeModel.html#adacb4e63f7d1d372efd71f821f9c1ae1" title="aide::core::SettingsPage\lGroupTreeModel::index" alt="" coords="497,45,663,87"/>
+<area shape="rect" id="node6" href="$classaide_1_1core_1_1SettingsPageRegistry.html#ab545e33bcd4f08f67df968f234b00c99" title="aide::core::SettingsPage\lRegistry::settingsPages" alt="" coords="497,111,663,152"/>
+<area shape="rect" id="node5" href="$classaide_1_1core_1_1TreeItem.html#a92914c527d122f23667b72bfdc01710c" title="aide::core::TreeItem\l::child" alt="" coords="737,45,875,87"/>
+<area shape="rect" id="node7" href="$classSettingsPageRegistryPrivate.html#a114ae5695e6db6ecd33964e18c9f9faf" title="SettingsPageRegistryPrivate\l::instance" alt="" coords="711,111,901,152"/>
+<area shape="rect" id="node8" href="$classSettingsPageRegistryPrivate.html#af0b8de5174fdb7abe77dd435d0848c93" title="SettingsPageRegistryPrivate\l::settingsPages" alt="" coords="711,176,901,217"/>
+</map>

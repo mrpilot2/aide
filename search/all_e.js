@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['qtsettings',['QtSettings',['../classaide_1_1QtSettings.html',1,'aide::QtSettings'],['../classaide_1_1QtSettings.html#a7996423baccaec6aa87bda7241775f46',1,'aide::QtSettings::QtSettings()']]],
-  ['qtsettings_2ecpp',['qtsettings.cpp',['../qtsettings_8cpp.html',1,'']]],
-  ['qtsettings_2ehpp',['qtsettings.hpp',['../qtsettings_8hpp.html',1,'']]]
+  ['parent',['parent',['../classaide_1_1core_1_1SettingsPageGroupTreeModel.html#a1c58a85caf8da179f6dd5a2077494c93',1,'aide::core::SettingsPageGroupTreeModel::parent()'],['../classaide_1_1core_1_1TreeItem.html#a59dcd6c43c09a5afc0774292695265ec',1,'aide::core::TreeItem::parent()']]]
 ];

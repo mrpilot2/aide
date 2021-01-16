@@ -1,6 +1,13 @@
 var searchData=
 [
-  ['ui',['Ui',['../structaide_1_1core_1_1settings_1_1Keys_1_1Ui.html',1,'aide::core::settings::Keys::Ui'],['../structUi.html',1,'Ui'],['../namespaceUi.html',1,'Ui'],['../structaide_1_1core_1_1settings_1_1Keys.html#af75615f1745604b72bca2aecac8415e0',1,'aide::core::settings::Keys::UI()'],['../commonsettingskeys_8hpp.html#a45a965acff5ab3ebcefd7783976627b9',1,'UI():&#160;commonsettingskeys.hpp']]],
-  ['unversionablesettings',['unversionableSettings',['../classaide_1_1AideSettingsProvider.html#ac907c1cfc4001817217e783673cb3269',1,'aide::AideSettingsProvider::unversionableSettings()'],['../classaide_1_1SettingsProviderInterface.html#af4391f6817f2cbf468e107d26a8d456d',1,'aide::SettingsProviderInterface::unversionableSettings()']]],
-  ['userselection',['UserSelection',['../namespaceaide_1_1core.html#a260cb790cefaddd2b83c6cbc68b41650',1,'aide::core']]]
+  ['textchanged',['textChanged',['../classaide_1_1gui_1_1SearchLineEdit.html#a4d72637f99993bec0f42df7c78761e3a',1,'aide::gui::SearchLineEdit']]],
+  ['trace',['trace',['../classaide_1_1LoggerInterface.html#acceed6571213c912dc9f67f98cef3e04',1,'aide::LoggerInterface']]],
+  ['translator',['translator',['../classaide_1_1gui_1_1MainWindow.html#a362efc7085cc894e1df5acb31fd4cb67',1,'aide::gui::MainWindow::translator()'],['../classaide_1_1Application.html#a272d1635ae2b031c6695faed57459437',1,'aide::Application::translator()']]],
+  ['translatorinterface',['TranslatorInterface',['../classaide_1_1gui_1_1TranslatorInterface.html',1,'aide::gui']]],
+  ['translatorinterface_2ehpp',['translatorinterface.hpp',['../translatorinterface_8hpp.html',1,'']]],
+  ['treeitem',['TreeItem',['../classaide_1_1core_1_1TreeItem.html',1,'aide::core::TreeItem'],['../classaide_1_1core_1_1TreeItem.html#aa96cb78e1143fe3850593aabdc465b6b',1,'aide::core::TreeItem::TreeItem()']]],
+  ['treeitem_2ecpp',['treeitem.cpp',['../treeitem_8cpp.html',1,'']]],
+  ['treeitem_2ehpp',['treeitem.hpp',['../treeitem_8hpp.html',1,'']]],
+  ['treeitemptr',['TreeItemPtr',['../namespaceaide_1_1core.html#a8a386d1ad0636f11137ca1824de27747',1,'aide::core']]],
+  ['treeviewgeometry',['treeViewGeometry',['../structaide_1_1core_1_1SettingsDialogGeometryAndStateData.html#ae37fb4d15a834fa604e85f05c4e04713',1,'aide::core::SettingsDialogGeometryAndStateData']]]
 ];

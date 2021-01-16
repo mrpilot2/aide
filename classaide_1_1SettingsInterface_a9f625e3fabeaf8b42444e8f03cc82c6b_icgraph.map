@@ -1,3 +1,5 @@
 <map id="aide::SettingsInterface::setValue" name="aide::SettingsInterface::setValue">
-<area shape="rect" id="node2" href="$classaide_1_1core_1_1MainWindowGeometryAndState.html#a3affddba98a598636524e59f12499035" title="aide::core::MainWindowGeometry\lAndState::saveGeometryAndState" alt="" coords="207,5,429,47"/>
+<area shape="rect" id="node2" href="$classaide_1_1core_1_1MainWindowGeometryAndState.html#a3affddba98a598636524e59f12499035" title="aide::core::MainWindowGeometry\lAndState::saveGeometryAndState" alt="" coords="209,5,431,47"/>
+<area shape="rect" id="node3" href="$classaide_1_1core_1_1SettingsDialogGeometryAndState.html#a6d1e12c430da04f292d3025f6ed36917" title="aide::core::SettingsDialog\lGeometryAndState::saveGeometry\lAndState" alt="" coords="207,71,433,127"/>
+<area shape="rect" id="node4" href="$classaide_1_1core_1_1ShowSettingsDialog.html#a7a09941d17fcd76a46280643cfe99a1d" title="aide::core::ShowSettings\lDialog::showSettingsDialog" alt="" coords="481,79,664,120"/>
 </map>

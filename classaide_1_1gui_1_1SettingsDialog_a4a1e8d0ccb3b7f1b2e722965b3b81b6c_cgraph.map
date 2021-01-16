@@ -1,0 +1,6 @@
+<map id="aide::gui::SettingsDialog::setController" name="aide::gui::SettingsDialog::setController">
+<area shape="rect" id="node2" href="$classaide_1_1gui_1_1SettingsDialogController.html#a5ba17dbe0f64bf7406e018b1c1d79be9" title="aide::gui::SettingsDialog\lController::onUserWantsToReset\lCurrentPage" alt="" coords="217,5,433,61"/>
+<area shape="rect" id="node4" href="$classaide_1_1gui_1_1SettingsDialogController.html#adfb7c15307e2352a30836603aa4db07b" title="aide::gui::SettingsDialog\lController::onUserWantsToApply\lSettingsPages" alt="" coords="218,85,433,141"/>
+<area shape="rect" id="node3" href="$classaide_1_1core_1_1SettingsDialogChangePageController.html#ae6322e7bdc3cf24c314bc37bb6450267" title="aide::core::SettingsDialog\lChangePageController::resetCurrentPage" alt="" coords="481,13,744,54"/>
+<area shape="rect" id="node5" href="$classaide_1_1core_1_1SettingsDialogChangePageController.html#af53f545960b1e50985fa0b9914a3bd59" title="aide::core::SettingsDialog\lChangePageController::applyModified\lSettingsPages" alt="" coords="492,85,733,141"/>
+</map>

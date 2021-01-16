@@ -65,7 +65,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">aide::gui Namespace Reference</div>  </div>
 </div><!--header-->
@@ -81,6 +82,10 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1gui_1_1SearchLineEdit.html">SearchLineEdit</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1gui_1_1SettingsDialog.html">SettingsDialog</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1gui_1_1SettingsDialogController.html">SettingsDialogController</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1gui_1_1TranslatorInterface.html">TranslatorInterface</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -88,6 +93,13 @@ Classes</h2></td></tr>
 Typedefs</h2></td></tr>
 <tr class="memitem:a1936f2b862673fedef3e57c60db70b76"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaide_1_1gui.html#a1936f2b862673fedef3e57c60db70b76">MainWindowControllerPtr</a> = std::shared_ptr&lt; <a class="el" href="classaide_1_1gui_1_1MainWindowController.html">MainWindowController</a> &gt;</td></tr>
 <tr class="separator:a1936f2b862673fedef3e57c60db70b76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa64e32d2a06256a182fc48b92ca1e9f0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaide_1_1gui.html#aa64e32d2a06256a182fc48b92ca1e9f0">SettingsDialogControllerPtr</a> = std::shared_ptr&lt; <a class="el" href="classaide_1_1gui_1_1SettingsDialogController.html">SettingsDialogController</a> &gt;</td></tr>
+<tr class="separator:aa64e32d2a06256a182fc48b92ca1e9f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a636b70d969c27cd3dccc721014a7aab4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceaide_1_1gui.html#a636b70d969c27cd3dccc721014a7aab4">installChangeDetector</a> (QObject *widget, const <a class="el" href="namespaceaide_1_1gui.html#aa64e32d2a06256a182fc48b92ca1e9f0">SettingsDialogControllerPtr</a> &amp;controller)</td></tr>
+<tr class="separator:a636b70d969c27cd3dccc721014a7aab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="a1936f2b862673fedef3e57c60db70b76"></a>
@@ -101,6 +113,74 @@ Typedefs</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa64e32d2a06256a182fc48b92ca1e9f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa64e32d2a06256a182fc48b92ca1e9f0">&#9670;&nbsp;</a></span>SettingsDialogControllerPtr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespaceaide_1_1gui.html#aa64e32d2a06256a182fc48b92ca1e9f0">aide::gui::SettingsDialogControllerPtr</a> = typedef std::shared_ptr&lt;<a class="el" href="classaide_1_1gui_1_1SettingsDialogController.html">SettingsDialogController</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a636b70d969c27cd3dccc721014a7aab4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a636b70d969c27cd3dccc721014a7aab4">&#9670;&nbsp;</a></span>installChangeDetector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void aide::gui::installChangeDetector </td>
+          <td>(</td>
+          <td class="paramtype">QObject *&#160;</td>
+          <td class="paramname"><em>widget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespaceaide_1_1gui.html#aa64e32d2a06256a182fc48b92ca1e9f0">SettingsDialogControllerPtr</a> &amp;&#160;</td>
+          <td class="paramname"><em>controller</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceaide_1_1gui_a636b70d969c27cd3dccc721014a7aab4_cgraph.png" border="0" usemap="#namespaceaide_1_1gui_a636b70d969c27cd3dccc721014a7aab4_cgraph" alt=""/></div>
+<map name="namespaceaide_1_1gui_a636b70d969c27cd3dccc721014a7aab4_cgraph" id="namespaceaide_1_1gui_a636b70d969c27cd3dccc721014a7aab4_cgraph">
+<area shape="rect" id="node2" href="changedetector_8cpp.html#a7771d9536cdbde863eeb34e5c58642d5" title="installChangeDetectorFor\lButtons" alt="" coords="215,5,386,47"/>
+<area shape="rect" id="node5" href="changedetector_8cpp.html#aa6458f2baa4386ef5be19b8357224659" title="installChangeDetectorFor\lComboBoxes" alt="" coords="215,71,386,112"/>
+<area shape="rect" id="node6" href="changedetector_8cpp.html#aaa616f0937f41989aa51ae102aad8691" title="installChangeDetectorFor\lSpinBoxes" alt="" coords="215,136,386,177"/>
+<area shape="rect" id="node7" href="changedetector_8cpp.html#ab04b9becb12fbfdde5a0f67b6bcb4c72" title="installChangeDetectorsFor\lDateTimeEdits" alt="" coords="212,201,389,243"/>
+<area shape="rect" id="node8" href="changedetector_8cpp.html#a62e5d4d1ed7ac5a9caf164bc04973dc3" title="installChangeDetectorFor\lSliders" alt="" coords="215,267,386,308"/>
+<area shape="rect" id="node9" href="changedetector_8cpp.html#a24509240bff02ae8a621d6b9bd06057b" title="installChangeDetectorFor\lKeyEdit" alt="" coords="215,332,386,373"/>
+<area shape="rect" id="node10" href="changedetector_8cpp.html#a248313cc5e7bc4b036612aae440bb83f" title="installChangeDetectorFor\lTextEdits" alt="" coords="215,397,386,439"/>
+<area shape="rect" id="node11" href="changedetector_8cpp.html#a3e8814b24e3888407faea27b59ec0dde" title="installChangeDetectorFor\lItemViews" alt="" coords="215,463,386,504"/>
+<area shape="rect" id="node3" href="classaide_1_1gui_1_1SettingsDialogController.html#a816bbf43336b138e3c31e49a23d9c457" title="aide::gui::SettingsDialog\lController::onUserChangedAGuiElement" alt="" coords="437,235,695,276"/>
+<area shape="rect" id="node4" href="classaide_1_1core_1_1SettingsDialogChangePageController.html#a5042a21cfc1bd23666879636990d6432" title="aide::core::SettingsDialog\lChangePageController::anyGuiElement\lHasChanged" alt="" coords="743,227,993,283"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespaceaide_1_1gui_a636b70d969c27cd3dccc721014a7aab4_icgraph.png" border="0" usemap="#namespaceaide_1_1gui_a636b70d969c27cd3dccc721014a7aab4_icgraph" alt=""/></div>
+<map name="namespaceaide_1_1gui_a636b70d969c27cd3dccc721014a7aab4_icgraph" id="namespaceaide_1_1gui_a636b70d969c27cd3dccc721014a7aab4_icgraph">
+<area shape="rect" id="node2" href="classaide_1_1gui_1_1SettingsDialog.html#a31e59307e0e23048bd7624fc0031b5cd" title="aide::gui::SettingsDialog\l::enableApplyButton" alt="" coords="212,5,376,47"/>
+</map>
+</div>
 
 </div>
 </div>

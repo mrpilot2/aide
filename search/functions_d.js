@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['qtsettings',['QtSettings',['../classaide_1_1QtSettings.html#a7996423baccaec6aa87bda7241775f46',1,'aide::QtSettings']]]
+  ['parent',['parent',['../classaide_1_1core_1_1SettingsPageGroupTreeModel.html#a1c58a85caf8da179f6dd5a2077494c93',1,'aide::core::SettingsPageGroupTreeModel::parent()'],['../classaide_1_1core_1_1TreeItem.html#a59dcd6c43c09a5afc0774292695265ec',1,'aide::core::TreeItem::parent()']]]
 ];

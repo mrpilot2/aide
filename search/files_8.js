@@ -1,4 +1,28 @@
 var searchData=
 [
-  ['translatorinterface_2ehpp',['translatorinterface.hpp',['../translatorinterface_8hpp.html',1,'']]]
+  ['searchlineedit_2ecpp',['searchlineedit.cpp',['../searchlineedit_8cpp.html',1,'']]],
+  ['searchlineedit_2ehpp',['searchlineedit.hpp',['../searchlineedit_8hpp.html',1,'']]],
+  ['settingsdialog_2ecpp',['settingsdialog.cpp',['../settingsdialog_8cpp.html',1,'']]],
+  ['settingsdialog_2ehpp',['settingsdialog.hpp',['../settingsdialog_8hpp.html',1,'']]],
+  ['settingsdialogchangepagecontroller_2ecpp',['settingsdialogchangepagecontroller.cpp',['../settingsdialogchangepagecontroller_8cpp.html',1,'']]],
+  ['settingsdialogchangepagecontroller_2ehpp',['settingsdialogchangepagecontroller.hpp',['../settingsdialogchangepagecontroller_8hpp.html',1,'']]],
+  ['settingsdialogcontroller_2ecpp',['settingsdialogcontroller.cpp',['../settingsdialogcontroller_8cpp.html',1,'']]],
+  ['settingsdialogcontroller_2ehpp',['settingsdialogcontroller.hpp',['../settingsdialogcontroller_8hpp.html',1,'']]],
+  ['settingsdialoggeometryandstate_2ecpp',['settingsdialoggeometryandstate.cpp',['../settingsdialoggeometryandstate_8cpp.html',1,'']]],
+  ['settingsdialoggeometryandstate_2ehpp',['settingsdialoggeometryandstate.hpp',['../settingsdialoggeometryandstate_8hpp.html',1,'']]],
+  ['settingsdialoggeometryandstatecontroller_2ehpp',['settingsdialoggeometryandstatecontroller.hpp',['../settingsdialoggeometryandstatecontroller_8hpp.html',1,'']]],
+  ['settingsdialoginterface_2ehpp',['settingsdialoginterface.hpp',['../settingsdialoginterface_8hpp.html',1,'']]],
+  ['settingsinterface_2ecpp',['settingsinterface.cpp',['../settingsinterface_8cpp.html',1,'']]],
+  ['settingsinterface_2ehpp',['settingsinterface.hpp',['../settingsinterface_8hpp.html',1,'']]],
+  ['settingspage_2ecpp',['settingspage.cpp',['../settingspage_8cpp.html',1,'']]],
+  ['settingspage_2ehpp',['settingspage.hpp',['../settingspage_8hpp.html',1,'']]],
+  ['settingspagegrouptreemodel_2ecpp',['settingspagegrouptreemodel.cpp',['../settingspagegrouptreemodel_8cpp.html',1,'']]],
+  ['settingspagegrouptreemodel_2ehpp',['settingspagegrouptreemodel.hpp',['../settingspagegrouptreemodel_8hpp.html',1,'']]],
+  ['settingspageregistry_2ecpp',['settingspageregistry.cpp',['../settingspageregistry_8cpp.html',1,'']]],
+  ['settingspageregistry_2ehpp',['settingspageregistry.hpp',['../settingspageregistry_8hpp.html',1,'']]],
+  ['settingsproviderinterface_2ecpp',['settingsproviderinterface.cpp',['../settingsproviderinterface_8cpp.html',1,'']]],
+  ['settingsproviderinterface_2ehpp',['settingsproviderinterface.hpp',['../settingsproviderinterface_8hpp.html',1,'']]],
+  ['showsettingsdialog_2ecpp',['showsettingsdialog.cpp',['../showsettingsdialog_8cpp.html',1,'']]],
+  ['showsettingsdialog_2ehpp',['showsettingsdialog.hpp',['../showsettingsdialog_8hpp.html',1,'']]],
+  ['showsettingsdialogcontroller_2ehpp',['showsettingsdialogcontroller.hpp',['../showsettingsdialogcontroller_8hpp.html',1,'']]]
 ];

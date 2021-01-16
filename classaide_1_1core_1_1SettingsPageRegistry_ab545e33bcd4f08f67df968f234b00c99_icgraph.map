@@ -1,0 +1,9 @@
+<map id="aide::core::SettingsPageRegistry::settingsPages" name="aide::core::SettingsPageRegistry::settingsPages">
+<area shape="rect" id="node2" href="$classaide_1_1core_1_1SettingsPageGroupTreeModel.html#aa018bf266234f95ff853119c6523d66b" title="aide::core::SettingsPage\lGroupTreeModel::SettingsPage\lGroupTreeModel" alt="" coords="233,5,437,61"/>
+<area shape="rect" id="node3" href="$classaide_1_1core_1_1SettingsPageGroupTreeModel.html#a2a4eb35c6dc13c6f8cb42282c36fc3e9" title="aide::core::SettingsPage\lGroupTreeModel::findCorresponding\lSettingsPage" alt="" coords="219,85,450,141"/>
+<area shape="rect" id="node5" href="$classaide_1_1core_1_1ShowSettingsDialog.html#a7a09941d17fcd76a46280643cfe99a1d" title="aide::core::ShowSettings\lDialog::showSettingsDialog" alt="" coords="779,221,961,262"/>
+<area shape="rect" id="node6" href="$classaide_1_1core_1_1ShowSettingsDialog.html#a65171e040582f2abd86a39f16c101f72" title="aide::core::ShowSettings\lDialog::anyGuiElementHasChanged" alt="" coords="219,267,451,309"/>
+<area shape="rect" id="node7" href="$classaide_1_1core_1_1ShowSettingsDialog.html#a239747ac71aae550b969704865d8f96d" title="aide::core::ShowSettings\lDialog::resetCurrentPage" alt="" coords="530,217,699,258"/>
+<area shape="rect" id="node8" href="$classaide_1_1core_1_1ShowSettingsDialog.html#ac6b1b74fa81f8d79e4a3557645395180" title="aide::core::ShowSettings\lDialog::applyModifiedSettingsPages" alt="" coords="499,282,731,323"/>
+<area shape="rect" id="node4" href="$classaide_1_1core_1_1SettingsPageGroupTreeModel.html#a244138dbe90a3c7432c8eced93d6e473" title="aide::core::SettingsPage\lGroupTreeModel::data" alt="" coords="532,93,697,134"/>
+</map>

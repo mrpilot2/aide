@@ -1,0 +1,4 @@
+<map id="aide::gui::SettingsDialog::setTreeModel" name="aide::gui::SettingsDialog::setTreeModel">
+<area shape="rect" id="node2" href="$classaide_1_1gui_1_1SettingsDialogController.html#a45aa7f19dbe89339b2292849795608f2" title="aide::gui::SettingsDialog\lController::onUserChangedSelectedPage" alt="" coords="217,5,479,47"/>
+<area shape="rect" id="node3" href="$classaide_1_1core_1_1SettingsDialogChangePageController.html#adc376d872d8a7389d56ef451d56f3adb" title="aide::core::SettingsDialog\lChangePageController::changeSelectedPage" alt="" coords="527,5,811,47"/>
+</map>

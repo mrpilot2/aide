@@ -64,6 +64,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-slots">Public Slots</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classaide_1_1gui_1_1MainWindowController-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -72,17 +73,36 @@ $(function() {
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="mainwindowcontroller_8hpp_source.html">mainwindowcontroller.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for aide::gui::MainWindowController:</div>
+<div class="dyncontent">
+<div class="center"><img src="classaide_1_1gui_1_1MainWindowController__inherit__graph.png" border="0" usemap="#aide_1_1gui_1_1MainWindowController_inherit__map" alt="Inheritance graph"/></div>
+<map name="aide_1_1gui_1_1MainWindowController_inherit__map" id="aide_1_1gui_1_1MainWindowController_inherit__map">
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for aide::gui::MainWindowController:</div>
+<div class="dyncontent">
+<div class="center"><img src="classaide_1_1gui_1_1MainWindowController__coll__graph.png" border="0" usemap="#aide_1_1gui_1_1MainWindowController_coll__map" alt="Collaboration graph"/></div>
+<map name="aide_1_1gui_1_1MainWindowController_coll__map" id="aide_1_1gui_1_1MainWindowController_coll__map">
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-slots"></a>
+Public Slots</h2></td></tr>
+<tr class="memitem:a79c8e0bf63d8e9389bad923fc783f926"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1gui_1_1MainWindowController.html#a79c8e0bf63d8e9389bad923fc783f926">onUserWantsToShowSettingsDialog</a> ()</td></tr>
+<tr class="separator:a79c8e0bf63d8e9389bad923fc783f926"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a51def5530f43dda4624a37675d063330"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1gui_1_1MainWindowController.html#a51def5530f43dda4624a37675d063330">MainWindowController</a> (const <a class="el" href="classaide_1_1core_1_1ApplicationCloseController.html">aide::core::ApplicationCloseController</a> &amp;closeUseCase, <a class="el" href="classaide_1_1core_1_1MainWindowGeometryAndStateController.html">aide::core::MainWindowGeometryAndStateController</a> &amp;saveUseCase)</td></tr>
-<tr class="separator:a51def5530f43dda4624a37675d063330"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b6b7769c0d2d1a7703eec5e6851f309"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1gui_1_1MainWindowController.html#a2b6b7769c0d2d1a7703eec5e6851f309">MainWindowController</a> (const <a class="el" href="classaide_1_1core_1_1ApplicationCloseController.html">aide::core::ApplicationCloseController</a> &amp;closeUseCase, <a class="el" href="classaide_1_1core_1_1MainWindowGeometryAndStateController.html">aide::core::MainWindowGeometryAndStateController</a> &amp;saveUseCase, <a class="el" href="classaide_1_1core_1_1ShowSettingsDialogController.html">core::ShowSettingsDialogController</a> &amp;settingsDialogUseCase)</td></tr>
+<tr class="separator:a2b6b7769c0d2d1a7703eec5e6851f309"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d4a82c15a72a888c9ec6c2b7061dd24"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1gui_1_1MainWindowController.html#a0d4a82c15a72a888c9ec6c2b7061dd24">onUserWantsToQuitApplication</a> (QCloseEvent *event, const QByteArray &amp;geometry, const QByteArray &amp;state)</td></tr>
 <tr class="separator:a0d4a82c15a72a888c9ec6c2b7061dd24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a51def5530f43dda4624a37675d063330"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51def5530f43dda4624a37675d063330">&#9670;&nbsp;</a></span>MainWindowController()</h2>
+<a id="a2b6b7769c0d2d1a7703eec5e6851f309"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b6b7769c0d2d1a7703eec5e6851f309">&#9670;&nbsp;</a></span>MainWindowController()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -100,7 +120,13 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="classaide_1_1core_1_1MainWindowGeometryAndStateController.html">aide::core::MainWindowGeometryAndStateController</a> &amp;&#160;</td>
-          <td class="paramname"><em>saveUseCase</em>&#160;</td>
+          <td class="paramname"><em>saveUseCase</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classaide_1_1core_1_1ShowSettingsDialogController.html">core::ShowSettingsDialogController</a> &amp;&#160;</td>
+          <td class="paramname"><em>settingsDialogUseCase</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -156,6 +182,47 @@ Here is the call graph for this function:</div>
 <map name="classaide_1_1gui_1_1MainWindowController_a0d4a82c15a72a888c9ec6c2b7061dd24_cgraph" id="classaide_1_1gui_1_1MainWindowController_a0d4a82c15a72a888c9ec6c2b7061dd24_cgraph">
 <area shape="rect" id="node2" href="classaide_1_1core_1_1ApplicationCloseController.html#a2ddf7b892671ec99dc0a4a4172a6e76d" title="aide::core::ApplicationClose\lController::isCloseAllowed" alt="" coords="287,5,472,47"/>
 <area shape="rect" id="node3" href="classaide_1_1core_1_1MainWindowGeometryAndStateController.html#ac8a7d64a87f39617c8ec40290b59d3be" title="aide::core::MainWindowGeometry\lAndStateController::saveGeometry\lAndState" alt="" coords="267,71,492,127"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a79c8e0bf63d8e9389bad923fc783f926"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79c8e0bf63d8e9389bad923fc783f926">&#9670;&nbsp;</a></span>onUserWantsToShowSettingsDialog</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainWindowController::onUserWantsToShowSettingsDialog </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classaide_1_1gui_1_1MainWindowController_a79c8e0bf63d8e9389bad923fc783f926_cgraph.png" border="0" usemap="#classaide_1_1gui_1_1MainWindowController_a79c8e0bf63d8e9389bad923fc783f926_cgraph" alt=""/></div>
+<map name="classaide_1_1gui_1_1MainWindowController_a79c8e0bf63d8e9389bad923fc783f926_cgraph" id="classaide_1_1gui_1_1MainWindowController_a79c8e0bf63d8e9389bad923fc783f926_cgraph">
+<area shape="rect" id="node2" href="classaide_1_1core_1_1ShowSettingsDialogController.html#a384bee0a2281019ea6e987bbb1deee3f" title="aide::core::ShowSettings\lDialogController::showSettings\lDialog" alt="" coords="296,5,499,61"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classaide_1_1gui_1_1MainWindowController_a79c8e0bf63d8e9389bad923fc783f926_icgraph.png" border="0" usemap="#classaide_1_1gui_1_1MainWindowController_a79c8e0bf63d8e9389bad923fc783f926_icgraph" alt=""/></div>
+<map name="classaide_1_1gui_1_1MainWindowController_a79c8e0bf63d8e9389bad923fc783f926_icgraph" id="classaide_1_1gui_1_1MainWindowController_a79c8e0bf63d8e9389bad923fc783f926_icgraph">
+<area shape="rect" id="node2" href="classaide_1_1gui_1_1MainWindow.html#a8a9c964637d582cd9a4e5e96d22355d7" title="aide::gui::MainWindow\l::restoreGeometryAndState" alt="" coords="296,5,477,47"/>
 </map>
 </div>
 

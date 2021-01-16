@@ -1,0 +1,7 @@
+<map id="aide::core::TreeItem::child" name="aide::core::TreeItem::child">
+<area shape="rect" id="node2" href="$classaide_1_1core_1_1SettingsPageGroupTreeModel.html#adacb4e63f7d1d372efd71f821f9c1ae1" title="aide::core::SettingsPage\lGroupTreeModel::index" alt="" coords="193,53,359,94"/>
+<area shape="rect" id="node6" href="$classaide_1_1core_1_1TreeItem.html#a489e940bfdbaaa5860ab92f35ea935e1" title="aide::core::TreeItem::row" alt="" coords="192,119,360,145"/>
+<area shape="rect" id="node3" href="$classaide_1_1core_1_1SettingsPageGroupTreeModel.html#a2a4eb35c6dc13c6f8cb42282c36fc3e9" title="aide::core::SettingsPage\lGroupTreeModel::findCorresponding\lSettingsPage" alt="" coords="408,5,639,61"/>
+<area shape="rect" id="node5" href="$classaide_1_1core_1_1SettingsPageGroupTreeModel.html#aeebec869a00eb249ead254fc0723137f" title="aide::core::SettingsPage\lGroupTreeModel::recursivelyFind\lSelectedTreeItemIndex" alt="" coords="416,85,631,141"/>
+<area shape="rect" id="node4" href="$classaide_1_1core_1_1SettingsPageGroupTreeModel.html#a244138dbe90a3c7432c8eced93d6e473" title="aide::core::SettingsPage\lGroupTreeModel::data" alt="" coords="687,13,852,54"/>
+</map>

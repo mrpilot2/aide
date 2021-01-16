@@ -1,7 +1,20 @@
 var searchData=
 [
   ['searchlineedit',['SearchLineEdit',['../classaide_1_1gui_1_1SearchLineEdit.html',1,'aide::gui']]],
+  ['settingsdialog',['SettingsDialog',['../classaide_1_1gui_1_1SettingsDialog.html',1,'aide::gui']]],
+  ['settingsdialogchangepagecontroller',['SettingsDialogChangePageController',['../classaide_1_1core_1_1SettingsDialogChangePageController.html',1,'aide::core']]],
+  ['settingsdialogcontroller',['SettingsDialogController',['../classaide_1_1gui_1_1SettingsDialogController.html',1,'aide::gui']]],
+  ['settingsdialoggeometryandstate',['SettingsDialogGeometryAndState',['../classaide_1_1core_1_1SettingsDialogGeometryAndState.html',1,'aide::core']]],
+  ['settingsdialoggeometryandstatecontroller',['SettingsDialogGeometryAndStateController',['../classaide_1_1core_1_1SettingsDialogGeometryAndStateController.html',1,'aide::core']]],
+  ['settingsdialoggeometryandstatedata',['SettingsDialogGeometryAndStateData',['../structaide_1_1core_1_1SettingsDialogGeometryAndStateData.html',1,'aide::core']]],
+  ['settingsdialoginterface',['SettingsDialogInterface',['../classaide_1_1core_1_1SettingsDialogInterface.html',1,'aide::core']]],
   ['settingsinterface',['SettingsInterface',['../classaide_1_1SettingsInterface.html',1,'aide']]],
+  ['settingspage',['SettingsPage',['../classaide_1_1core_1_1SettingsPage.html',1,'aide::core']]],
+  ['settingspagegrouptreemodel',['SettingsPageGroupTreeModel',['../classaide_1_1core_1_1SettingsPageGroupTreeModel.html',1,'aide::core']]],
+  ['settingspageregistry',['SettingsPageRegistry',['../classaide_1_1core_1_1SettingsPageRegistry.html',1,'aide::core']]],
+  ['settingspageregistryprivate',['SettingsPageRegistryPrivate',['../classSettingsPageRegistryPrivate.html',1,'']]],
   ['settingsproviderinterface',['SettingsProviderInterface',['../classaide_1_1SettingsProviderInterface.html',1,'aide']]],
+  ['showsettingsdialog',['ShowSettingsDialog',['../classaide_1_1core_1_1ShowSettingsDialog.html',1,'aide::core']]],
+  ['showsettingsdialogcontroller',['ShowSettingsDialogController',['../classaide_1_1core_1_1ShowSettingsDialogController.html',1,'aide::core']]],
   ['system',['System',['../structSystem.html',1,'System'],['../structaide_1_1core_1_1settings_1_1Keys_1_1System.html',1,'aide::core::settings::Keys::System']]]
 ];

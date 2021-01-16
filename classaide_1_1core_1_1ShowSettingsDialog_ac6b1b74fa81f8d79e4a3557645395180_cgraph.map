@@ -1,0 +1,6 @@
+<map id="aide::core::ShowSettingsDialog::applyModifiedSettingsPages" name="aide::core::ShowSettingsDialog::applyModifiedSettingsPages">
+<area shape="rect" id="node2" href="$classaide_1_1core_1_1SettingsPageRegistry.html#ab545e33bcd4f08f67df968f234b00c99" title="aide::core::SettingsPage\lRegistry::settingsPages" alt="" coords="565,39,731,80"/>
+<area shape="rect" id="node5" href="$classaide_1_1core_1_1ShowSettingsDialog.html#a65171e040582f2abd86a39f16c101f72" title="aide::core::ShowSettings\lDialog::anyGuiElementHasChanged" alt="" coords="285,68,517,109"/>
+<area shape="rect" id="node3" href="$classSettingsPageRegistryPrivate.html#a114ae5695e6db6ecd33964e18c9f9faf" title="SettingsPageRegistryPrivate\l::instance" alt="" coords="779,5,969,47"/>
+<area shape="rect" id="node4" href="$classSettingsPageRegistryPrivate.html#af0b8de5174fdb7abe77dd435d0848c93" title="SettingsPageRegistryPrivate\l::settingsPages" alt="" coords="779,71,969,112"/>
+</map>
