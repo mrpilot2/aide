@@ -1,72 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
-<context>
+<TS version="2.1" language="de" sourcelanguage="en">
+  <context>
     <name>MainWindow</name>
     <message>
-        <source>MainWindow</source>
-        <translation>Hauptfenster</translation>
+      <source>MainWindow</source>
+      <translation>Hauptfenster</translation>
     </message>
     <message>
-        <source>&amp;File</source>
-        <translation>&amp;Datei</translation>
+      <source>&amp;File</source>
+      <translation type="unfinished">&amp;File</translation>
     </message>
     <message>
-        <source>&amp;Help</source>
-        <translation>&amp;Hilfe</translation>
+      <source>&amp;Help</source>
+      <translation type="unfinished">&amp;Help</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>SearchLineEdit</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
+      <source>Form</source>
+      <translation type="unfinished">Form</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>SettingsDialog</name>
     <message>
-        <source>Settings</source>
-        <translation>Einstellungen</translation>
+      <source>Settings</source>
+      <translation type="unfinished">Settings</translation>
     </message>
     <message>
-        <source>&lt;a href=&quot;http://&quot;&gt;Reset&lt;/a&gt;</source>
-        <translation>&lt;a href=&quot;http://&quot;&gt;Zurücksetzen&lt;/a&gt;</translation>
+      <source>&lt;a href=&quot;http://&quot;&gt;Reset&lt;/a&gt;</source>
+      <translation type="unfinished">&lt;a href=&quot;http://&quot;&gt;Reset&lt;/a&gt;</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>aide::gui::MainWindow</name>
     <message>
-        <source>Quit</source>
-        <translation>Beenden</translation>
+      <source>Quit</source>
+      <translation type="unfinished">Quit</translation>
     </message>
     <message>
-        <source>Quits the application</source>
-        <translation>Beendet die Applikation</translation>
+      <source>Quits the application</source>
+      <translation type="unfinished">Quits the application</translation>
     </message>
     <message>
-        <source>About Qt</source>
-        <translation>Über Qt</translation>
+      <source>About Qt</source>
+      <translation type="unfinished">About Qt</translation>
     </message>
     <message>
-        <source>Don&apos;t ask again</source>
-        <translation>Nicht mehr fragen</translation>
+      <source>Don&apos;t ask again</source>
+      <translation type="unfinished">Don&apos;t ask again</translation>
     </message>
     <message>
-        <source>Confirm exit</source>
-        <translation>Beenden</translation>
+      <source>Confirm exit</source>
+      <translation type="unfinished">Confirm exit</translation>
     </message>
     <message>
-        <source>Are you sure you want to exit?</source>
-        <translation>Wollen Sie wirklich beenden?</translation>
+      <source>Are you sure you want to exit?</source>
+      <translation type="unfinished">Are you sure you want to exit?</translation>
     </message>
     <message>
-        <source>Settings</source>
-        <translation>Einstellungen</translation>
+      <source>Settings</source>
+      <translation type="unfinished">Settings</translation>
     </message>
     <message>
-        <source>Edit application settings</source>
-        <translation>Anwendungseinstellungen editieren</translation>
+      <source>Edit application settings</source>
+      <translation type="unfinished">Edit application settings</translation>
     </message>
-</context>
+  </context>
 </TS>
