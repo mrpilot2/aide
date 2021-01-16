@@ -8,24 +8,65 @@
       <translation type="unfinished">MainWindow</translation>
     </message>
     <message>
-      <source>File</source>
-      <translation type="unfinished">File</translation>
+      <source>&amp;File</source>
+      <translation type="unfinished">&amp;File</translation>
     </message>
+    <message>
+      <source>&amp;Help</source>
+      <translation type="unfinished">&amp;Help</translation>
+    </message>
+  </context>
+  <context>
+    <name>SearchLineEdit</name>
+    <message>
+      <source>Form</source>
+      <translation type="unfinished">Form</translation>
+    </message>
+  </context>
+  <context>
+    <name>SettingsDialog</name>
+    <message>
+      <source>Settings</source>
+      <translation type="unfinished">Settings</translation>
+    </message>
+    <message>
+      <source>&lt;a href=&quot;http://&quot;&gt;Reset&lt;/a&gt;</source>
+      <translation type="unfinished">&lt;a href=&quot;http://&quot;&gt;Reset&lt;/a&gt;</translation>
+    </message>
+  </context>
+  <context>
+    <name>aide::gui::MainWindow</name>
     <message>
       <source>Quit</source>
       <translation type="unfinished">Quit</translation>
     </message>
     <message>
-      <source>Help</source>
-      <translation type="unfinished">Help</translation>
+      <source>Quits the application</source>
+      <translation type="unfinished">Quits the application</translation>
     </message>
     <message>
       <source>About Qt</source>
       <translation type="unfinished">About Qt</translation>
     </message>
     <message>
-      <source>About aIDE</source>
-      <translation type="unfinished">About aIDE</translation>
+      <source>Don&apos;t ask again</source>
+      <translation type="unfinished">Don&apos;t ask again</translation>
+    </message>
+    <message>
+      <source>Confirm exit</source>
+      <translation type="unfinished">Confirm exit</translation>
+    </message>
+    <message>
+      <source>Are you sure you want to exit?</source>
+      <translation type="unfinished">Are you sure you want to exit?</translation>
+    </message>
+    <message>
+      <source>Settings</source>
+      <translation type="unfinished">Settings</translation>
+    </message>
+    <message>
+      <source>Edit application settings</source>
+      <translation type="unfinished">Edit application settings</translation>
     </message>
   </context>
 </TS>
