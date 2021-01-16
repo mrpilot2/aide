@@ -24,6 +24,17 @@
     </message>
 </context>
 <context>
+    <name>SettingsDialog</name>
+    <message>
+        <source>Settings</source>
+        <translation>Einstellungen</translation>
+    </message>
+    <message>
+        <source>&lt;a href=&quot;http://&quot;&gt;Reset&lt;/a&gt;</source>
+        <translation>&lt;a href=&quot;http://&quot;&gt;Zurücksetzen&lt;/a&gt;</translation>
+    </message>
+</context>
+<context>
     <name>aide::gui::MainWindow</name>
     <message>
         <source>Quit</source>
@@ -48,6 +59,14 @@
     <message>
         <source>Are you sure you want to exit?</source>
         <translation>Wollen Sie wirklich beenden?</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation>Einstellungen</translation>
+    </message>
+    <message>
+        <source>Edit application settings</source>
+        <translation>Anwendungseinstellungen editieren</translation>
     </message>
 </context>
 </TS>

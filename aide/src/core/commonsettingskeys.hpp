@@ -26,7 +26,18 @@ namespace aide::core::settings
                 HierarchicalId("Geometry")("MainWindow")};
             const HierarchicalId MAIN_WINDOW_STATE_KEY{
                 HierarchicalId("State")("MainWindow")};
-        } ALIGNMENT(64);
+            const HierarchicalId SETTINGS_DIALOG_GEOMETRY_KEY{
+                HierarchicalId("Geometry")("SettingsDialog")};
+            const HierarchicalId SETTINGS_DIALOG_SPLITTER_GEOMETRY_KEY{
+                HierarchicalId("Geometry")("SettingsDialog")("Splitter")};
+            const HierarchicalId SETTINGS_DIALOG_SPLITTER_STATE_KEY{
+                HierarchicalId("State")("SettingsDialog")("Splitter")};
+            const HierarchicalId SETTINGS_DIALOG_TREE_VIEW_GEOMETRY_KEY{
+                HierarchicalId("Geometry")("SettingsDialog")("TreeView")};
+            const HierarchicalId SETTINGS_DIALOG_TREE_VIEW_SELECTED_ITEM_KEY{
+                HierarchicalId("State")("SettingsDialog")("TreeView")(
+                    "SelectedItem")};
+        } ALIGNMENT(128);
 
         const Ui UI{};
         const System SYSTEM{};

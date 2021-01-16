@@ -5,6 +5,10 @@
 
 #include <aide/application.hpp>
 #include <aide/gui/translatorinterface.hpp>
+#include <aide/settings/settingspageregistry.hpp>
+#include <aide/settingsproviderinterface.hpp>
+
+#include "demosettingspage.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -26,6 +30,33 @@ int main(int argc, char* argv[])
         mainWindow.get()));
 
     mainWindow->setCentralWidget(description);
+
+    aide::core::SettingsPageRegistry::addPage(
+        std::make_unique<DemoSettingsPage>(
+            aide::HierarchicalId("Demo Page 1")("Demo Subpage 1")(
+                "Demo Subpage 1.1"),
+            app.settingsProvider()->unversionableSettings()));
+    aide::core::SettingsPageRegistry::addPage(
+        std::make_unique<DemoSettingsPage>(
+            aide::HierarchicalId("Demo Page 1")("Demo Subpage 1")(
+                "Demo Subpage 1.2"),
+            app.settingsProvider()->unversionableSettings()));
+
+    aide::core::SettingsPageRegistry::addPage(
+        std::make_unique<DemoSettingsPage>(
+            aide::HierarchicalId("Demo Page 1")("Demo Subpage 2")(
+                "Demo Subpage 2.1"),
+            app.settingsProvider()->unversionableSettings()));
+
+    aide::core::SettingsPageRegistry::addPage(
+        std::make_unique<DemoSettingsPage>(
+            aide::HierarchicalId("Demo Page 1")("Demo Subpage 2")(
+                "Demo Subpage 2.2"),
+            app.settingsProvider()->unversionableSettings()));
+    aide::core::SettingsPageRegistry::addPage(
+        std::make_unique<DemoSettingsPage>(
+            aide::HierarchicalId("Demo Page 2"),
+            app.settingsProvider()->unversionableSettings()));
 
     return aide::Application::exec();
 }

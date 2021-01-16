@@ -35,7 +35,10 @@ target_sources(
     applicationtest.cpp
     buildinformationtest.cpp
     hierarchicalidtest.cpp
+    mocksettingspage.cpp
     searchlineedittest.cpp
+    settingspageregistrytest.cpp
+    settingspagetest.cpp
     $<$<TARGET_EXISTS:Qt5::lrelease>:${CMAKE_CURRENT_BINARY_DIR}/ut_translations.qrc
     ${QM_FILES}>
     res/ut_icons.qrc
@@ -52,10 +55,15 @@ if(NOT ${TEST_AGAINST_INSTALLED})
             mainwindowgeometryandstatetest.cpp
             mainwindowtest.cpp
             mockapplicationcloseview.cpp
-            mocksettings.cpp
             mockmainwindowview.cpp
+            mocksettings.cpp
+            mocksettingsdialog.cpp
             nulllogger.cpp
             qtsettingstest.cpp
+            settingsdialoggeometryandstatetest.cpp
+            settingspagegrouptreemodeltest.cpp
+            showsettingsdialogtest.cpp
+            treeitemtest.cpp
   )
 endif()
 

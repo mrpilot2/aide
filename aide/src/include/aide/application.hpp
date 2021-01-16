@@ -14,6 +14,8 @@ namespace aide
 {
     class ApplicationBuilder;
     class ActionRegistry;
+    class SettingsProviderInterface;
+
     namespace gui
     {
         class MainWindow;
@@ -42,6 +44,9 @@ namespace aide
 
         [[nodiscard]] std::shared_ptr<gui::TranslatorInterface> translator()
             const;
+
+        [[nodiscard]] std::shared_ptr<SettingsProviderInterface>
+        settingsProvider();
 
     private:
         static bool isOrganizationNameSet();

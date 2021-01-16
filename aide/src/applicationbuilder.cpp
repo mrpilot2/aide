@@ -14,17 +14,29 @@ using aide::Logger;
 using aide::LoggerPtr;
 using aide::gui::MainWindow;
 using aide::gui::MainWindowController;
+using aide::gui::SettingsDialog;
+using aide::gui::SettingsDialogController;
 
 ApplicationBuilder::ApplicationBuilder()
     : m_actionRegistry{std::make_shared<ActionRegistry>(m_logger)}
-    , m_mainWindow(new MainWindow(m_actionRegistry, m_logger, nullptr))
-    , m_applicationClose(m_mainWindow, *settingsProvider.versionableSettings())
-    , m_mainWindowGeometryAndState(m_mainWindow,
-                                   *settingsProvider.unversionableSettings())
+    , m_mainWindow(new MainWindow(m_logger, nullptr))
+    , m_settingsDialog(std::make_shared<SettingsDialog>(m_mainWindow.get()))
+    , m_settingsProvider(std::make_shared<AideSettingsProvider>())
+    , m_applicationClose(m_mainWindow,
+                         *(m_settingsProvider->versionableSettings()))
+    , m_mainWindowGeometryAndState(
+          m_mainWindow, *(m_settingsProvider->unversionableSettings()))
+    , m_showSettingsDialog(m_settingsDialog,
+                           *(m_settingsProvider->unversionableSettings()),
+                           m_logger)
+    , m_settingsDialogController(
+          std::make_shared<SettingsDialogController>(m_showSettingsDialog))
     , m_mainController(std::make_shared<MainWindowController>(
-          m_applicationClose, m_mainWindowGeometryAndState))
+          m_applicationClose, m_mainWindowGeometryAndState,
+          m_showSettingsDialog))
 {
-    m_mainWindow->setMainWindowController(m_mainController);
+    m_mainWindow->setMainWindowController(m_mainController, m_actionRegistry);
+    m_settingsDialog->setController(m_settingsDialogController);
 
     m_mainWindowGeometryAndState.restoreGeometryAndState();
 }
@@ -78,4 +90,10 @@ bool ApplicationBuilder::tryToCreateLogLocationIfItDoesNotExist(
 std::shared_ptr<aide::gui::MainWindow> ApplicationBuilder::mainWindow() const
 {
     return m_mainWindow;
+}
+
+std::shared_ptr<aide::SettingsProviderInterface>
+ApplicationBuilder::settingsProvider() const
+{
+    return m_settingsProvider;
 }

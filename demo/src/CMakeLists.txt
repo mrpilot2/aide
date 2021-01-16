@@ -1,4 +1,7 @@
 set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOUIC_SEARCH_PATHS "res")
+set(CMAKE_AUTOMOC ON)
 
 if(TARGET Qt5::lrelease)
   set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
@@ -22,6 +25,7 @@ add_executable(
   aide_demo
   $<$<TARGET_EXISTS:Qt5::lrelease>:${CMAKE_CURRENT_BINARY_DIR}/demo_translations.qrc
   ${QM_FILES}>
+  demosettingspage.cpp
   main.cpp
 )
 

@@ -33,16 +33,16 @@ namespace aide
         {
             Q_OBJECT
         public:
-            explicit MainWindow(
-                const ActionRegistryInterfacePtr& actionRegistry,
-                aide::LoggerPtr loggerInterface, QWidget* parent = nullptr);
+            explicit MainWindow(LoggerPtr loggerInterface, QWidget* parent);
             ~MainWindow() override;
             MainWindow(const MainWindow&) = delete;
             MainWindow& operator=(const MainWindow&) = delete;
             MainWindow(const MainWindow&&)           = delete;
             MainWindow& operator=(const MainWindow&&) = delete;
 
-            void setMainWindowController(MainWindowControllerPtr controller);
+            void setMainWindowController(
+                MainWindowControllerPtr controller,
+                const ActionRegistryInterfacePtr& actionRegistry);
 
             void restoreGeometryAndState(QByteArray geometry,
                                          QByteArray state) override;
@@ -67,6 +67,7 @@ namespace aide
 
             std::shared_ptr<TranslatorInterface> m_translator;
             std::unique_ptr<Ui::MainWindow> m_ui;
+            std::shared_ptr<QAction> m_actionSettings;
             std::shared_ptr<QAction> m_actionQuit;
             std::shared_ptr<QAction> m_actionAboutQt;
         };

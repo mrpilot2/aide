@@ -32,6 +32,9 @@ target_sources(
   PRIVATE
     mainwindow.cpp
     mainwindowcontroller.cpp
+    settings/changedetector.cpp
+    settings/settingsdialog.cpp
+    settings/settingsdialogcontroller.cpp
     $<$<TARGET_EXISTS:Qt5::lrelease>:applicationtranslator.cpp>
     $<$<NOT:$<TARGET_EXISTS:Qt5::lrelease>>:nullapplicationtranslator.cpp>
     $<$<TARGET_EXISTS:Qt5::lrelease>:${CMAKE_CURRENT_BINARY_DIR}/translations.qrc

@@ -4,6 +4,10 @@
 
 #include <memory>
 
+#include <QObject>
+
+#include <settings/showsettingsdialogcontroller.hpp>
+
 class QByteArray;
 class QCloseEvent;
 
@@ -15,22 +19,29 @@ namespace aide::core
 
 namespace aide::gui
 {
-    class MainWindowController
+    class MainWindowController : public QObject
     {
+        Q_OBJECT
     public:
         explicit MainWindowController(
             const aide::core::ApplicationCloseController& closeUseCase,
-            aide::core::MainWindowGeometryAndStateController& saveUseCase);
+            aide::core::MainWindowGeometryAndStateController& saveUseCase,
+            core::ShowSettingsDialogController& settingsDialogUseCase);
 
         void onUserWantsToQuitApplication(QCloseEvent* event,
                                           const QByteArray& geometry,
                                           const QByteArray& state);
+
+    public slots:
+        void onUserWantsToShowSettingsDialog();
 
     private:
         const aide::core::ApplicationCloseController&
             applicationCloseInteractor;
         aide::core::MainWindowGeometryAndStateController&
             saveGeometryAndStateInteractor;
+
+        aide::core::ShowSettingsDialogController& showSettingsDialogInteractor;
     };
 
     using MainWindowControllerPtr = std::shared_ptr<MainWindowController>;

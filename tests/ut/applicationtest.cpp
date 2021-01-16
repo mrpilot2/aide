@@ -107,3 +107,16 @@ TEST_CASE("Application main window is never null", "[Application]")
 
     REQUIRE(app.mainWindow() != nullptr);
 }
+
+TEST_CASE("Application settings provider is never null", "[Application]")
+{
+    aide::Application::setApplicationName("aide_test");
+    aide::Application::setOrganizationName("aide_company");
+
+    int numberOfArgs{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+    aide::Application app(numberOfArgs, appName.data());
+
+    REQUIRE(app.settingsProvider() != nullptr);
+}
