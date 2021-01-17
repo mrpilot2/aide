@@ -26,7 +26,8 @@ namespace aide::core
 
         virtual void setSelectedGroupIndex(const QModelIndex& index) = 0;
 
-        virtual SettingsDialogGeometryAndStateData currentGeometry() const = 0;
+        [[nodiscard]] virtual SettingsDialogGeometryAndStateData
+        currentGeometry() const = 0;
 
         virtual aide::core::UserSelection executeDialog() = 0;
 

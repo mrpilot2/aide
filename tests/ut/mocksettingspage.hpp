@@ -14,7 +14,7 @@ namespace aide::test
     {
     public:
         MockSettingsPage();
-        MockSettingsPage(const HierarchicalId& group);
+        explicit MockSettingsPage(const HierarchicalId& group);
 
         ~MockSettingsPage() override = default;
 
@@ -30,7 +30,7 @@ namespace aide::test
 
         void clearResetWasCalled();
 
-        uint16_t numberOfTimesResetWasCalled() const;
+        [[nodiscard]] uint16_t numberOfTimesResetWasCalled() const;
 
         void apply() override;
 

@@ -41,10 +41,10 @@ namespace aide::core
         [[nodiscard]] int columnCount(
             const QModelIndex& parent = QModelIndex()) const override;
 
-        SettingsPagePtr findCorrespondingSettingsPage(
+        [[nodiscard]] SettingsPagePtr findCorrespondingSettingsPage(
             const QModelIndex& selectedIndex) const;
 
-        QModelIndex recursivelyFindSelectedTreeItemIndex(
+        [[nodiscard]] QModelIndex recursivelyFindSelectedTreeItemIndex(
             const QString& groupName, const QModelIndex& parent) const;
 
     private:

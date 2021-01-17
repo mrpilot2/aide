@@ -9,7 +9,7 @@
 namespace aide
 {
     class SettingsInterface;
-}
+} // namespace aide
 
 namespace Ui
 {
@@ -25,11 +25,11 @@ public:
     DemoSettingsPage(aide::HierarchicalId group,
                      std::shared_ptr<aide::SettingsInterface> settings);
 
-    ~DemoSettingsPage();
+    ~DemoSettingsPage() override;
 
     [[nodiscard]] QWidget* widget() override;
 
-    bool isModified() const override;
+    [[nodiscard]] bool isModified() const override;
 
     void reset() override;
 

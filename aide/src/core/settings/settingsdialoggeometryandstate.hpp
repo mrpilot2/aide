@@ -23,7 +23,7 @@ namespace aide::core
 
         void restoreGeometryAndState() override;
 
-        QString selectedTreeViewItem() const;
+        [[nodiscard]] QString selectedTreeViewItem() const;
 
     private:
         SettingsDialogWeakPtr view;

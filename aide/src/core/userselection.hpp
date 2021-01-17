@@ -9,6 +9,6 @@ namespace aide::core
         Cancel,
         Exit,
     };
-}
+} // namespace aide::core
 
 #endif // AIDE_USER_SELECTION_HPP
