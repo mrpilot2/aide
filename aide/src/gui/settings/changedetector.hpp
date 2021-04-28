@@ -9,6 +9,9 @@ namespace aide::gui
 {
     void installChangeDetector(QObject* widget,
                                const SettingsDialogControllerPtr& controller);
+
+    void unInstallChangeDetector(QObject* widget);
+
 } // namespace aide::gui
 
 #endif // AIDE_CHANGE_DETECTOR_HPP

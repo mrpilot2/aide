@@ -119,7 +119,9 @@ void SettingsDialog::setSelectedPageDisplayName(const std::string& displayName)
 
 void SettingsDialog::showSelectedPageWidget(QWidget* widget)
 {
-    ui->settingsPageScrollArea->takeWidget();
+    auto oldWidget = ui->settingsPageScrollArea->takeWidget();
+
+    unInstallChangeDetector(oldWidget);
 
     ui->settingsPageScrollArea->setWidget(widget);
 
@@ -128,7 +130,9 @@ void SettingsDialog::showSelectedPageWidget(QWidget* widget)
 
 void SettingsDialog::showEmptyPageWidget()
 {
-    ui->settingsPageScrollArea->takeWidget();
+    auto oldWidget = ui->settingsPageScrollArea->takeWidget();
+
+    unInstallChangeDetector(oldWidget);
 
     ui->settingsPageScrollArea->setWidget(ui->defaultScrollAreaWidget);
 }
@@ -146,4 +150,9 @@ void SettingsDialog::enableApplyButton(bool enable)
 void SettingsDialog::installChangeDetector(QObject* widget)
 {
     aide::gui::installChangeDetector(widget, settingsController);
+}
+
+void SettingsDialog::unInstallChangeDetector(QObject* widget)
+{
+    aide::gui::unInstallChangeDetector(widget);
 }

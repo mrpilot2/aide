@@ -62,6 +62,8 @@ namespace aide::gui
 
         void installChangeDetector(QObject* widget);
 
+        void unInstallChangeDetector(QObject* widget);
+
         std::unique_ptr<Ui::SettingsDialog> ui;
 
         SettingsDialogControllerPtr settingsController;
