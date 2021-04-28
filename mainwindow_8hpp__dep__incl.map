@@ -1,6 +1,7 @@
 <map id="/home/runner/work/aide/aide/aide/src/gui/mainwindow.hpp" name="/home/runner/work/aide/aide/aide/src/gui/mainwindow.hpp">
-<area shape="rect" id="node2" href="$applicationbuilder_8hpp.html" title="/home/runner/work/aide\l/aide/aide/src/applicationbuilder.hpp" alt="" coords="138,95,367,136"/>
-<area shape="rect" id="node3" href="$application_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/application.cpp" alt="" coords="5,184,196,225"/>
-<area shape="rect" id="node5" href="$mainwindow_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/gui/mainwindow.cpp" alt="" coords="392,95,615,136"/>
-<area shape="rect" id="node4" href="$applicationbuilder_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/applicationbuilder.cpp" alt="" coords="221,184,450,225"/>
+<area shape="rect" id="node1" title=" " alt="" coords="155,5,401,47"/>
+<area shape="rect" id="node2" href="$applicationbuilder_8hpp.html" title=" " alt="" coords="149,95,407,136"/>
+<area shape="rect" id="node3" href="$application_8cpp.html" title=" " alt="" coords="5,184,217,225"/>
+<area shape="rect" id="node5" href="$mainwindow_8cpp.html" title=" " alt="" coords="431,95,677,136"/>
+<area shape="rect" id="node4" href="$applicationbuilder_8cpp.html" title=" " alt="" coords="242,184,498,225"/>
 </map>

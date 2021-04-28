@@ -1,4 +1,5 @@
 <map id="aide::core::ShowSettingsDialog" name="aide::core::ShowSettingsDialog">
-<area shape="rect" id="node2" href="$classaide_1_1core_1_1ShowSettingsDialogController.html" title="aide::core::ShowSettings\lDialogController" alt="" coords="7,5,175,47"/>
-<area shape="rect" id="node3" href="$classaide_1_1core_1_1SettingsDialogChangePageController.html" title="aide::core::SettingsDialog\lChangePageController" alt="" coords="5,71,177,112"/>
+<area shape="rect" id="node1" title=" " alt="" coords="243,39,425,80"/>
+<area shape="rect" id="node2" href="$classaide_1_1core_1_1ShowSettingsDialogController.html" title=" " alt="" coords="9,5,191,47"/>
+<area shape="rect" id="node3" href="$classaide_1_1core_1_1SettingsDialogChangePageController.html" title=" " alt="" coords="5,71,195,112"/>
 </map>

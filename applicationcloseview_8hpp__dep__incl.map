@@ -1,9 +1,10 @@
 <map id="/home/runner/work/aide/aide/aide/src/core/applicationcloseview.hpp" name="/home/runner/work/aide/aide/aide/src/core/applicationcloseview.hpp">
-<area shape="rect" id="node2" href="$applicationclose_8hpp.html" title="/home/runner/work/aide\l/aide/aide/src/core/applicationclose.hpp" alt="" coords="228,95,479,136"/>
-<area shape="rect" id="node3" href="$applicationbuilder_8hpp.html" title="/home/runner/work/aide\l/aide/aide/src/applicationbuilder.hpp" alt="" coords="88,273,317,315"/>
-<area shape="rect" id="node6" href="$mainwindow_8hpp.html" title="/home/runner/work/aide\l/aide/aide/src/gui/mainwindow.hpp" alt="" coords="242,184,465,225"/>
-<area shape="rect" id="node8" href="$applicationclose_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/core/applicationclose.cpp" alt="" coords="489,184,740,225"/>
-<area shape="rect" id="node4" href="$application_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/application.cpp" alt="" coords="259,363,450,404"/>
-<area shape="rect" id="node5" href="$applicationbuilder_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/applicationbuilder.cpp" alt="" coords="5,363,235,404"/>
-<area shape="rect" id="node7" href="$mainwindow_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/gui/mainwindow.cpp" alt="" coords="391,273,614,315"/>
+<area shape="rect" id="node1" title=" " alt="" coords="235,5,544,47"/>
+<area shape="rect" id="node2" href="$applicationclose_8hpp.html" title=" " alt="" coords="250,95,529,136"/>
+<area shape="rect" id="node3" href="$applicationbuilder_8hpp.html" title=" " alt="" coords="97,273,354,315"/>
+<area shape="rect" id="node6" href="$mainwindow_8hpp.html" title=" " alt="" coords="266,184,513,225"/>
+<area shape="rect" id="node8" href="$applicationclose_8cpp.html" title=" " alt="" coords="537,184,815,225"/>
+<area shape="rect" id="node4" href="$application_8cpp.html" title=" " alt="" coords="286,363,498,404"/>
+<area shape="rect" id="node5" href="$applicationbuilder_8cpp.html" title=" " alt="" coords="5,363,261,404"/>
+<area shape="rect" id="node7" href="$mainwindow_8cpp.html" title=" " alt="" coords="429,273,675,315"/>
 </map>

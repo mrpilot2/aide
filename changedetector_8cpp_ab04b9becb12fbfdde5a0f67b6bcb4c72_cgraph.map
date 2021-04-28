@@ -1,4 +1,5 @@
 <map id="installChangeDetectorsForDateTimeEdits" name="installChangeDetectorsForDateTimeEdits">
-<area shape="rect" id="node2" href="$classaide_1_1gui_1_1SettingsDialogController.html#a816bbf43336b138e3c31e49a23d9c457" title="aide::gui::SettingsDialog\lController::onUserChangedAGuiElement" alt="" coords="231,13,488,54"/>
-<area shape="rect" id="node3" href="$classaide_1_1core_1_1SettingsDialogChangePageController.html#a5042a21cfc1bd23666879636990d6432" title="aide::core::SettingsDialog\lChangePageController::anyGuiElement\lHasChanged" alt="" coords="536,5,787,61"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,13,200,54"/>
+<area shape="rect" id="node2" href="$classaide_1_1gui_1_1SettingsDialogController.html#a816bbf43336b138e3c31e49a23d9c457" title=" " alt="" coords="248,13,531,54"/>
+<area shape="rect" id="node3" href="$classaide_1_1core_1_1SettingsDialogChangePageController.html#a5042a21cfc1bd23666879636990d6432" title=" " alt="" coords="579,5,853,61"/>
 </map>

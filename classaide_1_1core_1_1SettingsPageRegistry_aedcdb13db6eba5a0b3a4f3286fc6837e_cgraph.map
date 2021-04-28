@@ -1,4 +1,5 @@
 <map id="aide::core::SettingsPageRegistry::addPage" name="aide::core::SettingsPageRegistry::addPage">
-<area shape="rect" id="node2" href="$classSettingsPageRegistryPrivate.html#a114ae5695e6db6ecd33964e18c9f9faf" title="SettingsPageRegistryPrivate\l::instance" alt="" coords="219,5,409,47"/>
-<area shape="rect" id="node3" href="$classSettingsPageRegistryPrivate.html#a30652fbbe4edd0c1eea5e2d7d4a6c35b" title="SettingsPageRegistryPrivate\l::addPage" alt="" coords="219,71,409,112"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,39,184,80"/>
+<area shape="rect" id="node2" href="$classSettingsPageRegistryPrivate.html#a30652fbbe4edd0c1eea5e2d7d4a6c35b" title=" " alt="" coords="232,5,439,47"/>
+<area shape="rect" id="node3" href="$classSettingsPageRegistryPrivate.html#a114ae5695e6db6ecd33964e18c9f9faf" title=" " alt="" coords="232,71,439,112"/>
 </map>

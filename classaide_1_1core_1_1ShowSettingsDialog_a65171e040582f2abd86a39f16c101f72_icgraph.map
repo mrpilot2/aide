@@ -1,5 +1,6 @@
 <map id="aide::core::ShowSettingsDialog::anyGuiElementHasChanged" name="aide::core::ShowSettingsDialog::anyGuiElementHasChanged">
-<area shape="rect" id="node2" href="$classaide_1_1core_1_1ShowSettingsDialog.html#a239747ac71aae550b969704865d8f96d" title="aide::core::ShowSettings\lDialog::resetCurrentPage" alt="" coords="317,5,486,47"/>
-<area shape="rect" id="node3" href="$classaide_1_1core_1_1ShowSettingsDialog.html#ac6b1b74fa81f8d79e4a3557645395180" title="aide::core::ShowSettings\lDialog::applyModifiedSettingsPages" alt="" coords="285,71,517,112"/>
-<area shape="rect" id="node4" href="$classaide_1_1core_1_1ShowSettingsDialog.html#a7a09941d17fcd76a46280643cfe99a1d" title="aide::core::ShowSettings\lDialog::showSettingsDialog" alt="" coords="565,71,748,112"/>
+<area shape="rect" id="node1" title=" " alt="" coords="557,39,812,80"/>
+<area shape="rect" id="node2" href="$classaide_1_1core_1_1ShowSettingsDialog.html#ac6b1b74fa81f8d79e4a3557645395180" title=" " alt="" coords="255,5,509,47"/>
+<area shape="rect" id="node4" href="$classaide_1_1core_1_1ShowSettingsDialog.html#a239747ac71aae550b969704865d8f96d" title=" " alt="" coords="290,71,474,112"/>
+<area shape="rect" id="node3" href="$classaide_1_1core_1_1ShowSettingsDialog.html#a7a09941d17fcd76a46280643cfe99a1d" title=" " alt="" coords="5,5,207,47"/>
 </map>

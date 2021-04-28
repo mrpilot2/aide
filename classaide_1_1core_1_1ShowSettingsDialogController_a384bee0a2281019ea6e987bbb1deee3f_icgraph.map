@@ -1,4 +1,4 @@
 <map id="aide::core::ShowSettingsDialogController::showSettingsDialog" name="aide::core::ShowSettingsDialogController::showSettingsDialog">
-<area shape="rect" id="node2" href="$classaide_1_1gui_1_1MainWindowController.html#a79c8e0bf63d8e9389bad923fc783f926" title="aide::gui::MainWindowController\l::onUserWantsToShowSettingsDialog" alt="" coords="256,13,499,54"/>
-<area shape="rect" id="node3" href="$classaide_1_1gui_1_1MainWindow.html#a8a9c964637d582cd9a4e5e96d22355d7" title="aide::gui::MainWindow\l::restoreGeometryAndState" alt="" coords="547,13,728,54"/>
+<area shape="rect" id="node1" title=" " alt="" coords="313,5,536,61"/>
+<area shape="rect" id="node2" href="$classaide_1_1gui_1_1MainWindowController.html#a79c8e0bf63d8e9389bad923fc783f926" title=" " alt="" coords="5,13,265,54"/>
 </map>

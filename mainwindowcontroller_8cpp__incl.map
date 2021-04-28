@@ -1,6 +1,11 @@
 <map id="/home/runner/work/aide/aide/aide/src/gui/mainwindowcontroller.cpp" name="/home/runner/work/aide/aide/aide/src/gui/mainwindowcontroller.cpp">
-<area shape="rect" id="node2" href="$mainwindowcontroller_8hpp.html" title="mainwindowcontroller.hpp" alt="" coords="49,95,221,121"/>
-<area shape="rect" id="node7" href="$applicationclosecontroller_8hpp.html" title="applicationclosecontroller.hpp" alt="" coords="369,95,562,121"/>
-<area shape="rect" id="node8" href="$mainwindowgeometryandstatecontroller_8hpp.html" title="mainwindowgeometryandstatecontroller.hpp" alt="" coords="586,95,862,121"/>
-<area shape="rect" id="node5" href="$showsettingsdialogcontroller_8hpp.html" title="settings/showsettingsdialogcontroller.hpp" alt="" coords="195,169,456,196"/>
+<area shape="rect" id="node1" title=" " alt="" coords="257,5,565,47"/>
+<area shape="rect" id="node2" href="$mainwindowcontroller_8hpp.html" title=" " alt="" coords="47,95,241,121"/>
+<area shape="rect" id="node6" title=" " alt="" coords="266,95,371,121"/>
+<area shape="rect" id="node7" href="$applicationclosecontroller_8hpp.html" title=" " alt="" coords="395,95,613,121"/>
+<area shape="rect" id="node8" href="$mainwindowgeometryandstatecontroller_8hpp.html" title=" " alt="" coords="637,95,952,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,169,83,196"/>
+<area shape="rect" id="node4" title=" " alt="" coords="107,169,181,196"/>
+<area shape="rect" id="node5" href="$showsettingsdialogcontroller_8hpp.html" title=" " alt="" coords="205,169,499,196"/>
+<area shape="rect" id="node9" title=" " alt="" coords="746,169,843,196"/>
 </map>

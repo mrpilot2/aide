@@ -1,12 +1,12 @@
 <map id="aide::gui::SettingsDialogController::onUserChangedAGuiElement" name="aide::gui::SettingsDialogController::onUserChangedAGuiElement">
-<area shape="rect" id="node2" href="$changedetector_8cpp.html#a3e8814b24e3888407faea27b59ec0dde" title="installChangeDetectorFor\lItemViews" alt="" coords="314,5,485,47"/>
-<area shape="rect" id="node5" href="$changedetector_8cpp.html#a248313cc5e7bc4b036612aae440bb83f" title="installChangeDetectorFor\lTextEdits" alt="" coords="314,71,485,112"/>
-<area shape="rect" id="node6" href="$changedetector_8cpp.html#a24509240bff02ae8a621d6b9bd06057b" title="installChangeDetectorFor\lKeyEdit" alt="" coords="314,136,485,177"/>
-<area shape="rect" id="node7" href="$changedetector_8cpp.html#a62e5d4d1ed7ac5a9caf164bc04973dc3" title="installChangeDetectorFor\lSliders" alt="" coords="314,201,485,243"/>
-<area shape="rect" id="node8" href="$changedetector_8cpp.html#ab04b9becb12fbfdde5a0f67b6bcb4c72" title="installChangeDetectorsFor\lDateTimeEdits" alt="" coords="311,267,488,308"/>
-<area shape="rect" id="node9" href="$changedetector_8cpp.html#aaa616f0937f41989aa51ae102aad8691" title="installChangeDetectorFor\lSpinBoxes" alt="" coords="314,332,485,373"/>
-<area shape="rect" id="node10" href="$changedetector_8cpp.html#aa6458f2baa4386ef5be19b8357224659" title="installChangeDetectorFor\lComboBoxes" alt="" coords="314,397,485,439"/>
-<area shape="rect" id="node11" href="$changedetector_8cpp.html#a7771d9536cdbde863eeb34e5c58642d5" title="installChangeDetectorFor\lButtons" alt="" coords="314,463,485,504"/>
-<area shape="rect" id="node3" href="$namespaceaide_1_1gui.html#a636b70d969c27cd3dccc721014a7aab4" title="aide::gui::installChange\lDetector" alt="" coords="536,235,695,276"/>
-<area shape="rect" id="node4" href="$classaide_1_1gui_1_1SettingsDialog.html#a31e59307e0e23048bd7624fc0031b5cd" title="aide::gui::SettingsDialog\l::enableApplyButton" alt="" coords="743,235,907,276"/>
+<area shape="rect" id="node1" title=" " alt="" coords="471,235,753,276"/>
+<area shape="rect" id="node2" href="$changedetector_8cpp.html#a7771d9536cdbde863eeb34e5c58642d5" title=" " alt="" coords="232,5,419,47"/>
+<area shape="rect" id="node4" href="$changedetector_8cpp.html#aa6458f2baa4386ef5be19b8357224659" title=" " alt="" coords="232,71,419,112"/>
+<area shape="rect" id="node5" href="$changedetector_8cpp.html#a3e8814b24e3888407faea27b59ec0dde" title=" " alt="" coords="232,136,419,177"/>
+<area shape="rect" id="node6" href="$changedetector_8cpp.html#a24509240bff02ae8a621d6b9bd06057b" title=" " alt="" coords="232,201,419,243"/>
+<area shape="rect" id="node7" href="$changedetector_8cpp.html#a62e5d4d1ed7ac5a9caf164bc04973dc3" title=" " alt="" coords="232,267,419,308"/>
+<area shape="rect" id="node8" href="$changedetector_8cpp.html#aaa616f0937f41989aa51ae102aad8691" title=" " alt="" coords="232,332,419,373"/>
+<area shape="rect" id="node9" href="$changedetector_8cpp.html#a248313cc5e7bc4b036612aae440bb83f" title=" " alt="" coords="232,397,419,439"/>
+<area shape="rect" id="node10" href="$changedetector_8cpp.html#ab04b9becb12fbfdde5a0f67b6bcb4c72" title=" " alt="" coords="228,463,423,504"/>
+<area shape="rect" id="node3" href="$namespaceaide_1_1gui.html#a636b70d969c27cd3dccc721014a7aab4" title=" " alt="" coords="5,235,180,276"/>
 </map>

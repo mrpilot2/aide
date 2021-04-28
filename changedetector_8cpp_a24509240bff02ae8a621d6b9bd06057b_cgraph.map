@@ -1,4 +1,5 @@
 <map id="installChangeDetectorForKeyEdit" name="installChangeDetectorForKeyEdit">
-<area shape="rect" id="node2" href="$classaide_1_1gui_1_1SettingsDialogController.html#a816bbf43336b138e3c31e49a23d9c457" title="aide::gui::SettingsDialog\lController::onUserChangedAGuiElement" alt="" coords="224,13,481,54"/>
-<area shape="rect" id="node3" href="$classaide_1_1core_1_1SettingsDialogChangePageController.html#a5042a21cfc1bd23666879636990d6432" title="aide::core::SettingsDialog\lChangePageController::anyGuiElement\lHasChanged" alt="" coords="529,5,780,61"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,13,192,54"/>
+<area shape="rect" id="node2" href="$classaide_1_1gui_1_1SettingsDialogController.html#a816bbf43336b138e3c31e49a23d9c457" title=" " alt="" coords="240,13,523,54"/>
+<area shape="rect" id="node3" href="$classaide_1_1core_1_1SettingsDialogChangePageController.html#a5042a21cfc1bd23666879636990d6432" title=" " alt="" coords="571,5,845,61"/>
 </map>

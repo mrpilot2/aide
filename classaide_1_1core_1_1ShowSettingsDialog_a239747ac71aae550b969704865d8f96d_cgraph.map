@@ -1,6 +1,7 @@
 <map id="aide::core::ShowSettingsDialog::resetCurrentPage" name="aide::core::ShowSettingsDialog::resetCurrentPage">
-<area shape="rect" id="node2" href="$classaide_1_1core_1_1ShowSettingsDialog.html#a65171e040582f2abd86a39f16c101f72" title="aide::core::ShowSettings\lDialog::anyGuiElementHasChanged" alt="" coords="223,9,455,51"/>
-<area shape="rect" id="node3" href="$classaide_1_1core_1_1SettingsPageRegistry.html#ab545e33bcd4f08f67df968f234b00c99" title="aide::core::SettingsPage\lRegistry::settingsPages" alt="" coords="503,39,668,80"/>
-<area shape="rect" id="node4" href="$classSettingsPageRegistryPrivate.html#a114ae5695e6db6ecd33964e18c9f9faf" title="SettingsPageRegistryPrivate\l::instance" alt="" coords="716,5,907,47"/>
-<area shape="rect" id="node5" href="$classSettingsPageRegistryPrivate.html#af0b8de5174fdb7abe77dd435d0848c93" title="SettingsPageRegistryPrivate\l::settingsPages" alt="" coords="716,71,907,112"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,39,189,80"/>
+<area shape="rect" id="node2" href="$classaide_1_1core_1_1ShowSettingsDialog.html#a65171e040582f2abd86a39f16c101f72" title=" " alt="" coords="237,39,492,80"/>
+<area shape="rect" id="node3" href="$classaide_1_1core_1_1SettingsPageRegistry.html#ab545e33bcd4f08f67df968f234b00c99" title=" " alt="" coords="540,39,719,80"/>
+<area shape="rect" id="node4" href="$classSettingsPageRegistryPrivate.html#a114ae5695e6db6ecd33964e18c9f9faf" title=" " alt="" coords="767,5,973,47"/>
+<area shape="rect" id="node5" href="$classSettingsPageRegistryPrivate.html#af0b8de5174fdb7abe77dd435d0848c93" title=" " alt="" coords="767,71,973,112"/>
 </map>

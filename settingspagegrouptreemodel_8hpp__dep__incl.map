@@ -1,8 +1,9 @@
 <map id="/home/runner/work/aide/aide/aide/src/core/settings/settingspagegrouptreemodel.hpp" name="/home/runner/work/aide/aide/aide/src/core/settings/settingspagegrouptreemodel.hpp">
-<area shape="rect" id="node2" href="$settingspagegrouptreemodel_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/core/settings\l/settingspagegrouptreemodel.cpp" alt="" coords="5,109,220,165"/>
-<area shape="rect" id="node3" href="$showsettingsdialog_8hpp.html" title="/home/runner/work/aide\l/aide/aide/src/core/settings\l/showsettingsdialog.hpp" alt="" coords="245,109,423,165"/>
-<area shape="rect" id="node4" href="$applicationbuilder_8hpp.html" title="/home/runner/work/aide\l/aide/aide/src/applicationbuilder.hpp" alt="" coords="106,221,335,262"/>
-<area shape="rect" id="node7" href="$showsettingsdialog_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/core/settings\l/showsettingsdialog.cpp" alt="" coords="359,213,538,269"/>
-<area shape="rect" id="node5" href="$application_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/application.cpp" alt="" coords="8,317,199,359"/>
-<area shape="rect" id="node6" href="$applicationbuilder_8cpp.html" title="/home/runner/work/aide\l/aide/aide/src/applicationbuilder.cpp" alt="" coords="223,317,453,359"/>
+<area shape="rect" id="node1" title=" " alt="" coords="126,5,369,61"/>
+<area shape="rect" id="node2" href="$settingspagegrouptreemodel_8cpp.html" title=" " alt="" coords="5,109,247,165"/>
+<area shape="rect" id="node3" href="$showsettingsdialog_8hpp.html" title=" " alt="" coords="271,109,469,165"/>
+<area shape="rect" id="node4" href="$applicationbuilder_8hpp.html" title=" " alt="" coords="116,221,373,262"/>
+<area shape="rect" id="node7" href="$showsettingsdialog_8cpp.html" title=" " alt="" coords="398,213,595,269"/>
+<area shape="rect" id="node5" href="$application_8cpp.html" title=" " alt="" coords="9,317,221,359"/>
+<area shape="rect" id="node6" href="$applicationbuilder_8cpp.html" title=" " alt="" coords="246,317,502,359"/>
 </map>

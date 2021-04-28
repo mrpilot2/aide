@@ -1,3 +1,5 @@
 <map id="aide::gui::SettingsDialog" name="aide::gui::SettingsDialog">
-<area shape="rect" id="node3" href="$classaide_1_1core_1_1SettingsDialogInterface.html" title="aide::core::SettingsDialog\lInterface" alt="" coords="99,5,271,47"/>
+<area shape="rect" id="node1" title=" " alt="" coords="29,95,211,121"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,13,80,39"/>
+<area shape="rect" id="node3" href="$classaide_1_1core_1_1SettingsDialogInterface.html" title=" " alt="" coords="104,5,293,47"/>
 </map>

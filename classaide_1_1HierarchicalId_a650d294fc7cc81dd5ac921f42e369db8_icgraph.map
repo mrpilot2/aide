@@ -1,5 +1,6 @@
 <map id="aide::HierarchicalId::name" name="aide::HierarchicalId::name">
-<area shape="rect" id="node2" href="$classaide_1_1ActionRegistry.html#a234ac5a71230a1d9443e8b126ae8c428" title="aide::ActionRegistry\l::registerAction" alt="" coords="188,5,328,47"/>
-<area shape="rect" id="node3" href="$classaide_1_1HierarchicalId.html#adf1d34e5f6076c3ab10eb6eb1f593919" title="aide::HierarchicalId\l::operator==" alt="" coords="191,71,325,112"/>
-<area shape="rect" id="node4" href="$classaide_1_1HierarchicalId.html#acd8f9520dc74fd4a96aedaf74fb63ea1" title="aide::HierarchicalId\l::operator\&lt;" alt="" coords="191,136,325,177"/>
+<area shape="rect" id="node1" title=" " alt="" coords="207,71,355,112"/>
+<area shape="rect" id="node2" href="$classaide_1_1HierarchicalId.html#acd8f9520dc74fd4a96aedaf74fb63ea1" title=" " alt="" coords="8,5,156,47"/>
+<area shape="rect" id="node3" href="$classaide_1_1HierarchicalId.html#adf1d34e5f6076c3ab10eb6eb1f593919" title=" " alt="" coords="8,71,156,112"/>
+<area shape="rect" id="node4" href="$classaide_1_1ActionRegistry.html#a234ac5a71230a1d9443e8b126ae8c428" title=" " alt="" coords="5,136,159,177"/>
 </map>

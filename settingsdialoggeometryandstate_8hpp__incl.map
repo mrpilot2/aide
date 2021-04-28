@@ -1,6 +1,11 @@
 <map id="/home/runner/work/aide/aide/aide/src/core/settings/settingsdialoggeometryandstate.hpp" name="/home/runner/work/aide/aide/aide/src/core/settings/settingsdialoggeometryandstate.hpp">
-<area shape="rect" id="node2" href="$settingsdialoggeometryandstatecontroller_8hpp.html" title="settingsdialoggeometryandstatecontroller.hpp" alt="" coords="5,109,289,136"/>
-<area shape="rect" id="node6" href="$settingsdialoginterface_8hpp.html" title="settingsdialoginterface.hpp" alt="" coords="313,109,491,136"/>
-<area shape="rect" id="node4" href="$geometryandstatedata_8hpp.html" title="geometryandstatedata.hpp" alt="" coords="125,184,301,211"/>
-<area shape="rect" id="node9" href="$userselection_8hpp.html" title="userselection.hpp" alt="" coords="497,184,621,211"/>
+<area shape="rect" id="node1" title=" " alt="" coords="176,5,443,61"/>
+<area shape="rect" id="node2" href="$settingsdialoggeometryandstatecontroller_8hpp.html" title=" " alt="" coords="5,109,328,136"/>
+<area shape="rect" id="node6" href="$settingsdialoginterface_8hpp.html" title=" " alt="" coords="352,109,552,136"/>
+<area shape="rect" id="node3" title=" " alt="" coords="25,184,122,211"/>
+<area shape="rect" id="node4" href="$geometryandstatedata_8hpp.html" title=" " alt="" coords="146,184,345,211"/>
+<area shape="rect" id="node5" title=" " alt="" coords="159,259,332,285"/>
+<area shape="rect" id="node7" title=" " alt="" coords="368,184,445,211"/>
+<area shape="rect" id="node8" title=" " alt="" coords="469,184,528,211"/>
+<area shape="rect" id="node9" href="$userselection_8hpp.html" title=" " alt="" coords="553,184,690,211"/>
 </map>

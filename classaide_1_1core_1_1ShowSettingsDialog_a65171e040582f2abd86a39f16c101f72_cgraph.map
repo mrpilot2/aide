@@ -1,5 +1,6 @@
 <map id="aide::core::ShowSettingsDialog::anyGuiElementHasChanged" name="aide::core::ShowSettingsDialog::anyGuiElementHasChanged">
-<area shape="rect" id="node2" href="$classaide_1_1core_1_1SettingsPageRegistry.html#ab545e33bcd4f08f67df968f234b00c99" title="aide::core::SettingsPage\lRegistry::settingsPages" alt="" coords="285,39,451,80"/>
-<area shape="rect" id="node3" href="$classSettingsPageRegistryPrivate.html#a114ae5695e6db6ecd33964e18c9f9faf" title="SettingsPageRegistryPrivate\l::instance" alt="" coords="499,5,689,47"/>
-<area shape="rect" id="node4" href="$classSettingsPageRegistryPrivate.html#af0b8de5174fdb7abe77dd435d0848c93" title="SettingsPageRegistryPrivate\l::settingsPages" alt="" coords="499,71,689,112"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,39,260,80"/>
+<area shape="rect" id="node2" href="$classaide_1_1core_1_1SettingsPageRegistry.html#ab545e33bcd4f08f67df968f234b00c99" title=" " alt="" coords="308,39,487,80"/>
+<area shape="rect" id="node3" href="$classSettingsPageRegistryPrivate.html#a114ae5695e6db6ecd33964e18c9f9faf" title=" " alt="" coords="535,5,741,47"/>
+<area shape="rect" id="node4" href="$classSettingsPageRegistryPrivate.html#af0b8de5174fdb7abe77dd435d0848c93" title=" " alt="" coords="535,71,741,112"/>
 </map>
