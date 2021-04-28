@@ -34,6 +34,10 @@ void ShowSettingsDialog::showSettingsDialog()
 
     saveGeometryAndState.restoreGeometryAndState();
 
+    const auto& pages = SettingsPageRegistry::settingsPages();
+    std::for_each(pages.begin(), pages.end(),
+                  [](const auto& p) { p->reset(); });
+
     auto lastSelectedTreeItem = saveGeometryAndState.selectedTreeViewItem();
 
     if (!lastSelectedTreeItem.isEmpty()) {
@@ -44,10 +48,6 @@ void ShowSettingsDialog::showSettingsDialog()
     } else {
         dialog->setSelectedGroupIndex(treeModel->index(0, 0, QModelIndex()));
     }
-
-    const auto& pages = SettingsPageRegistry::settingsPages();
-    std::for_each(pages.begin(), pages.end(),
-                  [](const auto& p) { p->reset(); });
 
     auto result = dialog->executeDialog();
 
