@@ -212,7 +212,7 @@ bool DemoSettingsPage::isModified() const
     WidgetState defaultWidgetState;
 
     auto widgetStateFromSettings =
-        m_settings->value(group(), qVariantFromValue(defaultWidgetState))
+        m_settings->value(group(), QVariant::fromValue(defaultWidgetState))
             .value<WidgetState>();
 
     return widgetStateFromSettings != widgetStateFromGui(m_ui.get());
@@ -232,7 +232,7 @@ void DemoSettingsPage::reset()
 
     WidgetState defaultWidgetState;
     auto widgetState =
-        m_settings->value(group(), qVariantFromValue(defaultWidgetState))
+        m_settings->value(group(), QVariant::fromValue(defaultWidgetState))
             .value<WidgetState>();
 
     m_ui->radioButton->setChecked(widgetState.radioButtonChecked);
@@ -286,5 +286,5 @@ void DemoSettingsPage::reset()
 void DemoSettingsPage::apply()
 {
     m_settings->setValue(group(),
-                         qVariantFromValue(widgetStateFromGui(m_ui.get())));
+                         QVariant::fromValue(widgetStateFromGui(m_ui.get())));
 }
