@@ -73,6 +73,9 @@ jobs:
       id: cmake_args
       run: echo "::set-output name=CMAKE_ARGS::${{ steps.cmake_args_linux.outputs.CMAKE_ARGS }} -DUNIT_TESTS_RUN_ON_CI=1 -DWARNINGS_AS_ERRORS=${{ matrix.WARNINGS_AS_ERRORS }}"
 
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+
     - name: Build the project
       working-directory: build
       run: |
