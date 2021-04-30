@@ -139,7 +139,8 @@ void ShowSettingsDialog::showEmptyPageWidget() const
 
 void ShowSettingsDialog::anyGuiElementHasChanged()
 {
-    if (auto d = settingsDialog.lock(); d != nullptr) {
+    if (auto d = settingsDialog.lock();
+        d != nullptr && currentlySelectedPage != nullptr) {
         d->showResetLabel(currentlySelectedPage->isModified());
         const auto& pages = SettingsPageRegistry::settingsPages();
 

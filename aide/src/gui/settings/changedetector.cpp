@@ -204,3 +204,12 @@ void aide::gui::installChangeDetector(
         installChangeDetectorForItemViews(settingsController, child);
     }
 }
+
+void aide::gui::unInstallChangeDetector(QObject* widget)
+{
+    widget->disconnect();
+
+    for (auto* child : widget->children()) {
+        unInstallChangeDetector(child);
+    }
+}
