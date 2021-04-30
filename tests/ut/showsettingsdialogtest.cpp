@@ -427,3 +427,17 @@ TEST_CASE("Any show settings dialog use case")
                 QModelIndex());
     }
 }
+
+TEST_CASE("Any settings dialog", "[Issue 36]")
+{
+    auto view = std::make_shared<MockSettingsDialog>();
+    MockSettings settings;
+    auto logger = std::make_shared<NullLogger>();
+    ShowSettingsDialog useCase{view, settings, logger};
+
+    SECTION(
+        "shall not crash if anyGuiElementChanged is called with empty page ")
+    {
+        REQUIRE_NOTHROW(useCase.anyGuiElementHasChanged());
+    }
+}
