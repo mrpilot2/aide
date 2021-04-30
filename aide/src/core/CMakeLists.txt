@@ -21,6 +21,7 @@ target_sources(
           settings/settingspagegrouptreemodel.hpp
           settings/settingspageregistry.cpp
           settings/showsettingsdialog.cpp
+          settings/keymap/keymappage.cpp
           treeitem.cpp
 )
 

@@ -7,6 +7,9 @@
 #include <QStandardPaths>
 #include <QString>
 
+#include <settings/keymap/keymappage.hpp>
+#include <settings/settingspageregistry.hpp>
+
 #include "logger/logger.hpp"
 
 using aide::ApplicationBuilder;
@@ -39,6 +42,9 @@ ApplicationBuilder::ApplicationBuilder()
     m_settingsDialog->setController(m_settingsDialogController);
 
     m_mainWindowGeometryAndState.restoreGeometryAndState();
+
+    aide::core::SettingsPageRegistry::addPage(
+        std::make_unique<aide::core::KeymapPage>());
 }
 
 LoggerPtr ApplicationBuilder::logger() const
