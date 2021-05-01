@@ -31,32 +31,32 @@ int main(int argc, char* argv[])
 
     mainWindow->setCentralWidget(description);
 
-    aide::core::SettingsPageRegistry::addPage(
-        std::make_unique<DemoSettingsPage>(
-            aide::HierarchicalId("Demo Page 1")("Demo Subpage 1")(
-                "Demo Subpage 1.1"),
-            app.settingsProvider()->unversionableSettings()));
-    aide::core::SettingsPageRegistry::addPage(
-        std::make_unique<DemoSettingsPage>(
-            aide::HierarchicalId("Demo Page 1")("Demo Subpage 1")(
-                "Demo Subpage 1.2"),
-            app.settingsProvider()->unversionableSettings()));
-
-    aide::core::SettingsPageRegistry::addPage(
-        std::make_unique<DemoSettingsPage>(
-            aide::HierarchicalId("Demo Page 1")("Demo Subpage 2")(
-                "Demo Subpage 2.1"),
-            app.settingsProvider()->unversionableSettings()));
-
-    aide::core::SettingsPageRegistry::addPage(
-        std::make_unique<DemoSettingsPage>(
-            aide::HierarchicalId("Demo Page 1")("Demo Subpage 2")(
-                "Demo Subpage 2.2"),
-            app.settingsProvider()->unversionableSettings()));
-    aide::core::SettingsPageRegistry::addPage(
-        std::make_unique<DemoSettingsPage>(
-            aide::HierarchicalId("Demo Page 2"),
-            app.settingsProvider()->unversionableSettings()));
+    //    aide::core::SettingsPageRegistry::addPage(
+    //        std::make_unique<DemoSettingsPage>(
+    //            aide::HierarchicalId("Demo Page 1")("Demo Subpage 1")(
+    //                "Demo Subpage 1.1"),
+    //            app.settingsProvider()->unversionableSettings()));
+    //    aide::core::SettingsPageRegistry::addPage(
+    //        std::make_unique<DemoSettingsPage>(
+    //            aide::HierarchicalId("Demo Page 1")("Demo Subpage 1")(
+    //                "Demo Subpage 1.2"),
+    //            app.settingsProvider()->unversionableSettings()));
+    //
+    //    aide::core::SettingsPageRegistry::addPage(
+    //        std::make_unique<DemoSettingsPage>(
+    //            aide::HierarchicalId("Demo Page 1")("Demo Subpage 2")(
+    //                "Demo Subpage 2.1"),
+    //            app.settingsProvider()->unversionableSettings()));
+    //
+    //    aide::core::SettingsPageRegistry::addPage(
+    //        std::make_unique<DemoSettingsPage>(
+    //            aide::HierarchicalId("Demo Page 1")("Demo Subpage 2")(
+    //                "Demo Subpage 2.2"),
+    //            app.settingsProvider()->unversionableSettings()));
+    //    aide::core::SettingsPageRegistry::addPage(
+    //        std::make_unique<DemoSettingsPage>(
+    //            aide::HierarchicalId("Demo Page 2"),
+    //            app.settingsProvider()->unversionableSettings()));
 
     return aide::Application::exec();
 }
