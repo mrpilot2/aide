@@ -2,7 +2,7 @@ var searchData=
 [
   ['action_0',['Action',['../structaide_1_1Action.html',1,'aide::Action'],['../structaide_1_1Action.html#a0aa006222a41a280788a17d28f4bf3ea',1,'aide::Action::action()']]],
   ['actionids_1',['ActionIds',['../structActionIds.html',1,'']]],
-  ['actionregistry_2',['ActionRegistry',['../classaide_1_1ActionRegistry.html',1,'aide::ActionRegistry'],['../classaide_1_1ActionRegistry.html#ae6d6e59cf78b6c58f1639bc7ea2831f9',1,'aide::ActionRegistry::ActionRegistry()']]],
+  ['actionregistry_2',['ActionRegistry',['../classaide_1_1ActionRegistry.html',1,'aide::ActionRegistry'],['../classaide_1_1ApplicationBuilder.html#a1d66f0dd94f022aa1f95680d79fa6d18',1,'aide::ApplicationBuilder::actionRegistry()'],['../classaide_1_1Application.html#a71aeffb8b9f6f1c032d229367021f0b7',1,'aide::Application::actionRegistry()'],['../classaide_1_1ActionRegistry.html#ae6d6e59cf78b6c58f1639bc7ea2831f9',1,'aide::ActionRegistry::ActionRegistry()']]],
   ['actionregistry_2ecpp_3',['actionregistry.cpp',['../actionregistry_8cpp.html',1,'']]],
   ['actionregistry_2ehpp_4',['actionregistry.hpp',['../actionregistry_8hpp.html',1,'']]],
   ['actionregistryinterface_5',['ActionRegistryInterface',['../classaide_1_1ActionRegistryInterface.html',1,'aide']]],

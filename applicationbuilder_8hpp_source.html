@@ -99,38 +99,39 @@ $(function() {
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        [[nodiscard]] std::shared_ptr&lt;SettingsProviderInterface&gt;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <a class="code" href="classaide_1_1ApplicationBuilder.html#a494a60eb65bccc9972ae7f3a68e80a49">settingsProvider</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keyword">static</span> <a class="code" href="namespaceaide.html#a42111fe174dd6f5b3fc5e879ecc68c14">aide::LoggerPtr</a> setupLogger();</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        [[nodiscard]] <span class="keyword">static</span> <span class="keywordtype">bool</span> tryToCreateLogLocationIfItDoesNotExist(</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keyword">const</span> QString&amp; logLocation);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <a class="code" href="namespaceaide.html#a42111fe174dd6f5b3fc5e879ecc68c14">aide::LoggerPtr</a> m_logger{setupLogger()};</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        [[nodiscard]] <a class="code" href="namespaceaide.html#a720ef0c950881fba3ebd2f30c30dad35">ActionRegistryInterfacePtr</a> <a class="code" href="classaide_1_1ApplicationBuilder.html#a1d66f0dd94f022aa1f95680d79fa6d18">actionRegistry</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keyword">static</span> <a class="code" href="namespaceaide.html#a42111fe174dd6f5b3fc5e879ecc68c14">aide::LoggerPtr</a> setupLogger();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        [[nodiscard]] <span class="keyword">static</span> <span class="keywordtype">bool</span> tryToCreateLogLocationIfItDoesNotExist(</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keyword">const</span> QString&amp; logLocation);</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        std::shared_ptr&lt;aide::ActionRegistry&gt; m_actionRegistry;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <a class="code" href="namespaceaide.html#a42111fe174dd6f5b3fc5e879ecc68c14">aide::LoggerPtr</a> m_logger{setupLogger()};</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        std::shared_ptr&lt;aide::gui::MainWindow&gt; m_mainWindow;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        std::shared_ptr&lt;aide::ActionRegistry&gt; m_actionRegistry;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        std::shared_ptr&lt;aide::gui::SettingsDialog&gt; m_settingsDialog;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        std::shared_ptr&lt;aide::gui::MainWindow&gt; m_mainWindow;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        std::shared_ptr&lt;AideSettingsProvider&gt; m_settingsProvider;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        std::shared_ptr&lt;aide::gui::SettingsDialog&gt; m_settingsDialog;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <a class="code" href="classaide_1_1core_1_1ApplicationClose.html">aide::core::ApplicationClose</a> m_applicationClose;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        std::shared_ptr&lt;AideSettingsProvider&gt; m_settingsProvider;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <a class="code" href="classaide_1_1core_1_1MainWindowGeometryAndState.html">aide::core::MainWindowGeometryAndState</a> m_mainWindowGeometryAndState;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <a class="code" href="classaide_1_1core_1_1ApplicationClose.html">aide::core::ApplicationClose</a> m_applicationClose;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <a class="code" href="classaide_1_1core_1_1ShowSettingsDialog.html">aide::core::ShowSettingsDialog</a> m_showSettingsDialog;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <a class="code" href="classaide_1_1core_1_1MainWindowGeometryAndState.html">aide::core::MainWindowGeometryAndState</a> m_mainWindowGeometryAndState;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <a class="code" href="namespaceaide_1_1gui.html#aa64e32d2a06256a182fc48b92ca1e9f0">aide::gui::SettingsDialogControllerPtr</a> m_settingsDialogController;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <a class="code" href="classaide_1_1core_1_1ShowSettingsDialog.html">aide::core::ShowSettingsDialog</a> m_showSettingsDialog;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <a class="code" href="namespaceaide_1_1gui.html#a1936f2b862673fedef3e57c60db70b76">aide::gui::MainWindowControllerPtr</a> m_mainController;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    };</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;} <span class="comment">// namespace aide</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif // AIDE_APPLICATION_BUILDER_HPP</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <a class="code" href="namespaceaide_1_1gui.html#aa64e32d2a06256a182fc48b92ca1e9f0">aide::gui::SettingsDialogControllerPtr</a> m_settingsDialogController;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <a class="code" href="namespaceaide_1_1gui.html#a1936f2b862673fedef3e57c60db70b76">aide::gui::MainWindowControllerPtr</a> m_mainController;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    };</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;} <span class="comment">// namespace aide</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif // AIDE_APPLICATION_BUILDER_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassaide_1_1ApplicationBuilder_html_ae64c6394ccb0cfadfa3ab888aaf34d38"><div class="ttname"><a href="classaide_1_1ApplicationBuilder.html#ae64c6394ccb0cfadfa3ab888aaf34d38">aide::ApplicationBuilder::ApplicationBuilder</a></div><div class="ttdeci">ApplicationBuilder()</div><div class="ttdef"><b>Definition:</b> applicationbuilder.cpp:20</div></div>
-<div class="ttc" id="aclassaide_1_1Application_html"><div class="ttname"><a href="classaide_1_1Application.html">aide::Application</a></div><div class="ttdoc">The aide::Application class manages the GUI application.</div><div class="ttdef"><b>Definition:</b> application.hpp:35</div></div>
-<div class="ttc" id="aclassaide_1_1Application_html_ac716b3de988ba325a08c9ba94ca84311"><div class="ttname"><a href="classaide_1_1Application.html#ac716b3de988ba325a08c9ba94ca84311">aide::Application::settingsProvider</a></div><div class="ttdeci">std::shared_ptr&lt; SettingsProviderInterface &gt; settingsProvider()</div><div class="ttdef"><b>Definition:</b> application.cpp:59</div></div>
+<div class="ttc" id="aclassaide_1_1Application_html"><div class="ttname"><a href="classaide_1_1Application.html">aide::Application</a></div><div class="ttdoc">The aide::Application class manages the GUI application.</div><div class="ttdef"><b>Definition:</b> application.hpp:36</div></div>
 <div class="ttc" id="aclassaide_1_1Application_html_a272d1635ae2b031c6695faed57459437"><div class="ttname"><a href="classaide_1_1Application.html#a272d1635ae2b031c6695faed57459437">aide::Application::translator</a></div><div class="ttdeci">std::shared_ptr&lt; gui::TranslatorInterface &gt; translator() const</div><div class="ttdef"><b>Definition:</b> application.cpp:54</div></div>
 <div class="ttc" id="aclassaide_1_1gui_1_1MainWindow_html"><div class="ttname"><a href="classaide_1_1gui_1_1MainWindow.html">aide::gui::MainWindow</a></div><div class="ttdef"><b>Definition:</b> mainwindow.hpp:30</div></div>
 <div class="ttc" id="aclassaide_1_1ApplicationBuilder_html_a494a60eb65bccc9972ae7f3a68e80a49"><div class="ttname"><a href="classaide_1_1ApplicationBuilder.html#a494a60eb65bccc9972ae7f3a68e80a49">aide::ApplicationBuilder::settingsProvider</a></div><div class="ttdeci">std::shared_ptr&lt; SettingsProviderInterface &gt; settingsProvider() const</div><div class="ttdef"><b>Definition:</b> applicationbuilder.cpp:96</div></div>
@@ -148,8 +149,11 @@ $(function() {
 <div class="ttc" id="aloggerinterface_8hpp_html"><div class="ttname"><a href="loggerinterface_8hpp.html">loggerinterface.hpp</a></div></div>
 <div class="ttc" id="aaidesettingsprovider_8hpp_html"><div class="ttname"><a href="aidesettingsprovider_8hpp.html">aidesettingsprovider.hpp</a></div></div>
 <div class="ttc" id="ashowsettingsdialog_8hpp_html"><div class="ttname"><a href="showsettingsdialog_8hpp.html">showsettingsdialog.hpp</a></div></div>
+<div class="ttc" id="anamespaceaide_html_a720ef0c950881fba3ebd2f30c30dad35"><div class="ttname"><a href="namespaceaide.html#a720ef0c950881fba3ebd2f30c30dad35">aide::ActionRegistryInterfacePtr</a></div><div class="ttdeci">std::shared_ptr&lt; ActionRegistryInterface &gt; ActionRegistryInterfacePtr</div><div class="ttdef"><b>Definition:</b> actionregistryinterface.hpp:47</div></div>
 <div class="ttc" id="amainwindowcontroller_8hpp_html"><div class="ttname"><a href="mainwindowcontroller_8hpp.html">mainwindowcontroller.hpp</a></div></div>
 <div class="ttc" id="aapplicationbuilder_8hpp_html"><div class="ttname"><a href="applicationbuilder_8hpp.html">applicationbuilder.hpp</a></div></div>
+<div class="ttc" id="aclassaide_1_1ApplicationBuilder_html_a1d66f0dd94f022aa1f95680d79fa6d18"><div class="ttname"><a href="classaide_1_1ApplicationBuilder.html#a1d66f0dd94f022aa1f95680d79fa6d18">aide::ApplicationBuilder::actionRegistry</a></div><div class="ttdeci">ActionRegistryInterfacePtr actionRegistry() const</div><div class="ttdef"><b>Definition:</b> applicationbuilder.cpp:101</div></div>
+<div class="ttc" id="aclassaide_1_1Application_html_a71aeffb8b9f6f1c032d229367021f0b7"><div class="ttname"><a href="classaide_1_1Application.html#a71aeffb8b9f6f1c032d229367021f0b7">aide::Application::actionRegistry</a></div><div class="ttdeci">ActionRegistryInterfacePtr actionRegistry() const</div><div class="ttdef"><b>Definition:</b> application.cpp:64</div></div>
 <div class="ttc" id="aclassaide_1_1Application_html_a1dd1657d55e133a45ae39f9546991671"><div class="ttname"><a href="classaide_1_1Application.html#a1dd1657d55e133a45ae39f9546991671">aide::Application::mainWindow</a></div><div class="ttdeci">std::shared_ptr&lt; QMainWindow &gt; mainWindow() const</div><div class="ttdef"><b>Definition:</b> application.cpp:44</div></div>
 <div class="ttc" id="amainwindowgeometryandstate_8hpp_html"><div class="ttname"><a href="mainwindowgeometryandstate_8hpp.html">mainwindowgeometryandstate.hpp</a></div></div>
 <div class="ttc" id="anamespaceaide_1_1gui_html_a1936f2b862673fedef3e57c60db70b76"><div class="ttname"><a href="namespaceaide_1_1gui.html#a1936f2b862673fedef3e57c60db70b76">aide::gui::MainWindowControllerPtr</a></div><div class="ttdeci">std::shared_ptr&lt; MainWindowController &gt; MainWindowControllerPtr</div><div class="ttdef"><b>Definition:</b> mainwindowcontroller.hpp:47</div></div>
@@ -159,6 +163,7 @@ $(function() {
 <div class="ttc" id="aclassaide_1_1ApplicationBuilder_html"><div class="ttname"><a href="classaide_1_1ApplicationBuilder.html">aide::ApplicationBuilder</a></div><div class="ttdef"><b>Definition:</b> applicationbuilder.hpp:18</div></div>
 <div class="ttc" id="aclassaide_1_1Application_html_a5d3d955937a4fd1753a9faffe94e75da"><div class="ttname"><a href="classaide_1_1Application.html#a5d3d955937a4fd1753a9faffe94e75da">aide::Application::logger</a></div><div class="ttdeci">aide::LoggerPtr logger() const</div><div class="ttdef"><b>Definition:</b> application.cpp:39</div></div>
 <div class="ttc" id="asettingsdialog_8hpp_html"><div class="ttname"><a href="settingsdialog_8hpp.html">settingsdialog.hpp</a></div></div>
+<div class="ttc" id="aclassaide_1_1Application_html_a40089b58876394f97a85fc0af1315426"><div class="ttname"><a href="classaide_1_1Application.html#a40089b58876394f97a85fc0af1315426">aide::Application::settingsProvider</a></div><div class="ttdeci">std::shared_ptr&lt; SettingsProviderInterface &gt; settingsProvider()</div><div class="ttdef"><b>Definition:</b> application.cpp:59</div></div>
 <div class="ttc" id="aapplicationclose_8hpp_html"><div class="ttname"><a href="applicationclose_8hpp.html">applicationclose.hpp</a></div></div>
 <div class="ttc" id="aclassaide_1_1Logger_html"><div class="ttname"><a href="classaide_1_1Logger.html">aide::Logger</a></div><div class="ttdoc">Logging framework.</div><div class="ttdef"><b>Definition:</b> logger.hpp:46</div></div>
 <div class="ttc" id="aclassaide_1_1core_1_1ShowSettingsDialog_html"><div class="ttname"><a href="classaide_1_1core_1_1ShowSettingsDialog.html">aide::core::ShowSettingsDialog</a></div><div class="ttdef"><b>Definition:</b> showsettingsdialog.hpp:15</div></div>
