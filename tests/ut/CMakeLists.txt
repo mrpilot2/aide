@@ -9,7 +9,7 @@ option(UNIT_TESTS_RUN_ON_CI
        "Specify if unit tests are executed on CI - changes reporter"
 )
 
-add_library(aide_catch_main OBJECT catch_main.cpp)
+add_library(aide_catch_main STATIC catch_main.cpp)
 target_link_libraries(aide_catch_main PUBLIC CONAN_PKG::catch2)
 target_compile_features(aide_catch_main PUBLIC cxx_std_11)
 
@@ -32,7 +32,6 @@ add_executable(ut.aide)
 target_sources(
   ut.aide
   PRIVATE
-    $<TARGET_OBJECTS:aide_catch_main>
     applicationtest.cpp
     buildinformationtest.cpp
     hierarchicalidtest.cpp
