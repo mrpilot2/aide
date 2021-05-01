@@ -69,7 +69,7 @@ endif()
 
 target_link_libraries(
   ut.aide
-  PRIVATE catch_main
+  PRIVATE aide_catch_main
           Qt5::Core
           Qt5::Widgets
           Qt5::Test
