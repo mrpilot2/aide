@@ -27,6 +27,8 @@ namespace aide
         [[nodiscard]] std::shared_ptr<SettingsProviderInterface>
         settingsProvider() const;
 
+        [[nodiscard]] ActionRegistryInterfacePtr actionRegistry() const;
+
     private:
         static aide::LoggerPtr setupLogger();
 

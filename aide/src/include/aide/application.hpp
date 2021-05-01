@@ -6,6 +6,7 @@
 
 #include <QApplication>
 
+#include <aide/actionregistryinterface.hpp>
 #include <aide/loggerinterface.hpp>
 
 class QMainWindow;
@@ -47,6 +48,8 @@ namespace aide
 
         [[nodiscard]] std::shared_ptr<SettingsProviderInterface>
         settingsProvider();
+
+        [[nodiscard]] ActionRegistryInterfacePtr actionRegistry() const;
 
     private:
         static bool isOrganizationNameSet();

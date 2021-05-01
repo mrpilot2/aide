@@ -97,3 +97,8 @@ ApplicationBuilder::settingsProvider() const
 {
     return m_settingsProvider;
 }
+
+aide::ActionRegistryInterfacePtr ApplicationBuilder::actionRegistry() const
+{
+    return m_actionRegistry;
+}

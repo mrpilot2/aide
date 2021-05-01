@@ -56,7 +56,12 @@ std::shared_ptr<TranslatorInterface> Application::translator() const
     return m_appBuilder->mainWindow()->translator();
 }
 
-std::shared_ptr<SettingsProviderInterface> aide::Application::settingsProvider()
+std::shared_ptr<SettingsProviderInterface> Application::settingsProvider()
 {
     return m_appBuilder->settingsProvider();
+}
+
+aide::ActionRegistryInterfacePtr Application::actionRegistry() const
+{
+    return m_appBuilder->actionRegistry();
 }
