@@ -73,8 +73,8 @@ target_link_libraries(
           Qt5::Core
           Qt5::Widgets
           Qt5::Test
-          project_sanitizers
-          project_warnings
+          aide_project_sanitizers
+          aide_project_warnings
           Aide::AideBuildInformation
           Aide::AideApplication
 )

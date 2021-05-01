@@ -1,6 +1,6 @@
-add_library(project_coverage INTERFACE)
+add_library(aide_project_coverage INTERFACE)
 
-add_library(project_sanitizers INTERFACE)
+add_library(aide_project_sanitizers INTERFACE)
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL
                                            "Clang"
@@ -8,8 +8,8 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL
   option(ENABLE_COVERAGE "Enable coverage reporting for gcc/clang" FALSE)
 
   if(ENABLE_COVERAGE)
-    target_compile_options(project_coverage INTERFACE --coverage -O0 -g)
-    target_link_libraries(project_coverage INTERFACE --coverage)
+    target_compile_options(aide_project_coverage INTERFACE --coverage -O0 -g)
+    target_link_libraries(aide_project_coverage INTERFACE --coverage)
   endif()
 
   set(SANITIZERS "")
@@ -43,10 +43,10 @@ endif()
 if(LIST_OF_SANITIZERS)
   if(NOT "${LIST_OF_SANITIZERS}" STREQUAL "")
     target_compile_options(
-      project_sanitizers INTERFACE -fsanitize=${LIST_OF_SANITIZERS}
+      aide_project_sanitizers INTERFACE -fsanitize=${LIST_OF_SANITIZERS}
     )
     target_link_libraries(
-      project_sanitizers INTERFACE -fsanitize=${LIST_OF_SANITIZERS}
+      aide_project_sanitizers INTERFACE -fsanitize=${LIST_OF_SANITIZERS}
     )
   endif()
 endif()

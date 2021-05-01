@@ -77,14 +77,14 @@ set(GCC_WARNINGS
 )
 
 if(MSVC)
-  set(PROJECT_WARNINGS ${MSVC_WARNINGS})
+  set(aide_project_warnings ${MSVC_WARNINGS})
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL
                                                  "AppleClang"
 )
-  set(PROJECT_WARNINGS ${CLANG_WARNINGS})
+  set(aide_project_warnings ${CLANG_WARNINGS})
 else()
-  set(PROJECT_WARNINGS ${GCC_WARNINGS})
+  set(aide_project_warnings ${GCC_WARNINGS})
 endif()
 
-add_library(project_warnings INTERFACE)
-target_compile_options(project_warnings INTERFACE ${PROJECT_WARNINGS})
+add_library(aide_project_warnings INTERFACE)
+target_compile_options(aide_project_warnings INTERFACE ${aide_project_warnings})

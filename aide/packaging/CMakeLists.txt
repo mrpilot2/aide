@@ -6,9 +6,9 @@ install(
           AideCore
           AideGui
           AideLogger
-          project_warnings
-          project_coverage
-          project_sanitizers
+          aide_project_warnings
+          aide_project_coverage
+          aide_project_sanitizers
   EXPORT AideTargets
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )

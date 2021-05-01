@@ -23,7 +23,8 @@ target_include_directories(
 target_link_libraries(
   AideApplication
   PUBLIC CONAN_PKG::spdlog Qt5::Core Qt5::Widgets
-  PRIVATE Aide::AideCore Aide::AideGui project_coverage project_sanitizers
+  PRIVATE Aide::AideCore Aide::AideGui aide_project_coverage
+          aide_project_sanitizers
 )
 
 target_compile_features(AideApplication PUBLIC cxx_std_17)

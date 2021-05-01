@@ -11,16 +11,16 @@ project(
   VERSION 0.1.0
 )
 
-if(NOT TARGET project_sanitizers)
-  add_library(project_sanitizers INTERFACE)
+if(NOT TARGET aide_project_sanitizers)
+  add_library(aide_project_sanitizers INTERFACE)
 endif()
 
-if(NOT TARGET project_coverage)
-  add_library(project_coverage INTERFACE)
+if(NOT TARGET aide_project_coverage)
+  add_library(aide_project_coverage INTERFACE)
 endif()
 
-if(NOT TARGET project_warnings)
-  add_library(project_warnings INTERFACE)
+if(NOT TARGET aide_project_warnings)
+  add_library(aide_project_warnings INTERFACE)
 endif()
 
 add_subdirectory(dependencies)
