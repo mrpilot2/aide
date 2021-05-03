@@ -51,6 +51,7 @@ if(NOT ${TEST_AGAINST_INSTALLED})
             aidesettingsprovidertest.cpp
             applicationcloseinteractortest.cpp
             applicationtranslatortest.cpp
+            keymaptreemodeltest.cpp
             loggertest.cpp
             mainwindowgeometryandstatetest.cpp
             mainwindowtest.cpp

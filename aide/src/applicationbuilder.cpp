@@ -38,6 +38,8 @@ ApplicationBuilder::ApplicationBuilder()
           m_applicationClose, m_mainWindowGeometryAndState,
           m_showSettingsDialog))
 {
+    aide::core::SettingsPageRegistry::deleteAllPages();
+
     m_mainWindow->setMainWindowController(m_mainController, m_actionRegistry);
     m_settingsDialog->setController(m_settingsDialogController);
 

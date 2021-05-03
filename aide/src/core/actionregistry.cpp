@@ -61,10 +61,11 @@ void ActionRegistry::registerAction(
     m_actions.insert({uniqueId, detailedAction});
 }
 
-std::map<HierarchicalId, Action> ActionRegistry::actions() const
+const std::map<HierarchicalId, Action>& ActionRegistry::actions() const
 {
     return m_actions;
 }
+
 std::string ActionRegistry::printKeySequences(
     const std::vector<QKeySequence>& keySequences)
 {

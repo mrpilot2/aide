@@ -22,6 +22,7 @@ target_sources(
           settings/settingspageregistry.cpp
           settings/showsettingsdialog.cpp
           settings/keymap/keymappage.cpp
+          settings/keymap/keymaptreemodel.cpp
           treeitem.cpp
           treemodel.cpp
 )
