@@ -23,6 +23,7 @@ target_sources(
           settings/showsettingsdialog.cpp
           settings/keymap/keymappage.cpp
           treeitem.cpp
+          treemodel.cpp
 )
 
 target_include_directories(
