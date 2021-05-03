@@ -205,11 +205,12 @@ void aide::gui::installChangeDetector(
     }
 }
 
-void aide::gui::unInstallChangeDetector(QObject* widget)
+void aide::gui::unInstallChangeDetector(
+    QObject* widget, const SettingsDialogControllerPtr& controller)
 {
-    widget->disconnect();
+    widget->disconnect(controller.get());
 
     for (auto* child : widget->children()) {
-        unInstallChangeDetector(child);
+        unInstallChangeDetector(child, controller);
     }
 }

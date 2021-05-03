@@ -119,22 +119,26 @@ void SettingsDialog::setSelectedPageDisplayName(const std::string& displayName)
 
 void SettingsDialog::showSelectedPageWidget(QWidget* widget)
 {
-    auto oldWidget = ui->settingsPageScrollArea->takeWidget();
-
-    unInstallChangeDetector(oldWidget);
+    auto* oldWidget = ui->settingsPageScrollArea->takeWidget();
 
     ui->settingsPageScrollArea->setWidget(widget);
 
-    installChangeDetector(widget);
+    if (oldWidget != widget) {
+        unInstallChangeDetector(oldWidget);
+        installChangeDetector(widget);
+    }
 }
 
 void SettingsDialog::showEmptyPageWidget()
 {
-    auto oldWidget = ui->settingsPageScrollArea->takeWidget();
-
-    unInstallChangeDetector(oldWidget);
+    auto* oldWidget = ui->settingsPageScrollArea->takeWidget();
 
     ui->settingsPageScrollArea->setWidget(ui->defaultScrollAreaWidget);
+
+    if (oldWidget != ui->defaultScrollAreaWidget) {
+        unInstallChangeDetector(oldWidget);
+        installChangeDetector(ui->defaultScrollAreaWidget);
+    }
 }
 
 void SettingsDialog::showResetLabel(bool show)
@@ -154,5 +158,5 @@ void SettingsDialog::installChangeDetector(QObject* widget)
 
 void SettingsDialog::unInstallChangeDetector(QObject* widget)
 {
-    aide::gui::unInstallChangeDetector(widget);
+    aide::gui::unInstallChangeDetector(widget, settingsController);
 }

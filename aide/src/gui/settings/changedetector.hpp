@@ -10,7 +10,8 @@ namespace aide::gui
     void installChangeDetector(QObject* widget,
                                const SettingsDialogControllerPtr& controller);
 
-    void unInstallChangeDetector(QObject* widget);
+    void unInstallChangeDetector(QObject* widget,
+                                 const SettingsDialogControllerPtr& controller);
 
 } // namespace aide::gui
 
