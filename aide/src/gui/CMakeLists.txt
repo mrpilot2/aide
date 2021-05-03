@@ -53,8 +53,8 @@ target_include_directories(
 target_compile_features(AideGui PUBLIC cxx_std_17)
 
 target_link_libraries(
-  AideGui PRIVATE Aide::AideCore Aide::AideLogger Qt5::Widgets
-                  aide_project_sanitizers aide_project_warnings
+  AideGui PRIVATE Aide::AideCore Aide::AideLogger Aide::AideWidgets
+                  Qt5::Widgets aide_project_sanitizers aide_project_warnings
 )
 
 set_source_files_properties(
