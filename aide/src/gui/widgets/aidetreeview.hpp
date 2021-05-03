@@ -17,7 +17,7 @@ namespace aide::widgets
         void paintEvent(QPaintEvent* event) override;
 
     private:
-        QString placeHolderText{tr("There are no elements in this view")};
+        QString placeHolderText;
     };
 } // namespace aide::widgets
 

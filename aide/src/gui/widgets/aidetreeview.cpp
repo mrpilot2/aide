@@ -6,6 +6,7 @@
 
 #include <utility>
 
+#include <QApplication>
 #include <QBrush>
 #include <QPainter>
 #include <QPalette>
@@ -14,6 +15,8 @@ using aide::widgets::AideTreeView;
 
 AideTreeView::AideTreeView(QWidget* parent)
     : QTreeView(parent)
+    , placeHolderText{QApplication::translate(
+          "AideTreeView", "There are no elements in this view")}
 {}
 
 void AideTreeView::paintEvent(QPaintEvent* event)

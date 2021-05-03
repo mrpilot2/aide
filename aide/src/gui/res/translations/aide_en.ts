@@ -5,7 +5,7 @@
     <name>AideTreeView</name>
     <message>
         <source>There are no elements in this view</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
