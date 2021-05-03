@@ -3,10 +3,9 @@
 
 #include <utility>
 
-aide::core::TreeModel::TreeModel(QObject* parent,
-                                 aide::core::TreeItemPtr rootItem)
+aide::core::TreeModel::TreeModel(QObject* parent, aide::core::TreeItemPtr root)
     : QAbstractItemModel(parent)
-    , rootItem(std::move(rootItem))
+    , rootItem(std::move(root))
 {}
 
 // NOLINTNEXTLINE
@@ -32,8 +31,7 @@ QVariant aide::core::TreeModel::headerData(int section,
                                            Qt::Orientation orientation,
                                            int role) const
 {
-    if (orientation == Qt::Horizontal && role == Qt::DisplayRole &&
-        section == 0) {
+    if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
         return rootItem->data(static_cast<size_t>(section));
     }
 

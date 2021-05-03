@@ -104,7 +104,6 @@ UserSelection SettingsDialog::executeDialog()
 void SettingsDialog::setTreeModel(std::shared_ptr<QAbstractItemModel> model)
 {
     ui->treeView->setModel(model.get());
-    ui->treeView->hideColumn(1);
     ui->treeView->resizeColumnToContents(0);
 
     connect(ui->treeView->selectionModel(),

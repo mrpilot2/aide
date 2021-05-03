@@ -13,8 +13,8 @@ using aide::core::SettingsPageRegistry;
 using aide::core::TreeItemPtr;
 
 SettingsPageGroupTreeModel::SettingsPageGroupTreeModel(QObject* parent)
-    : TreeModel(parent, std::make_shared<TreeItem>(
-                            std::vector<QVariant>({{"Group", "Complete"}})))
+    : TreeModel(parent,
+                std::make_shared<TreeItem>(std::vector<QVariant>({{"Group"}})))
 {
     setupModelData(rootItem);
 }
@@ -46,9 +46,9 @@ void SettingsPageGroupTreeModel::setupModelData(const TreeItemPtr& parent)
             auto currentSubGroup = HierarchicalId(groups.begin(), iterator + 1);
 
             auto child = std::make_shared<TreeItem>(
-                std::vector<QVariant>({*iterator, QString::fromStdString(
-                                                      currentSubGroup.name())}),
-                current);
+                std::vector<QVariant>({*iterator}), current);
+            child->setHiddenUserData(
+                QString::fromStdString(currentSubGroup.name()));
             current->appendChild(child);
             current = std::move(child);
         }
@@ -85,10 +85,9 @@ Qt::ItemFlags SettingsPageGroupTreeModel::flags(const QModelIndex& index) const
 SettingsPagePtr SettingsPageGroupTreeModel::findCorrespondingSettingsPage(
     const QModelIndex& selectedIndex) const
 {
-    auto completeGroupIndex =
-        index(selectedIndex.row(), 1, selectedIndex.parent());
-    auto completeGroupName{
-        data(completeGroupIndex, Qt::DisplayRole).toString().toStdString()};
+    auto* item = static_cast<TreeItem*>(selectedIndex.internalPointer());
+
+    auto completeGroupName{item->getHiddenUserData().toString().toStdString()};
 
     const auto& pages = SettingsPageRegistry::settingsPages();
 
@@ -108,12 +107,11 @@ QModelIndex SettingsPageGroupTreeModel::recursivelyFindSelectedTreeItemIndex(
 {
     QModelIndex index;
     for (int i = 0; i < rowCount(parent); ++i) {
-        index                          = this->index(i, 0, parent);
-        QModelIndex completeGroupIndex = this->index(i, 1, parent);
+        index = this->index(i, 0, parent);
 
-        if (completeGroupIndex.data(Qt::DisplayRole).toString() == groupName) {
-            return index;
-        }
+        auto* item = static_cast<TreeItem*>(index.internalPointer());
+
+        if (item->getHiddenUserData().toString() == groupName) { return index; }
 
         index = recursivelyFindSelectedTreeItemIndex(groupName, index);
         if (index.isValid()) { break; }

@@ -344,8 +344,8 @@ TEST_CASE("Any show settings dialog use case")
         useCase.showSettingsDialog();
 
         useCase.changeSelectedPage(
-            QItemSelection(treeModel.index(1, 1, QModelIndex()),
-                           treeModel.index(1, 1, QModelIndex())),
+            QItemSelection(treeModel.index(1, 0, QModelIndex()),
+                           treeModel.index(1, 0, QModelIndex())),
             QItemSelection(treeModel.index(-1, -1, QModelIndex()),
                            treeModel.index(-1, -1, QModelIndex())));
 
