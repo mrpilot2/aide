@@ -18,7 +18,7 @@ target_include_directories(
 target_link_libraries(
   AideWidgets
   PUBLIC Qt5::Widgets
-  PRIVATE aide_project_coverage aide_project_sanitizers aide_project_warnings
+  PRIVATE aide_project_sanitizers aide_project_warnings
 )
 
 target_compile_features(AideWidgets PUBLIC cxx_std_17)
