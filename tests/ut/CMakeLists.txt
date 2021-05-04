@@ -52,6 +52,7 @@ if(NOT ${TEST_AGAINST_INSTALLED})
             applicationcloseinteractortest.cpp
             applicationtranslatortest.cpp
             keymaptreemodeltest.cpp
+            keymappagetest.cpp
             loggertest.cpp
             mainwindowgeometryandstatetest.cpp
             mainwindowtest.cpp

@@ -4,12 +4,18 @@
 
 #include <memory>
 
+#include <QWidget>
+
 #include "settings/keymap/keymappagewidgetinterface.hpp"
+
 namespace aide::test
 {
-    class MockKeyMapPageWidget : public aide::core::KeyMapPageWidgetInterface
+    class MockKeyMapPageWidget
+        : public QWidget
+        , public aide::core::KeyMapPageWidgetInterface
     {
     public:
+        explicit MockKeyMapPageWidget(QWidget* parent = nullptr);
         void setTreeModel(std::shared_ptr<QAbstractItemModel> model) override;
 
         [[nodiscard]] bool wasTreeModelSet() const;

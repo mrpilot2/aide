@@ -1,4 +1,8 @@
+#include <array>
+
 #include <catch2/catch.hpp>
+
+#include <QApplication>
 
 #include "actionregistry.hpp"
 #include "hierarchicalid.hpp"
@@ -14,10 +18,16 @@ using aide::test::NullLogger;
 
 TEST_CASE("Any show keymap use case")
 {
+    int numberOfArgs{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+
+    QApplication app{numberOfArgs, appName.data()};
+
     auto logger = std::make_shared<NullLogger>();
     auto registry(std::make_shared<ActionRegistry>(logger));
 
-    auto widget = std::make_unique<MockKeyMapPageWidget>();
+    auto widget = std::make_shared<MockKeyMapPageWidget>();
     ShowKeyMap keyMapUseCase{registry, widget.get()};
 
     SECTION("does not crash if widget is nullptr")
