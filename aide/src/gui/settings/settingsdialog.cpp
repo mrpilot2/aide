@@ -120,6 +120,8 @@ void SettingsDialog::showSelectedPageWidget(QWidget* widget)
 {
     auto* oldWidget = ui->settingsPageScrollArea->takeWidget();
 
+    oldWidget->setParent(ui->settingsPageScrollArea);
+
     ui->settingsPageScrollArea->setWidget(widget);
 
     if (oldWidget != widget) {
@@ -131,6 +133,8 @@ void SettingsDialog::showSelectedPageWidget(QWidget* widget)
 void SettingsDialog::showEmptyPageWidget()
 {
     auto* oldWidget = ui->settingsPageScrollArea->takeWidget();
+
+    oldWidget->setParent(ui->settingsPageScrollArea);
 
     ui->settingsPageScrollArea->setWidget(ui->defaultScrollAreaWidget);
 
