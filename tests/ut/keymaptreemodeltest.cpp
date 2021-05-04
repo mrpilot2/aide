@@ -133,6 +133,12 @@ TEST_CASE("Any keymap tree model")
         REQUIRE(treeModel.flags(index).testFlag(Qt::ItemIsSelectable));
     }
 
+    SECTION("aligns shortcuts header on right side")
+    {
+        REQUIRE(treeModel.headerData(1, Qt::Horizontal,
+                                     Qt::TextAlignmentRole) == Qt::AlignRight);
+    }
+
     SECTION("aligns shortcuts on right side")
     {
         QModelIndex index = treeModel.index(0, 1);
@@ -147,5 +153,19 @@ TEST_CASE("Any keymap tree model")
 
         REQUIRE(elem.data(Qt::ToolTipRole).toString().toStdString() ==
                 "Thoughtful description");
+    }
+
+    SECTION("does not crash if no tooltip is defined for current index")
+    {
+        QModelIndex root = treeModel.index(0, 0, QModelIndex());
+
+        REQUIRE(root.data(Qt::ToolTipRole) == QVariant());
+    }
+
+    SECTION("returns empty QVariant for unsupported role")
+    {
+        QModelIndex index = treeModel.index(0, 1);
+
+        REQUIRE(treeModel.data(index, Qt::CheckStateRole) == QVariant());
     }
 }
