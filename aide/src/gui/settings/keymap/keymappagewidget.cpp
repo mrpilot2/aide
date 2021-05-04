@@ -12,4 +12,14 @@ KeymapPageWidget::KeymapPageWidget(QWidget* parent)
     ui->setupUi(this);
 }
 
+void aide::gui::KeymapPageWidget::setTreeModel(
+    std::shared_ptr<QAbstractItemModel> model)
+{
+    ui->treeView->setModel(model.get());
+
+    ui->treeView->expandAll();
+    ui->treeView->resizeColumnToContents(0);
+    ui->treeView->collapseAll();
+}
+
 KeymapPageWidget::~KeymapPageWidget() = default;

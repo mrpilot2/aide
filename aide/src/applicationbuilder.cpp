@@ -10,11 +10,13 @@
 #include <settings/keymap/keymappage.hpp>
 #include <settings/settingspageregistry.hpp>
 
+#include "gui/settings/keymap/keymappagewidget.hpp"
 #include "logger/logger.hpp"
 
 using aide::ApplicationBuilder;
 using aide::Logger;
 using aide::LoggerPtr;
+using aide::core::KeymapPage;
 using aide::gui::MainWindow;
 using aide::gui::MainWindowController;
 using aide::gui::SettingsDialog;
@@ -37,6 +39,8 @@ ApplicationBuilder::ApplicationBuilder()
     , m_mainController(std::make_shared<MainWindowController>(
           m_applicationClose, m_mainWindowGeometryAndState,
           m_showSettingsDialog))
+    , m_keyMapPage(std::make_shared<KeymapPage>(
+          m_actionRegistry, new aide::gui::KeymapPageWidget()))
 {
     aide::core::SettingsPageRegistry::deleteAllPages();
 
@@ -45,8 +49,7 @@ ApplicationBuilder::ApplicationBuilder()
 
     m_mainWindowGeometryAndState.restoreGeometryAndState();
 
-    aide::core::SettingsPageRegistry::addPage(
-        std::make_unique<aide::core::KeymapPage>());
+    aide::core::SettingsPageRegistry::addPage(m_keyMapPage);
 }
 
 LoggerPtr ApplicationBuilder::logger() const

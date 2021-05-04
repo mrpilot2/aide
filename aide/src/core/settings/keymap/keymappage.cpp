@@ -1,18 +1,26 @@
 
 #include "keymappage.hpp"
 
+#include <actionregistryinterface.hpp>
+#include <utility>
+
 #include <QLabel>
+
+#include "showkeymap.hpp"
 
 using aide::core::KeymapPage;
 
-KeymapPage::KeymapPage()
+KeymapPage::KeymapPage(ActionRegistryInterfacePtr registry,
+                       KeyMapPageWidgetInterface* widget)
     : SettingsPage(HierarchicalId("Keymap"))
-    , m_widget(new aide::gui::KeymapPageWidget())
+    , actionRegistry(std::move(registry))
+    , m_widget(widget)
+    , showUseCase(actionRegistry, m_widget)
 {}
 
 QWidget* KeymapPage::widget()
 {
-    return m_widget;
+    return dynamic_cast<QWidget*>(m_widget);
 }
 
 bool KeymapPage::isModified() const
@@ -20,5 +28,14 @@ bool KeymapPage::isModified() const
     return false;
 }
 
-void KeymapPage::reset() {}
+void KeymapPage::reset()
+{
+    showUseCase.fillTreeView();
+}
+
 void KeymapPage::apply() {}
+
+aide::core::KeyMapPageWidgetInterface* KeymapPage::keyMapWidget()
+{
+    return m_widget;
+}

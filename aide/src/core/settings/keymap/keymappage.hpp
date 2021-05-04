@@ -4,22 +4,30 @@
 
 #include <settings/settingspage.hpp>
 
-#include "../../../gui/settings/keymap/keymappagewidget.hpp"
+#include "actionregistryinterface.hpp"
+#include "showkeymap.hpp"
 
 namespace aide::core
 {
     class KeymapPage : public SettingsPage
     {
     public:
-        KeymapPage();
+        explicit KeymapPage(ActionRegistryInterfacePtr registry,
+                            KeyMapPageWidgetInterface* widget);
 
         QWidget* widget() override;
         [[nodiscard]] bool isModified() const override;
         void reset() override;
         void apply() override;
 
+        KeyMapPageWidgetInterface* keyMapWidget();
+
     private:
-        aide::gui::KeymapPageWidget* m_widget;
+        ActionRegistryInterfacePtr actionRegistry;
+
+        KeyMapPageWidgetInterface* m_widget;
+
+        ShowKeyMap showUseCase;
     };
 } // namespace aide::core
 

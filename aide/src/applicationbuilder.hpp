@@ -3,6 +3,8 @@
 
 #include <QString>
 
+#include <settings/keymap/keymappage.hpp>
+
 #include "actionregistry.hpp"
 #include "aidesettingsprovider.hpp"
 #include "applicationclose.hpp"
@@ -11,6 +13,7 @@
 #include "gui/settings/settingsdialog.hpp"
 #include "loggerinterface.hpp"
 #include "mainwindowgeometryandstate.hpp"
+#include "settings/keymap/showkeymap.hpp"
 #include "settings/showsettingsdialog.hpp"
 
 namespace aide
@@ -54,6 +57,8 @@ namespace aide
         aide::gui::SettingsDialogControllerPtr m_settingsDialogController;
 
         aide::gui::MainWindowControllerPtr m_mainController;
+
+        std::shared_ptr<core::KeymapPage> m_keyMapPage;
     };
 } // namespace aide
 #endif // AIDE_APPLICATION_BUILDER_HPP
