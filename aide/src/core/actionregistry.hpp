@@ -31,7 +31,8 @@ namespace aide
             std::string description,
             const std::vector<QKeySequence>& defaultKeySequences) override;
 
-        [[nodiscard]] const std::map<HierarchicalId, Action>& actions() const override;
+        [[nodiscard]] const std::map<HierarchicalId, Action>& actions()
+            const override;
 
     private:
         static std::string printKeySequences(
