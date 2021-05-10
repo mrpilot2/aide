@@ -1,16 +1,12 @@
 # automatically enable catch2 to generate ctest targets
-if(CONAN_CATCH2_ROOT_DEBUG)
-  include(${CONAN_CATCH2_ROOT_DEBUG}/lib/cmake/Catch2/Catch.cmake)
-else()
-  include(${CONAN_CATCH2_ROOT}/lib/cmake/Catch2/Catch.cmake)
-endif()
+include(${Catch2_LIB_DIRS}/cmake/Catch2/Catch.cmake)
 
 option(UNIT_TESTS_RUN_ON_CI
        "Specify if unit tests are executed on CI - changes reporter"
 )
 
 add_library(aide_catch_main STATIC catch_main.cpp)
-target_link_libraries(aide_catch_main PUBLIC CONAN_PKG::catch2)
+target_link_libraries(aide_catch_main PUBLIC Catch2::Catch2)
 target_compile_features(aide_catch_main PUBLIC cxx_std_11)
 
 set(CMAKE_AUTORCC ON)
