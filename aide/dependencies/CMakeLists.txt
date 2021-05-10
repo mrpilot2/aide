@@ -23,23 +23,45 @@ conan_add_remote(
   NAME bincrafters URL https://api.bintray.com/conan/bincrafters/public-conan
 )
 
-conan_cmake_configure(
-  REQUIRES spdlog/1.8.5 fmt/7.1.3 GENERATORS cmake_find_package
-)
+get_property(IS_MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
 
-conan_cmake_autodetect(settings)
+if(${IS_MULTI_CONFIG})
+  set(generator cmake_find_package_multi)
+else()
+  set(generator cmake_find_package)
+endif()
 
-conan_cmake_install(
-  PATH_OR_REFERENCE
-  .
-  BUILD
-  missing
-  REMOTE
-  conan-center
-  SETTINGS
-  ${settings}
-)
+conan_cmake_configure(REQUIRES spdlog/1.8.5 fmt/7.1.3 GENERATORS ${generator})
 
+if(${IS_MULTI_CONFIG})
+  foreach(TYPE ${CMAKE_CONFIGURATION_TYPES})
+    conan_cmake_autodetect(settings BUILD_TYPE ${TYPE})
+
+    conan_cmake_install(
+      PATH_OR_REFERENCE
+      .
+      BUILD
+      missing
+      REMOTE
+      conan-center
+      SETTINGS
+      ${settings}
+    )
+  endforeach()
+else()
+  conan_cmake_autodetect(settings)
+
+  conan_cmake_install(
+    PATH_OR_REFERENCE
+    .
+    BUILD
+    missing
+    REMOTE
+    conan-center
+    SETTINGS
+    ${settings}
+  )
+endif()
 find_package(spdlog)
 find_package(fmt)
 
