@@ -23,23 +23,51 @@ conan_add_remote(
   NAME bincrafters URL https://api.bintray.com/conan/bincrafters/public-conan
 )
 
-conan_cmake_configure(REQUIRES catch2/2.13.6 GENERATORS cmake_find_package)
+get_property(IS_MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
 
-conan_cmake_autodetect(settings)
+if(${IS_MULTI_CONFIG})
+  set(generator cmake_find_package_multi)
+else()
+  set(generator cmake_find_package)
+endif()
 
-conan_cmake_install(
-  PATH_OR_REFERENCE
-  .
-  BUILD
-  missing
-  REMOTE
-  conan-center
-  SETTINGS
-  ${settings}
-)
+conan_cmake_configure(REQUIRES catch2/2.13.6 GENERATORS ${generator})
 
+if(${IS_MULTI_CONFIG})
+  foreach(TYPE ${CMAKE_CONFIGURATION_TYPES})
+    conan_cmake_autodetect(settings BUILD_TYPE ${TYPE})
+
+    conan_cmake_install(
+      PATH_OR_REFERENCE
+      .
+      BUILD
+      missing
+      REMOTE
+      conan-center
+      SETTINGS
+      ${settings}
+    )
+  endforeach()
+else()
+  conan_cmake_autodetect(settings)
+
+  conan_cmake_install(
+    PATH_OR_REFERENCE
+    .
+    BUILD
+    missing
+    REMOTE
+    conan-center
+    SETTINGS
+    ${settings}
+  )
+endif()
 find_package(Catch2)
 
-find_package(Qt5 COMPONENTS Widgets Test REQUIRED)
+find_package(
+  Qt5
+  COMPONENTS Widgets Test
+  REQUIRED
+)
 
 find_package(Qt5LinguistTools)

@@ -1,5 +1,5 @@
 # automatically enable catch2 to generate ctest targets
-include(${Catch2_LIB_DIRS}/cmake/Catch2/Catch.cmake)
+include(Catch)
 
 option(UNIT_TESTS_RUN_ON_CI
        "Specify if unit tests are executed on CI - changes reporter"
