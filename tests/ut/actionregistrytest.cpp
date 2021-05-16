@@ -9,17 +9,20 @@
 
 #include "actionregistry.hpp"
 #include "hierarchicalid.hpp"
+#include "mocksettings.hpp"
 #include "nulllogger.hpp"
 
 using aide::ActionRegistry;
 using aide::HierarchicalId;
+using aide::test::MockSettings;
 using aide::test::NullLogger;
 
 TEST_CASE("A new action registry ")
 {
     SECTION(" has no actions registered")
     {
-        ActionRegistry registry{std::make_shared<NullLogger>()};
+        MockSettings settings;
+        ActionRegistry registry{settings, std::make_shared<NullLogger>()};
 
         REQUIRE(registry.actions().empty());
     }
@@ -27,7 +30,8 @@ TEST_CASE("A new action registry ")
 
 TEST_CASE("Any action registry ")
 {
-    ActionRegistry registry{std::make_shared<NullLogger>()};
+    MockSettings settings;
+    ActionRegistry registry{settings, std::make_shared<NullLogger>()};
 
     int numberOfArgs{1};
     // NOLINTNEXTLINE
@@ -110,5 +114,38 @@ TEST_CASE("Any action registry ")
                 {QKeySequence("Alt+F4"), QKeySequence("Alt+F3")}));
 
         REQUIRE(registry.actions().at(id).defaultKeySequences.size() == 2);
+        REQUIRE(action->shortcuts().size() == 2);
+    }
+
+    SECTION("overwrites key sequences from settings if present")
+    {
+        auto action = std::make_shared<QAction>("&File", nullptr);
+        const HierarchicalId id{HierarchicalId("MainMenu")("File")};
+
+        const auto settingsKey{HierarchicalId("Keymap")("MainMenu")("File")};
+
+        settings.setValue(settingsKey, QKeySequence("Alt+F5"));
+
+        registry.registerAction(
+            action, id, std::vector<QKeySequence>({QKeySequence("Alt+F4")}));
+
+        REQUIRE(action->shortcuts().size() == 1);
+        REQUIRE(action->shortcut().toString().toStdString() ==
+                QKeySequence("Alt+F5").toString().toStdString());
+    }
+
+    SECTION("allows to overwrite key sequences with empty key sequence")
+    {
+        auto action = std::make_shared<QAction>("&File", nullptr);
+        const HierarchicalId id{HierarchicalId("MainMenu")("File")};
+
+        const auto settingsKey{HierarchicalId("Keymap")("MainMenu")("File")};
+
+        settings.setValue(settingsKey, QKeySequence());
+
+        registry.registerAction(
+            action, id, std::vector<QKeySequence>({QKeySequence("Alt+F4")}));
+
+        REQUIRE(action->shortcuts().empty());
     }
 }

@@ -7,6 +7,7 @@
 #include "actionregistry.hpp"
 #include "hierarchicalid.hpp"
 #include "mockkeymappagewidget.hpp"
+#include "mocksettings.hpp"
 #include "nulllogger.hpp"
 #include "settings/keymap/showkeymap.hpp"
 
@@ -14,6 +15,7 @@ using aide::ActionRegistry;
 using aide::HierarchicalId;
 using aide::core::ShowKeyMap;
 using aide::test::MockKeyMapPageWidget;
+using aide::test::MockSettings;
 using aide::test::NullLogger;
 
 TEST_CASE("Any show keymap use case")
@@ -24,8 +26,9 @@ TEST_CASE("Any show keymap use case")
 
     QApplication app{numberOfArgs, appName.data()};
 
+    MockSettings settings;
     auto logger = std::make_shared<NullLogger>();
-    auto registry(std::make_shared<ActionRegistry>(logger));
+    auto registry(std::make_shared<ActionRegistry>(settings, logger));
 
     auto widget = std::make_shared<MockKeyMapPageWidget>();
     ShowKeyMap keyMapUseCase{registry, widget.get()};

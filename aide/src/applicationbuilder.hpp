@@ -40,13 +40,13 @@ namespace aide
 
         aide::LoggerPtr m_logger{setupLogger()};
 
+        std::shared_ptr<AideSettingsProvider> m_settingsProvider;
+
         std::shared_ptr<aide::ActionRegistry> m_actionRegistry;
 
         std::shared_ptr<aide::gui::MainWindow> m_mainWindow;
 
         std::shared_ptr<aide::gui::SettingsDialog> m_settingsDialog;
-
-        std::shared_ptr<AideSettingsProvider> m_settingsProvider;
 
         aide::core::ApplicationClose m_applicationClose;
 

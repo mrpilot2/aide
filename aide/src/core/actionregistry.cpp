@@ -4,8 +4,10 @@ using aide::Action;
 using aide::ActionRegistry;
 using aide::HierarchicalId;
 
-ActionRegistry::ActionRegistry(aide::LoggerPtr loggerInterface)
-    : logger{std::move(loggerInterface)}
+ActionRegistry::ActionRegistry(SettingsInterface& settingsInterface,
+                               LoggerPtr loggerInterface)
+    : settings{settingsInterface}
+    , logger{std::move(loggerInterface)}
 {}
 
 void ActionRegistry::registerAction(std::weak_ptr<QAction> action,
@@ -47,16 +49,26 @@ void ActionRegistry::registerAction(
         R"(Register new action "{}" with description "{}" and default sequence "{}")",
         uniqueId.name(), description, printKeySequences(defaultKeySequences));
 
-    QList<QKeySequence> qtDefaultKeySequences;
-    for (const auto& seq : defaultKeySequences) {
-        qtDefaultKeySequences << seq;
+    QList<QKeySequence> qtKeySequences;
+
+    auto settingsId{HierarchicalId("Keymap")};
+    for (const auto* i : uniqueId) {
+        settingsId.addLevel(i);
+    }
+    if (settings.value(settingsId) == QVariant()) {
+        for (const auto& seq : defaultKeySequences) {
+            qtKeySequences << seq;
+        }
+    } else {
+        qtKeySequences << QKeySequence::listFromString(
+            settings.value(settingsId).toString());
     }
 
-    Action detailedAction{action, description, qtDefaultKeySequences};
+    Action detailedAction{action, description, qtKeySequences};
     if (!action.expired()) {
         auto sharedAction = action.lock();
         sharedAction->setStatusTip(QString::fromStdString(description));
-        sharedAction->setShortcuts(qtDefaultKeySequences);
+        sharedAction->setShortcuts(qtKeySequences);
     }
     m_actions.insert({uniqueId, detailedAction});
 }

@@ -4,6 +4,7 @@
 
 #include "actionregistry.hpp"
 #include "hierarchicalid.hpp"
+#include "mocksettings.hpp"
 #include "nulllogger.hpp"
 #include "settings/keymap/keymaptreemodel.hpp"
 
@@ -11,12 +12,14 @@ using aide::ActionRegistry;
 using aide::ActionRegistryInterfacePtr;
 using aide::HierarchicalId;
 using aide::core::KeyMapTreeModel;
+using aide::test::MockSettings;
 using aide::test::NullLogger;
 
 TEST_CASE("A new keymap tree model without any action registered")
 {
     auto logger = std::make_shared<NullLogger>();
-    auto registry(std::make_shared<ActionRegistry>(logger));
+    MockSettings settings;
+    auto registry(std::make_shared<ActionRegistry>(settings, logger));
     KeyMapTreeModel treeModel(registry);
 
     SECTION("has no rows") { REQUIRE(treeModel.rowCount() == 0); }
@@ -26,8 +29,9 @@ TEST_CASE("A new keymap tree model without any action registered")
 
 TEST_CASE("A new keymap tree model with one action registered")
 {
+    MockSettings settings;
     auto logger = std::make_shared<NullLogger>();
-    auto registry(std::make_shared<ActionRegistry>(logger));
+    auto registry(std::make_shared<ActionRegistry>(settings, logger));
 
     std::shared_ptr<QAction> action{std::make_shared<QAction>()};
     registry->registerAction(action, HierarchicalId("New File"));
@@ -56,8 +60,9 @@ TEST_CASE("A new keymap tree model with one action registered")
 
 TEST_CASE("A new keymap tree model with multiple actions registered")
 {
+    MockSettings settings;
     auto logger = std::make_shared<NullLogger>();
-    auto registry(std::make_shared<ActionRegistry>(logger));
+    auto registry(std::make_shared<ActionRegistry>(settings, logger));
 
     std::shared_ptr<QAction> action{std::make_shared<QAction>()};
 
@@ -102,8 +107,9 @@ TEST_CASE("A new keymap tree model with multiple actions registered")
 
 TEST_CASE("Any keymap tree model")
 {
+    MockSettings settings;
     auto logger = std::make_shared<NullLogger>();
-    auto registry(std::make_shared<ActionRegistry>(logger));
+    auto registry(std::make_shared<ActionRegistry>(settings, logger));
 
     std::shared_ptr<QAction> action{std::make_shared<QAction>("abc", nullptr)};
     auto id = HierarchicalId("Main Menu")("Close");

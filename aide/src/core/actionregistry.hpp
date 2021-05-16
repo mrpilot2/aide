@@ -1,6 +1,8 @@
 #ifndef AIDE_ACTIONREGISTRY_HPP
 #define AIDE_ACTIONREGISTRY_HPP
 
+#include <settingsinterface.hpp>
+
 #include <QAction>
 #include <QKeySequence>
 
@@ -10,10 +12,13 @@
 
 namespace aide
 {
+    class SettingsInterface;
+
     class ActionRegistry : public ActionRegistryInterface
     {
     public:
-        explicit ActionRegistry(LoggerPtr loggerInterface);
+        explicit ActionRegistry(SettingsInterface& settingsInterface,
+                                LoggerPtr loggerInterface);
 
         void registerAction(std::weak_ptr<QAction> action,
                             const HierarchicalId& uniqueId) override;
@@ -37,6 +42,8 @@ namespace aide
     private:
         static std::string printKeySequences(
             const std::vector<QKeySequence>& keySequences);
+
+        [[maybe_unused]] SettingsInterface& settings;
 
         LoggerPtr logger;
 

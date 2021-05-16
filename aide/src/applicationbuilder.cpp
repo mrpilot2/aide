@@ -12,6 +12,7 @@
 
 #include "gui/settings/keymap/keymappagewidget.hpp"
 #include "logger/logger.hpp"
+#include "settingsinterface.hpp"
 
 using aide::ApplicationBuilder;
 using aide::Logger;
@@ -23,10 +24,11 @@ using aide::gui::SettingsDialog;
 using aide::gui::SettingsDialogController;
 
 ApplicationBuilder::ApplicationBuilder()
-    : m_actionRegistry{std::make_shared<ActionRegistry>(m_logger)}
+    : m_settingsProvider(std::make_shared<AideSettingsProvider>())
+    , m_actionRegistry{std::make_shared<ActionRegistry>(
+          *(m_settingsProvider->versionableSettings()), m_logger)}
     , m_mainWindow(new MainWindow(m_logger, nullptr))
     , m_settingsDialog(std::make_shared<SettingsDialog>(m_mainWindow.get()))
-    , m_settingsProvider(std::make_shared<AideSettingsProvider>())
     , m_applicationClose(m_mainWindow,
                          *(m_settingsProvider->versionableSettings()))
     , m_mainWindowGeometryAndState(
