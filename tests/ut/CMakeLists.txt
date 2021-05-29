@@ -47,10 +47,13 @@ if(NOT ${TEST_AGAINST_INSTALLED})
             aidesettingsprovidertest.cpp
             applicationcloseinteractortest.cpp
             applicationtranslatortest.cpp
+            keymaptreemodeltest.cpp
+            keymappagetest.cpp
             loggertest.cpp
             mainwindowgeometryandstatetest.cpp
             mainwindowtest.cpp
             mockapplicationcloseview.cpp
+            mockkeymappagewidget.cpp
             mockmainwindowview.cpp
             mocksettings.cpp
             mocksettingsdialog.cpp
@@ -58,6 +61,7 @@ if(NOT ${TEST_AGAINST_INSTALLED})
             qtsettingstest.cpp
             settingsdialoggeometryandstatetest.cpp
             settingspagegrouptreemodeltest.cpp
+            showkeymaptest.cpp
             showsettingsdialogtest.cpp
             treeitemtest.cpp
   )

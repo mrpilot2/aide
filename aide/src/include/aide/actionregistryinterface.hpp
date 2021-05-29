@@ -2,9 +2,15 @@
 #ifndef AIDE_ACTIONREGISTRYINTERFACE_HPP
 #define AIDE_ACTIONREGISTRYINTERFACE_HPP
 
+#include <map>
 #include <memory>
 #include <string>
 #include <vector>
+
+#include <QKeySequence>
+#include <QList>
+
+#include <aide/hierarchicalid.hpp>
 
 class QAction;
 class QKeySequence;
@@ -41,7 +47,7 @@ namespace aide
             std::string description,
             const std::vector<QKeySequence>& defaultKeySequences) = 0;
 
-        virtual std::map<HierarchicalId, Action> actions() const = 0;
+        virtual const std::map<HierarchicalId, Action>& actions() const = 0;
     };
 
     using ActionRegistryInterfacePtr = std::shared_ptr<ActionRegistryInterface>;

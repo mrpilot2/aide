@@ -109,12 +109,13 @@ void ShowSettingsDialog::updateDisplayName(
     const QModelIndex& selectedIndex) const
 {
     auto completeGroupIndex =
-        treeModel->index(selectedIndex.row(), 1, selectedIndex.parent());
-    auto completeGroupString{
-        treeModel->data(completeGroupIndex, Qt::DisplayRole)
-            .toString()
-            .replace("/", " > ")
-            .toStdString()};
+        treeModel->index(selectedIndex.row(), 0, selectedIndex.parent());
+    auto* treeItem =
+        static_cast<TreeItem*>(completeGroupIndex.internalPointer());
+    auto completeGroupString{treeItem->getHiddenUserData()
+                                 .toString()
+                                 .replace("/", " > ")
+                                 .toStdString()};
 
     logger->trace("User changed settings page to {} ", completeGroupString);
 

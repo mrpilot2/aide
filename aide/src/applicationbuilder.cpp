@@ -7,21 +7,28 @@
 #include <QStandardPaths>
 #include <QString>
 
+#include <settings/keymap/keymappage.hpp>
+#include <settings/settingspageregistry.hpp>
+
+#include "gui/settings/keymap/keymappagewidget.hpp"
 #include "logger/logger.hpp"
+#include "settingsinterface.hpp"
 
 using aide::ApplicationBuilder;
 using aide::Logger;
 using aide::LoggerPtr;
+using aide::core::KeymapPage;
 using aide::gui::MainWindow;
 using aide::gui::MainWindowController;
 using aide::gui::SettingsDialog;
 using aide::gui::SettingsDialogController;
 
 ApplicationBuilder::ApplicationBuilder()
-    : m_actionRegistry{std::make_shared<ActionRegistry>(m_logger)}
+    : m_settingsProvider(std::make_shared<AideSettingsProvider>())
+    , m_actionRegistry{std::make_shared<ActionRegistry>(
+          *(m_settingsProvider->versionableSettings()), m_logger)}
     , m_mainWindow(new MainWindow(m_logger, nullptr))
     , m_settingsDialog(std::make_shared<SettingsDialog>(m_mainWindow.get()))
-    , m_settingsProvider(std::make_shared<AideSettingsProvider>())
     , m_applicationClose(m_mainWindow,
                          *(m_settingsProvider->versionableSettings()))
     , m_mainWindowGeometryAndState(
@@ -34,11 +41,17 @@ ApplicationBuilder::ApplicationBuilder()
     , m_mainController(std::make_shared<MainWindowController>(
           m_applicationClose, m_mainWindowGeometryAndState,
           m_showSettingsDialog))
+    , m_keyMapPage(std::make_shared<KeymapPage>(
+          m_actionRegistry, new aide::gui::KeymapPageWidget()))
 {
+    aide::core::SettingsPageRegistry::deleteAllPages();
+
     m_mainWindow->setMainWindowController(m_mainController, m_actionRegistry);
     m_settingsDialog->setController(m_settingsDialogController);
 
     m_mainWindowGeometryAndState.restoreGeometryAndState();
+
+    aide::core::SettingsPageRegistry::addPage(m_keyMapPage);
 }
 
 LoggerPtr ApplicationBuilder::logger() const

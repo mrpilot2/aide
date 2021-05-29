@@ -6,6 +6,7 @@ install(
           AideCore
           AideGui
           AideLogger
+          AideWidgets
           aide_project_warnings
           aide_project_coverage
           aide_project_sanitizers

@@ -15,6 +15,16 @@ void TreeItem::appendChild(TreeItemPtr child)
     childItems.push_back(std::move(child));
 }
 
+void TreeItem::setHiddenUserData(QVariant data)
+{
+    hiddenUserData = std::move(data);
+}
+
+QVariant TreeItem::getHiddenUserData() const
+{
+    return hiddenUserData;
+}
+
 TreeItemPtr TreeItem::child(size_t row)
 {
     if (row >= childItems.size()) { return nullptr; }
@@ -36,7 +46,6 @@ QVariant TreeItem::data(size_t column) const
     if (column >= itemData.size()) { return QVariant(); }
     return itemData.at(column);
 }
-
 int64_t TreeItem::row() const
 {
     if (parentItem) {
@@ -49,7 +58,6 @@ int64_t TreeItem::row() const
     }
     return 0;
 }
-
 TreeItemPtr TreeItem::parent() const
 {
     return parentItem;
