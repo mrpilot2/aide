@@ -43,7 +43,7 @@ namespace aide
         static std::string printKeySequences(
             const std::vector<QKeySequence>& keySequences);
 
-        [[maybe_unused]] SettingsInterface& settings;
+        SettingsInterface& settings;
 
         LoggerPtr logger;
 
