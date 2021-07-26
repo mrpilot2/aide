@@ -49,28 +49,33 @@ void ActionRegistry::registerAction(
         R"(Register new action "{}" with description "{}" and default sequence "{}")",
         uniqueId.name(), description, printKeySequences(defaultKeySequences));
 
-    QList<QKeySequence> qtKeySequences;
+    QList<QKeySequence> qtDefaultSequences;
+    for (const auto& seq : defaultKeySequences) {
+        qtDefaultSequences << seq;
+    }
 
+    auto userKeySequences = loadUserKeySequences(uniqueId);
+
+    Action detailedAction{action, description, qtDefaultSequences,
+                          userKeySequences};
+
+    if (!action.expired()) {
+        auto sharedAction = action.lock();
+        sharedAction->setStatusTip(QString::fromStdString(description));
+        sharedAction->setShortcuts(detailedAction.getActiveKeySequences());
+    }
+    m_actions.insert({uniqueId, detailedAction});
+}
+
+QList<QKeySequence> ActionRegistry::loadUserKeySequences(
+    const HierarchicalId& uniqueId)
+{
     auto settingsId{HierarchicalId("Keymap")};
     for (const auto* i : uniqueId) {
         settingsId.addLevel(i);
     }
-    if (settings.value(settingsId) == QVariant()) {
-        for (const auto& seq : defaultKeySequences) {
-            qtKeySequences << seq;
-        }
-    } else {
-        qtKeySequences << QKeySequence::listFromString(
-            settings.value(settingsId).toString());
-    }
-
-    Action detailedAction{action, description, qtKeySequences};
-    if (!action.expired()) {
-        auto sharedAction = action.lock();
-        sharedAction->setStatusTip(QString::fromStdString(description));
-        sharedAction->setShortcuts(qtKeySequences);
-    }
-    m_actions.insert({uniqueId, detailedAction});
+    if (settings.value(settingsId) == QVariant()) { return {}; }
+    return QKeySequence::listFromString(settings.value(settingsId).toString());
 }
 
 const std::map<HierarchicalId, Action>& ActionRegistry::actions() const

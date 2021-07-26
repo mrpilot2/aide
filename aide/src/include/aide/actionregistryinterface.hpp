@@ -24,6 +24,12 @@ namespace aide
         std::weak_ptr<QAction> action;
         std::string description;
         QList<QKeySequence> defaultKeySequences;
+        QList<QKeySequence> keySequences;
+
+        QList<QKeySequence> getActiveKeySequences() const
+        {
+            return keySequences.empty() ? defaultKeySequences : keySequences;
+        }
     };
 
     class ActionRegistryInterface

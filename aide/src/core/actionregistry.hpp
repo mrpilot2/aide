@@ -43,10 +43,12 @@ namespace aide
         static std::string printKeySequences(
             const std::vector<QKeySequence>& keySequences);
 
+        QList<QKeySequence> loadUserKeySequences(
+            const HierarchicalId& uniqueId);
+
         SettingsInterface& settings;
 
         LoggerPtr logger;
-
         std::map<HierarchicalId, Action> m_actions;
     };
 } // namespace aide

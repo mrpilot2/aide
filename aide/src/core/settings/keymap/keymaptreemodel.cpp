@@ -36,7 +36,7 @@ void KeyMapTreeModel::setupModelData(
             auto keySequenceStringList =
                 currentSubGroup == completeId
                     ? QKeySequence::listToString(
-                          action.second.defaultKeySequences)
+                          action.second.getActiveKeySequences())
                     : "";
 
             auto child = std::make_shared<TreeItem>(
