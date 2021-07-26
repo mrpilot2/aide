@@ -3,6 +3,8 @@
 
 #include <utility>
 
+#include <QColor>
+
 using aide::Action;
 using aide::core::KeyMapTreeModel;
 using aide::core::TreeItemPtr;
@@ -91,6 +93,11 @@ QVariant KeyMapTreeModel::data(const QModelIndex& index, int role) const
         return item->data(static_cast<size_t>(index.column()));
     }
 
+    if (role == Qt::ForegroundRole) {
+        return isAnyUserSelectedKeySequencesInGroup(index) ? QColor(Qt::blue)
+                                                           : QVariant();
+    }
+
     return QVariant();
 }
 
@@ -112,4 +119,27 @@ std::optional<Action> KeyMapTreeModel::findCorrespondingAction(
         return it->second;
     }
     return {};
+}
+
+bool aide::core::KeyMapTreeModel::isAnyUserSelectedKeySequencesInGroup(
+    const QModelIndex& index) const
+{
+    if (!index.isValid()) { return false; }
+
+    if (auto action = findCorrespondingAction(index)) {
+        return (action->defaultKeySequences != action->getActiveKeySequences());
+    }
+
+    bool found = false;
+
+    for (int i = 0; i < rowCount(index); ++i) {
+        auto childIndex = this->index(i, 0, index);
+
+        if (!childIndex.isValid()) { continue; }
+
+        found = isAnyUserSelectedKeySequencesInGroup(childIndex);
+
+        if (found) { break; }
+    }
+    return found;
 }

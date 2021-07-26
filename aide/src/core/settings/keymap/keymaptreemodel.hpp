@@ -25,12 +25,14 @@ namespace aide::core
     private:
         void setupModelData(const ActionRegistryInterfacePtr& registry);
 
+        bool isAnyUserSelectedKeySequencesInGroup(
+            const QModelIndex& index) const;
+
         [[nodiscard]] std::optional<Action> findCorrespondingAction(
             const QModelIndex& selectedIndex) const;
 
         static std::optional<TreeItemPtr> existingTreeItemForId(
             const aide::core::TreeItemPtr& current, const char* const& id);
-
         ActionRegistryInterfacePtr actionRegistry;
     };
 } // namespace aide::core
