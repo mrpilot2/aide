@@ -16,7 +16,7 @@ ShowKeyMap::ShowKeyMap(aide::ActionRegistryInterfacePtr registry,
 void ShowKeyMap::fillTreeView()
 {
     if (keymapWidget != nullptr) {
-        treeModel.reset(new KeyMapTreeModel(actionRegistry));
+        treeModel->setupModelData();
         keymapWidget->setTreeModel(treeModel);
     }
 }

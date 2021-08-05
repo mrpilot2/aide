@@ -7,6 +7,7 @@
 #include "mocksettings.hpp"
 #include "nulllogger.hpp"
 #include "settings/keymap/keymaptreemodel.hpp"
+#include "treeitem.hpp"
 
 using aide::ActionRegistry;
 using aide::ActionRegistryInterfacePtr;
@@ -173,5 +174,12 @@ TEST_CASE("Any keymap tree model")
         QModelIndex index = treeModel.index(0, 1);
 
         REQUIRE(treeModel.data(index, Qt::CheckStateRole) == QVariant());
+    }
+
+    SECTION("can find the tree item for a hierarchical id")
+    {
+        const auto item = treeModel.findItemForActionId(id);
+
+        REQUIRE(item.value()->data(0) == "Close");
     }
 }

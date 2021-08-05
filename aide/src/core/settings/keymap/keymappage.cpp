@@ -7,6 +7,7 @@
 #include <QLabel>
 
 #include "showkeymap.hpp"
+#include "treeitem.hpp"
 
 using aide::core::KeymapPage;
 using aide::core::KeyMapTreeModel;
@@ -26,6 +27,15 @@ QWidget* KeymapPage::widget()
 
 bool KeymapPage::isModified() const
 {
+    for (const auto& [id, action] : actionRegistry->actions()) {
+        if (auto item = showUseCase.getTreeModel()->findItemForActionId(id)) {
+            if (!action.areKeySequencesTheSame(QKeySequence::listFromString(
+                    item.value()->data(1).toString()),
+                action.getActiveKeySequences())) {
+                return true;
+            }
+        }
+    }
     return false;
 }
 

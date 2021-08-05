@@ -1,6 +1,7 @@
 
 #include "keymaptreemodel.hpp"
 
+#include <memory>
 #include <utility>
 
 #include <QColor>
@@ -15,13 +16,12 @@ aide::core::KeyMapTreeModel::KeyMapTreeModel(
                             std::vector<QVariant>({{"Action", "Shortcuts"}})))
     , actionRegistry{registry}
 {
-    setupModelData(actionRegistry);
+    setupModelData();
 }
 
-void KeyMapTreeModel::setupModelData(
-    const aide::ActionRegistryInterfacePtr& registry)
+void KeyMapTreeModel::setupModelData()
 {
-    for (const auto& action : registry->actions()) {
+    for (const auto& action : actionRegistry->actions()) {
         TreeItemPtr current = rootItem;
         auto completeId     = action.first;
 
@@ -29,6 +29,17 @@ void KeyMapTreeModel::setupModelData(
              ++iterator) {
             if (auto item = existingTreeItemForId(current, *iterator)) {
                 current = std::move(*item);
+                auto currentSubGroup =
+                    HierarchicalId(completeId.begin(), iterator + 1);
+
+                auto keySequenceStringList =
+                    currentSubGroup == completeId
+                    ? QKeySequence::listToString(
+                        action.second.getActiveKeySequences())
+                        : QString();
+                current->setData(1, keySequenceStringList);
+                emit dataChanged(QModelIndex(), QModelIndex(),
+                                 {Qt::DisplayRole, Qt::ForegroundRole});
                 continue;
             }
 
@@ -39,7 +50,7 @@ void KeyMapTreeModel::setupModelData(
                 currentSubGroup == completeId
                     ? QKeySequence::listToString(
                           action.second.getActiveKeySequences())
-                    : "";
+                    : QString();
 
             auto child = std::make_shared<TreeItem>(
                 std::vector<QVariant>({*iterator, keySequenceStringList}),
@@ -101,6 +112,21 @@ QVariant KeyMapTreeModel::data(const QModelIndex& index, int role) const
     return QVariant();
 }
 
+bool aide::core::KeyMapTreeModel::setData(const QModelIndex& index,
+                                          const QVariant& value, int role)
+{
+    if (role == Qt::DisplayRole) {
+        auto* item = static_cast<TreeItem*>(index.internalPointer());
+
+        const auto res = item->setData(1, value);
+
+        emit dataChanged(index, index, {Qt::DisplayRole, Qt::ForegroundRole});
+
+        return res;
+    }
+    return QAbstractItemModel::setData(index, value, role);
+}
+
 std::optional<Action> KeyMapTreeModel::findCorrespondingAction(
     const QModelIndex& selectedIndex) const
 {
@@ -119,6 +145,27 @@ std::optional<Action> KeyMapTreeModel::findCorrespondingAction(
         return it->second;
     }
     return {};
+}
+
+std::optional<TreeItemPtr> aide::core::KeyMapTreeModel::findItemForActionId(
+    aide::HierarchicalId id)
+{
+    return recursivelyFindItemForActionId(rootItem, id);
+}
+
+std::optional<TreeItemPtr>
+aide::core::KeyMapTreeModel::recursivelyFindItemForActionId(
+    TreeItemPtr item, aide::HierarchicalId id)
+{
+    auto completeGroupName{item->getHiddenUserData().toString().toStdString()};
+
+    if (completeGroupName == id.name()) { return item; }
+
+    for (size_t i = 0; i < item->childCount(); ++i) {
+        auto res = recursivelyFindItemForActionId(item->child(i), id);
+        if (res) { return res; }
+    }
+    return std::optional<TreeItemPtr>();
 }
 
 bool aide::core::KeyMapTreeModel::isAnyUserSelectedKeySequencesInGroup(

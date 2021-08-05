@@ -19,21 +19,31 @@ namespace aide::core
 
         [[nodiscard]] QVariant data(const QModelIndex& index,
                                     int role) const override;
+
+        bool setData(const QModelIndex& index, const QVariant& value,
+                     int role) override;
+
         QVariant headerData(int section, Qt::Orientation orientation,
                             int role) const override;
 
         [[nodiscard]] std::optional<Action> findCorrespondingAction(
             const QModelIndex& selectedIndex) const;
 
+        [[nodiscard]] std::optional<TreeItemPtr> findItemForActionId(
+            HierarchicalId id);
+
+        void setupModelData();
     private:
-        void setupModelData(const ActionRegistryInterfacePtr& registry);
 
         bool isAnyUserSelectedKeySequencesInGroup(
             const QModelIndex& index) const;
 
         static std::optional<TreeItemPtr> existingTreeItemForId(
             const aide::core::TreeItemPtr& current, const char* const& id);
+
         ActionRegistryInterfacePtr actionRegistry;
+        std::optional<TreeItemPtr> recursivelyFindItemForActionId(
+            TreeItemPtr item, HierarchicalId id);
     };
 } // namespace aide::core
 
