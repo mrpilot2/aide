@@ -6,6 +6,8 @@
 #include <string>
 #include <vector>
 
+#include <QKeySequence>
+
 class QAbstractItemModel;
 
 namespace aide::core
@@ -22,7 +24,7 @@ namespace aide::core
     {
         ContextMenuItemType type{ContextMenuItemType::ADD_KEYBOARD_SHORTCUT};
         std::string displayText;
-        std::string additionalData;
+        QKeySequence sequence;
     };
 
     using ContextMenuEntries = std::vector<ContextMenuEntry>;

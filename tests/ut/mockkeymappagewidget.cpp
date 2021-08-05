@@ -30,6 +30,7 @@ void aide::test::MockKeyMapPageWidget::showContextMenu(
 {
     contextMenuWasSet             = true;
     numberOfSetContextMenuEntries = entries.size();
+    contextMenuEntries            = entries;
 }
 
 bool aide::test::MockKeyMapPageWidget::wasContextMeuSet() const
@@ -40,4 +41,16 @@ bool aide::test::MockKeyMapPageWidget::wasContextMeuSet() const
 size_t aide::test::MockKeyMapPageWidget::numberOfContextMenuEntries() const
 {
     return numberOfSetContextMenuEntries;
+}
+
+aide::core::ContextMenuItemType
+aide::test::MockKeyMapPageWidget::contextMenuItemTypeAt(size_t index) const
+{
+    return contextMenuEntries.at(index).type;
+}
+
+std::string aide::test::MockKeyMapPageWidget::contextMenuDisplayTextAt(
+    size_t index) const
+{
+    return contextMenuEntries.at(index).displayText;
 }

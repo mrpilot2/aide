@@ -25,9 +25,14 @@ namespace aide::test
 
         [[nodiscard]] bool wasContextMeuSet() const;
         [[nodiscard]] size_t numberOfContextMenuEntries() const;
+        [[nodiscard]] aide::core::ContextMenuItemType contextMenuItemTypeAt(
+            size_t index) const;
+        [[nodiscard]] std::string contextMenuDisplayTextAt(size_t index) const;
 
     private:
         std::shared_ptr<QAbstractItemModel> treeModel;
+
+        core::ContextMenuEntries contextMenuEntries;
 
         bool treeModelWasSet{false};
 

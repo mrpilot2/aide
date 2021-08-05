@@ -2,18 +2,26 @@
 #ifndef AIDE_KEYMAP_CONTEXT_MENU_PROVIDER_HPP
 #define AIDE_KEYMAP_CONTEXT_MENU_PROVIDER_HPP
 
+#include <QModelIndex>
+#include <QObject>
+
 #include "keymappagewidgetinterface.hpp"
 
 namespace aide::core
 {
-    class KeymapContextMenuProvider
+    class KeyMapTreeModel;
+
+    class KeymapContextMenuProvider : public QObject
     {
     public:
-        KeymapContextMenuProvider(KeyMapPageWidgetRawPtr view);
+        KeymapContextMenuProvider(KeyMapTreeModel* model,
+                                  KeyMapPageWidgetRawPtr view);
 
-        void createAndShowContextMenu();
+        void createAndShowContextMenu(const QModelIndex& index);
 
     private:
+        KeyMapTreeModel* treeModel;
+
         KeyMapPageWidgetRawPtr keymapView;
     };
 } // namespace aide::core
