@@ -31,5 +31,10 @@ QVariant MockSettings::value(const aide::HierarchicalId& groupAndKey,
     return defaultValue;
 }
 
+void aide::test::MockSettings::removeKey(const aide::HierarchicalId& key)
+{
+    inMemorySettings.erase(key);
+}
+
 void aide::test::MockSettings::save() {}
 void aide::test::MockSettings::load() {}

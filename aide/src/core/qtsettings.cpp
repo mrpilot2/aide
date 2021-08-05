@@ -64,6 +64,23 @@ QVariant QtSettings::value(const aide::HierarchicalId& groupAndKey,
     return settingsValue != QVariant() ? settingsValue : defaultValue;
 }
 
+void aide::QtSettings::removeKey(const aide::HierarchicalId& groupAndKey)
+{
+    const auto* key = *(groupAndKey.end() - 1);
+    const auto group =
+        HierarchicalId(groupAndKey.begin(), groupAndKey.end() - 1);
+
+    for (const auto* g : group) {
+        m_settings->beginGroup(QString::fromLatin1(g));
+    }
+
+    m_settings->remove(key);
+
+    for ([[maybe_unused]] const auto* g : group) {
+        m_settings->endGroup();
+    }
+}
+
 void aide::QtSettings::save()
 {
     m_settings->sync();
