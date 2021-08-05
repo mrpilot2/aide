@@ -46,6 +46,16 @@ QVariant TreeItem::data(size_t column) const
     if (column >= itemData.size()) { return QVariant(); }
     return itemData.at(column);
 }
+
+bool aide::core::TreeItem::setData(size_t column, const QVariant& data)
+{
+    if (column > itemData.size() - 1) { return false; }
+
+    itemData.at(column) = data;
+
+    return true;
+}
+
 int64_t TreeItem::row() const
 {
     if (parentItem) {
@@ -58,6 +68,7 @@ int64_t TreeItem::row() const
     }
     return 0;
 }
+
 TreeItemPtr TreeItem::parent() const
 {
     return parentItem;

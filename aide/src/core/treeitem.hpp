@@ -28,6 +28,7 @@ namespace aide::core
         [[nodiscard]] size_t childCount() const;
         [[nodiscard]] size_t columnCount() const;
         [[nodiscard]] QVariant data(size_t column) const;
+        bool setData(size_t column, const QVariant& data);
         [[nodiscard]] int64_t row() const;
         [[nodiscard]] TreeItemPtr parent() const;
 
