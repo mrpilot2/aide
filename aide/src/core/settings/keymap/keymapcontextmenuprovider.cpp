@@ -29,10 +29,18 @@ void KeymapContextMenuProvider::createAndShowContextMenu(
 
     auto action = treeModel->findCorrespondingAction(index);
 
-    if (!action->getActiveKeySequences().empty()) {
+    auto* item = static_cast<TreeItem*>(index.internalPointer());
+    auto keySequenceInModel{
+        QKeySequence::listFromString(item->data(1).toString())};
+
+    bool keySequencesAreAllEmpty{
+        std::all_of(keySequenceInModel.begin(), keySequenceInModel.end(),
+                    [](auto elem) { return elem.isEmpty(); })};
+    if (!keySequencesAreAllEmpty) {
         entries.push_back({ContextMenuItemType::SEPARATOR, "", QKeySequence()});
 
-        for (const auto& seq : action->getActiveKeySequences()) {
+        for (const auto& seq : keySequenceInModel) {
+            if (seq.isEmpty()) { continue; }
             entries.push_back({ContextMenuItemType::REMOVE_SHORTCUT,
                                KeymapContextMenuProvider::tr("Remove %1")
                                    .arg(seq.toString())
@@ -41,7 +49,8 @@ void KeymapContextMenuProvider::createAndShowContextMenu(
         }
     }
 
-    if (action->getActiveKeySequences() != action->defaultKeySequences) {
+    if (!action->areKeySequencesTheSame(keySequenceInModel,
+                                        action->defaultKeySequences)) {
         entries.push_back({ContextMenuItemType::SEPARATOR, "", QKeySequence()});
 
         entries.push_back(

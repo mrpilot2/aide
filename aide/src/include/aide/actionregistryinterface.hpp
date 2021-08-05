@@ -30,6 +30,17 @@ namespace aide
         {
             return keySequences.empty() ? defaultKeySequences : keySequences;
         }
+
+        bool areKeySequencesTheSame(QList<QKeySequence> lhs,
+                                    QList<QKeySequence> rhs) const
+        {
+            if ((lhs.size() == 1 && lhs.at(0).isEmpty() && rhs.size() == 0) ||
+                (rhs.size() == 1 && rhs.at(0).isEmpty() && lhs.size() == 0)) {
+                return true;
+            }
+
+            return lhs == rhs;
+        }
     };
 
     class ActionRegistryInterface
