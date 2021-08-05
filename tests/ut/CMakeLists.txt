@@ -51,6 +51,7 @@ if(NOT ${TEST_AGAINST_INSTALLED})
             aidesettingsprovidertest.cpp
             applicationcloseinteractortest.cpp
             applicationtranslatortest.cpp
+            keymapcontextmenuprovidertest.cpp
             keymaptreemodeltest.cpp
             keymappagetest.cpp
             loggertest.cpp

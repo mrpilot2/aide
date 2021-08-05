@@ -12,6 +12,8 @@ KeymapPageWidget::KeymapPageWidget(QWidget* parent)
     ui->setupUi(this);
 }
 
+KeymapPageWidget::~KeymapPageWidget() = default;
+
 void aide::gui::KeymapPageWidget::setTreeModel(
     std::shared_ptr<QAbstractItemModel> model)
 {
@@ -22,4 +24,6 @@ void aide::gui::KeymapPageWidget::setTreeModel(
     ui->treeView->collapseAll();
 }
 
-KeymapPageWidget::~KeymapPageWidget() = default;
+void aide::gui::KeymapPageWidget::showContextMenu([
+    [maybe_unused]] const aide::core::ContextMenuEntries& entries)
+{}

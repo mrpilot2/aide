@@ -14,11 +14,30 @@ void aide::test::MockKeyMapPageWidget::setTreeModel(
     treeModelWasSet = true;
     treeModel       = model;
 }
+
 bool aide::test::MockKeyMapPageWidget::wasTreeModelSet() const
 {
     return treeModelWasSet;
 }
+
 int aide::test::MockKeyMapPageWidget::numberOfRowsInTree() const
 {
     return treeModel->rowCount();
+}
+
+void aide::test::MockKeyMapPageWidget::showContextMenu(
+    const aide::core::ContextMenuEntries& entries)
+{
+    contextMenuWasSet             = true;
+    numberOfSetContextMenuEntries = entries.size();
+}
+
+bool aide::test::MockKeyMapPageWidget::wasContextMeuSet() const
+{
+    return contextMenuWasSet;
+}
+
+size_t aide::test::MockKeyMapPageWidget::numberOfContextMenuEntries() const
+{
+    return numberOfSetContextMenuEntries;
 }

@@ -30,6 +30,8 @@ namespace aide::gui
 
         void setTreeModel(std::shared_ptr<QAbstractItemModel> model) override;
 
+        void showContextMenu(const core::ContextMenuEntries& entries) override;
+
     private:
         std::unique_ptr<Ui::KeymapPageWidget> ui;
     };
