@@ -127,7 +127,12 @@ bool aide::core::KeyMapTreeModel::isAnyUserSelectedKeySequencesInGroup(
     if (!index.isValid()) { return false; }
 
     if (auto action = findCorrespondingAction(index)) {
-        return (action->defaultKeySequences != action->getActiveKeySequences());
+        auto* item = static_cast<TreeItem*>(index.internalPointer());
+        auto currentKeySequences =
+            QKeySequence::listFromString(item->data(1).toString());
+
+        return (!action->areKeySequencesTheSame(action->defaultKeySequences,
+                                                currentKeySequences));
     }
 
     bool found = false;
