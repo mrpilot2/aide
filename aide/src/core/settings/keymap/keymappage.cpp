@@ -9,6 +9,7 @@
 #include "showkeymap.hpp"
 
 using aide::core::KeymapPage;
+using aide::core::KeyMapTreeModel;
 
 KeymapPage::KeymapPage(ActionRegistryInterfacePtr registry,
                        KeyMapPageWidgetInterface* widget)
@@ -35,7 +36,13 @@ void KeymapPage::reset()
 
 void KeymapPage::apply() {}
 
-aide::core::KeyMapPageWidgetInterface* KeymapPage::keyMapWidget()
+aide::core::KeyMapPageWidgetInterface* KeymapPage::keyMapWidget() const
 {
     return m_widget;
+}
+
+const std::shared_ptr<KeyMapTreeModel>& aide::core::KeymapPage::getTreeModel()
+    const
+{
+    return showUseCase.getTreeModel();
 }

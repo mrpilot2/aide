@@ -20,7 +20,10 @@ namespace aide::core
         void reset() override;
         void apply() override;
 
-        KeyMapPageWidgetInterface* keyMapWidget();
+        [[nodiscard]] KeyMapPageWidgetInterface* keyMapWidget() const;
+
+        [[nodiscard]] const std::shared_ptr<KeyMapTreeModel>& getTreeModel()
+            const;
 
     private:
         ActionRegistryInterfacePtr actionRegistry;

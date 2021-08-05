@@ -6,6 +6,7 @@
 
 #include <QWidget>
 
+#include <settings/keymap/keymappagewidgetcontroller.hpp>
 #include <settings/keymap/keymappagewidgetinterface.hpp>
 
 namespace Ui
@@ -28,12 +29,20 @@ namespace aide::gui
         KeymapPageWidget(KeymapPageWidget&&)                 = delete;
         KeymapPageWidget& operator=(KeymapPageWidget&&) = delete;
 
+        void setController(KeyMapPageControllerPtr controller);
+
         void setTreeModel(std::shared_ptr<QAbstractItemModel> model) override;
 
         void showContextMenu(const core::ContextMenuEntries& entries) override;
 
+    private slots:
+        void onUserRequestedContextMenuViaRightClick(const QPoint& point);
+
     private:
+        void connectSignals() const;
+
         std::unique_ptr<Ui::KeymapPageWidget> ui;
+        KeyMapPageControllerPtr keymapPageController;
     };
 } // namespace aide::gui
 

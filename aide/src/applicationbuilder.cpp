@@ -43,6 +43,8 @@ ApplicationBuilder::ApplicationBuilder()
           m_showSettingsDialog))
     , m_keyMapPage(std::make_shared<KeymapPage>(
           m_actionRegistry, new aide::gui::KeymapPageWidget()))
+    , m_keymapPageController(std::make_shared<gui::KeyMapPageWidgetController>(
+          m_keyMapPage->getTreeModel(), m_keyMapPage->keyMapWidget()))
 {
     aide::core::SettingsPageRegistry::deleteAllPages();
 
@@ -50,6 +52,12 @@ ApplicationBuilder::ApplicationBuilder()
     m_settingsDialog->setController(m_settingsDialogController);
 
     m_mainWindowGeometryAndState.restoreGeometryAndState();
+
+    if (auto* widget = dynamic_cast<aide::gui::KeymapPageWidget*>(
+            m_keyMapPage->keyMapWidget());
+        widget != nullptr) {
+        widget->setController(m_keymapPageController);
+    }
 
     aide::core::SettingsPageRegistry::addPage(m_keyMapPage);
 }

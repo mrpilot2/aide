@@ -13,7 +13,7 @@ aide::core::KeyMapTreeModel::KeyMapTreeModel(
     ActionRegistryInterfacePtr registry, QObject* parent)
     : TreeModel(parent, std::make_shared<TreeItem>(
                             std::vector<QVariant>({{"Action", "Shortcuts"}})))
-    , actionRegistry{std::move(registry)}
+    , actionRegistry{registry}
 {
     setupModelData(actionRegistry);
 }

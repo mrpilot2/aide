@@ -18,6 +18,9 @@ namespace aide::core
 
         void fillTreeView();
 
+        [[nodiscard]] const std::shared_ptr<KeyMapTreeModel>& getTreeModel()
+            const;
+
     private:
         const ActionRegistryInterfacePtr actionRegistry;
 
