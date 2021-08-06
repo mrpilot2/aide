@@ -33,8 +33,8 @@ namespace aide::core
             HierarchicalId id);
 
         void setupModelData();
-    private:
 
+    private:
         bool isAnyUserSelectedKeySequencesInGroup(
             const QModelIndex& index) const;
 
