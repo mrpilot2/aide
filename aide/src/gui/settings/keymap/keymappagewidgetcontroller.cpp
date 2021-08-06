@@ -12,14 +12,14 @@ using aide::gui::KeyMapPageWidgetController;
 aide::gui::KeyMapPageWidgetController::KeyMapPageWidgetController(
     const std::shared_ptr<KeyMapTreeModel>& treeModel,
     core::KeyMapPageWidgetInterface* view)
-    : treeModel(treeModel)
-    , view(view)
+    : keyMapTreeModel(treeModel)
+    , keyMapView(view)
 {}
 
 void aide::gui::KeyMapPageWidgetController::requestContextMenuForIndex(
     const QModelIndex& index)
 {
-    KeymapContextMenuProvider creator{treeModel.get(), view};
+    KeymapContextMenuProvider creator{keyMapTreeModel.get(), keyMapView};
     creator.createAndShowContextMenu(index);
 }
 

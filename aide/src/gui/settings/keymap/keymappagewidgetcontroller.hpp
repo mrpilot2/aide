@@ -29,8 +29,8 @@ namespace aide::gui
         void onUserRequestedContextMenuViaDoubleClick(const QModelIndex& index);
 
     private:
-        const std::shared_ptr<core::KeyMapTreeModel>& treeModel;
-        core::KeyMapPageWidgetInterface* view;
+        const std::shared_ptr<core::KeyMapTreeModel>& keyMapTreeModel;
+        core::KeyMapPageWidgetInterface* keyMapView;
     };
 
     using KeyMapPageControllerPtr = std::shared_ptr<KeyMapPageWidgetController>;
