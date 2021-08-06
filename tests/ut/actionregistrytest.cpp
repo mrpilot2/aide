@@ -124,14 +124,14 @@ TEST_CASE("Any action registry ")
 
         const auto settingsKey{HierarchicalId("Keymap")("MainMenu")("File")};
 
-        settings.setValue(settingsKey, QKeySequence("Alt+F5"));
+        settings.setValue(settingsKey, QKeySequence("5"));
 
-        registry.registerAction(
-            action, id, std::vector<QKeySequence>({QKeySequence("Alt+F4")}));
+        registry.registerAction(action, id,
+                                std::vector<QKeySequence>({QKeySequence("4")}));
 
         REQUIRE(action->shortcuts().size() == 1);
-        REQUIRE(action->shortcut().toString().toStdString() ==
-                QKeySequence("Alt+F5").toString().toStdString());
+        REQUIRE(action->shortcuts() ==
+                QList<QKeySequence>({QKeySequence("5")}));
     }
 
     SECTION("allows to overwrite key sequences with empty key sequence")
@@ -156,20 +156,19 @@ TEST_CASE("Any action registry ")
 
         const auto settingsKey{HierarchicalId("Keymap")("MainMenu")("File")};
 
-        settings.setValue(settingsKey, QKeySequence("Alt+F5"));
+        settings.setValue(settingsKey, QKeySequence("F5"));
 
         registry.registerAction(
-            action, id, std::vector<QKeySequence>({QKeySequence("Alt+F4")}));
+            action, id, std::vector<QKeySequence>({QKeySequence("F4")}));
 
         registry.modifyShortcutsForAction(
-            id, QList<QKeySequence>({QKeySequence("Alt+F6")}));
+            id, QList<QKeySequence>({QKeySequence("F6")}));
 
         REQUIRE(action->shortcuts() ==
-                QList<QKeySequence>({QKeySequence("Alt+F6")}));
+                QList<QKeySequence>({QKeySequence("F6")}));
         REQUIRE(registry.actions().at(id).keySequences ==
-                QList<QKeySequence>({QKeySequence("Alt+F6")}));
-        REQUIRE(settings.value(settingsKey).toString().toStdString() ==
-                "Alt+F6");
+                QList<QKeySequence>({QKeySequence("F6")}));
+        REQUIRE(settings.value(settingsKey).toString().toStdString() == "F6");
     }
 
     SECTION("uses default shortcuts if modified shortcuts equal default")
@@ -179,16 +178,16 @@ TEST_CASE("Any action registry ")
 
         const auto settingsKey{HierarchicalId("Keymap")("MainMenu")("File")};
 
-        settings.setValue(settingsKey, QKeySequence("Alt+F5"));
+        settings.setValue(settingsKey, QKeySequence("F5"));
 
         registry.registerAction(
-            action, id, std::vector<QKeySequence>({QKeySequence("Alt+F4")}));
+            action, id, std::vector<QKeySequence>({QKeySequence("F4")}));
 
         registry.modifyShortcutsForAction(
-            id, QList<QKeySequence>({QKeySequence("Alt+F4")}));
+            id, QList<QKeySequence>({QKeySequence("F4")}));
 
         REQUIRE(action->shortcuts() ==
-                QList<QKeySequence>({QKeySequence("Alt+F4")}));
+                QList<QKeySequence>({QKeySequence("F4")}));
         REQUIRE(registry.actions().at(id).keySequences.isEmpty());
         REQUIRE(settings.value(settingsKey) == QVariant());
     }
