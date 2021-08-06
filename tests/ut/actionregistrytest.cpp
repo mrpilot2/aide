@@ -148,4 +148,48 @@ TEST_CASE("Any action registry ")
 
         REQUIRE(action->shortcuts().empty());
     }
+
+    SECTION("allows to modify shortcuts for an action id")
+    {
+        auto action = std::make_shared<QAction>("&File", nullptr);
+        const HierarchicalId id{HierarchicalId("MainMenu")("File")};
+
+        const auto settingsKey{HierarchicalId("Keymap")("MainMenu")("File")};
+
+        settings.setValue(settingsKey, QKeySequence("Alt+F5"));
+
+        registry.registerAction(
+            action, id, std::vector<QKeySequence>({QKeySequence("Alt+F4")}));
+
+        registry.modifyShortcutsForAction(
+            id, QList<QKeySequence>({QKeySequence("Alt+F6")}));
+
+        REQUIRE(action->shortcuts() ==
+                QList<QKeySequence>({QKeySequence("Alt+F6")}));
+        REQUIRE(registry.actions().at(id).keySequences ==
+                QList<QKeySequence>({QKeySequence("Alt+F6")}));
+        REQUIRE(settings.value(settingsKey).toString().toStdString() ==
+                "Alt+F6");
+    }
+
+    SECTION("uses default shortcuts if modified shortcuts equal default")
+    {
+        auto action = std::make_shared<QAction>("&File", nullptr);
+        const HierarchicalId id{HierarchicalId("MainMenu")("File")};
+
+        const auto settingsKey{HierarchicalId("Keymap")("MainMenu")("File")};
+
+        settings.setValue(settingsKey, QKeySequence("Alt+F5"));
+
+        registry.registerAction(
+            action, id, std::vector<QKeySequence>({QKeySequence("Alt+F4")}));
+
+        registry.modifyShortcutsForAction(
+            id, QList<QKeySequence>({QKeySequence("Alt+F4")}));
+
+        REQUIRE(action->shortcuts() ==
+                QList<QKeySequence>({QKeySequence("Alt+F4")}));
+        REQUIRE(registry.actions().at(id).keySequences.isEmpty());
+        REQUIRE(settings.value(settingsKey) == QVariant());
+    }
 }

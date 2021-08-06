@@ -28,7 +28,7 @@ namespace aide
 
         QList<QKeySequence> getActiveKeySequences() const
         {
-            return keySequences.empty() ? defaultKeySequences : keySequences;
+            return keySequences.isEmpty() ? defaultKeySequences : keySequences;
         }
 
         bool areKeySequencesTheSame(QList<QKeySequence> lhs,
@@ -63,6 +63,9 @@ namespace aide
             std::weak_ptr<QAction> action, const HierarchicalId& uniqueId,
             std::string description,
             const std::vector<QKeySequence>& defaultKeySequences) = 0;
+
+        virtual void modifyShortcutsForAction(
+            HierarchicalId id, const QList<QKeySequence>& shortcuts) = 0;
 
         virtual const std::map<HierarchicalId, Action>& actions() const = 0;
     };

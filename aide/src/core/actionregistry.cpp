@@ -78,6 +78,27 @@ QList<QKeySequence> ActionRegistry::loadUserKeySequences(
     return QKeySequence::listFromString(settings.value(settingsId).toString());
 }
 
+void aide::ActionRegistry::modifyShortcutsForAction(
+    HierarchicalId id, const QList<QKeySequence>& shortcuts)
+{
+    auto settingsId{HierarchicalId("Keymap")};
+    for (const auto* i : id) {
+        settingsId.addLevel(i);
+    }
+
+    auto& action = m_actions.at(id);
+
+    action.action.lock()->setShortcuts(shortcuts);
+
+    if (action.areKeySequencesTheSame(shortcuts, action.defaultKeySequences)) {
+        action.keySequences.clear();
+        settings.removeKey(settingsId);
+    } else {
+        action.keySequences = shortcuts;
+        settings.setValue(settingsId, QKeySequence::listToString(shortcuts));
+    }
+}
+
 const std::map<HierarchicalId, Action>& ActionRegistry::actions() const
 {
     return m_actions;

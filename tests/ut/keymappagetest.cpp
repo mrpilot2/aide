@@ -81,7 +81,7 @@ TEST_CASE("Any keymap page")
         auto model = page.getTreeModel();
 
         QModelIndex index(model->index(
-            0, 0, model->index(0, 0, model->index(0, 0, QModelIndex()))));
+            0, 1, model->index(0, 0, model->index(0, 0, QModelIndex()))));
 
         page.getTreeModel()->setData(index, "Alt+F5", Qt::DisplayRole);
 
@@ -95,7 +95,7 @@ TEST_CASE("Any keymap page")
         auto model = page.getTreeModel();
 
         QModelIndex index(model->index(
-            0, 0, model->index(0, 0, model->index(0, 0, QModelIndex()))));
+            0, 1, model->index(0, 0, model->index(0, 0, QModelIndex()))));
 
         page.getTreeModel()->setData(index, "Alt+F5", Qt::DisplayRole);
         page.getTreeModel()->setData(index, "Alt+F4", Qt::DisplayRole);
@@ -117,5 +117,22 @@ TEST_CASE("Any keymap page")
         REQUIRE(!page.isModified());
         REQUIRE(model->data(index, Qt::DisplayRole).toString().toStdString() ==
                 "Alt+F4");
+    }
+
+    SECTION("applies modified shortcuts in the action registry")
+    {
+        auto model = page.getTreeModel();
+
+        QModelIndex index(model->index(
+            0, 1, model->index(0, 0, model->index(0, 0, QModelIndex()))));
+
+        page.getTreeModel()->setData(index, "Alt+F5", Qt::DisplayRole);
+
+        page.apply();
+
+        REQUIRE(registry->actions()
+                    .at(HierarchicalId("Main Menu")("File")("New File"))
+                    .keySequences ==
+                QList<QKeySequence>({QKeySequence::fromString("Alt+F5")}));
     }
 }

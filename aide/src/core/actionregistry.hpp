@@ -36,6 +36,9 @@ namespace aide
             std::string description,
             const std::vector<QKeySequence>& defaultKeySequences) override;
 
+        void modifyShortcutsForAction(
+            HierarchicalId id, const QList<QKeySequence>& shortcuts) override;
+
         [[nodiscard]] const std::map<HierarchicalId, Action>& actions()
             const override;
 

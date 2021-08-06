@@ -34,8 +34,8 @@ void KeyMapTreeModel::setupModelData()
 
                 auto keySequenceStringList =
                     currentSubGroup == completeId
-                    ? QKeySequence::listToString(
-                        action.second.getActiveKeySequences())
+                        ? QKeySequence::listToString(
+                              action.second.getActiveKeySequences())
                         : QString();
                 current->setData(1, keySequenceStringList);
                 emit dataChanged(QModelIndex(), QModelIndex(),
@@ -118,7 +118,8 @@ bool aide::core::KeyMapTreeModel::setData(const QModelIndex& index,
     if (role == Qt::DisplayRole) {
         auto* item = static_cast<TreeItem*>(index.internalPointer());
 
-        const auto res = item->setData(1, value);
+        const auto res =
+            item->setData(static_cast<size_t>(index.column()), value);
 
         emit dataChanged(index, index, {Qt::DisplayRole, Qt::ForegroundRole});
 

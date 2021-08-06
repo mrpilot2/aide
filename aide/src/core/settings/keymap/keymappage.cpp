@@ -4,6 +4,7 @@
 #include <actionregistryinterface.hpp>
 #include <utility>
 
+#include <QAction>
 #include <QLabel>
 
 #include "showkeymap.hpp"
@@ -27,16 +28,17 @@ QWidget* KeymapPage::widget()
 
 bool KeymapPage::isModified() const
 {
-    for (const auto& [id, action] : actionRegistry->actions()) {
+    const auto& actions{actionRegistry->actions()};
+
+    return std::any_of(actions.begin(), actions.end(), [this](const auto& a) {
+        const auto& [id, action] = a;
         if (auto item = showUseCase.getTreeModel()->findItemForActionId(id)) {
-            if (!action.areKeySequencesTheSame(QKeySequence::listFromString(
-                    item.value()->data(1).toString()),
-                action.getActiveKeySequences())) {
-                return true;
-            }
+            return !action.areKeySequencesTheSame(
+                QKeySequence::listFromString(item.value()->data(1).toString()),
+                action.getActiveKeySequences());
         }
-    }
-    return false;
+        return false;
+    });
 }
 
 void KeymapPage::reset()
@@ -44,7 +46,20 @@ void KeymapPage::reset()
     showUseCase.fillTreeView();
 }
 
-void KeymapPage::apply() {}
+void KeymapPage::apply()
+{
+    for (const auto& [id, action] : actionRegistry->actions()) {
+        if (auto item = showUseCase.getTreeModel()->findItemForActionId(id)) {
+            auto treeModelShortcuts =
+                QKeySequence::listFromString(item.value()->data(1).toString());
+            if (!action.areKeySequencesTheSame(
+                    treeModelShortcuts, action.getActiveKeySequences())) {
+                actionRegistry->modifyShortcutsForAction(id,
+                                                         treeModelShortcuts);
+            }
+        }
+    }
+}
 
 aide::core::KeyMapPageWidgetInterface* KeymapPage::keyMapWidget() const
 {
