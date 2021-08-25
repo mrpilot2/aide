@@ -36,6 +36,7 @@ target_sources(
     settings/changedetector.cpp
     settings/settingsdialog.cpp
     settings/settingsdialogcontroller.cpp
+    settings/keymap/addshortcutdialog.cpp
     settings/keymap/keymappagewidget.cpp
     settings/keymap/keymappagewidgetcontroller.cpp
     $<$<TARGET_EXISTS:Qt5::lrelease>:applicationtranslator.cpp>
