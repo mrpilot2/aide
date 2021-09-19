@@ -12,7 +12,7 @@ target_include_directories(
 
 target_link_libraries(
   AideLogger
-  PUBLIC CONAN_PKG::spdlog CONAN_PKG::fmt
+  PUBLIC spdlog::spdlog fmt::fmt
   PRIVATE aide_project_coverage aide_project_sanitizers aide_project_warnings
 )
 

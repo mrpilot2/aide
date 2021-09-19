@@ -1,46 +1,79 @@
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_BINARY_DIR})
+list(APPEND CMAKE_PREFIX_PATH ${CMAKE_CURRENT_BINARY_DIR})
+
 # Download automatically, you can also just copy the conan.cmake file
-if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
+if(NOT EXISTS "${CMAKE_CURRENT_BINARY_DIR}/conan.cmake")
   message(
     STATUS
       "Downloading conan.cmake from https://github.com/conan-io/cmake-conan"
   )
-  file(DOWNLOAD "https://github.com/conan-io/cmake-conan/raw/v0.15/conan.cmake"
-       "${CMAKE_BINARY_DIR}/conan.cmake"
+  file(
+    DOWNLOAD
+    "https://raw.githubusercontent.com/conan-io/cmake-conan/develop/conan.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/conan.cmake"
+    EXPECTED_HASH
+      SHA256=ddf0fafacf48b5c4912ecce5701c252532437c40277734cad5f4a8084470adbc
+    TLS_VERIFY ON
   )
 endif()
 
-include(${CMAKE_BINARY_DIR}/conan.cmake)
+include(${CMAKE_CURRENT_BINARY_DIR}/conan.cmake)
 
 conan_add_remote(
   NAME bincrafters URL https://api.bintray.com/conan/bincrafters/public-conan
 )
 
-conan_cmake_run(
-  REQUIRES
-  ${CONAN_EXTRA_REQUIRES}
-  spdlog/1.8.5
-  fmt/7.1.3
-  OPTIONS
-  ${CONAN_EXTRA_OPTIONS}
-  BASIC_SETUP
-  CMAKE_TARGETS # individual targets to link to
-  BUILD
-  missing
-)
+get_property(IS_MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
 
-if(TARGET CONAN_PKG::spdlog)
-  set_target_properties(CONAN_PKG::spdlog PROPERTIES IMPORTED_GLOBAL TRUE)
+if(${IS_MULTI_CONFIG})
+  set(generator cmake_find_package_multi)
+else()
+  set(generator cmake_find_package)
 endif()
 
-if(TARGET CONAN_PKG::fmt)
-  set_target_properties(CONAN_PKG::fmt PROPERTIES IMPORTED_GLOBAL TRUE)
+conan_cmake_configure(REQUIRES spdlog/1.8.5 fmt/7.1.3 GENERATORS ${generator})
+
+if(${IS_MULTI_CONFIG})
+  foreach(TYPE ${CMAKE_CONFIGURATION_TYPES})
+    conan_cmake_autodetect(settings BUILD_TYPE ${TYPE})
+
+    conan_cmake_install(
+      PATH_OR_REFERENCE
+      .
+      BUILD
+      missing
+      REMOTE
+      conan-center
+      SETTINGS
+      ${settings}
+    )
+  endforeach()
+else()
+  conan_cmake_autodetect(settings)
+
+  conan_cmake_install(
+    PATH_OR_REFERENCE
+    .
+    BUILD
+    missing
+    REMOTE
+    conan-center
+    SETTINGS
+    ${settings}
+  )
+endif()
+find_package(spdlog)
+find_package(fmt)
+
+if(TARGET spdlog::spdlog)
+  set_target_properties(spdlog::spdlog PROPERTIES IMPORTED_GLOBAL TRUE)
 endif()
 
-find_package(
-  Qt5
-  COMPONENTS Core Widgets
-  REQUIRED
-)
+if(TARGET fmt::fmt)
+  set_target_properties(fmt::fmt PROPERTIES IMPORTED_GLOBAL TRUE)
+endif()
+
+find_package(Qt5 COMPONENTS Core Widgets REQUIRED)
 
 if(TARGET Qt5::Core)
   set_target_properties(
