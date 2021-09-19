@@ -36,8 +36,6 @@ conan_cmake_install(
   .
   BUILD
   missing
-  REMOTE
-  conan-center
   SETTINGS
   ${settings}
 )
