@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['userselection_564',['UserSelection',['../namespaceaide_1_1core.html#a260cb790cefaddd2b83c6cbc68b41650',1,'aide::core']]]
+  ['contextmenuitemtype_710',['ContextMenuItemType',['../namespaceaide_1_1core.html#aa6a5c117192574f6ededf42714fb59db',1,'aide::core']]]
 ];

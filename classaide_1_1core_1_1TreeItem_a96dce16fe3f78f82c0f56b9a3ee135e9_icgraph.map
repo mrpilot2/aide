@@ -1,5 +1,6 @@
 <map id="aide::core::TreeItem::data" name="aide::core::TreeItem::data">
-<area shape="rect" id="node1" title=" " alt="" coords="535,13,685,54"/>
-<area shape="rect" id="node2" href="$classaide_1_1core_1_1SettingsPageGroupTreeModel.html#a244138dbe90a3c7432c8eced93d6e473" title=" " alt="" coords="308,13,487,54"/>
-<area shape="rect" id="node3" href="$classaide_1_1core_1_1SettingsPageGroupTreeModel.html#a2a4eb35c6dc13c6f8cb42282c36fc3e9" title=" " alt="" coords="5,5,260,61"/>
+<area shape="rect" id="node1" title=" " alt="" coords="267,71,417,112"/>
+<area shape="rect" id="node2" href="$classaide_1_1core_1_1KeyMapTreeModel.html#ab7a8793f7868eca62f120f1e9f779dcb" title=" " alt="" coords="5,5,219,47"/>
+<area shape="rect" id="node3" href="$classaide_1_1core_1_1SettingsPageGroupTreeModel.html#a244138dbe90a3c7432c8eced93d6e473" title=" " alt="" coords="23,71,201,112"/>
+<area shape="rect" id="node4" href="$classaide_1_1core_1_1TreeItem.html#a22b693730066573d36a9edd1602175bf" title=" " alt="" coords="33,136,191,177"/>
 </map>

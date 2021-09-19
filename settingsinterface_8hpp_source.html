@@ -92,20 +92,23 @@ $(function() {
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keyword">virtual</span> QVariant <a class="code" href="classaide_1_1SettingsInterface.html#a3d57d89380555575f8e2d181e0b31d4c">value</a>(<span class="keyword">const</span> <a class="code" href="classaide_1_1HierarchicalId.html">HierarchicalId</a>&amp; key,</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;                               <span class="keyword">const</span> QVariant&amp; defaultValue) = 0;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaide_1_1SettingsInterface.html#af1d1148317328c540e220ad49ecf1bf9">save</a>() = 0;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaide_1_1SettingsInterface.html#aa2216d31d780cd44858c586553e7d1b0">load</a>() = 0;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    };</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;} <span class="comment">// namespace aide</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#endif // AIDE_SETTINGS_INTERFACE_HPP</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaide_1_1SettingsInterface.html#a459243a40e4272a14685cbba2d5b4fb5">removeKey</a>(<span class="keyword">const</span> <a class="code" href="classaide_1_1HierarchicalId.html">HierarchicalId</a>&amp; key) = 0;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaide_1_1SettingsInterface.html#af1d1148317328c540e220ad49ecf1bf9">save</a>() = 0;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classaide_1_1SettingsInterface.html#aa2216d31d780cd44858c586553e7d1b0">load</a>() = 0;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    };</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;} <span class="comment">// namespace aide</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif // AIDE_SETTINGS_INTERFACE_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassaide_1_1SettingsInterface_html_a9f625e3fabeaf8b42444e8f03cc82c6b"><div class="ttname"><a href="classaide_1_1SettingsInterface.html#a9f625e3fabeaf8b42444e8f03cc82c6b">aide::SettingsInterface::setValue</a></div><div class="ttdeci">virtual void setValue(const HierarchicalId &amp;key, const QVariant &amp;value)=0</div></div>
-<div class="ttc" id="anamespaceaide_html"><div class="ttname"><a href="namespaceaide.html">aide</a></div><div class="ttdef"><b>Definition:</b> applicationbuilder.hpp:16</div></div>
+<div class="ttc" id="anamespaceaide_html"><div class="ttname"><a href="namespaceaide.html">aide</a></div><div class="ttdef"><b>Definition:</b> applicationbuilder.hpp:20</div></div>
 <div class="ttc" id="aclassaide_1_1SettingsInterface_html_af1d1148317328c540e220ad49ecf1bf9"><div class="ttname"><a href="classaide_1_1SettingsInterface.html#af1d1148317328c540e220ad49ecf1bf9">aide::SettingsInterface::save</a></div><div class="ttdeci">virtual void save()=0</div></div>
 <div class="ttc" id="aclassaide_1_1SettingsInterface_html_a3d57d89380555575f8e2d181e0b31d4c"><div class="ttname"><a href="classaide_1_1SettingsInterface.html#a3d57d89380555575f8e2d181e0b31d4c">aide::SettingsInterface::value</a></div><div class="ttdeci">virtual QVariant value(const HierarchicalId &amp;key)=0</div></div>
 <div class="ttc" id="aclassaide_1_1SettingsInterface_html_ae88eb84013e027038a57f69c38050821"><div class="ttname"><a href="classaide_1_1SettingsInterface.html#ae88eb84013e027038a57f69c38050821">aide::SettingsInterface::~SettingsInterface</a></div><div class="ttdeci">virtual ~SettingsInterface()</div></div>
 <div class="ttc" id="aclassaide_1_1SettingsInterface_html"><div class="ttname"><a href="classaide_1_1SettingsInterface.html">aide::SettingsInterface</a></div><div class="ttdef"><b>Definition:</b> settingsinterface.hpp:10</div></div>
 <div class="ttc" id="aclassaide_1_1SettingsInterface_html_aa2216d31d780cd44858c586553e7d1b0"><div class="ttname"><a href="classaide_1_1SettingsInterface.html#aa2216d31d780cd44858c586553e7d1b0">aide::SettingsInterface::load</a></div><div class="ttdeci">virtual void load()=0</div></div>
+<div class="ttc" id="aclassaide_1_1SettingsInterface_html_a459243a40e4272a14685cbba2d5b4fb5"><div class="ttname"><a href="classaide_1_1SettingsInterface.html#a459243a40e4272a14685cbba2d5b4fb5">aide::SettingsInterface::removeKey</a></div><div class="ttdeci">virtual void removeKey(const HierarchicalId &amp;key)=0</div></div>
 <div class="ttc" id="aclassaide_1_1HierarchicalId_html"><div class="ttname"><a href="classaide_1_1HierarchicalId.html">aide::HierarchicalId</a></div><div class="ttdef"><b>Definition:</b> hierarchicalid.hpp:9</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

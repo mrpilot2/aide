@@ -1,5 +1,21 @@
 var searchData=
 [
-  ['translatorinterface_315',['TranslatorInterface',['../classaide_1_1gui_1_1TranslatorInterface.html',1,'aide::gui']]],
-  ['treeitem_316',['TreeItem',['../classaide_1_1core_1_1TreeItem.html',1,'aide::core']]]
+  ['searchlineedit_378',['SearchLineEdit',['../classaide_1_1gui_1_1SearchLineEdit.html',1,'aide::gui']]],
+  ['settingsdialog_379',['SettingsDialog',['../classaide_1_1gui_1_1SettingsDialog.html',1,'aide::gui']]],
+  ['settingsdialogchangepagecontroller_380',['SettingsDialogChangePageController',['../classaide_1_1core_1_1SettingsDialogChangePageController.html',1,'aide::core']]],
+  ['settingsdialogcontroller_381',['SettingsDialogController',['../classaide_1_1gui_1_1SettingsDialogController.html',1,'aide::gui']]],
+  ['settingsdialoggeometryandstate_382',['SettingsDialogGeometryAndState',['../classaide_1_1core_1_1SettingsDialogGeometryAndState.html',1,'aide::core']]],
+  ['settingsdialoggeometryandstatecontroller_383',['SettingsDialogGeometryAndStateController',['../classaide_1_1core_1_1SettingsDialogGeometryAndStateController.html',1,'aide::core']]],
+  ['settingsdialoggeometryandstatedata_384',['SettingsDialogGeometryAndStateData',['../structaide_1_1core_1_1SettingsDialogGeometryAndStateData.html',1,'aide::core']]],
+  ['settingsdialoginterface_385',['SettingsDialogInterface',['../classaide_1_1core_1_1SettingsDialogInterface.html',1,'aide::core']]],
+  ['settingsinterface_386',['SettingsInterface',['../classaide_1_1SettingsInterface.html',1,'aide']]],
+  ['settingspage_387',['SettingsPage',['../classaide_1_1core_1_1SettingsPage.html',1,'aide::core']]],
+  ['settingspagegrouptreemodel_388',['SettingsPageGroupTreeModel',['../classaide_1_1core_1_1SettingsPageGroupTreeModel.html',1,'aide::core']]],
+  ['settingspageregistry_389',['SettingsPageRegistry',['../classaide_1_1core_1_1SettingsPageRegistry.html',1,'aide::core']]],
+  ['settingspageregistryprivate_390',['SettingsPageRegistryPrivate',['../classSettingsPageRegistryPrivate.html',1,'']]],
+  ['settingsproviderinterface_391',['SettingsProviderInterface',['../classaide_1_1SettingsProviderInterface.html',1,'aide']]],
+  ['showkeymap_392',['ShowKeyMap',['../classaide_1_1core_1_1ShowKeyMap.html',1,'aide::core']]],
+  ['showsettingsdialog_393',['ShowSettingsDialog',['../classaide_1_1core_1_1ShowSettingsDialog.html',1,'aide::core']]],
+  ['showsettingsdialogcontroller_394',['ShowSettingsDialogController',['../classaide_1_1core_1_1ShowSettingsDialogController.html',1,'aide::core']]],
+  ['system_395',['System',['../structaide_1_1core_1_1settings_1_1Keys_1_1System.html',1,'aide::core::settings::Keys::System'],['../structSystem.html',1,'System']]]
 ];

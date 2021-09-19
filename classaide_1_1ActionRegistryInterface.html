@@ -97,8 +97,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a56424063d64b60ac191414679decbffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa34058f71eb8884aaaa0390c82e6d5f4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1ActionRegistryInterface.html#aa34058f71eb8884aaaa0390c82e6d5f4">registerAction</a> (std::weak_ptr&lt; QAction &gt; action, const <a class="el" href="classaide_1_1HierarchicalId.html">HierarchicalId</a> &amp;uniqueId, std::string description, const std::vector&lt; QKeySequence &gt; &amp;defaultKeySequences)=0</td></tr>
 <tr class="separator:aa34058f71eb8884aaaa0390c82e6d5f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e18ef1d5aa47017afdfb85f1d8de492"><td class="memItemLeft" align="right" valign="top">virtual std::map&lt; <a class="el" href="classaide_1_1HierarchicalId.html">HierarchicalId</a>, <a class="el" href="structaide_1_1Action.html">Action</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1ActionRegistryInterface.html#a1e18ef1d5aa47017afdfb85f1d8de492">actions</a> () const =0</td></tr>
-<tr class="separator:a1e18ef1d5aa47017afdfb85f1d8de492"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e0bac21a313c024bb1dc9ef3b4f11cb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1ActionRegistryInterface.html#a2e0bac21a313c024bb1dc9ef3b4f11cb">modifyShortcutsForAction</a> (<a class="el" href="classaide_1_1HierarchicalId.html">HierarchicalId</a> id, const QList&lt; QKeySequence &gt; &amp;shortcuts)=0</td></tr>
+<tr class="separator:a2e0bac21a313c024bb1dc9ef3b4f11cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb0ce35860e2c13270368b44ab25a781"><td class="memItemLeft" align="right" valign="top">virtual const std::map&lt; <a class="el" href="classaide_1_1HierarchicalId.html">HierarchicalId</a>, <a class="el" href="structaide_1_1Action.html">Action</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1ActionRegistryInterface.html#abb0ce35860e2c13270368b44ab25a781">actions</a> () const =0</td></tr>
+<tr class="separator:abb0ce35860e2c13270368b44ab25a781"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad7be1f80ebd8808f5babe3c81c03db01"></a>
@@ -127,8 +129,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a1e18ef1d5aa47017afdfb85f1d8de492"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e18ef1d5aa47017afdfb85f1d8de492">&#9670;&nbsp;</a></span>actions()</h2>
+<a id="abb0ce35860e2c13270368b44ab25a781"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb0ce35860e2c13270368b44ab25a781">&#9670;&nbsp;</a></span>actions()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -137,7 +139,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::map&lt;<a class="el" href="classaide_1_1HierarchicalId.html">HierarchicalId</a>, <a class="el" href="structaide_1_1Action.html">Action</a>&gt; aide::ActionRegistryInterface::actions </td>
+          <td class="memname">virtual const std::map&lt;<a class="el" href="classaide_1_1HierarchicalId.html">HierarchicalId</a>, <a class="el" href="structaide_1_1Action.html">Action</a>&gt;&amp; aide::ActionRegistryInterface::actions </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -150,7 +152,45 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classaide_1_1ActionRegistry.html#a601c3af762505d81dbf66c1c76a5828b">aide::ActionRegistry</a>.</p>
+<p>Implemented in <a class="el" href="classaide_1_1ActionRegistry.html#a3014e325f7427da346f8c05d403d19ca">aide::ActionRegistry</a>.</p>
+
+</div>
+</div>
+<a id="a2e0bac21a313c024bb1dc9ef3b4f11cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e0bac21a313c024bb1dc9ef3b4f11cb">&#9670;&nbsp;</a></span>modifyShortcutsForAction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void aide::ActionRegistryInterface::modifyShortcutsForAction </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classaide_1_1HierarchicalId.html">HierarchicalId</a>&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QList&lt; QKeySequence &gt; &amp;&#160;</td>
+          <td class="paramname"><em>shortcuts</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classaide_1_1ActionRegistry.html#a3dc307a17e068a4455f700499a277757">aide::ActionRegistry</a>.</p>
 
 </div>
 </div>

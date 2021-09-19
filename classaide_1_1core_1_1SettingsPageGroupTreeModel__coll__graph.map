@@ -1,4 +1,5 @@
 <map id="aide::core::SettingsPageGroupTreeModel" name="aide::core::SettingsPageGroupTreeModel">
-<area shape="rect" id="node1" title=" " alt="" coords="5,80,184,121"/>
-<area shape="rect" id="node2" title=" " alt="" coords="17,5,173,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,155,184,196"/>
+<area shape="rect" id="node2" href="$classaide_1_1core_1_1TreeModel.html" title=" " alt="" coords="14,80,175,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="17,5,173,32"/>
 </map>

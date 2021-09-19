@@ -1,6 +1,7 @@
 <map id="/home/runner/work/aide/aide/aide/src/include/aide/settings/settingspageregistry.hpp" name="/home/runner/work/aide/aide/aide/src/include/aide/settings/settingspageregistry.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="233,5,507,61"/>
-<area shape="rect" id="node2" href="$settingspagegrouptreemodel_8cpp.html" title=" " alt="" coords="5,109,247,165"/>
-<area shape="rect" id="node3" href="$settingspageregistry_8cpp.html" title=" " alt="" coords="271,109,469,165"/>
-<area shape="rect" id="node4" href="$showsettingsdialog_8cpp.html" title=" " alt="" coords="493,109,690,165"/>
+<area shape="rect" id="node1" title=" " alt="" coords="391,5,665,61"/>
+<area shape="rect" id="node2" href="$applicationbuilder_8cpp.html" title=" " alt="" coords="5,117,261,158"/>
+<area shape="rect" id="node3" href="$settingspagegrouptreemodel_8cpp.html" title=" " alt="" coords="286,109,527,165"/>
+<area shape="rect" id="node4" href="$settingspageregistry_8cpp.html" title=" " alt="" coords="552,109,749,165"/>
+<area shape="rect" id="node5" href="$showsettingsdialog_8cpp.html" title=" " alt="" coords="773,109,971,165"/>
 </map>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['treeviewgeometry_550',['treeViewGeometry',['../structaide_1_1core_1_1SettingsDialogGeometryAndStateData.html#ae37fb4d15a834fa604e85f05c4e04713',1,'aide::core::SettingsDialogGeometryAndStateData']]]
+  ['rootitem_681',['rootItem',['../classaide_1_1core_1_1TreeModel.html#a0da9ba8aba094977fddca83683c15fe6',1,'aide::core::TreeModel']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['filename_286',['FileName',['../structaide_1_1FileName.html',1,'aide']]]
+  ['contextmenuentry_359',['ContextMenuEntry',['../structaide_1_1core_1_1ContextMenuEntry.html',1,'aide::core']]]
 ];

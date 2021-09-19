@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['qtsettings_2ecpp_359',['qtsettings.cpp',['../qtsettings_8cpp.html',1,'']]],
-  ['qtsettings_2ehpp_360',['qtsettings.hpp',['../qtsettings_8hpp.html',1,'']]]
+  ['nullapplicationtranslator_2ecpp_456',['nullapplicationtranslator.cpp',['../nullapplicationtranslator_8cpp.html',1,'']]]
 ];

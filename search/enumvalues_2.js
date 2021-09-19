@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ok_567',['Ok',['../namespaceaide_1_1core.html#a260cb790cefaddd2b83c6cbc68b41650aa60852f204ed8028c1c58808b746d115',1,'aide::core']]]
+  ['exit_714',['Exit',['../namespaceaide_1_1core.html#a260cb790cefaddd2b83c6cbc68b41650afef46e5063ce3dc78b8ae64fa474241d',1,'aide::core']]]
 ];
