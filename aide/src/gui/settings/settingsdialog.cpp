@@ -8,9 +8,11 @@
 #include <QWidget>
 
 #include "changedetector.hpp"
+#include "treeitem.hpp"
 #include "ui_settingsdialog.h"
 
 using aide::core::SettingsDialogGeometryAndStateData;
+using aide::core::TreeItem;
 using aide::core::UserSelection;
 using aide::gui::SettingsDialog;
 using aide::gui::SettingsDialogController;
@@ -78,15 +80,16 @@ SettingsDialogGeometryAndStateData SettingsDialog::currentGeometry() const
 
     auto selectedIndexes = ui->treeView->selectionModel()->selectedIndexes();
     if (!selectedIndexes.empty()) {
-        auto index = selectedIndexes.at(0);
+        const auto& index = selectedIndexes.at(0);
 
         if (index.isValid()) {
             auto completeGroupIndex =
-                ui->treeView->model()->index(index.row(), 1, index.parent());
-            auto completeGroupString{
-                ui->treeView->model()
-                    ->data(completeGroupIndex, Qt::DisplayRole)
-                    .toString()};
+                ui->treeView->model()->index(index.row(), 0, index.parent());
+            const auto* const treeItem =
+                static_cast<TreeItem*>(completeGroupIndex.internalPointer());
+            const auto completeGroupString{
+                treeItem->getHiddenUserData().toString()};
+
             dialogGeometryAndStateData.selectedTreeViewItem =
                 completeGroupString;
         }
@@ -120,8 +123,6 @@ void SettingsDialog::showSelectedPageWidget(QWidget* widget)
 {
     auto* oldWidget = ui->settingsPageScrollArea->takeWidget();
 
-    oldWidget->setParent(ui->settingsPageScrollArea);
-
     ui->settingsPageScrollArea->setWidget(widget);
 
     if (oldWidget != widget) {
@@ -133,8 +134,6 @@ void SettingsDialog::showSelectedPageWidget(QWidget* widget)
 void SettingsDialog::showEmptyPageWidget()
 {
     auto* oldWidget = ui->settingsPageScrollArea->takeWidget();
-
-    oldWidget->setParent(ui->settingsPageScrollArea);
 
     ui->settingsPageScrollArea->setWidget(ui->defaultScrollAreaWidget);
 
@@ -154,6 +153,7 @@ void SettingsDialog::enableApplyButton(bool enable)
     ui->leaveDialogButtonBox->button(QDialogButtonBox::Apply)
         ->setEnabled(enable);
 }
+
 void SettingsDialog::installChangeDetector(QObject* widget)
 {
     aide::gui::installChangeDetector(widget, settingsController);
