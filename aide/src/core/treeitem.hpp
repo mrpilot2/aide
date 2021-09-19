@@ -20,10 +20,15 @@ namespace aide::core
 
         void appendChild(TreeItemPtr child);
 
+        void setHiddenUserData(QVariant data);
+
+        [[nodiscard]] QVariant getHiddenUserData() const;
+
         TreeItemPtr child(size_t row);
         [[nodiscard]] size_t childCount() const;
         [[nodiscard]] size_t columnCount() const;
         [[nodiscard]] QVariant data(size_t column) const;
+        bool setData(size_t column, const QVariant& data);
         [[nodiscard]] int64_t row() const;
         [[nodiscard]] TreeItemPtr parent() const;
 
@@ -31,6 +36,8 @@ namespace aide::core
         std::vector<TreeItemPtr> childItems;
         std::vector<QVariant> itemData;
         TreeItemPtr parentItem;
+
+        QVariant hiddenUserData;
     };
 } // namespace aide::core
 

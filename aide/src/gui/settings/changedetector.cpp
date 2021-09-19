@@ -43,6 +43,9 @@ void installChangeDetectorForItemViews(
             QObject::connect(
                 itemModel, &QAbstractItemModel::rowsRemoved, settingsController,
                 &aide::gui::SettingsDialogController::onUserChangedAGuiElement);
+            QObject::connect(
+                itemModel, &QAbstractItemModel::dataChanged, settingsController,
+                &aide::gui::SettingsDialogController::onUserChangedAGuiElement);
         }
     }
 }

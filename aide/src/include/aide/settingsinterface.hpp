@@ -20,6 +20,8 @@ namespace aide
         virtual QVariant value(const HierarchicalId& key,
                                const QVariant& defaultValue) = 0;
 
+        virtual void removeKey(const HierarchicalId& key) = 0;
+
         virtual void save() = 0;
         virtual void load() = 0;
     };

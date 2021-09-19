@@ -48,6 +48,11 @@ jobs:
         pip3 install conan
         mkdir build
 
+    - name: Setup cmake
+      uses: jwlawson/actions-setup-cmake@v1.8
+      with:
+        cmake-version: '3.18.4'
+
     - name: Install apt dependencies
       if: runner.os == 'Linux'
       run: sudo apt install lcov ^libxcb-*
@@ -83,7 +88,8 @@ jobs:
       uses: GabrielBB/xvfb-action@v1
       with:
         working-directory: build
-        run: ctest
+        options: -screen 0 1600x1200x24
+        run: ctest -VV --output-on-failure --stop-on-failure
 
     - name: Upload Unit Test Results
       if: always()

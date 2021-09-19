@@ -97,3 +97,21 @@ TEST_CASE("Second new child item")
         REQUIRE(parent->child(1) == child2);
     }
 }
+
+TEST_CASE("Any tree item")
+{
+    auto parent =
+        std::make_shared<TreeItem>(std::vector<QVariant>({"abc"}), nullptr);
+    auto child1 =
+        std::make_shared<TreeItem>(std::vector<QVariant>({{"def", 2}}), parent);
+    auto child2 =
+        std::make_shared<TreeItem>(std::vector<QVariant>({3, true}), parent);
+    parent->appendChild(child1);
+    parent->appendChild(child2);
+
+    SECTION("allows to set new data")
+    {
+        child2->setData(1, false);
+        REQUIRE(!child2->data(1).toBool());
+    }
+}

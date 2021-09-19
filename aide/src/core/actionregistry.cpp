@@ -4,8 +4,10 @@ using aide::Action;
 using aide::ActionRegistry;
 using aide::HierarchicalId;
 
-ActionRegistry::ActionRegistry(aide::LoggerPtr loggerInterface)
-    : logger{std::move(loggerInterface)}
+ActionRegistry::ActionRegistry(SettingsInterface& settingsInterface,
+                               LoggerPtr loggerInterface)
+    : settings{settingsInterface}
+    , logger{std::move(loggerInterface)}
 {}
 
 void ActionRegistry::registerAction(std::weak_ptr<QAction> action,
@@ -47,24 +49,61 @@ void ActionRegistry::registerAction(
         R"(Register new action "{}" with description "{}" and default sequence "{}")",
         uniqueId.name(), description, printKeySequences(defaultKeySequences));
 
-    QList<QKeySequence> qtDefaultKeySequences;
+    QList<QKeySequence> qtDefaultSequences;
     for (const auto& seq : defaultKeySequences) {
-        qtDefaultKeySequences << seq;
+        qtDefaultSequences << seq;
     }
 
-    Action detailedAction{action, description, qtDefaultKeySequences};
+    auto userKeySequences = loadUserKeySequences(uniqueId);
+
+    Action detailedAction{action, description, qtDefaultSequences,
+                          userKeySequences};
+
     if (!action.expired()) {
         auto sharedAction = action.lock();
         sharedAction->setStatusTip(QString::fromStdString(description));
-        sharedAction->setShortcuts(qtDefaultKeySequences);
+        sharedAction->setShortcuts(detailedAction.getActiveKeySequences());
     }
     m_actions.insert({uniqueId, detailedAction});
 }
 
-std::map<HierarchicalId, Action> ActionRegistry::actions() const
+QList<QKeySequence> ActionRegistry::loadUserKeySequences(
+    const HierarchicalId& uniqueId)
+{
+    auto settingsId{HierarchicalId("Keymap")};
+    for (const auto* i : uniqueId) {
+        settingsId.addLevel(i);
+    }
+    if (settings.value(settingsId) == QVariant()) { return {}; }
+    return QKeySequence::listFromString(settings.value(settingsId).toString());
+}
+
+void aide::ActionRegistry::modifyShortcutsForAction(
+    HierarchicalId id, const QList<QKeySequence>& shortcuts)
+{
+    auto settingsId{HierarchicalId("Keymap")};
+    for (const auto* i : id) {
+        settingsId.addLevel(i);
+    }
+
+    auto& action = m_actions.at(id);
+
+    action.action.lock()->setShortcuts(shortcuts);
+
+    if (action.areKeySequencesTheSame(shortcuts, action.defaultKeySequences)) {
+        action.keySequences.clear();
+        settings.removeKey(settingsId);
+    } else {
+        action.keySequences = shortcuts;
+        settings.setValue(settingsId, QKeySequence::listToString(shortcuts));
+    }
+}
+
+const std::map<HierarchicalId, Action>& ActionRegistry::actions() const
 {
     return m_actions;
 }
+
 std::string ActionRegistry::printKeySequences(
     const std::vector<QKeySequence>& keySequences)
 {

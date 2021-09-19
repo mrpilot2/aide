@@ -11,6 +11,7 @@ if(TARGET Qt5::lrelease)
   qt5_create_translation(
     QM_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/../core
     res/translations/aide_de_DE.ts
     res/translations/aide_en.ts
     OPTIONS
@@ -35,6 +36,9 @@ target_sources(
     settings/changedetector.cpp
     settings/settingsdialog.cpp
     settings/settingsdialogcontroller.cpp
+    settings/keymap/addshortcutdialog.cpp
+    settings/keymap/keymappagewidget.cpp
+    settings/keymap/keymappagewidgetcontroller.cpp
     $<$<TARGET_EXISTS:Qt5::lrelease>:applicationtranslator.cpp>
     $<$<NOT:$<TARGET_EXISTS:Qt5::lrelease>>:nullapplicationtranslator.cpp>
     $<$<TARGET_EXISTS:Qt5::lrelease>:${CMAKE_CURRENT_BINARY_DIR}/translations.qrc
@@ -52,8 +56,8 @@ target_include_directories(
 target_compile_features(AideGui PUBLIC cxx_std_17)
 
 target_link_libraries(
-  AideGui PRIVATE Aide::AideCore Aide::AideLogger Qt5::Widgets
-                  aide_project_sanitizers aide_project_warnings
+  AideGui PRIVATE Aide::AideCore Aide::AideLogger Aide::AideWidgets
+                  Qt5::Widgets aide_project_sanitizers aide_project_warnings
 )
 
 set_source_files_properties(

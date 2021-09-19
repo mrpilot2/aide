@@ -21,7 +21,12 @@ target_sources(
           settings/settingspagegrouptreemodel.hpp
           settings/settingspageregistry.cpp
           settings/showsettingsdialog.cpp
+          settings/keymap/keymapcontextmenuprovider.cpp
+          settings/keymap/keymappage.cpp
+          settings/keymap/keymaptreemodel.cpp
+          settings/keymap/showkeymap.cpp
           treeitem.cpp
+          treemodel.cpp
 )
 
 target_include_directories(

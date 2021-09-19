@@ -17,6 +17,8 @@ namespace aide::test
         QVariant value(const HierarchicalId& groupAndKey,
                        const QVariant& defaultValue) override;
 
+        void removeKey(const HierarchicalId& key) override;
+
         void save() override;
         void load() override;
 

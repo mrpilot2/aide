@@ -2,6 +2,20 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en_US">
 <context>
+    <name>AideTreeView</name>
+    <message>
+        <source>There are no elements in this view</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
+    <name>KeymapPageWidget</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
         <source>MainWindow</source>
