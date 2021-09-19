@@ -46,12 +46,17 @@ void KeymapPageWidget::onUserRequestedContextMenuViaRightClick(
 void aide::gui::KeymapPageWidget::setTreeModel(
     std::shared_ptr<QAbstractItemModel> model)
 {
+    bool isFirstModelSet(ui->treeView->model() == nullptr);
+
     ui->treeView->setModel(model.get());
 
-    ui->treeView->expandAll();
-    ui->treeView->resizeColumnToContents(0);
-    ui->treeView->collapseAll();
+    if (isFirstModelSet) {
+        ui->treeView->expandAll();
+        ui->treeView->resizeColumnToContents(0);
+        ui->treeView->collapseAll();
+    }
 }
+
 void aide::gui::KeymapPageWidget::showContextMenu(
     const aide::core::ContextMenuEntries& entries)
 {
@@ -61,6 +66,29 @@ void aide::gui::KeymapPageWidget::showContextMenu(
         switch (entry.type) {
         case aide::core::ContextMenuItemType::SEPARATOR:
             menu.addSeparator();
+            break;
+        case aide::core::ContextMenuItemType::REMOVE_SHORTCUT:
+        {
+            auto action =
+                new QAction(QString::fromStdString(entry.displayText), &menu);
+            action->setData(entry.sequence);
+            QObject::connect(
+                action, &QAction::triggered, keymapPageController.get(),
+                &KeyMapPageWidgetController::onUserRequestedToRemoveAShortcut);
+            menu.addAction(action);
+            break;
+        }
+        case aide::core::ContextMenuItemType::RESET_TO_DEFAULTS:
+            menu.addAction(QString::fromStdString(entry.displayText),
+                           keymapPageController.get(),
+                           &KeyMapPageWidgetController::
+                               onUserRequestedToResetCurrentShortcutsToDefault);
+            break;
+        case aide::core::ContextMenuItemType::ADD_KEYBOARD_SHORTCUT:
+            menu.addAction(QString::fromStdString(entry.displayText),
+                           keymapPageController.get(),
+                           &KeyMapPageWidgetController::
+                               onUserRequestedToAddAKeyboardShortcut);
             break;
         default:
             menu.addAction(QString::fromStdString(entry.displayText));

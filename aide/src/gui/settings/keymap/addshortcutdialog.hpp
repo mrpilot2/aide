@@ -19,6 +19,10 @@ namespace aide::gui
         explicit AddShortcutDialog(QWidget* parent = nullptr);
         ~AddShortcutDialog() override;
 
+        void setAssignedActionDescription(const QString& text);
+
+        QKeySequence userSelectedKeySequence() const;
+
     private:
         std::unique_ptr<Ui::AddShortcutDialog> ui;
     };

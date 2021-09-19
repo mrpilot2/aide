@@ -4,6 +4,7 @@
 
 #include <memory>
 
+#include <QModelIndex>
 #include <QObject>
 
 namespace aide::core
@@ -28,9 +29,17 @@ namespace aide::gui
 
         void onUserRequestedContextMenuViaDoubleClick(const QModelIndex& index);
 
+        void onUserRequestedToResetCurrentShortcutsToDefault();
+
+        void onUserRequestedToRemoveAShortcut();
+
+        void onUserRequestedToAddAKeyboardShortcut();
+
     private:
         const std::shared_ptr<core::KeyMapTreeModel>& keyMapTreeModel;
         core::KeyMapPageWidgetInterface* keyMapView;
+
+        QModelIndex currentIndex;
     };
 
     using KeyMapPageControllerPtr = std::shared_ptr<KeyMapPageWidgetController>;
