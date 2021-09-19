@@ -13,6 +13,7 @@ namespace aide::core
 
     class KeymapContextMenuProvider : public QObject
     {
+        Q_OBJECT
     public:
         KeymapContextMenuProvider(KeyMapTreeModel* model,
                                   KeyMapPageWidgetRawPtr view);
