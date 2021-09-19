@@ -182,4 +182,28 @@ TEST_CASE("Any keymap tree model")
 
         REQUIRE(item.value()->data(0) == "Close");
     }
+
+    SECTION("directly highlights item with modified key sequences")
+    {
+        QModelIndex root = treeModel.index(0, 0, QModelIndex());
+        QModelIndex elem = treeModel.index(0, 1, root);
+
+        treeModel.setData(elem,
+                          QKeySequence::listToString({QKeySequence(Qt::Key_0)}),
+                          Qt::DisplayRole);
+
+        REQUIRE(treeModel.data(elem, Qt::ForegroundRole) == QColor(Qt::blue));
+    }
+
+    SECTION("recursively highlights parent items with modified key sequences")
+    {
+        QModelIndex root = treeModel.index(0, 0, QModelIndex());
+        QModelIndex elem = treeModel.index(0, 1, root);
+
+        treeModel.setData(elem,
+                          QKeySequence::listToString({QKeySequence(Qt::Key_0)}),
+                          Qt::DisplayRole);
+
+        REQUIRE(treeModel.data(root, Qt::ForegroundRole) == QColor(Qt::blue));
+    }
 }

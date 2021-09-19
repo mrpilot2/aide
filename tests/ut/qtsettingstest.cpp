@@ -74,6 +74,18 @@ TEST_CASE("Versionable Qt Settings")
         auto val = settings.value(key, "def");
         REQUIRE(val.toString().toStdString() == "def");
     }
+
+    SECTION("allows to remove a key within a group")
+    {
+        auto key = HierarchicalId("MainWindow")("Size");
+
+        settings.setValue(key, "abc");
+
+        settings.removeKey(key);
+
+        auto val = settings.value(key, "def");
+        REQUIRE(val.toString().toStdString() == "def");
+    }
 }
 
 TEST_CASE("Un-Versionable Qt Settings")
