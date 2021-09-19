@@ -9,10 +9,10 @@ if(NOT EXISTS "${CMAKE_CURRENT_BINARY_DIR}/conan.cmake")
   )
   file(
     DOWNLOAD
-    "https://raw.githubusercontent.com/conan-io/cmake-conan/develop/conan.cmake"
+    "https://raw.githubusercontent.com/conan-io/cmake-conan/7f9fe6df98eb805d78b7e55f27920546dbdd8d49/conan.cmake"
     "${CMAKE_CURRENT_BINARY_DIR}/conan.cmake"
     EXPECTED_HASH
-      SHA256=ddf0fafacf48b5c4912ecce5701c252532437c40277734cad5f4a8084470adbc
+      SHA256=7496444eb14a0fd8be75c6a158f0b693ccb3bc4404806e12df61d3db4bb070d2
     TLS_VERIFY ON
   )
 endif()
@@ -73,7 +73,11 @@ if(TARGET fmt::fmt)
   set_target_properties(fmt::fmt PROPERTIES IMPORTED_GLOBAL TRUE)
 endif()
 
-find_package(Qt5 COMPONENTS Core Widgets REQUIRED)
+find_package(
+  Qt5
+  COMPONENTS Core Widgets
+  REQUIRED
+)
 
 if(TARGET Qt5::Core)
   set_target_properties(
