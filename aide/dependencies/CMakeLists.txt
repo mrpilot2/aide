@@ -37,30 +37,12 @@ if(${IS_MULTI_CONFIG})
   foreach(TYPE ${CMAKE_CONFIGURATION_TYPES})
     conan_cmake_autodetect(settings BUILD_TYPE ${TYPE})
 
-    conan_cmake_install(
-      PATH_OR_REFERENCE
-      .
-      BUILD
-      missing
-      REMOTE
-      conan-center
-      SETTINGS
-      ${settings}
-    )
+    conan_cmake_install(PATH_OR_REFERENCE . BUILD missing SETTINGS ${settings})
   endforeach()
 else()
   conan_cmake_autodetect(settings)
 
-  conan_cmake_install(
-    PATH_OR_REFERENCE
-    .
-    BUILD
-    missing
-    REMOTE
-    conan-center
-    SETTINGS
-    ${settings}
-  )
+  conan_cmake_install(PATH_OR_REFERENCE . BUILD missing SETTINGS ${settings})
 endif()
 find_package(spdlog)
 find_package(fmt)
