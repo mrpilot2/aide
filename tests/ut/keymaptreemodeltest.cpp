@@ -178,7 +178,7 @@ TEST_CASE("Any keymap tree model")
         std::shared_ptr<QAction> newAction{
             std::make_shared<QAction>("New", nullptr)};
         auto newId = HierarchicalId("Main Menu")("New");
-        registry->registerAction(action, id, "Thoughtful description");
+        registry->registerAction(newAction, newId, "Thoughtful description");
 
         QModelIndex root = treeModel.index(0, 0, QModelIndex());
         QModelIndex elem = treeModel.index(1, 0, root);
