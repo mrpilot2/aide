@@ -1,10 +1,5 @@
 <map id="aide::core::TreeItem::row" name="aide::core::TreeItem::row">
-<area shape="rect" id="node1" title=" " alt="" coords="696,79,879,106"/>
-<area shape="rect" id="node2" href="$classaide_1_1core_1_1TreeItem.html#a92914c527d122f23667b72bfdc01710c" title=" " alt="" coords="497,72,648,113"/>
-<area shape="rect" id="node3" href="$classaide_1_1core_1_1TreeItem.html#a706b0f21327d1bb6bb927afeee2359a0" title=" " alt="" coords="293,39,444,80"/>
-<area shape="rect" id="node4" href="$classaide_1_1core_1_1TreeModel.html#a2ee9911f44452165395d6d9b9e5181f9" title=" " alt="" coords="288,104,449,145"/>
-<area shape="rect" id="node5" href="$classaide_1_1core_1_1KeyMapTreeModel.html#ab7a8793f7868eca62f120f1e9f779dcb" title=" " alt="" coords="16,5,229,47"/>
-<area shape="rect" id="node6" href="$classaide_1_1core_1_1SettingsPageGroupTreeModel.html#a244138dbe90a3c7432c8eced93d6e473" title=" " alt="" coords="33,71,212,112"/>
-<area shape="rect" id="node7" href="$classaide_1_1core_1_1SettingsPageGroupTreeModel.html#afb401115e3b5a67b6081aa538e37ebe2" title=" " alt="" coords="33,136,212,177"/>
-<area shape="rect" id="node8" href="$classaide_1_1core_1_1SettingsPageGroupTreeModel.html#aeebec869a00eb249ead254fc0723137f" title=" " alt="" coords="5,202,240,258"/>
+<area shape="rect" id="node1" title=" " alt="" coords="403,13,585,39"/>
+<area shape="rect" id="node2" href="$classaide_1_1core_1_1TreeItem.html#a92914c527d122f23667b72bfdc01710c" title=" " alt="" coords="204,5,355,47"/>
+<area shape="rect" id="node3" href="$classaide_1_1core_1_1TreeItem.html#a706b0f21327d1bb6bb927afeee2359a0" title=" " alt="" coords="5,5,156,47"/>
 </map>

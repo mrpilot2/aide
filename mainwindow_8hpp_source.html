@@ -93,66 +93,60 @@ $(function() {
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">class </span>QIcon;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">class </span>QWidget;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaide.html">aide</a></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaide_1_1gui.html">aide::gui</a></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">namespace </span>gui</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">class </span>TranslatorInterface;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classaide_1_1gui_1_1MainWindow.html">   30</a></span>&#160;        <span class="keyword">class </span><a class="code" href="classaide_1_1gui_1_1MainWindow.html">MainWindow</a></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            : <span class="keyword">public</span> <a class="code" href="classaide_1_1core_1_1MainWindowInterface.html">aide::core::MainWindowInterface</a></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            , <span class="keyword">public</span> <a class="code" href="classaide_1_1core_1_1ApplicationCloseView.html">aide::core::ApplicationCloseView</a></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            Q_OBJECT</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keyword">explicit</span> <a class="code" href="classaide_1_1gui_1_1MainWindow.html#a46d4f2528b29fde28557cf857decfd24">MainWindow</a>(<a class="code" href="namespaceaide.html#a42111fe174dd6f5b3fc5e879ecc68c14">LoggerPtr</a> loggerInterface, QWidget* parent);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <a class="code" href="classaide_1_1gui_1_1MainWindow.html#a1f7d2c56410fc1bfa135bb907d43313f">~MainWindow</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <a class="code" href="classaide_1_1gui_1_1MainWindow.html#a46d4f2528b29fde28557cf857decfd24">MainWindow</a>(<span class="keyword">const</span> <a class="code" href="classaide_1_1gui_1_1MainWindow.html">MainWindow</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <a class="code" href="classaide_1_1gui_1_1MainWindow.html">MainWindow</a>&amp; <a class="code" href="classaide_1_1gui_1_1MainWindow.html#a506d85b2b278633a1f19f508f94dab96">operator=</a>(<span class="keyword">const</span> <a class="code" href="classaide_1_1gui_1_1MainWindow.html">MainWindow</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <a class="code" href="classaide_1_1gui_1_1MainWindow.html#a46d4f2528b29fde28557cf857decfd24">MainWindow</a>(<span class="keyword">const</span> <a class="code" href="classaide_1_1gui_1_1MainWindow.html">MainWindow</a>&amp;&amp;)           = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <a class="code" href="classaide_1_1gui_1_1MainWindow.html">MainWindow</a>&amp; <a class="code" href="classaide_1_1gui_1_1MainWindow.html#a506d85b2b278633a1f19f508f94dab96">operator=</a>(<span class="keyword">const</span> <a class="code" href="classaide_1_1gui_1_1MainWindow.html">MainWindow</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classaide_1_1gui_1_1MainWindow.html#a83dd9250f5cadcbe2432737f40982521">setMainWindowController</a>(</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                <a class="code" href="namespaceaide_1_1gui.html#a1936f2b862673fedef3e57c60db70b76">MainWindowControllerPtr</a> controller,</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                <span class="keyword">const</span> <a class="code" href="namespaceaide.html#a720ef0c950881fba3ebd2f30c30dad35">ActionRegistryInterfacePtr</a>&amp; actionRegistry);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="classaide_1_1gui_1_1MainWindow.html#a8a9c964637d582cd9a4e5e96d22355d7">restoreGeometryAndState</a>(QByteArray geometry,</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                                         QByteArray state) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            [[nodiscard]] std::shared_ptr&lt;TranslatorInterface&gt; <a class="code" href="classaide_1_1gui_1_1MainWindow.html#a362efc7085cc894e1df5acb31fd4cb67">translator</a>()</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            std::tuple&lt;aide::core::UserSelection, bool&gt;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <a class="code" href="classaide_1_1gui_1_1MainWindow.html#a13aaaaf5dc829770ac7bd7c5abcd48cc">letUserConfirmApplicationClose</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">class </span>TranslatorInterface;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classaide_1_1gui_1_1MainWindow.html">   28</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classaide_1_1gui_1_1MainWindow.html">MainWindow</a></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        : <span class="keyword">public</span> <a class="code" href="classaide_1_1core_1_1MainWindowInterface.html">aide::core::MainWindowInterface</a></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        , <span class="keyword">public</span> <a class="code" href="classaide_1_1core_1_1ApplicationCloseView.html">aide::core::ApplicationCloseView</a></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        Q_OBJECT</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="classaide_1_1gui_1_1MainWindow.html#a46d4f2528b29fde28557cf857decfd24">MainWindow</a>(<a class="code" href="namespaceaide.html#a42111fe174dd6f5b3fc5e879ecc68c14">LoggerPtr</a> loggerInterface, QWidget* parent);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <a class="code" href="classaide_1_1gui_1_1MainWindow.html#a1f7d2c56410fc1bfa135bb907d43313f">~MainWindow</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <a class="code" href="classaide_1_1gui_1_1MainWindow.html#a46d4f2528b29fde28557cf857decfd24">MainWindow</a>(<span class="keyword">const</span> <a class="code" href="classaide_1_1gui_1_1MainWindow.html">MainWindow</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="classaide_1_1gui_1_1MainWindow.html">MainWindow</a>&amp; <a class="code" href="classaide_1_1gui_1_1MainWindow.html#a506d85b2b278633a1f19f508f94dab96">operator=</a>(<span class="keyword">const</span> <a class="code" href="classaide_1_1gui_1_1MainWindow.html">MainWindow</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <a class="code" href="classaide_1_1gui_1_1MainWindow.html#a46d4f2528b29fde28557cf857decfd24">MainWindow</a>(<span class="keyword">const</span> <a class="code" href="classaide_1_1gui_1_1MainWindow.html">MainWindow</a>&amp;&amp;)           = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="classaide_1_1gui_1_1MainWindow.html">MainWindow</a>&amp; <a class="code" href="classaide_1_1gui_1_1MainWindow.html#a506d85b2b278633a1f19f508f94dab96">operator=</a>(<span class="keyword">const</span> <a class="code" href="classaide_1_1gui_1_1MainWindow.html">MainWindow</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaide_1_1gui_1_1MainWindow.html#a83dd9250f5cadcbe2432737f40982521">setMainWindowController</a>(</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            <a class="code" href="namespaceaide_1_1gui.html#a1936f2b862673fedef3e57c60db70b76">MainWindowControllerPtr</a> controller,</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keyword">const</span> <a class="code" href="namespaceaide.html#a720ef0c950881fba3ebd2f30c30dad35">ActionRegistryInterfacePtr</a>&amp; actionRegistry);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaide_1_1gui_1_1MainWindow.html#a8a9c964637d582cd9a4e5e96d22355d7">restoreGeometryAndState</a>(QByteArray geometry,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                                     QByteArray state) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        [[nodiscard]] std::shared_ptr&lt;TranslatorInterface&gt; <a class="code" href="classaide_1_1gui_1_1MainWindow.html#a362efc7085cc894e1df5acb31fd4cb67">translator</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        std::tuple&lt;aide::core::UserSelection, bool&gt;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <a class="code" href="classaide_1_1gui_1_1MainWindow.html#a13aaaaf5dc829770ac7bd7c5abcd48cc">letUserConfirmApplicationClose</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">void</span> closeEvent(QCloseEvent* event) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keywordtype">void</span> closeEvent(QCloseEvent* event) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordtype">void</span> registerActions(</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                <span class="keyword">const</span> <a class="code" href="namespaceaide.html#a720ef0c950881fba3ebd2f30c30dad35">ActionRegistryInterfacePtr</a>&amp; actionRegistry);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            [[nodiscard]] <span class="keyword">static</span> QIcon createIconFromTheme(</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                <span class="keyword">const</span> std::string&amp; iconName);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordtype">void</span> registerActions(<span class="keyword">const</span> <a class="code" href="namespaceaide.html#a720ef0c950881fba3ebd2f30c30dad35">ActionRegistryInterfacePtr</a>&amp; actionRegistry);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        [[nodiscard]] <span class="keyword">static</span> QIcon createIconFromTheme(</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keyword">const</span> std::string&amp; iconName);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <a class="code" href="namespaceaide.html#a42111fe174dd6f5b3fc5e879ecc68c14">LoggerPtr</a> logger;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <a class="code" href="namespaceaide_1_1gui.html#a1936f2b862673fedef3e57c60db70b76">MainWindowControllerPtr</a> m_controller;</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <a class="code" href="namespaceaide.html#a42111fe174dd6f5b3fc5e879ecc68c14">LoggerPtr</a> logger;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <a class="code" href="namespaceaide_1_1gui.html#a1936f2b862673fedef3e57c60db70b76">MainWindowControllerPtr</a> m_controller;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            std::shared_ptr&lt;TranslatorInterface&gt; m_translator;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            std::unique_ptr&lt;Ui::MainWindow&gt; m_ui;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            std::shared_ptr&lt;QAction&gt; m_actionSettings;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            std::shared_ptr&lt;QAction&gt; m_actionQuit;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            std::shared_ptr&lt;QAction&gt; m_actionAboutQt;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        };</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    } <span class="comment">// namespace gui</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;} <span class="comment">// namespace aide</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#endif // AIDE_MAINWINDOW_HPP</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        std::shared_ptr&lt;TranslatorInterface&gt; m_translator;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        std::unique_ptr&lt;Ui::MainWindow&gt; m_ui;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        std::shared_ptr&lt;QAction&gt; m_actionSettings;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        std::shared_ptr&lt;QAction&gt; m_actionQuit;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        std::shared_ptr&lt;QAction&gt; m_actionAboutQt;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    };</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;} <span class="comment">// namespace aide::gui</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#endif // AIDE_MAINWINDOW_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassaide_1_1gui_1_1MainWindow_html_a8a9c964637d582cd9a4e5e96d22355d7"><div class="ttname"><a href="classaide_1_1gui_1_1MainWindow.html#a8a9c964637d582cd9a4e5e96d22355d7">aide::gui::MainWindow::restoreGeometryAndState</a></div><div class="ttdeci">void restoreGeometryAndState(QByteArray geometry, QByteArray state) override</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:72</div></div>
 <div class="ttc" id="aclassaide_1_1gui_1_1MainWindow_html_a1f7d2c56410fc1bfa135bb907d43313f"><div class="ttname"><a href="classaide_1_1gui_1_1MainWindow.html#a1f7d2c56410fc1bfa135bb907d43313f">aide::gui::MainWindow::~MainWindow</a></div><div class="ttdeci">~MainWindow() override</div></div>
-<div class="ttc" id="aclassaide_1_1gui_1_1MainWindow_html"><div class="ttname"><a href="classaide_1_1gui_1_1MainWindow.html">aide::gui::MainWindow</a></div><div class="ttdef"><b>Definition:</b> mainwindow.hpp:30</div></div>
+<div class="ttc" id="aclassaide_1_1gui_1_1MainWindow_html"><div class="ttname"><a href="classaide_1_1gui_1_1MainWindow.html">aide::gui::MainWindow</a></div><div class="ttdef"><b>Definition:</b> mainwindow.hpp:28</div></div>
 <div class="ttc" id="aclassaide_1_1gui_1_1MainWindow_html_a13aaaaf5dc829770ac7bd7c5abcd48cc"><div class="ttname"><a href="classaide_1_1gui_1_1MainWindow.html#a13aaaaf5dc829770ac7bd7c5abcd48cc">aide::gui::MainWindow::letUserConfirmApplicationClose</a></div><div class="ttdeci">std::tuple&lt; aide::core::UserSelection, bool &gt; letUserConfirmApplicationClose() override</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:136</div></div>
-<div class="ttc" id="anamespaceaide_html"><div class="ttname"><a href="namespaceaide.html">aide</a></div><div class="ttdef"><b>Definition:</b> applicationbuilder.hpp:20</div></div>
 <div class="ttc" id="astructActionIds_html"><div class="ttname"><a href="structActionIds.html">ActionIds</a></div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:28</div></div>
 <div class="ttc" id="aclassaide_1_1core_1_1ApplicationCloseView_html"><div class="ttname"><a href="classaide_1_1core_1_1ApplicationCloseView.html">aide::core::ApplicationCloseView</a></div><div class="ttdef"><b>Definition:</b> applicationcloseview.hpp:11</div></div>
 <div class="ttc" id="anamespaceaide_1_1core_html_a260cb790cefaddd2b83c6cbc68b41650"><div class="ttname"><a href="namespaceaide_1_1core.html#a260cb790cefaddd2b83c6cbc68b41650">aide::core::UserSelection</a></div><div class="ttdeci">UserSelection</div><div class="ttdef"><b>Definition:</b> userselection.hpp:6</div></div>
@@ -166,7 +160,7 @@ $(function() {
 <div class="ttc" id="aclassaide_1_1core_1_1MainWindowInterface_html"><div class="ttname"><a href="classaide_1_1core_1_1MainWindowInterface.html">aide::core::MainWindowInterface</a></div><div class="ttdef"><b>Definition:</b> mainwindowinterface.hpp:10</div></div>
 <div class="ttc" id="astructActionIds_html_a3fad439c4ecd710d4b626513c3d566d3"><div class="ttname"><a href="structActionIds.html#a3fad439c4ecd710d4b626513c3d566d3">ActionIds::MAIN_MENU_HELP_ABOUT_QT</a></div><div class="ttdeci">const HierarchicalId MAIN_MENU_HELP_ABOUT_QT</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:34</div></div>
 <div class="ttc" id="alog__helper__macros_8hpp_html_a889ff33a50645bce712adaa125031bbc"><div class="ttname"><a href="log__helper__macros_8hpp.html#a889ff33a50645bce712adaa125031bbc">AIDE_LOG_CRITICAL</a></div><div class="ttdeci">#define AIDE_LOG_CRITICAL(...)</div><div class="ttdef"><b>Definition:</b> log_helper_macros.hpp:115</div></div>
-<div class="ttc" id="anamespaceaide_html_a720ef0c950881fba3ebd2f30c30dad35"><div class="ttname"><a href="namespaceaide.html#a720ef0c950881fba3ebd2f30c30dad35">aide::ActionRegistryInterfacePtr</a></div><div class="ttdeci">std::shared_ptr&lt; ActionRegistryInterface &gt; ActionRegistryInterfacePtr</div><div class="ttdef"><b>Definition:</b> actionregistryinterface.hpp:73</div></div>
+<div class="ttc" id="anamespaceaide_html_a720ef0c950881fba3ebd2f30c30dad35"><div class="ttname"><a href="namespaceaide.html#a720ef0c950881fba3ebd2f30c30dad35">aide::ActionRegistryInterfacePtr</a></div><div class="ttdeci">std::shared_ptr&lt; ActionRegistryInterface &gt; ActionRegistryInterfacePtr</div><div class="ttdef"><b>Definition:</b> actionregistryinterface.hpp:74</div></div>
 <div class="ttc" id="amainwindowcontroller_8hpp_html"><div class="ttname"><a href="mainwindowcontroller_8hpp.html">mainwindowcontroller.hpp</a></div></div>
 <div class="ttc" id="amainwindowinterface_8hpp_html"><div class="ttname"><a href="mainwindowinterface_8hpp.html">mainwindowinterface.hpp</a></div></div>
 <div class="ttc" id="aapplicationtranslator_8hpp_html"><div class="ttname"><a href="applicationtranslator_8hpp.html">applicationtranslator.hpp</a></div></div>
@@ -176,6 +170,7 @@ $(function() {
 <div class="ttc" id="astructActionIds_html_abce9f8cc07a2bbe904862096f0182213"><div class="ttname"><a href="structActionIds.html#abce9f8cc07a2bbe904862096f0182213">ActionIds::MAIN_MENU_FILE_SETTINGS</a></div><div class="ttdeci">const HierarchicalId MAIN_MENU_FILE_SETTINGS</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:30</div></div>
 <div class="ttc" id="aactionregistryinterface_8hpp_html"><div class="ttname"><a href="actionregistryinterface_8hpp.html">actionregistryinterface.hpp</a></div></div>
 <div class="ttc" id="asettingsdialog_8hpp_html"><div class="ttname"><a href="settingsdialog_8hpp.html">settingsdialog.hpp</a></div></div>
+<div class="ttc" id="anamespaceaide_1_1gui_html"><div class="ttname"><a href="namespaceaide_1_1gui.html">aide::gui</a></div><div class="ttdef"><b>Definition:</b> applicationtranslator.hpp:14</div></div>
 <div class="ttc" id="aclassaide_1_1HierarchicalId_html"><div class="ttname"><a href="classaide_1_1HierarchicalId.html">aide::HierarchicalId</a></div><div class="ttdef"><b>Definition:</b> hierarchicalid.hpp:9</div></div>
 <div class="ttc" id="alog__helper__macros_8hpp_html"><div class="ttname"><a href="log__helper__macros_8hpp.html">log_helper_macros.hpp</a></div></div>
 <div class="ttc" id="aclassaide_1_1gui_1_1MainWindow_html_a506d85b2b278633a1f19f508f94dab96"><div class="ttname"><a href="classaide_1_1gui_1_1MainWindow.html#a506d85b2b278633a1f19f508f94dab96">aide::gui::MainWindow::operator=</a></div><div class="ttdeci">MainWindow &amp; operator=(const MainWindow &amp;)=delete</div></div>

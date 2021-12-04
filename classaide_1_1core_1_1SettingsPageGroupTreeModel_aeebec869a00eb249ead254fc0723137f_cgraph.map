@@ -1,9 +1,7 @@
 <map id="aide::core::SettingsPageGroupTreeModel::recursivelyFindSelectedTreeItemIndex" name="aide::core::SettingsPageGroupTreeModel::recursivelyFindSelectedTreeItemIndex">
 <area shape="rect" id="node1" title=" " alt="" coords="5,63,240,119"/>
 <area shape="rect" id="node2" href="$classaide_1_1core_1_1TreeModel.html#a2ee9911f44452165395d6d9b9e5181f9" title=" " alt="" coords="288,5,449,47"/>
-<area shape="rect" id="node5" href="$classaide_1_1core_1_1TreeModel.html#a9d46915297e10e10fa08fd567ae51187" title=" " alt="" coords="288,71,449,112"/>
-<area shape="rect" id="node7" href="$classaide_1_1core_1_1TreeModel.html#afa54f4cbf0d6e10e18eb2ddd74fa0e8b" title=" " alt="" coords="288,136,449,177"/>
-<area shape="rect" id="node3" href="$classaide_1_1core_1_1TreeItem.html#a92914c527d122f23667b72bfdc01710c" title=" " alt="" coords="497,5,648,47"/>
-<area shape="rect" id="node4" href="$classaide_1_1core_1_1TreeItem.html#a489e940bfdbaaa5860ab92f35ea935e1" title=" " alt="" coords="696,13,879,39"/>
-<area shape="rect" id="node6" href="$classaide_1_1core_1_1TreeItem.html#a59dcd6c43c09a5afc0774292695265ec" title=" " alt="" coords="497,71,648,112"/>
+<area shape="rect" id="node3" href="$classaide_1_1core_1_1TreeModel.html#a9d46915297e10e10fa08fd567ae51187" title=" " alt="" coords="288,71,449,112"/>
+<area shape="rect" id="node5" href="$classaide_1_1core_1_1TreeModel.html#afa54f4cbf0d6e10e18eb2ddd74fa0e8b" title=" " alt="" coords="288,136,449,177"/>
+<area shape="rect" id="node4" href="$classaide_1_1core_1_1TreeItem.html#a59dcd6c43c09a5afc0774292695265ec" title=" " alt="" coords="497,71,648,112"/>
 </map>
