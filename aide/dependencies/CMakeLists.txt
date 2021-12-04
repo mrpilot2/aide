@@ -19,9 +19,7 @@ endif()
 
 include(${CMAKE_CURRENT_BINARY_DIR}/conan.cmake)
 
-conan_add_remote(
-  NAME bincrafters URL https://api.bintray.com/conan/bincrafters/public-conan
-)
+conan_add_remote(NAME conancenter URL https://center.conan.io)
 
 get_property(IS_MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
 

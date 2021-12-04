@@ -22,11 +22,11 @@ endif()
 include(${CMAKE_CURRENT_BINARY_DIR}/conan.cmake)
 
 conan_add_remote(
-  NAME bincrafters URL https://api.bintray.com/conan/bincrafters/public-conan
+  NAME conancenter URL https://center.conan.io
 )
 
 conan_cmake_configure(
-  REQUIRES spdlog/1.8.5 fmt/7.1.3 ms-gsl/3.1.0 GENERATORS cmake_find_package
+  REQUIRES spdlog/1.8.5 fmt/7.1.3 GENERATORS cmake_find_package
 )
 
 conan_cmake_autodetect(settings)
