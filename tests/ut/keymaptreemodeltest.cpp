@@ -112,9 +112,11 @@ TEST_CASE("Any keymap tree model")
     auto logger = std::make_shared<NullLogger>();
     auto registry(std::make_shared<ActionRegistry>(settings, logger));
 
-    std::shared_ptr<QAction> action{std::make_shared<QAction>("abc", nullptr)};
+    std::shared_ptr<QAction> action{std::make_shared<QAction>(
+        QIcon::fromTheme("application-exit"), "abc", nullptr)};
     auto id = HierarchicalId("Main Menu")("Close");
     registry->registerAction(action, id, "Thoughtful description");
+
     KeyMapTreeModel treeModel(registry);
 
     SECTION("provides horizontal header")
@@ -160,6 +162,35 @@ TEST_CASE("Any keymap tree model")
 
         REQUIRE(elem.data(Qt::ToolTipRole).toString().toStdString() ==
                 "Thoughtful description");
+    }
+
+    SECTION("shows action icon if defined")
+    {
+        QModelIndex root = treeModel.index(0, 0, QModelIndex());
+        QModelIndex elem = treeModel.index(0, 0, root);
+
+        REQUIRE(elem.data(Qt::DecorationRole) ==
+                QIcon::fromTheme("application-exit"));
+    }
+
+    SECTION("does not show icon if action has not assigned one")
+    {
+        std::shared_ptr<QAction> newAction{
+            std::make_shared<QAction>("New", nullptr)};
+        auto newId = HierarchicalId("Main Menu")("New");
+        registry->registerAction(action, id, "Thoughtful description");
+
+        QModelIndex root = treeModel.index(0, 0, QModelIndex());
+        QModelIndex elem = treeModel.index(1, 0, root);
+
+        REQUIRE(elem.data(Qt::DecorationRole) == QVariant());
+    }
+
+    SECTION("shows folder icon for tree item with children")
+    {
+        QModelIndex root = treeModel.index(0, 0, QModelIndex());
+
+        REQUIRE(root.data(Qt::DecorationRole) == QIcon::fromTheme("folder"));
     }
 
     SECTION("does not crash if no tooltip is defined for current index")
