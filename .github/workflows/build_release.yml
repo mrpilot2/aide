@@ -78,13 +78,9 @@ jobs:
       run: |
         cmake ${{ steps.cmake_args.outputs.CMAKE_ARGS }} ..
         cmake --build . --config Release --parallel
-
-    - name: Test the project
-      uses: GabrielBB/xvfb-action@v1
-      with:
-        working-directory: build
-        options: -screen 0 1600x1200x24
-        run: ctest -VV --output-on-failure --stop-on-failure
+        ctest -VV --output-on-failure --stop-on-failure
+      env:
+        QT_QPA_PLATFORM: offscreen
 
     - name: Upload Unit Test Results
       if: always()
