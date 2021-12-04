@@ -97,7 +97,7 @@ $(function() {
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaide_1_1ActionRegistry.html#afce9b4442c909839c4d15813c4557c15">registerAction</a>(std::weak_ptr&lt;QAction&gt; action,</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                            <span class="keyword">const</span> <a class="code" href="classaide_1_1HierarchicalId.html">HierarchicalId</a>&amp; uniqueId,</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                            <span class="keyword">const</span> std::string&amp; description) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                            std::string description) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaide_1_1ActionRegistry.html#afce9b4442c909839c4d15813c4557c15">registerAction</a>(</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            std::weak_ptr&lt;QAction&gt; action, <span class="keyword">const</span> <a class="code" href="classaide_1_1HierarchicalId.html">HierarchicalId</a>&amp; uniqueId,</div>
@@ -105,7 +105,7 @@ $(function() {
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaide_1_1ActionRegistry.html#afce9b4442c909839c4d15813c4557c15">registerAction</a>(</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            std::weak_ptr&lt;QAction&gt; action, <span class="keyword">const</span> <a class="code" href="classaide_1_1HierarchicalId.html">HierarchicalId</a>&amp; uniqueId,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keyword">const</span> std::string&amp; description,</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            std::string description,</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <span class="keyword">const</span> std::vector&lt;QKeySequence&gt;&amp; defaultKeySequences) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaide_1_1ActionRegistry.html#a3dc307a17e068a4455f700499a277757">modifyShortcutsForAction</a>(</div>
@@ -147,7 +147,6 @@ $(function() {
 <div class="ttc" id="aclassaide_1_1ActionRegistry_html_a53732e25015c5109b88e2ee6a92327ad"><div class="ttname"><a href="classaide_1_1ActionRegistry.html#a53732e25015c5109b88e2ee6a92327ad">aide::ActionRegistry::ActionRegistry</a></div><div class="ttdeci">ActionRegistry(SettingsInterface &amp;settingsInterface, LoggerPtr loggerInterface)</div><div class="ttdef"><b>Definition:</b> actionregistry.cpp:7</div></div>
 <div class="ttc" id="aactionregistryinterface_8hpp_html"><div class="ttname"><a href="actionregistryinterface_8hpp.html">actionregistryinterface.hpp</a></div></div>
 <div class="ttc" id="aclassaide_1_1HierarchicalId_html"><div class="ttname"><a href="classaide_1_1HierarchicalId.html">aide::HierarchicalId</a></div><div class="ttdef"><b>Definition:</b> hierarchicalid.hpp:9</div></div>
-<div class="ttc" id="astructaide_1_1Action_html_abddc47bf1c634ba1552d8d1eb9ede3e9"><div class="ttname"><a href="structaide_1_1Action.html#abddc47bf1c634ba1552d8d1eb9ede3e9">aide::Action::areKeySequencesTheSame</a></div><div class="ttdeci">static bool areKeySequencesTheSame(const QList&lt; QKeySequence &gt; &amp;lhs, const QList&lt; QKeySequence &gt; &amp;rhs)</div><div class="ttdef"><b>Definition:</b> actionregistryinterface.hpp:34</div></div>
 <div class="ttc" id="ahierarchicalid_8hpp_html"><div class="ttname"><a href="hierarchicalid_8hpp.html">hierarchicalid.hpp</a></div></div>
 <div class="ttc" id="anamespaceaide_html_a42111fe174dd6f5b3fc5e879ecc68c14"><div class="ttname"><a href="namespaceaide.html#a42111fe174dd6f5b3fc5e879ecc68c14">aide::LoggerPtr</a></div><div class="ttdeci">std::shared_ptr&lt; LoggerInterface &gt; LoggerPtr</div><div class="ttdef"><b>Definition:</b> loggerinterface.hpp:73</div></div>
 <div class="ttc" id="aactionregistry_8hpp_html"><div class="ttname"><a href="actionregistry_8hpp.html">actionregistry.hpp</a></div></div>

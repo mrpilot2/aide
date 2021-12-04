@@ -76,40 +76,40 @@ $(function() {
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="settingsproviderinterface_8hpp.html">aide/settingsproviderinterface.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="qtsettings_8hpp.html">qtsettings.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaide.html">aide</a></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">class </span>SettingsInterface;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classaide_1_1AideSettingsProvider.html">   13</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classaide_1_1AideSettingsProvider.html">AideSettingsProvider</a> : <span class="keyword">public</span> <a class="code" href="classaide_1_1SettingsProviderInterface.html">SettingsProviderInterface</a></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    {</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaide.html">aide</a></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keyword">class </span>SettingsInterface;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classaide_1_1AideSettingsProvider.html">   11</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classaide_1_1AideSettingsProvider.html">AideSettingsProvider</a> : <span class="keyword">public</span> <a class="code" href="classaide_1_1SettingsProviderInterface.html">SettingsProviderInterface</a></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    {</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <a class="code" href="classaide_1_1AideSettingsProvider.html#a729ef094bf96430256cba6a1aa65c077">AideSettingsProvider</a>();</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        [[nodiscard]] std::shared_ptr&lt;SettingsInterface&gt; <a class="code" href="classaide_1_1AideSettingsProvider.html#a7a84bb6cb656132f9ba7b4aed13e40f9">versionableSettings</a>()</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        [[nodiscard]] std::shared_ptr&lt;SettingsInterface&gt; <a class="code" href="classaide_1_1AideSettingsProvider.html#ac907c1cfc4001817217e783673cb3269">unversionableSettings</a>()</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        std::shared_ptr&lt;SettingsInterface&gt; m_versionableSettings{</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            std::make_shared&lt;QtSettings&gt;(<span class="keyword">true</span>)};</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        std::shared_ptr&lt;SettingsInterface&gt; m_unversionableSettings{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            std::make_shared&lt;QtSettings&gt;(<span class="keyword">false</span>)};</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    };</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;} <span class="comment">// namespace aide</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif // AIDE_AIDE_SETTINGS_PROVIDER_HPP</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        std::shared_ptr&lt;SettingsInterface&gt; m_versionableSettings;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        std::shared_ptr&lt;SettingsInterface&gt; m_unversionableSettings;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    };</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;} <span class="comment">// namespace aide</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#endif // AIDE_AIDE_SETTINGS_PROVIDER_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassaide_1_1AideSettingsProvider_html_ac907c1cfc4001817217e783673cb3269"><div class="ttname"><a href="classaide_1_1AideSettingsProvider.html#ac907c1cfc4001817217e783673cb3269">aide::AideSettingsProvider::unversionableSettings</a></div><div class="ttdeci">std::shared_ptr&lt; SettingsInterface &gt; unversionableSettings() const override</div><div class="ttdef"><b>Definition:</b> aidesettingsprovider.cpp:16</div></div>
+<div class="ttc" id="aclassaide_1_1AideSettingsProvider_html_ac907c1cfc4001817217e783673cb3269"><div class="ttname"><a href="classaide_1_1AideSettingsProvider.html#ac907c1cfc4001817217e783673cb3269">aide::AideSettingsProvider::unversionableSettings</a></div><div class="ttdeci">std::shared_ptr&lt; SettingsInterface &gt; unversionableSettings() const override</div><div class="ttdef"><b>Definition:</b> aidesettingsprovider.cpp:21</div></div>
 <div class="ttc" id="anamespaceaide_html"><div class="ttname"><a href="namespaceaide.html">aide</a></div><div class="ttdef"><b>Definition:</b> applicationbuilder.hpp:20</div></div>
 <div class="ttc" id="asettingsinterface_8hpp_html"><div class="ttname"><a href="settingsinterface_8hpp.html">settingsinterface.hpp</a></div></div>
 <div class="ttc" id="aclassaide_1_1SettingsProviderInterface_html"><div class="ttname"><a href="classaide_1_1SettingsProviderInterface.html">aide::SettingsProviderInterface</a></div><div class="ttdef"><b>Definition:</b> settingsproviderinterface.hpp:10</div></div>
 <div class="ttc" id="asettingsproviderinterface_8hpp_html"><div class="ttname"><a href="settingsproviderinterface_8hpp.html">settingsproviderinterface.hpp</a></div></div>
-<div class="ttc" id="aclassaide_1_1AideSettingsProvider_html"><div class="ttname"><a href="classaide_1_1AideSettingsProvider.html">aide::AideSettingsProvider</a></div><div class="ttdef"><b>Definition:</b> aidesettingsprovider.hpp:13</div></div>
+<div class="ttc" id="aclassaide_1_1AideSettingsProvider_html"><div class="ttname"><a href="classaide_1_1AideSettingsProvider.html">aide::AideSettingsProvider</a></div><div class="ttdef"><b>Definition:</b> aidesettingsprovider.hpp:11</div></div>
+<div class="ttc" id="aclassaide_1_1AideSettingsProvider_html_a729ef094bf96430256cba6a1aa65c077"><div class="ttname"><a href="classaide_1_1AideSettingsProvider.html#a729ef094bf96430256cba6a1aa65c077">aide::AideSettingsProvider::AideSettingsProvider</a></div><div class="ttdeci">AideSettingsProvider()</div><div class="ttdef"><b>Definition:</b> aidesettingsprovider.cpp:10</div></div>
 <div class="ttc" id="aaidesettingsprovider_8hpp_html"><div class="ttname"><a href="aidesettingsprovider_8hpp.html">aidesettingsprovider.hpp</a></div></div>
 <div class="ttc" id="aclassaide_1_1SettingsInterface_html"><div class="ttname"><a href="classaide_1_1SettingsInterface.html">aide::SettingsInterface</a></div><div class="ttdef"><b>Definition:</b> settingsinterface.hpp:10</div></div>
-<div class="ttc" id="aclassaide_1_1AideSettingsProvider_html_a7a84bb6cb656132f9ba7b4aed13e40f9"><div class="ttname"><a href="classaide_1_1AideSettingsProvider.html#a7a84bb6cb656132f9ba7b4aed13e40f9">aide::AideSettingsProvider::versionableSettings</a></div><div class="ttdeci">std::shared_ptr&lt; SettingsInterface &gt; versionableSettings() const override</div><div class="ttdef"><b>Definition:</b> aidesettingsprovider.cpp:10</div></div>
+<div class="ttc" id="aclassaide_1_1AideSettingsProvider_html_a7a84bb6cb656132f9ba7b4aed13e40f9"><div class="ttname"><a href="classaide_1_1AideSettingsProvider.html#a7a84bb6cb656132f9ba7b4aed13e40f9">aide::AideSettingsProvider::versionableSettings</a></div><div class="ttdeci">std::shared_ptr&lt; SettingsInterface &gt; versionableSettings() const override</div><div class="ttdef"><b>Definition:</b> aidesettingsprovider.cpp:15</div></div>
+<div class="ttc" id="aclassaide_1_1QtSettings_html"><div class="ttname"><a href="classaide_1_1QtSettings.html">aide::QtSettings</a></div><div class="ttdef"><b>Definition:</b> qtsettings.hpp:12</div></div>
 <div class="ttc" id="aqtsettings_8hpp_html"><div class="ttname"><a href="qtsettings_8hpp.html">qtsettings.hpp</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

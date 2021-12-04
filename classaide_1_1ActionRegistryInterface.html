@@ -91,12 +91,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad7be1f80ebd8808f5babe3c81c03db01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a995f0683a6fad6412fbb526f626bc4cc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1ActionRegistryInterface.html#a995f0683a6fad6412fbb526f626bc4cc">registerAction</a> (std::weak_ptr&lt; QAction &gt; action, const <a class="el" href="classaide_1_1HierarchicalId.html">HierarchicalId</a> &amp;uniqueId)=0</td></tr>
 <tr class="separator:a995f0683a6fad6412fbb526f626bc4cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a245b127ed7367e7251ef4680346a1a7c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1ActionRegistryInterface.html#a245b127ed7367e7251ef4680346a1a7c">registerAction</a> (std::weak_ptr&lt; QAction &gt; action, const <a class="el" href="classaide_1_1HierarchicalId.html">HierarchicalId</a> &amp;uniqueId, const std::string &amp;description)=0</td></tr>
-<tr class="separator:a245b127ed7367e7251ef4680346a1a7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac72719396b61d70057005b807bc77963"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1ActionRegistryInterface.html#ac72719396b61d70057005b807bc77963">registerAction</a> (std::weak_ptr&lt; QAction &gt; action, const <a class="el" href="classaide_1_1HierarchicalId.html">HierarchicalId</a> &amp;uniqueId, std::string description)=0</td></tr>
+<tr class="separator:ac72719396b61d70057005b807bc77963"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56424063d64b60ac191414679decbffa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1ActionRegistryInterface.html#a56424063d64b60ac191414679decbffa">registerAction</a> (std::weak_ptr&lt; QAction &gt; action, const <a class="el" href="classaide_1_1HierarchicalId.html">HierarchicalId</a> &amp;uniqueId, const std::vector&lt; QKeySequence &gt; &amp;defaultKeySequences)=0</td></tr>
 <tr class="separator:a56424063d64b60ac191414679decbffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a360482c739d1faf7b18e8035801c0fd5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1ActionRegistryInterface.html#a360482c739d1faf7b18e8035801c0fd5">registerAction</a> (std::weak_ptr&lt; QAction &gt; action, const <a class="el" href="classaide_1_1HierarchicalId.html">HierarchicalId</a> &amp;uniqueId, const std::string &amp;description, const std::vector&lt; QKeySequence &gt; &amp;defaultKeySequences)=0</td></tr>
-<tr class="separator:a360482c739d1faf7b18e8035801c0fd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa34058f71eb8884aaaa0390c82e6d5f4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1ActionRegistryInterface.html#aa34058f71eb8884aaaa0390c82e6d5f4">registerAction</a> (std::weak_ptr&lt; QAction &gt; action, const <a class="el" href="classaide_1_1HierarchicalId.html">HierarchicalId</a> &amp;uniqueId, std::string description, const std::vector&lt; QKeySequence &gt; &amp;defaultKeySequences)=0</td></tr>
+<tr class="separator:aa34058f71eb8884aaaa0390c82e6d5f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e0bac21a313c024bb1dc9ef3b4f11cb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1ActionRegistryInterface.html#a2e0bac21a313c024bb1dc9ef3b4f11cb">modifyShortcutsForAction</a> (<a class="el" href="classaide_1_1HierarchicalId.html">HierarchicalId</a> id, const QList&lt; QKeySequence &gt; &amp;shortcuts)=0</td></tr>
 <tr class="separator:a2e0bac21a313c024bb1dc9ef3b4f11cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb0ce35860e2c13270368b44ab25a781"><td class="memItemLeft" align="right" valign="top">virtual const std::map&lt; <a class="el" href="classaide_1_1HierarchicalId.html">HierarchicalId</a>, <a class="el" href="structaide_1_1Action.html">Action</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1ActionRegistryInterface.html#abb0ce35860e2c13270368b44ab25a781">actions</a> () const =0</td></tr>
@@ -232,102 +232,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a245b127ed7367e7251ef4680346a1a7c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a245b127ed7367e7251ef4680346a1a7c">&#9670;&nbsp;</a></span>registerAction() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void aide::ActionRegistryInterface::registerAction </td>
-          <td>(</td>
-          <td class="paramtype">std::weak_ptr&lt; QAction &gt;&#160;</td>
-          <td class="paramname"><em>action</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classaide_1_1HierarchicalId.html">HierarchicalId</a> &amp;&#160;</td>
-          <td class="paramname"><em>uniqueId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>description</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implemented in <a class="el" href="classaide_1_1ActionRegistry.html#a662eb1134e47899b4a0d9e9d064e7757">aide::ActionRegistry</a>.</p>
-
-</div>
-</div>
-<a id="a360482c739d1faf7b18e8035801c0fd5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a360482c739d1faf7b18e8035801c0fd5">&#9670;&nbsp;</a></span>registerAction() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void aide::ActionRegistryInterface::registerAction </td>
-          <td>(</td>
-          <td class="paramtype">std::weak_ptr&lt; QAction &gt;&#160;</td>
-          <td class="paramname"><em>action</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classaide_1_1HierarchicalId.html">HierarchicalId</a> &amp;&#160;</td>
-          <td class="paramname"><em>uniqueId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>description</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::vector&lt; QKeySequence &gt; &amp;&#160;</td>
-          <td class="paramname"><em>defaultKeySequences</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implemented in <a class="el" href="classaide_1_1ActionRegistry.html#abf641297c0084877a6f32fd9c6d0d898">aide::ActionRegistry</a>.</p>
-
-</div>
-</div>
 <a id="a56424063d64b60ac191414679decbffa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a56424063d64b60ac191414679decbffa">&#9670;&nbsp;</a></span>registerAction() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a56424063d64b60ac191414679decbffa">&#9670;&nbsp;</a></span>registerAction() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -367,6 +273,100 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implemented in <a class="el" href="classaide_1_1ActionRegistry.html#a3561a913982418548642a74385382c72">aide::ActionRegistry</a>.</p>
+
+</div>
+</div>
+<a id="ac72719396b61d70057005b807bc77963"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac72719396b61d70057005b807bc77963">&#9670;&nbsp;</a></span>registerAction() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void aide::ActionRegistryInterface::registerAction </td>
+          <td>(</td>
+          <td class="paramtype">std::weak_ptr&lt; QAction &gt;&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classaide_1_1HierarchicalId.html">HierarchicalId</a> &amp;&#160;</td>
+          <td class="paramname"><em>uniqueId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>description</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classaide_1_1ActionRegistry.html#a727fb1649bfbe7d70d6c8d7938161c9e">aide::ActionRegistry</a>.</p>
+
+</div>
+</div>
+<a id="aa34058f71eb8884aaaa0390c82e6d5f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa34058f71eb8884aaaa0390c82e6d5f4">&#9670;&nbsp;</a></span>registerAction() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void aide::ActionRegistryInterface::registerAction </td>
+          <td>(</td>
+          <td class="paramtype">std::weak_ptr&lt; QAction &gt;&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classaide_1_1HierarchicalId.html">HierarchicalId</a> &amp;&#160;</td>
+          <td class="paramname"><em>uniqueId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>description</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; QKeySequence &gt; &amp;&#160;</td>
+          <td class="paramname"><em>defaultKeySequences</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classaide_1_1ActionRegistry.html#a234ac5a71230a1d9443e8b126ae8c428">aide::ActionRegistry</a>.</p>
 
 </div>
 </div>

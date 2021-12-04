@@ -74,34 +74,32 @@ $(function() {
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#ifndef AIDE_AIDE_TREE_VIEW_HPP</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#define AIDE_AIDE_TREE_VIEW_HPP</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QApplication&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QTreeView&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="namespaceaide_1_1widgets.html">    8</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaide_1_1widgets.html">aide::widgets</a></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="classaide_1_1widgets_1_1AideTreeView.html">   10</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classaide_1_1widgets_1_1AideTreeView.html">AideTreeView</a> : <span class="keyword">public</span> QTreeView</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    {</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="classaide_1_1widgets_1_1AideTreeView.html#a6169bbc529ecb97dd51974d06321bd76">AideTreeView</a>(QWidget* parent);</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaide_1_1widgets_1_1AideTreeView.html#ac1a3d5f393d8cce1b65270c8219c71d6">setPlaceHolderText</a>(QString text);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaide_1_1widgets_1_1AideTreeView.html#aab7dafa3fad73b6bfdee8b2b203e0601">paintEvent</a>(QPaintEvent* event) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        QString placeHolderText{QApplication::translate(</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            <span class="stringliteral">&quot;AideTreeView&quot;</span>, <span class="stringliteral">&quot;There are no elements in this view&quot;</span>)};</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    };</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;} <span class="comment">// namespace aide::widgets</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif // AIDE_AIDE_TREE_VIEW_HPP</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QTreeView&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="namespaceaide_1_1widgets.html">    7</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaide_1_1widgets.html">aide::widgets</a></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="classaide_1_1widgets_1_1AideTreeView.html">    9</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classaide_1_1widgets_1_1AideTreeView.html">AideTreeView</a> : <span class="keyword">public</span> QTreeView</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    {</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="classaide_1_1widgets_1_1AideTreeView.html#a6169bbc529ecb97dd51974d06321bd76">AideTreeView</a>(QWidget* parent);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaide_1_1widgets_1_1AideTreeView.html#ac1a3d5f393d8cce1b65270c8219c71d6">setPlaceHolderText</a>(QString text);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classaide_1_1widgets_1_1AideTreeView.html#aab7dafa3fad73b6bfdee8b2b203e0601">paintEvent</a>(QPaintEvent* event) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        QString placeHolderText;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    };</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;} <span class="comment">// namespace aide::widgets</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#endif // AIDE_AIDE_TREE_VIEW_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="anamespaceaide_1_1widgets_html"><div class="ttname"><a href="namespaceaide_1_1widgets.html">aide::widgets</a></div><div class="ttdef"><b>Definition:</b> aidetreeview.hpp:8</div></div>
+<div class="ttc" id="anamespaceaide_1_1widgets_html"><div class="ttname"><a href="namespaceaide_1_1widgets.html">aide::widgets</a></div><div class="ttdef"><b>Definition:</b> aidetreeview.hpp:7</div></div>
 <div class="ttc" id="aaidetreeview_8hpp_html"><div class="ttname"><a href="aidetreeview_8hpp.html">aidetreeview.hpp</a></div></div>
-<div class="ttc" id="aclassaide_1_1widgets_1_1AideTreeView_html_ac1a3d5f393d8cce1b65270c8219c71d6"><div class="ttname"><a href="classaide_1_1widgets_1_1AideTreeView.html#ac1a3d5f393d8cce1b65270c8219c71d6">aide::widgets::AideTreeView::setPlaceHolderText</a></div><div class="ttdeci">void setPlaceHolderText(QString text)</div><div class="ttdef"><b>Definition:</b> aidetreeview.cpp:42</div></div>
-<div class="ttc" id="aclassaide_1_1widgets_1_1AideTreeView_html_aab7dafa3fad73b6bfdee8b2b203e0601"><div class="ttname"><a href="classaide_1_1widgets_1_1AideTreeView.html#aab7dafa3fad73b6bfdee8b2b203e0601">aide::widgets::AideTreeView::paintEvent</a></div><div class="ttdeci">void paintEvent(QPaintEvent *event) override</div><div class="ttdef"><b>Definition:</b> aidetreeview.cpp:20</div></div>
-<div class="ttc" id="aclassaide_1_1widgets_1_1AideTreeView_html"><div class="ttname"><a href="classaide_1_1widgets_1_1AideTreeView.html">aide::widgets::AideTreeView</a></div><div class="ttdef"><b>Definition:</b> aidetreeview.hpp:10</div></div>
+<div class="ttc" id="aclassaide_1_1widgets_1_1AideTreeView_html_ac1a3d5f393d8cce1b65270c8219c71d6"><div class="ttname"><a href="classaide_1_1widgets_1_1AideTreeView.html#ac1a3d5f393d8cce1b65270c8219c71d6">aide::widgets::AideTreeView::setPlaceHolderText</a></div><div class="ttdeci">void setPlaceHolderText(QString text)</div><div class="ttdef"><b>Definition:</b> aidetreeview.cpp:44</div></div>
+<div class="ttc" id="aclassaide_1_1widgets_1_1AideTreeView_html_aab7dafa3fad73b6bfdee8b2b203e0601"><div class="ttname"><a href="classaide_1_1widgets_1_1AideTreeView.html#aab7dafa3fad73b6bfdee8b2b203e0601">aide::widgets::AideTreeView::paintEvent</a></div><div class="ttdeci">void paintEvent(QPaintEvent *event) override</div><div class="ttdef"><b>Definition:</b> aidetreeview.cpp:22</div></div>
+<div class="ttc" id="aclassaide_1_1widgets_1_1AideTreeView_html"><div class="ttname"><a href="classaide_1_1widgets_1_1AideTreeView.html">aide::widgets::AideTreeView</a></div><div class="ttdef"><b>Definition:</b> aidetreeview.hpp:9</div></div>
 <div class="ttc" id="aclassaide_1_1widgets_1_1AideTreeView_html_a6169bbc529ecb97dd51974d06321bd76"><div class="ttname"><a href="classaide_1_1widgets_1_1AideTreeView.html#a6169bbc529ecb97dd51974d06321bd76">aide::widgets::AideTreeView::AideTreeView</a></div><div class="ttdeci">AideTreeView(QWidget *parent)</div><div class="ttdef"><b>Definition:</b> aidetreeview.cpp:16</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

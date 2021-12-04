@@ -4,7 +4,7 @@ var searchData=
   ['index_112',['index',['../classaide_1_1core_1_1TreeModel.html#a2ee9911f44452165395d6d9b9e5181f9',1,'aide::core::TreeModel']]],
   ['info_113',['info',['../classaide_1_1LoggerInterface.html#afae49e7c359deaf5e86a9cebeae88637',1,'aide::LoggerInterface']]],
   ['initresources_114',['initResources',['../applicationtranslator_8cpp.html#ac574253826b0b2a23c4c9bcf2ec89f62',1,'applicationtranslator.cpp']]],
-  ['installchangedetector_115',['installChangeDetector',['../namespaceaide_1_1gui.html#ae241c9508d6637619bfa08f7d6525dd8',1,'aide::gui']]],
+  ['installchangedetector_115',['installChangeDetector',['../namespaceaide_1_1gui.html#a636b70d969c27cd3dccc721014a7aab4',1,'aide::gui']]],
   ['installchangedetectorforbuttons_116',['installChangeDetectorForButtons',['../changedetector_8cpp.html#a7771d9536cdbde863eeb34e5c58642d5',1,'changedetector.cpp']]],
   ['installchangedetectorforcomboboxes_117',['installChangeDetectorForComboBoxes',['../changedetector_8cpp.html#aa6458f2baa4386ef5be19b8357224659',1,'changedetector.cpp']]],
   ['installchangedetectorforitemviews_118',['installChangeDetectorForItemViews',['../changedetector_8cpp.html#a3e8814b24e3888407faea27b59ec0dde',1,'changedetector.cpp']]],
