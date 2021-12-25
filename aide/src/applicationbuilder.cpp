@@ -91,6 +91,7 @@ LoggerPtr ApplicationBuilder::setupLogger(const std::string& loggerName)
 
         if (loggerName == "aide") {
             logger->info("Configured logger to log to file {}", logPath());
+            logger->flush();
         }
         return logger;
     }

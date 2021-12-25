@@ -118,7 +118,7 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_TRACE("my_fancy_logger", "Test")
         custom_logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") !=
+        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") !=
                 std::string::npos);
         REQUIRE(::lookForContentInFile(logFileName, "trace") !=
                 std::string::npos);
@@ -129,7 +129,7 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_TRACE("my_fancy_logger", "Test")
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") ==
+        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") ==
                 std::string::npos);
         REQUIRE(::lookForContentInFile(logFileName, "error") !=
                 std::string::npos);
@@ -156,7 +156,7 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_DEBUG("my_fancy_logger", "Test")
         custom_logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") !=
+        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") !=
                 std::string::npos);
         REQUIRE(::lookForContentInFile(logFileName, "debug") !=
                 std::string::npos);
@@ -167,7 +167,7 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_DEBUG("my_fancy_logger", "Test")
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") ==
+        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") ==
                 std::string::npos);
         REQUIRE(::lookForContentInFile(logFileName, "error") !=
                 std::string::npos);
@@ -194,7 +194,7 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_INFO("my_fancy_logger", "Test")
         custom_logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") !=
+        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") !=
                 std::string::npos);
         REQUIRE(::lookForContentInFile(logFileName, "info") !=
                 std::string::npos);
@@ -205,7 +205,7 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_INFO("my_fancy_logger", "Test")
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") ==
+        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") ==
                 std::string::npos);
         REQUIRE(::lookForContentInFile(logFileName, "error") !=
                 std::string::npos);
@@ -232,7 +232,7 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_WARN("my_fancy_logger", "Test")
         custom_logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") !=
+        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") !=
                 std::string::npos);
         REQUIRE(::lookForContentInFile(logFileName, "warn") !=
                 std::string::npos);
@@ -243,7 +243,7 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_WARN("my_fancy_logger", "Test")
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") ==
+        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") ==
                 std::string::npos);
         REQUIRE(::lookForContentInFile(logFileName, "error") !=
                 std::string::npos);
@@ -270,7 +270,7 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_ERROR("my_fancy_logger", "Test")
         custom_logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") !=
+        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") !=
                 std::string::npos);
         REQUIRE(::lookForContentInFile(logFileName, "error") !=
                 std::string::npos);
@@ -281,7 +281,7 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_ERROR("my_fancy_logger", "Test")
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") ==
+        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") ==
                 std::string::npos);
         REQUIRE(::lookForContentInFile(logFileName, "error") !=
                 std::string::npos);
@@ -308,7 +308,7 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_CRITICAL("my_fancy_logger", "Test")
         custom_logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") !=
+        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") !=
                 std::string::npos);
         REQUIRE(::lookForContentInFile(logFileName, "critical") !=
                 std::string::npos);
@@ -319,7 +319,7 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_CRITICAL("my_fancy_logger", "Test")
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "- my_fancy_logger -") ==
+        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") ==
                 std::string::npos);
         REQUIRE(::lookForContentInFile(logFileName, "error") !=
                 std::string::npos);
