@@ -4,6 +4,7 @@ add_library(Aide::AideWidgets ALIAS AideWidgets)
 target_sources(
   AideWidgets
   PRIVATE
+    aidetableview.cpp
     aidetreeview.cpp
     searchlineedit.cpp
     ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/aidetableview.hpp
