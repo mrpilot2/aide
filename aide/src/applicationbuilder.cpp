@@ -86,7 +86,13 @@ LoggerPtr ApplicationBuilder::setupLogger(const std::string& loggerName)
                              .append(".log")
                              .toStdString());
 
-        return std::make_shared<aide::Logger>(logPath, LoggerName(loggerName));
+        auto logger =
+            std::make_shared<aide::Logger>(logPath, LoggerName(loggerName));
+
+        if (loggerName == "aide") {
+            logger->info("Configured logger to log to file {}", logPath());
+        }
+        return logger;
     }
     return std::make_shared<Logger>();
 }
