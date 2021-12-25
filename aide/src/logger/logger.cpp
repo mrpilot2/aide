@@ -32,7 +32,7 @@ Logger::Logger(const FileName& logFileName, const LoggerName& loggerName)
     auto logSinks = createSinks(logFileName());
 
     const std::string commonLogPattern =
-        "%b %d %H:%M:%S.%e [%8t] - %^%8l%$ - %10n - %v";
+        "%b %d %H:%M:%S.%e [%8t] - %^%8l%$ - %20n - %v";
     m_logger = std::make_shared<spdlog::logger>(loggerName(), begin(logSinks),
                                                 end(logSinks));
     m_logger->set_level(spdlog::level::trace);

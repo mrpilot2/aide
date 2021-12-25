@@ -39,7 +39,10 @@ namespace aide
         // NOLINTNEXTLINE
         explicit Application(int& argc, char* argv[]);
 
-        [[nodiscard]] aide::LoggerPtr logger() const;
+        [[nodiscard]] static aide::LoggerPtr logger();
+
+        [[nodiscard]] static aide::LoggerPtr logger(
+            const std::string& loggerName);
 
         [[nodiscard]] std::shared_ptr<QMainWindow> mainWindow() const;
 

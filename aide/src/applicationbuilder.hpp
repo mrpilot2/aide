@@ -33,8 +33,10 @@ namespace aide
 
         [[nodiscard]] ActionRegistryInterfacePtr actionRegistry() const;
 
+        static LoggerPtr setupLogger(const std::string& loggerName);
+
     private:
-        static aide::LoggerPtr setupLogger();
+        static LoggerPtr setupLogger();
 
         [[nodiscard]] static bool tryToCreateLogLocationIfItDoesNotExist(
             const QString& logLocation);

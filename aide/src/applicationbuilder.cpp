@@ -67,7 +67,7 @@ LoggerPtr ApplicationBuilder::logger() const
     return m_logger;
 }
 
-LoggerPtr ApplicationBuilder::setupLogger()
+LoggerPtr ApplicationBuilder::setupLogger(const std::string& loggerName)
 {
     QString logLocation(
         QStandardPaths::writableLocation(QStandardPaths::CacheLocation));
@@ -86,9 +86,14 @@ LoggerPtr ApplicationBuilder::setupLogger()
                              .append(".log")
                              .toStdString());
 
-        return std::make_shared<aide::Logger>(logPath);
+        return std::make_shared<aide::Logger>(logPath, LoggerName(loggerName));
     }
     return std::make_shared<Logger>();
+}
+
+LoggerPtr ApplicationBuilder::setupLogger()
+{
+    return setupLogger("aide");
 }
 
 bool ApplicationBuilder::tryToCreateLogLocationIfItDoesNotExist(

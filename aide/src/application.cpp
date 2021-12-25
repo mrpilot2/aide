@@ -5,6 +5,7 @@
 
 #include "applicationbuilder.hpp"
 #include "gui/mainwindow.hpp"
+#include "logger.hpp"
 
 using aide::Application;
 using aide::ApplicationBuilder;
@@ -36,9 +37,14 @@ Application::Application(int& argc, char* argv[])
     timer->start(delayedSetupTimeInMs);
 }
 
-LoggerPtr aide::Application::logger() const
+LoggerPtr aide::Application::logger()
 {
-    return m_appBuilder->logger();
+    return logger(QApplication::applicationName().toStdString());
+}
+
+LoggerPtr aide::Application::logger(const std::string& loggerName)
+{
+    return ApplicationBuilder::setupLogger(loggerName);
 }
 
 std::shared_ptr<QMainWindow> aide::Application::mainWindow() const
