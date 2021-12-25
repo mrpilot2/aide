@@ -2,7 +2,7 @@
 // Created by markus on 5/3/21.
 //
 
-#include "aidetreeview.hpp"
+#include "widgets/aidetreeview.hpp"
 
 #include <utility>
 

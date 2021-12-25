@@ -1,10 +1,13 @@
-add_library(AideWidgets OBJECT)
+add_library(AideWidgets)
 add_library(Aide::AideWidgets ALIAS AideWidgets)
 
 target_sources(
   AideWidgets
   PRIVATE
-    aidetreeview.cpp searchlineedit.cpp
+    aidetreeview.cpp
+    searchlineedit.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/aidetableview.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/aidetreeview.hpp
     ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/searchlineedit.hpp
 )
 
@@ -13,6 +16,7 @@ target_include_directories(
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}
           ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}>
+         $<INSTALL_INTERFACE:include/aide>
 )
 
 target_link_libraries(

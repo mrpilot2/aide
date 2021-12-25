@@ -43,7 +43,7 @@
   <customwidget>
    <class>aide::widgets::AideTreeView</class>
    <extends>QTreeView</extends>
-   <header>aidetreeview.hpp</header>
+   <header location="global">aide/gui/widgets/aidetreeview.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>
