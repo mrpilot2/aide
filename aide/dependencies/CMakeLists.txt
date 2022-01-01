@@ -65,12 +65,12 @@ if(TARGET Qt5::Core)
                                                                  TRUE
   )
   set(Qt5Core_VERSION_MAJOR
-      ${Qt5Core_VERSION_MAJOR}
-      PARENT_SCOPE
+      "${Qt5Core_VERSION_MAJOR}"
+      CACHE INTERNAL "Qt5 Major version"
   )
   set(Qt5Core_VERSION_MINOR
-      ${Qt5Core_VERSION_MINOR}
-      PARENT_SCOPE
+      "${Qt5Core_VERSION_MINOR}"
+      CACHE INTERNAL "Qt5 Minor version"
   )
 endif()
 
