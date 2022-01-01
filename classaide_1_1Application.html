@@ -68,6 +68,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classaide_1_1Application-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">aide::Application Class Reference</div>  </div>
@@ -101,8 +102,6 @@ Collaboration diagram for aide::Application:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a45b8f2a74ef149181b7ffe0909e55afe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1Application.html#a45b8f2a74ef149181b7ffe0909e55afe">Application</a> (int &amp;argc, char *argv[])</td></tr>
 <tr class="separator:a45b8f2a74ef149181b7ffe0909e55afe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d3d955937a4fd1753a9faffe94e75da"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaide.html#a42111fe174dd6f5b3fc5e879ecc68c14">aide::LoggerPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1Application.html#a5d3d955937a4fd1753a9faffe94e75da">logger</a> () const</td></tr>
-<tr class="separator:a5d3d955937a4fd1753a9faffe94e75da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1dd1657d55e133a45ae39f9546991671"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; QMainWindow &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1Application.html#a1dd1657d55e133a45ae39f9546991671">mainWindow</a> () const</td></tr>
 <tr class="separator:a1dd1657d55e133a45ae39f9546991671"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a272d1635ae2b031c6695faed57459437"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classaide_1_1gui_1_1TranslatorInterface.html">gui::TranslatorInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1Application.html#a272d1635ae2b031c6695faed57459437">translator</a> () const</td></tr>
@@ -111,6 +110,13 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a40089b58876394f97a85fc0af1315426"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71aeffb8b9f6f1c032d229367021f0b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceaide.html#a720ef0c950881fba3ebd2f30c30dad35">ActionRegistryInterfacePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1Application.html#a71aeffb8b9f6f1c032d229367021f0b7">actionRegistry</a> () const</td></tr>
 <tr class="separator:a71aeffb8b9f6f1c032d229367021f0b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:abb7396301637bd6b8fa5f33cc03002ed"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespaceaide.html#a42111fe174dd6f5b3fc5e879ecc68c14">aide::LoggerPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1Application.html#abb7396301637bd6b8fa5f33cc03002ed">logger</a> ()</td></tr>
+<tr class="separator:abb7396301637bd6b8fa5f33cc03002ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47e0a45798cc189252aa527efc86f9cf"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespaceaide.html#a42111fe174dd6f5b3fc5e879ecc68c14">aide::LoggerPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaide_1_1Application.html#a47e0a45798cc189252aa527efc86f9cf">logger</a> (const std::string &amp;loggerName)</td></tr>
+<tr class="separator:a47e0a45798cc189252aa527efc86f9cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classaide_1_1Application.html" title="The aide::Application class manages the GUI application.">aide::Application</a> class manages the GUI application. </p>
@@ -171,19 +177,69 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a5d3d955937a4fd1753a9faffe94e75da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d3d955937a4fd1753a9faffe94e75da">&#9670;&nbsp;</a></span>logger()</h2>
+<a id="abb7396301637bd6b8fa5f33cc03002ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb7396301637bd6b8fa5f33cc03002ed">&#9670;&nbsp;</a></span>logger() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="namespaceaide.html#a42111fe174dd6f5b3fc5e879ecc68c14">LoggerPtr</a> aide::Application::logger </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classaide_1_1Application_abb7396301637bd6b8fa5f33cc03002ed_cgraph.png" border="0" usemap="#classaide_1_1Application_abb7396301637bd6b8fa5f33cc03002ed_cgraph" alt=""/></div>
+<map name="classaide_1_1Application_abb7396301637bd6b8fa5f33cc03002ed_cgraph" id="classaide_1_1Application_abb7396301637bd6b8fa5f33cc03002ed_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,144,71"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classaide_1_1Application_abb7396301637bd6b8fa5f33cc03002ed_icgraph.png" border="0" usemap="#classaide_1_1Application_abb7396301637bd6b8fa5f33cc03002ed_icgraph" alt=""/></div>
+<map name="classaide_1_1Application_abb7396301637bd6b8fa5f33cc03002ed_icgraph" id="classaide_1_1Application_abb7396301637bd6b8fa5f33cc03002ed_icgraph">
+<area shape="rect" title=" " alt="" coords="5,29,144,71"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a47e0a45798cc189252aa527efc86f9cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47e0a45798cc189252aa527efc86f9cf">&#9670;&nbsp;</a></span>logger() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceaide.html#a42111fe174dd6f5b3fc5e879ecc68c14">LoggerPtr</a> aide::Application::logger </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>loggerName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
