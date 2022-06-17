@@ -31,5 +31,5 @@ target_compile_features(AideQt${QT_VERSION_MAJOR}Application PUBLIC cxx_std_17)
 
 target_compile_definitions(
   AideQt${QT_VERSION_MAJOR}Application
-  PUBLIC SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_TRACE
+  PUBLIC SPDLOG_ACTIVE_LEVEL=${AIDE_LOG_LEVEL}
 )
