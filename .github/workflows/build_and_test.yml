@@ -44,7 +44,6 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.x
-
       - name: Install pip dependencies
         run: |
           pip3 install wheel setuptools
@@ -55,6 +54,9 @@ jobs:
         uses: jwlawson/actions-setup-cmake@v1.8
         with:
           cmake-version: ${{matrix.cmake}}
+
+      - name: Setup ninja
+        uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: Install apt dependencies
         if: runner.os == 'Linux'
@@ -81,14 +83,57 @@ jobs:
         id: cmake_args
         run: echo "::set-output name=CMAKE_ARGS::${{ steps.cmake_args_linux.outputs.CMAKE_ARGS }} -DUNIT_TESTS_RUN_ON_CI=1 -DWARNINGS_AS_ERRORS=${{ matrix.WARNINGS_AS_ERRORS }}"
 
-      - name: Build the project
-        working-directory: build
-        run: |
-          cmake ${{ steps.cmake_args.outputs.CMAKE_ARGS }} ..
-          cmake --build . --config Release --parallel
-          ctest -VV --output-on-failure --stop-on-failure
+      # Static Debug
+      - name: "Static Debug: Configure"
+        run: cmake -G Ninja -S . -B build-static-dbg -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_DEBUG_POSTFIX=d${{matrix.static_postfix}}"
+      - name: "Static Debug: Build"
+        run: cmake --build build-static-dbg --parallel
+      - name: "Static Debug: Test"
+        run: ctest --output-on-failure --stop-on-failure
+        working-directory: build-static-dbg
         env:
           QT_QPA_PLATFORM: offscreen
+
+      # Shared Debug
+      - name: "Shared Debug: Configure"
+        run: cmake -G Ninja -S . -B build-shared-dbg -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEBUG_POSTFIX=d -DBUILD_SHARED_LIBS=ON
+      - name: "Shared Debug: Build"
+        run: cmake --build build-shared-dbg --parallel
+      - name: "Shared Debug: Test"
+        run: ctest --output-on-failure --stop-on-failure
+        working-directory: build-shared-dbg
+        env:
+          QT_QPA_PLATFORM: offscreen
+
+      # Static Release
+      - name: "Static Release: Configure"
+        run: cmake -G Ninja -S . -B build-static-rel -DCMAKE_BUILD_TYPE=Release "-DCMAKE_RELEASE_POSTFIX=${{matrix.static_postfix}}"
+      - name: "Static Release: Build"
+        run: cmake --build build-static-rel --parallel
+      - name: "Static Release: Test"
+        run: ctest --output-on-failure --stop-on-failure
+        working-directory: build-static-rel
+        env:
+          QT_QPA_PLATFORM: offscreen
+
+      # Shared Release
+      - name: "Shared Release: Configure"
+        run: cmake -G Ninja -S . -B build-shared-rel -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON
+      - name: "Shared Release: Build"
+        run: cmake --build build-shared-rel --parallel
+      - name: "Shared Release: Test"
+        run: ctest --output-on-failure --stop-on-failure
+        working-directory: build-shared-rel
+        env:
+          QT_QPA_PLATFORM: offscreen
+
+      # Joint install
+      - name: Install
+        run: |
+          cmake --install build-shared-dbg --prefix install
+          cmake --install build-static-dbg --prefix install
+          cmake --install build-shared-rel --prefix install
+          cmake --install build-static-rel --prefix install
 
       - name: Upload Unit Test Results
         if: always()
