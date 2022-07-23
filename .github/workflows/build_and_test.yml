@@ -1,0 +1,133 @@
+name: CI - Build and Test
+
+on: [ push, pull_request, workflow_dispatch ]
+
+jobs:
+  build:
+    name: ${{ matrix.os }}, ${{ matrix.cmake_name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ windows-latest, macos-10.15, ubuntu-18.04, ubuntu-20.04 ]
+        cmake: [ 3.15, 3.x ]
+        include:
+          - os: ubuntu-18.04
+            COMPILER: g++-9
+            COVERAGE: OFF
+            WARNINGS_AS_ERRORS: ON
+
+          - os: ubuntu-20.04
+            COMPILER: g++-9
+            COVERAGE: ON
+            GCOV_TOOL: gcov-9
+            WARNINGS_AS_ERRORS: ON
+
+          - os: macos-10.15
+            COVERAGE: OFF
+            WARNINGS_AS_ERRORS: ON
+
+          - os: windows-latest
+            COVERAGE: OFF
+            WARNINGS_AS_ERRORS: OFF
+
+          - cmake: 3.15
+            cmake_name: CMake 3.15
+          - cmake: 3.x
+            cmake_name: CMake Latest
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.x
+
+      - name: Install pip dependencies
+        run: |
+          pip3 install wheel setuptools
+          pip3 install conan
+          mkdir build
+
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.8
+        with:
+          cmake-version: ${{matrix.cmake}}
+
+      - name: Install apt dependencies
+        if: runner.os == 'Linux'
+        run: sudo apt install lcov ^libxcb-*
+
+      - name: Cache Qt
+        id: cache-qt
+        uses: actions/cache@v1
+        with:
+          path: ../Qt
+          key: ${{ runner.os }}-QtCache
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
+
+      - name: Set CMake arguments for Linux
+        if: runner.os == 'Linux'
+        id: cmake_args_linux
+        run: echo "::set-output name=CMAKE_ARGS::-DCMAKE_CXX_COMPILER=${{ matrix.COMPILER }} -DENABLE_COVERAGE=${{ matrix.COVERAGE }}"
+
+      - name: Set CMake arguments
+        id: cmake_args
+        run: echo "::set-output name=CMAKE_ARGS::${{ steps.cmake_args_linux.outputs.CMAKE_ARGS }} -DUNIT_TESTS_RUN_ON_CI=1 -DWARNINGS_AS_ERRORS=${{ matrix.WARNINGS_AS_ERRORS }}"
+
+      - name: Build the project
+        working-directory: build
+        run: |
+          cmake ${{ steps.cmake_args.outputs.CMAKE_ARGS }} ..
+          cmake --build . --config Release --parallel
+          ctest -VV --output-on-failure --stop-on-failure
+        env:
+          QT_QPA_PLATFORM: offscreen
+
+      - name: Upload Unit Test Results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: test_results_${{ matrix.os }}
+          path: build/**/*.xml
+
+      - name: Generate and upload coverage reports
+        if: matrix.COVERAGE == 'ON'
+        working-directory: build
+        run: |
+          lcov --gcov-tool ${{ matrix.GCOV_TOOL }} --directory . --capture --output-file coverage.info # capture coverage info
+          lcov --gcov-tool ${{ matrix.GCOV_TOOL }} --remove coverage.info '/usr/*' --output-file coverage.info # filter out system
+          lcov --gcov-tool ${{ matrix.GCOV_TOOL }} --list coverage.info #debug info
+          bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+
+  publish-test-results:
+    name: "Publish Unit Test Results from ${{ matrix. os }}"
+    needs: build
+    strategy:
+      matrix:
+        os: [ ubuntu-18.04, ubuntu-20.04 ]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: artifacts
+
+      - name: Publish Unit Test Results ${{ matrix.os }}
+        uses: EnricoMi/publish-unit-test-result-action@v1.4
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          check_name: Unit Test Results ${{ matrix.os }}
+          hide_comments: all but latest
+          comment_on_pr: true
+          files: artifacts/test_results_${{ matrix. os}}/tests/ut/*.xml
+          report_individual_runs: true
+          deduplicate_classes_by_file_name: false
+
