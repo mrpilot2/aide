@@ -9,36 +9,54 @@ jobs:
       fail-fast: false
       matrix:
         os: [ windows-latest, macos-10.15, ubuntu-18.04, ubuntu-20.04 ]
-        cmake: [ 3.15, 3.x ]
+        cmake: [ 3.16, 3.x ]
         include:
           - os: ubuntu-18.04
             COMPILER: g++-9
             COVERAGE: OFF
-            WARNINGS_AS_ERRORS: ON
+            WARNINGS_AS_ERRORS: OFF
 
           - os: ubuntu-20.04
             COMPILER: g++-9
             COVERAGE: ON
             GCOV_TOOL: gcov-9
-            WARNINGS_AS_ERRORS: ON
+            WARNINGS_AS_ERRORS: OFF
 
           - os: macos-10.15
             COVERAGE: OFF
-            WARNINGS_AS_ERRORS: ON
-
-          - os: windows-latest
-            COVERAGE: OFF
             WARNINGS_AS_ERRORS: OFF
 
-          - cmake: 3.15
-            cmake_name: CMake 3.15
+          - os: windows-latest
+            static_postfix: _static
+            COVERAGE: OFF
+            WARNINGS_AS_ERRORS: OFF
+            CXX: cl
+
+          - cmake: 3.16
+            cmake_name: CMake 3.16
           - cmake: 3.x
             cmake_name: CMake Latest
 
     runs-on: ${{ matrix.os }}
 
+    env:
+      # CMake 3.15 doesn't detect Visual Studio correctly without these.
+      CXX: ${{ matrix.CXX }}
+      CC: ${{ matrix.CXX }}
+
     steps:
       - uses: actions/checkout@v2
+      - uses: seanmiddleditch/gha-setup-ninja@master
+
+      - name: Setup Windows environment
+        if: matrix.cmake == '3.16'
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          toolset: 16.7
+
+      - name: Setup Windows environment
+        if: matrix.cmake != '3.16'
+        uses: ilammy/msvc-dev-cmd@v1
 
       - name: Setup Python
         uses: actions/setup-python@v1
@@ -54,9 +72,6 @@ jobs:
         uses: jwlawson/actions-setup-cmake@v1.8
         with:
           cmake-version: ${{matrix.cmake}}
-
-      - name: Setup ninja
-        uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: Install apt dependencies
         if: runner.os == 'Linux'
@@ -85,7 +100,7 @@ jobs:
 
       # Static Debug
       - name: "Static Debug: Configure"
-        run: cmake -G Ninja -S . -B build-static-dbg -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_DEBUG_POSTFIX=d${{matrix.static_postfix}}"
+        run: cmake -G Ninja -S . -B build-static-dbg -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_DEBUG_POSTFIX=d${{matrix.static_postfix}}" -DWARNINGS_AS_ERRORS=OFF
       - name: "Static Debug: Build"
         run: cmake --build build-static-dbg --parallel
       - name: "Static Debug: Test"
@@ -96,7 +111,7 @@ jobs:
 
       # Shared Debug
       - name: "Shared Debug: Configure"
-        run: cmake -G Ninja -S . -B build-shared-dbg -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEBUG_POSTFIX=d -DBUILD_SHARED_LIBS=ON
+        run: cmake -G Ninja -S . -B build-shared-dbg -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEBUG_POSTFIX=d -DBUILD_SHARED_LIBS=ON "-DENABLE_COVERAGE=${{ matrix.COVERAGE }}"
       - name: "Shared Debug: Build"
         run: cmake --build build-shared-dbg --parallel
       - name: "Shared Debug: Test"
@@ -144,7 +159,7 @@ jobs:
 
       - name: Generate and upload coverage reports
         if: matrix.COVERAGE == 'ON'
-        working-directory: build
+        working-directory: build-shared-dbg
         run: |
           lcov --gcov-tool ${{ matrix.GCOV_TOOL }} --directory . --capture --output-file coverage.info # capture coverage info
           lcov --gcov-tool ${{ matrix.GCOV_TOOL }} --remove coverage.info '/usr/*' --output-file coverage.info # filter out system
