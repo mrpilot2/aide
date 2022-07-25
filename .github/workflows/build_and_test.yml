@@ -16,23 +16,18 @@ jobs:
 
         include:
           - os: ubuntu-18.04
-            COMPILER: g++-9
-            COVERAGE: OFF
             WARNINGS_AS_ERRORS: OFF
 
           - os: ubuntu-20.04
-            COMPILER: g++-9
             COVERAGE: ON
             GCOV_TOOL: gcov-9
             WARNINGS_AS_ERRORS: OFF
 
           - os: macos-10.15
-            COVERAGE: OFF
             WARNINGS_AS_ERRORS: OFF
 
           - os: windows-latest
             static_postfix: _static
-            COVERAGE: OFF
             WARNINGS_AS_ERRORS: OFF
             CXX: cl
 
@@ -93,18 +88,13 @@ jobs:
         with:
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
-      - name: Set CMake arguments for Linux
-        if: runner.os == 'Linux'
-        id: cmake_args_linux
-        run: echo "::set-output name=CMAKE_ARGS::-DCMAKE_CXX_COMPILER=${{ matrix.COMPILER }} -DENABLE_COVERAGE=${{ matrix.COVERAGE }}"
-
       - name: Set CMake arguments
         id: cmake_args
-        run: echo "::set-output name=CMAKE_ARGS::${{ steps.cmake_args_linux.outputs.CMAKE_ARGS }} -DUNIT_TESTS_RUN_ON_CI=1 -DWARNINGS_AS_ERRORS=${{ matrix.WARNINGS_AS_ERRORS }}"
+        run: echo "::set-output name=CMAKE_ARGS::-DUNIT_TESTS_RUN_ON_CI=1 -DWARNINGS_AS_ERRORS=OFF"
 
       # Static Debug
       - name: "Static Debug: Configure"
-        run: cmake -G Ninja -S . -B build-static-dbg -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_DEBUG_POSTFIX=d${{matrix.static_postfix}}" -DWARNINGS_AS_ERRORS=OFF
+        run: cmake -G Ninja -S . -B build-static-dbg -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_DEBUG_POSTFIX=d${{matrix.static_postfix}}" ${{ steps.cmake_args.outputs.CMAKE_ARGS }}
       - name: "Static Debug: Build"
         run: cmake --build build-static-dbg --parallel
       - name: "Static Debug: Test"
@@ -115,7 +105,7 @@ jobs:
 
       # Shared Debug
       - name: "Shared Debug: Configure"
-        run: cmake -G Ninja -S . -B build-shared-dbg -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEBUG_POSTFIX=d -DBUILD_SHARED_LIBS=ON "-DENABLE_COVERAGE=${{ matrix.COVERAGE }}"
+        run: cmake -G Ninja -S . -B build-shared-dbg -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEBUG_POSTFIX=d -DBUILD_SHARED_LIBS=ON "-DENABLE_COVERAGE=${{ matrix.COVERAGE }}" ${{ steps.cmake_args.outputs.CMAKE_ARGS }}
       - name: "Shared Debug: Build"
         run: cmake --build build-shared-dbg --parallel
       - name: "Shared Debug: Test"
@@ -126,7 +116,7 @@ jobs:
 
       # Static Release
       - name: "Static Release: Configure"
-        run: cmake -G Ninja -S . -B build-static-rel -DCMAKE_BUILD_TYPE=Release "-DCMAKE_RELEASE_POSTFIX=${{matrix.static_postfix}}"
+        run: cmake -G Ninja -S . -B build-static-rel -DCMAKE_BUILD_TYPE=Release "-DCMAKE_RELEASE_POSTFIX=${{matrix.static_postfix}}" ${{ steps.cmake_args.outputs.CMAKE_ARGS }}
       - name: "Static Release: Build"
         run: cmake --build build-static-rel --parallel
       - name: "Static Release: Test"
@@ -137,7 +127,7 @@ jobs:
 
       # Shared Release
       - name: "Shared Release: Configure"
-        run: cmake -G Ninja -S . -B build-shared-rel -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON
+        run: cmake -G Ninja -S . -B build-shared-rel -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON ${{ steps.cmake_args.outputs.CMAKE_ARGS }}
       - name: "Shared Release: Build"
         run: cmake --build build-shared-rel --parallel
       - name: "Shared Release: Test"
