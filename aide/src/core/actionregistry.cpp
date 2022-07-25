@@ -3,6 +3,8 @@
 using aide::Action;
 using aide::ActionRegistry;
 using aide::HierarchicalId;
+using aide::LoggerPtr;
+using aide::SettingsInterface;
 
 ActionRegistry::ActionRegistry(SettingsInterface& settingsInterface,
                                LoggerPtr loggerInterface)

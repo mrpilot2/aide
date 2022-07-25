@@ -2,6 +2,28 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de_DE">
 <context>
+    <name>AddShortcutDialog</name>
+    <message>
+        <source>Add Keyboard Shortcut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Already assigned to:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AideTableView</name>
+    <message>
+        <source>There are no elements in this view</source>
+        <translation type="unfinished">Keine Elemente zur Anzeige verfügbar</translation>
+    </message>
+    <message>
+        <source> due to active filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AideTreeView</name>
     <message>
         <source>There are no elements in this view</source>
@@ -9,17 +31,10 @@
     </message>
 </context>
 <context>
-    <name>KeymapPageWidget</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>MainWindow</name>
     <message>
         <source>MainWindow</source>
-        <translation>Hauptfenster</translation>
+        <translation type="vanished">Hauptfenster</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -46,6 +61,21 @@
     <message>
         <source>&lt;a href=&quot;http://&quot;&gt;Reset&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;http://&quot;&gt;Zurücksetzen&lt;/a&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>aide::core::KeymapContextMenuProvider</name>
+    <message>
+        <source>Add keyboard shortcut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset to default</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
