@@ -25,15 +25,9 @@ TEST_CASE("A new keymap tree model without any action registered")
     auto registry(std::make_shared<ActionRegistry>(settings, logger));
     KeyMapTreeModel treeModel(registry);
 
-    SECTION("has no rows")
-    {
-        REQUIRE(treeModel.rowCount() == 0);
-    }
+    SECTION("has no rows") { REQUIRE(treeModel.rowCount() == 0); }
 
-    SECTION("has two columns")
-    {
-        REQUIRE(treeModel.columnCount() == 2);
-    }
+    SECTION("has two columns") { REQUIRE(treeModel.columnCount() == 2); }
 }
 
 TEST_CASE("A new keymap tree model with one action registered")
@@ -46,15 +40,9 @@ TEST_CASE("A new keymap tree model with one action registered")
     registry->registerAction(action, HierarchicalId("New File"));
     KeyMapTreeModel treeModel(registry);
 
-    SECTION("has one row")
-    {
-        REQUIRE(treeModel.rowCount() == 1);
-    }
+    SECTION("has one row") { REQUIRE(treeModel.rowCount() == 1); }
 
-    SECTION("has two columns")
-    {
-        REQUIRE(treeModel.columnCount() == 2);
-    }
+    SECTION("has two columns") { REQUIRE(treeModel.columnCount() == 2); }
 
     SECTION("provides action id in first column and row")
     {
