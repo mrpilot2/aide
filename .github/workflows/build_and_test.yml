@@ -149,7 +149,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: test_results_${{ matrix.os }}
-          path: build/**/*.xml
+          path: build*/**/*.xml
 
       - name: Generate and upload coverage reports
         if: matrix.COVERAGE == 'ON'
