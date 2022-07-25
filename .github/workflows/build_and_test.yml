@@ -60,7 +60,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v1
         with:
-          python-version: 3.x
+          python-version: 3.7.x
       - name: Install pip dependencies
         run: |
           pip3 install wheel setuptools
@@ -86,7 +86,8 @@ jobs:
         uses: jurplel/install-qt-action@v2
         with:
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
-
+          setup-python: 'false'
+          
       - name: Set CMake arguments
         id: cmake_args
         run: echo "::set-output name=CMAKE_ARGS::-DUNIT_TESTS_RUN_ON_CI=1 -DWARNINGS_AS_ERRORS=OFF"
