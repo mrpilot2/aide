@@ -37,4 +37,7 @@ macro(standard_project_settings)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
   endif()
 
+  # Export all symbols on Windows to match GCC/Clang behavior on Linux/macOS
+  set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+
 endmacro()

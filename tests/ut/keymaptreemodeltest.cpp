@@ -2,6 +2,8 @@
 
 #include <catch2/catch.hpp>
 
+#include <QApplication>
+
 #include "actionregistry.hpp"
 #include "hierarchicalid.hpp"
 #include "mocksettings.hpp"
@@ -108,6 +110,12 @@ TEST_CASE("A new keymap tree model with multiple actions registered")
 
 TEST_CASE("Any keymap tree model")
 {
+    int numberOfArgs{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+
+    QApplication app{numberOfArgs, appName.data()};
+
     MockSettings settings;
     auto logger = std::make_shared<NullLogger>();
     auto registry(std::make_shared<ActionRegistry>(settings, logger));
@@ -188,6 +196,8 @@ TEST_CASE("Any keymap tree model")
 
     SECTION("shows folder icon for tree item with children")
     {
+        if (QIcon::themeName().isEmpty()) return;
+
         QModelIndex root = treeModel.index(0, 0, QModelIndex());
 
         REQUIRE(root.data(Qt::DecorationRole) == QIcon::fromTheme("folder"));

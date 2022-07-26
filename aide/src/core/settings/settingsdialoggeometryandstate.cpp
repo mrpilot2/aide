@@ -6,6 +6,7 @@
 #include "settingsinterface.hpp"
 
 using aide::core::SettingsDialogGeometryAndState;
+using aide::core::SettingsDialogGeometryAndStateData;
 using aide::core::SettingsDialogWeakPtr;
 using aide::core::settings::KEYS;
 

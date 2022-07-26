@@ -91,7 +91,7 @@ TEST_CASE("Hierarchical Id ")
 
         size_t index{0};
         for (const auto* id : hId) {
-            REQUIRE(id == expected.at(index));
+            REQUIRE(std::string(id) == std::string(expected.at(index)));
             ++index;
         }
         REQUIRE(index == 3);
@@ -105,7 +105,7 @@ TEST_CASE("Hierarchical Id ")
         size_t index{0};
         for (auto iterator = hId.begin() + 1; iterator != hId.end();
              ++iterator) {
-            REQUIRE(*iterator == expected.at(index));
+            REQUIRE(std::string(*iterator) == std::string(expected.at(index)));
             ++index;
         }
 
