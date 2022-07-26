@@ -1,18 +1,19 @@
 extraction:
   cpp:
-    prepare:    # Customizable step used by all languages.
+    prepare:
       packages:
-        - python-pip
-        - ca-certificates
-    after_prepare:    # Customizable step used by all languages.
-      - DEPS_DIR="$HOME/deps"
-      - mkdir ${DEPS_DIR} && cd ${DEPS_DIR}
-      - CMAKE_URL="https://cmake.org/files/v3.15/cmake-3.15.7-Linux-x86_64.tar.gz"
-      - mkdir cmake && wget --no-check-certificate --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
-      - export PATH=${DEPS_DIR}/cmake/bin:${PATH}
-      - pip3 install --user conan
-      - export PATH=~/.local/bin:${PATH}
-      - conan profile new default --detect
-      - conan profile update settings.compiler.version=8 default
-      - conan profile update settings.compiler.libcxx=libstdc++11 default
-      - conan remote add conancenter https://center.conan.io False
+        - g++-10
+        - ccache
+      script:
+        - mkdir ~/.conan
+        - cat /usr/local/share/ca-certificates/semmle-cache-ca/semmle-cache-ca.crt >> ~/.conan/cacert.pem
+        - python3 -m pip install --upgrade pip setuptools
+        - python3 -m pip install conan
+        - python3 -m pip install cmake
+        - source ~/.profile
+    configure:
+      command:
+        - mkdir build
+        - cmake -D OPT_ENABLE_COVERAGE:BOOL=TRUE -D CMAKE_BUILD_TYPE:STRING=Debug -S . -B build
+      index:
+        build_command: cmake --build ./build -- -j2
