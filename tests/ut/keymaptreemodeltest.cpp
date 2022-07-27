@@ -189,8 +189,9 @@ TEST_CASE("Any keymap tree model")
         QModelIndex root = treeModel.index(0, 0, QModelIndex());
         QModelIndex elem = treeModel.index(0, 0, root);
 
-        REQUIRE(elem.data(Qt::DecorationRole) ==
-                QIcon::fromTheme("application-exit"));
+        const auto icon =elem.data(Qt::DecorationRole).value<QIcon>();
+        REQUIRE(icon.pixmap(100, 100).toImage() ==
+                QIcon::fromTheme("application-exit").pixmap(100, 100).toImage());
     }
 
     SECTION("does not show icon if action has not assigned one")
@@ -212,7 +213,9 @@ TEST_CASE("Any keymap tree model")
 
         QModelIndex root = treeModel.index(0, 0, QModelIndex());
 
-        REQUIRE(root.data(Qt::DecorationRole) == QIcon::fromTheme("folder"));
+        const auto icon =root.data(Qt::DecorationRole).value<QIcon>();
+        REQUIRE(icon.pixmap(100, 100).toImage() ==
+                QIcon::fromTheme("folder").pixmap(100, 100).toImage());
     }
 
     SECTION("does not crash if no tooltip is defined for current index")
