@@ -32,6 +32,12 @@ TEST_CASE("A new keymap tree model without any action registered")
 
 TEST_CASE("A new keymap tree model with one action registered")
 {
+    int numberOfArgs{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+
+    QApplication app{numberOfArgs, appName.data()};
+
     MockSettings settings;
     auto logger = std::make_shared<NullLogger>();
     auto registry(std::make_shared<ActionRegistry>(settings, logger));
@@ -63,6 +69,12 @@ TEST_CASE("A new keymap tree model with one action registered")
 
 TEST_CASE("A new keymap tree model with multiple actions registered")
 {
+    int numberOfArgs{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+
+    QApplication app{numberOfArgs, appName.data()};
+
     MockSettings settings;
     auto logger = std::make_shared<NullLogger>();
     auto registry(std::make_shared<ActionRegistry>(settings, logger));
