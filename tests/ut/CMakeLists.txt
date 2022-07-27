@@ -14,9 +14,15 @@ set(CMAKE_AUTORCC ON)
 if(TARGET Qt::lrelease)
   set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
 
-  qt5_create_translation(
-    QM_FILES ${CMAKE_CURRENT_SOURCE_DIR} res/ut_sv.ts OPTIONS -locations none
-  )
+  if(Qt6Core_VERSION_MAJOR)
+    qt_create_translation(
+      QM_FILES ${CMAKE_CURRENT_SOURCE_DIR} res/ut_sv.ts OPTIONS -locations none
+    )
+  else()
+    qt5_create_translation(
+      QM_FILES ${CMAKE_CURRENT_SOURCE_DIR} res/ut_sv.ts OPTIONS -locations none
+    )
+  endif()
 
   configure_file(
     res/ut_translations.qrc.in ${CMAKE_CURRENT_BINARY_DIR}/ut_translations.qrc

@@ -5,15 +5,27 @@ set(CMAKE_AUTOMOC ON)
 
 if(TARGET Qt::lrelease)
   set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
-  qt5_create_translation(
-    QM_FILES
-    ${CMAKE_CURRENT_SOURCE_DIR}
-    res/demo_de.ts
-    res/demo_en.ts
-    OPTIONS
-    -locations
-    none
-  )
+  if(Qt6Core_VERSION_MAJOR)
+    qt_create_translation(
+      QM_FILES
+      ${CMAKE_CURRENT_SOURCE_DIR}
+      res/demo_de.ts
+      res/demo_en.ts
+      OPTIONS
+      -locations
+      none
+    )
+  else()
+    qt5_create_translation(
+      QM_FILES
+      ${CMAKE_CURRENT_SOURCE_DIR}
+      res/demo_de.ts
+      res/demo_en.ts
+      OPTIONS
+      -locations
+      none
+    )
+  endif()
 
   configure_file(
     res/demo_translations.qrc.in

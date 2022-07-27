@@ -23,6 +23,7 @@ if(NOT TARGET aide_project_warnings)
   add_library(aide_project_warnings INTERFACE)
 endif()
 
+include(dependencies/Qt.cmake)
 add_subdirectory(dependencies)
 
 add_subdirectory(doc)
