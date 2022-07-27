@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ windows-latest, macos-10.15, ubuntu-18.04, ubuntu-20.04, ubuntu-22.04 ]
+        os: [ windows-latest, macos-11, ubuntu-18.04, ubuntu-20.04, ubuntu-22.04 ]
         cmake: [ 3.16, 3.x ]
         exclude:
           - os: windows-latest
@@ -23,7 +23,7 @@ jobs:
             GCOV_TOOL: gcov-9
             WARNINGS_AS_ERRORS: OFF
 
-          - os: macos-10.15
+          - os: macos-11
             WARNINGS_AS_ERRORS: OFF
 
           - os: windows-latest
