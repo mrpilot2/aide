@@ -64,7 +64,11 @@ void ActionRegistry::registerAction(
     if (!action.expired()) {
         auto sharedAction = action.lock();
         sharedAction->setStatusTip(QString::fromStdString(description));
-        sharedAction->setShortcuts(detailedAction.getActiveKeySequences());
+        auto shortcuts = detailedAction.getActiveKeySequences();
+        sharedAction->setShortcuts(
+            (shortcuts.size() == 1 && shortcuts.at(0).isEmpty())
+                ? QList<QKeySequence>()
+                : shortcuts);
     }
     m_actions.insert({uniqueId, detailedAction});
 }
