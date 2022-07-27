@@ -5,7 +5,7 @@ set(CMAKE_AUTORCC ON)
 
 add_subdirectory(widgets)
 
-if(TARGET Qt5::lrelease)
+if(TARGET Qt::lrelease)
   set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
 
   qt5_create_translation(
@@ -39,9 +39,9 @@ target_sources(
     settings/keymap/addshortcutdialog.cpp
     settings/keymap/keymappagewidget.cpp
     settings/keymap/keymappagewidgetcontroller.cpp
-    $<$<TARGET_EXISTS:Qt5::lrelease>:applicationtranslator.cpp>
-    $<$<NOT:$<TARGET_EXISTS:Qt5::lrelease>>:nullapplicationtranslator.cpp>
-    $<$<TARGET_EXISTS:Qt5::lrelease>:${CMAKE_CURRENT_BINARY_DIR}/translations.qrc
+    $<$<TARGET_EXISTS:Qt::lrelease>:applicationtranslator.cpp>
+    $<$<NOT:$<TARGET_EXISTS:Qt::lrelease>>:nullapplicationtranslator.cpp>
+    $<$<TARGET_EXISTS:Qt::lrelease>:${CMAKE_CURRENT_BINARY_DIR}/translations.qrc
     ${QM_FILES}>
 )
 
@@ -56,8 +56,8 @@ target_include_directories(
 target_compile_features(AideGui PUBLIC cxx_std_17)
 
 target_link_libraries(
-  AideGui PRIVATE Aide::AideCore Aide::AideLogger Aide::AideWidgets
-                  Qt5::Widgets aide_project_sanitizers aide_project_warnings
+  AideGui PRIVATE Aide::AideCore Aide::AideLogger Aide::AideWidgets Qt::Widgets
+                  aide_project_sanitizers aide_project_warnings
 )
 
 set_source_files_properties(

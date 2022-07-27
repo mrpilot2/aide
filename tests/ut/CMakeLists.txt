@@ -11,7 +11,7 @@ target_compile_features(aide_catch_main PUBLIC cxx_std_11)
 
 set(CMAKE_AUTORCC ON)
 
-if(TARGET Qt5::lrelease)
+if(TARGET Qt::lrelease)
   set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
 
   qt5_create_translation(
@@ -35,7 +35,7 @@ target_sources(
     searchlineedittest.cpp
     settingspageregistrytest.cpp
     settingspagetest.cpp
-    $<$<TARGET_EXISTS:Qt5::lrelease>:${CMAKE_CURRENT_BINARY_DIR}/ut_translations.qrc
+    $<$<TARGET_EXISTS:Qt::lrelease>:${CMAKE_CURRENT_BINARY_DIR}/ut_translations.qrc
     ${QM_FILES}>
     res/ut_icons.qrc
 )
@@ -71,9 +71,9 @@ endif()
 target_link_libraries(
   ut.aide
   PRIVATE aide_catch_main
-          Qt5::Core
-          Qt5::Widgets
-          Qt5::Test
+          Qt::Core
+          Qt::Widgets
+          Qt::Test
           aide_project_sanitizers
           aide_project_warnings
           Aide::AideBuildInformation

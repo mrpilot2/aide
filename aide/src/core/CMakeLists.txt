@@ -38,7 +38,7 @@ target_include_directories(
 
 target_link_libraries(
   AideCore
-  PUBLIC Qt5::Core Qt5::Widgets AideLogger
+  PUBLIC Qt::Core Qt::Widgets AideLogger
   PRIVATE aide_project_coverage aide_project_sanitizers aide_project_warnings
 )
 

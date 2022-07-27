@@ -64,6 +64,19 @@ if(TARGET Qt5::Core)
     Qt5::Core Qt5::Widgets Qt5::moc Qt5::uic Qt5::rcc PROPERTIES IMPORTED_GLOBAL
                                                                  TRUE
   )
+  if(NOT TARGET Qt::Core)
+    add_library(Qt::Core ALIAS Qt5::Core)
+    add_library(Qt::Widgets ALIAS Qt5::Widgets)
+    add_executable(Qt::moc ALIAS Qt5::moc)
+    add_executable(Qt::uic ALIAS Qt5::uic)
+    add_executable(Qt::rcc ALIAS Qt5::rcc)
+  else()
+    set_target_properties(
+      Qt::Core Qt::Widgets Qt::moc Qt::uic Qt::rcc PROPERTIES IMPORTED_GLOBAL
+                                                              TRUE
+    )
+  endif()
+
   set(Qt5Core_VERSION_MAJOR
       "${Qt5Core_VERSION_MAJOR}"
       CACHE INTERNAL "Qt5 Major version"
@@ -80,6 +93,15 @@ if(TARGET Qt5::lrelease)
   set_target_properties(
     Qt5::lrelease Qt5::lupdate PROPERTIES IMPORTED_GLOBAL TRUE
   )
+  if(NOT TARGET Qt::lrelease)
+    add_executable(Qt::lrelease ALIAS Qt5::lrelease)
+    add_executable(Qt::lupdate ALIAS Qt5::lupdate)
+  else()
+    set_target_properties(
+      Qt::lrelease Qt::lupdate PROPERTIES IMPORTED_GLOBAL TRUE
+    )
+  endif()
+
   set(Qt5_LRELEASE_EXECUTABLE
       ${Qt5_LRELEASE_EXECUTABLE}
       PARENT_SCOPE

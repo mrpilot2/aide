@@ -50,4 +50,9 @@ find_package(
   REQUIRED
 )
 
+if(NOT TARGET Qt::Test)
+  add_library(Qt::Test ALIAS Qt5::Test)
+  add_library(Qt::Widgets ALIAS Qt5::Widgets)
+endif()
+
 find_package(Qt5LinguistTools)

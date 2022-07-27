@@ -22,7 +22,7 @@ target_include_directories(
 
 target_link_libraries(
   AideApplication
-  PUBLIC spdlog::spdlog Qt5::Core Qt5::Widgets
+  PUBLIC spdlog::spdlog Qt::Core Qt::Widgets
   PRIVATE Aide::AideCore Aide::AideGui aide_project_coverage
           aide_project_sanitizers
 )

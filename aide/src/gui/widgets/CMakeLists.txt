@@ -22,7 +22,7 @@ target_include_directories(
 
 target_link_libraries(
   AideWidgets
-  PUBLIC Qt5::Widgets
+  PUBLIC Qt::Widgets
   PRIVATE aide_project_sanitizers aide_project_warnings
 )
 
