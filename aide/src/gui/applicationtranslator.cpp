@@ -35,8 +35,14 @@ ApplicationTranslator::ApplicationTranslator(LoggerPtr loggerInterface)
         "Current application language is {}",
         QLocale::languageToString(QLocale::system().language()).toStdString());
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    [[maybe_unused]] auto res{m_qtTranslator.load(
+        "qt_" + QLocale::system().name(),
+        QLibraryInfo::path(QLibraryInfo::TranslationsPath))};
+#else
     m_qtTranslator.load("qt_" + QLocale::system().name(),
                         QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+#endif
 
     QApplication::installTranslator(&m_qtTranslator);
 
@@ -113,7 +119,7 @@ std::set<std::string> ApplicationTranslator::fetchLanguages(
 QString ApplicationTranslator::extractLocaleFromFileName(
     const QString& languageFile)
 {
-    const int start = languageFile.indexOf(QLatin1Char('_')) + 1;
-    const int end   = languageFile.lastIndexOf(QLatin1Char('.'));
+    const auto start = languageFile.indexOf(QLatin1Char('_')) + 1;
+    const auto end   = languageFile.lastIndexOf(QLatin1Char('.'));
     return languageFile.mid(start, end - start);
 }

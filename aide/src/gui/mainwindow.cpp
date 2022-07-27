@@ -86,7 +86,7 @@ void MainWindow::registerActions(
     actionRegistry->registerAction(
         m_actionSettings, ACTION_IDS().MAIN_MENU_FILE_SETTINGS,
         tr("Edit application settings").toStdString(),
-        {QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_S)});
+        {QKeySequence(Qt::CTRL | Qt::ALT | Qt::Key_S)});
     m_ui->menuFile->addSeparator();
 
     m_actionQuit = std::make_shared<QAction>(
