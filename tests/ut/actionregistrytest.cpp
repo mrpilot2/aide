@@ -133,7 +133,6 @@ TEST_CASE("Any action registry ")
         REQUIRE(action->shortcuts() ==
                 QList<QKeySequence>({QKeySequence("5")}));
     }
-
     SECTION("allows to overwrite key sequences with empty key sequence")
     {
         auto action = std::make_shared<QAction>("&File", nullptr);
@@ -146,7 +145,7 @@ TEST_CASE("Any action registry ")
         registry.registerAction(
             action, id, std::vector<QKeySequence>({QKeySequence("Alt+F4")}));
 
-        REQUIRE(action->shortcuts().empty());
+        REQUIRE(action->shortcuts().isEmpty());
     }
 
     SECTION("allows to modify shortcuts for an action id")
