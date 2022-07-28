@@ -39,22 +39,39 @@ jobs:
         setup-python: false
         aqtversion: ">=2.1.0"
 
-    - name: Build and install the library
+    - name: "Static Release: Configure"
       working-directory: aide
-      run: |
-        mkdir build_standalone
-        cd build_standalone
-        cmake -DCMAKE_INSTALL_PREFIX=~/.local/ -DUNIT_TESTS_RUN_ON_CI=1 ..
-        cmake --build . --target install --config Release --parallel
-
-    - name: Build and run the tests
+      run: cmake -S . -B build-static-rel -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=~/.local/build-static-rel/
+    - name: "Static Release: Build and install"
+      working-directory: aide
+      run:  cmake --build build-static-rel --target install --parallel
+    - name: "Static Release: Configure tests"
       working-directory: tests
-      run: |
-        mkdir build_standalone
-        cd build_standalone
-        cmake -DCMAKE_INSTALL_PREFIX=~/.local/ -DUNIT_TESTS_RUN_ON_CI=1 ..
-        cmake --build . --config Release --parallel
-        ctest
+      run: cmake -S . -B build-static-rel -DCMAKE_INSTALL_PREFIX=~/.local/build-static-rel -DUNIT_TESTS_RUN_ON_CI=1
+    - name: "Static Release: Build tests"
+      working-directory: tests
+      run: cmake --build build-static-rel --parallel
+    - name: "Static Release: Run tests"
+      working-directory: tests/build-static-rel
+      run: ctest
+      env:
+        QT_QPA_PLATFORM: offscreen
+
+    - name: "Shared Release: Configure"
+      working-directory: aide
+      run: cmake -S . -B build-shared-rel -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=~/.local/build-static-rel/
+    - name: "Shared Release: Build and install"
+      working-directory: aide
+      run:  cmake --build build-shared-rel --target install --parallel
+    - name: "Shared Release: Configure tests"
+      working-directory: tests
+      run: cmake -S . -B build-shared-rel -DCMAKE_INSTALL_PREFIX=~/.local/build-static-rel -DUNIT_TESTS_RUN_ON_CI=1
+    - name: "Shared Release: Build tests"
+      working-directory: tests
+      run: cmake --build build-shared-rel --parallel
+    - name: "Shared Release: Run tests"
+      working-directory: tests/build-shared-rel
+      run: ctest
       env:
         QT_QPA_PLATFORM: offscreen
 
@@ -63,7 +80,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: test_results_installed_lib
-        path: tests/build_standalone/**/*.xml
+        path: tests/build*rel/**/*.xml
 
   publish-test-results:
     name: "Publish Unit Test Results from installed lib"
