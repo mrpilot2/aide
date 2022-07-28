@@ -4,12 +4,13 @@ on: [ push, pull_request, workflow_dispatch ]
 
 jobs:
   build:
-    name: ${{ matrix.os }}, ${{ matrix.cmake_name }}
+    name: ${{ matrix.os }}, ${{ matrix.cmake_name }}, ${{ matrix.qt_name }}
     strategy:
       fail-fast: false
       matrix:
         os: [ windows-latest, macos-11, ubuntu-18.04, ubuntu-20.04, ubuntu-22.04 ]
         cmake: [ 3.18, 3.x ]
+        qt: ["5.15.2", "6.*"]
         exclude:
           - os: windows-latest
             cmake: 3.18
@@ -35,6 +36,11 @@ jobs:
             cmake_name: CMake 3.18
           - cmake: 3.x
             cmake_name: CMake Latest
+
+          - qt: "5.15.2"
+            qt_name: Qt5
+          - qt: "6.*"
+            qt_name: Qt6
 
     runs-on: ${{ matrix.os }}
 
@@ -71,19 +77,13 @@ jobs:
         if: runner.os == 'Linux'
         run: sudo apt install lcov ^libxcb-*
 
-      - name: Cache Qt
-        id: cache-qt
-        uses: actions/cache@v1
-        with:
-          path: ../Qt
-          key: ${{ runner.os }}-QtCache
-
       - name: Install Qt
-        uses: jurplel/install-qt-action@v2
+        uses: jurplel/install-qt-action@v3
         with:
-          cached: ${{ steps.cache-qt.outputs.cache-hit }}
-          setup-python: 'false'
-          
+          version: ${{ matrix.qt }}
+          setup-python: false
+          aqtversion: ">=2.1.0"
+ 
       - name: Set CMake arguments
         id: cmake_args
         run: echo "::set-output name=CMAKE_ARGS::-DUNIT_TESTS_RUN_ON_CI=1 -DWARNINGS_AS_ERRORS=OFF"

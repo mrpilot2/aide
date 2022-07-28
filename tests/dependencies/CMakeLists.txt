@@ -61,6 +61,7 @@ else()
 
   if(NOT TARGET Qt::Test)
     add_library(Qt::Test ALIAS Qt5::Test)
+  elseif(NOT TARGET Qt::Widgets)
     add_library(Qt::Widgets ALIAS Qt5::Widgets)
   endif()
 
