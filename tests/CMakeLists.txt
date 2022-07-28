@@ -15,7 +15,7 @@ include(dependencies/CMakeLists.txt)
 
 # In standalone mode we need to find our library
 if(NOT TARGET Aide::AideApplication)
-  find_package(Aide CONFIG REQUIRED)
+  find_package(AideQt${QT_VERSION_MAJOR} CONFIG REQUIRED)
   set(TEST_AGAINST_INSTALLED TRUE)
 else()
   set(TEST_AGAINST_INSTALLED FALSE)

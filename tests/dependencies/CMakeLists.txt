@@ -44,6 +44,8 @@ else()
 endif()
 find_package(Catch2)
 
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
+
 find_package(
   Qt6
   COMPONENTS Core Widgets Test

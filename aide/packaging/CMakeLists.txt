@@ -16,7 +16,7 @@ install(
 
 install(
   EXPORT AideTargets
-  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/Aide
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/AideQt${QT_VERSION_MAJOR}
   FILE AideTargets.cmake
   NAMESPACE Aide::
 )
@@ -48,12 +48,12 @@ write_basic_package_version_file(
 # generate the config file that is includes the exports
 configure_package_config_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/AideConfig.cmake.in
-  "${CMAKE_BINARY_DIR}/AideConfig.cmake"
-  INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/Aide"
+  "${CMAKE_BINARY_DIR}/AideQt${QT_VERSION_MAJOR}Config.cmake"
+  INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/AideQt${QT_VERSION_MAJOR}"
   NO_SET_AND_CHECK_MACRO NO_CHECK_REQUIRED_COMPONENTS_MACRO
 )
 
-install(FILES ${CMAKE_BINARY_DIR}/AideConfig.cmake
+install(FILES ${CMAKE_BINARY_DIR}/AideQt${QT_VERSION_MAJOR}Config.cmake
               ${CMAKE_BINARY_DIR}/AideConfigVersion.cmake
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/Aide
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/AideQt${QT_VERSION_MAJOR}
 )
