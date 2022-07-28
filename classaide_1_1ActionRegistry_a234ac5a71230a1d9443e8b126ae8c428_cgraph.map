@@ -1,4 +1,5 @@
 <map id="aide::ActionRegistry::registerAction" name="aide::ActionRegistry::registerAction">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,159,47"/>
-<area shape="rect" id="node2" href="$classaide_1_1HierarchicalId.html#a650d294fc7cc81dd5ac921f42e369db8" title=" " alt="" coords="207,5,355,47"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,39,159,80"/>
+<area shape="rect" id="node2" href="$structaide_1_1Action.html#a64b8410eea92b901b8a5ef8a396ec9bb" title=" " alt="" coords="207,5,400,47"/>
+<area shape="rect" id="node3" href="$classaide_1_1HierarchicalId.html#a650d294fc7cc81dd5ac921f42e369db8" title=" " alt="" coords="229,71,377,112"/>
 </map>
