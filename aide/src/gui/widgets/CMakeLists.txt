@@ -1,8 +1,8 @@
-add_library(AideWidgets)
-add_library(Aide::AideWidgets ALIAS AideWidgets)
+add_library(AideQt${QT_VERSION_MAJOR}Widgets)
+add_library(Aide::AideWidgets ALIAS AideQt${QT_VERSION_MAJOR}Widgets)
 
 target_sources(
-  AideWidgets
+  AideQt${QT_VERSION_MAJOR}Widgets
   PRIVATE
     aidetableview.cpp
     aidetreeview.cpp
@@ -13,7 +13,7 @@ target_sources(
 )
 
 target_include_directories(
-  AideWidgets
+  AideQt${QT_VERSION_MAJOR}Widgets
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}
           ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}>
@@ -21,12 +21,12 @@ target_include_directories(
 )
 
 target_link_libraries(
-  AideWidgets
+  AideQt${QT_VERSION_MAJOR}Widgets
   PUBLIC Qt::Widgets
   PRIVATE aide_project_sanitizers aide_project_warnings
 )
 
-target_compile_features(AideWidgets PUBLIC cxx_std_17)
+target_compile_features(AideQt${QT_VERSION_MAJOR}Widgets PUBLIC cxx_std_17)
 
 set_source_files_properties(
   ${CMAKE_CURRENT_BINARY_DIR}/AideWidgets_autogen/mocs_compilation.cpp

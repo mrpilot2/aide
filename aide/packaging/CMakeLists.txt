@@ -1,12 +1,12 @@
 include(GNUInstallDirs)
 
 install(
-  TARGETS AideApplication
+  TARGETS AideQt${QT_VERSION_MAJOR}Application
           AideBuildInformation
           AideCore
           AideGui
           AideLogger
-          AideWidgets
+          AideQt${QT_VERSION_MAJOR}Widgets
           aide_project_warnings
           aide_project_coverage
           aide_project_sanitizers
@@ -17,13 +17,13 @@ install(
 install(
   EXPORT AideTargets
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/AideQt${QT_VERSION_MAJOR}
-  FILE AideTargets.cmake
+  FILE AideQt${QT_VERSION_MAJOR}Targets.cmake
   NAMESPACE Aide::
 )
 
 export(
   EXPORT AideTargets
-  FILE "${CMAKE_BINARY_DIR}/AideTargets.cmake"
+  FILE "${CMAKE_BINARY_DIR}/AideQt${QT_VERSION_MAJOR}Targets.cmake"
   NAMESPACE Aide::
 )
 

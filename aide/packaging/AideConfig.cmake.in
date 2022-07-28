@@ -43,7 +43,21 @@ conan_cmake_install(
 find_package(spdlog)
 find_package(fmt)
 
-include("${CMAKE_CURRENT_LIST_DIR}/AideTargets.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/AideQt@QT_VERSION_MAJOR@Targets.cmake")
+
+# Create versionless targets
+add_library(Aide::AideApplication INTERFACE IMPORTED)
+
+set_target_properties(Aide::AideApplication PROPERTIES
+  INTERFACE_LINK_LIBRARIES Aide::AideQt@QT_VERSION_MAJOR@Application
+)
+
+add_library(Aide::AideWidgets INTERFACE IMPORTED)
+
+set_target_properties(Aide::AideWidgets PROPERTIES
+  INTERFACE_LINK_LIBRARIES Aide::AideQt@QT_VERSION_MAJOR@Widgets
+)
+
 
 include(CMakeFindDependencyMacro)
 
