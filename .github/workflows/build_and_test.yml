@@ -15,6 +15,9 @@ jobs:
           - os: windows-latest
             cmake: 3.18
 
+          - os: ubuntu-18.04
+            qt: "6.*"
+
         include:
           - os: ubuntu-18.04
             WARNINGS_AS_ERRORS: OFF
