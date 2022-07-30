@@ -7,12 +7,14 @@ find_package(
 )
 
 if(TARGET Qt6::Core)
-  message(STATUS "Using Qt6")
+  find_package(
+    Qt6
+    COMPONENTS Core Widgets
+    REQUIRED
+  )
 
   find_package(Qt6LinguistTools)
 else()
-  message(STATUS "Using Qt5")
-
   if(NOT TARGET Qt5::Core)
     find_package(
       Qt5
