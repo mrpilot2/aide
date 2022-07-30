@@ -12,7 +12,7 @@ jobs:
       - uses: google-github-actions/release-please-action@main
         id: release
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.RELEASE_TOKEN }}
           release-type: node
           package-name: ${{env.ACTION_NAME}}
           command: github-release
@@ -38,7 +38,7 @@ jobs:
       - id: release-pr
         uses: google-github-actions/release-please-action@main
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.RELEASE_TOKEN }}
           release-type: node
           fork: true
           package-name: ${{env.ACTION_NAME}}
