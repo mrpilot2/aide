@@ -71,3 +71,4 @@ jobs:
           upload_url: ${{ steps.get_release.outputs.upload_url }}
           asset_path: ./build-shared/aide*.tar.gz
           asset_name: "Aide shared library"
+          asset_content_type: application/gzip
