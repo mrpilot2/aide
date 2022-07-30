@@ -4,12 +4,14 @@ repos:
     hooks:
     - id: cmake-format
       additional_dependencies: [pyyaml]
+      stages: [commit]
 
   - repo: https://github.com/doublify/pre-commit-clang-format
     rev: 62302476d0da01515660132d76902359bed0f782
     hooks:
     - id: clang-format
-
+      stages: [commit]
+  
   - repo: https://github.com/compilerla/conventional-pre-commit
     rev: v1.4.0
     hooks:
