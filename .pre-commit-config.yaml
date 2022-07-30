@@ -9,3 +9,9 @@ repos:
     rev: 62302476d0da01515660132d76902359bed0f782
     hooks:
     - id: clang-format
+
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v1.4.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
