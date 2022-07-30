@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.2](https://github.com/mrpilot2/aide/compare/v0.0.1...v0.0.2) (2022-07-30)
+
+
+### Bug Fixes
+
+* branch ([571909b](https://github.com/mrpilot2/aide/commit/571909b3cac70452a0e65bf0f155e03e6c17ac04))
+
 ## [0.0.1](https://github.com/mrpilot2/aide/compare/v0.0.0...v0.0.1) (2022-07-30)
 
 
