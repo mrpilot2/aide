@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/mrpilot2/aide/compare/v0.1.0...v0.1.1) (2022-07-30)
+
+
+### Bug Fixes
+
+* remove wrong if condition ([33aff8e](https://github.com/mrpilot2/aide/commit/33aff8e74af9b663a9a2c118b0679ff652c556c5))
+
 ## [0.1.0](https://github.com/mrpilot2/aide/compare/v0.0.2...v0.1.0) (2022-07-30)
 
 
