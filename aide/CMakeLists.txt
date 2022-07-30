@@ -5,10 +5,14 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 include(AideStandardProjectSettings)
 standard_project_settings()
 
+include(VersionFromGit)
+
+version_from_git()
+
 project(
   aide
   LANGUAGES CXX
-  VERSION 0.1.0
+  VERSION ${VERSION}
 )
 
 if(NOT TARGET aide_project_sanitizers)

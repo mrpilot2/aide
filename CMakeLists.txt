@@ -8,10 +8,14 @@ include(FeatureSummary)
 include(AideStandardProjectSettings)
 standard_project_settings()
 
+include(VersionFromGit)
+
+version_from_git()
+
 project(
   aide
   LANGUAGES CXX
-  VERSION 0.1.0
+  VERSION ${VERSION}
 )
 
 include(AideCompilerWarnings)
