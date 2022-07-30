@@ -112,5 +112,9 @@
         <source>Edit application settings</source>
         <translation>Anwendungseinstellungen editieren</translation>
     </message>
+    <message>
+        <source>About</source>
+        <translation>Über</translation>
+    </message>
 </context>
 </TS>

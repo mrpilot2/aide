@@ -108,5 +108,9 @@
         <source>Edit application settings</source>
         <translation></translation>
     </message>
+    <message>
+        <source>About</source>
+        <translation></translation>
+    </message>
 </context>
 </TS>

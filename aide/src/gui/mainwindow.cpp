@@ -31,6 +31,8 @@ struct ActionIds
         HierarchicalId("Main Menu")("File")("Settings")};
     const HierarchicalId MAIN_MENU_FILE_QUIT{
         HierarchicalId("Main Menu")("File")("Quit")};
+    const HierarchicalId MAIN_MENU_HELP_ABOUT_AIDE{
+        HierarchicalId("Main Menu")("Help")("About Aide")};
     const HierarchicalId MAIN_MENU_HELP_ABOUT_QT{
         HierarchicalId("Main Menu")("Help")("About Qt")};
 };
@@ -99,6 +101,11 @@ void MainWindow::registerActions(
         m_actionQuit, ACTION_IDS().MAIN_MENU_FILE_QUIT,
         tr("Quits the application").toStdString(),
         {QKeySequence(QKeySequence::Quit), QKeySequence("Alt+F4")});
+
+    m_actionAboutAide = std::make_shared<QAction>(tr("About") + " aIDE", this);
+    m_ui->menuHelp->addAction(m_actionAboutAide.get());
+    actionRegistry->registerAction(m_actionAboutAide,
+                                   ACTION_IDS().MAIN_MENU_HELP_ABOUT_AIDE);
 
     m_actionAboutQt = std::make_shared<QAction>(tr("About Qt"), this);
     connect(m_actionAboutQt.get(), &QAction::triggered,

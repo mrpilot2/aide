@@ -35,9 +35,9 @@ namespace aide
         public:
             explicit MainWindow(LoggerPtr loggerInterface, QWidget* parent);
             ~MainWindow() override;
-            MainWindow(const MainWindow&) = delete;
-            MainWindow& operator=(const MainWindow&) = delete;
-            MainWindow(const MainWindow&&)           = delete;
+            MainWindow(const MainWindow&)             = delete;
+            MainWindow& operator=(const MainWindow&)  = delete;
+            MainWindow(const MainWindow&&)            = delete;
             MainWindow& operator=(const MainWindow&&) = delete;
 
             void setMainWindowController(
@@ -69,6 +69,7 @@ namespace aide
             std::unique_ptr<Ui::MainWindow> m_ui;
             std::shared_ptr<QAction> m_actionSettings;
             std::shared_ptr<QAction> m_actionQuit;
+            std::shared_ptr<QAction> m_actionAboutAide;
             std::shared_ptr<QAction> m_actionAboutQt;
         };
 
