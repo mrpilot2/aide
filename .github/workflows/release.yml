@@ -4,7 +4,7 @@ on:
       - develop-auto_release
 name: release-please
 env:
-  ACTION_NAME: release-please-action
+  ACTION_NAME: release-aide
 jobs:
   release-please-pr:
     runs-on: ubuntu-latest
