@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.0](https://github.com/mrpilot2/aide/compare/v0.0.2...v0.1.0) (2022-07-30)
+
+
+### Features
+
+* create deploy workflow ([9b9ad1b](https://github.com/mrpilot2/aide/commit/9b9ad1bc6d5bf22576d5a7585a3f10610d57c749))
+
 ## [0.0.2](https://github.com/mrpilot2/aide/compare/v0.0.1...v0.0.2) (2022-07-30)
 
 
