@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - develop-auto_release
+      - develop
 name: release-please
 env:
   ACTION_NAME: release-aide
