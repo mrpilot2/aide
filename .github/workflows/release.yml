@@ -14,7 +14,7 @@ jobs:
         with:
           token: ${{ secrets.RELEASE_TOKEN }}
           release-type: node
-          package-name: ${{env.ACTION_NAME}}
+#          package-name: ${{env.ACTION_NAME}}
           command: github-release
       - uses: actions/checkout@v2
       - name: tag major and patch versions
@@ -41,7 +41,7 @@ jobs:
           token: ${{ secrets.RELEASE_TOKEN }}
           release-type: node
           fork: true
-          package-name: ${{env.ACTION_NAME}}
+#          package-name: ${{env.ACTION_NAME}}
           command: release-pr
       - id: label
         if: ${{ steps.release-pr.outputs.pr }}
