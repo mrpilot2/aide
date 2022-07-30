@@ -16,7 +16,6 @@ jobs:
           release-type: simple
 #          package-name: ${{env.ACTION_NAME}}
           command: github-release
-        if: ${{ steps.release.outputs.release_created }}
   release-please-pr:
     runs-on: ubuntu-latest
     needs: [release-please-release]
