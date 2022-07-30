@@ -12,10 +12,10 @@ jobs:
       - id: release-pr
         uses: google-github-actions/release-please-action@main
         with:
-          token: ${{ secrets.ACTIONS_BOT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           release-type: node
           fork: true
-          package-name: test
+          package-name: ${{env.ACTION_NAME}}
           command: release-pr
       - id: label
         if: ${{ steps.release-pr.outputs.pr }}
