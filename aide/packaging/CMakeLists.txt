@@ -57,3 +57,5 @@ install(FILES ${CMAKE_BINARY_DIR}/AideQt${QT_VERSION_MAJOR}Config.cmake
               ${CMAKE_BINARY_DIR}/AideConfigVersion.cmake
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/AideQt${QT_VERSION_MAJOR}
 )
+
+include(CPack)
