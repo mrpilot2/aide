@@ -58,7 +58,8 @@ else()
     OUTPUT_QUIET
   )
 endif()
-find_package(Catch2)
+
+find_package(Catch2 REQUIRED)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
 

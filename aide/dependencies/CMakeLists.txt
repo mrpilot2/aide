@@ -58,8 +58,9 @@ else()
     OUTPUT_QUIET
   )
 endif()
-find_package(spdlog)
-find_package(fmt)
+
+find_package(spdlog REQUIRED)
+find_package(fmt REQUIRED)
 
 if(TARGET spdlog::spdlog)
   set_target_properties(spdlog::spdlog PROPERTIES IMPORTED_GLOBAL TRUE)
