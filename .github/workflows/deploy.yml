@@ -1,0 +1,70 @@
+name: CD - Deploy to Github Release
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    name: Build project
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: seanmiddleditch/gha-setup-ninja@master
+
+      - name: Setup Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7.x
+      - name: Install pip dependencies
+        run: |
+          pip3 install wheel setuptools
+          pip3 install conan
+
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.8
+        with:
+          cmake-version: ${{matrix.cmake}}
+
+      - name: Print CMake version
+        run: cmake --version
+
+      - name: Install apt dependencies
+        if: runner.os == 'Linux'
+        run: sudo apt install lcov ^libxcb-*
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: ${{ matrix.qt }}
+          setup-python: false
+          aqtversion: ">=2.1.0"
+ 
+      - name: Set CMake arguments
+        id: cmake_args
+        run: echo "::set-output name=CMAKE_ARGS::-DUNIT_TESTS_RUN_ON_CI=1 -DWARNINGS_AS_ERRORS=OFF"
+
+      # Shared RelWithDebInfo
+      - name: "Shared Debug: Configure"
+        run: cmake -G Ninja -S . -B build-shared -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_SHARED_LIBS=ON  ${{ steps.cmake_args.outputs.CMAKE_ARGS }}
+      - name: "Shared Debug: Build"
+        run: cmake --build build-shared --parallel
+      - name: "Shared Debug: Test"
+        run: cmake --build build-shared --target package
+
+      - name: Get release
+        id: get_release
+        uses: bruceadams/get-release@v1.2.3
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: ./build-shared/aide*.tar.gz
+          asset_name: "Aide shared library"
