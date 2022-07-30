@@ -13,7 +13,7 @@ jobs:
         id: release
         with:
           token: ${{ secrets.RELEASE_TOKEN }}
-          release-type: node
+          release-type: simple
 #          package-name: ${{env.ACTION_NAME}}
           command: github-release
       - uses: actions/checkout@v2
@@ -39,8 +39,8 @@ jobs:
         uses: google-github-actions/release-please-action@main
         with:
           token: ${{ secrets.RELEASE_TOKEN }}
-          release-type: node
-          fork: true
+          release-type: simple
+          fork: false
 #          package-name: ${{env.ACTION_NAME}}
           command: release-pr
       - id: label
