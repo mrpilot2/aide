@@ -41,7 +41,6 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
-          version: ${{ matrix.qt }}
           setup-python: false
           aqtversion: ">=2.1.0"
  
