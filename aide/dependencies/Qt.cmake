@@ -37,6 +37,8 @@ else()
 
   find_package(Qt5LinguistTools)
 
-  add_executable(Qt::lrelease ALIAS Qt5::lrelease)
-  add_executable(Qt::lupdate ALIAS Qt5::lupdate)
+  if(TARGET Qt5::lrelease)
+    add_executable(Qt::lrelease ALIAS Qt5::lrelease)
+    add_executable(Qt::lupdate ALIAS Qt5::lupdate)
+  endif()
 endif()
