@@ -35,12 +35,28 @@ if(${IS_MULTI_CONFIG})
   foreach(TYPE ${CMAKE_CONFIGURATION_TYPES})
     conan_cmake_autodetect(settings BUILD_TYPE ${TYPE})
 
-    conan_cmake_install(PATH_OR_REFERENCE . BUILD missing SETTINGS ${settings})
+    conan_cmake_install(
+      PATH_OR_REFERENCE
+      .
+      BUILD
+      missing
+      SETTINGS
+      ${settings}
+      OUTPUT_QUIET
+    )
   endforeach()
 else()
   conan_cmake_autodetect(settings)
 
-  conan_cmake_install(PATH_OR_REFERENCE . BUILD missing SETTINGS ${settings})
+  conan_cmake_install(
+    PATH_OR_REFERENCE
+    .
+    BUILD
+    missing
+    SETTINGS
+    ${settings}
+    OUTPUT_QUIET
+  )
 endif()
 find_package(Catch2)
 

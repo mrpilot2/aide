@@ -38,6 +38,7 @@ conan_cmake_install(
   missing
   SETTINGS
   ${settings}
+  OUTPUT_QUIET
 )
 
 find_package(spdlog)
