@@ -1,41 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="de_DE">
 <context>
     <name>AddShortcutDialog</name>
     <message>
         <source>Add Keyboard Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Tastenkürzel hinzufügen</translation>
     </message>
     <message>
         <source>Already assigned to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bereits zugewiesen an:</translation>
     </message>
 </context>
 <context>
     <name>AideTableView</name>
     <message>
         <source>There are no elements in this view</source>
-        <translation type="unfinished">Keine Elemente zur Anzeige verfügbar</translation>
+        <translation>In dieser Ansicht sind keine Elemente vorhanden</translation>
     </message>
     <message>
         <source> due to active filter</source>
-        <translation type="unfinished"></translation>
+        <translation>aufgrund eines aktiven Filters</translation>
     </message>
 </context>
 <context>
     <name>AideTreeView</name>
     <message>
         <source>There are no elements in this view</source>
-        <translation>Keine Elemente zur Anzeige verfügbar</translation>
+        <translation>In dieser Ansicht sind keine Elemente vorhanden</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
-    <message>
-        <source>MainWindow</source>
-        <translation type="vanished">Hauptfenster</translation>
-    </message>
     <message>
         <source>&amp;File</source>
         <translation>&amp;Datei</translation>
@@ -49,7 +43,7 @@
     <name>SearchLineEdit</name>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation>Fenster</translation>
     </message>
 </context>
 <context>
@@ -67,15 +61,15 @@
     <name>aide::core::KeymapContextMenuProvider</name>
     <message>
         <source>Add keyboard shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Tastenkürzel hinzufügen</translation>
     </message>
     <message>
         <source>Remove %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Entferne %1</translation>
     </message>
     <message>
         <source>Reset to default</source>
-        <translation type="unfinished"></translation>
+        <translation>Auf Standard zurücksetzen</translation>
     </message>
 </context>
 <context>
@@ -94,15 +88,15 @@
     </message>
     <message>
         <source>Don&apos;t ask again</source>
-        <translation>Nicht mehr fragen</translation>
+        <translation>Nicht erneut fragen</translation>
     </message>
     <message>
         <source>Confirm exit</source>
-        <translation>Beenden</translation>
+        <translation>Wirklich beenden</translation>
     </message>
     <message>
         <source>Are you sure you want to exit?</source>
-        <translation>Wollen Sie wirklich beenden?</translation>
+        <translation>Wollen Sie wirklich beenden</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -110,7 +104,7 @@
     </message>
     <message>
         <source>Edit application settings</source>
-        <translation>Anwendungseinstellungen editieren</translation>
+        <translation>Editiere Anwendungseinstellungen</translation>
     </message>
 </context>
 </TS>
