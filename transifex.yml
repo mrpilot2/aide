@@ -1,0 +1,10 @@
+git:
+  filters:
+    - filter_type: file
+      file_format: QT
+      source_language: en
+      source_file: aide/src/gui/res/translations/aide_en.ts
+      translation_files_expression: 'aide/src/gui/res/translations/aide_<lang>.ts'
+
+  settings:
+    pr_branch_name: tx_translations_<br_unique_id>
