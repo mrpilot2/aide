@@ -26,10 +26,10 @@ namespace aide::gui
     public:
         explicit SettingsDialog(QWidget* parent = nullptr);
         ~SettingsDialog() override;
-        SettingsDialog(const SettingsDialog&) = delete;
+        SettingsDialog(const SettingsDialog&)            = delete;
         SettingsDialog& operator=(const SettingsDialog&) = delete;
         SettingsDialog(SettingsDialog&&)                 = delete;
-        SettingsDialog& operator=(SettingsDialog&&) = delete;
+        SettingsDialog& operator=(SettingsDialog&&)      = delete;
 
         void setController(SettingsDialogControllerPtr controller);
 

@@ -35,9 +35,9 @@ namespace aide
         public:
             explicit MainWindow(LoggerPtr loggerInterface, QWidget* parent);
             ~MainWindow() override;
-            MainWindow(const MainWindow&) = delete;
-            MainWindow& operator=(const MainWindow&) = delete;
-            MainWindow(const MainWindow&&)           = delete;
+            MainWindow(const MainWindow&)             = delete;
+            MainWindow& operator=(const MainWindow&)  = delete;
+            MainWindow(const MainWindow&&)            = delete;
             MainWindow& operator=(const MainWindow&&) = delete;
 
             void setMainWindowController(

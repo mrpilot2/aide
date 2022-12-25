@@ -24,10 +24,10 @@ namespace aide::gui
     public:
         explicit KeymapPageWidget(QWidget* parent = nullptr);
         ~KeymapPageWidget() override;
-        KeymapPageWidget(const KeymapPageWidget&) = delete;
+        KeymapPageWidget(const KeymapPageWidget&)            = delete;
         KeymapPageWidget& operator=(const KeymapPageWidget&) = delete;
         KeymapPageWidget(KeymapPageWidget&&)                 = delete;
-        KeymapPageWidget& operator=(KeymapPageWidget&&) = delete;
+        KeymapPageWidget& operator=(KeymapPageWidget&&)      = delete;
 
         void setController(KeyMapPageControllerPtr controller);
 

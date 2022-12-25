@@ -12,10 +12,10 @@ namespace aide::core
         virtual ~SettingsDialogChangePageController();
         SettingsDialogChangePageController(
             const SettingsDialogChangePageController&) = delete;
-        SettingsDialogChangePageController& operator   =(
+        SettingsDialogChangePageController& operator=(
             const SettingsDialogChangePageController&) = delete;
         SettingsDialogChangePageController(
-            SettingsDialogChangePageController&&)   = delete;
+            SettingsDialogChangePageController&&) = delete;
         SettingsDialogChangePageController& operator=(
             SettingsDialogChangePageController&&) = delete;
 

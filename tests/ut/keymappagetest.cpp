@@ -34,7 +34,10 @@ TEST_CASE("A new keymap page")
 
     KeymapPage page{registry, widget.get()};
 
-    SECTION("returns a valid widget") { REQUIRE(page.widget() != nullptr); }
+    SECTION("returns a valid widget")
+    {
+        REQUIRE(page.widget() != nullptr);
+    }
 
     SECTION("returns a valid keymap widget")
     {

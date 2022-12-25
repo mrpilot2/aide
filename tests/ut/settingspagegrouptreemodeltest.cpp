@@ -17,7 +17,10 @@ TEST_CASE("A new settings page group tree model without registered page")
     SettingsPageRegistry::deleteAllPages();
     SettingsPageGroupTreeModel treeModel;
 
-    SECTION("has no rows") { REQUIRE(treeModel.rowCount() == 0); }
+    SECTION("has no rows")
+    {
+        REQUIRE(treeModel.rowCount() == 0);
+    }
 }
 
 TEST_CASE("A new settings page group tree model with one registered page")
@@ -29,9 +32,15 @@ TEST_CASE("A new settings page group tree model with one registered page")
 
     SettingsPageGroupTreeModel treeModel;
 
-    SECTION("has one row") { REQUIRE(treeModel.rowCount() == 1); }
+    SECTION("has one row")
+    {
+        REQUIRE(treeModel.rowCount() == 1);
+    }
 
-    SECTION("has one column") { REQUIRE(treeModel.columnCount() == 1); }
+    SECTION("has one column")
+    {
+        REQUIRE(treeModel.columnCount() == 1);
+    }
 
     SECTION("provides group in first column and first row")
     {
