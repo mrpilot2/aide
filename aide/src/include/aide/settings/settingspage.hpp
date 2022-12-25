@@ -16,10 +16,10 @@ namespace aide::core
 
         virtual ~SettingsPage();
 
-        SettingsPage(const SettingsPage&) = delete;
+        SettingsPage(const SettingsPage&)            = delete;
         SettingsPage& operator=(const SettingsPage&) = delete;
         SettingsPage(SettingsPage&&)                 = delete;
-        SettingsPage& operator=(SettingsPage&&) = delete;
+        SettingsPage& operator=(SettingsPage&&)      = delete;
 
         [[nodiscard]] const HierarchicalId& group() const;
 

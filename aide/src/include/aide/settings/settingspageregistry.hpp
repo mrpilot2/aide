@@ -12,12 +12,12 @@ namespace aide::core
     class SettingsPageRegistry
     {
     public:
-        SettingsPageRegistry()                            = delete;
-        ~SettingsPageRegistry()                           = delete;
-        SettingsPageRegistry(const SettingsPageRegistry&) = delete;
+        SettingsPageRegistry()                                       = delete;
+        ~SettingsPageRegistry()                                      = delete;
+        SettingsPageRegistry(const SettingsPageRegistry&)            = delete;
         SettingsPageRegistry& operator=(const SettingsPageRegistry&) = delete;
         SettingsPageRegistry(SettingsPageRegistry&&)                 = delete;
-        SettingsPageRegistry& operator=(SettingsPageRegistry&&) = delete;
+        SettingsPageRegistry& operator=(SettingsPageRegistry&&)      = delete;
 
         static void addPage(SettingsPagePtr page);
 

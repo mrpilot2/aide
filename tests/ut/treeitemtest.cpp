@@ -17,9 +17,15 @@ TEST_CASE("A new root tree item")
         REQUIRE(item.columnCount() == 3);
     }
 
-    SECTION("is in row zero") { REQUIRE(item.row() == 0); }
+    SECTION("is in row zero")
+    {
+        REQUIRE(item.row() == 0);
+    }
 
-    SECTION("has no parent") { REQUIRE(item.parent() == nullptr); }
+    SECTION("has no parent")
+    {
+        REQUIRE(item.parent() == nullptr);
+    }
 
     SECTION("has no children")
     {
@@ -48,7 +54,10 @@ TEST_CASE("First new child tree item")
         REQUIRE(child->columnCount() == 2);
     }
 
-    SECTION("is in row zero ") { REQUIRE(child->row() == 0); }
+    SECTION("is in row zero ")
+    {
+        REQUIRE(child->row() == 0);
+    }
 
     SECTION("has parent")
     {
@@ -85,7 +94,10 @@ TEST_CASE("Second new child item")
     parent->appendChild(child1);
     parent->appendChild(child2);
 
-    SECTION("is in row one") { REQUIRE(child2->row() == 1); }
+    SECTION("is in row one")
+    {
+        REQUIRE(child2->row() == 1);
+    }
 
     SECTION("has same parent as first child")
     {
