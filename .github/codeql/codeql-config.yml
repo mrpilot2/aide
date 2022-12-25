@@ -1,0 +1,4 @@
+name: "Aide CodeQL config"
+
+paths:
+  - aide
