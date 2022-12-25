@@ -2,9 +2,12 @@
 
 #include <QCloseEvent>
 
+#include "aboutaidedialog.hpp"
+#include "aboutaideusecase.hpp"
 #include "applicationclosecontroller.hpp"
 #include "mainwindowgeometryandstatecontroller.hpp"
 
+using aide::core::AboutAideUseCase;
 using aide::core::ApplicationCloseController;
 using aide::core::MainWindowGeometryAndStateController;
 using aide::core::ShowSettingsDialogController;
@@ -35,4 +38,11 @@ void MainWindowController::onUserWantsToQuitApplication(
 void MainWindowController::onUserWantsToShowSettingsDialog()
 {
     showSettingsDialogInteractor.showSettingsDialog();
+}
+
+void MainWindowController::onUserWantsToShowAboutAideDialog()
+{
+    auto dialog = std::make_shared<AboutAideDialog>();
+    AboutAideUseCase useCase(dialog);
+    useCase.showAboutAideInformation();
 }

@@ -103,6 +103,8 @@ void MainWindow::registerActions(
         {QKeySequence(QKeySequence::Quit), QKeySequence("Alt+F4")});
 
     m_actionAboutAide = std::make_shared<QAction>(tr("About") + " aIDE", this);
+    connect(m_actionAboutAide.get(), &QAction::triggered, m_controller.get(),
+            &MainWindowController::onUserWantsToShowAboutAideDialog);
     m_ui->menuHelp->addAction(m_actionAboutAide.get());
     actionRegistry->registerAction(m_actionAboutAide,
                                    ACTION_IDS().MAIN_MENU_HELP_ABOUT_AIDE);

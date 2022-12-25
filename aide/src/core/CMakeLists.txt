@@ -5,7 +5,8 @@ add_library(Aide::AideCore ALIAS AideCore)
 
 target_sources(
   AideCore
-  PRIVATE aidesettingsprovider.cpp
+  PRIVATE aboutaideusecase.cpp
+          aidesettingsprovider.cpp
           actionregistry.cpp
           applicationclose.cpp
           hierarchicalid.cpp
@@ -39,7 +40,8 @@ target_include_directories(
 target_link_libraries(
   AideCore
   PUBLIC Qt::Core Qt::Widgets AideLogger
-  PRIVATE aide_project_coverage aide_project_sanitizers aide_project_warnings
+  PRIVATE Aide::AideBuildInformation aide_project_coverage
+          aide_project_sanitizers aide_project_warnings
 )
 
 target_compile_features(AideCore PRIVATE cxx_std_17)

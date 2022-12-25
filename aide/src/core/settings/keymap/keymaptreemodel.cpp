@@ -1,6 +1,7 @@
 
 #include "keymaptreemodel.hpp"
 
+#include <iostream>
 #include <memory>
 #include <utility>
 
@@ -101,6 +102,7 @@ QVariant KeyMapTreeModel::data(const QModelIndex& index, int role) const
 
     if (role == Qt::DecorationRole && index.column() == 0) {
         auto action = findCorrespondingAction(index);
+        if (!action) { return QIcon::fromTheme("folder"); }
         if (auto qaction = action->action.lock(); qaction != nullptr) {
             return qaction->icon();
         }

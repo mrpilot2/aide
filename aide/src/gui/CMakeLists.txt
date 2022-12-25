@@ -44,6 +44,7 @@ add_library(Aide::AideGui ALIAS AideGui)
 target_sources(
   AideGui
   PRIVATE
+    aboutaidedialog.cpp
     mainwindow.cpp
     mainwindowcontroller.cpp
     settings/changedetector.cpp

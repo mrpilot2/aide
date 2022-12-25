@@ -35,6 +35,8 @@ namespace aide::gui
     public slots:
         void onUserWantsToShowSettingsDialog();
 
+        static void onUserWantsToShowAboutAideDialog();
+
     private:
         const aide::core::ApplicationCloseController&
             applicationCloseInteractor;
