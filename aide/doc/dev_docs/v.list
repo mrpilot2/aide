@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE vars SYSTEM "https://helpserver.labs.jb.gg/help/schemas/mvp/vars.dtd">
+<vars>
+  <var name="latest_version"
+     instance="aide"
+     value="0.1.1"
+     type="string"
+  />
+  <var name="sdk_name"
+       instance="aide"
+       value="aIDE SDK"
+       type="string"
+  />
+</vars>
