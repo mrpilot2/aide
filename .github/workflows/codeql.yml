@@ -25,12 +25,30 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Install Packages
         run: |
           sudo apt-get update
           sudo apt-get install --yes g++-10 ccache
 
+      - name: Setup Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7.x
+      - name: Install pip dependencies
+        run: |
+          pip3 install wheel setuptools
+          pip3 install conan
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: "6.*"
+          setup-python: false
+          aqtversion: ">=2.1.0"
+ 
       - name: Configure
         run: |
           mkdir build
@@ -39,9 +57,10 @@ jobs:
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
+          config-file: ./.github/codeql/codeql-config.yml
           languages: ${{ matrix.language }}
           queries: +security-and-quality
-
+ 
       - name: Build cpp
         run: cmake --build ./build -- -j2
 
