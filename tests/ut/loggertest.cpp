@@ -35,6 +35,8 @@ TEST_CASE("Test different log levels", "[Logger]")
 
     Logger logger = Logger(FileName(logFileName));
 
+#if SPDLOG_ACTIVE_LEVEL <= SPDLOG_LEVEL_TRACE
+
     SECTION(" trace")
     {
         logger.trace("This logs to the file");
@@ -52,6 +54,9 @@ TEST_CASE("Test different log levels", "[Logger]")
         REQUIRE(::lookForContentInFile(logFileName, "debug") !=
                 std::string::npos);
     }
+#endif
+
+#if SPDLOG_ACTIVE_LEVEL <= SPDLOG_LEVEL_INFO
 
     SECTION(" info")
     {
@@ -61,6 +66,9 @@ TEST_CASE("Test different log levels", "[Logger]")
         REQUIRE(::lookForContentInFile(logFileName, "info") !=
                 std::string::npos);
     }
+#endif
+
+#if SPDLOG_ACTIVE_LEVEL <= SPDLOG_LEVEL_WARN
 
     SECTION(" warning")
     {
@@ -70,6 +78,9 @@ TEST_CASE("Test different log levels", "[Logger]")
         REQUIRE(::lookForContentInFile(logFileName, "warn") !=
                 std::string::npos);
     }
+#endif
+
+#if SPDLOG_ACTIVE_LEVEL <= SPDLOG_LEVEL_ERROR
 
     SECTION(" error")
     {
@@ -88,6 +99,7 @@ TEST_CASE("Test different log levels", "[Logger]")
         REQUIRE(::lookForContentInFile(logFileName, "critical") !=
                 std::string::npos);
     }
+#endif
 }
 
 TEST_CASE("Test log macros", "[Logger]")
@@ -99,6 +111,7 @@ TEST_CASE("Test log macros", "[Logger]")
 
     Logger logger = Logger(FileName(logFileName));
 
+#if SPDLOG_ACTIVE_LEVEL <= SPDLOG_LEVEL_TRACE
     SECTION(" trace default logger")
     {
         AIDE_LOG_TRACE("Test")
@@ -136,6 +149,9 @@ TEST_CASE("Test log macros", "[Logger]")
         REQUIRE(::lookForContentInFile(logFileName, "trying to access") !=
                 std::string::npos);
     }
+#endif
+
+#if SPDLOG_ACTIVE_LEVEL <= SPDLOG_LEVEL_DEBUG
 
     SECTION(" debug default logger")
     {
@@ -174,6 +190,9 @@ TEST_CASE("Test log macros", "[Logger]")
         REQUIRE(::lookForContentInFile(logFileName, "trying to access") !=
                 std::string::npos);
     }
+#endif
+
+#if SPDLOG_ACTIVE_LEVEL <= SPDLOG_LEVEL_INFO
 
     SECTION(" info default logger")
     {
@@ -213,6 +232,10 @@ TEST_CASE("Test log macros", "[Logger]")
                 std::string::npos);
     }
 
+#endif
+
+#if SPDLOG_ACTIVE_LEVEL <= SPDLOG_LEVEL_WARN
+
     SECTION(" warn default logger")
     {
         AIDE_LOG_WARN("Test")
@@ -250,6 +273,9 @@ TEST_CASE("Test log macros", "[Logger]")
         REQUIRE(::lookForContentInFile(logFileName, "trying to access") !=
                 std::string::npos);
     }
+#endif
+
+#if SPDLOG_ACTIVE_LEVEL <= SPDLOG_LEVEL_ERROR
 
     SECTION(" error default logger")
     {
@@ -289,6 +315,10 @@ TEST_CASE("Test log macros", "[Logger]")
                 std::string::npos);
     }
 
+#endif
+
+#if SPDLOG_ACTIVE_LEVEL <= SPDLOG_LEVEL_CRITICAL
+
     SECTION(" critical default logger")
     {
         AIDE_LOG_CRITICAL("Test")
@@ -326,4 +356,5 @@ TEST_CASE("Test log macros", "[Logger]")
         REQUIRE(::lookForContentInFile(logFileName, "trying to access") !=
                 std::string::npos);
     }
+#endif
 }
