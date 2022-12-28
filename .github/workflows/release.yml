@@ -17,7 +17,7 @@ jobs:
           release-type: simple
 #          package-name: ${{env.ACTION_NAME}}
           command: github-release
-
+          default-branch: main
       - uses: actions/checkout@v3
       - name: merge back into develop
         run: |
