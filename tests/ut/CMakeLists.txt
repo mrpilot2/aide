@@ -49,16 +49,18 @@ target_sources(
 if(NOT ${TEST_AGAINST_INSTALLED})
   target_sources(
     ut.aide
-    PRIVATE actionregistrytest.cpp
+    PRIVATE aboutaideusecasetest.cpp
+            actionregistrytest.cpp
             aidesettingsprovidertest.cpp
             applicationcloseinteractortest.cpp
-            applicationtranslatortest.cpp
+            $<$<TARGET_EXISTS:Qt::lrelease>:applicationtranslatortest.cpp>
             keymapcontextmenuprovidertest.cpp
             keymaptreemodeltest.cpp
             keymappagetest.cpp
             loggertest.cpp
             mainwindowgeometryandstatetest.cpp
             mainwindowtest.cpp
+            mockaboutdialog.cpp
             mockapplicationcloseview.cpp
             mockkeymappagewidget.cpp
             mockmainwindowview.cpp

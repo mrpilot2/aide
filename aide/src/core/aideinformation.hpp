@@ -20,7 +20,7 @@ namespace aide::core
         std::string copyrightYear;
         std::string gitHash;
         std::string versionInfo;
-        std::string whatsNewBaseUrl;
+        std::string whatsNewUrl;
     } ALIGNMENT(128);
 } // namespace aide::core
 

@@ -34,8 +34,7 @@ void AboutAideDialog::showAboutInformation(
                  QString::fromStdString(info.gitHash),
                  locale.toString(info.buildDate,
                                  QLocale::FormatType::LongFormat),
-                 QString::fromStdString(info.whatsNewBaseUrl) + "v" +
-                     QString::fromStdString(info.versionInfo))};
+                 QString::fromStdString(info.whatsNewUrl))};
 
     m_ui->info->setText(textToDisplay);
 

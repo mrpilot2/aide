@@ -24,7 +24,8 @@ void AboutAideUseCase::showAboutAideInformation()
     info.gitHash     = aide::build_information::GIT_HASH;
     info.buildDate   = QLocale("en_US").toDate(__DATE__, "MMM d yyyy");
 
-    info.whatsNewBaseUrl = "https://github.com/mrpilot2/aide/releases/tag/";
+    info.whatsNewUrl =
+        "https://github.com/mrpilot2/aide/releases/tag/v" + info.versionInfo;
 
     if (!m_presenter.expired()) {
         auto sharedPtr{m_presenter.lock()};
