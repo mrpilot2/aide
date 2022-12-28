@@ -14,7 +14,8 @@ namespace aide::core
         std::string copyrightYear;
         std::string gitHash;
         std::string versionInfo;
-    };
+        std::string whatsNewBaseUrl;
+    } __attribute__((aligned(128)));
 } // namespace aide::core
 
 #endif // AIDE_AIDE_INFORMATION_HPP

@@ -29,6 +29,9 @@ namespace aide::gui
 
         void showAboutInformation(const core::AideInformation& info) override;
 
+    private slots:
+        static void whatsNewHovered(const QString& text);
+
     private:
         std::unique_ptr<Ui::AboutDialog> m_ui;
     };
