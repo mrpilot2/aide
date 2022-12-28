@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - develop
+      - main
 
 name: release-please
 env:
@@ -27,6 +27,7 @@ jobs:
           token: ${{ secrets.RELEASE_TOKEN }}
           release-type: simple
           fork: false
+          default-branch: main
 #          package-name: ${{env.ACTION_NAME}}
           command: release-pr
       - id: label
