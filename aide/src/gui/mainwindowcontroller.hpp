@@ -19,11 +19,14 @@ namespace aide::core
 
 namespace aide::gui
 {
+    class MainWindow;
+
     class MainWindowController : public QObject
     {
         Q_OBJECT
     public:
         explicit MainWindowController(
+            std::shared_ptr<MainWindow> mainWindow,
             const aide::core::ApplicationCloseController& closeUseCase,
             aide::core::MainWindowGeometryAndStateController& saveUseCase,
             core::ShowSettingsDialogController& settingsDialogUseCase);
@@ -35,7 +38,11 @@ namespace aide::gui
     public slots:
         void onUserWantsToShowSettingsDialog();
 
+        void onUserWantsToShowAboutAideDialog();
+
     private:
+        std::shared_ptr<MainWindow> m_mainWindow;
+
         const aide::core::ApplicationCloseController&
             applicationCloseInteractor;
         aide::core::MainWindowGeometryAndStateController&

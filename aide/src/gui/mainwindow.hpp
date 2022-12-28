@@ -69,6 +69,7 @@ namespace aide
             std::unique_ptr<Ui::MainWindow> m_ui;
             std::shared_ptr<QAction> m_actionSettings;
             std::shared_ptr<QAction> m_actionQuit;
+            std::shared_ptr<QAction> m_actionAboutAide;
             std::shared_ptr<QAction> m_actionAboutQt;
         };
 

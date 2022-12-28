@@ -39,7 +39,7 @@ ApplicationBuilder::ApplicationBuilder()
     , m_settingsDialogController(
           std::make_shared<SettingsDialogController>(m_showSettingsDialog))
     , m_mainController(std::make_shared<MainWindowController>(
-          m_applicationClose, m_mainWindowGeometryAndState,
+          m_mainWindow, m_applicationClose, m_mainWindowGeometryAndState,
           m_showSettingsDialog))
     , m_keyMapPage(std::make_shared<KeymapPage>(
           m_actionRegistry, new aide::gui::KeymapPageWidget()))

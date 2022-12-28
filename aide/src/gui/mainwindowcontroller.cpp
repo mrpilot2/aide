@@ -1,20 +1,28 @@
 #include "mainwindowcontroller.hpp"
 
+#include <utility>
+
 #include <QCloseEvent>
 
+#include "aboutaidedialog.hpp"
+#include "aboutaideusecase.hpp"
 #include "applicationclosecontroller.hpp"
+#include "mainwindow.hpp"
 #include "mainwindowgeometryandstatecontroller.hpp"
 
+using aide::core::AboutAideUseCase;
 using aide::core::ApplicationCloseController;
 using aide::core::MainWindowGeometryAndStateController;
 using aide::core::ShowSettingsDialogController;
 using aide::gui::MainWindowController;
 
 MainWindowController::MainWindowController(
+    std::shared_ptr<MainWindow> mainWindow,
     const ApplicationCloseController& closeUseCase,
     MainWindowGeometryAndStateController& saveUseCase,
     ShowSettingsDialogController& settingsDialogUseCase)
-    : applicationCloseInteractor(closeUseCase)
+    : m_mainWindow(std::move(mainWindow))
+    , applicationCloseInteractor(closeUseCase)
     , saveGeometryAndStateInteractor(saveUseCase)
     , showSettingsDialogInteractor(settingsDialogUseCase)
 {}
@@ -35,4 +43,11 @@ void MainWindowController::onUserWantsToQuitApplication(
 void MainWindowController::onUserWantsToShowSettingsDialog()
 {
     showSettingsDialogInteractor.showSettingsDialog();
+}
+
+void MainWindowController::onUserWantsToShowAboutAideDialog()
+{
+    auto dialog = std::make_shared<AboutAideDialog>(m_mainWindow.get());
+    AboutAideUseCase useCase(dialog);
+    useCase.showAboutAideInformation();
 }
