@@ -10,6 +10,23 @@
 * **about:** add What's new link ([a14a5a1](https://github.com/mrpilot2/aide/commit/a14a5a170dce9fb3ef976cd7d4454e059f9a2756))
 * **about:** implementation of about dialog ([f43dd37](https://github.com/mrpilot2/aide/commit/f43dd3784bbd8d12e5f98b19b2f5cec689bfb517))
 * **about:** set parent window ([e57231c](https://github.com/mrpilot2/aide/commit/e57231c82a22dcc0d4ace7873589d3e82d5aace0))
+* **Logger:** make log level configurable ([e522e61](https://github.com/mrpilot2/aide/commit/e522e614eb68530ef1a7d45859dd0651e04cdf41))
+
+
+### Bug Fixes
+
+* release-please shall run on default branch ([ffeefae](https://github.com/mrpilot2/aide/commit/ffeefaebc25b7b4176eb1bded60a15f1ecc490be))
+
+## [0.2.0](https://github.com/mrpilot2/aide/compare/v0.1.1...v0.2.0) (2022-12-28)
+
+
+### Features
+
+* **about:** add logo ([a362268](https://github.com/mrpilot2/aide/commit/a3622687bf8c44319cccd07533bc3fe40b16df03))
+* **about:** add menu item to select about dialog ([c8ab3e2](https://github.com/mrpilot2/aide/commit/c8ab3e24f61c00ba5c50b4e2ca881025f6c88b85))
+* **about:** add What's new link ([a14a5a1](https://github.com/mrpilot2/aide/commit/a14a5a170dce9fb3ef976cd7d4454e059f9a2756))
+* **about:** implementation of about dialog ([f43dd37](https://github.com/mrpilot2/aide/commit/f43dd3784bbd8d12e5f98b19b2f5cec689bfb517))
+* **about:** set parent window ([e57231c](https://github.com/mrpilot2/aide/commit/e57231c82a22dcc0d4ace7873589d3e82d5aace0))
 
 ## [0.1.1](https://github.com/mrpilot2/aide/compare/v0.1.0...v0.1.1) (2022-07-30)
 
