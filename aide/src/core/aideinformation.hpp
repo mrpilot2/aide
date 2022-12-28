@@ -6,6 +6,12 @@
 
 #include <QDate>
 
+#if defined(_MSC_VER)
+#define ALIGNMENT(size) __declspec(align(size))
+#elif defined(__GNUC__)
+#define ALIGNMENT(size) __attribute__((aligned(size)))
+#endif
+
 namespace aide::core
 {
     struct AideInformation
@@ -15,7 +21,7 @@ namespace aide::core
         std::string gitHash;
         std::string versionInfo;
         std::string whatsNewBaseUrl;
-    } __attribute__((aligned(128)));
+    } ALIGNMENT(128);
 } // namespace aide::core
 
 #endif // AIDE_AIDE_INFORMATION_HPP
