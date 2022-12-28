@@ -35,14 +35,16 @@ Logger::Logger(const FileName& logFileName, const LoggerName& loggerName)
         "%b %d %H:%M:%S.%e [%8t] - %^%8l%$ - %20n - %v";
     m_logger = std::make_shared<spdlog::logger>(loggerName(), begin(logSinks),
                                                 end(logSinks));
-    m_logger->set_level(spdlog::level::trace);
+    m_logger->set_level(
+        static_cast<spdlog::level::level_enum>(SPDLOG_ACTIVE_LEVEL));
     m_logger->set_pattern(commonLogPattern);
 
     auto macroLogSinks = createSinks(logFileName());
     m_macroLogger      = std::make_shared<spdlog::logger>(
         loggerName() + std::string("_macro"), begin(macroLogSinks),
         end(macroLogSinks));
-    m_macroLogger->set_level(spdlog::level::trace);
+    m_macroLogger->set_level(
+        static_cast<spdlog::level::level_enum>(SPDLOG_ACTIVE_LEVEL));
 #ifdef NDEBUG
     m_macroLogger->set_pattern(commonLogPattern);
 #else
