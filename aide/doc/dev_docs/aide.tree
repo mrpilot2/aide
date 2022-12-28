@@ -7,4 +7,14 @@
                  start-page="Welcome.md">
 
     <toc-element topic="Welcome.md" toc-title="Home"/>
+    <toc-element topic="Introduction.md">
+        <toc-element topic="Code-samples.md"/>
+        <toc-element topic="Getting-Help.md"/>
+    </toc-element>
+    <toc-element toc-title="Base Platform">
+        <toc-element topic="User-Interface-Components.md"/>
+        <toc-element topic="Actions.md"/>
+        <toc-element topic="Settings.md"/>
+    </toc-element>
+    <toc-element topic="API.topic"/>
 </instance-profile>
