@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0](https://github.com/mrpilot2/aide/compare/v0.2.0...v0.3.0) (2022-12-28)
+
+
+### Features
+
+* **Logger:** make log level configurable ([f679569](https://github.com/mrpilot2/aide/commit/f679569d7f1811bb8a8b069c1c3f27e295602028))
+
+
+### Bug Fixes
+
+* release-please shall run on default branch ([4d8b712](https://github.com/mrpilot2/aide/commit/4d8b71264b1e7695ee652051dfa83e2f4ecc7d19))
+
 ## [0.2.0](https://github.com/mrpilot2/aide/compare/v0.1.1...v0.2.0) (2022-12-28)
 
 
