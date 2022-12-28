@@ -49,6 +49,6 @@ jobs:
       - name: Publish doxygen documentation to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          publish_dir: build/aide/doc/html
+          publish_dir: build/aide/doc/api/html
           branch: gh_pages
           github_token: ${{ secrets.GITHUB_TOKEN }}
