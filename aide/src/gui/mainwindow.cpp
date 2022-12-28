@@ -51,6 +51,10 @@ const static ActionIds& ACTION_IDS()
         std::terminate();
     }
 }
+void initIconResource()
+{
+    Q_INIT_RESOURCE(icons);
+}
 
 MainWindow::MainWindow(LoggerPtr loggerInterface, QWidget* parent)
     : MainWindowInterface(parent)
@@ -58,6 +62,8 @@ MainWindow::MainWindow(LoggerPtr loggerInterface, QWidget* parent)
     , m_translator{new ApplicationTranslator(logger)}
     , m_ui(new Ui::MainWindow)
 {
+    initIconResource();
+
     m_ui->setupUi(this);
 }
 

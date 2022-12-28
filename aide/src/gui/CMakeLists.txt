@@ -57,6 +57,7 @@ target_sources(
     $<$<NOT:$<TARGET_EXISTS:Qt::lrelease>>:nullapplicationtranslator.cpp>
     $<$<TARGET_EXISTS:Qt::lrelease>:${CMAKE_CURRENT_BINARY_DIR}/translations.qrc
     ${QM_FILES}>
+    res/icons/icons.qrc
 )
 
 target_include_directories(
