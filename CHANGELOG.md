@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/mrpilot2/aide/compare/v0.2.0...v0.2.1) (2022-12-28)
+
+
+### Bug Fixes
+
+* run github-release on main branch ([97316a2](https://github.com/mrpilot2/aide/commit/97316a2d8972168faddf7408f11e0ae79c28952b))
+
 ## [0.2.0](https://github.com/mrpilot2/aide/compare/v0.1.1...v0.2.0) (2022-12-28)
 
 
