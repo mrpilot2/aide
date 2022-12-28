@@ -1,7 +1,7 @@
 <map id="/home/runner/work/aide/aide/aide/src/core/settings/keymap/keymappage.hpp" name="/home/runner/work/aide/aide/aide/src/core/settings/keymap/keymappage.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="271,5,469,61"/>
-<area shape="rect" id="node2" href="$applicationbuilder_8hpp.html" title=" " alt="" coords="75,117,332,158"/>
-<area shape="rect" id="node4" href="$applicationbuilder_8cpp.html" title=" " alt="" coords="242,213,498,255"/>
-<area shape="rect" id="node5" href="$keymappage_8cpp.html" title=" " alt="" coords="407,109,605,165"/>
-<area shape="rect" id="node3" href="$application_8cpp.html" title=" " alt="" coords="5,213,217,255"/>
+<area shape="rect" id="node1" title=" " alt="" coords="201,5,399,61"/>
+<area shape="rect" id="node2" href="$applicationbuilder_8cpp.html" title=" " alt="" coords="5,213,261,255"/>
+<area shape="rect" id="node3" href="$applicationbuilder_8hpp.html" title=" " alt="" coords="171,117,429,158"/>
+<area shape="rect" id="node5" href="$keymappage_8cpp.html" title=" " alt="" coords="453,109,651,165"/>
+<area shape="rect" id="node4" href="$application_8cpp.html" title=" " alt="" coords="286,213,498,255"/>
 </map>

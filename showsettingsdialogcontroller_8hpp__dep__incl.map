@@ -1,12 +1,12 @@
 <map id="/home/runner/work/aide/aide/aide/src/core/settings/showsettingsdialogcontroller.hpp" name="/home/runner/work/aide/aide/aide/src/core/settings/showsettingsdialogcontroller.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="469,5,711,61"/>
-<area shape="rect" id="node2" href="$mainwindowcontroller_8hpp.html" title=" " alt="" coords="297,117,606,158"/>
-<area shape="rect" id="node9" href="$showsettingsdialog_8hpp.html" title=" " alt="" coords="630,109,827,165"/>
-<area shape="rect" id="node3" href="$mainwindow_8hpp.html" title=" " alt="" coords="361,221,608,262"/>
-<area shape="rect" id="node4" href="$applicationbuilder_8hpp.html" title=" " alt="" coords="519,317,776,359"/>
-<area shape="rect" id="node7" href="$mainwindow_8cpp.html" title=" " alt="" coords="35,317,281,359"/>
-<area shape="rect" id="node8" href="$mainwindowcontroller_8cpp.html" title=" " alt="" coords="29,221,337,262"/>
-<area shape="rect" id="node5" href="$application_8cpp.html" title=" " alt="" coords="375,407,587,448"/>
-<area shape="rect" id="node6" href="$applicationbuilder_8cpp.html" title=" " alt="" coords="611,407,867,448"/>
-<area shape="rect" id="node10" href="$showsettingsdialog_8cpp.html" title=" " alt="" coords="733,213,930,269"/>
+<area shape="rect" id="node1" title=" " alt="" coords="203,5,445,61"/>
+<area shape="rect" id="node2" href="$showsettingsdialog_8hpp.html" title=" " alt="" coords="77,109,275,165"/>
+<area shape="rect" id="node7" href="$mainwindowcontroller_8hpp.html" title=" " alt="" coords="317,117,627,158"/>
+<area shape="rect" id="node3" href="$applicationbuilder_8hpp.html" title=" " alt="" coords="97,317,354,359"/>
+<area shape="rect" id="node6" href="$showsettingsdialog_8cpp.html" title=" " alt="" coords="77,213,275,269"/>
+<area shape="rect" id="node4" href="$application_8cpp.html" title=" " alt="" coords="286,407,498,448"/>
+<area shape="rect" id="node5" href="$applicationbuilder_8cpp.html" title=" " alt="" coords="5,407,261,448"/>
+<area shape="rect" id="node8" href="$mainwindow_8cpp.html" title=" " alt="" coords="429,317,675,359"/>
+<area shape="rect" id="node9" href="$mainwindow_8hpp.html" title=" " alt="" coords="349,221,595,262"/>
+<area shape="rect" id="node10" href="$mainwindowcontroller_8cpp.html" title=" " alt="" coords="699,317,1007,359"/>
 </map>

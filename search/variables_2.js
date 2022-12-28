@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['icon_5fsize_683',['ICON_SIZE',['../searchlineedit_8cpp.html#a37556d5306a8fba67bed8d0f3fa81871',1,'searchlineedit.cpp']]]
+  ['copyrightyear_735',['copyrightYear',['../structaide_1_1core_1_1AideInformation.html#a7b3291d11606355a91dbc7cb4a58b4a3',1,'aide::core::AideInformation::copyrightYear()'],['../aideinformation_8hpp.html#ac625a900698f6e030f0d78e2772864cd',1,'copyrightYear():&#160;aideinformation.hpp']]]
 ];

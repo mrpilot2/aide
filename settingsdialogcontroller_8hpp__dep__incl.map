@@ -1,12 +1,12 @@
 <map id="/home/runner/work/aide/aide/aide/src/gui/settings/settingsdialogcontroller.hpp" name="/home/runner/work/aide/aide/aide/src/gui/settings/settingsdialogcontroller.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="656,5,863,61"/>
-<area shape="rect" id="node2" href="$settingsdialog_8hpp.html" title=" " alt="" coords="437,109,626,165"/>
-<area shape="rect" id="node8" href="$changedetector_8hpp.html" title=" " alt="" coords="665,109,854,165"/>
-<area shape="rect" id="node10" href="$settingsdialogcontroller_8cpp.html" title=" " alt="" coords="879,109,1085,165"/>
-<area shape="rect" id="node3" href="$applicationbuilder_8hpp.html" title=" " alt="" coords="112,221,369,262"/>
-<area shape="rect" id="node6" href="$mainwindow_8cpp.html" title=" " alt="" coords="393,221,640,262"/>
-<area shape="rect" id="node7" href="$settingsdialog_8cpp.html" title=" " alt="" coords="665,213,854,269"/>
-<area shape="rect" id="node4" href="$application_8cpp.html" title=" " alt="" coords="5,317,217,359"/>
-<area shape="rect" id="node5" href="$applicationbuilder_8cpp.html" title=" " alt="" coords="242,317,498,359"/>
-<area shape="rect" id="node9" href="$changedetector_8cpp.html" title=" " alt="" coords="878,213,1067,269"/>
+<area shape="rect" id="node1" title=" " alt="" coords="441,5,647,61"/>
+<area shape="rect" id="node2" href="$changedetector_8hpp.html" title=" " alt="" coords="219,109,408,165"/>
+<area shape="rect" id="node5" href="$settingsdialog_8hpp.html" title=" " alt="" coords="449,109,639,165"/>
+<area shape="rect" id="node10" href="$settingsdialogcontroller_8cpp.html" title=" " alt="" coords="663,109,870,165"/>
+<area shape="rect" id="node3" href="$changedetector_8cpp.html" title=" " alt="" coords="5,213,195,269"/>
+<area shape="rect" id="node4" href="$settingsdialog_8cpp.html" title=" " alt="" coords="219,213,408,269"/>
+<area shape="rect" id="node6" href="$applicationbuilder_8hpp.html" title=" " alt="" coords="433,221,690,262"/>
+<area shape="rect" id="node9" href="$mainwindow_8cpp.html" title=" " alt="" coords="714,221,961,262"/>
+<area shape="rect" id="node7" href="$application_8cpp.html" title=" " alt="" coords="326,317,538,359"/>
+<area shape="rect" id="node8" href="$applicationbuilder_8cpp.html" title=" " alt="" coords="563,317,819,359"/>
 </map>

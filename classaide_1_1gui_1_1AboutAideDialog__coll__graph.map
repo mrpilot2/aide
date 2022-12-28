@@ -1,0 +1,5 @@
+<map id="aide::gui::AboutAideDialog" name="aide::gui::AboutAideDialog">
+<area shape="rect" id="node1" title=" " alt="" coords="25,95,220,121"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,13,80,39"/>
+<area shape="rect" id="node3" href="$classaide_1_1core_1_1AideInformationPresenter.html" title=" " alt="" coords="103,5,302,47"/>
+</map>

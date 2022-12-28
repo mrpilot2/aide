@@ -1,3 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structaide_1_1core_1_1settings_1_1Keys_1_1System.html" title=" " alt="" coords="5,5,152,47"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,107,80,134"/>
+<area shape="rect" id="node2" href="$classaide_1_1core_1_1KeymapContextMenuProvider.html" title=" " alt="" coords="146,5,345,47"/>
+<area shape="rect" id="node3" href="$classaide_1_1gui_1_1KeyMapPageWidgetController.html" title=" " alt="" coords="138,71,353,112"/>
+<area shape="rect" id="node4" href="$classaide_1_1gui_1_1MainWindowController.html" title=" " alt="" coords="128,137,363,163"/>
+<area shape="rect" id="node5" href="$classaide_1_1gui_1_1SettingsDialogController.html" title=" " alt="" coords="155,188,336,229"/>
 </map>
