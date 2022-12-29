@@ -24,11 +24,10 @@ SearchLineEdit::SearchLineEdit(QWidget* parent)
     m_typingTimer->setSingleShot(true);
     connect(m_typingTimer, &QTimer::timeout, this,
             &SearchLineEdit::filterEntries);
-
-    QMenu* contextMenu = new QMenu(this);
-    contextMenu->addAction(new QAction("Test"));
-    m_ui->toolButton->setMenu(contextMenu);
-    m_ui->toolButton->setContextMenuPolicy(Qt::ActionsContextMenu);
+    connect(m_ui->matchCase, &QCheckBox::stateChanged, this,
+            &SearchLineEdit::filterEntries);
+    connect(m_ui->regularExpression, &QCheckBox::stateChanged, this,
+            &SearchLineEdit::filterEntries);
 }
 
 SearchLineEdit::~SearchLineEdit() = default;
@@ -51,19 +50,25 @@ QSortFilterProxyModel* SearchLineEdit::getFilterModel()
 void SearchLineEdit::textChanged(const QString& text)
 {
     m_currentFilterText = text;
-    m_typingTimer->start(200);
+    m_typingTimer->start(300);
 }
 
 void SearchLineEdit::filterEntries()
 {
+    m_filterModel->setFilterCaseSensitivity(
+        m_ui->matchCase->isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive);
+    m_filterModel->setFilterOption(m_ui->regularExpression->isChecked()
+                                       ? FilterOption::Regex
+                                       : FilterOption::Wildcard);
     m_filterModel->clearFilterForAllColumns();
-    auto parts = m_currentFilterText.split(' ');
+    auto parts = m_currentFilterText.trimmed().split(' ');
     for (int part_index = 0; part_index < parts.size(); ++part_index) {
         if (parts[part_index].endsWith(':')) {
             auto possibleColumnName = parts[part_index];
 
             possibleColumnName =
-                possibleColumnName.left(possibleColumnName.lastIndexOf(':'));
+                possibleColumnName.left(possibleColumnName.lastIndexOf(':'))
+                    .toLower();
 
             bool found = false;
             int index  = -1;
@@ -71,7 +76,8 @@ void SearchLineEdit::filterEntries()
                  ++i) {
                 if (m_filterModel->sourceModel()
                         ->headerData(i, Qt::Horizontal)
-                        .toString() == possibleColumnName) {
+                        .toString()
+                        .toLower() == possibleColumnName) {
                     found = true;
                     index = i;
                     break;

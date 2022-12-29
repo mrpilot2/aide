@@ -7,12 +7,20 @@
 
 namespace aide::widgets
 {
+    enum class FilterOption
+    {
+        Regex,
+        Wildcard
+    };
+
     class MultiColumnSortFilterProxyModel : public QSortFilterProxyModel
     {
     public:
         using QSortFilterProxyModel::QSortFilterProxyModel;
 
         void setFilterForColumn(int column, const QString& filterText);
+
+        void setFilterOption(FilterOption option);
 
         void clearFilterForColumn(int column);
 
@@ -24,6 +32,8 @@ namespace aide::widgets
 
     private:
         std::map<int, QString> m_columnFilterMap;
+
+        FilterOption m_option{FilterOption::Regex};
     };
 } // namespace aide::widgets
 

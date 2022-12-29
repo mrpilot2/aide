@@ -30,6 +30,11 @@ void MultiColumnSortFilterProxyModel::clearFilterForColumn(int column)
     }
 }
 
+void MultiColumnSortFilterProxyModel::setFilterOption(FilterOption option)
+{
+    m_option = option;
+}
+
 bool aide::widgets::MultiColumnSortFilterProxyModel::filterAcceptsRow(
     int source_row, const QModelIndex& source_parent) const
 {
@@ -40,7 +45,18 @@ bool aide::widgets::MultiColumnSortFilterProxyModel::filterAcceptsRow(
 
     bool result = true;
     for (auto const& [column_index, filterText] : m_columnFilterMap) {
-        const QRegularExpression regex(filterText);
+        QRegularExpression regex(filterText);
+        if (m_option == FilterOption::Wildcard) {
+            regex = QRegularExpression::fromWildcard(filterText,
+                                                     filterCaseSensitivity());
+        }
+        if (filterCaseSensitivity() == Qt::CaseInsensitive) {
+            regex.setPatternOptions(regex.patternOptions().setFlag(
+                QRegularExpression::CaseInsensitiveOption));
+        } else {
+            regex.setPatternOptions(regex.patternOptions().setFlag(
+                QRegularExpression::CaseInsensitiveOption, false));
+        }
 
         if (column_index == -1) {
             bool anyColumnMatches = false;

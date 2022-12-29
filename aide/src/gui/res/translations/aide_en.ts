@@ -67,7 +67,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Bla Bla Bal</source>
+        <source>Match &amp;Case</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Regular E&amp;xpression</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
