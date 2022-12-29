@@ -4,10 +4,6 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <source>&lt;Put Logo here&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -69,6 +65,14 @@
     <message>
         <source>Form</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Search ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bla Bla Bal</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

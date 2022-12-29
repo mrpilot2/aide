@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include <QSortFilterProxyModel>
 #include <QWidget>
 
 namespace Ui
@@ -10,29 +11,36 @@ namespace Ui
     class SearchLineEdit;
 } // namespace Ui
 
-namespace aide
+namespace aide::widgets
 {
-    namespace gui
+    class MultiColumnSortFilterProxyModel;
+
+    class SearchLineEdit : public QWidget
     {
-        class SearchLineEdit : public QWidget
-        {
-            Q_OBJECT
-        public:
-            explicit SearchLineEdit(QWidget* parent);
+        Q_OBJECT
+    public:
+        explicit SearchLineEdit(QWidget* parent);
 
-            ~SearchLineEdit() override;
+        ~SearchLineEdit() override;
 
-            void setSearchHint(const std::string& searchHint);
+        void setSearchIcon(const QIcon& icon);
 
-            void setSearchIcon(const QIcon& icon);
+        void setSourceModel(QAbstractItemModel* model);
 
-        signals:
-            void textChanged(const QString& text);
+        QSortFilterProxyModel* getFilterModel();
+    private slots:
+        void textChanged(const QString& text);
 
-        private:
-            std::unique_ptr<Ui::SearchLineEdit> m_ui;
-        };
-    } // namespace gui
-} // namespace aide
+    private:
+        void filterEntries();
+
+        std::unique_ptr<Ui::SearchLineEdit> m_ui;
+
+        QTimer* m_typingTimer;
+        QString m_currentFilterText;
+
+        MultiColumnSortFilterProxyModel* m_filterModel;
+    };
+} // namespace aide::widgets
 
 #endif // AIDE_SEARCHLINEEDIT_HPP
