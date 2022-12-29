@@ -28,8 +28,8 @@ namespace aide
 
         [[nodiscard]] std::shared_ptr<aide::gui::MainWindow> mainWindow() const;
 
-        [[nodiscard]] std::shared_ptr<SettingsProviderInterface>
-        settingsProvider() const;
+        [[nodiscard]] std::shared_ptr<AideSettingsProvider> settingsProvider()
+            const;
 
         [[nodiscard]] ActionRegistryInterfacePtr actionRegistry() const;
 

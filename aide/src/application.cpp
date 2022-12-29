@@ -3,9 +3,11 @@
 
 #include <QTimer>
 
+#include "aidesettingsprovider.hpp"
 #include "applicationbuilder.hpp"
 #include "gui/mainwindow.hpp"
 #include "logger.hpp"
+#include "qtsettings.hpp"
 
 using aide::Application;
 using aide::ApplicationBuilder;
@@ -16,8 +18,13 @@ using aide::gui::TranslatorInterface;
 // NOLINTNEXTLINE
 Application::Application(int& argc, char* argv[])
     : QApplication(argc, argv)
-    , m_appBuilder(std::make_shared<ApplicationBuilder>())
 {
+    AideSettingsProvider::provideVersionableSettings(
+        std::make_shared<QtSettings>(true));
+    AideSettingsProvider::provideUnVersionableSettings(
+        std::make_shared<QtSettings>(false));
+    m_appBuilder = std::make_shared<ApplicationBuilder>();
+
     if (!isOrganizationNameSet()) {
         throw std::runtime_error(
             "Application name and organization name need to be set before "
@@ -62,7 +69,7 @@ std::shared_ptr<TranslatorInterface> Application::translator() const
     return m_appBuilder->mainWindow()->translator();
 }
 
-std::shared_ptr<SettingsProviderInterface> Application::settingsProvider()
+std::shared_ptr<aide::AideSettingsProvider> Application::settingsProvider()
 {
     return m_appBuilder->settingsProvider();
 }

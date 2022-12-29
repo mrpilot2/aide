@@ -10,6 +10,7 @@
 #include <settings/keymap/keymappage.hpp>
 #include <settings/settingspageregistry.hpp>
 
+#include "aidesettingsprovider.hpp"
 #include "gui/settings/keymap/keymappagewidget.hpp"
 #include "logger/logger.hpp"
 #include "settingsinterface.hpp"
@@ -125,7 +126,7 @@ std::shared_ptr<aide::gui::MainWindow> ApplicationBuilder::mainWindow() const
     return m_mainWindow;
 }
 
-std::shared_ptr<aide::SettingsProviderInterface>
+std::shared_ptr<aide::AideSettingsProvider>
 ApplicationBuilder::settingsProvider() const
 {
     return m_settingsProvider;
