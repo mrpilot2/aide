@@ -46,7 +46,7 @@ jobs:
  
       - name: Set CMake arguments
         id: cmake_args
-        run: echo "::set-output name=CMAKE_ARGS::-DUNIT_TESTS_RUN_ON_CI=1 -DWARNINGS_AS_ERRORS=OFF"
+        run: echo "CMAKE_ARGS=-DUNIT_TESTS_RUN_ON_CI=1 -DWARNINGS_AS_ERRORS=OFF" >> $GITHUB_OUTPUT
 
       # Shared RelWithDebInfo
       - name: "Shared Debug: Configure"
