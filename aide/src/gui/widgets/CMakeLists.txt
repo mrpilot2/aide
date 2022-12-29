@@ -17,6 +17,7 @@ target_include_directories(
   AideQt${QT_VERSION_MAJOR}Widgets
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}
           ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/
+          ${CMAKE_CURRENT_LIST_DIR}/../../include/
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}>
          $<INSTALL_INTERFACE:include/aide>
 )
@@ -24,7 +25,7 @@ target_include_directories(
 target_link_libraries(
   AideQt${QT_VERSION_MAJOR}Widgets
   PUBLIC Qt::Widgets
-  PRIVATE aide_project_sanitizers aide_project_warnings
+  PRIVATE aide_project_sanitizers aide_project_warnings Aide::AideLogger
 )
 
 target_compile_features(AideQt${QT_VERSION_MAJOR}Widgets PUBLIC cxx_std_17)

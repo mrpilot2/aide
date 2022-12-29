@@ -5,18 +5,37 @@
 #include <QObject>
 #include <QTimer>
 
+#include <aide/aidesettingsprovider.hpp>
+#include <aide/settingsinterface.hpp>
+
+#include "aide/application.hpp"
 #include "multicolumnsortfilterproxymodel.hpp"
 #include "ui_searchlineedit.h"
 
 using aide::widgets::SearchLineEdit;
 
-SearchLineEdit::SearchLineEdit(QWidget* parent)
+SearchLineEdit::SearchLineEdit(const aide::HierarchicalId& id,
+                               const QKeySequence& showHideShortcut,
+                               QWidget* parent)
     : QWidget(parent)
     , m_ui{new Ui::SearchLineEdit}
     , m_typingTimer{new QTimer{this}}
     , m_filterModel(new MultiColumnSortFilterProxyModel(this))
+    , m_visibilitySettingsKey{id.addLevel("isVisible")}
+    , m_matchCaseSettingsKey{id.addLevel("matchCase")}
+    , m_regexSettingsKey{id.addLevel("regex")}
 {
     m_ui->setupUi(this);
+
+    auto guiSettings = aide::AideSettingsProvider::versionableSettings();
+
+    this->setVisible(guiSettings->value(m_visibilitySettingsKey).toBool());
+    m_ui->matchCase->setChecked(
+        guiSettings->value(m_matchCaseSettingsKey, false).toBool());
+    m_ui->regularExpression->setChecked(
+        guiSettings->value(m_regexSettingsKey, true).toBool());
+    matchCaseStateChanged(m_ui->matchCase->isChecked());
+    regexStateChanged(m_ui->regularExpression->isChecked());
 
     connect(m_ui->searchField, &QLineEdit::textChanged, this,
             &SearchLineEdit::textChanged);
@@ -24,13 +43,40 @@ SearchLineEdit::SearchLineEdit(QWidget* parent)
     m_typingTimer->setSingleShot(true);
     connect(m_typingTimer, &QTimer::timeout, this,
             &SearchLineEdit::filterEntries);
-    connect(m_ui->matchCase, &QCheckBox::stateChanged, this,
-            &SearchLineEdit::filterEntries);
-    connect(m_ui->regularExpression, &QCheckBox::stateChanged, this,
-            &SearchLineEdit::filterEntries);
+    connect(m_ui->matchCase, &QCheckBox::toggled, this,
+            &SearchLineEdit::matchCaseStateChanged);
+    connect(m_ui->regularExpression, &QCheckBox::toggled, this,
+            &SearchLineEdit::regexStateChanged);
+
+    auto* showHideAction = new QAction(this);
+    showHideAction->setShortcut(showHideShortcut);
+    showHideAction->setCheckable(true);
+    showHideAction->setChecked(this->isVisible());
+
+    if (parent != nullptr) {
+        parent->addAction(showHideAction);
+    } else {
+        aide::Application::logger()->warn(
+            "To make the show/hide action of the SearchLineEdit available, a "
+            "parent needs to be set. The show/hide functionality is now "
+            "disabled.");
+        this->setVisible(true);
+    }
+
+    connect(showHideAction, &QAction::toggled, this,
+            &SearchLineEdit::onUserRequestsToChangeVisibility);
 }
 
 SearchLineEdit::~SearchLineEdit() = default;
+
+void SearchLineEdit::onUserRequestsToChangeVisibility(bool visible)
+{
+    this->setVisible(visible);
+
+    auto guiSettings = aide::AideSettingsProvider::versionableSettings();
+
+    guiSettings->setValue(m_visibilitySettingsKey, visible);
+}
 
 void SearchLineEdit::setSearchIcon(const QIcon& icon)
 {
@@ -53,13 +99,37 @@ void SearchLineEdit::textChanged(const QString& text)
     m_typingTimer->start(300);
 }
 
-void SearchLineEdit::filterEntries()
+void SearchLineEdit::matchCaseStateChanged(bool state)
 {
     m_filterModel->setFilterCaseSensitivity(
         m_ui->matchCase->isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive);
+
+    auto guiSettings = aide::AideSettingsProvider::versionableSettings();
+
+    guiSettings->setValue(m_matchCaseSettingsKey, state);
+
+    filterEntries();
+}
+
+void SearchLineEdit::regexStateChanged(bool state)
+{
     m_filterModel->setFilterOption(m_ui->regularExpression->isChecked()
                                        ? FilterOption::Regex
                                        : FilterOption::Wildcard);
+
+    auto guiSettings = aide::AideSettingsProvider::versionableSettings();
+
+    guiSettings->setValue(m_regexSettingsKey, state);
+
+    filterEntries();
+}
+
+void SearchLineEdit::filterEntries()
+{
+    if (m_filterModel == nullptr || m_filterModel->sourceModel() == nullptr) {
+        return;
+    }
+
     m_filterModel->clearFilterForAllColumns();
     auto parts = m_currentFilterText.trimmed().split(' ');
     for (int part_index = 0; part_index < parts.size(); ++part_index) {

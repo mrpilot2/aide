@@ -5,12 +5,15 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QSignalSpy>
+#include <QToolButton>
 #include <QtTest/qtestkeyboard.h>
+
+#include <aide/hierarchicalid.hpp>
 
 #include "aide/gui/widgets/searchlineedit.hpp"
 #include "catch2/catch.hpp"
 
-using aide::gui::SearchLineEdit;
+using aide::widgets::SearchLineEdit;
 
 TEST_CASE("Any search line edit ")
 {
@@ -21,49 +24,30 @@ TEST_CASE("Any search line edit ")
 
     Q_INIT_RESOURCE(ut_icons);
 
-    SearchLineEdit searchLineEdit(nullptr);
-
-    SECTION(" displays search hint in corresponding label")
-    {
-        searchLineEdit.setSearchHint("finds actions");
-
-        const auto* child = searchLineEdit.findChild<QLabel*>("searchHint");
-
-        REQUIRE(child != nullptr);
-        const auto text{child->text()};
-        REQUIRE("finds actions" == text.toStdString());
-    }
+    SearchLineEdit searchLineEdit(aide::HierarchicalId("test"),
+                                  QKeySequence(Qt::Key_F), nullptr);
 
     SECTION(" allows empty search icon")
     {
         searchLineEdit.setSearchIcon(QIcon());
 
-        const auto* child = searchLineEdit.findChild<QLabel*>("searchIcon");
+        const auto* child =
+            searchLineEdit.findChild<QToolButton*>("toolButton");
 
-        REQUIRE(child != nullptr);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-        auto pixmapSize{child->pixmap(Qt::ReturnByValue).size()};
-#else
-        auto pixmapSize{child->pixmap()->size()};
-#endif
-        REQUIRE(0 == pixmapSize.width());
-        REQUIRE(0 == pixmapSize.height());
+        REQUIRE(child->icon().isNull());
     }
 
     SECTION(" displays a custom search icon")
     {
         searchLineEdit.setSearchIcon(QIcon(":/icons/unit-test/system-search"));
 
-        const auto* child = searchLineEdit.findChild<QLabel*>("searchIcon");
+        const auto* child =
+            searchLineEdit.findChild<QToolButton*>("toolButton");
 
-        REQUIRE(child != nullptr);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-        auto pixmapSize{child->pixmap(Qt::ReturnByValue).size()};
-#else
-        auto pixmapSize{child->pixmap()->size()};
-#endif
-        REQUIRE(16 == pixmapSize.width());
-        REQUIRE(16 == pixmapSize.height());
+        REQUIRE(!child->icon().isNull());
+
+        REQUIRE(16 == child->iconSize().width());
+        REQUIRE(16 == child->iconSize().height());
     }
 
     SECTION(" emit the textChanged signal if text in the search box is entered")

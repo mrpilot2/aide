@@ -74,6 +74,14 @@
         <source>Regular E&amp;xpression</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Esc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SettingsDialog</name>
