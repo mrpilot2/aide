@@ -5,7 +5,7 @@
 #include <QCoreApplication>
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
-#include <aide/application.hpp>
+#include <QDebug>
 #endif
 
 using aide::widgets::MultiColumnSortFilterProxyModel;
@@ -58,8 +58,8 @@ bool aide::widgets::MultiColumnSortFilterProxyModel::filterAcceptsRow(
             regex = QRegularExpression(
                 QRegularExpression::wildcardToRegularExpression(filterText));
 #else
-            aide::Application::logger()->warn(
-                "Wildcard matching not supported for Qt Versions < 5.12");
+            qDebug()
+                << "Wildcard matching not supported for Qt Versions < 5.12";
 #endif
         }
         if (filterCaseSensitivity() == Qt::CaseInsensitive) {

@@ -1,5 +1,6 @@
 #include "widgets/searchlineedit.hpp"
 
+#include <QDebug>
 #include <QIcon>
 #include <QMenu>
 #include <QObject>
@@ -8,7 +9,6 @@
 #include <aide/aidesettingsprovider.hpp>
 #include <aide/settingsinterface.hpp>
 
-#include "aide/application.hpp"
 #include "multicolumnsortfilterproxymodel.hpp"
 #include "ui_searchlineedit.h"
 
@@ -56,10 +56,11 @@ SearchLineEdit::SearchLineEdit(const aide::HierarchicalId& id,
     if (parent != nullptr) {
         parent->addAction(showHideAction);
     } else {
-        aide::Application::logger()->warn(
-            "To make the show/hide action of the SearchLineEdit available, a "
-            "parent needs to be set. The show/hide functionality is now "
-            "disabled.");
+        qDebug()
+            << "To make the show/hide action of the SearchLineEdit available, "
+               "a "
+               "parent needs to be set. The show/hide functionality is now "
+               "disabled.";
         this->setVisible(true);
     }
 
