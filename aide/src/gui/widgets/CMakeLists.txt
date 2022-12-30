@@ -26,6 +26,7 @@ target_link_libraries(
   AideQt${QT_VERSION_MAJOR}Widgets
   PUBLIC Qt::Widgets
   PRIVATE aide_project_sanitizers aide_project_warnings Aide::AideLogger
+          Aide::AideCore
 )
 
 target_compile_features(AideQt${QT_VERSION_MAJOR}Widgets PUBLIC cxx_std_17)
