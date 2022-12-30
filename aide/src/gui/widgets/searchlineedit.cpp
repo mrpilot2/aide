@@ -65,6 +65,12 @@ SearchLineEdit::SearchLineEdit(const aide::HierarchicalId& id,
 
     connect(showHideAction, &QAction::toggled, this,
             &SearchLineEdit::onUserRequestsToChangeVisibility);
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
+    m_ui->regularExpression->setChecked(true);
+    m_ui->regularExpression->hide();
+    regexStateChanged(m_ui->regularExpression->isChecked());
+#endif
 }
 
 SearchLineEdit::~SearchLineEdit() = default;

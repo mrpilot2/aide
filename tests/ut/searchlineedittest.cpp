@@ -2,8 +2,8 @@
 
 #include <QApplication>
 #include <QIcon>
-#include <QLabel>
 #include <QLineEdit>
+#include <QMainWindow>
 #include <QSignalSpy>
 #include <QToolButton>
 #include <QtTest/qtestkeyboard.h>
@@ -22,10 +22,12 @@ TEST_CASE("Any search line edit ")
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
     QApplication app(numberOfArgs, appName.data());
 
+    QMainWindow mainWindow;
+
     Q_INIT_RESOURCE(ut_icons);
 
     SearchLineEdit searchLineEdit(aide::HierarchicalId("test"),
-                                  QKeySequence(Qt::Key_F), nullptr);
+                                  QKeySequence(Qt::Key_F), &mainWindow);
 
     SECTION(" allows empty search icon")
     {

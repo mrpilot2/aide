@@ -2,7 +2,11 @@
 
 #include "multicolumnsortfilterproxymodel.hpp"
 
-#include <iostream>
+#include <QCoreApplication>
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
+#include <aide/application.hpp>
+#endif
 
 using aide::widgets::MultiColumnSortFilterProxyModel;
 
@@ -47,8 +51,16 @@ bool aide::widgets::MultiColumnSortFilterProxyModel::filterAcceptsRow(
     for (auto const& [column_index, filterText] : m_columnFilterMap) {
         QRegularExpression regex(filterText);
         if (m_option == FilterOption::Wildcard) {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
             regex = QRegularExpression::fromWildcard(filterText,
                                                      filterCaseSensitivity());
+#elif QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+            regex = QRegularExpression(
+                QRegularExpression::wildcardToRegularExpression(filterText));
+#else
+            aide::Application::logger()->warn(
+                "Wildcard matching not supported for Qt Versions < 5.12");
+#endif
         }
         if (filterCaseSensitivity() == Qt::CaseInsensitive) {
             regex.setPatternOptions(regex.patternOptions().setFlag(
