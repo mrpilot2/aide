@@ -41,6 +41,7 @@ target_sources(
     applicationtest.cpp
     buildinformationtest.cpp
     hierarchicalidtest.cpp
+    mocksettings.cpp
     mocksettingspage.cpp
     searchlineedittest.cpp
     settingspageregistrytest.cpp
@@ -68,7 +69,6 @@ if(NOT ${TEST_AGAINST_INSTALLED})
             mockapplicationcloseview.cpp
             mockkeymappagewidget.cpp
             mockmainwindowview.cpp
-            mocksettings.cpp
             mocksettingsdialog.cpp
             nulllogger.cpp
             qtsettingstest.cpp
