@@ -29,15 +29,19 @@ SearchLineEdit::SearchLineEdit(const aide::HierarchicalId& id,
 
     auto guiSettings = aide::AideSettingsProvider::versionableSettings();
 
-    bool visibilitySetting{
-        guiSettings->value(m_visibilitySettingsKey).toBool()};
+    bool visibilitySetting{true};
 
-    m_ui->matchCase->setChecked(
-        guiSettings->value(m_matchCaseSettingsKey, false).toBool());
-    m_ui->regularExpression->setChecked(
-        guiSettings->value(m_regexSettingsKey, true).toBool());
-    matchCaseStateChanged(m_ui->matchCase->isChecked());
-    regexStateChanged(m_ui->regularExpression->isChecked());
+    if (guiSettings != nullptr) {
+        visibilitySetting =
+            guiSettings->value(m_visibilitySettingsKey).toBool();
+
+        m_ui->matchCase->setChecked(
+            guiSettings->value(m_matchCaseSettingsKey, false).toBool());
+        m_ui->regularExpression->setChecked(
+            guiSettings->value(m_regexSettingsKey, true).toBool());
+        matchCaseStateChanged(m_ui->matchCase->isChecked());
+        regexStateChanged(m_ui->regularExpression->isChecked());
+    }
 
     connect(m_ui->searchField, &QLineEdit::textChanged, this,
             &SearchLineEdit::textChanged);
@@ -88,9 +92,10 @@ void SearchLineEdit::onUserRequestsToChangeVisibility(bool visible)
 {
     this->setVisible(visible);
 
-    auto guiSettings = aide::AideSettingsProvider::versionableSettings();
-
-    guiSettings->setValue(m_visibilitySettingsKey, visible);
+    if (auto guiSettings = aide::AideSettingsProvider::versionableSettings();
+        guiSettings != nullptr) {
+        guiSettings->setValue(m_visibilitySettingsKey, visible);
+    }
 }
 
 void SearchLineEdit::setSearchIcon(const QIcon& icon)
@@ -119,11 +124,12 @@ void SearchLineEdit::matchCaseStateChanged(bool state)
     m_filterModel->setFilterCaseSensitivity(
         m_ui->matchCase->isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive);
 
-    auto guiSettings = aide::AideSettingsProvider::versionableSettings();
+    if (auto guiSettings = aide::AideSettingsProvider::versionableSettings();
+        guiSettings != nullptr) {
+        guiSettings->setValue(m_matchCaseSettingsKey, state);
 
-    guiSettings->setValue(m_matchCaseSettingsKey, state);
-
-    filterEntries();
+        filterEntries();
+    }
 }
 
 void SearchLineEdit::regexStateChanged(bool state)
@@ -131,12 +137,12 @@ void SearchLineEdit::regexStateChanged(bool state)
     m_filterModel->setFilterOption(m_ui->regularExpression->isChecked()
                                        ? FilterOption::Regex
                                        : FilterOption::Wildcard);
+    if (auto guiSettings = aide::AideSettingsProvider::versionableSettings();
+        guiSettings != nullptr) {
+        guiSettings->setValue(m_regexSettingsKey, state);
 
-    auto guiSettings = aide::AideSettingsProvider::versionableSettings();
-
-    guiSettings->setValue(m_regexSettingsKey, state);
-
-    filterEntries();
+        filterEntries();
+    }
 }
 
 void SearchLineEdit::filterEntries()
