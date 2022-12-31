@@ -1,6 +1,5 @@
 #include <array>
 
-#include <QApplication>
 #include <QIcon>
 #include <QLineEdit>
 #include <QMainWindow>
@@ -8,6 +7,7 @@
 #include <QToolButton>
 #include <QtTest/qtestkeyboard.h>
 
+#include <aide/application.hpp>
 #include <aide/hierarchicalid.hpp>
 
 #include "aide/gui/widgets/searchlineedit.hpp"
@@ -17,17 +17,18 @@ using aide::widgets::SearchLineEdit;
 
 TEST_CASE("Any search line edit ")
 {
+    aide::Application::setApplicationName("test");
+    aide::Application::setOrganizationName("org");
     int numberOfArgs{1};
     // NOLINTNEXTLINE
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
     QApplication app(numberOfArgs, appName.data());
 
-    QMainWindow mainWindow;
-
     Q_INIT_RESOURCE(ut_icons);
 
+    QMainWindow* mainWindow = new QMainWindow();
     SearchLineEdit searchLineEdit(aide::HierarchicalId("test"),
-                                  QKeySequence(Qt::Key_F), &mainWindow);
+                                  QKeySequence(Qt::Key_F), mainWindow);
 
     SECTION(" allows empty search icon")
     {

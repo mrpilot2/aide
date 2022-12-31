@@ -10,22 +10,20 @@ using aide::AideSettingsProvider;
 using aide::SettingsInterface;
 
 std::shared_ptr<SettingsInterface> AideSettingsProvider::m_versionableSettings{
-    std::make_shared<aide::QtSettings>(true)};
-
+    nullptr};
 std::shared_ptr<SettingsInterface>
-    AideSettingsProvider::m_unversionableSettings{
-        std::make_shared<aide::QtSettings>(false)};
+    AideSettingsProvider::m_unversionableSettings{nullptr};
 
 void AideSettingsProvider::provideVersionableSettings(
     std::shared_ptr<SettingsInterface> settings)
 {
-    m_versionableSettings = std::move(settings);
+    m_versionableSettings = settings;
 }
 
 void AideSettingsProvider::provideUnVersionableSettings(
     std::shared_ptr<SettingsInterface> settings)
 {
-    m_unversionableSettings = std::move(settings);
+    m_unversionableSettings = settings;
 }
 
 std::shared_ptr<SettingsInterface> AideSettingsProvider::versionableSettings()

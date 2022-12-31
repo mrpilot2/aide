@@ -6,7 +6,11 @@ option(UNIT_TESTS_RUN_ON_CI
 )
 
 add_library(aide_catch_main STATIC catch_main.cpp)
-target_link_libraries(aide_catch_main PUBLIC Catch2::Catch2)
+target_link_libraries(
+  aide_catch_main
+  PUBLIC Catch2::Catch2
+  PRIVATE Aide::AideApplication
+)
 target_compile_features(aide_catch_main PUBLIC cxx_std_11)
 
 set(CMAKE_AUTORCC ON)
@@ -120,5 +124,5 @@ if(UNIT_TESTS_RUN_ON_CI)
     .xml
   )
 else()
-  catch_discover_tests(ut.aide REPORTER console)
+  # catch_discover_tests(ut.aide REPORTER console)
 endif()
