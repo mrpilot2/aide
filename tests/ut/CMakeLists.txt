@@ -90,6 +90,7 @@ target_link_libraries(
           aide_project_warnings
           Aide::AideBuildInformation
           Aide::AideApplication
+          Aide::AideWidgets
 )
 
 if(NOT ${TEST_AGAINST_INSTALLED})
