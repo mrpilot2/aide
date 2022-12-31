@@ -29,7 +29,9 @@ SearchLineEdit::SearchLineEdit(const aide::HierarchicalId& id,
 
     auto guiSettings = aide::AideSettingsProvider::versionableSettings();
 
-    this->setVisible(guiSettings->value(m_visibilitySettingsKey).toBool());
+    bool visibilitySetting{
+        guiSettings->value(m_visibilitySettingsKey).toBool()};
+
     m_ui->matchCase->setChecked(
         guiSettings->value(m_matchCaseSettingsKey, false).toBool());
     m_ui->regularExpression->setChecked(
@@ -61,7 +63,7 @@ SearchLineEdit::SearchLineEdit(const aide::HierarchicalId& id,
                "a "
                "parent needs to be set. The show/hide functionality is now "
                "disabled.";
-        this->setVisible(true);
+        visibilitySetting = true;
     }
 
     connect(showHideAction, &QAction::toggled, this,
@@ -72,6 +74,12 @@ SearchLineEdit::SearchLineEdit(const aide::HierarchicalId& id,
     m_ui->regularExpression->hide();
     regexStateChanged(m_ui->regularExpression->isChecked());
 #endif
+
+    // Set visibility delayed - overridden functions shall not be called
+    // in constructor
+    QTimer::singleShot(200, [this, visibilitySetting]() {
+        this->setVisible(visibilitySetting);
+    });
 }
 
 SearchLineEdit::~SearchLineEdit() = default;
