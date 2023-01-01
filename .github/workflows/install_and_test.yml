@@ -102,6 +102,6 @@ jobs:
           check_name: Unit Test Results install lib
           hide_comments: all but latest
           comment_on_pr: true
-          files: artifacts/test_results_installed_lib/ut/*.xml
+          files: artifacts/test_results_installed_lib/build*rel/**/*.xml
           report_individual_runs: true
           deduplicate_classes_by_file_name: false
