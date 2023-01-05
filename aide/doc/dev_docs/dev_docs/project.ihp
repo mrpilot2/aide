@@ -2,9 +2,10 @@
 <!DOCTYPE ihp SYSTEM "https://helpserver.labs.jb.gg/help/schemas/mvp/ihp.dtd">
 
 <ihp version="2.0">
+  <module name="dev_docs"/>
   <categories src="c.list"/>
   <vars src="v.list"/>
-  <instance src="aide.tree" web-path="docs/aide/" version="0.1.1"/>
   <topics dir="topics"/>
   <images dir="images" version="%latest_version%"/>
+  <instance src="aide.tree" web-path="docs/aide/" version="0.1.1"/>
 </ihp>

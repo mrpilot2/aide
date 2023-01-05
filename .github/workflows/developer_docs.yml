@@ -1,0 +1,61 @@
+name: Build developer docs
+
+on:
+  push:
+    branches:
+      - main
+      - developer_docs
+
+  workflow_dispatch:
+
+env:
+  PRODUCT: dev_docs/aide
+  ARTIFACT: webHelpAIDE2-all.zip
+
+jobs:
+  build-job:
+    runs-on: ubuntu-latest
+    container:
+      image: 'registry.jetbrains.team/p/writerside/builder/writerside-builder:2.1.984'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - run: |
+          set -e
+          /opt/builder/bin/idea.sh helpbuilderinspect -source-dir aide/doc/dev_docs -product $PRODUCT -output-dir artifacts/ || true
+          echo "Test existing of $ARTIFACT artifact"
+          test -e artifacts/$ARTIFACT
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifact
+          path: artifacts/${{ env.ARTIFACT }}
+          retention-days: 7
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build-job
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: artifact
+      - name: Unzip artifact
+        uses: montudor/action-zip@v1
+        with:
+          args: unzip -qq ${{ env.ARTIFACT }} -d dir
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: dir
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
