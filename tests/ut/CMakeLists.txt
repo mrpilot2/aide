@@ -43,7 +43,7 @@ target_sources(
     hierarchicalidtest.cpp
     mocksettings.cpp
     mocksettingspage.cpp
-    searchlineedittest.cpp
+    searchfilterwidgettest.cpp
     settingspageregistrytest.cpp
     settingspagetest.cpp
     $<$<TARGET_EXISTS:Qt::lrelease>:${CMAKE_CURRENT_BINARY_DIR}/ut_translations.qrc

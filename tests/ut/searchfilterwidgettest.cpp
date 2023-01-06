@@ -10,12 +10,12 @@
 #include <aide/application.hpp>
 #include <aide/hierarchicalid.hpp>
 
-#include "aide/gui/widgets/searchlineedit.hpp"
+#include "aide/gui/widgets/searchfilterwidget.hpp"
 #include "catch2/catch.hpp"
 
-using aide::widgets::SearchLineEdit;
+using aide::widgets::SearchFilterWidget;
 
-TEST_CASE("Any search line edit ")
+TEST_CASE("Any search filter widget ")
 {
     aide::Application::setApplicationName("test");
     aide::Application::setOrganizationName("org");
@@ -27,25 +27,26 @@ TEST_CASE("Any search line edit ")
     Q_INIT_RESOURCE(ut_icons);
 
     QMainWindow* mainWindow = new QMainWindow();
-    SearchLineEdit searchLineEdit(aide::HierarchicalId("test"),
-                                  QKeySequence(Qt::Key_F), mainWindow);
+    SearchFilterWidget searchFilterWidget(aide::HierarchicalId("test"),
+                                          QKeySequence(Qt::Key_F), mainWindow);
 
     SECTION(" allows empty search icon")
     {
-        searchLineEdit.setSearchIcon(QIcon());
+        searchFilterWidget.setSearchIcon(QIcon());
 
         const auto* child =
-            searchLineEdit.findChild<QToolButton*>("toolButton");
+            searchFilterWidget.findChild<QToolButton*>("toolButton");
 
         REQUIRE(child->icon().isNull());
     }
 
     SECTION(" displays a custom search icon")
     {
-        searchLineEdit.setSearchIcon(QIcon(":/icons/unit-test/system-search"));
+        searchFilterWidget.setSearchIcon(
+            QIcon(":/icons/unit-test/system-search"));
 
         const auto* child =
-            searchLineEdit.findChild<QToolButton*>("toolButton");
+            searchFilterWidget.findChild<QToolButton*>("toolButton");
 
         REQUIRE(!child->icon().isNull());
 
@@ -55,7 +56,7 @@ TEST_CASE("Any search line edit ")
 
     SECTION(" emit the textChanged signal if text in the search box is entered")
     {
-        auto* child = searchLineEdit.findChild<QLineEdit*>("searchField");
+        auto* child = searchFilterWidget.findChild<QLineEdit*>("searchField");
 
         QSignalSpy spy(child, SIGNAL(textChanged(const QString&)));
 

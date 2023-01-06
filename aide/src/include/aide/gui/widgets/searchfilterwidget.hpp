@@ -1,5 +1,5 @@
-#ifndef AIDE_SEARCHLINEEDIT_HPP
-#define AIDE_SEARCHLINEEDIT_HPP
+#ifndef AIDE_SEARCH_FILTER_WIDGET_HPP
+#define AIDE_SEARCH_FILTER_WIDGET_HPP
 
 #include <memory>
 
@@ -10,7 +10,7 @@
 
 namespace Ui
 {
-    class SearchLineEdit;
+    class SearchFilterWidget;
 } // namespace Ui
 
 namespace aide
@@ -22,15 +22,15 @@ namespace aide::widgets
 {
     class MultiColumnSortFilterProxyModel;
 
-    class SearchLineEdit : public QWidget
+    class SearchFilterWidget : public QWidget
     {
         Q_OBJECT
     public:
-        explicit SearchLineEdit(const aide::HierarchicalId& id,
-                                const QKeySequence& showHideShortcut,
-                                QWidget* parent);
+        explicit SearchFilterWidget(const aide::HierarchicalId& id,
+                                    const QKeySequence& showHideShortcut,
+                                    QWidget* parent);
 
-        ~SearchLineEdit() override;
+        ~SearchFilterWidget() override;
 
     public:
         void setSearchIcon(const QIcon& icon);
@@ -51,7 +51,7 @@ namespace aide::widgets
         void filterEntries();
 
     private:
-        std::unique_ptr<Ui::SearchLineEdit> m_ui;
+        std::unique_ptr<Ui::SearchFilterWidget> m_ui;
 
         QTimer* m_typingTimer;
         QString m_currentFilterText;
@@ -66,4 +66,4 @@ namespace aide::widgets
     };
 } // namespace aide::widgets
 
-#endif // AIDE_SEARCHLINEEDIT_HPP
+#endif // AIDE_SEARCH_FILTER_WIDGET_HPP

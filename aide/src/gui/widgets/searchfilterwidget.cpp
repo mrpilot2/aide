@@ -1,4 +1,4 @@
-#include "widgets/searchlineedit.hpp"
+#include "widgets/searchfilterwidget.hpp"
 
 #include <QDebug>
 #include <QIcon>
@@ -10,15 +10,15 @@
 #include <aide/settingsinterface.hpp>
 
 #include "multicolumnsortfilterproxymodel.hpp"
-#include "ui_searchlineedit.h"
+#include "ui_searchfilterwidget.h"
 
-using aide::widgets::SearchLineEdit;
+using aide::widgets::SearchFilterWidget;
 
-SearchLineEdit::SearchLineEdit(const aide::HierarchicalId& id,
-                               const QKeySequence& showHideShortcut,
-                               QWidget* parent)
+SearchFilterWidget::SearchFilterWidget(const aide::HierarchicalId& id,
+                                       const QKeySequence& showHideShortcut,
+                                       QWidget* parent)
     : QWidget(parent)
-    , m_ui{new Ui::SearchLineEdit}
+    , m_ui{new Ui::SearchFilterWidget}
     , m_typingTimer{new QTimer{this}}
     , m_filterModel(new MultiColumnSortFilterProxyModel(this))
     , m_visibilitySettingsKey{id.addLevel("isVisible")}
@@ -44,15 +44,15 @@ SearchLineEdit::SearchLineEdit(const aide::HierarchicalId& id,
     }
 
     connect(m_ui->searchField, &QLineEdit::textChanged, this,
-            &SearchLineEdit::textChanged);
+            &SearchFilterWidget::textChanged);
 
     m_typingTimer->setSingleShot(true);
     connect(m_typingTimer, &QTimer::timeout, this,
-            &SearchLineEdit::filterEntries);
+            &SearchFilterWidget::filterEntries);
     connect(m_ui->matchCase, &QCheckBox::toggled, this,
-            &SearchLineEdit::matchCaseStateChanged);
+            &SearchFilterWidget::matchCaseStateChanged);
     connect(m_ui->regularExpression, &QCheckBox::toggled, this,
-            &SearchLineEdit::regexStateChanged);
+            &SearchFilterWidget::regexStateChanged);
 
     auto* showHideAction = new QAction(this);
     showHideAction->setShortcut(showHideShortcut);
@@ -63,7 +63,8 @@ SearchLineEdit::SearchLineEdit(const aide::HierarchicalId& id,
         parent->addAction(showHideAction);
     } else {
         qDebug()
-            << "To make the show/hide action of the SearchLineEdit available, "
+            << "To make the show/hide action of the SearchFilterWidget "
+               "available, "
                "a "
                "parent needs to be set. The show/hide functionality is now "
                "disabled.";
@@ -71,7 +72,7 @@ SearchLineEdit::SearchLineEdit(const aide::HierarchicalId& id,
     }
 
     connect(showHideAction, &QAction::toggled, this,
-            &SearchLineEdit::onUserRequestsToChangeVisibility);
+            &SearchFilterWidget::onUserRequestsToChangeVisibility);
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
     m_ui->regularExpression->setChecked(true);
@@ -86,9 +87,9 @@ SearchLineEdit::SearchLineEdit(const aide::HierarchicalId& id,
     });
 }
 
-SearchLineEdit::~SearchLineEdit() = default;
+SearchFilterWidget::~SearchFilterWidget() = default;
 
-void SearchLineEdit::onUserRequestsToChangeVisibility(bool visible)
+void SearchFilterWidget::onUserRequestsToChangeVisibility(bool visible)
 {
     this->setVisible(visible);
 
@@ -98,28 +99,28 @@ void SearchLineEdit::onUserRequestsToChangeVisibility(bool visible)
     }
 }
 
-void SearchLineEdit::setSearchIcon(const QIcon& icon)
+void SearchFilterWidget::setSearchIcon(const QIcon& icon)
 {
     m_ui->toolButton->setIcon(icon);
 }
 
-void SearchLineEdit::setSourceModel(QAbstractItemModel* model)
+void SearchFilterWidget::setSourceModel(QAbstractItemModel* model)
 {
     m_filterModel->setSourceModel(model);
 }
 
-QSortFilterProxyModel* SearchLineEdit::getFilterModel()
+QSortFilterProxyModel* SearchFilterWidget::getFilterModel()
 {
     return m_filterModel;
 }
 
-void SearchLineEdit::textChanged(const QString& text)
+void SearchFilterWidget::textChanged(const QString& text)
 {
     m_currentFilterText = text;
     m_typingTimer->start(300);
 }
 
-void SearchLineEdit::matchCaseStateChanged(bool state)
+void SearchFilterWidget::matchCaseStateChanged(bool state)
 {
     m_filterModel->setFilterCaseSensitivity(
         m_ui->matchCase->isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive);
@@ -132,7 +133,7 @@ void SearchLineEdit::matchCaseStateChanged(bool state)
     }
 }
 
-void SearchLineEdit::regexStateChanged(bool state)
+void SearchFilterWidget::regexStateChanged(bool state)
 {
     m_filterModel->setFilterOption(m_ui->regularExpression->isChecked()
                                        ? FilterOption::Regex
@@ -145,7 +146,7 @@ void SearchLineEdit::regexStateChanged(bool state)
     }
 }
 
-void SearchLineEdit::filterEntries()
+void SearchFilterWidget::filterEntries()
 {
     if (m_filterModel == nullptr || m_filterModel->sourceModel() == nullptr) {
         return;

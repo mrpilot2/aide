@@ -61,7 +61,7 @@
     </message>
 </context>
 <context>
-    <name>SearchLineEdit</name>
+    <name>SearchFilterWidget</name>
     <message>
         <source>Form</source>
         <translation></translation>

@@ -7,10 +7,10 @@ target_sources(
     aidetableview.cpp
     aidetreeview.cpp
     multicolumnsortfilterproxymodel.cpp
-    searchlineedit.cpp
+    searchfilterwidget.cpp
     ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/aidetableview.hpp
     ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/aidetreeview.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/searchlineedit.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/searchfilterwidget.hpp
 )
 
 target_include_directories(

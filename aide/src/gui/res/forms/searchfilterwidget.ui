@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SearchLineEdit</class>
- <widget class="QWidget" name="SearchLineEdit">
+ <class>SearchFilterWidget</class>
+ <widget class="QWidget" name="SearchFilterWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -173,7 +173,7 @@
   <connection>
    <sender>close</sender>
    <signal>clicked()</signal>
-   <receiver>SearchLineEdit</receiver>
+   <receiver>SearchFilterWidget</receiver>
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
