@@ -33,7 +33,7 @@
     <number>4</number>
    </property>
    <item row="0" column="1" colspan="5">
-    <widget class="QLineEdit" name="searchField">
+    <widget class="aide::widgets::SearchLineEdit" name="searchField">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
        <horstretch>0</horstretch>
@@ -98,7 +98,9 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset theme="search"/>
+      <iconset theme="search">
+       <normaloff>.</normaloff>.
+      </iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -132,7 +134,9 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset theme="cancel"/>
+      <iconset theme="cancel">
+       <normaloff>.</normaloff>.
+      </iconset>
      </property>
      <property name="shortcut">
       <string>Esc</string>
@@ -164,6 +168,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>aide::widgets::SearchLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">searchlineedit.hpp</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>toolButton</tabstop>
   <tabstop>searchField</tabstop>

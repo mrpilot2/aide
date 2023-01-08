@@ -26,6 +26,8 @@ namespace aide::widgets
 
         void clearFilterForAllColumns();
 
+        QRegularExpression getRegexForColumn(int column) const;
+
     protected:
         bool filterAcceptsRow(int source_row,
                               const QModelIndex& source_parent) const override;

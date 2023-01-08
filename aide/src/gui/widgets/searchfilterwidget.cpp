@@ -2,6 +2,7 @@
 
 #include <QDebug>
 #include <QIcon>
+#include <QLineEdit>
 #include <QMenu>
 #include <QObject>
 #include <QTimer>
@@ -10,6 +11,7 @@
 #include <aide/settingsinterface.hpp>
 
 #include "multicolumnsortfilterproxymodel.hpp"
+#include "searchfilterresultdelegate.hpp"
 #include "ui_searchfilterwidget.h"
 
 using aide::widgets::SearchFilterWidget;
@@ -114,6 +116,11 @@ QSortFilterProxyModel* SearchFilterWidget::getFilterModel()
     return m_filterModel;
 }
 
+QAbstractItemDelegate* SearchFilterWidget::getItemDelegate()
+{
+    return new SearchFilterResultDelegate(this);
+}
+
 void SearchFilterWidget::textChanged(const QString& text)
 {
     m_currentFilterText = text;
@@ -152,7 +159,9 @@ void SearchFilterWidget::filterEntries()
         return;
     }
 
+    QList<QString> tags;
     m_filterModel->clearFilterForAllColumns();
+
     auto parts = m_currentFilterText.trimmed().split(' ');
     for (int part_index = 0; part_index < parts.size(); ++part_index) {
         if (parts[part_index].endsWith(':')) {
@@ -170,6 +179,7 @@ void SearchFilterWidget::filterEntries()
                         ->headerData(i, Qt::Horizontal)
                         .toString()
                         .toLower() == possibleColumnName) {
+                    tags.append(possibleColumnName + ':');
                     found = true;
                     index = i;
                     break;
@@ -185,6 +195,8 @@ void SearchFilterWidget::filterEntries()
             m_filterModel->setFilterForColumn(-1, parts[part_index]);
         }
     }
+
+    m_ui->searchField->setTags(tags);
 
     if (m_filterModel->rowCount() < m_filterModel->sourceModel()->rowCount()) {
         m_ui->filterResult->setText(

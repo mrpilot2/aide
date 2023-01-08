@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include <QAbstractItemDelegate>
 #include <QSortFilterProxyModel>
 #include <QWidget>
 
@@ -16,7 +17,9 @@ namespace Ui
 namespace aide
 {
     class HierarchicalId;
-}
+} // namespace aide
+
+class QAbstractItemDelegate;
 
 namespace aide::widgets
 {
@@ -32,12 +35,13 @@ namespace aide::widgets
 
         ~SearchFilterWidget() override;
 
-    public:
         void setSearchIcon(const QIcon& icon);
 
         void setSourceModel(QAbstractItemModel* model);
 
         QSortFilterProxyModel* getFilterModel();
+
+        QAbstractItemDelegate* getItemDelegate();
 
     private slots:
         void onUserRequestsToChangeVisibility(bool visible);
@@ -47,7 +51,6 @@ namespace aide::widgets
         void matchCaseStateChanged(bool state);
         void regexStateChanged(bool state);
 
-    private:
         void filterEntries();
 
     private:

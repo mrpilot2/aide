@@ -50,26 +50,7 @@ bool aide::widgets::MultiColumnSortFilterProxyModel::filterAcceptsRow(
 
     bool result = true;
     for (auto const& [column_index, filterText] : m_columnFilterMap) {
-        QRegularExpression regex(filterText);
-        if (m_option == FilterOption::Wildcard) {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-            regex = QRegularExpression::fromWildcard(filterText,
-                                                     filterCaseSensitivity());
-#elif QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-            regex = QRegularExpression(
-                QRegularExpression::wildcardToRegularExpression(filterText));
-#else
-            qDebug()
-                << "Wildcard matching not supported for Qt Versions < 5.12";
-#endif
-        }
-        if (filterCaseSensitivity() == Qt::CaseInsensitive) {
-            regex.setPatternOptions(regex.patternOptions().setFlag(
-                QRegularExpression::CaseInsensitiveOption));
-        } else {
-            regex.setPatternOptions(regex.patternOptions().setFlag(
-                QRegularExpression::CaseInsensitiveOption, false));
-        }
+        auto regex = getRegexForColumn(column_index);
 
         if (column_index == -1) {
             bool anyColumnMatches = false;
@@ -94,4 +75,35 @@ bool aide::widgets::MultiColumnSortFilterProxyModel::filterAcceptsRow(
     }
 
     return result;
+}
+
+QRegularExpression MultiColumnSortFilterProxyModel::getRegexForColumn(
+    int column) const
+{
+    if (m_columnFilterMap.count(column) <= 0) { return {}; }
+
+    auto filterText = m_columnFilterMap.at(column);
+
+    QRegularExpression regex(filterText);
+
+    if (m_option == FilterOption::Wildcard) {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        regex = QRegularExpression::fromWildcard(filterText,
+                                                 filterCaseSensitivity());
+#elif QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        regex = QRegularExpression(
+            QRegularExpression::wildcardToRegularExpression(filterText));
+#else
+        qDebug() << "Wildcard matching not supported for Qt Versions < 5.12";
+#endif
+    }
+    if (filterCaseSensitivity() == Qt::CaseInsensitive) {
+        regex.setPatternOptions(regex.patternOptions().setFlag(
+            QRegularExpression::CaseInsensitiveOption));
+    } else {
+        regex.setPatternOptions(regex.patternOptions().setFlag(
+            QRegularExpression::CaseInsensitiveOption, false));
+    }
+
+    return regex;
 }
