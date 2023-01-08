@@ -80,7 +80,7 @@ bool aide::widgets::MultiColumnSortFilterProxyModel::filterAcceptsRow(
 QRegularExpression MultiColumnSortFilterProxyModel::getRegexForColumn(
     int column) const
 {
-    if (m_columnFilterMap.count(column) <= 0) { return {}; }
+    if (m_columnFilterMap.count(column) == 0) { return {}; }
 
     auto filterText = m_columnFilterMap.at(column);
 
