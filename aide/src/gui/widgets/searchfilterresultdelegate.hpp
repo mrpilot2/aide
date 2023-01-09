@@ -22,8 +22,10 @@ namespace aide::widgets
                          const QRect& rect, const QString& text) const override;
 
     private:
-        void highlightMatches(const QRegularExpression& expression, QPainter* painter,
-                               const QStyleOptionViewItem& option, const QRect& rect) const;
+        void highlightMatches(const QRegularExpression& expression,
+                              QPainter* painter,
+                              const QStyleOptionViewItem& option,
+                              const QRect& rect) const;
 
         mutable QString m_currentValue;
         mutable QRegularExpression m_expr;
