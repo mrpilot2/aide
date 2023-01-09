@@ -40,9 +40,10 @@ void SearchFilterResultDelegate::paint(QPainter* painter,
     QItemDelegate::paint(painter, option, index);
 }
 
-void SearchFilterResultDelegate::drawDisplay(
-    QPainter* painter, const QStyleOptionViewItem& option, const QRect& rect,
-    const QString& text) const
+void SearchFilterResultDelegate::drawDisplay(QPainter* painter,
+                                             const QStyleOptionViewItem& option,
+                                             const QRect& rect,
+                                             const QString& text) const
 {
     highlightMatches(m_expr, painter, option, rect);
     highlightMatches(m_exprForAllColumns, painter, option, rect);
@@ -65,12 +66,22 @@ void SearchFilterResultDelegate::highlightMatches(
 #else
         for (const auto& match : expression.globalMatch(m_currentValue)) {
 #endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
             auto startPos = fontMetrics.horizontalAdvance(
                 m_currentValue.mid(0, match.capturedStart()));
             auto endPos =
                 startPos + fontMetrics.horizontalAdvance(m_currentValue.mid(
                                match.capturedStart(),
                                match.capturedEnd() - match.capturedStart()));
+#else
+            auto startPos =
+                fontMetrics.width(m_currentValue.mid(0, match.capturedStart()));
+            auto endPos =
+                startPos + fontMetrics.width(m_currentValue.mid(
+                               match.capturedStart(),
+                               match.capturedEnd() - match.capturedStart()));
+#endif
 
             auto rectStartPos{std::min(rect.left() + startPos, rect.right())};
             auto rectEndPos{std::min(rect.left() + endPos, rect.right())};
