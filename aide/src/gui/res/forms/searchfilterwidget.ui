@@ -99,8 +99,7 @@
      </property>
      <property name="icon">
       <iconset theme="search">
-       <normaloff>.</normaloff>.
-      </iconset>
+       <normaloff>.</normaloff>.</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -135,8 +134,7 @@
      </property>
      <property name="icon">
       <iconset theme="cancel">
-       <normaloff>.</normaloff>.
-      </iconset>
+       <normaloff>.</normaloff>.</iconset>
      </property>
      <property name="shortcut">
       <string>Esc</string>
@@ -172,7 +170,7 @@
   <customwidget>
    <class>aide::widgets::SearchLineEdit</class>
    <extends>QLineEdit</extends>
-   <header location="global">searchlineedit.hpp</header>
+   <header location="global">aide/gui/widgets/searchlineedit.hpp</header>
   </customwidget>
  </customwidgets>
  <tabstops>

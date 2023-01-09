@@ -19,6 +19,7 @@ target_include_directories(
   AideQt${QT_VERSION_MAJOR}Widgets
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}
           ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/
+          ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets
           ${CMAKE_CURRENT_LIST_DIR}/../../include/
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}>
          $<INSTALL_INTERFACE:include/aide>
