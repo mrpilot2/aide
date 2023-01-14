@@ -3,13 +3,13 @@
 
 #include <QTimer>
 
+#include "aide/sentry.hpp"
 #include "aidesettingsprovider.hpp"
 #include "applicationbuilder.hpp"
 #include "applicationconfig.hpp"
 #include "gui/mainwindow.hpp"
 #include "logger.hpp"
 #include "qtsettings.hpp"
-#include "sentry/sentry.hpp"
 #include "sentry/sentrycleanup.hpp"
 
 using aide::Application;

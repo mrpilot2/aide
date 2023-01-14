@@ -20,7 +20,7 @@ if(ENABLE_SENTRY_INTEGRATION)
   target_link_libraries(
     AideSentry
     PUBLIC sentry::sentry sentry-breakpad::sentry-breakpad
-    PRIVATE Qt::Core
+    PRIVATE Qt::Core AideBuildInformation
   )
 endif()
 

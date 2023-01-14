@@ -4,7 +4,7 @@
 
 #include <string>
 
-#include <aide/applicationconfig.hpp>
+#include "applicationconfig.hpp"
 
 namespace aide
 {
@@ -14,6 +14,10 @@ namespace aide
         static void initializeConnection(const SentryConfig& config);
 
         static void closeConnection();
+
+        static void captureException(const std::exception& exception);
+
+        static void captureUnknownException();
     };
 } // namespace aide
 

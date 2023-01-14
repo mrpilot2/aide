@@ -2,7 +2,7 @@
 
 #include "sentrycleanup.hpp"
 
-#include "sentry.hpp"
+#include "aide/sentry.hpp"
 
 using aide::SentryCleanup;
 
