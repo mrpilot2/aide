@@ -14,7 +14,6 @@ target_sources(
           mainwindowinterface.cpp
           qtsettings.cpp
           settingsinterface.cpp
-          settingsproviderinterface.cpp
           settings/settingsdialogchangepagecontroller.cpp
           settings/settingsdialoggeometryandstate.cpp
           settings/settingspage.cpp

@@ -1,38 +1,36 @@
-#ifndef AIDE_SEARCHLINEEDIT_HPP
-#define AIDE_SEARCHLINEEDIT_HPP
 
-#include <memory>
+#ifndef AIDE_SEARCH_LINE_EDIT_HPP
+#define AIDE_SEARCH_LINE_EDIT_HPP
 
-#include <QWidget>
+#include <QColor>
+#include <QLineEdit>
+#include <QList>
+#include <QRect>
+#include <QSet>
+#include <QString>
 
-namespace Ui
+class QPaintEvent;
+
+namespace aide::widgets
 {
-    class SearchLineEdit;
-} // namespace Ui
-
-namespace aide
-{
-    namespace gui
+    class SearchLineEdit : public QLineEdit
     {
-        class SearchLineEdit : public QWidget
-        {
-            Q_OBJECT
-        public:
-            explicit SearchLineEdit(QWidget* parent);
+    public:
+        using QLineEdit::QLineEdit;
 
-            ~SearchLineEdit() override;
+        void setTags(QList<QString> tags);
 
-            void setSearchHint(const std::string& searchHint);
+    protected:
+        void paintEvent(QPaintEvent* event) override;
 
-            void setSearchIcon(const QIcon& icon);
+    private:
+        QList<QRect> calculateHighlightRects();
 
-        signals:
-            void textChanged(const QString& text);
+        QSet<QString> m_tags;
 
-        private:
-            std::unique_ptr<Ui::SearchLineEdit> m_ui;
-        };
-    } // namespace gui
-} // namespace aide
+        QColor m_highlightColor{0, 96, 100, 150};
+    };
 
-#endif // AIDE_SEARCHLINEEDIT_HPP
+} // namespace aide::widgets
+
+#endif // AIDE_SEARCH_LINE_EDIT_HPP

@@ -15,7 +15,7 @@ namespace aide
 {
     class ApplicationBuilder;
     class ActionRegistry;
-    class SettingsProviderInterface;
+    class AideSettingsProvider;
 
     namespace gui
     {
@@ -49,8 +49,7 @@ namespace aide
         [[nodiscard]] std::shared_ptr<gui::TranslatorInterface> translator()
             const;
 
-        [[nodiscard]] std::shared_ptr<SettingsProviderInterface>
-        settingsProvider();
+        [[nodiscard]] std::shared_ptr<AideSettingsProvider> settingsProvider();
 
         [[nodiscard]] ActionRegistryInterfacePtr actionRegistry() const;
 

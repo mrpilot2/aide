@@ -22,7 +22,8 @@ void AboutAideUseCase::showAboutAideInformation()
 
     info.versionInfo = aide::build_information::AIDE_VERSION_STRING;
     info.gitHash     = aide::build_information::GIT_HASH;
-    info.buildDate   = QLocale("en_US").toDate(__DATE__, "MMM d yyyy");
+    info.buildDate =
+        QLocale("en_US").toDate(QString(__DATE__).simplified(), "MMM d yyyy");
 
     info.whatsNewUrl =
         "https://github.com/mrpilot2/aide/releases/tag/v" + info.versionInfo;

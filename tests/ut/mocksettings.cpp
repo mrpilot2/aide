@@ -4,8 +4,6 @@
 
 #include <QVariant>
 
-#include "hierarchicalid.hpp"
-
 using aide::test::MockSettings;
 
 void aide::test::MockSettings::setValue(const aide::HierarchicalId& groupAndKey,

@@ -9,7 +9,6 @@ add_library(Aide::AideApplication ALIAS AideQt${QT_VERSION_MAJOR}Application)
 target_sources(
   AideQt${QT_VERSION_MAJOR}Application
   PRIVATE $<TARGET_OBJECTS:AideCore> $<TARGET_OBJECTS:AideGui>
-          $<TARGET_OBJECTS:AideQt${QT_VERSION_MAJOR}Widgets>
           $<TARGET_OBJECTS:AideLogger> application.cpp applicationbuilder.cpp
 )
 

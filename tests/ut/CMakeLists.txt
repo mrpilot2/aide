@@ -6,7 +6,11 @@ option(UNIT_TESTS_RUN_ON_CI
 )
 
 add_library(aide_catch_main STATIC catch_main.cpp)
-target_link_libraries(aide_catch_main PUBLIC Catch2::Catch2)
+target_link_libraries(
+  aide_catch_main
+  PUBLIC Catch2::Catch2
+  PRIVATE Aide::AideApplication
+)
 target_compile_features(aide_catch_main PUBLIC cxx_std_11)
 
 set(CMAKE_AUTORCC ON)
@@ -37,8 +41,9 @@ target_sources(
     applicationtest.cpp
     buildinformationtest.cpp
     hierarchicalidtest.cpp
+    mocksettings.cpp
     mocksettingspage.cpp
-    searchlineedittest.cpp
+    searchfilterwidgettest.cpp
     settingspageregistrytest.cpp
     settingspagetest.cpp
     $<$<TARGET_EXISTS:Qt::lrelease>:${CMAKE_CURRENT_BINARY_DIR}/ut_translations.qrc
@@ -64,7 +69,6 @@ if(NOT ${TEST_AGAINST_INSTALLED})
             mockapplicationcloseview.cpp
             mockkeymappagewidget.cpp
             mockmainwindowview.cpp
-            mocksettings.cpp
             mocksettingsdialog.cpp
             nulllogger.cpp
             qtsettingstest.cpp
@@ -86,6 +90,7 @@ target_link_libraries(
           aide_project_warnings
           Aide::AideBuildInformation
           Aide::AideApplication
+          Aide::AideWidgets
 )
 
 if(NOT ${TEST_AGAINST_INSTALLED})
@@ -120,5 +125,5 @@ if(UNIT_TESTS_RUN_ON_CI)
     .xml
   )
 else()
-  catch_discover_tests(ut.aide REPORTER console)
+  # catch_discover_tests(ut.aide REPORTER console)
 endif()

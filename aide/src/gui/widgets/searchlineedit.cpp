@@ -1,32 +1,76 @@
-#include "widgets/searchlineedit.hpp"
 
-#include <QIcon>
-#include <QObject>
+#include "searchlineedit.hpp"
 
-#include "ui_searchlineedit.h"
+#include <QFontMetrics>
+#include <QPaintEvent>
+#include <QPainter>
+#include <QPainterPath>
 
-using aide::gui::SearchLineEdit;
+using aide::widgets::SearchLineEdit;
 
-const int ICON_SIZE{16};
-
-SearchLineEdit::SearchLineEdit(QWidget* parent)
-    : QWidget(parent)
-    , m_ui{new Ui::SearchLineEdit}
+void SearchLineEdit::setTags(QList<QString> tags)
 {
-    m_ui->setupUi(this);
-
-    connect(m_ui->searchField, &QLineEdit::textChanged, this,
-            &SearchLineEdit::textChanged);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    m_tags = QSet<QString>(tags.begin(), tags.end());
+#else
+    m_tags = tags.toSet();
+#endif
 }
 
-SearchLineEdit::~SearchLineEdit() = default;
-
-void SearchLineEdit::setSearchHint(const std::string& searchHint)
+void SearchLineEdit::paintEvent(QPaintEvent* event)
 {
-    m_ui->searchHint->setText(QString::fromStdString(searchHint));
+    QLineEdit::paintEvent(event);
+
+    QPainter painter(this);
+
+    auto rects = calculateHighlightRects();
+
+    for (auto& rect : rects) {
+        QPainterPath path;
+        path.addRoundedRect(rect, 5, 5);
+        painter.fillPath(path, m_highlightColor);
+    }
 }
 
-void SearchLineEdit::setSearchIcon(const QIcon& icon)
+QList<QRect> SearchLineEdit::calculateHighlightRects()
 {
-    m_ui->searchIcon->setPixmap(icon.pixmap(ICON_SIZE, ICON_SIZE));
+    QList<QRect> rects;
+
+    for (const auto& tag : m_tags) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+        int pos = 0;
+#else
+        qsizetype pos = 0;
+#endif
+        const auto currentText{this->text().toLower()};
+        while (pos >= 0) {
+            pos = currentText.indexOf(tag.toLower(), pos);
+
+            if (pos >= 0) {
+                auto fontMetrics(this->fontMetrics());
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
+                const auto startPos =
+                    fontMetrics.horizontalAdvance(this->text().mid(0, pos));
+                const auto endPos =
+                    startPos + fontMetrics.horizontalAdvance(
+                                   this->text().mid(pos, tag.length()));
+#else
+                const auto startPos =
+                    fontMetrics.width(this->text().mid(0, pos));
+                const auto endPos =
+                    startPos +
+                    fontMetrics.width(this->text().mid(pos, tag.length()));
+#endif
+                const QRect tagsRect{QPoint(this->rect().left() + 2 + startPos,
+                                            this->rect().top() + 2),
+                                     QPoint(this->rect().left() + 2 + endPos,
+                                            this->rect().bottom() - 2)};
+
+                rects.append(tagsRect);
+                pos += tag.length();
+            }
+        }
+    }
+
+    return rects;
 }
