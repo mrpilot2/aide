@@ -12,7 +12,6 @@
 using aide::Application;
 using aide::ApplicationBuilder;
 using aide::LoggerPtr;
-using aide::SettingsProviderInterface;
 using aide::gui::TranslatorInterface;
 
 // NOLINTNEXTLINE

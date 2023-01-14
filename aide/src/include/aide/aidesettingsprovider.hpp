@@ -2,7 +2,7 @@
 #ifndef AIDE_AIDE_SETTINGS_PROVIDER_HPP
 #define AIDE_AIDE_SETTINGS_PROVIDER_HPP
 
-#include "settingsproviderinterface.hpp"
+#include <memory>
 
 namespace aide
 {

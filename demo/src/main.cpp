@@ -6,7 +6,6 @@
 #include <aide/application.hpp>
 #include <aide/gui/translatorinterface.hpp>
 #include <aide/settings/settingspageregistry.hpp>
-#include <aide/settingsproviderinterface.hpp>
 
 #include "demosettingspage.hpp"
 
