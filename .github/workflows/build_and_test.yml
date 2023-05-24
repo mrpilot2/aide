@@ -69,7 +69,7 @@ jobs:
       - name: Install pip dependencies
         run: |
           pip3 install wheel setuptools
-          pip3 install conan
+          pip3 install conan==1.60.0
 
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1.13
