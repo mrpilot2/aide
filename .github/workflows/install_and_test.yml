@@ -8,13 +8,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        qt: ["5.15.2", "6.*"]
+        qt: [ "5.15.2", "6.5.0" ]
 
         include:
-        - qt: "5.15.2"
-          qt_name: Qt5
-        - qt: "6.*"
-          qt_name: Qt6
+          - qt: "5.15.2"
+            qt_name: Qt5
+          - qt: "6.5.0"
+            qt_name: Qt6
 
     runs-on: ubuntu-20.04
 
@@ -38,8 +38,7 @@ jobs:
       uses: jurplel/install-qt-action@v3
       with:
         version: ${{ matrix.qt }}
-        setup-python: false
-        aqtversion: ">=2.1.0"
+        aqtversion: '==3.1.*'
 
     - name: "Static Release: Configure"
       working-directory: aide

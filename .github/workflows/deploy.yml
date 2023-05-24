@@ -15,7 +15,7 @@ jobs:
         with:
           fetch-depth: 0
           
-      - uses: seanmiddleditch/gha-setup-ninja@master
+      - uses: abdes/gha-setup-ninja@master
 
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -41,9 +41,10 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
-          setup-python: false
-          aqtversion: ">=2.1.0"
- 
+          version: '6.5.0'
+          aqtversion: '==3.1.*'
+
+
       - name: Set CMake arguments
         id: cmake_args
         run: echo "CMAKE_ARGS=-DUNIT_TESTS_RUN_ON_CI=1 -DWARNINGS_AS_ERRORS=OFF" >> $GITHUB_OUTPUT

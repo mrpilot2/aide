@@ -31,9 +31,12 @@ jobs:
           key: ${{ runner.os }}-QtCache
 
       - name: Install Qt
-        uses: jurplel/install-qt-action@v2
+        uses: jurplel/install-qt-action@v3
         with:
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
+          version: '6.5.0'
+          aqtversion: '==3.1.*'
+
 
       - name: Install Doxygen
         run:
