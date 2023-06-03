@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.3.0](https://github.com/mrpilot2/aide/compare/v0.2.1...v0.3.0) (2023-06-03)
+
+
+### Features
+
+* **SearchLineEdit:** add highlight delegates ([7cbfb46](https://github.com/mrpilot2/aide/commit/7cbfb4675a06b98b00a05f3cb1689eda0de2bf07))
+* **SearchLineEdit:** add options to match case and for regex ([a641aab](https://github.com/mrpilot2/aide/commit/a641aabc08fc726b7284f00ed5431af20ff0b1b8))
+* **SearchLineEdit:** first useful implementation ([6d5bc8a](https://github.com/mrpilot2/aide/commit/6d5bc8ab0f638bf35d00996009fa29855ce16713))
+* **SearchLineEdit:** gui settings might be null ([7eff1ff](https://github.com/mrpilot2/aide/commit/7eff1ff426d9858f1ed4bfec47399d13b17113d4))
+* **SearchLineEdit:** save/load GUI state ([548cd19](https://github.com/mrpilot2/aide/commit/548cd19ba97e6a7b0c05034bd9c5f15e7e340600))
+* **SearchLineEdit:** set visibility of widget after construction ([16cbff9](https://github.com/mrpilot2/aide/commit/16cbff9ec5f6f5973f5e365120380854b6ffb2eb))
+* **SearchLineEdit:** wildcard matching not allowed for Qt &lt; 5.12 ([922ea32](https://github.com/mrpilot2/aide/commit/922ea32884436277f7f6260bf9b768b16246c929))
+
+
+### Bug Fixes
+
+* **about:** correct representation of build date ([d4a2d71](https://github.com/mrpilot2/aide/commit/d4a2d71dbb33b90847f96a5c247452119e931294))
+* remove memory leaks ([1155d13](https://github.com/mrpilot2/aide/commit/1155d137e6e94ea1bb18179e2ade6fe4253a4d8b))
+
 ## [0.2.1](https://github.com/mrpilot2/aide/compare/v0.2.0...v0.2.1) (2022-12-28)
 
 
