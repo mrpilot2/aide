@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['qtsettings_647',['QtSettings',['../classaide_1_1QtSettings.html#a7996423baccaec6aa87bda7241775f46',1,'aide::QtSettings']]]
+  ['qtsettings_684',['QtSettings',['../classaide_1_1QtSettings.html#a7996423baccaec6aa87bda7241775f46',1,'aide::QtSettings']]]
 ];

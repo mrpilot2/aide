@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>aide: /home/runner/work/aide/aide/aide/src/core/aidesettingsprovider.hpp Source File</title>
+<title>aide: /home/runner/work/aide/aide/aide/src/include/aide/aidesettingsprovider.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,7 +62,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_aebb8dcc11953d78e620bbef0b9e2183.html">core</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b0856f6b0d80ccb263b2f415c91f9e17.html">include</a></li><li class="navelem"><a class="el" href="dir_82fa30340bc98e33006465db37b638fe.html">aide</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -74,37 +74,41 @@ $(function() {
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#ifndef AIDE_AIDE_SETTINGS_PROVIDER_HPP</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#define AIDE_AIDE_SETTINGS_PROVIDER_HPP</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="settingsproviderinterface_8hpp.html">aide/settingsproviderinterface.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceaide.html">aide</a></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keyword">class </span>SettingsInterface;</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classaide_1_1AideSettingsProvider.html">   11</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classaide_1_1AideSettingsProvider.html">AideSettingsProvider</a> : <span class="keyword">public</span> <a class="code" href="classaide_1_1SettingsProviderInterface.html">SettingsProviderInterface</a></div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classaide_1_1AideSettingsProvider.html">   11</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classaide_1_1AideSettingsProvider.html">AideSettingsProvider</a></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    {</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <a class="code" href="classaide_1_1AideSettingsProvider.html#a729ef094bf96430256cba6a1aa65c077">AideSettingsProvider</a>();</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        [[nodiscard]] std::shared_ptr&lt;SettingsInterface&gt; <a class="code" href="classaide_1_1AideSettingsProvider.html#a7a84bb6cb656132f9ba7b4aed13e40f9">versionableSettings</a>()</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        [[nodiscard]] std::shared_ptr&lt;SettingsInterface&gt; <a class="code" href="classaide_1_1AideSettingsProvider.html#ac907c1cfc4001817217e783673cb3269">unversionableSettings</a>()</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        std::shared_ptr&lt;SettingsInterface&gt; m_versionableSettings;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        std::shared_ptr&lt;SettingsInterface&gt; m_unversionableSettings;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    };</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;} <span class="comment">// namespace aide</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// AIDE_AIDE_SETTINGS_PROVIDER_HPP</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classaide_1_1AideSettingsProvider.html#af12dc969ebb7278699b7beb0a5121af5">provideVersionableSettings</a>(</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;            std::shared_ptr&lt;SettingsInterface&gt; settings);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classaide_1_1AideSettingsProvider.html#a3f6890777e3ff991168a750188199138">provideUnVersionableSettings</a>(</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            std::shared_ptr&lt;SettingsInterface&gt; settings);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        [[nodiscard]] <span class="keyword">static</span> std::shared_ptr&lt;SettingsInterface&gt;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <a class="code" href="classaide_1_1AideSettingsProvider.html#af5b1d35e73ad081b6ccc2be11e4df008">versionableSettings</a>();</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        [[nodiscard]] <span class="keyword">static</span> std::shared_ptr&lt;SettingsInterface&gt;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <a class="code" href="classaide_1_1AideSettingsProvider.html#a2442399ee084f8cf68203dfa0a81673a">unversionableSettings</a>();</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">static</span> std::shared_ptr&lt;SettingsInterface&gt; m_versionableSettings;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">static</span> std::shared_ptr&lt;SettingsInterface&gt; m_unversionableSettings;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    };</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;} <span class="comment">// namespace aide</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// AIDE_AIDE_SETTINGS_PROVIDER_HPP</span></div>
 <div class="ttc" id="aclassaide_1_1AideSettingsProvider_html"><div class="ttname"><a href="classaide_1_1AideSettingsProvider.html">aide::AideSettingsProvider</a></div><div class="ttdef"><b>Definition:</b> aidesettingsprovider.hpp:12</div></div>
-<div class="ttc" id="aclassaide_1_1AideSettingsProvider_html_a729ef094bf96430256cba6a1aa65c077"><div class="ttname"><a href="classaide_1_1AideSettingsProvider.html#a729ef094bf96430256cba6a1aa65c077">aide::AideSettingsProvider::AideSettingsProvider</a></div><div class="ttdeci">AideSettingsProvider()</div><div class="ttdef"><b>Definition:</b> aidesettingsprovider.cpp:10</div></div>
-<div class="ttc" id="aclassaide_1_1AideSettingsProvider_html_a7a84bb6cb656132f9ba7b4aed13e40f9"><div class="ttname"><a href="classaide_1_1AideSettingsProvider.html#a7a84bb6cb656132f9ba7b4aed13e40f9">aide::AideSettingsProvider::versionableSettings</a></div><div class="ttdeci">std::shared_ptr&lt; SettingsInterface &gt; versionableSettings() const override</div><div class="ttdef"><b>Definition:</b> aidesettingsprovider.cpp:15</div></div>
-<div class="ttc" id="aclassaide_1_1AideSettingsProvider_html_ac907c1cfc4001817217e783673cb3269"><div class="ttname"><a href="classaide_1_1AideSettingsProvider.html#ac907c1cfc4001817217e783673cb3269">aide::AideSettingsProvider::unversionableSettings</a></div><div class="ttdeci">std::shared_ptr&lt; SettingsInterface &gt; unversionableSettings() const override</div><div class="ttdef"><b>Definition:</b> aidesettingsprovider.cpp:21</div></div>
-<div class="ttc" id="aclassaide_1_1SettingsProviderInterface_html"><div class="ttname"><a href="classaide_1_1SettingsProviderInterface.html">aide::SettingsProviderInterface</a></div><div class="ttdef"><b>Definition:</b> settingsproviderinterface.hpp:11</div></div>
+<div class="ttc" id="aclassaide_1_1AideSettingsProvider_html_a2442399ee084f8cf68203dfa0a81673a"><div class="ttname"><a href="classaide_1_1AideSettingsProvider.html#a2442399ee084f8cf68203dfa0a81673a">aide::AideSettingsProvider::unversionableSettings</a></div><div class="ttdeci">static std::shared_ptr&lt; SettingsInterface &gt; unversionableSettings()</div><div class="ttdef"><b>Definition:</b> aidesettingsprovider.cpp:34</div></div>
+<div class="ttc" id="aclassaide_1_1AideSettingsProvider_html_a3f6890777e3ff991168a750188199138"><div class="ttname"><a href="classaide_1_1AideSettingsProvider.html#a3f6890777e3ff991168a750188199138">aide::AideSettingsProvider::provideUnVersionableSettings</a></div><div class="ttdeci">static void provideUnVersionableSettings(std::shared_ptr&lt; SettingsInterface &gt; settings)</div><div class="ttdef"><b>Definition:</b> aidesettingsprovider.cpp:23</div></div>
+<div class="ttc" id="aclassaide_1_1AideSettingsProvider_html_af12dc969ebb7278699b7beb0a5121af5"><div class="ttname"><a href="classaide_1_1AideSettingsProvider.html#af12dc969ebb7278699b7beb0a5121af5">aide::AideSettingsProvider::provideVersionableSettings</a></div><div class="ttdeci">static void provideVersionableSettings(std::shared_ptr&lt; SettingsInterface &gt; settings)</div><div class="ttdef"><b>Definition:</b> aidesettingsprovider.cpp:17</div></div>
+<div class="ttc" id="aclassaide_1_1AideSettingsProvider_html_af5b1d35e73ad081b6ccc2be11e4df008"><div class="ttname"><a href="classaide_1_1AideSettingsProvider.html#af5b1d35e73ad081b6ccc2be11e4df008">aide::AideSettingsProvider::versionableSettings</a></div><div class="ttdeci">static std::shared_ptr&lt; SettingsInterface &gt; versionableSettings()</div><div class="ttdef"><b>Definition:</b> aidesettingsprovider.cpp:29</div></div>
 <div class="ttc" id="anamespaceaide_html"><div class="ttname"><a href="namespaceaide.html">aide</a></div><div class="ttdef"><b>Definition:</b> applicationbuilder.hpp:21</div></div>
-<div class="ttc" id="asettingsproviderinterface_8hpp_html"><div class="ttname"><a href="settingsproviderinterface_8hpp.html">settingsproviderinterface.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

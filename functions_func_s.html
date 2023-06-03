@@ -75,8 +75,8 @@ $(function() {
 , <a class="el" href="classaide_1_1core_1_1SettingsDialogGeometryAndState.html#a6d1e12c430da04f292d3025f6ed36917">aide::core::SettingsDialogGeometryAndState</a>
 , <a class="el" href="classaide_1_1core_1_1SettingsDialogGeometryAndStateController.html#a25184b6ed20aaa6d77d15f4e6c674473">aide::core::SettingsDialogGeometryAndStateController</a>
 </li>
-<li>SearchLineEdit()
-: <a class="el" href="classaide_1_1gui_1_1SearchLineEdit.html#a192605461464830e200c2910d9d0272b">aide::gui::SearchLineEdit</a>
+<li>SearchFilterWidget()
+: <a class="el" href="classaide_1_1widgets_1_1SearchFilterWidget.html#a585596d13a425ca3f1897a76d0aa1ec5">aide::widgets::SearchFilterWidget</a>
 </li>
 <li>selectedTreeViewItem()
 : <a class="el" href="classaide_1_1core_1_1SettingsDialogGeometryAndState.html#a651a016c484a16f8d561389e3cc44519">aide::core::SettingsDialogGeometryAndState</a>
@@ -92,6 +92,12 @@ $(function() {
 : <a class="el" href="classaide_1_1core_1_1KeyMapTreeModel.html#a3ec55e0fbe816093573676385cd2883e">aide::core::KeyMapTreeModel</a>
 , <a class="el" href="classaide_1_1core_1_1TreeItem.html#ae3f9ac50ef01d70ea366a42cf60f978f">aide::core::TreeItem</a>
 </li>
+<li>setFilterForColumn()
+: <a class="el" href="classaide_1_1widgets_1_1MultiColumnSortFilterProxyModel.html#a111d0b62aaf548a54aecf0eee232234c">aide::widgets::MultiColumnSortFilterProxyModel</a>
+</li>
+<li>setFilterOption()
+: <a class="el" href="classaide_1_1widgets_1_1MultiColumnSortFilterProxyModel.html#acbe051301eba28d0414b65c801e03e53">aide::widgets::MultiColumnSortFilterProxyModel</a>
+</li>
 <li>setHiddenUserData()
 : <a class="el" href="classaide_1_1core_1_1TreeItem.html#a22b693730066573d36a9edd1602175bf">aide::core::TreeItem</a>
 </li>
@@ -102,11 +108,8 @@ $(function() {
 : <a class="el" href="classaide_1_1widgets_1_1AideTableView.html#aaf8509dc68b5dd8ac4934f24a23d6cdf">aide::widgets::AideTableView</a>
 , <a class="el" href="classaide_1_1widgets_1_1AideTreeView.html#ac1a3d5f393d8cce1b65270c8219c71d6">aide::widgets::AideTreeView</a>
 </li>
-<li>setSearchHint()
-: <a class="el" href="classaide_1_1gui_1_1SearchLineEdit.html#a86d47f3873c745587a40c470794bfb42">aide::gui::SearchLineEdit</a>
-</li>
 <li>setSearchIcon()
-: <a class="el" href="classaide_1_1gui_1_1SearchLineEdit.html#a5431bdfdfca6309f0900f43aefbb04ce">aide::gui::SearchLineEdit</a>
+: <a class="el" href="classaide_1_1widgets_1_1SearchFilterWidget.html#acc7e3c2aa879738fe955b240d3fd7007">aide::widgets::SearchFilterWidget</a>
 </li>
 <li>setSelectedGroupIndex()
 : <a class="el" href="classaide_1_1core_1_1SettingsDialogInterface.html#a04da19f4fbcebce8ec106f4e81d35d0c">aide::core::SettingsDialogInterface</a>
@@ -115,6 +118,12 @@ $(function() {
 <li>setSelectedPageDisplayName()
 : <a class="el" href="classaide_1_1core_1_1SettingsDialogInterface.html#a611d128f7627d36d8b0b36e514a4995e">aide::core::SettingsDialogInterface</a>
 , <a class="el" href="classaide_1_1gui_1_1SettingsDialog.html#aaefd1e4c6115ed93c442d9101dbcf29c">aide::gui::SettingsDialog</a>
+</li>
+<li>setSourceModel()
+: <a class="el" href="classaide_1_1widgets_1_1SearchFilterWidget.html#a3d999eae50f6f2c9eedb97e4f44b63f1">aide::widgets::SearchFilterWidget</a>
+</li>
+<li>setTags()
+: <a class="el" href="classaide_1_1widgets_1_1SearchLineEdit.html#a2a87c2f9a2b10f094305777ad66a4047">aide::widgets::SearchLineEdit</a>
 </li>
 <li>SettingsDialog()
 : <a class="el" href="classaide_1_1gui_1_1SettingsDialog.html#ac5ab03e7361d2d6fe1232ee8ce1f0c26">aide::gui::SettingsDialog</a>
@@ -145,8 +154,8 @@ $(function() {
 , <a class="el" href="classSettingsPageRegistryPrivate.html#af0b8de5174fdb7abe77dd435d0848c93">SettingsPageRegistryPrivate</a>
 </li>
 <li>settingsProvider()
-: <a class="el" href="classaide_1_1Application.html#a40089b58876394f97a85fc0af1315426">aide::Application</a>
-, <a class="el" href="classaide_1_1ApplicationBuilder.html#a494a60eb65bccc9972ae7f3a68e80a49">aide::ApplicationBuilder</a>
+: <a class="el" href="classaide_1_1Application.html#ae3c65207179d877f87486d0f1c519815">aide::Application</a>
+, <a class="el" href="classaide_1_1ApplicationBuilder.html#aea536f9301719ab27bd2c1e4a7306b58">aide::ApplicationBuilder</a>
 </li>
 <li>setTreeModel()
 : <a class="el" href="classaide_1_1core_1_1KeyMapPageWidgetInterface.html#a0d2d7172bb4f1771bcacee2a78b2c3b2">aide::core::KeyMapPageWidgetInterface</a>
@@ -190,14 +199,12 @@ $(function() {
 : <a class="el" href="classaide_1_1core_1_1SettingsDialogInterface.html#a29b94499dc880c9273d5ef9f559a171e">aide::core::SettingsDialogInterface</a>
 , <a class="el" href="classaide_1_1gui_1_1SettingsDialog.html#a58184fb4891d5c4e52a49581926f8926">aide::gui::SettingsDialog</a>
 </li>
-<li>showSettingsDialog()
-: <a class="el" href="classaide_1_1core_1_1ShowSettingsDialog.html#a7a09941d17fcd76a46280643cfe99a1d">aide::core::ShowSettingsDialog</a>
-</li>
 <li>ShowSettingsDialog()
 : <a class="el" href="classaide_1_1core_1_1ShowSettingsDialog.html#a536ec1bd3d252fbd2911a749c2d15fd8">aide::core::ShowSettingsDialog</a>
 </li>
 <li>showSettingsDialog()
-: <a class="el" href="classaide_1_1core_1_1ShowSettingsDialogController.html#a384bee0a2281019ea6e987bbb1deee3f">aide::core::ShowSettingsDialogController</a>
+: <a class="el" href="classaide_1_1core_1_1ShowSettingsDialog.html#a7a09941d17fcd76a46280643cfe99a1d">aide::core::ShowSettingsDialog</a>
+, <a class="el" href="classaide_1_1core_1_1ShowSettingsDialogController.html#a384bee0a2281019ea6e987bbb1deee3f">aide::core::ShowSettingsDialogController</a>
 </li>
 </ul>
 </div><!-- contents -->

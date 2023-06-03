@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['userselection_783',['UserSelection',['../namespaceaide_1_1core.html#a260cb790cefaddd2b83c6cbc68b41650',1,'aide::core']]]
+  ['filteroption_820',['FilterOption',['../namespaceaide_1_1widgets.html#aead4e8894f51f19eca5aeafc29560c51',1,'aide::widgets']]]
 ];

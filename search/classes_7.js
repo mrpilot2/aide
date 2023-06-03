@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['qtsettings_420',['QtSettings',['../classaide_1_1QtSettings.html',1,'aide']]]
+  ['qtsettings_443',['QtSettings',['../classaide_1_1QtSettings.html',1,'aide']]]
 ];
