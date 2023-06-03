@@ -76,6 +76,7 @@ if(NOT ${TEST_AGAINST_INSTALLED})
             settingspagegrouptreemodeltest.cpp
             showkeymaptest.cpp
             showsettingsdialogtest.cpp
+            systemmemorytest.cpp
             treeitemtest.cpp
   )
 endif()
@@ -91,6 +92,7 @@ target_link_libraries(
           Aide::AideBuildInformation
           Aide::AideApplication
           Aide::AideWidgets
+          Aide::AideUtils
 )
 
 if(NOT ${TEST_AGAINST_INSTALLED})

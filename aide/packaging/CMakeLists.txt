@@ -6,6 +6,7 @@ install(
           AideCore
           AideGui
           AideLogger
+          AideUtils
           AideQt${QT_VERSION_MAJOR}Widgets
           aide_project_warnings
           aide_project_coverage
