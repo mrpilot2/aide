@@ -24,7 +24,7 @@ TEST_CASE("A new root tree item")
 
     SECTION("has no parent")
     {
-        REQUIRE(item.parent() == nullptr);
+        REQUIRE(item.parent().lock() == nullptr);
     }
 
     SECTION("has no children")
@@ -61,8 +61,9 @@ TEST_CASE("First new child tree item")
 
     SECTION("has parent")
     {
-        REQUIRE(child->parent() != nullptr);
-        REQUIRE(child->parent()->data(0).toString().toStdString() == "abc");
+        REQUIRE(child->parent().lock() != nullptr);
+        REQUIRE(child->parent().lock()->data(0).toString().toStdString() ==
+                "abc");
     }
 
     SECTION("has no children")
@@ -101,7 +102,7 @@ TEST_CASE("Second new child item")
 
     SECTION("has same parent as first child")
     {
-        REQUIRE(child2->parent() == child1->parent());
+        REQUIRE(child2->parent().lock() == child1->parent().lock());
     }
 
     SECTION("can be accessed from parent item")

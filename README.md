@@ -16,6 +16,7 @@ A modern, C++ native GUI application framework based on QT5 - using C++11 and la
 
 -   [Contributors](#contributors-)
 -   [License](#license)
+-   [Development](#development)
 
 ## Contributors ✨
 
@@ -29,3 +30,13 @@ This project is licensed under the terms of the [GPLv3](https://github.com/mrpil
 
 However, aIDE includes several third-party Open-Source libraries, which are licensed under their own respective Open-Source licenses.
 These licenses can be found in the [3rd Party Licenses](https://github.com/mrpilot2/aide/blob/develop/3rd-party-licenses.md)
+
+## Development
+
+### How to release
+
+This project uses [Release please](https://github.com/googleapis/release-please) Github action to automatically create releases.
+
+The following steps are required to create a release:
+1. Merge the latest change from ``develop`` into ``main`` branch
+2. Merge the automatically created pull request
