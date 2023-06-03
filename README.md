@@ -35,8 +35,9 @@ These licenses can be found in the [3rd Party Licenses](https://github.com/mrpil
 
 ### How to release
 
-This project uses [Release please](https://github.com/googleapis/release-please) Github action to automatically create releases.
+This project uses [Release please](https://github.com/googleapis/release-please) GitHub action to automatically create releases.
 
 The following steps are required to create a release:
-1. Merge the latest change from ``develop`` into ``main`` branch
-2. Merge the automatically created pull request
+1.  Make sure the latest commit on ``develop`` passes all checks
+2.  Merge the latest change from ``develop`` into ``main`` branch
+3.  Merge the automatically created pull request after it passes all checks
