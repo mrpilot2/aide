@@ -43,7 +43,8 @@ ApplicationBuilder::ApplicationBuilder()
           m_mainWindow, m_applicationClose, m_mainWindowGeometryAndState,
           m_showSettingsDialog))
     , m_keyMapPage(std::make_shared<KeymapPage>(
-          m_actionRegistry, new aide::gui::KeymapPageWidget()))
+          m_actionRegistry,
+          new aide::gui::KeymapPageWidget(m_settingsDialog.get())))
     , m_keymapPageController(std::make_shared<gui::KeyMapPageWidgetController>(
           m_keyMapPage->getTreeModel(), m_keyMapPage->keyMapWidget()))
 {

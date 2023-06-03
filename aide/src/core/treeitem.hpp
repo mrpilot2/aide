@@ -30,12 +30,12 @@ namespace aide::core
         [[nodiscard]] QVariant data(size_t column) const;
         bool setData(size_t column, const QVariant& data);
         [[nodiscard]] int64_t row() const;
-        [[nodiscard]] TreeItemPtr parent() const;
+        [[nodiscard]] std::weak_ptr<TreeItem> parent() const;
 
     private:
         std::vector<TreeItemPtr> childItems;
         std::vector<QVariant> itemData;
-        TreeItemPtr parentItem;
+        std::weak_ptr<TreeItem> parentItem;
 
         QVariant hiddenUserData;
     };

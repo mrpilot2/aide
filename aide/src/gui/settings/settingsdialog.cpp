@@ -37,7 +37,10 @@ SettingsDialog::SettingsDialog(QWidget* parent)
     ui->splitter->setStretchFactor(1, 3);
 }
 
-SettingsDialog::~SettingsDialog() = default;
+SettingsDialog::~SettingsDialog()
+{
+    delete ui->defaultScrollAreaWidget;
+}
 
 void SettingsDialog::setController(SettingsDialogControllerPtr controller)
 {

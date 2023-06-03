@@ -7,7 +7,7 @@ using aide::core::TreeItemPtr;
 
 TreeItem::TreeItem(std::vector<QVariant> data, TreeItemPtr parent)
     : itemData(std::move(data))
-    , parentItem(std::move(parent))
+    , parentItem(parent)
 {}
 
 void TreeItem::appendChild(TreeItemPtr child)
@@ -58,8 +58,8 @@ bool aide::core::TreeItem::setData(size_t column, const QVariant& data)
 
 int64_t TreeItem::row() const
 {
-    if (parentItem) {
-        const auto childs{parentItem->childItems};
+    if (auto parent = parentItem.lock(); parent != nullptr) {
+        const auto childs{parent->childItems};
 
         return std::distance(
             childs.begin(),
@@ -69,7 +69,7 @@ int64_t TreeItem::row() const
     return 0;
 }
 
-TreeItemPtr TreeItem::parent() const
+std::weak_ptr<TreeItem> TreeItem::parent() const
 {
     return parentItem;
 }

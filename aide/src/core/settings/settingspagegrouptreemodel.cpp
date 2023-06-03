@@ -13,8 +13,8 @@ using aide::core::SettingsPageRegistry;
 using aide::core::TreeItemPtr;
 
 SettingsPageGroupTreeModel::SettingsPageGroupTreeModel(QObject* parent)
-    : TreeModel(parent,
-                std::make_shared<TreeItem>(std::vector<QVariant>({{"Group"}})))
+    : TreeModel(parent, std::make_shared<TreeItem>(
+                            std::vector<QVariant>({{"Group"}}), nullptr))
 {
     setupModelData(rootItem);
 }

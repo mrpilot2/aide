@@ -43,7 +43,7 @@ QModelIndex aide::core::TreeModel::parent(const QModelIndex& index) const
     if (!index.isValid()) { return QModelIndex(); }
 
     auto* childItem        = static_cast<TreeItem*>(index.internalPointer());
-    TreeItemPtr parentItem = childItem->parent();
+    TreeItemPtr parentItem = childItem->parent().lock();
 
     if (parentItem == rootItem) { return QModelIndex(); }
 
