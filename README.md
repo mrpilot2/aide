@@ -1,6 +1,6 @@
 # aide
 
-A modern, C++ native GUI application framework based on QT5 - using C++11 and later
+A  modern, C++ native GUI application framework based on QT5 - using C++11 and later
 
 ![CI](https://github.com/mrpilot2/aide/workflows/CI/badge.svg)
 
