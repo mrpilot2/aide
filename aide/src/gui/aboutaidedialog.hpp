@@ -7,6 +7,7 @@
 
 #include <QDialog>
 
+#include "aideinformation.hpp"
 #include "aideinformationpresenter.hpp"
 
 namespace Ui
@@ -29,11 +30,15 @@ namespace aide::gui
 
         void showAboutInformation(const core::AideInformation& info) override;
 
+        void copySystemInfoToClipBoard() const;
+
     private slots:
         static void whatsNewHovered(const QString& text);
 
     private:
         std::unique_ptr<Ui::AboutDialog> m_ui;
+
+        core::AideInformation m_info;
     };
 } // namespace aide::gui
 

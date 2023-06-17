@@ -1,13 +1,17 @@
 
 #include "aboutaidedialog.hpp"
 
+#include <QClipboard>
 #include <QString>
+#include <QThread>
 #include <QToolTip>
 
 #include "aideinformation.hpp"
+#include "systemmemory.hpp"
 #include "ui_aboutaidedialog.h"
 
 using aide::gui::AboutAideDialog;
+using aide::utils::SystemMemory;
 
 AboutAideDialog::AboutAideDialog(QWidget* parent)
     : QDialog(parent)
@@ -19,6 +23,8 @@ AboutAideDialog::AboutAideDialog(QWidget* parent)
 
     connect(m_ui->info, &QLabel::linkHovered, this,
             &AboutAideDialog::whatsNewHovered);
+    connect(m_ui->copyButton, &QPushButton::clicked, this,
+            &AboutAideDialog::copySystemInfoToClipBoard);
 }
 
 AboutAideDialog::~AboutAideDialog() = default;
@@ -38,6 +44,8 @@ void AboutAideDialog::showAboutInformation(
 
     m_ui->info->setText(textToDisplay);
 
+    m_info = info;
+
     this->layout()->setSizeConstraint(QLayout::SetFixedSize);
 
     this->exec();
@@ -51,4 +59,33 @@ void AboutAideDialog::whatsNewHovered(const QString& text)
     }
 
     QToolTip::showText(QCursor::pos(), text);
+}
+
+void AboutAideDialog::copySystemInfoToClipBoard() const
+{
+    auto memoryInBytes{SystemMemory::getAvailableRAMInBytes()};
+    auto memoryInfo{QString("%1 MB").arg(
+        memoryInBytes.has_value()
+            ? QString::number(memoryInBytes.value() / 1024 / 1024)
+            : "Undefined")};
+
+    const auto locale{QLocale::system()};
+    auto clipBoardText{
+        QString("aIDE %1\n%2 built on %3\nQt Version: %4\nOS: %5\nKernel: "
+                "%6\nMemory: %7\nCores: %8\n")
+            .arg(QString::fromStdString(m_info.versionInfo),
+                 QString::fromStdString(m_info.gitHash),
+                 locale.toString(m_info.buildDate,
+                                 QLocale::FormatType::LongFormat),
+                 qVersion(), QSysInfo::prettyProductName(),
+                 QSysInfo::kernelVersion(), memoryInfo,
+                 QString::number(QThread::idealThreadCount()))};
+
+#ifdef Q_OS_LINUX
+    clipBoardText += QString("Desktop environment: %1")
+                         .arg(QString(qgetenv("XDG_CURRENT_DESKTOP")));
+#endif
+
+    auto* clipboard = QApplication::clipboard();
+    clipboard->setText(clipBoardText);
 }

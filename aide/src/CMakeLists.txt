@@ -1,4 +1,5 @@
 add_subdirectory(buildinformation)
+add_subdirectory(utils)
 add_subdirectory(core)
 add_subdirectory(gui)
 add_subdirectory(logger)
@@ -9,7 +10,8 @@ add_library(Aide::AideApplication ALIAS AideQt${QT_VERSION_MAJOR}Application)
 target_sources(
   AideQt${QT_VERSION_MAJOR}Application
   PRIVATE $<TARGET_OBJECTS:AideCore> $<TARGET_OBJECTS:AideGui>
-          $<TARGET_OBJECTS:AideLogger> application.cpp applicationbuilder.cpp
+          $<TARGET_OBJECTS:AideLogger> $<TARGET_OBJECTS:AideUtils>
+          application.cpp applicationbuilder.cpp
 )
 
 target_include_directories(
@@ -22,7 +24,7 @@ target_include_directories(
 target_link_libraries(
   AideQt${QT_VERSION_MAJOR}Application
   PUBLIC spdlog::spdlog Qt::Core Qt::Widgets
-  PRIVATE Aide::AideCore Aide::AideGui aide_project_coverage
+  PRIVATE Aide::AideCore Aide::AideGui Aide::AideUtils aide_project_coverage
           aide_project_sanitizers
 )
 
