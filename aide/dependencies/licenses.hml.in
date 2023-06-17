@@ -1,0 +1,44 @@
+<style>
+table {
+  width: 560px;
+}
+
+th {
+  border:0pt;
+  text - align: left;
+}
+
+td {
+  padding - bottom: 11px;
+}
+
+  .firstColumn {
+    width: 410px;
+    padding - left: 16px;
+    padding - right: 50px;
+  }
+
+  .secondColumn {
+    width: 150px;
+    padding - right: 28px;
+  }
+
+  .name {
+    color: #4a78c2;
+    margin - right: 5px;
+  }
+
+  .version {
+    color: #888888;
+    line - height: 1.5em;
+    white - space: nowrap;
+  }
+
+  .licence {
+    color: #779dbd;
+  }
+</style >
+<table>
+    <tr><th class="firstColumn">Open source module</th><th class="secondColumn">License</th></tr>
+    @table_content@
+</table>

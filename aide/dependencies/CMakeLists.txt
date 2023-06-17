@@ -66,3 +66,33 @@ endif()
 if(TARGET fmt::fmt)
   set_target_properties(fmt::fmt PROPERTIES IMPORTED_GLOBAL TRUE)
 endif()
+
+include(${CMAKE_CURRENT_LIST_DIR}/addlicensedependency.cmake)
+
+set(table_content "")
+add_license_dependency(
+  PROJECT
+  "fmt"
+  PROJECT_URL
+  "https://github.com/fmtlib/fmt/"
+  VERSION
+  "10.0.0"
+  LICENSE
+  "Apache 2.0"
+  LICENSE_URL
+  "https://github.com/fmtlib/fmt/LICENSE.rst"
+)
+add_license_dependency(
+  PROJECT
+  "spdlog"
+  PROJECT_URL
+  "https://github.com/gabime/spdlog/"
+  VERSION
+  "1.11.0"
+  LICENSE
+  "MIT"
+  LICENSE_URL
+  "https://github.com/gabime/spdlog/LICENSE"
+)
+
+configure_file(../../aide/dependencies/licenses.hml.in licenses.html @ONLY)
