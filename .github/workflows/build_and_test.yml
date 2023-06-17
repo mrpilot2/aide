@@ -85,7 +85,7 @@ jobs:
  
       - name: Set CMake arguments
         id: cmake_args
-        run: echo "CMAKE_ARGS=-DUNIT_TESTS_RUN_ON_CI=1 -DWARNINGS_AS_ERRORS=OFF" >> $GITHUB_OUTPUT
+        run: echo "CMAKE_ARGS=-DUNIT_TESTS_RUN_ON_CI=1 -Daide_PACKAGING_MAINTAINER_MODE=ON" >> $GITHUB_OUTPUT
 
       # Static Debug
       - name: "Static Debug: Configure"
@@ -100,7 +100,7 @@ jobs:
 
       # Shared Debug
       - name: "Shared Debug: Configure"
-        run: cmake -G Ninja -S . -B build-shared-dbg -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEBUG_POSTFIX=d -DBUILD_SHARED_LIBS=ON "-DENABLE_COVERAGE=${{ matrix.COVERAGE }}" ${{ steps.cmake_args.outputs.CMAKE_ARGS }}
+        run: cmake -G Ninja -S . -B build-shared-dbg -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEBUG_POSTFIX=d -DBUILD_SHARED_LIBS=ON "-Daide_ENABLE_COVERAGE=${{ matrix.COVERAGE }}" ${{ steps.cmake_args.outputs.CMAKE_ARGS }}
       - name: "Shared Debug: Build"
         run: cmake --build build-shared-dbg --parallel
       - name: "Shared Debug: Test"
