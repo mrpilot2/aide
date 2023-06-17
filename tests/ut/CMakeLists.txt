@@ -51,7 +51,7 @@ target_sources(
     res/ut_icons.qrc
 )
 
-if(NOT ${TEST_AGAINST_INSTALLED})
+if(NOT PROJECT_IS_TOP_LEVEL)
   target_sources(
     ut.aide
     PRIVATE aboutaideusecasetest.cpp
@@ -95,7 +95,7 @@ target_link_libraries(
           Aide::AideUtils
 )
 
-if(NOT ${TEST_AGAINST_INSTALLED})
+if(NOT PROJECT_IS_TOP_LEVEL)
   target_link_libraries(
     ut.aide PRIVATE Aide::AideCore Aide::AideGui Aide::AideLogger
   )
@@ -127,5 +127,5 @@ if(UNIT_TESTS_RUN_ON_CI)
     .xml
   )
 else()
-  # catch_discover_tests(ut.aide REPORTER console)
+  catch_discover_tests(ut.aide REPORTER console)
 endif()
