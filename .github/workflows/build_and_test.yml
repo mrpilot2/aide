@@ -40,6 +40,9 @@ jobs:
             qt_name: Qt6
 
     runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
 
     env:
       # CMake 3.15 doesn't detect Visual Studio correctly without these.
