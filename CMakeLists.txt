@@ -1,14 +1,10 @@
 cmake_minimum_required(VERSION 3.21...3.26)
 
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/aide/cmake)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 include(FeatureSummary)
 
-include(AideStandardProjectSettings)
-standard_project_settings()
-
-include(VersionFromGit)
+include(cmake/VersionFromGit.cmake)
 
 version_from_git()
 
@@ -18,20 +14,29 @@ project(
   VERSION ${VERSION}
 )
 
-include(AideCompilerWarnings)
-include(AideStaticAnalyzers)
-include(AideSanitizers)
+include(cmake/PreventInSourceBuilds.cmake)
+include(ProjectOptions.cmake)
+
+aide_setup_options()
+
+aide_global_options()
+
+aide_local_options()
 
 add_subdirectory(aide)
 
 enable_testing()
 add_subdirectory(tests)
 
-option(ENABLE_DEMO "Builds a small demo application" ON)
-add_feature_info(EnableDemo ENABLE_DEMO "Builds the demo application.")
+if(PROJECT_IS_TOP_LEVEL)
 
-if(ENABLE_DEMO)
-  add_subdirectory(demo)
+  option(aide_ENABLE_DEMO "Builds a small demo application" ON)
+  add_feature_info(EnableDemo aide_ENABLE_DEMO "Builds the demo application.")
+
+  if(aide_ENABLE_DEMO)
+    add_subdirectory(demo)
+  endif()
+
 endif()
 
 feature_summary(WHAT ALL)

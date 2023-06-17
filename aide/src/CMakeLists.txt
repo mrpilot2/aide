@@ -24,8 +24,8 @@ target_include_directories(
 target_link_libraries(
   AideQt${QT_VERSION_MAJOR}Application
   PUBLIC spdlog::spdlog Qt::Core Qt::Widgets
-  PRIVATE Aide::AideCore Aide::AideGui Aide::AideUtils aide_project_coverage
-          aide_project_sanitizers
+  PRIVATE Aide::AideCore Aide::AideGui Aide::AideUtils aide_options
+          aide_warnings
 )
 
 target_compile_features(AideQt${QT_VERSION_MAJOR}Application PUBLIC cxx_std_17)

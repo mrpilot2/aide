@@ -77,8 +77,8 @@ target_link_libraries(
           Aide::AideWidgets
           Aide::AideUtils
           Qt::Widgets
-          aide_project_sanitizers
-          aide_project_warnings
+          aide_options
+          aide_warnings
 )
 
 set_source_files_properties(

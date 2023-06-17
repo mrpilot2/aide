@@ -8,9 +8,8 @@ install(
           AideLogger
           AideUtils
           AideQt${QT_VERSION_MAJOR}Widgets
-          aide_project_warnings
-          aide_project_coverage
-          aide_project_sanitizers
+          aide_warnings
+          aide_options
   EXPORT AideTargets
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )

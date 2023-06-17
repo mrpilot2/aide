@@ -18,20 +18,5 @@ if(NOT TARGET Aide::AideApplication)
   find_package(AideQt${QT_VERSION_MAJOR} CONFIG REQUIRED)
 endif()
 
-# target does not exist in standalone mode, only when built from top-level
-if(NOT TARGET aide_project_sanitizers)
-  add_library(aide_project_sanitizers INTERFACE IMPORTED)
-endif()
-
-# target does not exist in standalone mode, only when built from top-level
-if(NOT TARGET aide_project_coverage)
-  add_library(aide_project_coverage INTERFACE IMPORTED)
-endif()
-
-# target does not exist in standalone mode, only when built from top-level
-if(NOT TARGET aide_project_warnings)
-  add_library(aide_project_warnings INTERFACE IMPORTED)
-endif()
-
 enable_testing()
 add_subdirectory(ut)

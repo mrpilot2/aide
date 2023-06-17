@@ -87,8 +87,8 @@ target_link_libraries(
           Qt::Core
           Qt::Widgets
           Qt::Test
-          aide_project_sanitizers
-          aide_project_warnings
+          aide_options
+          aide_warnings
           Aide::AideBuildInformation
           Aide::AideApplication
           Aide::AideWidgets
