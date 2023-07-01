@@ -26,9 +26,9 @@ TEST_CASE("Any search filter widget ")
 
     Q_INIT_RESOURCE(ut_icons);
 
-    QMainWindow* mainWindow = new QMainWindow();
+    QMainWindow mainWindow;
     SearchFilterWidget searchFilterWidget(aide::HierarchicalId("test"),
-                                          QKeySequence(Qt::Key_F), mainWindow);
+                                          QKeySequence(Qt::Key_F), &mainWindow);
 
     SECTION(" allows empty search icon")
     {
