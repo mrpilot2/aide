@@ -85,7 +85,7 @@ jobs:
  
       - name: Set CMake arguments
         id: cmake_args
-        run: echo "CMAKE_ARGS=-DUNIT_TESTS_RUN_ON_CI=1 -Daide_PACKAGING_MAINTAINER_MODE=ON" >> $GITHUB_OUTPUT
+        run: echo "CMAKE_ARGS=-DUNIT_TESTS_RUN_ON_CI=1 -Daide_PACKAGING_MAINTAINER_MODE=ON -Daide_ENABLE_HARDENING=OFF" >> $GITHUB_OUTPUT
 
       # Static Debug
       - name: "Static Debug: Configure"
