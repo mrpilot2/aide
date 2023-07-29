@@ -14,6 +14,14 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   )
 endif()
 
+# make sure all windows dlls and exe are in the same directory
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+# export all dll symbols on windows
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+
 # Generate compile_commands.json to make it easier to work with clang based
 # tools
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
