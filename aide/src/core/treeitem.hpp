@@ -16,7 +16,7 @@ namespace aide::core
     {
     public:
         explicit TreeItem(std::vector<QVariant> data,
-                          TreeItemPtr parent = nullptr);
+                          const TreeItemPtr& parent = nullptr);
 
         void appendChild(TreeItemPtr child);
 

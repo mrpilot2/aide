@@ -66,7 +66,7 @@ void AboutAideDialog::copySystemInfoToClipBoard() const
     auto memoryInBytes{SystemMemory::getAvailableRAMInBytes()};
     auto memoryInfo{QString("%1 MB").arg(
         memoryInBytes.has_value()
-            ? QString::number(memoryInBytes.value() / 1024 / 1024)
+            ? QString::number(memoryInBytes.value() / BYTE_TO_MEGABYTE)
             : "Undefined")};
 
     const auto locale{QLocale::system()};

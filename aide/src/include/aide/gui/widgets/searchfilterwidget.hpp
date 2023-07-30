@@ -4,11 +4,14 @@
 #include <memory>
 
 #include <QAbstractItemDelegate>
+#include <QAction>
 #include <QSortFilterProxyModel>
 #include <QWidget>
 
 #include <aide/hierarchicalid.hpp>
 
+static constexpr const auto VISIBILITY_TOGGLE_DELAY = 200;
+static constexpr const auto TYPING_FILTER_DELAY     = 300;
 namespace Ui
 {
     class SearchFilterWidget;
@@ -56,11 +59,12 @@ namespace aide::widgets
     private:
         std::unique_ptr<Ui::SearchFilterWidget> m_ui;
 
-        QTimer* m_typingTimer;
+        std::unique_ptr<QTimer> m_typingTimer;
         QString m_currentFilterText;
 
-        MultiColumnSortFilterProxyModel* m_filterModel;
+        std::unique_ptr<MultiColumnSortFilterProxyModel> m_filterModel;
 
+        QAction m_showHideAction;
         const aide::HierarchicalId m_visibilitySettingsKey;
         const aide::HierarchicalId m_matchCaseSettingsKey;
         const aide::HierarchicalId m_regexSettingsKey;

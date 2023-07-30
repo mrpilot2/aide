@@ -1,8 +1,22 @@
 ---
-Checks:          '*,-android-*,-abseil-*,-fuchsia-*,-llvm-header-guard,-llvmlibc-*,-modernize-use-trailing-return-type'
-HeaderFilterRegex: '^((?!ui_).)*$'
+Checks:          '*,
+                  -android-*,
+                  -abseil-*,
+                  -altera*,
+                  -fuchsia-*,
+                  -clang-analyzer-*,
+                  -bugprone-easily-swappable-parameters,
+                  -llvm-header-guard,
+                  -llvmlibc-*,
+                  -misc-no-recursion,
+                  -modernize-use-trailing-return-type'
+HeaderFilterRegex: '^((?!ui_).)*$|.*test.cpp'
 FormatStyle:     none
-CheckOptions:    
+CheckOptions:
+  - key: readability-identifier-length.IgnoredVariableNames
+    value: 'i|id|c|g|p|d'
+  - key: readability-identifier-length.IgnoredParameterNames
+    value: 'i|id|s|v|p'
   - key:             google-readability-braces-around-statements.ShortStatementLines
     value:           '1'
   - key:             google-readability-function-size.StatementThreshold

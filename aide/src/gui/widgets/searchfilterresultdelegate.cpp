@@ -6,15 +6,11 @@
 #include <QModelIndex>
 #include <QPainter>
 #include <QRegularExpression>
-#include <QSortFilterProxyModel>
 #include <QString>
-#include <QTextCharFormat>
-#include <QTextCursor>
 #include <QTextDocument>
 
 #include "multicolumnsortfilterproxymodel.hpp"
 
-using aide::widgets::MultiColumnSortFilterProxyModel;
 using aide::widgets::SearchFilterResultDelegate;
 
 void SearchFilterResultDelegate::paint(QPainter* painter,

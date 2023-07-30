@@ -33,7 +33,7 @@ namespace aide::core
             const QModelIndex& parent = QModelIndex()) const override;
 
     protected:
-        TreeItemPtr rootItem;
+        TreeItemPtr m_rootItem;
     };
 
 } // namespace aide::core

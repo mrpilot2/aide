@@ -9,6 +9,7 @@
 #include <QSet>
 #include <QString>
 
+static constexpr const auto ROUNDED_RECT_RADIUS = 5;
 class QPaintEvent;
 
 namespace aide::widgets

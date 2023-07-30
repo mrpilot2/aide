@@ -30,7 +30,7 @@ namespace aide::core
             const QModelIndex& selectedIndex) const;
 
         [[nodiscard]] std::optional<TreeItemPtr> findItemForActionId(
-            HierarchicalId id);
+            const HierarchicalId& id);
 
         void setupModelData();
 
@@ -43,7 +43,7 @@ namespace aide::core
 
         ActionRegistryInterfacePtr actionRegistry;
         std::optional<TreeItemPtr> recursivelyFindItemForActionId(
-            TreeItemPtr item, HierarchicalId id);
+            TreeItemPtr item, const HierarchicalId& id);
     };
 } // namespace aide::core
 

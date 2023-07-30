@@ -9,14 +9,13 @@
 
 using aide::core::SettingsPageGroupTreeModel;
 using aide::core::SettingsPagePtr;
-using aide::core::SettingsPageRegistry;
 using aide::core::TreeItemPtr;
 
 SettingsPageGroupTreeModel::SettingsPageGroupTreeModel(QObject* parent)
     : TreeModel(parent, std::make_shared<TreeItem>(
                             std::vector<QVariant>({{"Group"}}), nullptr))
 {
-    setupModelData(rootItem);
+    setupModelData(m_rootItem);
 }
 
 std::optional<TreeItemPtr> SettingsPageGroupTreeModel::existingTreeItemForGroup(
@@ -58,10 +57,10 @@ void SettingsPageGroupTreeModel::setupModelData(const TreeItemPtr& parent)
 QVariant SettingsPageGroupTreeModel::data(const QModelIndex& index,
                                           int role) const
 {
-    if (!index.isValid()) { return QVariant(); }
+    if (!index.isValid()) { return {}; }
 
     if (role == Qt::DisplayRole) {
-        auto* item = static_cast<TreeItem*>(index.internalPointer());
+        auto const* item = static_cast<TreeItem*>(index.internalPointer());
 
         return item->data(static_cast<size_t>(index.column()));
     }
@@ -72,7 +71,7 @@ QVariant SettingsPageGroupTreeModel::data(const QModelIndex& index,
                                                      : QVariant();
     }
 
-    return QVariant();
+    return {};
 }
 
 Qt::ItemFlags SettingsPageGroupTreeModel::flags(const QModelIndex& index) const
@@ -83,16 +82,16 @@ Qt::ItemFlags SettingsPageGroupTreeModel::flags(const QModelIndex& index) const
 }
 
 SettingsPagePtr SettingsPageGroupTreeModel::findCorrespondingSettingsPage(
-    const QModelIndex& selectedIndex) const
+    const QModelIndex& selectedIndex)
 {
-    auto* item = static_cast<TreeItem*>(selectedIndex.internalPointer());
+    auto const* item = static_cast<TreeItem*>(selectedIndex.internalPointer());
 
     auto completeGroupName{item->getHiddenUserData().toString().toStdString()};
 
     const auto& pages = SettingsPageRegistry::settingsPages();
 
     if (auto it = std::find_if(pages.begin(), pages.end(),
-                               [completeGroupName](const auto& page) {
+                               [&completeGroupName](const auto& page) {
                                    return page->group().name() ==
                                           completeGroupName;
                                });
@@ -109,9 +108,10 @@ QModelIndex SettingsPageGroupTreeModel::recursivelyFindSelectedTreeItemIndex(
     for (int i = 0; i < rowCount(parent); ++i) {
         index = this->index(i, 0, parent);
 
-        auto* item = static_cast<TreeItem*>(index.internalPointer());
-
-        if (item->getHiddenUserData().toString() == groupName) { return index; }
+        if (auto const* item = static_cast<TreeItem*>(index.internalPointer());
+            item->getHiddenUserData().toString() == groupName) {
+            return index;
+        }
 
         index = recursivelyFindSelectedTreeItemIndex(groupName, index);
         if (index.isValid()) { break; }

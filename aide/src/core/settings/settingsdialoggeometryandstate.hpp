@@ -19,7 +19,7 @@ namespace aide::core
             SettingsDialogWeakPtr v, SettingsInterface& unversionableSettings);
 
         void saveGeometryAndState(
-            SettingsDialogGeometryAndStateData data) override;
+            const SettingsDialogGeometryAndStateData& data) override;
 
         void restoreGeometryAndState() override;
 

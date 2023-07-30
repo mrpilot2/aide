@@ -7,7 +7,6 @@
 #include "commonsettingskeys.hpp"
 #include "settingsinterface.hpp"
 
-using aide::SettingsInterface;
 using aide::core::ApplicationClose;
 using aide::core::ApplicationCloseViewWeakPtr;
 using aide::core::settings::KEYS;

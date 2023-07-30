@@ -4,7 +4,6 @@ using aide::Action;
 using aide::ActionRegistry;
 using aide::HierarchicalId;
 using aide::LoggerPtr;
-using aide::SettingsInterface;
 
 ActionRegistry::ActionRegistry(SettingsInterface& settingsInterface,
                                LoggerPtr loggerInterface)
@@ -96,7 +95,7 @@ void aide::ActionRegistry::modifyShortcutsForAction(
 
     action.action.lock()->setShortcuts(shortcuts);
 
-    if (action.areKeySequencesTheSame(shortcuts, action.defaultKeySequences)) {
+    if (Action::areKeySequencesTheSame(shortcuts, action.defaultKeySequences)) {
         action.keySequences.clear();
         settings.removeKey(settingsId);
     } else {

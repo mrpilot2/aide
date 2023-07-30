@@ -5,7 +5,7 @@
 using aide::core::TreeItem;
 using aide::core::TreeItemPtr;
 
-TreeItem::TreeItem(std::vector<QVariant> data, TreeItemPtr parent)
+TreeItem::TreeItem(std::vector<QVariant> data, const TreeItemPtr& parent)
     : itemData(std::move(data))
     , parentItem(parent)
 {}
@@ -43,7 +43,7 @@ size_t TreeItem::columnCount() const
 
 QVariant TreeItem::data(size_t column) const
 {
-    if (column >= itemData.size()) { return QVariant(); }
+    if (column >= itemData.size()) { return {}; }
     return itemData.at(column);
 }
 

@@ -102,6 +102,7 @@ TEST_CASE("Test different log levels", "[Logger]")
 #endif
 }
 
+// NOLINTNEXTLINE
 TEST_CASE("Test log macros", "[Logger]")
 {
     spdlog::drop_all();

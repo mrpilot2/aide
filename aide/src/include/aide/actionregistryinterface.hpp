@@ -26,16 +26,16 @@ namespace aide
         QList<QKeySequence> defaultKeySequences;
         QList<QKeySequence> keySequences;
 
-        QList<QKeySequence> getActiveKeySequences() const
+        [[nodiscard]] QList<QKeySequence> getActiveKeySequences() const
         {
             return keySequences.isEmpty() ? defaultKeySequences : keySequences;
         }
 
-        bool areKeySequencesTheSame(QList<QKeySequence> lhs,
-                                    QList<QKeySequence> rhs) const
+        static bool areKeySequencesTheSame(const QList<QKeySequence>& lhs,
+                                           const QList<QKeySequence>& rhs)
         {
-            if ((lhs.size() == 1 && lhs.at(0).isEmpty() && rhs.size() == 0) ||
-                (rhs.size() == 1 && rhs.at(0).isEmpty() && lhs.size() == 0)) {
+            if ((lhs.size() == 1 && lhs.at(0).isEmpty() && rhs.isEmpty()) ||
+                (rhs.size() == 1 && rhs.at(0).isEmpty() && lhs.isEmpty())) {
                 return true;
             }
 

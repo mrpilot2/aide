@@ -19,7 +19,6 @@
 #include "ui_mainwindow.h"
 
 using aide::HierarchicalId;
-using aide::core::MainWindowInterface;
 using aide::core::UserSelection;
 using aide::gui::MainWindow;
 using aide::gui::MainWindowControllerPtr;

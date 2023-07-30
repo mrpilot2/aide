@@ -1,3 +1,5 @@
+// NOLINTBEGIN
+
 #include "demosettingspage.hpp"
 
 #include <utility>
@@ -289,3 +291,4 @@ void DemoSettingsPage::apply()
     m_settings->setValue(group(),
                          QVariant::fromValue(widgetStateFromGui(m_ui.get())));
 }
+// NOLINTEND
