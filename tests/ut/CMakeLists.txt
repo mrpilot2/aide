@@ -92,12 +92,11 @@ target_link_libraries(
           Aide::AideBuildInformation
           Aide::AideApplication
           Aide::AideWidgets
-          Aide::AideUtils
 )
 
 if(NOT PROJECT_IS_TOP_LEVEL)
   target_link_libraries(
-    ut.aide PRIVATE Aide::AideCore Aide::AideGui Aide::AideLogger
+    ut.aide PRIVATE Aide::AideCore Aide::AideGui Aide::AideLogger Aide::AideUtils
   )
   target_include_directories(
     ut.aide PRIVATE ${CMAKE_SOURCE_DIR}/aide/src/include
