@@ -76,7 +76,8 @@ macro(aide_enable_hardening target global ubsan_minimal_runtime)
       "-fsanitize=undefined -fno-sanitize-recover=undefined -fsanitize-minimal-runtime"
       MINIMAL_RUNTIME
     )
-    if(MINIMAL_RUNTIME)
+    # false positive on macos build with AppleClang 13
+    if(MINIMAL_RUNTIME AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
       set(NEW_COMPILE_OPTIONS
           "${NEW_COMPILE_OPTIONS} -fsanitize=undefined -fsanitize-minimal-runtime"
       )
