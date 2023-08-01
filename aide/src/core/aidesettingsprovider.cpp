@@ -9,31 +9,31 @@
 using aide::AideSettingsProvider;
 using aide::SettingsInterface;
 
+using SettingsInterfacePtr = std::shared_ptr<SettingsInterface>;
+
 // NOLINTNEXTLINE
-std::shared_ptr<SettingsInterface> AideSettingsProvider::m_versionableSettings{
-    nullptr};
+SettingsInterfacePtr AideSettingsProvider::m_versionableSettings{nullptr};
 // NOLINTNEXTLINE
-std::shared_ptr<SettingsInterface>
-    AideSettingsProvider::m_unversionableSettings{nullptr};
+SettingsInterfacePtr AideSettingsProvider::m_unversionableSettings{nullptr};
 
 void AideSettingsProvider::provideVersionableSettings(
-    std::shared_ptr<SettingsInterface> settings)
+    SettingsInterfacePtr settings)
 {
     m_versionableSettings = std::move(settings);
 }
 
 void AideSettingsProvider::provideUnVersionableSettings(
-    std::shared_ptr<SettingsInterface> settings)
+    SettingsInterfacePtr settings)
 {
     m_unversionableSettings = std::move(settings);
 }
 
-std::shared_ptr<SettingsInterface> AideSettingsProvider::versionableSettings()
+SettingsInterfacePtr AideSettingsProvider::versionableSettings()
 {
     return m_versionableSettings;
 }
 
-std::shared_ptr<SettingsInterface> AideSettingsProvider::unversionableSettings()
+SettingsInterfacePtr AideSettingsProvider::unversionableSettings()
 {
     return m_unversionableSettings;
 }

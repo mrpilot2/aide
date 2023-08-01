@@ -31,7 +31,7 @@ TEST_CASE("Test different log levels", "[Logger]")
 {
     const char* const logFileName = "aide_test.log";
 
-    std::remove(logFileName);
+    [[maybe_unused]] auto res = std::remove(logFileName);
 
     Logger logger = Logger(FileName(logFileName));
 
@@ -108,9 +108,9 @@ TEST_CASE("Test log macros", "[Logger]")
     spdlog::drop_all();
     const char* const logFileName = "aide_test.log";
 
-    std::remove(logFileName);
+    [[maybe_unused]] auto res = std::remove(logFileName);
 
-    Logger logger = Logger(FileName(logFileName));
+    auto logger = Logger(FileName(logFileName));
 
 #if SPDLOG_ACTIVE_LEVEL <= SPDLOG_LEVEL_TRACE
     SECTION(" trace default logger")

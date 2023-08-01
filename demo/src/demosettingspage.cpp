@@ -4,6 +4,7 @@
 
 #include <utility>
 
+#include <QMetaType>
 #include <QPushButton>
 #include <QWidget>
 
@@ -86,7 +87,7 @@ struct WidgetState
     }
     bool operator!=(const WidgetState& rhs) const { return !(rhs == *this); }
 };
-// NOLINTNEXTLINE
+
 Q_DECLARE_METATYPE(WidgetState)
 
 QDataStream& operator<<(QDataStream& out, const WidgetState& obj)
@@ -177,8 +178,8 @@ DemoSettingsPage::DemoSettingsPage(
     : SettingsPage(std::move(group))
     , m_ui{std::make_unique<Ui::DemoSettingsPage>()}
     , m_settings{std::move(settings)}
-    , m_widget(nullptr)
     , m_tableInsertTimer{std::make_unique<QTimer>()}
+    , m_widget(nullptr)
 {
     qRegisterMetaType<WidgetState>("WidgetState");
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)

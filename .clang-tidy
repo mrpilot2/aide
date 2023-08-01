@@ -10,7 +10,7 @@ Checks:          '*,
                   -llvmlibc-*,
                   -misc-no-recursion,
                   -modernize-use-trailing-return-type'
-HeaderFilterRegex: '^((?!ui_).)*$|.*test.cpp'
+HeaderFilterRegex: '^((?!ui_).)*$'
 FormatStyle:     none
 CheckOptions:
   - key: readability-identifier-length.IgnoredVariableNames

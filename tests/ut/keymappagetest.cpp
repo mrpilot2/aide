@@ -24,7 +24,7 @@ TEST_CASE("A new keymap page")
     // NOLINTNEXTLINE
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
 
-    QApplication app{numberOfArgs, appName.data()};
+    QApplication const app{numberOfArgs, appName.data()};
 
     MockSettings settings;
     auto logger = std::make_shared<NullLogger>();
@@ -56,13 +56,13 @@ TEST_CASE("Any keymap page")
     // NOLINTNEXTLINE
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
 
-    QApplication app{numberOfArgs, appName.data()};
+    QApplication const app{numberOfArgs, appName.data()};
 
     MockSettings settings;
     auto logger = std::make_shared<NullLogger>();
     auto registry(std::make_shared<ActionRegistry>(settings, logger));
 
-    std::shared_ptr<QAction> action{std::make_shared<QAction>()};
+    std::shared_ptr<QAction> const action{std::make_shared<QAction>()};
 
     registry->registerAction(action,
                              HierarchicalId("Main Menu")("File")("New File"),
@@ -81,9 +81,9 @@ TEST_CASE("Any keymap page")
 
     SECTION("detects modification if the action registry and tree model differ")
     {
-        auto model = page.getTreeModel();
+        const auto& model = page.getTreeModel();
 
-        QModelIndex index(model->index(
+        QModelIndex const index(model->index(
             0, 1, model->index(0, 0, model->index(0, 0, QModelIndex()))));
 
         page.getTreeModel()->setData(index, "Alt+F5", Qt::DisplayRole);
@@ -95,9 +95,9 @@ TEST_CASE("Any keymap page")
         "does not detects modification if the tree model is set back to the "
         "action registry")
     {
-        auto model = page.getTreeModel();
+        const auto& model = page.getTreeModel();
 
-        QModelIndex index(model->index(
+        QModelIndex const index(model->index(
             0, 1, model->index(0, 0, model->index(0, 0, QModelIndex()))));
 
         page.getTreeModel()->setData(index, "Alt+F5", Qt::DisplayRole);
@@ -110,7 +110,7 @@ TEST_CASE("Any keymap page")
     {
         auto model = page.getTreeModel();
 
-        QModelIndex index(model->index(
+        QModelIndex const index(model->index(
             0, 1, model->index(0, 0, model->index(0, 0, QModelIndex()))));
 
         page.getTreeModel()->setData(index, "Alt+F5", Qt::DisplayRole);
@@ -126,7 +126,7 @@ TEST_CASE("Any keymap page")
     {
         auto model = page.getTreeModel();
 
-        QModelIndex index(model->index(
+        QModelIndex const index(model->index(
             0, 1, model->index(0, 0, model->index(0, 0, QModelIndex()))));
 
         page.getTreeModel()->setData(index, "Alt+F5", Qt::DisplayRole);
