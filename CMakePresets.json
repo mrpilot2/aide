@@ -12,10 +12,7 @@
             "hidden": true,
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/${presetName}",
-            "installDir": "${sourceDir}/install/${presetName}",
-            "cacheVariables": {
-                "aide_WARNINGS_AS_ERRORS": "OFF"
-            }
+            "installDir": "${sourceDir}/install/${presetName}"
         },
         {
             "name": "conf-windows-common",

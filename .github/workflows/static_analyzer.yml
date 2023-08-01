@@ -78,7 +78,7 @@ jobs:
       - name: "Static Debug: Build"
         run: cmake --build build-static-dbg --parallel
       - name: "Static Debug: Test"
-        run:  ASAN_OPTIONS=detect_odr_violation=0 LSAN_OPTIONS=suppressions=../../lsan.supp ctest --output-on-failure --stop-on-failure
+        run:  ASAN_OPTIONS=detect_odr_violation=0 LSAN_OPTIONS=suppressions=lsan.supp ctest --output-on-failure --stop-on-failure
         working-directory: build-static-dbg
         env:
           QT_QPA_PLATFORM: offscreen

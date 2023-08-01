@@ -32,6 +32,7 @@ macro(aide_enable_cppcheck WARNINGS_AS_ERRORS CPPCHECK_OPTIONS)
           --suppress=*:*/*_autogen/*.h
           --std=c++17
           --inconclusive
+          -DQ_DECLARE_METATYPE
       )
     else()
       # if the user provides a CPPCHECK_OPTIONS with a template specified, it
@@ -47,7 +48,7 @@ macro(aide_enable_cppcheck WARNINGS_AS_ERRORS CPPCHECK_OPTIONS)
       )
     endif()
     if(${WARNINGS_AS_ERRORS})
-      # list(APPEND CMAKE_CXX_CPPCHECK --error-exitcode=2)
+      list(APPEND CMAKE_CXX_CPPCHECK --error-exitcode=2)
     endif()
   else()
     message(${WARNING_MESSAGE} "cppcheck requested but executable not found")
@@ -76,9 +77,11 @@ macro(aide_enable_clang_tidy target WARNINGS_AS_ERRORS)
 
     # construct the clang-tidy command line
     set(CLANG_TIDY_OPTIONS
-        ${CLANGTIDY} -extra-arg=-Wno-unknown-warning-option
+        ${CLANGTIDY}
+        -extra-arg=-Wno-unknown-warning-option
         -extra-arg=-Wno-ignored-optimization-argument
-        -extra-arg=-Wno-unused-command-line-argument -p
+        -extra-arg=-Wno-unused-command-line-argument
+        -p=${CMAKE_CURRENT_BINARY_DIR}
     )
     # set standard
     if(NOT "${CMAKE_CXX_STANDARD}" STREQUAL "")
