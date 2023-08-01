@@ -36,6 +36,8 @@ namespace aide::gui
     private slots:
         static void whatsNewHovered(const QString& text);
 
+        void onThirdPartyLibrariesLinkClicked() const;
+
     private:
         std::unique_ptr<Ui::AboutDialog> m_ui;
 

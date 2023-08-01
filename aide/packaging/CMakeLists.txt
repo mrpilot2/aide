@@ -39,6 +39,9 @@ install(
   COMPONENT Devel
 )
 
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/../dependencies/licenses.html
+        DESTINATION ${CMAKE_INSTALL_DOCDIR}/
+)
 include(CMakePackageConfigHelpers)
 
 write_basic_package_version_file(

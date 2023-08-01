@@ -15,6 +15,10 @@
         <source>About aIDE</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;br&gt;&lt;p&gt;aIDE is made possible by &lt;a href=&quot;abc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;open source software&lt;/span&gt;&lt;br/&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AddShortcutDialog</name>
@@ -96,6 +100,13 @@
     <message>
         <source>&lt;a href=&quot;http://&quot;&gt;Reset&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;http://&quot;&gt;Zurücksetzen&lt;/a&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>ThirdPartyLicensesDialog</name>
+    <message>
+        <source>Third-party licenses</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
