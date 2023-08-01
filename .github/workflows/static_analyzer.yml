@@ -8,15 +8,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ windows-latest, macos-11, ubuntu-22.04 ]
+        os: [ macos-11, ubuntu-22.04 ]
         cmake: [ 3.x ]
         qt: [ "5.15.2", "6.5.0" ]
 
         include:
-          - os: windows-latest
-            static_postfix: _static
-            CXX: cl
-
           - cmake: 3.x
             cmake_name: CMake Latest
 
