@@ -16,14 +16,9 @@ jobs:
           - os: ubuntu-20.04
             COVERAGE: ON
             GCOV_TOOL: gcov-9
-            WARNINGS_AS_ERRORS: OFF
-
-          - os: macos-11
-            WARNINGS_AS_ERRORS: OFF
 
           - os: windows-latest
             static_postfix: _static
-            WARNINGS_AS_ERRORS: OFF
             CXX: cl
 
           - cmake: 3.21
@@ -85,7 +80,7 @@ jobs:
  
       - name: Set CMake arguments
         id: cmake_args
-        run: echo "CMAKE_ARGS=-DUNIT_TESTS_RUN_ON_CI=1 -Daide_PACKAGING_MAINTAINER_MODE=ON" >> $GITHUB_OUTPUT
+        run: echo "CMAKE_ARGS=-DUNIT_TESTS_RUN_ON_CI=1 -Daide_WARNINGS_AS_ERRORS=ON -Daide_ENABLE_CLANG_TIDY=OFF -Daide_ENABLE_CPPCHECK=OFF -Daide_ENABLE_SANITIZER_ADDRESS=OFF" >> $GITHUB_OUTPUT
 
       # Static Debug
       - name: "Static Debug: Configure"
@@ -93,7 +88,7 @@ jobs:
       - name: "Static Debug: Build"
         run: cmake --build build-static-dbg --parallel
       - name: "Static Debug: Test"
-        run:  LSAN_OPTIONS=suppressions=../../lsan.supp ctest --output-on-failure --stop-on-failure
+        run: ctest --output-on-failure --stop-on-failure
         working-directory: build-static-dbg
         env:
           QT_QPA_PLATFORM: offscreen
@@ -104,7 +99,7 @@ jobs:
       - name: "Shared Debug: Build"
         run: cmake --build build-shared-dbg --parallel
       - name: "Shared Debug: Test"
-        run: LSAN_OPTIONS=suppressions=../../lsan.supp ctest --output-on-failure --stop-on-failure
+        run: ctest --output-on-failure --stop-on-failure
         working-directory: build-shared-dbg
         env:
           QT_QPA_PLATFORM: offscreen
@@ -115,7 +110,7 @@ jobs:
       - name: "Static Release: Build"
         run: cmake --build build-static-rel --parallel
       - name: "Static Release: Test"
-        run: LSAN_OPTIONS=suppressions=../../lsan.supp ctest --output-on-failure --stop-on-failure
+        run: ctest --output-on-failure --stop-on-failure
         working-directory: build-static-rel
         env:
           QT_QPA_PLATFORM: offscreen
@@ -126,7 +121,7 @@ jobs:
       - name: "Shared Release: Build"
         run: cmake --build build-shared-rel --parallel
       - name: "Shared Release: Test"
-        run: LSAN_OPTIONS=suppressions=../../lsan.supp ctest --output-on-failure --stop-on-failure
+        run: ctest --output-on-failure --stop-on-failure
         working-directory: build-shared-rel
         env:
           QT_QPA_PLATFORM: offscreen

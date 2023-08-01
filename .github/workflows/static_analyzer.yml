@@ -1,0 +1,88 @@
+name: CI - Static Analyzer
+
+on: [ push, pull_request, workflow_dispatch ]
+
+jobs:
+  build:
+    name: ${{ matrix.os }}, ${{ matrix.cmake_name }}, ${{ matrix.qt_name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ windows-latest, macos-11, ubuntu-22.04 ]
+        cmake: [ 3.x ]
+        qt: [ "5.15.2", "6.5.0" ]
+
+        include:
+          - os: windows-latest
+            static_postfix: _static
+            CXX: cl
+
+          - cmake: 3.x
+            cmake_name: CMake Latest
+
+          - qt: "5.15.2"
+            qt_name: Qt5
+          - qt: "6.5.0"
+            qt_name: Qt6
+
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+
+    env:
+      # CMake 3.15 doesn't detect Visual Studio correctly without these.
+      CXX: ${{ matrix.CXX }}
+      CC: ${{ matrix.CXX }}
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: abdes/gha-setup-ninja@master
+
+      - name: Setup Windows environment
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.7.x
+      - name: Install pip dependencies
+        run: |
+          pip3 install wheel setuptools
+          pip3 install conan==1.60.0
+
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.14
+        with:
+          cmake-version: ${{matrix.cmake}}
+
+      - name: Print CMake version
+        run: cmake --version
+
+      - name: Install apt dependencies
+        if: runner.os == 'Linux'
+        run: sudo apt install lcov ^libxcb-*
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: ${{ matrix.qt }}
+          aqtversion: '==3.1.*'
+ 
+      - name: Set CMake arguments
+        id: cmake_args
+        run: echo "CMAKE_ARGS=-DUNIT_TESTS_RUN_ON_CI=1 -Daide_WARNINGS_AS_ERRORS=OFF" >> $GITHUB_OUTPUT
+
+      # Static Debug
+      - name: "Static Debug: Configure"
+        run: cmake -G Ninja -S . -B build-static-dbg -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_DEBUG_POSTFIX=d${{matrix.static_postfix}}" ${{ steps.cmake_args.outputs.CMAKE_ARGS }}
+      - name: "Static Debug: Build"
+        run: cmake --build build-static-dbg --parallel
+      - name: "Static Debug: Test"
+        run:  ASAN_OPTIONS=detect_odr_violation=0 LSAN_OPTIONS=suppressions=../../lsan.supp ctest --output-on-failure --stop-on-failure
+        working-directory: build-static-dbg
+        env:
+          QT_QPA_PLATFORM: offscreen
