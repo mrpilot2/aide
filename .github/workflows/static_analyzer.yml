@@ -70,7 +70,7 @@ jobs:
  
       - name: Set CMake arguments
         id: cmake_args
-        run: echo "CMAKE_ARGS=-DUNIT_TESTS_RUN_ON_CI=1 -Daide_WARNINGS_AS_ERRORS=OFF" >> $GITHUB_OUTPUT
+        run: echo "CMAKE_ARGS=-DUNIT_TESTS_RUN_ON_CI=1" >> $GITHUB_OUTPUT
 
       # Static Debug
       - name: "Static Debug: Configure"
