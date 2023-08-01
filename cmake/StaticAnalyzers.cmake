@@ -78,7 +78,7 @@ macro(aide_enable_clang_tidy target WARNINGS_AS_ERRORS)
     )
     # set standard
     if(NOT "${CMAKE_CXX_STANDARD}" STREQUAL "")
-      if("${CLANG_TIDY_OPTIONS_DRIVER_MODE}" STREQUAL "cl")
+      if(WIN32)
         set(CLANG_TIDY_OPTIONS ${CLANG_TIDY_OPTIONS}
                                -extra-arg=/std:c++${CMAKE_CXX_STANDARD}
         )
