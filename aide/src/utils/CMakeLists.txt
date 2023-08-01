@@ -15,4 +15,4 @@ target_include_directories(
 
 target_link_libraries(AideUtils PRIVATE aide_options aide_warnings)
 
-target_compile_features(AideUtils PRIVATE cxx_std_17)
+target_compile_features(AideUtils PUBLIC cxx_std_17)
