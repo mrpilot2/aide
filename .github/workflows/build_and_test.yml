@@ -17,6 +17,11 @@ jobs:
             COVERAGE: ON
             GCOV_TOOL: gcov-9
 
+
+          - os: windows-latest
+            cmake: 3.21
+            WARNINGS_AS_ERRORS: OFF
+
           - os: windows-latest
             static_postfix: _static
             CXX: cl
@@ -80,7 +85,7 @@ jobs:
  
       - name: Set CMake arguments
         id: cmake_args
-        run: echo "CMAKE_ARGS=-DUNIT_TESTS_RUN_ON_CI=1 -Daide_WARNINGS_AS_ERRORS=ON -Daide_ENABLE_CLANG_TIDY=OFF -Daide_ENABLE_CPPCHECK=OFF -Daide_ENABLE_SANITIZER_ADDRESS=OFF -Daide_ENABLE_SANITIZER_UNDEFINED=OFF -Daide_ENABLE_IPO=OFF" >> $GITHUB_OUTPUT
+        run: echo "CMAKE_ARGS=-DUNIT_TESTS_RUN_ON_CI=1 -Daide_WARNINGS_AS_ERRORS=${{ matrix.WARNINGS_AS_ERRORS || 'ON' }} -Daide_ENABLE_CLANG_TIDY=OFF -Daide_ENABLE_CPPCHECK=OFF -Daide_ENABLE_SANITIZER_ADDRESS=OFF -Daide_ENABLE_SANITIZER_UNDEFINED=OFF -Daide_ENABLE_IPO=OFF" >> $GITHUB_OUTPUT
 
       # Static Debug
       - name: "Static Debug: Configure"
