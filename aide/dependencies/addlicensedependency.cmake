@@ -13,4 +13,8 @@ macro(add_license_dependency)
   class=\"license\"
   href=\"${ALD_LICENSE_URL}\">${ALD_LICENSE}</a></td></tr>"
   )
+
+  set(markdown_content
+      "${markdown_content}### [${ALD_PROJECT}](${ALD_PROJECT_URL})\n\nVersion: ${ALD_VERSION}\n\nLicense: [${ALD_LICENSE}](${ALD_LICENSE_URL})\n\n"
+  )
 endmacro()

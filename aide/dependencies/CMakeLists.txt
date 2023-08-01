@@ -70,29 +70,61 @@ endif()
 include(${CMAKE_CURRENT_LIST_DIR}/addlicensedependency.cmake)
 
 set(table_content "")
+set(markdown_content "")
+
 add_license_dependency(
   PROJECT
   "fmt"
   PROJECT_URL
   "https://github.com/fmtlib/fmt/"
   VERSION
-  "10.0.0"
+  "7.1.3"
   LICENSE
-  "Apache 2.0"
+  "MIT (custom)"
   LICENSE_URL
-  "https://github.com/fmtlib/fmt/LICENSE.rst"
+  "https://github.com/fmtlib/fmt/blob/7.1.3/LICENSE.rst"
 )
+
+add_license_dependency(
+  PROJECT
+  "catch2"
+  PROJECT_URL
+  "https://github.com/catchorg/Catch2/"
+  VERSION
+  "2.13.6"
+  LICENSE
+  "Boost Software License 1.0"
+  LICENSE_URL
+  "https://github.com/catchorg/Catch2/blob/v2.13.6/LICENSE.txt"
+)
+
+add_license_dependency(
+  PROJECT
+  "Qt"
+  PROJECT_URL
+  "https://www.qt.io/"
+  VERSION
+  "${QT_VERSION}"
+  LICENSE
+  "(L)GPL"
+  LICENSE_URL
+  "https://www.qt.io/licensing/"
+)
+
 add_license_dependency(
   PROJECT
   "spdlog"
   PROJECT_URL
   "https://github.com/gabime/spdlog/"
   VERSION
-  "1.11.0"
+  "1.8.5"
   LICENSE
   "MIT"
   LICENSE_URL
-  "https://github.com/gabime/spdlog/LICENSE"
+  "https://github.com/gabime/spdlog/blob/v1.8.5/LICENSE"
 )
 
-configure_file(../../aide/dependencies/licenses.hml.in licenses.html @ONLY)
+configure_file(licenses.hml.in licenses.html @ONLY)
+configure_file(
+  licenses.md.in ${CMAKE_CURRENT_LIST_DIR}/../../3rd-party-licenses.md @ONLY
+)
