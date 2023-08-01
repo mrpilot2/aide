@@ -1,11 +1,8 @@
-cmake_minimum_required(VERSION 3.18...3.23)
+cmake_minimum_required(VERSION 3.21...3.26)
 
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-include(AideStandardProjectSettings)
-standard_project_settings()
-
-include(VersionFromGit)
+include(${CMAKE_CURRENT_LIST_DIR}/../cmake/VersionFromGit.cmake)
 
 version_from_git()
 
@@ -15,16 +12,16 @@ project(
   VERSION ${VERSION}
 )
 
-if(NOT TARGET aide_project_sanitizers)
-  add_library(aide_project_sanitizers INTERFACE)
-endif()
+if(PROJECT_IS_TOP_LEVEL)
 
-if(NOT TARGET aide_project_coverage)
-  add_library(aide_project_coverage INTERFACE)
-endif()
+  include(${CMAKE_CURRENT_LIST_DIR}/../cmake/PreventInSourceBuilds.cmake)
+  include(${CMAKE_CURRENT_LIST_DIR}/../ProjectOptions.cmake)
 
-if(NOT TARGET aide_project_warnings)
-  add_library(aide_project_warnings INTERFACE)
+  aide_setup_options()
+
+  aide_global_options()
+
+  aide_local_options()
 endif()
 
 include(dependencies/Qt.cmake)

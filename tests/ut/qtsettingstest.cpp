@@ -110,9 +110,9 @@ TEST_CASE("Un-Versionable Qt Settings")
 
         REQUIRE(settings.value(group, "Position") == geom);
 
-        QSettings s(QApplication::organizationName(),
-                    QApplication::applicationName() + "_unversionable");
-        auto fileName = s.fileName().toStdString();
+        QSettings qsettings(QApplication::organizationName(),
+                            QApplication::applicationName() + "_unversionable");
+        auto fileName = qsettings.fileName().toStdString();
 
         settings.load();
     }

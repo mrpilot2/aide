@@ -8,7 +8,7 @@ using aide::core::ShowKeyMap;
 
 ShowKeyMap::ShowKeyMap(aide::ActionRegistryInterfacePtr registry,
                        KeyMapPageWidgetRawPtr widget)
-    : actionRegistry{registry}
+    : actionRegistry{std::move(registry)}
     , keymapWidget{widget}
     , treeModel(std::make_shared<KeyMapTreeModel>(actionRegistry))
 {}

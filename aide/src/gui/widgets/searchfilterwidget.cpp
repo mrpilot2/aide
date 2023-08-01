@@ -1,6 +1,7 @@
 #include "widgets/searchfilterwidget.hpp"
 
-#include <QDebug>
+#include <iostream>
+
 #include <QIcon>
 #include <QLineEdit>
 #include <QMenu>
@@ -23,6 +24,7 @@ SearchFilterWidget::SearchFilterWidget(const aide::HierarchicalId& id,
     , m_ui{new Ui::SearchFilterWidget}
     , m_typingTimer{new QTimer{this}}
     , m_filterModel(new MultiColumnSortFilterProxyModel(this))
+    , m_showHideAction(this)
     , m_visibilitySettingsKey{id.addLevel("isVisible")}
     , m_matchCaseSettingsKey{id.addLevel("matchCase")}
     , m_regexSettingsKey{id.addLevel("regex")}
@@ -49,31 +51,30 @@ SearchFilterWidget::SearchFilterWidget(const aide::HierarchicalId& id,
             &SearchFilterWidget::textChanged);
 
     m_typingTimer->setSingleShot(true);
-    connect(m_typingTimer, &QTimer::timeout, this,
+    connect(m_typingTimer.get(), &QTimer::timeout, this,
             &SearchFilterWidget::filterEntries);
     connect(m_ui->matchCase, &QCheckBox::toggled, this,
             &SearchFilterWidget::matchCaseStateChanged);
     connect(m_ui->regularExpression, &QCheckBox::toggled, this,
             &SearchFilterWidget::regexStateChanged);
 
-    auto* showHideAction = new QAction(this);
-    showHideAction->setShortcut(showHideShortcut);
-    showHideAction->setCheckable(true);
-    showHideAction->setChecked(this->isVisible());
+    m_showHideAction.setShortcut(showHideShortcut);
+    m_showHideAction.setCheckable(true);
+    m_showHideAction.setChecked(this->isVisible());
 
     if (parent != nullptr) {
-        parent->addAction(showHideAction);
+        parent->addAction(&m_showHideAction);
     } else {
-        qDebug()
+        std::cout
             << "To make the show/hide action of the SearchFilterWidget "
                "available, "
                "a "
                "parent needs to be set. The show/hide functionality is now "
-               "disabled.";
+               "disabled.\n";
         visibilitySetting = true;
     }
 
-    connect(showHideAction, &QAction::toggled, this,
+    connect(&m_showHideAction, &QAction::toggled, this,
             &SearchFilterWidget::onUserRequestsToChangeVisibility);
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
@@ -84,7 +85,8 @@ SearchFilterWidget::SearchFilterWidget(const aide::HierarchicalId& id,
 
     // Set visibility delayed - overridden functions shall not be called
     // in constructor
-    QTimer::singleShot(200, [this, visibilitySetting]() {
+    // NOLINTNEXTLINE
+    QTimer::singleShot(VISIBILITY_TOGGLE_DELAY, [this, visibilitySetting]() {
         this->setVisible(visibilitySetting);
     });
 }
@@ -113,7 +115,7 @@ void SearchFilterWidget::setSourceModel(QAbstractItemModel* model)
 
 QSortFilterProxyModel* SearchFilterWidget::getFilterModel()
 {
-    return m_filterModel;
+    return m_filterModel.get();
 }
 
 QAbstractItemDelegate* SearchFilterWidget::getItemDelegate()
@@ -124,7 +126,7 @@ QAbstractItemDelegate* SearchFilterWidget::getItemDelegate()
 void SearchFilterWidget::textChanged(const QString& text)
 {
     m_currentFilterText = text;
-    m_typingTimer->start(300);
+    m_typingTimer->start(TYPING_FILTER_DELAY);
 }
 
 void SearchFilterWidget::matchCaseStateChanged(bool state)

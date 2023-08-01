@@ -13,7 +13,7 @@ namespace aide::core
         virtual ~SettingsDialogGeometryAndStateController() = default;
 
         virtual void saveGeometryAndState(
-            SettingsDialogGeometryAndStateData geometryAndState) = 0;
+            const SettingsDialogGeometryAndStateData& geometryAndState) = 0;
 
         virtual void restoreGeometryAndState() = 0;
     };

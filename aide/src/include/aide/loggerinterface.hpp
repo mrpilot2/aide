@@ -4,6 +4,7 @@
 #include <memory>
 
 #include <fmt/format.h>
+#include <string_view>
 
 namespace aide
 {
@@ -52,7 +53,7 @@ namespace aide
 
     private:
         template <typename... Args>
-        std::string doFormat(std::string_view fmt, const Args&... args) const
+        static std::string doFormat(std::string_view fmt, const Args&... args)
         {
             return fmt::format(fmt, args...);
         }

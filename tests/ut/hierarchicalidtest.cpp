@@ -6,6 +6,7 @@
 
 using aide::HierarchicalId;
 
+// NOLINTNEXTLINE
 TEST_CASE("Hierarchical Id ")
 {
     SECTION("can be constructed with one addLevel")

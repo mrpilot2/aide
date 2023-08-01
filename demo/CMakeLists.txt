@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.18...3.23)
+cmake_minimum_required(VERSION 3.21...3.26)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
@@ -10,14 +10,6 @@ project(
   LANGUAGES CXX
   VERSION 0.1.0
 )
-
-if(NOT TARGET aide_project_sanitizers)
-  add_library(aide_project_sanitizers INTERFACE)
-endif()
-
-if(NOT TARGET aide_project_coverage)
-  add_library(aide_project_coverage INTERFACE)
-endif()
 
 if(NOT TARGET Aide::AideApplication)
   find_package(Aide 0.1 REQUIRED)

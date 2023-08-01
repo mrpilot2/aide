@@ -11,7 +11,6 @@
 #include <settings/settingspageregistry.hpp>
 
 #include "aidesettingsprovider.hpp"
-#include "gui/settings/keymap/keymappagewidget.hpp"
 #include "logger/logger.hpp"
 #include "settingsinterface.hpp"
 
@@ -19,6 +18,7 @@ using aide::ApplicationBuilder;
 using aide::Logger;
 using aide::LoggerPtr;
 using aide::core::KeymapPage;
+using aide::gui::KeymapPageWidget;
 using aide::gui::MainWindow;
 using aide::gui::MainWindowController;
 using aide::gui::SettingsDialog;
@@ -42,9 +42,10 @@ ApplicationBuilder::ApplicationBuilder()
     , m_mainController(std::make_shared<MainWindowController>(
           m_mainWindow, m_applicationClose, m_mainWindowGeometryAndState,
           m_showSettingsDialog))
-    , m_keyMapPage(std::make_shared<KeymapPage>(
-          m_actionRegistry,
-          new aide::gui::KeymapPageWidget(m_settingsDialog.get())))
+    , m_keyMapPageWidget{std::make_unique<KeymapPageWidget>(
+          m_settingsDialog.get())}
+    , m_keyMapPage(std::make_shared<KeymapPage>(m_actionRegistry,
+                                                m_keyMapPageWidget.get()))
     , m_keymapPageController(std::make_shared<gui::KeyMapPageWidgetController>(
           m_keyMapPage->getTreeModel(), m_keyMapPage->keyMapWidget()))
 {

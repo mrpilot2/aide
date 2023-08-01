@@ -10,6 +10,7 @@
 #include "applicationclose.hpp"
 #include "gui/mainwindow.hpp"
 #include "gui/mainwindowcontroller.hpp"
+#include "gui/settings/keymap/keymappagewidget.hpp"
 #include "gui/settings/settingsdialog.hpp"
 #include "loggerinterface.hpp"
 #include "mainwindowgeometryandstate.hpp"
@@ -60,6 +61,8 @@ namespace aide
         aide::gui::SettingsDialogControllerPtr m_settingsDialogController;
 
         aide::gui::MainWindowControllerPtr m_mainController;
+
+        std::unique_ptr<aide::gui::KeymapPageWidget> m_keyMapPageWidget;
 
         std::shared_ptr<core::KeymapPage> m_keyMapPage;
 

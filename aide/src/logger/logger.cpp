@@ -8,9 +8,7 @@
 #include <spdlog/sinks/rotating_file_sink.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 
-using aide::FileName;
 using aide::Logger;
-using aide::LoggerName;
 
 static constexpr unsigned int maxFileSizeInMB{1024 * 1024 * 5};
 static constexpr uint16_t maxNumberOfFiles{3};

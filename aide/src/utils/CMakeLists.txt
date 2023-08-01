@@ -13,9 +13,6 @@ target_include_directories(
   AideUtils PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
 )
 
-target_link_libraries(
-  AideUtils PRIVATE aide_project_coverage aide_project_sanitizers
-                    aide_project_warnings
-)
+target_link_libraries(AideUtils PRIVATE aide_options aide_warnings)
 
-target_compile_features(AideUtils PRIVATE cxx_std_17)
+target_compile_features(AideUtils PUBLIC cxx_std_17)

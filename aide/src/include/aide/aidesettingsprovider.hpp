@@ -24,8 +24,9 @@ namespace aide
         unversionableSettings();
 
     private:
+        // NOLINTNEXTLINE
         static std::shared_ptr<SettingsInterface> m_versionableSettings;
-
+        // NOLINTNEXTLINE
         static std::shared_ptr<SettingsInterface> m_unversionableSettings;
     };
 } // namespace aide

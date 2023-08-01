@@ -27,7 +27,7 @@ void SearchLineEdit::paintEvent(QPaintEvent* event)
 
     for (auto& rect : rects) {
         QPainterPath path;
-        path.addRoundedRect(rect, 5, 5);
+        path.addRoundedRect(rect, ROUNDED_RECT_RADIUS, ROUNDED_RECT_RADIUS);
         painter.fillPath(path, m_highlightColor);
     }
 }

@@ -11,7 +11,6 @@
 #include "settings/keymap/keymaptreemodel.hpp"
 
 using aide::core::KeymapContextMenuProvider;
-using aide::core::KeyMapPageWidgetInterface;
 using aide::core::KeyMapTreeModel;
 using aide::gui::KeyMapPageWidgetController;
 

@@ -15,7 +15,6 @@ using aide::core::SettingsDialogGeometryAndStateData;
 using aide::core::TreeItem;
 using aide::core::UserSelection;
 using aide::gui::SettingsDialog;
-using aide::gui::SettingsDialogController;
 
 SettingsDialog::SettingsDialog(QWidget* parent)
     : QDialog(parent)
@@ -39,6 +38,7 @@ SettingsDialog::SettingsDialog(QWidget* parent)
 
 SettingsDialog::~SettingsDialog()
 {
+    // NOLINTNEXTLINE
     delete ui->defaultScrollAreaWidget;
 }
 

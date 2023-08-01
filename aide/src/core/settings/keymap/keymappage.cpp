@@ -30,15 +30,18 @@ bool KeymapPage::isModified() const
 {
     const auto& actions{actionRegistry->actions()};
 
-    return std::any_of(actions.begin(), actions.end(), [this](const auto& a) {
-        const auto& [id, action] = a;
-        if (auto item = showUseCase.getTreeModel()->findItemForActionId(id)) {
-            return !action.areKeySequencesTheSame(
-                QKeySequence::listFromString(item.value()->data(1).toString()),
-                action.getActiveKeySequences());
-        }
-        return false;
-    });
+    return std::any_of(
+        actions.begin(), actions.end(), [this](const auto& keyActionPair) {
+            const auto& [id, action] = keyActionPair;
+            if (auto item =
+                    showUseCase.getTreeModel()->findItemForActionId(id)) {
+                return !action.areKeySequencesTheSame(
+                    QKeySequence::listFromString(
+                        item.value()->data(1).toString()),
+                    action.getActiveKeySequences());
+            }
+            return false;
+        });
 }
 
 void KeymapPage::reset()
@@ -52,7 +55,7 @@ void KeymapPage::apply()
         if (auto item = showUseCase.getTreeModel()->findItemForActionId(id)) {
             auto treeModelShortcuts =
                 QKeySequence::listFromString(item.value()->data(1).toString());
-            if (!action.areKeySequencesTheSame(
+            if (!Action::areKeySequencesTheSame(
                     treeModelShortcuts, action.getActiveKeySequences())) {
                 actionRegistry->modifyShortcutsForAction(id,
                                                          treeModelShortcuts);

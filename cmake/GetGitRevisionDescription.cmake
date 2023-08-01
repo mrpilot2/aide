@@ -39,12 +39,17 @@ set(__get_git_revision_description YES)
 get_filename_component(_gitdescmoddir ${CMAKE_CURRENT_LIST_FILE} PATH)
 
 function(get_git_head_revision _refspecvar _hashvar)
-  execute_process(COMMAND "${GIT_EXECUTABLE}" rev-parse --show-toplevel
+  execute_process(
+    COMMAND "${GIT_EXECUTABLE}" rev-parse --show-toplevel
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
     OUTPUT_VARIABLE GIT_PARENT_DIR
-    OUTPUT_STRIP_TRAILING_WHITESPACE)
- 
-  set(GIT_ROOT_DIR ${GIT_PARENT_DIR} PARENT_SCOPE)
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+  )
+
+  set(GIT_ROOT_DIR
+      ${GIT_PARENT_DIR}
+      PARENT_SCOPE
+  )
 
   set(GIT_DIR "${GIT_PARENT_DIR}/.git")
 

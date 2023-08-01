@@ -69,7 +69,7 @@ void aide::gui::KeymapPageWidget::showContextMenu(
             break;
         case aide::core::ContextMenuItemType::REMOVE_SHORTCUT:
         {
-            auto action =
+            auto* action =
                 new QAction(QString::fromStdString(entry.displayText), &menu);
             action->setData(entry.sequence);
             QObject::connect(

@@ -1,4 +1,3 @@
-#include <applicationtranslator.hpp>
 #include <array>
 
 #include <catch2/catch.hpp>
@@ -11,6 +10,7 @@
 using aide::gui::ApplicationTranslator;
 using aide::test::NullLogger;
 
+// NOLINTNEXTLINE(readability-function-cognitive-complexity)
 TEST_CASE("Default ApplicationTranslator")
 {
     int numberOfArgs{1};

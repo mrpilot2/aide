@@ -6,7 +6,6 @@
 #include "settingsinterface.hpp"
 
 using aide::core::SettingsDialogGeometryAndState;
-using aide::core::SettingsDialogGeometryAndStateData;
 using aide::core::SettingsDialogWeakPtr;
 using aide::core::settings::KEYS;
 
@@ -17,7 +16,7 @@ SettingsDialogGeometryAndState::SettingsDialogGeometryAndState(
 {}
 
 void SettingsDialogGeometryAndState::saveGeometryAndState(
-    SettingsDialogGeometryAndStateData data)
+    const SettingsDialogGeometryAndStateData& data)
 {
     settings.setValue(KEYS().UI.SETTINGS_DIALOG_GEOMETRY_KEY,
                       data.dialogGeometry);

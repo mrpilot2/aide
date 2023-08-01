@@ -51,7 +51,7 @@ target_sources(
     res/ut_icons.qrc
 )
 
-if(NOT ${TEST_AGAINST_INSTALLED})
+if(NOT PROJECT_IS_TOP_LEVEL)
   target_sources(
     ut.aide
     PRIVATE aboutaideusecasetest.cpp
@@ -87,17 +87,17 @@ target_link_libraries(
           Qt::Core
           Qt::Widgets
           Qt::Test
-          aide_project_sanitizers
-          aide_project_warnings
+          aide_options
+          aide_warnings
           Aide::AideBuildInformation
           Aide::AideApplication
           Aide::AideWidgets
-          Aide::AideUtils
 )
 
-if(NOT ${TEST_AGAINST_INSTALLED})
+if(NOT PROJECT_IS_TOP_LEVEL)
   target_link_libraries(
     ut.aide PRIVATE Aide::AideCore Aide::AideGui Aide::AideLogger
+                    Aide::AideUtils
   )
   target_include_directories(
     ut.aide PRIVATE ${CMAKE_SOURCE_DIR}/aide/src/include
@@ -125,7 +125,11 @@ if(UNIT_TESTS_RUN_ON_CI)
     ${CMAKE_CURRENT_BINARY_DIR}
     OUTPUT_SUFFIX
     .xml
+    WORKING_DIRECTORY
+    ${CMAKE_CURRENT_LIST_DIR}/../../
   )
 else()
-  # catch_discover_tests(ut.aide REPORTER console)
+  catch_discover_tests(
+    ut.aide REPORTER console WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/../../
+  )
 endif()

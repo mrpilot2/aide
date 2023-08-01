@@ -70,14 +70,14 @@ TEST_CASE("Logger logs into cache directory", "[Application]")
             .append(".log")
             .toStdString());
 
-    std::remove(logFileLocation.c_str());
+    [[maybe_unused]] auto res = std::remove(logFileLocation.c_str());
 
     int numberOfArgs{1};
     // NOLINTNEXTLINE
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    aide::Application app(numberOfArgs, appName.data());
+    [[maybe_unused]] aide::Application app(numberOfArgs, appName.data());
 
-    app.logger()->flush();
+    aide::Application::logger()->flush();
     REQUIRE(::lookForContentInFile(logFileLocation.c_str(), "Configured") !=
             std::string::npos);
 }

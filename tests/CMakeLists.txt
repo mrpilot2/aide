@@ -1,9 +1,7 @@
-cmake_minimum_required(VERSION 3.18...3.23)
+cmake_minimum_required(VERSION 3.21...3.26)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
-include(AideTestStandardProjectSettings)
-standard_project_settings()
 
 project(
   aide_tests
@@ -11,29 +9,23 @@ project(
   VERSION 0.1.0
 )
 
+if(PROJECT_IS_TOP_LEVEL)
+
+  include(${CMAKE_CURRENT_LIST_DIR}/../cmake/PreventInSourceBuilds.cmake)
+  include(${CMAKE_CURRENT_LIST_DIR}/../ProjectOptions.cmake)
+
+  aide_setup_options()
+
+  aide_global_options()
+
+  aide_local_options()
+endif()
+
 include(dependencies/CMakeLists.txt)
 
 # In standalone mode we need to find our library
 if(NOT TARGET Aide::AideApplication)
   find_package(AideQt${QT_VERSION_MAJOR} CONFIG REQUIRED)
-  set(TEST_AGAINST_INSTALLED TRUE)
-else()
-  set(TEST_AGAINST_INSTALLED FALSE)
-endif()
-
-# target does not exist in standalone mode, only when built from top-level
-if(NOT TARGET aide_project_sanitizers)
-  add_library(aide_project_sanitizers INTERFACE IMPORTED)
-endif()
-
-# target does not exist in standalone mode, only when built from top-level
-if(NOT TARGET aide_project_coverage)
-  add_library(aide_project_coverage INTERFACE IMPORTED)
-endif()
-
-# target does not exist in standalone mode, only when built from top-level
-if(NOT TARGET aide_project_warnings)
-  add_library(aide_project_warnings INTERFACE IMPORTED)
 endif()
 
 enable_testing()

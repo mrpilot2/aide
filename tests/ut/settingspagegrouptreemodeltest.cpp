@@ -101,7 +101,8 @@ TEST_CASE("A new settings page group tree model with multiple registered page")
     {
         auto parentIndex = treeModel.index(0, 0);
 
-        auto childIndex = treeModel.index(5, 0, parentIndex);
+        const auto rowIndexTooHigh{5};
+        auto childIndex = treeModel.index(rowIndexTooHigh, 0, parentIndex);
 
         REQUIRE(!childIndex.isValid());
     }
@@ -140,7 +141,8 @@ TEST_CASE("Any settings page group tree model")
 
     SECTION("removes item flags for invalid index")
     {
-        QModelIndex index = treeModel.index(5, 0);
+        const auto rowIndexTooHigh{5};
+        QModelIndex index = treeModel.index(rowIndexTooHigh, 0);
 
         REQUIRE(treeModel.flags(index).testFlag(Qt::NoItemFlags));
     }

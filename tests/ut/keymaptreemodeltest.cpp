@@ -126,12 +126,14 @@ TEST_CASE("A new keymap tree model with multiple actions registered")
     {
         auto parentIndex = treeModel.index(0, 0);
 
-        auto childIndex = treeModel.index(5, 0, parentIndex);
+        const int row   = 5;
+        auto childIndex = treeModel.index(row, 0, parentIndex);
 
         REQUIRE(!childIndex.isValid());
     }
 }
 
+// NOLINTNEXTLINE
 TEST_CASE("Any keymap tree model")
 {
     int numberOfArgs{1};
@@ -222,7 +224,7 @@ TEST_CASE("Any keymap tree model")
 
     SECTION("shows folder icon for tree item with children")
     {
-        if (QIcon::themeName().isEmpty()) return;
+        if (QIcon::themeName().isEmpty()) { return; }
 
         QModelIndex root = treeModel.index(0, 0, QModelIndex());
 

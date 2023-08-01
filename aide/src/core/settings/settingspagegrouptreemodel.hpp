@@ -24,8 +24,8 @@ namespace aide::core
         [[nodiscard]] Qt::ItemFlags flags(
             const QModelIndex& index) const override;
 
-        [[nodiscard]] SettingsPagePtr findCorrespondingSettingsPage(
-            const QModelIndex& selectedIndex) const;
+        [[nodiscard]] static SettingsPagePtr findCorrespondingSettingsPage(
+            const QModelIndex& selectedIndex);
 
         [[nodiscard]] QModelIndex recursivelyFindSelectedTreeItemIndex(
             const QString& groupName, const QModelIndex& parent) const;
