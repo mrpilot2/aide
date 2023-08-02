@@ -13,7 +13,7 @@ target_include_directories(
 target_link_libraries(
   AideLogger
   PUBLIC spdlog::spdlog fmt::fmt
-  PRIVATE aide_options aide_warnings
+  PRIVATE aide_coverage aide_options aide_warnings
 )
 
 set_target_properties(AideLogger PROPERTIES POSITION_INDEPENDENT_CODE ON)

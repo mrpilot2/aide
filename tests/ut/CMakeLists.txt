@@ -87,6 +87,7 @@ target_link_libraries(
           Qt::Core
           Qt::Widgets
           Qt::Test
+          aide_coverage
           aide_options
           aide_warnings
           Aide::AideBuildInformation

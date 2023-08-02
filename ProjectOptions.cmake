@@ -157,6 +157,7 @@ macro(aide_local_options)
 
   add_library(aide_warnings INTERFACE)
   add_library(aide_options INTERFACE)
+  add_library(aide_coverage INTERFACE)
 
   include(cmake/CompilerWarnings.cmake)
   aide_set_project_warnings(
@@ -203,7 +204,7 @@ macro(aide_local_options)
 
   if(aide_ENABLE_COVERAGE)
     include(cmake/Tests.cmake)
-    aide_enable_coverage(aide_options)
+    aide_enable_coverage(aide_coverage)
   endif()
 
   if(aide_WARNINGS_AS_ERRORS)

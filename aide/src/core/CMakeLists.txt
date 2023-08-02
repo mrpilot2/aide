@@ -40,7 +40,7 @@ target_include_directories(
 target_link_libraries(
   AideCore
   PUBLIC Qt::Core Qt::Widgets AideLogger
-  PRIVATE Aide::AideBuildInformation aide_options aide_warnings
+  PRIVATE Aide::AideBuildInformation aide_coverage aide_options aide_warnings
 )
 
 target_compile_features(AideCore PRIVATE cxx_std_17)

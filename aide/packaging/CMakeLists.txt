@@ -8,6 +8,7 @@ install(
           AideLogger
           AideUtils
           AideQt${QT_VERSION_MAJOR}Widgets
+          aide_coverage
           aide_warnings
           aide_options
   EXPORT AideTargets
