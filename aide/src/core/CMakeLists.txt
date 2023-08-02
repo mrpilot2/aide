@@ -10,6 +10,7 @@ target_sources(
           actionregistry.cpp
           applicationclose.cpp
           hierarchicalid.cpp
+          loggerfactory.cpp
           mainwindowgeometryandstate.cpp
           mainwindowinterface.cpp
           qtsettings.cpp

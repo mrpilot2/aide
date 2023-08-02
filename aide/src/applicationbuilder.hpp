@@ -37,12 +37,10 @@ namespace aide
         static LoggerPtr setupLogger(const std::string& loggerName);
 
     private:
+        // cppcheck-suppress unusedPrivateFunction
         static LoggerPtr setupLogger();
 
-        [[nodiscard]] static bool tryToCreateLogLocationIfItDoesNotExist(
-            const QString& logLocation);
-
-        aide::LoggerPtr m_logger{setupLogger()};
+        aide::LoggerPtr m_logger{ApplicationBuilder::setupLogger()};
 
         std::shared_ptr<AideSettingsProvider> m_settingsProvider;
 

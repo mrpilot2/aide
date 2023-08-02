@@ -5,6 +5,7 @@
 
 #include "aboutaideusecase.hpp"
 #include "mockaboutdialog.hpp"
+#include "nulllogger.hpp"
 
 using aide::core::AboutAideUseCase;
 using aide::tests::MockAboutDialog;
@@ -14,7 +15,8 @@ TEST_CASE("Any AboutAideUseCase")
     std::shared_ptr<MockAboutDialog> const dialog{
         std::make_shared<MockAboutDialog>()};
 
-    AboutAideUseCase useCase{dialog};
+    AboutAideUseCase useCase{dialog,
+                             std::make_shared<aide::test::NullLogger>()};
 
     useCase.showAboutAideInformation();
 
