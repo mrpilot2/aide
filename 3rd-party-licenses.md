@@ -23,5 +23,3 @@ License: [(L)GPL](https://www.qt.io/licensing/)
 Version: 1.8.5
 
 License: [MIT](https://github.com/gabime/spdlog/blob/v1.8.5/LICENSE)
-
-

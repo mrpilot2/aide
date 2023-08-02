@@ -17,7 +17,7 @@ namespace aide::gui
     class ThirdPartyLicensesDialog : public QDialog
     {
     public:
-        ThirdPartyLicensesDialog(QWidget* parent = nullptr);
+        explicit ThirdPartyLicensesDialog(QWidget* parent = nullptr);
 
         ~ThirdPartyLicensesDialog() override;
 

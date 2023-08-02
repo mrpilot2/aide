@@ -124,6 +124,10 @@ add_license_dependency(
   "https://github.com/gabime/spdlog/blob/v1.8.5/LICENSE"
 )
 
+string(LENGTH ${markdown_content} markdown_length)
+math(EXPR markdown_substring "${markdown_length} - 2")
+string(SUBSTRING ${markdown_content} 0 ${markdown_substring} markdown_content)
+
 configure_file(licenses.hml.in licenses.html @ONLY)
 configure_file(
   licenses.md.in ${CMAKE_CURRENT_LIST_DIR}/../../3rd-party-licenses.md @ONLY
