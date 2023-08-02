@@ -51,7 +51,7 @@ jobs:
       - name: Configure
         run: |
           mkdir build
-          cmake -D OPT_ENABLE_COVERAGE:BOOL=TRUE -D CMAKE_BUILD_TYPE:STRING=Debug -S . -B build
+          cmake -Daide_ENABLE_COVERAGE:BOOL=ON -Daide_PACKAGING_MAINTAINER_MODE=ON -DCMAKE_BUILD_TYPE:STRING=Debug -S . -B build
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2

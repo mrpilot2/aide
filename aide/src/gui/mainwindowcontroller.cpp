@@ -7,6 +7,7 @@
 #include "aboutaidedialog.hpp"
 #include "aboutaideusecase.hpp"
 #include "applicationclosecontroller.hpp"
+#include "loggerfactory.hpp"
 #include "mainwindow.hpp"
 #include "mainwindowgeometryandstatecontroller.hpp"
 
@@ -48,6 +49,7 @@ void MainWindowController::onUserWantsToShowSettingsDialog()
 void MainWindowController::onUserWantsToShowAboutAideDialog()
 {
     auto dialog = std::make_shared<AboutAideDialog>(m_mainWindow.get());
-    AboutAideUseCase useCase(dialog);
+    AboutAideUseCase useCase(dialog,
+                             core::LoggerFactory::createLogger("AboutAide"));
     useCase.showAboutAideInformation();
 }

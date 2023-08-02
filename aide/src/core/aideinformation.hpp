@@ -21,6 +21,8 @@ namespace aide::core
         std::string gitHash;
         std::string versionInfo;
         std::string whatsNewUrl;
+
+        std::string thirdPartyLicensesHtml;
     } ALIGNMENT(128);
 } // namespace aide::core
 

@@ -1,21 +1,14 @@
 #include "applicationbuilder.hpp"
 
-#include <iostream>
-
 #include <QApplication>
-#include <QDir>
-#include <QStandardPaths>
-#include <QString>
 
 #include <settings/keymap/keymappage.hpp>
 #include <settings/settingspageregistry.hpp>
 
-#include "aidesettingsprovider.hpp"
 #include "logger/logger.hpp"
-#include "settingsinterface.hpp"
+#include "loggerfactory.hpp"
 
 using aide::ApplicationBuilder;
-using aide::Logger;
 using aide::LoggerPtr;
 using aide::core::KeymapPage;
 using aide::gui::KeymapPageWidget;
@@ -72,55 +65,12 @@ LoggerPtr ApplicationBuilder::logger() const
 
 LoggerPtr ApplicationBuilder::setupLogger(const std::string& loggerName)
 {
-    QString logLocation(
-        QStandardPaths::writableLocation(QStandardPaths::CacheLocation));
-
-    bool success = tryToCreateLogLocationIfItDoesNotExist(logLocation);
-
-    if (!success) {
-        logLocation =
-            QStandardPaths::writableLocation(QStandardPaths::TempLocation);
-        success = tryToCreateLogLocationIfItDoesNotExist(logLocation);
-    }
-
-    if (success) {
-        FileName logPath(logLocation.append("/")
-                             .append(QApplication::applicationName())
-                             .append(".log")
-                             .toStdString());
-
-        auto logger =
-            std::make_shared<aide::Logger>(logPath, LoggerName(loggerName));
-
-        if (loggerName == "aide") {
-            logger->info("Configured logger to log to file {}", logPath());
-            logger->flush();
-        }
-        return logger;
-    }
-    return std::make_shared<Logger>();
+    return aide::core::LoggerFactory::createLogger(loggerName);
 }
 
 LoggerPtr ApplicationBuilder::setupLogger()
 {
-    return setupLogger("aide");
-}
-
-bool ApplicationBuilder::tryToCreateLogLocationIfItDoesNotExist(
-    const QString& logLocation)
-{
-    if (!logLocation.isEmpty()) {
-        QDir d;
-        if (!d.mkpath(logLocation)) {
-            std::cerr << "Could not create standard log directory: "
-                      << logLocation.toStdString()
-                      << ". Trying to log into temp directory instead. If this "
-                         "also does not work no file logging will happen.";
-            return false;
-        }
-        return true;
-    }
-    return false;
+    return aide::core::LoggerFactory::createLogger();
 }
 
 std::shared_ptr<aide::gui::MainWindow> ApplicationBuilder::mainWindow() const

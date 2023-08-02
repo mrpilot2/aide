@@ -8,6 +8,7 @@
 
 #include "aideinformation.hpp"
 #include "systemmemory.hpp"
+#include "thirdpartylicensesdialog.hpp"
 #include "ui_aboutaidedialog.h"
 
 using aide::gui::AboutAideDialog;
@@ -23,6 +24,8 @@ AboutAideDialog::AboutAideDialog(QWidget* parent)
 
     connect(m_ui->info, &QLabel::linkHovered, this,
             &AboutAideDialog::whatsNewHovered);
+    connect(m_ui->thirdParty, &QLabel::linkActivated, this,
+            &AboutAideDialog::onThirdPartyLibrariesLinkClicked);
     connect(m_ui->copyButton, &QPushButton::clicked, this,
             &AboutAideDialog::copySystemInfoToClipBoard);
 }
@@ -46,6 +49,9 @@ void AboutAideDialog::showAboutInformation(
 
     m_info = info;
 
+    //    m_ui->textBrowser->setOpenExternalLinks(true);
+    //    m_ui->textBrowser->setHtml(QString::fromStdString(info.thirdPartyLicensesHtml));
+
     this->layout()->setSizeConstraint(QLayout::SetFixedSize);
 
     this->exec();
@@ -59,6 +65,15 @@ void AboutAideDialog::whatsNewHovered(const QString& text)
     }
 
     QToolTip::showText(QCursor::pos(), text);
+}
+
+void AboutAideDialog::onThirdPartyLibrariesLinkClicked() const
+{
+    ThirdPartyLicensesDialog licensesDialog(m_ui->info);
+    licensesDialog.setLicensesText(
+        QString::fromStdString(m_info.thirdPartyLicensesHtml));
+
+    licensesDialog.exec();
 }
 
 void AboutAideDialog::copySystemInfoToClipBoard() const

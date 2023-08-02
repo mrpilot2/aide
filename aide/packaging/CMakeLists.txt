@@ -8,6 +8,7 @@ install(
           AideLogger
           AideUtils
           AideQt${QT_VERSION_MAJOR}Widgets
+          aide_coverage
           aide_warnings
           aide_options
   EXPORT AideTargets
@@ -39,6 +40,9 @@ install(
   COMPONENT Devel
 )
 
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/../dependencies/licenses.html
+        DESTINATION ${CMAKE_INSTALL_DOCDIR}/
+)
 include(CMakePackageConfigHelpers)
 
 write_basic_package_version_file(

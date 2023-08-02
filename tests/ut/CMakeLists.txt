@@ -87,6 +87,7 @@ target_link_libraries(
           Qt::Core
           Qt::Widgets
           Qt::Test
+          aide_coverage
           aide_options
           aide_warnings
           Aide::AideBuildInformation
@@ -113,6 +114,16 @@ if(APPLE)
             $<TARGET_FILE:ut.aide>
   )
 endif()
+
+set(LICENSE_FILE "${CMAKE_INSTALL_PREFIX}/share/doc/aide/licenses.html")
+set(DEVEL_LICENSE_FILE "${CMAKE_BINARY_DIR}/aide/dependencies/licenses.html")
+
+set_source_files_properties(
+  aboutaideusecasetest.cpp
+  PROPERTIES
+    COMPILE_DEFINITIONS
+    "INSTALL_LICENSE_FILE=\"${LICENSE_FILE}\";DEVEL_LICENSE_FILE=\"${DEVEL_LICENSE_FILE}\""
+)
 
 enable_testing()
 

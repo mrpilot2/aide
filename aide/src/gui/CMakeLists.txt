@@ -47,6 +47,7 @@ target_sources(
     aboutaidedialog.cpp
     mainwindow.cpp
     mainwindowcontroller.cpp
+    thirdpartylicensesdialog.cpp
     settings/changedetector.cpp
     settings/settingsdialog.cpp
     settings/settingsdialogcontroller.cpp

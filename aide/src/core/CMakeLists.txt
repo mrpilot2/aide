@@ -10,6 +10,7 @@ target_sources(
           actionregistry.cpp
           applicationclose.cpp
           hierarchicalid.cpp
+          loggerfactory.cpp
           mainwindowgeometryandstate.cpp
           mainwindowinterface.cpp
           qtsettings.cpp
@@ -39,7 +40,17 @@ target_include_directories(
 target_link_libraries(
   AideCore
   PUBLIC Qt::Core Qt::Widgets AideLogger
-  PRIVATE Aide::AideBuildInformation aide_options aide_warnings
+  PRIVATE Aide::AideBuildInformation aide_coverage aide_options aide_warnings
 )
 
 target_compile_features(AideCore PRIVATE cxx_std_17)
+
+set(LICENSE_FILE "${CMAKE_INSTALL_PREFIX}/share/doc/aide/licenses.html")
+set(DEVEL_LICENSE_FILE "${CMAKE_BINARY_DIR}/aide/dependencies/licenses.html")
+
+set_source_files_properties(
+  aboutaideusecase.cpp
+  PROPERTIES
+    COMPILE_DEFINITIONS
+    "INSTALL_LICENSE_FILE=\"${LICENSE_FILE}\";DEVEL_LICENSE_FILE=\"${DEVEL_LICENSE_FILE}\""
+)
