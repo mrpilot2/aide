@@ -47,14 +47,14 @@ std::string AboutAideUseCase::getThirdPartyLicenses() const
         file.setFileName(QString(DEVEL_LICENSE_FILE));
         if (file.open(QIODevice::ReadOnly)) {
             m_logger->debug("Parsing third party licenses file {}",
-                          file.fileName().toStdString());
+                            file.fileName().toStdString());
             return file.readAll().toStdString();
         }
         m_logger->warn("Could not find a valid third party licenses file");
         return "<b>No third-party licenses file found</b>";
     }
     m_logger->debug("Parsing third party licenses file {}",
-                  file.fileName().toStdString());
+                    file.fileName().toStdString());
 
     return file.readAll().toStdString();
 }
