@@ -17,9 +17,38 @@ if(NOT "${res_var}" STREQUAL "0")
     )
   else()
     message(
-      FATAL_ERROR
-      "ABI compliance checker detected incompability. If any commit between ${GIT_HASH} (HEAD) and ${LATEST_RELEASE_TAG} is marked as braking change, this is OK."
+      STATUS
+        "ABI compliance checker detected incompatibility. If any commit between ${GIT_HASH} (HEAD) and ${LATEST_RELEASE_TAG} is marked as braking change, this is OK."
     )
+
+    execute_process(
+      "git rev-list --ancestry-path ${LATEST_RELEASE_TAG}..${GIT_HASH}"
+      OUTPUT_VARIABLE GIT_HASHES_TO_BE_CHECKED
+    )
+
+    set(found_breaking_change FALSE)
+    foreach(git_hash ${GIT_HASHES_TO_BE_CHECKED)
+      message(
+        STATUS "Checking if commit ${git_hash} is marked as breaking changed."
+      )
+
+      execute_process("git show -s ${git_hash}" OUTPUT_VARIABLE COMMIT_MESSAGE)
+
+      if(${COMMIT_MESSAGE} MATCHES ".*BREAKING CHANGE:.*")
+        message(
+          STATUS
+            "Commit ${git_hash} is marked as breaking change. Major version will be increased in next release. All OK"
+        )
+        set(found_breaking_change TRUE)
+      endif()
+    endforeach()
+
+    if(NOT ${found_breaking_change})
+      message(
+        FATAL_ERROR
+          "ABI compliance checker detected incompatibility but no commit is marked as breaking change. Find the breaking change and mark the commit as such to make this check pass."
+      )
+    endif()
 
   endif()
 else()

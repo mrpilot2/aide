@@ -71,7 +71,7 @@ jobs:
         env:
           QT_QPA_PLATFORM: offscreen
 
-      - name: Upload Unit Test Results
+      - name: Upload ABI compliance report
         if: always()
         uses: actions/upload-artifact@v3
         with:
