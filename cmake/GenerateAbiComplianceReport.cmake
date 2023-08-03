@@ -8,16 +8,23 @@ execute_process(
 )
 
 if(NOT "${res_var}" STREQUAL "0")
-  # do something here about the failed "process" call...
-  message(STATUS "compliance checker returned with res_var='${res_var}'")
+  message(STATUS "ABI compliance checker returned with res_var='${res_var}'")
 
-  if(NOT "{res_var}" STREQUAL "1")
+  if(NOT "${res_var}" STREQUAL "1")
     message(
-      STATUS
-        "Any compliance checker error occured, but binary compability is OK"
+      FATAL_ERROR
+        "ABI compliance checker error ${res_var}. Status of Binary and Source compatibility cannot be checked from return-code. Fix ABI compliance checker error and try again."
     )
   else()
-    message(FATAL_ERROR "Binary incompability detectd")
-  endif()
+    message(
+      FATAL_ERROR
+      "ABI compliance checker detected incompability. If any commit between ${GIT_HASH} (HEAD) and ${LATEST_RELEASE_TAG} is marked as braking change, this is OK."
+    )
 
+  endif()
+else()
+  message(
+    STATUS
+      "Generating ABI compliance report finished without any error. Binary and Source compatibility is given."
+  )
 endif()
