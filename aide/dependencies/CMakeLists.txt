@@ -74,15 +74,30 @@ set(markdown_content "")
 
 add_license_dependency(
   PROJECT
-  "fmt"
+  "abi-compliance-checker"
   PROJECT_URL
-  "https://github.com/fmtlib/fmt/"
+  "https://github.com/lvc/abi-compliance-checker"
   VERSION
-  "7.1.3"
+  "Undefined"
   LICENSE
-  "MIT (custom)"
+  "LGPL-2.1"
   LICENSE_URL
-  "https://github.com/fmtlib/fmt/blob/7.1.3/LICENSE.rst"
+  "https://github.com/lvc/abi-compliance-checker/blob/master/LICENSE"
+  MARKDOWN_ONLY
+)
+
+add_license_dependency(
+  PROJECT
+  "cmake-abicc"
+  PROJECT_URL
+  "https://github.com/Oleh-Kravchenko/cmake-abicc"
+  VERSION
+  "None"
+  LICENSE
+  "BSD 3-Clause License"
+  LICENSE_URL
+  "https://github.com/Oleh-Kravchenko/cmake-abicc/blob/master/LICENSE"
+  MARKDOWN_ONLY
 )
 
 add_license_dependency(
@@ -96,6 +111,33 @@ add_license_dependency(
   "Boost Software License 1.0"
   LICENSE_URL
   "https://github.com/catchorg/Catch2/blob/v2.13.6/LICENSE.txt"
+)
+
+add_license_dependency(
+  PROJECT
+  "fmt"
+  PROJECT_URL
+  "https://github.com/fmtlib/fmt/"
+  VERSION
+  "7.1.3"
+  LICENSE
+  "MIT (custom)"
+  LICENSE_URL
+  "https://github.com/fmtlib/fmt/blob/7.1.3/LICENSE.rst"
+)
+
+add_license_dependency(
+  PROJECT
+  "libyang (parts used for ABI check)"
+  PROJECT_URL
+  "https://github.com/CESNET/libyang/blob/master/CMakeModules/ABICheck.cmake"
+  VERSION
+  "None"
+  LICENSE
+  "BSD 3-Clause License"
+  LICENSE_URL
+  "https://github.com/CESNET/libyang/blob/master/LICENSE"
+  MARKDOWN_ONLY
 )
 
 add_license_dependency(
