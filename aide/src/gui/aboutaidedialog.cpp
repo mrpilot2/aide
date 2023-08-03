@@ -86,15 +86,19 @@ void AboutAideDialog::copySystemInfoToClipBoard() const
 
     const auto locale{QLocale::system()};
     auto clipBoardText{
-        QString("aIDE %1\n%2 built on %3\nQt Version: %4\nOS: %5\nKernel: "
-                "%6\nMemory: %7\nCores: %8\n")
+        QString("aIDE %1\n%2 built on %3\n\nCompiler: %4 %5\nBuild Type: "
+                "%6\nCompile Flags: %7\n\nQt Version: %8\nOS: %9\nKernel: "
+                "%10\nMemory: %11\nCores: %12\n")
             .arg(QString::fromStdString(m_info.versionInfo),
                  QString::fromStdString(m_info.gitHash),
                  locale.toString(m_info.buildDate,
                                  QLocale::FormatType::LongFormat),
-                 qVersion(), QSysInfo::prettyProductName(),
-                 QSysInfo::kernelVersion(), memoryInfo,
-                 QString::number(QThread::idealThreadCount()))};
+                 QString::fromStdString(m_info.compiler),
+                 QString::fromStdString(m_info.compilerVersion),
+                 QString::fromStdString(m_info.buildType),
+                 QString::fromStdString(m_info.compileFlags), qVersion(),
+                 QSysInfo::prettyProductName(), QSysInfo::kernelVersion(),
+                 memoryInfo, QString::number(QThread::idealThreadCount()))};
 
 #ifdef Q_OS_LINUX
     clipBoardText += QString("Desktop environment: %1")

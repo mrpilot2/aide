@@ -25,8 +25,13 @@ void AboutAideUseCase::showAboutAideInformation() const
 
     info.versionInfo = aide::build_information::AIDE_VERSION_STRING;
     info.gitHash     = aide::build_information::GIT_HASH;
+
     info.buildDate =
         QLocale("en_US").toDate(QString(__DATE__).simplified(), "MMM d yyyy");
+    info.compiler        = aide::build_information::CMAKE_CXX_COMPILER;
+    info.compilerVersion = aide::build_information::CMAKE_CXX_COMPILER_VERSION;
+    info.buildType       = aide::build_information::CMAKE_BUILD_TYPE;
+    info.compileFlags    = aide::build_information::COMPILE_FLAGS;
 
     info.whatsNewUrl =
         "https://github.com/mrpilot2/aide/releases/tag/v" + info.versionInfo;

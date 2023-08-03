@@ -20,6 +20,11 @@ namespace aide::core
         std::string copyrightYear;
         std::string gitHash;
         std::string versionInfo;
+        std::string compiler;
+        std::string compilerVersion;
+        std::string buildType;
+        std::string compileFlags;
+
         std::string whatsNewUrl;
 
         std::string thirdPartyLicensesHtml;

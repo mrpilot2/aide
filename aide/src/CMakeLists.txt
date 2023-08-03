@@ -1,4 +1,3 @@
-add_subdirectory(buildinformation)
 add_subdirectory(utils)
 add_subdirectory(core)
 add_subdirectory(gui)
@@ -34,3 +33,5 @@ target_compile_definitions(
   AideQt${QT_VERSION_MAJOR}Application
   PUBLIC SPDLOG_ACTIVE_LEVEL=${AIDE_LOG_LEVEL}
 )
+
+add_subdirectory(buildinformation)
