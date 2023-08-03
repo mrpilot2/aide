@@ -4,6 +4,8 @@
 #include <set>
 #include <string>
 
+class QDir;
+
 namespace aide::gui
 {
     class TranslatorInterface
