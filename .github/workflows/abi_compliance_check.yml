@@ -1,0 +1,79 @@
+name: CI - ABI compliance check
+
+on: [ push, pull_request, workflow_dispatch ]
+
+jobs:
+  build:
+    name: ${{ matrix.os }}, ${{ matrix.cmake_name }}, ${{ matrix.qt_name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-22.04 ]
+        cmake: [ 3.x ]
+        qt: [ "5.15.2" ]
+
+        include:
+          - cmake: 3.x
+            cmake_name: CMake Latest
+
+          - qt: "5.15.2"
+            qt_name: Qt5
+
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: abdes/gha-setup-ninja@master
+
+      - name: Setup Windows environment
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.7.x
+      - name: Install pip dependencies
+        run: |
+          pip3 install wheel setuptools
+          pip3 install conan==1.60.0
+
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.14
+        with:
+          cmake-version: ${{matrix.cmake}}
+
+      - name: Print CMake version
+        run: cmake --version
+
+      - name: Install apt dependencies
+        if: runner.os == 'Linux'
+        run: sudo apt install lcov ^libxcb-* abi-dumper abi-compliance-checker
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: ${{ matrix.qt }}
+          aqtversion: '==3.1.*'
+ 
+      # Shared Debug
+      - name: "Shared Debug: Configure"
+        run: cmake -G Ninja -S . -B build-shared-dbg -DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=ON -Daide_PACKAGING_MAINTAINER_MODE=ON -Daide_ENABLE_ABI_COMPLIANCE_CHECK=ON
+      - name: "Shared Debug: Build"
+        run: cmake --build build-shared-dbg --parallel
+      - name: "Shared Debug: ABI compliance check"
+        run: cmake --build build-shared-dbg --target generate_abi_compliance_report 
+        env:
+          QT_QPA_PLATFORM: offscreen
+
+      - name: Upload ABI compliance report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: abi_compliance_report
+          path: build-shared-dbg/compat_reports/libAide/**/*.html

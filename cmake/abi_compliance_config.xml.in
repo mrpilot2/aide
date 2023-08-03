@@ -1,0 +1,11 @@
+<version>@ABI_VERSION@</version>
+
+<headers>@ABI_HEADERS@</headers>
+
+<libs>@ABI_LIBS@</libs>
+
+<search_headers>@ABI_INCLUDE_PATHS@</search_headers>
+
+<gcc_options>@ABI_GCC_OPTIONS@</gcc_options>
+
+<defines>@ABI_GCC_DEFINES@</defines>

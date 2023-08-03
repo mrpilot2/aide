@@ -31,4 +31,9 @@ add_subdirectory(doc)
 
 add_subdirectory(src)
 
+if(aide_ENABLE_ABI_COMPLIANCE_CHECK)
+  include(cmake/AbiComplianceCheck.cmake)
+  aide_perform_abi_compliance_check(Aide::AideApplication Aide::AideWidgets)
+endif()
+
 add_subdirectory(packaging)
