@@ -92,6 +92,17 @@ function(aide_perform_abi_compliance_check)
 
   string(FIND ${LATEST_RELEASE_TAG} "-" pos)
   string(SUBSTRING ${LATEST_RELEASE_TAG} 0 ${pos} LATEST_RELEASE_TAG)
+
+  execute_process(
+    COMMAND git merge-base --is-ancestor 4d2d9b265021cc4fa3f6bcba20f4e4d7f5c40957 ${LATEST_RELEASE_TAG}
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR} COMMAND_ECHO STDOUT
+    RESULT_VARIABLE res_var
+  )
+
+  if(NOT "${res_var}" STREQUAL "0")
+    set(LATEST_RELEASE_TAG 4d2d9b265021cc4fa3f6bcba20f4e4d7f5c40957)
+  endif()
+
   message(
     STATUS
       "Abi Compliance Checker - compare against latest release ${LATEST_RELEASE_TAG}"
@@ -112,17 +123,17 @@ function(aide_perform_abi_compliance_check)
       "#!/bin/sh
 if [ ! -d abibase ]; then mkdir abibase; fi
 cd abibase
-if [ ! -f build/abi_compliance_config*.dump ]; then
+if [ ! -f build/aide/abi_compliance_config.xml ]; then
 if [ -d .git ] && [ \"${LATEST_RELEASE_TAG}\" != \"`git log --pretty=oneline | cut -d' ' -f1`\" ]; then rm -rf .* 2> /dev/null; fi
     if [ ! -d .git ]; then
         git init --initial-branch=develop
         git remote add origin ${ORIGIN_URL}
-        git fetch origin --tags ${LATEST_RELEASE_TAG}
-        git reset --hard FETCH_HEAD
+        git pull origin develop --tags
+        git checkout ${LATEST_RELEASE_TAG}
     fi
     if [ ! -d build ]; then mkdir build; fi
     cd build
-    cmake .. -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Debug -Daide_PACKAGING_MAINTAINER_MODE=ON -Daide_ENABLE_ABI_COMPLIANCE_CHECK=ON
+    cmake .. -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Debug -Daide_PACKAGING_MAINTAINER_MODE=ON -Daide_ENABLE_ABI_COMPLIANCE_CHECK=ON -DCMAKE_CXX_COMPILER=/usr/bin/g++
     cmake --build .
     cmake --build . --target generate_abi_compliance_xml
 fi
