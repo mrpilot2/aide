@@ -46,6 +46,7 @@ macro(aide_setup_options)
     option(aide_ENABLE_CPPCHECK "Enable cpp-check analysis" OFF)
     option(aide_ENABLE_PCH "Enable precompiled headers" OFF)
     option(aide_ENABLE_CACHE "Enable ccache" OFF)
+    option(aide_ENABLE_ABI_COMPLIANCE_CHECK "Enable ABI compliance check" OFF)
   else()
     option(aide_ENABLE_IPO "Enable IPO/LTO" ON)
     option(aide_WARNINGS_AS_ERRORS "Treat Warnings As Errors" ON)
@@ -64,6 +65,7 @@ macro(aide_setup_options)
     option(aide_ENABLE_CPPCHECK "Enable cpp-check analysis" ON)
     option(aide_ENABLE_PCH "Enable precompiled headers" OFF)
     option(aide_ENABLE_CACHE "Enable ccache" ON)
+    option(aide_ENABLE_ABI_COMPLIANCE_CHECK "Enable ABI compliance check" OFF)
   endif()
 
   add_feature_info(ENABLE_IPO aide_ENABLE_IPO "Enable IPO/LTO")
@@ -101,6 +103,10 @@ macro(aide_setup_options)
   )
   add_feature_info(ENABLE_PCH aide_ENABLE_PCH "Enable precompiled headers")
   add_feature_info(ENABLE_CACHE aide_ENABLE_CACHE "Enable ccache")
+  add_feature_info(
+    ENABLE_ABI_COMPLIANCE_CHECK aide_ENABLE_ABI_COMPLIANCE_CHECK
+    "Enable ABI compliance check"
+  )
 
   if(NOT PROJECT_IS_TOP_LEVEL)
     mark_as_advanced(
@@ -118,6 +124,7 @@ macro(aide_setup_options)
       aide_ENABLE_COVERAGE
       aide_ENABLE_PCH
       aide_ENABLE_CACHE
+      aide_ENABLE_ABI_COMPLIANCE_CHECK
     )
   endif()
 
@@ -205,6 +212,11 @@ macro(aide_local_options)
   if(aide_ENABLE_COVERAGE)
     include(cmake/Tests.cmake)
     aide_enable_coverage(aide_coverage)
+  endif()
+
+  if(aide_ENABLE_ABI_COMPLIANCE_CHECK)
+    include(cmake/AbiComplianceCheck.cmake)
+    aide_enable_compliance_check(aide_options)
   endif()
 
   if(aide_WARNINGS_AS_ERRORS)
