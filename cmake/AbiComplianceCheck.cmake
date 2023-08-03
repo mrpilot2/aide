@@ -135,9 +135,10 @@ fi
     generate_abi_compliance_report
     COMMAND bash ./abibase.sh
     COMMAND
-      ${ABI_CHECKER} -l libAide -v1 ${LATEST_RELEASE_TAG} -old
-      ${CMAKE_BINARY_DIR}/abibase/aide/abi_compliance_config.xml -v2 ${GIT_HASH}
-      -new ${CMAKE_BINARY_DIR}/aide/abi_compliance_config.xml
+      cmake -DABI_CHECKER="${ABI_CHECKER}"
+      -DCMAKE_BINARY_DIR="${CMAKE_BINARY_DIR}" -DGIT_HASH="${GIT_HASH}"
+      -DLATEST_RELEASE_TAG="${LATEST_RELEASE_TAG}" -P
+      "${CURRENT_SCRIPT_DIR}/GenerateAbiComplianceReport.cmake"
     DEPENDS ${ARGV} generate_abi_compliance_xml
     BYPRODUCTS
       ${CMAKE_BINARY_DIR}/compat_reports/libAide_${LATEST_RELEASE_TAG}_to_${GIT_HASH}/compat_report.html
