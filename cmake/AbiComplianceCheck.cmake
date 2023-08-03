@@ -67,7 +67,7 @@ function(aide_perform_abi_compliance_check)
   string(REPLACE ";" "$<SEMICOLON>" ABI_GCC_DEFINES "${ABI_GCC_DEFINES}")
 
   include(${CURRENT_SCRIPT_DIR}/GetGitRevisionDescription.cmake)
-  git_describe(GIT_HASH --tags --always --dirty)
+  get_git_head_revision(REFSPEC GIT_HASH)
 
   add_custom_command(
     OUTPUT "${CMAKE_BINARY_DIR}/abi_compliance_config.xml"

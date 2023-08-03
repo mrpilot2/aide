@@ -18,32 +18,40 @@ if(NOT "${res_var}" STREQUAL "0")
   else()
     message(
       STATUS
-        "ABI compliance checker detected incompatibility. If any commit between ${GIT_HASH} (HEAD) and ${LATEST_RELEASE_TAG} is marked as braking change, this is OK."
+        "ABI compliance checker detected incompatibility. If any commit between ${GIT_HASH} (HEAD) and ${LATEST_RELEASE_TAG} is marked as breaking change, this is OK."
     )
 
     execute_process(
-      "git rev-list --ancestry-path ${LATEST_RELEASE_TAG}..${GIT_HASH}"
+      COMMAND git rev-list --ancestry-path ${LATEST_RELEASE_TAG}..${GIT_HASH}
       OUTPUT_VARIABLE GIT_HASHES_TO_BE_CHECKED
     )
-
+    string(REPLACE "\n" ";" GIT_HASHES_TO_BE_CHECKED
+                   ${GIT_HASHES_TO_BE_CHECKED}
+    )
     set(found_breaking_change FALSE)
-    foreach(git_hash ${GIT_HASHES_TO_BE_CHECKED)
+    foreach(git_hash ${GIT_HASHES_TO_BE_CHECKED})
       message(
-        STATUS "Checking if commit ${git_hash} is marked as breaking changed."
+        STATUS "Checking if commit ${git_hash} is marked as breaking change."
       )
 
-      execute_process("git show -s ${git_hash}" OUTPUT_VARIABLE COMMIT_MESSAGE)
+      execute_process(
+        COMMAND git show -s ${git_hash} OUTPUT_VARIABLE COMMIT_MESSAGE
+      )
+      string(STRIP ${COMMIT_MESSAGE} COMMIT_MESSAGE)
 
-      if(${COMMIT_MESSAGE} MATCHES ".*BREAKING CHANGE:.*")
+      if(${COMMIT_MESSAGE} MATCHES ".*BREAKING CHANGE:.*"
+         OR ${COMMIT_MESSAGE} MATCHES "^[a-z]+(\(.*\))?!:.*"
+      )
         message(
           STATUS
             "Commit ${git_hash} is marked as breaking change. Major version will be increased in next release. All OK"
         )
         set(found_breaking_change TRUE)
+        break()
       endif()
     endforeach()
 
-    if(NOT ${found_breaking_change})
+    if(NOT found_breaking_change)
       message(
         FATAL_ERROR
           "ABI compliance checker detected incompatibility but no commit is marked as breaking change. Find the breaking change and mark the commit as such to make this check pass."
