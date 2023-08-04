@@ -1,6 +1,7 @@
-#ifndef AIDE_ACTIONREGISTRY_HPP
-#define AIDE_ACTIONREGISTRY_HPP
+#ifndef AIDE_ACTION_REGISTRY_HPP
+#define AIDE_ACTION_REGISTRY_HPP
 
+#include <optional>
 #include <settingsinterface.hpp>
 
 #include <QAction>
@@ -9,6 +10,7 @@
 #include <aide/actionregistryinterface.hpp>
 #include <aide/hierarchicalid.hpp>
 #include <aide/loggerinterface.hpp>
+#include <aide/menucontainerinterface.hpp>
 
 namespace aide
 {
@@ -42,6 +44,15 @@ namespace aide
         [[nodiscard]] const std::map<HierarchicalId, Action>& actions()
             const override;
 
+        MenuContainerInterfacePtr createMenu(
+            const HierarchicalId& uniqueId) override;
+
+        MenuContainerInterfacePtr createMenu(
+            const HierarchicalId& uniqueId, QWidget* parent) override;
+
+        [[nodiscard]] std::optional<MenuContainerInterfacePtr> getMenuContainer(
+            const HierarchicalId& uniqueId) const override;
+
     private:
         static std::string printKeySequences(
             const std::vector<QKeySequence>& keySequences);
@@ -53,7 +64,9 @@ namespace aide
 
         LoggerPtr logger;
         std::map<HierarchicalId, Action> m_actions;
+
+        std::map<HierarchicalId, MenuContainerInterfacePtr> m_menus;
     };
 } // namespace aide
 
-#endif // AIDE_ACTIONREGISTRY_HPP
+#endif // AIDE_ACTION_REGISTRY_HPP

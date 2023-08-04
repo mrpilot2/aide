@@ -65,6 +65,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
             loggertest.cpp
             mainwindowgeometryandstatetest.cpp
             mainwindowtest.cpp
+            menucontainertest.cpp
             mockaboutdialog.cpp
             mockapplicationcloseview.cpp
             mockkeymappagewidget.cpp

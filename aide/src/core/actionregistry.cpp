@@ -1,9 +1,12 @@
 #include "actionregistry.hpp"
 
+#include "menucontainer.hpp"
+
 using aide::Action;
 using aide::ActionRegistry;
 using aide::HierarchicalId;
 using aide::LoggerPtr;
+using aide::MenuContainerInterfacePtr;
 
 ActionRegistry::ActionRegistry(SettingsInterface& settingsInterface,
                                LoggerPtr loggerInterface)
@@ -38,10 +41,10 @@ void ActionRegistry::registerAction(
 {
     if (m_actions.find(uniqueId) != m_actions.end()) {
         logger->warn(
-            "Action with id \"{}\" is already registered. This is either a "
+            R"(Action with id "{}" is already registered. This is either a "
             "programming error or results from conflicting plugins. This "
-            "action cannot be found with \"Find Action\"  and will not be "
-            "displayed in the keymap.",
+            "action cannot be found with "Find Action"  and will not be "
+            "displayed in the keymap.")",
             uniqueId.name());
         return;
     }
@@ -57,8 +60,8 @@ void ActionRegistry::registerAction(
 
     auto userKeySequences = loadUserKeySequences(uniqueId);
 
-    Action detailedAction{action, description, qtDefaultSequences,
-                          userKeySequences};
+    Action const detailedAction{action, description, qtDefaultSequences,
+                                userKeySequences};
 
     if (!action.expired()) {
         auto sharedAction = action.lock();
@@ -69,7 +72,7 @@ void ActionRegistry::registerAction(
                 ? QList<QKeySequence>()
                 : shortcuts);
     }
-    m_actions.insert({uniqueId, detailedAction});
+    m_actions.try_emplace(uniqueId, detailedAction);
 }
 
 QList<QKeySequence> ActionRegistry::loadUserKeySequences(
@@ -121,4 +124,33 @@ std::string ActionRegistry::printKeySequences(
         combined += ", ";
     }
     return combined.erase(combined.size() - 2);
+}
+
+MenuContainerInterfacePtr ActionRegistry::createMenu(const aide::HierarchicalId& uniqueId)
+{
+    return createMenu(uniqueId, nullptr);
+}
+
+MenuContainerInterfacePtr ActionRegistry::createMenu(
+    const HierarchicalId& uniqueId, QWidget* parent)
+{
+    if (m_menus.find(uniqueId) == m_menus.end()) {
+        m_menus.try_emplace(uniqueId, std::make_shared<MenuContainer>(parent));
+    }
+
+    return m_menus.at(uniqueId);
+}
+
+std::optional<MenuContainerInterfacePtr> aide::ActionRegistry::getMenuContainer(
+    const HierarchicalId& uniqueId) const
+{
+    if (m_menus.find(uniqueId) != m_menus.end()) {
+        return m_menus.at(uniqueId);
+    }
+
+    logger->warn(
+        "Could not find MenuContainer for Id {}. Returning empty optional "
+        "instead.",
+        uniqueId.name());
+    return {};
 }

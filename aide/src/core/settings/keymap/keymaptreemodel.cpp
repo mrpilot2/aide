@@ -1,12 +1,13 @@
 
 #include "keymaptreemodel.hpp"
 
-#include <iostream>
 #include <memory>
 #include <utility>
 
 #include <QAction>
 #include <QColor>
+
+#include <aide/hierarchicalid.hpp>
 
 using aide::Action;
 using aide::core::KeyMapTreeModel;
