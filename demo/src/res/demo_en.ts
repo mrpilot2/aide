@@ -55,4 +55,19 @@
         <translation type="unfinished"></translation>
     </message>
 </context>
+<context>
+    <name>QApplication</name>
+    <message>
+        <source>New project ...</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Menu Extension</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>This action shows the menu extension capabilities of aIDE.</source>
+        <translation></translation>
+    </message>
+</context>
 </TS>

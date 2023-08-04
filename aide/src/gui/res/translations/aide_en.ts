@@ -5,41 +5,41 @@
     <name>AboutDialog</name>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>About aIDE</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;br&gt;&lt;p&gt;aIDE is made possible by &lt;a href=&quot;abc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;open source software&lt;/span&gt;&lt;br/&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>AddShortcutDialog</name>
     <message>
         <source>Add Keyboard Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Already assigned to:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>AideTableView</name>
     <message>
         <source>There are no elements in this view</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source> due to active filter</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -50,13 +50,15 @@
     </message>
 </context>
 <context>
-    <name>MainWindow</name>
+    <name>QApplication</name>
     <message>
         <source>&amp;File</source>
+        <comment>MainWindow</comment>
         <translation></translation>
     </message>
     <message>
         <source>&amp;Help</source>
+        <comment>MainWindow</comment>
         <translation></translation>
     </message>
 </context>
@@ -68,23 +70,23 @@
     </message>
     <message>
         <source>Search ...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Match &amp;Case</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Regular E&amp;xpression</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Esc</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -102,22 +104,22 @@
     <name>ThirdPartyLicensesDialog</name>
     <message>
         <source>Third-party licenses</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>aide::core::KeymapContextMenuProvider</name>
     <message>
         <source>Add keyboard shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Remove %1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Reset to default</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
