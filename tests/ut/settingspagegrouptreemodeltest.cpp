@@ -57,6 +57,8 @@ TEST_CASE("A new settings page group tree model with one registered page")
         auto parentIndex = treeModel.parent(index);
         REQUIRE(!parentIndex.isValid());
     }
+
+    SettingsPageRegistry::deleteAllPages();
 }
 
 TEST_CASE("A new settings page group tree model with multiple registered page")
@@ -106,6 +108,8 @@ TEST_CASE("A new settings page group tree model with multiple registered page")
 
         REQUIRE(!childIndex.isValid());
     }
+
+    SettingsPageRegistry::deleteAllPages();
 }
 
 TEST_CASE("Any settings page group tree model")
@@ -208,4 +212,6 @@ TEST_CASE("Any settings page group tree model")
                     QString::fromStdString(subSubPage2->group().name()),
                     QModelIndex()) == expectedIndex);
     }
+
+    SettingsPageRegistry::deleteAllPages();
 }
