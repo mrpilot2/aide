@@ -112,6 +112,18 @@ const std::map<HierarchicalId, Action>& ActionRegistry::actions() const
     return m_actions;
 }
 
+std::optional<QAction*> ActionRegistry::action(const HierarchicalId& id) const
+{
+    if (auto it = m_actions.find(id); it != m_actions.end()) {
+        return it->second.action.lock().get();
+    }
+
+    logger->warn(
+        "Could not find action by ID {}. Returning empty optional instead.",
+        id.name());
+    return {};
+}
+
 std::string ActionRegistry::printKeySequences(
     const std::vector<QKeySequence>& keySequences)
 {
@@ -126,7 +138,8 @@ std::string ActionRegistry::printKeySequences(
     return combined.erase(combined.size() - 2);
 }
 
-MenuContainerInterfacePtr ActionRegistry::createMenu(const aide::HierarchicalId& uniqueId)
+MenuContainerInterfacePtr ActionRegistry::createMenu(
+    const aide::HierarchicalId& uniqueId)
 {
     return createMenu(uniqueId, nullptr);
 }
@@ -144,8 +157,8 @@ MenuContainerInterfacePtr ActionRegistry::createMenu(
 std::optional<MenuContainerInterfacePtr> aide::ActionRegistry::getMenuContainer(
     const HierarchicalId& uniqueId) const
 {
-    if (m_menus.find(uniqueId) != m_menus.end()) {
-        return m_menus.at(uniqueId);
+    if (auto it = m_menus.find(uniqueId); it != m_menus.end()) {
+        return it->second;
     }
 
     logger->warn(

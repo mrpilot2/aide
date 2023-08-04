@@ -15,6 +15,7 @@
 #include "applicationtranslator.hpp"
 #include "hierarchicalid.hpp"
 #include "mainwindowcontroller.hpp"
+#include "menucontainerinterface.hpp"
 #include "settings/settingsdialog.hpp"
 #include "ui_mainwindow.h"
 
@@ -85,42 +86,55 @@ void MainWindow::restoreGeometryAndState(QByteArray geometry, QByteArray state)
 void MainWindow::registerActions(
     const ActionRegistryInterfacePtr& actionRegistry)
 {
+    auto menuFileContainer{actionRegistry->createMenu(
+        HierarchicalId("Main Menu")("File"), m_ui->menubar)};
+    auto* menuFile{menuFileContainer->menu()};
+    menuFile->setTitle(QApplication::tr("&File", "MainWindow"));
+
     m_actionSettings = std::make_shared<QAction>(tr("Settings"), this);
     connect(m_actionSettings.get(), &QAction::triggered, m_controller.get(),
             &MainWindowController::onUserWantsToShowSettingsDialog);
-    m_ui->menuFile->addAction(m_actionSettings.get());
+    menuFile->addAction(m_actionSettings.get());
 
     actionRegistry->registerAction(
         m_actionSettings, ACTION_IDS().MAIN_MENU_FILE_SETTINGS,
         tr("Edit application settings").toStdString(),
         {QKeySequence(Qt::CTRL | Qt::ALT | Qt::Key_S)});
-    m_ui->menuFile->addSeparator();
+    menuFile->addSeparator();
 
     m_actionQuit = std::make_shared<QAction>(
         createIconFromTheme("application-exit"), tr("Quit"), this);
     connect(m_actionQuit.get(), &QAction::triggered, QApplication::instance(),
             &QApplication::quit);
-    m_ui->menuFile->addAction(m_actionQuit.get());
+    menuFile->addAction(m_actionQuit.get());
 
     actionRegistry->registerAction(
         m_actionQuit, ACTION_IDS().MAIN_MENU_FILE_QUIT,
         tr("Quits the application").toStdString(),
         {QKeySequence(QKeySequence::Quit), QKeySequence("Alt+F4")});
 
+    m_ui->menubar->addMenu(menuFile);
+
+    auto menuHelpContainer{actionRegistry->createMenu(
+        HierarchicalId("Main Menu")("Help"), m_ui->menubar)};
+    auto* menuHelp{menuHelpContainer->menu()};
+    menuHelp->setTitle(QApplication::tr("&Help", "MainWindow"));
+
     m_actionAboutAide = std::make_shared<QAction>(tr("About") + " aIDE", this);
     connect(m_actionAboutAide.get(), &QAction::triggered, m_controller.get(),
             &MainWindowController::onUserWantsToShowAboutAideDialog);
-    m_ui->menuHelp->addAction(m_actionAboutAide.get());
+    menuHelp->addAction(m_actionAboutAide.get());
     actionRegistry->registerAction(m_actionAboutAide,
                                    ACTION_IDS().MAIN_MENU_HELP_ABOUT_AIDE);
 
     m_actionAboutQt = std::make_shared<QAction>(tr("About Qt"), this);
     connect(m_actionAboutQt.get(), &QAction::triggered,
             QApplication::instance(), &QApplication::aboutQt);
-    m_ui->menuHelp->addAction(m_actionAboutQt.get());
+    menuHelp->addAction(m_actionAboutQt.get());
 
     actionRegistry->registerAction(m_actionAboutQt,
                                    ACTION_IDS().MAIN_MENU_HELP_ABOUT_QT);
+    m_ui->menubar->addMenu(menuHelp);
 }
 
 std::shared_ptr<TranslatorInterface> MainWindow::translator() const

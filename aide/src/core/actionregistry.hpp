@@ -44,11 +44,13 @@ namespace aide
         [[nodiscard]] const std::map<HierarchicalId, Action>& actions()
             const override;
 
+        std::optional<QAction*> action(const HierarchicalId& id) const override;
+
         MenuContainerInterfacePtr createMenu(
             const HierarchicalId& uniqueId) override;
 
-        MenuContainerInterfacePtr createMenu(
-            const HierarchicalId& uniqueId, QWidget* parent) override;
+        MenuContainerInterfacePtr createMenu(const HierarchicalId& uniqueId,
+                                             QWidget* parent) override;
 
         [[nodiscard]] std::optional<MenuContainerInterfacePtr> getMenuContainer(
             const HierarchicalId& uniqueId) const override;

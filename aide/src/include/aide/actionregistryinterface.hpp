@@ -72,6 +72,9 @@ namespace aide
         [[nodiscard]] virtual const std::map<HierarchicalId, Action>& actions()
             const = 0;
 
+        [[nodiscard]] virtual std::optional<QAction*> action(
+            const HierarchicalId& id) const = 0;
+
         virtual MenuContainerInterfacePtr createMenu(
             const HierarchicalId& uniqueId) = 0;
 
