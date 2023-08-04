@@ -7,6 +7,7 @@
 #include <QMessageBox>
 #include <QString>
 
+#include <aide/aideconstants.hpp>
 #include <aide/aidesettingsprovider.hpp>
 #include <aide/application.hpp>
 #include <aide/gui/translatorinterface.hpp>
@@ -14,6 +15,8 @@
 #include <aide/settings/settingspageregistry.hpp>
 
 #include "demosettingspage.hpp"
+
+using aide::constants::CONSTANTS;
 
 int main(int argc, char* argv[])
 {
@@ -66,14 +69,10 @@ int main(int argc, char* argv[])
                                      "capabilities of aIDE."));
             });
         menuFile->insertAction(
-            actionRegistry
-                ->action(aide::HierarchicalId("Main Menu")("File")("Settings"))
-                .value(),
+            actionRegistry->action(CONSTANTS().FILE_SETTINGS).value(),
             actionNewProject.get());
         menuFile->insertSeparator(
-            actionRegistry
-                ->action(aide::HierarchicalId("Main Menu")("File")("Settings"))
-                .value());
+            actionRegistry->action(CONSTANTS().FILE_SETTINGS).value());
         mainWindow->menuBar()->update();
 
         actionRegistry->registerAction(
