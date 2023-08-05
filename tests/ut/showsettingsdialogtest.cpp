@@ -391,6 +391,16 @@ TEST_CASE("Any show settings dialog use case")
 
     SECTION("selects first item when executed if none was save")
     {
+        SettingsPageRegistry::deleteAllPages();
+
+        auto page1 =
+            std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
+        auto page2 =
+            std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage2"));
+
+        SettingsPageRegistry::addPage(page1);
+        SettingsPageRegistry::addPage(page2);
+
         useCase.showSettingsDialog();
 
         REQUIRE(view->getSelectedGroupIndex().row() == 0);
@@ -426,6 +436,8 @@ TEST_CASE("Any show settings dialog use case")
         REQUIRE(view->getSelectedGroupIndex().parent().parent().parent() ==
                 QModelIndex());
     }
+
+    SettingsPageRegistry::deleteAllPages();
 }
 
 TEST_CASE("Any settings dialog", "[Issue 36]")

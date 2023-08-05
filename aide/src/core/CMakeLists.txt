@@ -13,6 +13,9 @@ target_sources(
           loggerfactory.cpp
           mainwindowgeometryandstate.cpp
           mainwindowinterface.cpp
+          menucontainer.cpp
+          menucontainerinterface.cpp
+          ../include/aide/menucontainerinterface.hpp
           qtsettings.cpp
           settingsinterface.cpp
           settings/settingsdialogchangepagecontroller.cpp

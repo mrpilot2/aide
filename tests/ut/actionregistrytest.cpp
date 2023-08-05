@@ -6,6 +6,7 @@
 #include <QAction>
 #include <QApplication>
 #include <QKeySequence>
+#include <QMenu>
 
 #include "actionregistry.hpp"
 #include "hierarchicalid.hpp"
@@ -189,5 +190,77 @@ TEST_CASE("Any action registry ")
                 QList<QKeySequence>({QKeySequence("F4")}));
         REQUIRE(registry.actions().at(id).keySequences.isEmpty());
         REQUIRE(settings.value(settingsKey) == QVariant());
+    }
+
+    SECTION("added action can be retrieved from registry")
+    {
+        auto action = std::make_shared<QAction>("&File", nullptr);
+        const HierarchicalId id{HierarchicalId("MainMenu")("File")};
+
+        registry.registerAction(
+            action, id, std::vector<QKeySequence>({QKeySequence("F4")}));
+
+        REQUIRE(registry.action(id).has_value());
+        REQUIRE(registry.action(id).value() == action.get());
+    }
+
+    SECTION("non existing actions are received as empty optional")
+    {
+        const HierarchicalId id{HierarchicalId("MainMenu")("File")};
+
+        REQUIRE(!registry.action(id).has_value());
+    }
+
+    SECTION("allows to add a new menu container")
+    {
+        auto* ptr = registry.createMenu(HierarchicalId("MainMenu")("File"));
+
+        REQUIRE(ptr != nullptr);
+
+        // NOLINTNEXTLINE normally Qt takes ownership of the menu and deletes it
+        delete ptr->menu();
+    }
+
+    SECTION("returns the same menu container if it's already registered")
+    {
+        auto* firstInsertion =
+            registry.createMenu(HierarchicalId("MainMenu")("File"));
+
+        auto* secondInsertion =
+            registry.createMenu(HierarchicalId("MainMenu")("File"));
+
+        REQUIRE(firstInsertion == secondInsertion);
+
+        // NOLINTNEXTLINE normally Qt takes ownership of the menu and deletes it
+        delete firstInsertion->menu();
+    }
+
+    SECTION("added menu containers can be retrieved from registry")
+    {
+        const auto id{HierarchicalId("MainMenu")("File")};
+        auto* ptr = registry.createMenu(id);
+
+        auto result = registry.getMenuContainer(id);
+
+        REQUIRE(result.has_value());
+
+        REQUIRE(ptr == result.value());
+
+        // NOLINTNEXTLINE normally Qt takes ownership of the menu and deletes it
+        delete ptr->menu();
+    }
+
+    SECTION("non existing menu containers are received as empty optional")
+    {
+        auto const* firstInsertion =
+            registry.createMenu(HierarchicalId("MainMenu")("File"));
+
+        auto nonExistentMenu =
+            registry.getMenuContainer(HierarchicalId("MainMenu")("Help"));
+
+        REQUIRE(!nonExistentMenu.has_value());
+
+        // NOLINTNEXTLINE normally Qt takes ownership of the menu and deletes it
+        delete firstInsertion->menu();
     }
 }

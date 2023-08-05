@@ -9,47 +9,21 @@
 #include <QObject>
 #include <QPushButton>
 
-#include <aide/log_helper_macros.hpp>
-
 #include "actionregistry.hpp"
+#include "aideconstants.hpp"
 #include "applicationtranslator.hpp"
 #include "hierarchicalid.hpp"
 #include "mainwindowcontroller.hpp"
+#include "menucontainerinterface.hpp"
 #include "settings/settingsdialog.hpp"
 #include "ui_mainwindow.h"
 
-using aide::HierarchicalId;
+using aide::constants::CONSTANTS;
 using aide::core::UserSelection;
 using aide::gui::MainWindow;
 using aide::gui::MainWindowControllerPtr;
 using aide::gui::TranslatorInterface;
 
-struct ActionIds
-{
-    const HierarchicalId MAIN_MENU_FILE_SETTINGS{
-        HierarchicalId("Main Menu")("File")("Settings")};
-    const HierarchicalId MAIN_MENU_FILE_QUIT{
-        HierarchicalId("Main Menu")("File")("Quit")};
-    const HierarchicalId MAIN_MENU_HELP_ABOUT_AIDE{
-        HierarchicalId("Main Menu")("Help")("About Aide")};
-    const HierarchicalId MAIN_MENU_HELP_ABOUT_QT{
-        HierarchicalId("Main Menu")("Help")("About Qt")};
-};
-
-const static ActionIds& ACTION_IDS()
-{
-    try {
-        static ActionIds ids;
-        return ids;
-    }
-    catch (...) {
-        AIDE_LOG_CRITICAL(
-            "MainWindow: could not create hierarchical menu Ids with static "
-            "storage duration. This should only happen if the application is "
-            "already out of memory at startup")
-        std::terminate();
-    }
-}
 void initIconResource()
 {
     Q_INIT_RESOURCE(icons);
@@ -58,7 +32,7 @@ void initIconResource()
 MainWindow::MainWindow(LoggerPtr loggerInterface, QWidget* parent)
     : MainWindowInterface(parent)
     , logger{std::move(loggerInterface)}
-    , m_translator{new ApplicationTranslator(logger)}
+    , m_translator{std::make_shared<ApplicationTranslator>(logger)}
     , m_ui(new Ui::MainWindow)
 {
     initIconResource();
@@ -85,42 +59,54 @@ void MainWindow::restoreGeometryAndState(QByteArray geometry, QByteArray state)
 void MainWindow::registerActions(
     const ActionRegistryInterfacePtr& actionRegistry)
 {
+    auto const* menuFileContainer{
+        actionRegistry->createMenu(CONSTANTS().MENU_FILE, m_ui->menubar)};
+    auto* menuFile{menuFileContainer->menu()};
+    menuFile->setTitle(QApplication::tr("&File", "MainWindow"));
+
     m_actionSettings = std::make_shared<QAction>(tr("Settings"), this);
     connect(m_actionSettings.get(), &QAction::triggered, m_controller.get(),
             &MainWindowController::onUserWantsToShowSettingsDialog);
-    m_ui->menuFile->addAction(m_actionSettings.get());
+    menuFile->addAction(m_actionSettings.get());
 
     actionRegistry->registerAction(
-        m_actionSettings, ACTION_IDS().MAIN_MENU_FILE_SETTINGS,
+        m_actionSettings, CONSTANTS().FILE_SETTINGS,
         tr("Edit application settings").toStdString(),
         {QKeySequence(Qt::CTRL | Qt::ALT | Qt::Key_S)});
-    m_ui->menuFile->addSeparator();
+    menuFile->addSeparator();
 
     m_actionQuit = std::make_shared<QAction>(
         createIconFromTheme("application-exit"), tr("Quit"), this);
     connect(m_actionQuit.get(), &QAction::triggered, QApplication::instance(),
             &QApplication::quit);
-    m_ui->menuFile->addAction(m_actionQuit.get());
+    menuFile->addAction(m_actionQuit.get());
 
     actionRegistry->registerAction(
-        m_actionQuit, ACTION_IDS().MAIN_MENU_FILE_QUIT,
+        m_actionQuit, CONSTANTS().FILE_QUIT,
         tr("Quits the application").toStdString(),
         {QKeySequence(QKeySequence::Quit), QKeySequence("Alt+F4")});
+
+    m_ui->menubar->addMenu(menuFile);
+
+    auto const* menuHelpContainer{
+        actionRegistry->createMenu(CONSTANTS().MENU_HELP, m_ui->menubar)};
+    auto* menuHelp{menuHelpContainer->menu()};
+    menuHelp->setTitle(QApplication::tr("&Help", "MainWindow"));
 
     m_actionAboutAide = std::make_shared<QAction>(tr("About") + " aIDE", this);
     connect(m_actionAboutAide.get(), &QAction::triggered, m_controller.get(),
             &MainWindowController::onUserWantsToShowAboutAideDialog);
-    m_ui->menuHelp->addAction(m_actionAboutAide.get());
+    menuHelp->addAction(m_actionAboutAide.get());
     actionRegistry->registerAction(m_actionAboutAide,
-                                   ACTION_IDS().MAIN_MENU_HELP_ABOUT_AIDE);
+                                   CONSTANTS().HELP_ABOUT_AIDE);
 
     m_actionAboutQt = std::make_shared<QAction>(tr("About Qt"), this);
     connect(m_actionAboutQt.get(), &QAction::triggered,
             QApplication::instance(), &QApplication::aboutQt);
-    m_ui->menuHelp->addAction(m_actionAboutQt.get());
+    menuHelp->addAction(m_actionAboutQt.get());
 
-    actionRegistry->registerAction(m_actionAboutQt,
-                                   ACTION_IDS().MAIN_MENU_HELP_ABOUT_QT);
+    actionRegistry->registerAction(m_actionAboutQt, CONSTANTS().HELP_ABOUT_QT);
+    m_ui->menubar->addMenu(menuHelp);
 }
 
 std::shared_ptr<TranslatorInterface> MainWindow::translator() const
@@ -131,8 +117,8 @@ std::shared_ptr<TranslatorInterface> MainWindow::translator() const
 QIcon MainWindow::createIconFromTheme(const std::string& iconName)
 {
     QIcon icon;
-    QString iconThemeName = QString::fromStdString(iconName);
-    if (QIcon::hasThemeIcon(iconThemeName)) {
+    if (QString const iconThemeName = QString::fromStdString(iconName);
+        QIcon::hasThemeIcon(iconThemeName)) {
         icon = QIcon::fromTheme(iconThemeName);
     } else {
         icon.addFile(QString::fromUtf8(""), QSize(), QIcon::Normal, QIcon::Off);
@@ -161,8 +147,10 @@ MainWindow::letUserConfirmApplicationClose()
     messageBox->setDefaultButton(QMessageBox::Yes);
     messageBox->setIcon(QMessageBox::Question);
 
-    auto* layout = dynamic_cast<QGridLayout*>(messageBox->layout());
-    if (layout != nullptr) { layout->addWidget(checkBox.get(), 2, 0); }
+    if (auto* layout = dynamic_cast<QGridLayout*>(messageBox->layout());
+        layout != nullptr) {
+        layout->addWidget(checkBox.get(), 2, 0);
+    }
     auto reply = messageBox->exec();
 
     logger->debug("User requested to{} ask for exit confirmation again",

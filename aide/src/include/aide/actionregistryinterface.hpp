@@ -1,19 +1,21 @@
 
-#ifndef AIDE_ACTIONREGISTRYINTERFACE_HPP
-#define AIDE_ACTIONREGISTRYINTERFACE_HPP
+#ifndef AIDE_ACTION_REGISTRY_INTERFACE_HPP
+#define AIDE_ACTION_REGISTRY_INTERFACE_HPP
 
 #include <map>
 #include <memory>
+#include <optional>
 #include <string>
 #include <vector>
 
 #include <QKeySequence>
 #include <QList>
 
-#include <aide/hierarchicalid.hpp>
+#include <aide/menucontainerinterface.hpp>
 
 class QAction;
 class QKeySequence;
+class QWidget;
 
 namespace aide
 {
@@ -67,10 +69,23 @@ namespace aide
         virtual void modifyShortcutsForAction(
             HierarchicalId id, const QList<QKeySequence>& shortcuts) = 0;
 
-        virtual const std::map<HierarchicalId, Action>& actions() const = 0;
+        [[nodiscard]] virtual const std::map<HierarchicalId, Action>& actions()
+            const = 0;
+
+        [[nodiscard]] virtual std::optional<QAction*> action(
+            const HierarchicalId& id) const = 0;
+
+        virtual MenuContainerInterface* createMenu(
+            const aide::HierarchicalId& uniqueId) = 0;
+
+        virtual MenuContainerInterface* createMenu(
+            const HierarchicalId& uniqueId, QWidget* parent) = 0;
+
+        [[nodiscard]] virtual std::optional<MenuContainerInterface*>
+        getMenuContainer(const HierarchicalId& uniqueId) const = 0;
     };
 
     using ActionRegistryInterfacePtr = std::shared_ptr<ActionRegistryInterface>;
 } // namespace aide
 
-#endif // AIDE_ACTIONREGISTRYINTERFACE_HPP
+#endif // AIDE_ACTION_REGISTRY_INTERFACE_HPP

@@ -5,41 +5,41 @@
     <name>AboutDialog</name>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopieren</translation>
     </message>
     <message>
         <source>About aIDE</source>
-        <translation type="unfinished"></translation>
+        <translation>Über aIDE</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;br&gt;&lt;p&gt;aIDE is made possible by &lt;a href=&quot;abc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;open source software&lt;/span&gt;&lt;br/&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;br&gt;&lt;p&gt;aIDE wird ermöglicht durch den Einsatz von &lt;a href=&quot;abc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;freier Software&lt;/span&gt;&lt;br/&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
     <name>AddShortcutDialog</name>
     <message>
         <source>Add Keyboard Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Neues Tastenkürzel hinzufügen</translation>
     </message>
     <message>
         <source>Already assigned to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bereits zugewiesen an:</translation>
     </message>
 </context>
 <context>
     <name>AideTableView</name>
     <message>
         <source>There are no elements in this view</source>
-        <translation type="unfinished">Keine Elemente zur Anzeige verfügbar</translation>
+        <translation>Keine Elemente zur Anzeige verfügbar</translation>
     </message>
     <message>
         <source> due to active filter</source>
-        <translation type="unfinished"></translation>
+        <translation> aufgrund eines aktiven Filters</translation>
     </message>
 </context>
 <context>
@@ -57,10 +57,28 @@
     </message>
     <message>
         <source>&amp;File</source>
+        <translation type="vanished">&amp;Datei</translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation type="vanished">&amp;Hilfe</translation>
+    </message>
+</context>
+<context>
+    <name>QApplication</name>
+    <message>
+        <source>MainWindow</source>
+        <comment>&amp;File</comment>
+        <translation type="obsolete">Hauptfenster</translation>
+    </message>
+    <message>
+        <source>&amp;File</source>
+        <comment>MainWindow</comment>
         <translation>&amp;Datei</translation>
     </message>
     <message>
         <source>&amp;Help</source>
+        <comment>MainWindow</comment>
         <translation>&amp;Hilfe</translation>
     </message>
 </context>
@@ -72,23 +90,23 @@
     </message>
     <message>
         <source>Search ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche ...</translation>
     </message>
     <message>
         <source>Match &amp;Case</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Groß-/Kleinschreibung</translation>
     </message>
     <message>
         <source>Regular E&amp;xpression</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Regulärer Ausdruck</translation>
     </message>
     <message>
         <source>Esc</source>
-        <translation type="unfinished"></translation>
+        <translation>Esc</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Schließen</translation>
     </message>
 </context>
 <context>
@@ -106,22 +124,22 @@
     <name>ThirdPartyLicensesDialog</name>
     <message>
         <source>Third-party licenses</source>
-        <translation type="unfinished"></translation>
+        <translation>Lizenzen von Drittanbietern</translation>
     </message>
 </context>
 <context>
     <name>aide::core::KeymapContextMenuProvider</name>
     <message>
         <source>Add keyboard shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Tastenkürzel hinzufügen</translation>
     </message>
     <message>
         <source>Remove %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Entferne %1</translation>
     </message>
     <message>
         <source>Reset to default</source>
-        <translation type="unfinished"></translation>
+        <translation>Auf Standard zurücksetzen</translation>
     </message>
 </context>
 <context>
