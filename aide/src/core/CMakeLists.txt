@@ -49,7 +49,9 @@ target_link_libraries(
 target_compile_features(AideCore PRIVATE cxx_std_17)
 
 set(LICENSE_FILE "${CMAKE_INSTALL_PREFIX}/share/doc/aide/licenses.html")
-set(DEVEL_LICENSE_FILE "${CMAKE_BINARY_DIR}/aide/dependencies/licenses.html")
+set(DEVEL_LICENSE_FILE
+    "${CMAKE_CURRENT_BINARY_DIR}/../../dependencies/licenses.html"
+)
 
 set_source_files_properties(
   aboutaideusecase.cpp
