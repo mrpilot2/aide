@@ -6,6 +6,7 @@
 #include <memory>
 
 #include <QObject>
+
 class QMenu;
 
 namespace aide
@@ -19,7 +20,7 @@ namespace aide
         [[nodiscard]] virtual QMenu* menu() const = 0;
     };
 
-    using MenuContainerInterfacePtr = std::shared_ptr<MenuContainerInterface>;
+    using MenuContainerInterfacePtr = std::unique_ptr<MenuContainerInterface>;
 } // namespace aide
 
 #endif // AIDE_MENU_CONTAINER_INTERFACE_HPP

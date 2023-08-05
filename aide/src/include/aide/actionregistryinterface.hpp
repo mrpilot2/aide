@@ -75,13 +75,13 @@ namespace aide
         [[nodiscard]] virtual std::optional<QAction*> action(
             const HierarchicalId& id) const = 0;
 
-        virtual MenuContainerInterfacePtr createMenu(
-            const HierarchicalId& uniqueId) = 0;
+        virtual MenuContainerInterface* createMenu(
+            const aide::HierarchicalId& uniqueId) = 0;
 
-        virtual MenuContainerInterfacePtr createMenu(
+        virtual MenuContainerInterface* createMenu(
             const HierarchicalId& uniqueId, QWidget* parent) = 0;
 
-        [[nodiscard]] virtual std::optional<MenuContainerInterfacePtr>
+        [[nodiscard]] virtual std::optional<MenuContainerInterface*>
         getMenuContainer(const HierarchicalId& uniqueId) const = 0;
     };
 

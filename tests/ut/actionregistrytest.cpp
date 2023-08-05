@@ -6,6 +6,7 @@
 #include <QAction>
 #include <QApplication>
 #include <QKeySequence>
+#include <QMenu>
 
 #include "actionregistry.hpp"
 #include "hierarchicalid.hpp"
@@ -193,42 +194,54 @@ TEST_CASE("Any action registry ")
 
     SECTION("allows to add a new menu container")
     {
-        auto ptr = registry.createMenu(HierarchicalId("MainMenu")("File"));
+        auto* ptr = registry.createMenu(HierarchicalId("MainMenu")("File"));
 
         REQUIRE(ptr != nullptr);
+
+        //NOLINTNEXTLINE normally Qt takes ownership of the menu and deletes it
+        delete ptr->menu();
     }
 
     SECTION("returns the same menu container if it's already registered")
     {
-        auto firstInsertion =
+        auto* firstInsertion =
             registry.createMenu(HierarchicalId("MainMenu")("File"));
 
-        auto secondInsertion =
+        auto* secondInsertion =
             registry.createMenu(HierarchicalId("MainMenu")("File"));
 
-        REQUIRE(firstInsertion.get() == secondInsertion.get());
+        REQUIRE(firstInsertion == secondInsertion);
+
+        //NOLINTNEXTLINE normally Qt takes ownership of the menu and deletes it
+        delete firstInsertion->menu();
     }
 
     SECTION("added menu containers can be retrieved from registry")
     {
         const auto id{HierarchicalId("MainMenu")("File")};
-        auto ptr = registry.createMenu(id);
+        auto* ptr = registry.createMenu(id);
 
         auto result = registry.getMenuContainer(id);
 
         REQUIRE(result.has_value());
 
-        REQUIRE(ptr.get() == result.value().get());
+        REQUIRE(ptr == result.value());
+
+        //NOLINTNEXTLINE normally Qt takes ownership of the menu and deletes it
+        delete ptr->menu();
     }
 
     SECTION("non existing menu containers are received as empty optional")
     {
-        auto firstInsertion =
+        auto const* firstInsertion =
             registry.createMenu(HierarchicalId("MainMenu")("File"));
 
         auto nonExistentMenu =
             registry.getMenuContainer(HierarchicalId("MainMenu")("Help"));
 
         REQUIRE(!nonExistentMenu.has_value());
+
+        //NOLINTNEXTLINE normally Qt takes ownership of the menu and deletes it
+        delete firstInsertion->menu();
     }
 }

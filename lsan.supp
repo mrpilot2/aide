@@ -3,3 +3,4 @@ leak:libQt5*
 leak:libfontconfig*
 leak:libqoffscreen*
 leak:libwayland*
+leak:libharfbuzz

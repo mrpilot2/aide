@@ -11,3 +11,4 @@ QMenu* aide::MenuContainer::menu() const
 {
     return m_menu;
 }
+aide::MenuContainer::~MenuContainer() = default;

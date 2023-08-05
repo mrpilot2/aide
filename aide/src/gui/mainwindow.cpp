@@ -32,7 +32,7 @@ void initIconResource()
 MainWindow::MainWindow(LoggerPtr loggerInterface, QWidget* parent)
     : MainWindowInterface(parent)
     , logger{std::move(loggerInterface)}
-    , m_translator{new ApplicationTranslator(logger)}
+    , m_translator{std::make_shared<ApplicationTranslator>(logger)}
     , m_ui(new Ui::MainWindow)
 {
     initIconResource();
@@ -59,7 +59,7 @@ void MainWindow::restoreGeometryAndState(QByteArray geometry, QByteArray state)
 void MainWindow::registerActions(
     const ActionRegistryInterfacePtr& actionRegistry)
 {
-    auto menuFileContainer{
+    auto const* menuFileContainer{
         actionRegistry->createMenu(CONSTANTS().MENU_FILE, m_ui->menubar)};
     auto* menuFile{menuFileContainer->menu()};
     menuFile->setTitle(QApplication::tr("&File", "MainWindow"));
@@ -88,7 +88,7 @@ void MainWindow::registerActions(
 
     m_ui->menubar->addMenu(menuFile);
 
-    auto menuHelpContainer{
+    auto const* menuHelpContainer{
         actionRegistry->createMenu(CONSTANTS().MENU_HELP, m_ui->menubar)};
     auto* menuHelp{menuHelpContainer->menu()};
     menuHelp->setTitle(QApplication::tr("&Help", "MainWindow"));
@@ -117,8 +117,8 @@ std::shared_ptr<TranslatorInterface> MainWindow::translator() const
 QIcon MainWindow::createIconFromTheme(const std::string& iconName)
 {
     QIcon icon;
-    QString iconThemeName = QString::fromStdString(iconName);
-    if (QIcon::hasThemeIcon(iconThemeName)) {
+    if (QString const iconThemeName = QString::fromStdString(iconName);
+        QIcon::hasThemeIcon(iconThemeName)) {
         icon = QIcon::fromTheme(iconThemeName);
     } else {
         icon.addFile(QString::fromUtf8(""), QSize(), QIcon::Normal, QIcon::Off);
@@ -147,8 +147,10 @@ MainWindow::letUserConfirmApplicationClose()
     messageBox->setDefaultButton(QMessageBox::Yes);
     messageBox->setIcon(QMessageBox::Question);
 
-    auto* layout = dynamic_cast<QGridLayout*>(messageBox->layout());
-    if (layout != nullptr) { layout->addWidget(checkBox.get(), 2, 0); }
+    if (auto* layout = dynamic_cast<QGridLayout*>(messageBox->layout());
+        layout != nullptr) {
+        layout->addWidget(checkBox.get(), 2, 0);
+    }
     auto reply = messageBox->exec();
 
     logger->debug("User requested to{} ask for exit confirmation again",

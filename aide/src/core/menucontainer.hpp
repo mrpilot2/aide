@@ -19,6 +19,9 @@ namespace aide
     public:
         explicit MenuContainer(QWidget* parent = nullptr);
 
+        ~MenuContainer() override;
+
+
         [[nodiscard]] QMenu* menu() const override;
 
     private:

@@ -10,7 +10,6 @@
 #include <aide/actionregistryinterface.hpp>
 #include <aide/hierarchicalid.hpp>
 #include <aide/loggerinterface.hpp>
-#include <aide/menucontainerinterface.hpp>
 
 namespace aide
 {
@@ -46,13 +45,13 @@ namespace aide
 
         std::optional<QAction*> action(const HierarchicalId& id) const override;
 
-        MenuContainerInterfacePtr createMenu(
-            const HierarchicalId& uniqueId) override;
+        MenuContainerInterface* createMenu(
+            const aide::HierarchicalId& uniqueId) override;
 
-        MenuContainerInterfacePtr createMenu(const HierarchicalId& uniqueId,
+        MenuContainerInterface* createMenu(const HierarchicalId& uniqueId,
                                              QWidget* parent) override;
 
-        [[nodiscard]] std::optional<MenuContainerInterfacePtr> getMenuContainer(
+        [[nodiscard]] std::optional<MenuContainerInterface*> getMenuContainer(
             const HierarchicalId& uniqueId) const override;
 
     private:

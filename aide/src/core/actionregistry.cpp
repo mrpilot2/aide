@@ -6,7 +6,7 @@ using aide::Action;
 using aide::ActionRegistry;
 using aide::HierarchicalId;
 using aide::LoggerPtr;
-using aide::MenuContainerInterfacePtr;
+using aide::MenuContainerInterface;
 
 ActionRegistry::ActionRegistry(SettingsInterface& settingsInterface,
                                LoggerPtr loggerInterface)
@@ -138,27 +138,27 @@ std::string ActionRegistry::printKeySequences(
     return combined.erase(combined.size() - 2);
 }
 
-MenuContainerInterfacePtr ActionRegistry::createMenu(
+aide::MenuContainerInterface* ActionRegistry::createMenu(
     const aide::HierarchicalId& uniqueId)
 {
     return createMenu(uniqueId, nullptr);
 }
 
-MenuContainerInterfacePtr ActionRegistry::createMenu(
+aide::MenuContainerInterface* ActionRegistry::createMenu(
     const HierarchicalId& uniqueId, QWidget* parent)
 {
     if (m_menus.find(uniqueId) == m_menus.end()) {
-        m_menus.try_emplace(uniqueId, std::make_shared<MenuContainer>(parent));
+        m_menus.try_emplace(uniqueId, std::make_unique<MenuContainer>(parent));
     }
 
-    return m_menus.at(uniqueId);
+    return m_menus.at(uniqueId).get();
 }
 
-std::optional<MenuContainerInterfacePtr> aide::ActionRegistry::getMenuContainer(
+std::optional<MenuContainerInterface*> aide::ActionRegistry::getMenuContainer(
     const HierarchicalId& uniqueId) const
 {
     if (auto it = m_menus.find(uniqueId); it != m_menus.end()) {
-        return it->second;
+        return it->second.get();
     }
 
     logger->warn(
