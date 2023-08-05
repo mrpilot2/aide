@@ -5,6 +5,7 @@
 
 #include <QItemSelection>
 #include <QPersistentModelIndex>
+#include <QWidget>
 
 #include "settings/settingspage.hpp"
 #include "settings/settingspageregistry.hpp"
@@ -35,8 +36,10 @@ void ShowSettingsDialog::showSettingsDialog()
     saveGeometryAndState.restoreGeometryAndState();
 
     const auto& pages = SettingsPageRegistry::settingsPages();
-    std::for_each(pages.begin(), pages.end(),
-                  [](const auto& p) { p->reset(); });
+    std::for_each(pages.begin(), pages.end(), [](const auto& p) {
+        p->reset();
+        p->widget()->setVisible(false);
+    });
 
     auto lastSelectedTreeItem = saveGeometryAndState.selectedTreeViewItem();
 
