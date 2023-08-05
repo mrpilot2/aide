@@ -145,3 +145,9 @@ else()
     ut.aide REPORTER console WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/../../
   )
 endif()
+
+set_source_files_properties(
+  loggertest.cpp
+  PROPERTIES COMPILE_DEFINITIONS
+             TEST_LOG_FILE_LOCATION="${CMAKE_CURRENT_BINARY_DIR}"
+)

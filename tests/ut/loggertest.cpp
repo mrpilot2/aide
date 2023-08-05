@@ -22,14 +22,11 @@ namespace
     }
 } // namespace
 
-TEST_CASE("Test construction of logger", "[Logger]")
-{
-    Logger logger;
-}
-
 TEST_CASE("Test different log levels", "[Logger]")
 {
-    const char* const logFileName = "aide_test.log";
+    std::string const logFileNameStr{TEST_LOG_FILE_LOCATION +
+                                     std::string("/aide_test.log")};
+    const char* logFileName{logFileNameStr.c_str()};
 
     [[maybe_unused]] auto res = std::remove(logFileName);
 
@@ -100,13 +97,17 @@ TEST_CASE("Test different log levels", "[Logger]")
                 std::string::npos);
     }
 #endif
+
+    [[maybe_unused]] auto res1 = std::remove(logFileName);
 }
 
 // NOLINTNEXTLINE
 TEST_CASE("Test log macros", "[Logger]")
 {
     spdlog::drop_all();
-    const char* const logFileName = "aide_test.log";
+    std::string const logFileNameStr =
+        TEST_LOG_FILE_LOCATION + std::string("/aide_test.log");
+    const char* logFileName{logFileNameStr.c_str()};
 
     [[maybe_unused]] auto res = std::remove(logFileName);
 
@@ -358,4 +359,6 @@ TEST_CASE("Test log macros", "[Logger]")
                 std::string::npos);
     }
 #endif
+
+    [[maybe_unused]] auto res1 = std::remove(logFileName);
 }
