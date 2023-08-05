@@ -49,7 +49,7 @@ namespace aide
             const aide::HierarchicalId& uniqueId) override;
 
         MenuContainerInterface* createMenu(const HierarchicalId& uniqueId,
-                                             QWidget* parent) override;
+                                           QWidget* parent) override;
 
         [[nodiscard]] std::optional<MenuContainerInterface*> getMenuContainer(
             const HierarchicalId& uniqueId) const override;

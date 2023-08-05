@@ -3,11 +3,11 @@
 #ifndef AIDE_MENU_CONTAINER_HPP
 #define AIDE_MENU_CONTAINER_HPP
 
-#include "menucontainerinterface.hpp"
-
 #include <memory>
 
 #include <QMenu>
+
+#include "menucontainerinterface.hpp"
 
 class QWidget;
 
@@ -20,7 +20,6 @@ namespace aide
         explicit MenuContainer(QWidget* parent = nullptr);
 
         ~MenuContainer() override;
-
 
         [[nodiscard]] QMenu* menu() const override;
 

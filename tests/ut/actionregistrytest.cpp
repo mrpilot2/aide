@@ -198,7 +198,7 @@ TEST_CASE("Any action registry ")
 
         REQUIRE(ptr != nullptr);
 
-        //NOLINTNEXTLINE normally Qt takes ownership of the menu and deletes it
+        // NOLINTNEXTLINE normally Qt takes ownership of the menu and deletes it
         delete ptr->menu();
     }
 
@@ -212,7 +212,7 @@ TEST_CASE("Any action registry ")
 
         REQUIRE(firstInsertion == secondInsertion);
 
-        //NOLINTNEXTLINE normally Qt takes ownership of the menu and deletes it
+        // NOLINTNEXTLINE normally Qt takes ownership of the menu and deletes it
         delete firstInsertion->menu();
     }
 
@@ -227,7 +227,7 @@ TEST_CASE("Any action registry ")
 
         REQUIRE(ptr == result.value());
 
-        //NOLINTNEXTLINE normally Qt takes ownership of the menu and deletes it
+        // NOLINTNEXTLINE normally Qt takes ownership of the menu and deletes it
         delete ptr->menu();
     }
 
@@ -241,7 +241,7 @@ TEST_CASE("Any action registry ")
 
         REQUIRE(!nonExistentMenu.has_value());
 
-        //NOLINTNEXTLINE normally Qt takes ownership of the menu and deletes it
+        // NOLINTNEXTLINE normally Qt takes ownership of the menu and deletes it
         delete firstInsertion->menu();
     }
 }
