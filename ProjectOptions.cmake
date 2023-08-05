@@ -22,8 +22,14 @@ macro(aide_supports_sanitizers)
 endmacro()
 
 macro(aide_setup_options)
-  option(aide_ENABLE_HARDENING "Enable hardening" ON)
   option(aide_ENABLE_COVERAGE "Enable coverage reporting" OFF)
+
+  if(PROJECT_IS_TOP_LEVEL)
+    option(aide_ENABLE_HARDENING "Enable hardening" ON)
+  else()
+    option(aide_ENABLE_HARDENING "Enable hardening" OFF)
+  endif()
+
   cmake_dependent_option(
     aide_ENABLE_GLOBAL_HARDENING
     "Attempt to push hardening options to built dependencies" ON
@@ -67,6 +73,15 @@ macro(aide_setup_options)
     option(aide_ENABLE_CACHE "Enable ccache" ON)
     option(aide_ENABLE_ABI_COMPLIANCE_CHECK "Enable ABI compliance check" OFF)
   endif()
+
+  add_feature_info(
+    ENABLE_COVERAGE aide_ENABLE_COVERAGE "Enable coverage reporting"
+  )
+  add_feature_info(ENABLE_HARDENING aide_ENABLE_HARDENING "Enable hardening")
+  add_feature_info(
+    ENABLE_GLOBAL_HARDENING aide_ENABLE_GLOBAL_HARDENING
+    "Attempt to push hardening options to built dependencies"
+  )
 
   add_feature_info(ENABLE_IPO aide_ENABLE_IPO "Enable IPO/LTO")
   add_feature_info(
