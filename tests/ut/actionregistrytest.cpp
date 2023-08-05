@@ -192,6 +192,25 @@ TEST_CASE("Any action registry ")
         REQUIRE(settings.value(settingsKey) == QVariant());
     }
 
+    SECTION("added action can be retrieved from registry")
+    {
+        auto action = std::make_shared<QAction>("&File", nullptr);
+        const HierarchicalId id{HierarchicalId("MainMenu")("File")};
+
+        registry.registerAction(
+            action, id, std::vector<QKeySequence>({QKeySequence("F4")}));
+
+        REQUIRE(registry.action(id).has_value());
+        REQUIRE(registry.action(id).value() == action.get());
+    }
+
+    SECTION("non existing actions are received as empty optional")
+    {
+        const HierarchicalId id{HierarchicalId("MainMenu")("File")};
+
+        REQUIRE(!registry.action(id).has_value());
+    }
+
     SECTION("allows to add a new menu container")
     {
         auto* ptr = registry.createMenu(HierarchicalId("MainMenu")("File"));
