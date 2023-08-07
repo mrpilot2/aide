@@ -60,7 +60,7 @@ jobs:
 
       - name: Install apt dependencies
         if: runner.os == 'Linux'
-        run: sudo apt install lcov ^libxcb-*
+        run: sudo apt install cppcheck ^libxcb-*
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
