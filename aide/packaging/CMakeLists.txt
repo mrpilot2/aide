@@ -1,5 +1,17 @@
 include(GNUInstallDirs)
 
+if(NOT TARGET aide_coverage)
+  add_library(aide_coverage INTERFACE)
+endif()
+
+if(NOT TARGET aide_warnings)
+  add_library(aide_warnings INTERFACE)
+endif()
+
+if(NOT TARGET aide_options)
+  add_library(aide_options INTERFACE)
+endif()
+
 install(
   TARGETS AideQt${QT_VERSION_MAJOR}Application
           AideBuildInformation
