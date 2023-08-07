@@ -27,6 +27,6 @@ jobs:
       with:
         author_name: Clang-format Robot
         author_email: bot@github.com
-        message: '(=) automatic clang-format changes'
+        message: 'style: automatic clang-format changes'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
