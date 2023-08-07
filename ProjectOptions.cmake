@@ -75,51 +75,57 @@ macro(aide_setup_options)
   endif()
 
   add_feature_info(
-    ENABLE_COVERAGE aide_ENABLE_COVERAGE "Enable coverage reporting"
+    AIDE_ENABLE_COVERAGE aide_ENABLE_COVERAGE "Enable coverage reporting"
   )
-  add_feature_info(ENABLE_HARDENING aide_ENABLE_HARDENING "Enable hardening")
   add_feature_info(
-    ENABLE_GLOBAL_HARDENING aide_ENABLE_GLOBAL_HARDENING
+    AIDE_ENABLE_HARDENING aide_ENABLE_HARDENING "Enable hardening"
+  )
+  add_feature_info(
+    AIDE_ENABLE_GLOBAL_HARDENING aide_ENABLE_GLOBAL_HARDENING
     "Attempt to push hardening options to built dependencies"
   )
 
-  add_feature_info(ENABLE_IPO aide_ENABLE_IPO "Enable IPO/LTO")
+  add_feature_info(AIDE_ENABLE_IPO aide_ENABLE_IPO "Enable IPO/LTO")
   add_feature_info(
-    WARNINGS_AS_ERRORS aide_WARNINGS_AS_ERRORS "Treat Warnings As Errors"
+    AIDE_WARNINGS_AS_ERRORS aide_WARNINGS_AS_ERRORS "Treat Warnings As Errors"
   )
   add_feature_info(
-    ENABLE_USER_LINKER aide_ENABLE_USER_LINKER "Enable user-selected linker"
+    AIDE_ENABLE_USER_LINKER aide_ENABLE_USER_LINKER
+    "Enable user-selected linker"
   )
   add_feature_info(
-    ENABLE_SANITIZER_ADDRESS aide_ENABLE_SANITIZER_ADDRESS
+    AIDE_ENABLE_SANITIZER_ADDRESS aide_ENABLE_SANITIZER_ADDRESS
     "Enable address sanitizer"
   )
   add_feature_info(
-    ENABLE_SANITIZER_LEAK aide_ENABLE_SANITIZER_LEAK "Enable leak sanitizer"
+    AIDE_ENABLE_SANITIZER_LEAK aide_ENABLE_SANITIZER_LEAK
+    "Enable leak sanitizer"
   )
   add_feature_info(
-    ENABLE_SANITIZER_UNDEFINED aide_ENABLE_SANITIZER_UNDEFINED
+    AIDE_ENABLE_SANITIZER_UNDEFINED aide_ENABLE_SANITIZER_UNDEFINED
     "Enable undefined sanitizer"
   )
   add_feature_info(
-    ENABLE_SANITIZER_THREAD aide_ENABLE_SANITIZER_THREAD
+    AIDE_ENABLE_SANITIZER_THREAD aide_ENABLE_SANITIZER_THREAD
     "Enable thread sanitizer"
   )
   add_feature_info(
-    ENABLE_SANITIZER_MEMORY aide_ENABLE_SANITIZER_MEMORY
+    AIDE_ENABLE_SANITIZER_MEMORY aide_ENABLE_SANITIZER_MEMORY
     "Enable memory sanitizer"
   )
   add_feature_info(
-    ENABLE_UNITY_BUILD aide_ENABLE_UNITY_BUILD "Enable unity builds"
+    AIDE_ENABLE_UNITY_BUILD aide_ENABLE_UNITY_BUILD "Enable unity builds"
   )
-  add_feature_info(ENABLE_CLANG_TIDY aide_ENABLE_CLANG_TIDY "Enable clang-tidy")
   add_feature_info(
-    ENABLE_CPPCHECK aide_ENABLE_CPPCHECK "Enable cpp-check analysis"
+    AIDE_ENABLE_CLANG_TIDY aide_ENABLE_CLANG_TIDY "Enable clang-tidy"
   )
-  add_feature_info(ENABLE_PCH aide_ENABLE_PCH "Enable precompiled headers")
-  add_feature_info(ENABLE_CACHE aide_ENABLE_CACHE "Enable ccache")
   add_feature_info(
-    ENABLE_ABI_COMPLIANCE_CHECK aide_ENABLE_ABI_COMPLIANCE_CHECK
+    AIDE_ENABLE_CPPCHECK aide_ENABLE_CPPCHECK "Enable cpp-check analysis"
+  )
+  add_feature_info(AIDE_ENABLE_PCH aide_ENABLE_PCH "Enable precompiled headers")
+  add_feature_info(AIDE_ENABLE_CACHE aide_ENABLE_CACHE "Enable ccache")
+  add_feature_info(
+    AIDE_ENABLE_ABI_COMPLIANCE_CHECK aide_ENABLE_ABI_COMPLIANCE_CHECK
     "Enable ABI compliance check"
   )
 
