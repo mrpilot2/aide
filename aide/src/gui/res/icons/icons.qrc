@@ -1,5 +1,5 @@
 <RCC>
-  <qresource prefix="logo">
+  <qresource prefix="aide">
     <file>logo.svg</file>
   </qresource>
 </RCC>
