@@ -62,6 +62,21 @@ write_basic_package_version_file(
   COMPATIBILITY SameMajorVersion
 )
 
+if(NOT
+   EXISTS
+   ${CMAKE_FIND_PACKAGE_REDIRECTS_DIR}/aideqt${QT_VERSION_MAJOR}-config-version.cmake
+)
+  file(
+    WRITE
+    ${CMAKE_FIND_PACKAGE_REDIRECTS_DIR}/aideqt${QT_VERSION_MAJOR}-config-version.cmake
+    "
+set(PACKAGE_VERSION ${PROJECT_VERSION})
+set(PACKAGE_VERSION_COMPATIBLE TRUE)
+set(PACKAGE_VERSION_EXACT TRUE)
+"
+  )
+endif()
+
 # generate the config file that is includes the exports
 configure_package_config_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/AideConfig.cmake.in
