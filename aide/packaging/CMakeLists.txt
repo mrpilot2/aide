@@ -62,13 +62,12 @@ write_basic_package_version_file(
   COMPATIBILITY SameMajorVersion
 )
 
-if(NOT
-   EXISTS
-   ${CMAKE_FIND_PACKAGE_REDIRECTS_DIR}/aideqt${QT_VERSION_MAJOR}-config-version.cmake
+if(NOT EXISTS
+   ${CMAKE_FIND_PACKAGE_REDIRECTS_DIR}/aideqt${QT_VERSION_MAJOR}-extra.cmake
 )
   file(
     WRITE
-    ${CMAKE_FIND_PACKAGE_REDIRECTS_DIR}/aideqt${QT_VERSION_MAJOR}-config-version.cmake
+    ${CMAKE_FIND_PACKAGE_REDIRECTS_DIR}/aideqt${QT_VERSION_MAJOR}-extra.cmake
     "
 set(PACKAGE_VERSION ${PROJECT_VERSION})
 set(PACKAGE_VERSION_COMPATIBLE TRUE)
