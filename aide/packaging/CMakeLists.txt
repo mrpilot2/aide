@@ -58,7 +58,8 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/../dependencies/licenses.html
 include(CMakePackageConfigHelpers)
 
 write_basic_package_version_file(
-  ${CMAKE_BINARY_DIR}/AideConfigVersion.cmake COMPATIBILITY SameMajorVersion
+  ${CMAKE_BINARY_DIR}/AideQt${QT_VERSION_MAJOR}ConfigVersion.cmake
+  COMPATIBILITY SameMajorVersion
 )
 
 # generate the config file that is includes the exports
@@ -70,7 +71,7 @@ configure_package_config_file(
 )
 
 install(FILES ${CMAKE_BINARY_DIR}/AideQt${QT_VERSION_MAJOR}Config.cmake
-              ${CMAKE_BINARY_DIR}/AideConfigVersion.cmake
+              ${CMAKE_BINARY_DIR}/AideQt${QT_VERSION_MAJOR}ConfigVersion.cmake
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/AideQt${QT_VERSION_MAJOR}
 )
 
