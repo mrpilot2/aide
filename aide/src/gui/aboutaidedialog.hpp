@@ -13,7 +13,7 @@
 static constexpr const auto BYTE_TO_MEGABYTE = 1024 * 1024;
 namespace Ui
 {
-    class AboutDialog;
+    class AboutAideDialog;
 } // namespace Ui
 
 class QWidget;
@@ -39,7 +39,7 @@ namespace aide::gui
         void onThirdPartyLibrariesLinkClicked() const;
 
     private:
-        std::unique_ptr<Ui::AboutDialog> m_ui;
+        std::unique_ptr<Ui::AboutAideDialog> m_ui;
 
         core::AideInformation m_info;
     };

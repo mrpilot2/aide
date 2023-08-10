@@ -2,7 +2,15 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de_DE">
 <context>
-    <name>AboutDialog</name>
+    <name>AboutAideDialog</name>
+    <message>
+        <source>About aIDE</source>
+        <translation>Über aIDE</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;br&gt;&lt;p&gt;aIDE is made possible by &lt;a href=&quot;abc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;open source software&lt;/span&gt;&lt;br/&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;br&gt;&lt;p&gt;aIDE wird ermöglicht durch den Einsatz von &lt;a href=&quot;abc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;freier Software&lt;/span&gt;&lt;br/&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation></translation>
@@ -11,13 +19,20 @@
         <source>Copy</source>
         <translation>Kopieren</translation>
     </message>
+</context>
+<context>
+    <name>AboutDialog</name>
+    <message>
+        <source>Copy</source>
+        <translation type="vanished">Kopieren</translation>
+    </message>
     <message>
         <source>About aIDE</source>
-        <translation>Über aIDE</translation>
+        <translation type="vanished">Über aIDE</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;br&gt;&lt;p&gt;aIDE is made possible by &lt;a href=&quot;abc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;open source software&lt;/span&gt;&lt;br/&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;br&gt;&lt;p&gt;aIDE wird ermöglicht durch den Einsatz von &lt;a href=&quot;abc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;freier Software&lt;/span&gt;&lt;br/&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;br&gt;&lt;p&gt;aIDE wird ermöglicht durch den Einsatz von &lt;a href=&quot;abc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;freier Software&lt;/span&gt;&lt;br/&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>

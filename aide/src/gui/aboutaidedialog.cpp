@@ -16,7 +16,7 @@ using aide::utils::SystemMemory;
 
 AboutAideDialog::AboutAideDialog(QWidget* parent)
     : QDialog(parent)
-    , m_ui{std::make_unique<Ui::AboutDialog>()}
+    , m_ui{std::make_unique<Ui::AboutAideDialog>()}
 {
     m_ui->setupUi(this);
 
