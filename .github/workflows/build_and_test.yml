@@ -9,7 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ windows-latest, macos-11, ubuntu-20.04, ubuntu-22.04 ]
-        cmake: [ 3.21, 3.x ]
+        cmake: [ 3.24, 3.x ]
         qt: [ "5.15.2", "6.5.0" ]
 
         include:
@@ -19,15 +19,15 @@ jobs:
 
 
           - os: windows-latest
-            cmake: 3.21
+            cmake: 3.24
             WARNINGS_AS_ERRORS: OFF
 
           - os: windows-latest
             static_postfix: _static
             CXX: cl
 
-          - cmake: 3.21
-            cmake_name: CMake 3.21
+          - cmake: 3.24
+            cmake_name: CMake 3.24
           - cmake: 3.x
             cmake_name: CMake Latest
 
