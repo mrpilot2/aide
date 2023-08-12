@@ -10,7 +10,11 @@ else()
 endif()
 
 target_include_directories(
-  AideUtils PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+  AideUtils
+  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/>
+  PUBLIC $<INSTALL_INTERFACE:include/aide/>
+  PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/>
+   
 )
 
 target_link_libraries(AideUtils PRIVATE aide_options aide_warnings)

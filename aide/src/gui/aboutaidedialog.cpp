@@ -6,8 +6,8 @@
 #include <QThread>
 #include <QToolTip>
 
+#include "aide/utils/systemmemory.hpp"
 #include "aideinformation.hpp"
-#include "systemmemory.hpp"
 #include "thirdpartylicensesdialog.hpp"
 #include "ui_aboutaidedialog.h"
 

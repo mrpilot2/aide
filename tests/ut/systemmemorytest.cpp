@@ -1,6 +1,6 @@
 #include <catch2/catch.hpp>
 
-#include "systemmemory.hpp"
+#include "aide/utils/systemmemory.hpp"
 
 using aide::utils::SystemMemory;
 

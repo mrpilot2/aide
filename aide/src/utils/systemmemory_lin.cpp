@@ -1,6 +1,6 @@
 #include <sys/sysinfo.h>
 
-#include "systemmemory.hpp"
+#include "aide/utils/systemmemory.hpp"
 
 using aide::utils::SystemMemory;
 
