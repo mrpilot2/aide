@@ -39,7 +39,7 @@ add_custom_command(
 )
 
 add_custom_target(
-  generate_build_information
+  aide_generate_build_information
   DEPENDS "${CMAKE_BINARY_DIR}/include/aide/buildinformation.hpp"
 )
 
@@ -51,7 +51,7 @@ set_source_files_properties(
 add_library(AideBuildInformation INTERFACE)
 add_library(Aide::AideBuildInformation ALIAS AideBuildInformation)
 
-add_dependencies(AideBuildInformation generate_build_information)
+add_dependencies(AideBuildInformation aide_generate_build_information)
 
 target_sources(
   AideBuildInformation
