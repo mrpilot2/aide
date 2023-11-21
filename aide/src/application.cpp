@@ -5,9 +5,12 @@
 
 #include "aidesettingsprovider.hpp"
 #include "applicationbuilder.hpp"
+#include "applicationconfig.hpp"
 #include "gui/mainwindow.hpp"
 #include "logger.hpp"
 #include "qtsettings.hpp"
+#include "sentry/sentry.hpp"
+#include "sentry/sentrycleanup.hpp"
 
 using aide::Application;
 using aide::ApplicationBuilder;
@@ -16,8 +19,16 @@ using aide::gui::TranslatorInterface;
 
 // NOLINTNEXTLINE
 Application::Application(int& argc, char* argv[])
+    : Application(argc, argv, aide::ApplicationConfig())
+{}
+
+Application::Application(int& argc, char** argv,
+                         const aide::ApplicationConfig& config)
     : QApplication(argc, argv)
+    , m_sentryCleanup{std::make_unique<SentryCleanup>()}
 {
+    Sentry::initializeConnection(config.sentry);
+
     AideSettingsProvider::provideVersionableSettings(
         std::make_shared<QtSettings>(true));
     AideSettingsProvider::provideUnVersionableSettings(
@@ -42,6 +53,8 @@ Application::Application(int& argc, char* argv[])
     });
     timer->start(delayedSetupTimeInMs);
 }
+
+Application::~Application() = default;
 
 LoggerPtr aide::Application::logger()
 {
@@ -72,7 +85,6 @@ std::shared_ptr<aide::AideSettingsProvider> Application::settingsProvider()
 {
     return m_appBuilder->settingsProvider();
 }
-
 aide::ActionRegistryInterfacePtr Application::actionRegistry() const
 {
     return m_appBuilder->actionRegistry();

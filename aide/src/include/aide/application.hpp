@@ -7,6 +7,7 @@
 #include <QApplication>
 
 #include <aide/actionregistryinterface.hpp>
+#include <aide/applicationconfig.hpp>
 #include <aide/loggerinterface.hpp>
 
 class QMainWindow;
@@ -16,6 +17,7 @@ namespace aide
     class ApplicationBuilder;
     class ActionRegistry;
     class AideSettingsProvider;
+    class SentryCleanup;
 
     namespace gui
     {
@@ -38,6 +40,11 @@ namespace aide
     public:
         // NOLINTNEXTLINE
         explicit Application(int& argc, char* argv[]);
+        // NOLINTNEXTLINE
+        explicit Application(int& argc, char* argv[],
+                             const ApplicationConfig& config);
+
+        ~Application();
 
         [[nodiscard]] static aide::LoggerPtr logger();
 
@@ -57,6 +64,8 @@ namespace aide
         static bool isOrganizationNameSet();
 
         std::shared_ptr<aide::ApplicationBuilder> m_appBuilder;
+
+        [[maybe_unused]] std::unique_ptr<SentryCleanup> m_sentryCleanup;
     };
 } // namespace aide
 #endif // AIDE_APPLICATION_HPP

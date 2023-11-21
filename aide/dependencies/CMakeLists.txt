@@ -26,7 +26,13 @@ else()
   set(generator cmake_find_package)
 endif()
 
-conan_cmake_configure(REQUIRES spdlog/1.8.5 fmt/7.1.3 GENERATORS ${generator})
+set(conan_package_list spdlog/1.8.5 fmt/7.1.3 zlib/1.2.12)
+
+if(ENABLE_SENTRY_INTEGRATION)
+  list(APPEND conan_package_list sentry-native/0.5.3)
+endif()
+
+conan_cmake_configure(REQUIRES ${conan_package_list} GENERATORS ${generator})
 
 if(${IS_MULTI_CONFIG})
   foreach(TYPE ${CMAKE_CONFIGURATION_TYPES})
@@ -58,6 +64,8 @@ endif()
 
 find_package(spdlog REQUIRED)
 find_package(fmt REQUIRED)
+find_package(sentry REQUIRED)
+find_package(sentry-breakpad REQUIRED)
 
 if(TARGET spdlog::spdlog)
   set_target_properties(spdlog::spdlog PROPERTIES IMPORTED_GLOBAL TRUE)
@@ -65,6 +73,16 @@ endif()
 
 if(TARGET fmt::fmt)
   set_target_properties(fmt::fmt PROPERTIES IMPORTED_GLOBAL TRUE)
+endif()
+
+if(TARGET sentry::sentry)
+  set_target_properties(sentry::sentry PROPERTIES IMPORTED_GLOBAL TRUE)
+endif()
+
+if(TARGET sentry-breakpad::sentry-breakpad)
+  set_target_properties(
+    sentry-breakpad::sentry-breakpad PROPERTIES IMPORTED_GLOBAL TRUE
+  )
 endif()
 
 include(${CMAKE_CURRENT_LIST_DIR}/addlicensedependency.cmake)
