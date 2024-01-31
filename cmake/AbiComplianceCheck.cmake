@@ -88,13 +88,14 @@ function(aide_perform_abi_compliance_check)
     DEPENDS "${CMAKE_BINARY_DIR}/abi_compliance_config.xml"
   )
 
-  git_describe(LATEST_RELEASE_TAG --tags)
+  git_describe(LATEST_RELEASE_TAG --tags --match "v*")
 
   string(FIND ${LATEST_RELEASE_TAG} "-" pos)
   string(SUBSTRING ${LATEST_RELEASE_TAG} 0 ${pos} LATEST_RELEASE_TAG)
 
   execute_process(
-    COMMAND git merge-base --is-ancestor 4d2d9b265021cc4fa3f6bcba20f4e4d7f5c40957 ${LATEST_RELEASE_TAG}
+    COMMAND git merge-base --is-ancestor
+            4d2d9b265021cc4fa3f6bcba20f4e4d7f5c40957 ${LATEST_RELEASE_TAG}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR} COMMAND_ECHO STDOUT
     RESULT_VARIABLE res_var
   )

@@ -2,7 +2,7 @@ include(
   ${CMAKE_CURRENT_LIST_DIR}/../../../cmake/GetGitRevisionDescription.cmake
 )
 
-git_describe(GIT_HASH --tags --always --dirty)
+git_describe(GIT_HASH --tags --always --dirty --match "v*")
 
 message("BuildInformation - Current git hash is " ${GIT_HASH})
 
