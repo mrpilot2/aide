@@ -32,7 +32,7 @@ jobs:
       CC: ${{ matrix.CXX }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -48,7 +48,7 @@ jobs:
       - name: Install pip dependencies
         run: |
           pip3 install wheel setuptools
-          pip3 install conan==1.60.0
+          pip3 install conan
 
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1.14
@@ -74,7 +74,7 @@ jobs:
 
       # Static Debug
       - name: "Static Debug: Configure"
-        run: cmake -G Ninja -S . -B build-static-dbg -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_DEBUG_POSTFIX=d${{matrix.static_postfix}}" ${{ steps.cmake_args.outputs.CMAKE_ARGS }}
+        run: cmake -G Ninja -S . -B build-static-dbg -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=conan_provider.cmake -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_DEBUG_POSTFIX=d${{matrix.static_postfix}}" ${{ steps.cmake_args.outputs.CMAKE_ARGS }}
       - name: "Static Debug: Build"
         run: cmake --build build-static-dbg --parallel
       - name: "Static Debug: Test"

@@ -25,7 +25,7 @@ jobs:
         shell: bash
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -41,7 +41,7 @@ jobs:
       - name: Install pip dependencies
         run: |
           pip3 install wheel setuptools
-          pip3 install conan==1.60.0
+          pip3 install conan
 
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1.14
@@ -63,7 +63,7 @@ jobs:
  
       # Shared Debug
       - name: "Shared Debug: Configure"
-        run: cmake -G Ninja -S . -B build-shared-dbg -DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=ON -Daide_PACKAGING_MAINTAINER_MODE=ON -Daide_ENABLE_ABI_COMPLIANCE_CHECK=ON
+        run: cmake -G Ninja -S . -B build-shared-dbg -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=conan_provider.cmake -DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=ON -Daide_PACKAGING_MAINTAINER_MODE=ON -Daide_ENABLE_ABI_COMPLIANCE_CHECK=ON
       - name: "Shared Debug: Build"
         run: cmake --build build-shared-dbg --parallel
       - name: "Shared Debug: ABI compliance check"

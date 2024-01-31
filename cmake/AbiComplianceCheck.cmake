@@ -133,7 +133,7 @@ if [ -d .git ] && [ \"${LATEST_RELEASE_TAG}\" != \"`git log --pretty=oneline | c
     fi
     if [ ! -d build ]; then mkdir build; fi
     cd build
-    cmake .. -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Debug -Daide_PACKAGING_MAINTAINER_MODE=ON -Daide_ENABLE_ABI_COMPLIANCE_CHECK=ON -DCMAKE_CXX_COMPILER=/usr/bin/g++
+    cmake .. -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=conan_provider.cmake -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Debug -Daide_PACKAGING_MAINTAINER_MODE=ON -Daide_ENABLE_ABI_COMPLIANCE_CHECK=ON -DCMAKE_CXX_COMPILER=/usr/bin/g++
     cmake --build .
     cmake --build . --target generate_abi_compliance_xml
 fi

@@ -19,14 +19,14 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
     - name: Setup Python
       uses: actions/setup-python@v4
       with:
-        python-version: 3.6
+        python-version: 3.7.x
 
     - name: Install dependencies
       run: |
@@ -42,13 +42,13 @@ jobs:
 
     - name: "Static Release: Configure"
       working-directory: aide
-      run: cmake -S . -B build-static-rel -DCMAKE_BUILD_TYPE=Release -Daide_PACKAGING_MAINTAINER_MODE=ON -DCMAKE_INSTALL_PREFIX=~/.local/build-static-rel/
+      run: cmake -S . -B build-static-rel -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=../conan_provider.cmake -DCMAKE_BUILD_TYPE=Release -Daide_PACKAGING_MAINTAINER_MODE=ON -DCMAKE_INSTALL_PREFIX=~/.local/build-static-rel/
     - name: "Static Release: Build and install"
       working-directory: aide
       run:  cmake --build build-static-rel --target install --parallel
     - name: "Static Release: Configure tests"
       working-directory: tests
-      run: cmake -S . -B build-static-rel -Daide_PACKAGING_MAINTAINER_MODE=ON -DCMAKE_INSTALL_PREFIX=~/.local/build-static-rel -DUNIT_TESTS_RUN_ON_CI=1
+      run: cmake -S . -B build-static-rel -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=../conan_provider.cmake -Daide_PACKAGING_MAINTAINER_MODE=ON -DCMAKE_INSTALL_PREFIX=~/.local/build-static-rel -DUNIT_TESTS_RUN_ON_CI=1
     - name: "Static Release: Build tests"
       working-directory: tests
       run: cmake --build build-static-rel --parallel
@@ -60,13 +60,13 @@ jobs:
 
     - name: "Shared Release: Configure"
       working-directory: aide
-      run: cmake -S . -B build-shared-rel -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -Daide_PACKAGING_MAINTAINER_MODE=ON -DCMAKE_INSTALL_PREFIX=~/.local/build-static-rel/
+      run: cmake -S . -B build-shared-rel -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=../conan_provider.cmake -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -Daide_PACKAGING_MAINTAINER_MODE=ON -DCMAKE_INSTALL_PREFIX=~/.local/build-static-rel/
     - name: "Shared Release: Build and install"
       working-directory: aide
       run:  cmake --build build-shared-rel --target install --parallel
     - name: "Shared Release: Configure tests"
       working-directory: tests
-      run: cmake -S . -B build-shared-rel -DCMAKE_INSTALL_PREFIX=~/.local/build-static-rel -Daide_PACKAGING_MAINTAINER_MODE=ON -DUNIT_TESTS_RUN_ON_CI=1
+      run: cmake -S . -B build-shared-rel -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=../conan_provider.cmake -DCMAKE_INSTALL_PREFIX=~/.local/build-static-rel -Daide_PACKAGING_MAINTAINER_MODE=ON -DUNIT_TESTS_RUN_ON_CI=1
     - name: "Shared Release: Build tests"
       working-directory: tests
       run: cmake --build build-shared-rel --parallel

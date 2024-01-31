@@ -47,7 +47,7 @@ jobs:
       CC: ${{ matrix.CXX }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -60,10 +60,11 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: 3.7.x
+
       - name: Install pip dependencies
         run: |
           pip3 install wheel setuptools
-          pip3 install conan==1.60.0
+          pip3 install conan
 
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1.14
@@ -85,7 +86,7 @@ jobs:
  
       - name: Set CMake arguments
         id: cmake_args
-        run: echo "CMAKE_ARGS=-DUNIT_TESTS_RUN_ON_CI=1 -Daide_WARNINGS_AS_ERRORS=${{ matrix.WARNINGS_AS_ERRORS || 'ON' }} -Daide_ENABLE_CLANG_TIDY=OFF -Daide_ENABLE_CPPCHECK=OFF -Daide_ENABLE_SANITIZER_ADDRESS=OFF -Daide_ENABLE_SANITIZER_UNDEFINED=OFF -Daide_ENABLE_IPO=OFF" >> $GITHUB_OUTPUT
+        run: echo "CMAKE_ARGS=-DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=conan_provider.cmake -DUNIT_TESTS_RUN_ON_CI=1 -Daide_WARNINGS_AS_ERRORS=${{ matrix.WARNINGS_AS_ERRORS || 'ON' }} -Daide_ENABLE_CLANG_TIDY=OFF -Daide_ENABLE_CPPCHECK=OFF -Daide_ENABLE_SANITIZER_ADDRESS=OFF -Daide_ENABLE_SANITIZER_UNDEFINED=OFF -Daide_ENABLE_IPO=OFF" >> $GITHUB_OUTPUT
 
       # Static Debug
       - name: "Static Debug: Configure"

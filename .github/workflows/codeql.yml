@@ -24,7 +24,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -40,7 +40,7 @@ jobs:
       - name: Install pip dependencies
         run: |
           pip3 install wheel setuptools
-          pip3 install conan==1.60.0
+          pip3 install conan
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
@@ -51,7 +51,7 @@ jobs:
       - name: Configure
         run: |
           mkdir build
-          cmake -Daide_ENABLE_COVERAGE:BOOL=ON -Daide_PACKAGING_MAINTAINER_MODE=ON -DCMAKE_BUILD_TYPE:STRING=Debug -S . -B build
+          cmake -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=conan_provider.cmake -Daide_ENABLE_COVERAGE:BOOL=ON -Daide_PACKAGING_MAINTAINER_MODE=ON -DCMAKE_BUILD_TYPE:STRING=Debug -S . -B build
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2

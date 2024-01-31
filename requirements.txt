@@ -1,4 +1,4 @@
-conan==1.60.0
+conan
 cmake
 cmake-format
 clang-format

@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -46,7 +46,7 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake .. -DENABLE_DOXYGEN=ON
+          cmake .. -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=conan_provider.cmake -DENABLE_DOXYGEN=ON
           make doxygen-docs
 
       - name: Publish doxygen documentation to GitHub Pages
