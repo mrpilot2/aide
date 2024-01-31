@@ -528,7 +528,7 @@ function(conan_install)
   set(CONAN_ARGS ${CONAN_ARGS} -of=${CONAN_OUTPUT_FOLDER})
   message(
     STATUS
-      "CMake-Conan: conan install ${CMAKE_SOURCE_DIR} ${CONAN_ARGS} ${ARGN}"
+      "CMake-Conan: conan install ${CMAKE_CURRENT_FUNCTION_LIST_DIR} ${CONAN_ARGS} ${ARGN}"
   )
 
   # In case there was not a valid cmake executable in the PATH, we inject the
@@ -539,7 +539,7 @@ function(conan_install)
   endif()
 
   execute_process(
-    COMMAND ${CONAN_COMMAND} install ${CMAKE_SOURCE_DIR} ${CONAN_ARGS} ${ARGN}
+    COMMAND ${CONAN_COMMAND} install ${CMAKE_CURRENT_FUNCTION_LIST_DIR} ${CONAN_ARGS} ${ARGN}
             --format=json
     RESULT_VARIABLE return_code
     OUTPUT_VARIABLE conan_stdout
@@ -590,11 +590,11 @@ function(conan_install)
       0
       label
     )
-    message(STATUS "CMake-Conan: CONANFILE=${CMAKE_SOURCE_DIR}/${CONANFILE}")
+    message(STATUS "CMake-Conan: CONANFILE=${CMAKE_CURRENT_FUNCTION_LIST_DIR}/${CONANFILE}")
     set_property(
       DIRECTORY ${CMAKE_SOURCE_DIR}
       APPEND
-      PROPERTY CMAKE_CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/${CONANFILE}"
+      PROPERTY CMAKE_CONFIGURE_DEPENDS "${CMAKE_CURRENT_FUNCTION_LIST_DIR}/${CONANFILE}"
     )
     # success
     set_property(GLOBAL PROPERTY CONAN_INSTALL_SUCCESS TRUE)
@@ -685,8 +685,8 @@ macro(conan_provide_dependency method package_name)
     endif()
     construct_profile_argument(_host_profile_flags CONAN_HOST_PROFILE)
     construct_profile_argument(_build_profile_flags CONAN_BUILD_PROFILE)
-    if(EXISTS "${CMAKE_SOURCE_DIR}/conanfile.py")
-      file(READ "${CMAKE_SOURCE_DIR}/conanfile.py" outfile)
+    if(EXISTS "${CMAKE_CURRENT_FUNCTION_LIST_DIR}/conanfile.py")
+      file(READ "${CMAKE_CURRENT_FUNCTION_LIST_DIR}/conanfile.py" outfile)
       if(NOT "${outfile}" MATCHES ".*CMakeDeps.*")
         message(
           WARNING
@@ -694,8 +694,8 @@ macro(conan_provide_dependency method package_name)
         )
       endif()
       set(generator "")
-    elseif(EXISTS "${CMAKE_SOURCE_DIR}/conanfile.txt")
-      file(READ "${CMAKE_SOURCE_DIR}/conanfile.txt" outfile)
+    elseif(EXISTS "${CMAKE_CURRENT_FUNCTION_LIST_DIR}/conanfile.txt")
+      file(READ "${CMAKE_CURRENT_FUNCTION_LIST_DIR}/conanfile.txt" outfile)
       if(NOT "${outfile}" MATCHES ".*CMakeDeps.*")
         message(
           WARNING
