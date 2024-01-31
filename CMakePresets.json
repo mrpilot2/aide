@@ -2,7 +2,7 @@
     "version": 6,
     "cmakeMinimumRequired": {
         "major": 3,
-        "minor": 21,
+        "minor": 24,
         "patch": 0
     },
     "configurePresets": [
@@ -12,7 +12,11 @@
             "hidden": true,
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/${presetName}",
-            "installDir": "${sourceDir}/install/${presetName}"
+            "installDir": "${sourceDir}/install/${presetName}",
+            "cacheVariables": {
+              "CMAKE_PROJECT_TOP_LEVEL_INCLUDES": "${sourceDir}/conan_provider.cmake",
+              "CMAKE_FIND_PACKAGE_PREFER_CONFIG": "TRUE"
+            }
         },
         {
             "name": "conf-windows-common",
