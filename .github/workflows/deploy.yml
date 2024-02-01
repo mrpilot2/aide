@@ -47,7 +47,7 @@ jobs:
 
       - name: Set CMake arguments
         id: cmake_args
-        run: echo "-DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=conan_provider.cmake CMAKE_ARGS=-DUNIT_TESTS_RUN_ON_CI=1 -DWARNINGS_AS_ERRORS=OFF -Daide_PACKAGING_MAINTAINER_MODE=ON" >> $GITHUB_OUTPUT
+        run: echo "CMAKE_ARGS=-DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=conan_provider.cmake -DUNIT_TESTS_RUN_ON_CI=1 -DWARNINGS_AS_ERRORS=OFF -Daide_PACKAGING_MAINTAINER_MODE=ON" >> $GITHUB_OUTPUT
 
       # Shared RelWithDebInfo
       - name: "Shared Debug: Configure"
