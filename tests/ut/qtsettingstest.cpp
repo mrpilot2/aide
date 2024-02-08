@@ -28,7 +28,7 @@ TEST_CASE("Versionable Qt Settings")
     SECTION("write to default Qt Settings file")
     {
         auto group = HierarchicalId("Appearance")("Font")("Size");
-        const auto fontSize{10};
+        constexpr auto fontSize{10};
 
         settings.setValue(group, fontSize);
 
@@ -103,15 +103,16 @@ TEST_CASE("Un-Versionable Qt Settings")
 
     SECTION("write to default Qt Settings file with suffix _unversionable")
     {
-        auto group = HierarchicalId("Geometry")("MainWindow")("Position");
+        const auto group = HierarchicalId("Geometry")("MainWindow")("Position");
         const auto* geom{"a;dfjads;fjkads;fjkads;flkj"};
 
         settings.setValue(group, geom);
 
         REQUIRE(settings.value(group, "Position") == geom);
 
-        QSettings qsettings(QApplication::organizationName(),
-                            QApplication::applicationName() + "_unversionable");
+        const QSettings qsettings(
+            QApplication::organizationName(),
+            QApplication::applicationName() + "_unversionable");
         auto fileName = qsettings.fileName().toStdString();
 
         settings.load();

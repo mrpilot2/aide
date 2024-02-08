@@ -22,13 +22,13 @@ namespace aide::gui
 
     public slots:
         void onUserChangedSelectedPage(const QItemSelection& selected,
-                                       const QItemSelection& deselected);
+                                       const QItemSelection& deselected) const;
 
-        void onUserChangedAGuiElement();
+        void onUserChangedAGuiElement() const;
 
-        void onUserWantsToResetCurrentPage();
+        void onUserWantsToResetCurrentPage() const;
 
-        void onUserWantsToApplySettingsPages();
+        void onUserWantsToApplySettingsPages() const;
 
     private:
         aide::core::SettingsDialogChangePageController& controller;

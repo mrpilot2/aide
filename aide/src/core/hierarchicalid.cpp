@@ -1,16 +1,17 @@
 #include "hierarchicalid.hpp"
 
 #include <utility>
-
+    
 using aide::HierarchicalId;
 
-static const char DELIMITER = '/';
+static constexpr char DELIMITER = '/';
 
 HierarchicalId::HierarchicalId(const char* level)
     : m_id{level}
 {}
 
-HierarchicalId::HierarchicalId(const_iterator first, const_iterator last)
+HierarchicalId::HierarchicalId(const const_iterator first,
+                               const const_iterator last)
     : m_id{first, last}
 {}
 
@@ -52,12 +53,12 @@ std::string HierarchicalId::name() const
     return result.erase(result.size() - 1);
 }
 
-bool aide::HierarchicalId::operator==(const HierarchicalId& rhs) const
+bool HierarchicalId::operator==(const HierarchicalId& rhs) const
 {
     return name() == rhs.name();
 }
 
-bool aide::HierarchicalId::operator!=(const HierarchicalId& rhs) const
+bool HierarchicalId::operator!=(const HierarchicalId& rhs) const
 {
     return !(rhs == *this);
 }

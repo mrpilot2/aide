@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
     aide::AideSettingsProvider::provideUnVersionableSettings(
         std::make_shared<aide::test::MockSettings>());
 
-    int result = Catch::Session().run(argc, argv);
+    const int result = Catch::Session().run(argc, argv);
 
     return result;
 }

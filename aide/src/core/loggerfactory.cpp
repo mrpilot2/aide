@@ -14,7 +14,7 @@
 using aide::LoggerPtr;
 using aide::core::LoggerFactory;
 
-LoggerPtr aide::core::LoggerFactory::createLogger()
+LoggerPtr LoggerFactory::createLogger()
 {
     return setupLogger("aide");
 }
@@ -43,8 +43,7 @@ LoggerPtr LoggerFactory::setupLogger(const std::string& loggerName)
                              .append(".log")
                              .toStdString());
 
-        auto logger =
-            std::make_shared<aide::Logger>(logPath, LoggerName(loggerName));
+        auto logger = std::make_shared<Logger>(logPath, LoggerName(loggerName));
 
         if (loggerName == "aide") {
             logger->info("Configured logger to log to file {}", logPath());

@@ -30,20 +30,22 @@ namespace aide::core
             const QModelIndex& selectedIndex) const;
 
         [[nodiscard]] std::optional<TreeItemPtr> findItemForActionId(
-            const HierarchicalId& id);
+            const HierarchicalId& id) const;
 
         void setupModelData();
 
     private:
-        bool isAnyUserSelectedKeySequencesInGroup(
+        [[nodiscard]] bool isAnyUserSelectedKeySequencesInGroup(
             const QModelIndex& index) const;
 
         static std::optional<TreeItemPtr> existingTreeItemForId(
             const aide::core::TreeItemPtr& current, const char* const& id);
 
+        [[nodiscard]] static std::optional<TreeItemPtr>
+        recursivelyFindItemForActionId(TreeItemPtr item,
+                                       const HierarchicalId& id);
+
         ActionRegistryInterfacePtr actionRegistry;
-        std::optional<TreeItemPtr> recursivelyFindItemForActionId(
-            TreeItemPtr item, const HierarchicalId& id);
     };
 } // namespace aide::core
 

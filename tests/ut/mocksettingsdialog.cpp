@@ -43,7 +43,7 @@ QWidget* MockSettingsDialog::currentlyShownWidget() const
     return settingsWidget;
 }
 
-void MockSettingsDialog::showResetLabel(bool show)
+void MockSettingsDialog::showResetLabel(const bool show)
 {
     resetLabelIsVisible = show;
 }
@@ -53,7 +53,7 @@ bool MockSettingsDialog::isResetLabelVisible() const
     return resetLabelIsVisible;
 }
 
-void MockSettingsDialog::enableApplyButton(bool enable)
+void MockSettingsDialog::enableApplyButton(const bool enable)
 {
     applyButtonIsEnabled = enable;
 }
@@ -63,29 +63,28 @@ bool MockSettingsDialog::isApplyButtonEnabled() const
     return applyButtonIsEnabled;
 }
 
-void MockSettingsDialog::simulateUserAcceptsDialog(bool accept)
+void MockSettingsDialog::simulateUserAcceptsDialog(const bool accept)
 {
     userShallAcceptDialog = accept;
 }
-void aide::test::MockSettingsDialog::restoreGeometryAndState(
-    aide::core::SettingsDialogGeometryAndStateData data)
+void MockSettingsDialog::restoreGeometryAndState(
+    const core::SettingsDialogGeometryAndStateData data)
 {
     geometryAndStateData = data;
 }
 
-void aide::test::MockSettingsDialog::setSelectedGroupIndex(
-    const QModelIndex& index)
+void MockSettingsDialog::setSelectedGroupIndex(const QModelIndex& index)
 {
     selectedGroupIndex = index;
 }
 
-const QModelIndex& aide::test::MockSettingsDialog::getSelectedGroupIndex() const
+const QModelIndex& MockSettingsDialog::getSelectedGroupIndex() const
 {
     return selectedGroupIndex;
 }
 
 aide::core::SettingsDialogGeometryAndStateData
-aide::test::MockSettingsDialog::currentGeometry() const
+MockSettingsDialog::currentGeometry() const
 {
     return geometryAndStateData;
 }

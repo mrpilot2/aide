@@ -33,12 +33,12 @@ namespace aide::gui
 
         void onUserWantsToQuitApplication(QCloseEvent* event,
                                           const QByteArray& geometry,
-                                          const QByteArray& state);
+                                          const QByteArray& state) const;
 
     public slots:
-        void onUserWantsToShowSettingsDialog();
+        void onUserWantsToShowSettingsDialog() const;
 
-        void onUserWantsToShowAboutAideDialog();
+        void onUserWantsToShowAboutAideDialog() const;
 
     private:
         std::shared_ptr<MainWindow> m_mainWindow;

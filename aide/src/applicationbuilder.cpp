@@ -1,11 +1,8 @@
 #include "applicationbuilder.hpp"
 
-#include <QApplication>
-
 #include <settings/keymap/keymappage.hpp>
 #include <settings/settingspageregistry.hpp>
 
-#include "logger/logger.hpp"
 #include "loggerfactory.hpp"
 
 using aide::ApplicationBuilder;
@@ -42,20 +39,20 @@ ApplicationBuilder::ApplicationBuilder()
     , m_keymapPageController(std::make_shared<gui::KeyMapPageWidgetController>(
           m_keyMapPage->getTreeModel(), m_keyMapPage->keyMapWidget()))
 {
-    aide::core::SettingsPageRegistry::deleteAllPages();
+    core::SettingsPageRegistry::deleteAllPages();
 
     m_mainWindow->setMainWindowController(m_mainController, m_actionRegistry);
     m_settingsDialog->setController(m_settingsDialogController);
 
     m_mainWindowGeometryAndState.restoreGeometryAndState();
 
-    if (auto* widget = dynamic_cast<aide::gui::KeymapPageWidget*>(
-            m_keyMapPage->keyMapWidget());
+    if (auto* widget =
+            dynamic_cast<KeymapPageWidget*>(m_keyMapPage->keyMapWidget());
         widget != nullptr) {
         widget->setController(m_keymapPageController);
     }
 
-    aide::core::SettingsPageRegistry::addPage(m_keyMapPage);
+    core::SettingsPageRegistry::addPage(m_keyMapPage);
 }
 
 LoggerPtr ApplicationBuilder::logger() const
@@ -65,15 +62,15 @@ LoggerPtr ApplicationBuilder::logger() const
 
 LoggerPtr ApplicationBuilder::setupLogger(const std::string& loggerName)
 {
-    return aide::core::LoggerFactory::createLogger(loggerName);
+    return core::LoggerFactory::createLogger(loggerName);
 }
 
 LoggerPtr ApplicationBuilder::setupLogger()
 {
-    return aide::core::LoggerFactory::createLogger();
+    return core::LoggerFactory::createLogger();
 }
 
-std::shared_ptr<aide::gui::MainWindow> ApplicationBuilder::mainWindow() const
+std::shared_ptr<MainWindow> ApplicationBuilder::mainWindow() const
 {
     return m_mainWindow;
 }

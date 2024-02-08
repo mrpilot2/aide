@@ -10,14 +10,13 @@ using aide::core::MainWindowInterfaceWeakPtr;
 using aide::core::settings::KEYS;
 
 MainWindowGeometryAndState::MainWindowGeometryAndState(
-    MainWindowInterfaceWeakPtr v,
-    aide::SettingsInterface& unversionableSettings)
+    MainWindowInterfaceWeakPtr v, SettingsInterface& unversionableSettings)
     : view{std::move(v)}
     , settings{unversionableSettings}
 {}
 
-void MainWindowGeometryAndState::saveGeometryAndState(QByteArray geometry,
-                                                      QByteArray state)
+void MainWindowGeometryAndState::saveGeometryAndState(
+    const QByteArray& geometry, const QByteArray& state)
 {
     settings.setValue(KEYS().UI.MAIN_WINDOW_GEOMETRY_KEY, geometry);
     settings.setValue(KEYS().UI.MAIN_WINDOW_STATE_KEY, state);
@@ -25,12 +24,13 @@ void MainWindowGeometryAndState::saveGeometryAndState(QByteArray geometry,
 
 void MainWindowGeometryAndState::restoreGeometryAndState()
 {
-    auto geometry =
+    const auto geometry =
         settings.value(KEYS().UI.MAIN_WINDOW_GEOMETRY_KEY).toByteArray();
-    auto state = settings.value(KEYS().UI.MAIN_WINDOW_STATE_KEY).toByteArray();
+    const auto state =
+        settings.value(KEYS().UI.MAIN_WINDOW_STATE_KEY).toByteArray();
 
     {
-        auto ptr = view.lock();
+        const auto ptr = view.lock();
         if (ptr == nullptr) { return; }
 
         if (geometry.isEmpty() && state.isEmpty()) {

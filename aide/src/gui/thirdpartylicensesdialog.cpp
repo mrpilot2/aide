@@ -12,7 +12,7 @@ ThirdPartyLicensesDialog::ThirdPartyLicensesDialog(QWidget* parent)
 {
     m_ui->setupUi(this);
     m_ui->textBrowser->setOpenExternalLinks(true);
-    QPalette palette;
+    const QPalette palette;
     m_ui->textBrowser->setStyleSheet(
         QString("background-color: %1")
             .arg(palette.color(QPalette::Disabled, QPalette::Window).name()));
@@ -20,7 +20,7 @@ ThirdPartyLicensesDialog::ThirdPartyLicensesDialog(QWidget* parent)
 
 ThirdPartyLicensesDialog::~ThirdPartyLicensesDialog() = default;
 
-void aide::gui::ThirdPartyLicensesDialog::setLicensesText(const QString& text)
+void ThirdPartyLicensesDialog::setLicensesText(const QString& text) const
 {
     m_ui->textBrowser->setText(text);
     m_ui->textBrowser->adjustSize();

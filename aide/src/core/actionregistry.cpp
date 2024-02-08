@@ -14,13 +14,13 @@ ActionRegistry::ActionRegistry(SettingsInterface& settingsInterface,
     , logger{std::move(loggerInterface)}
 {}
 
-void ActionRegistry::registerAction(std::weak_ptr<QAction> action,
+void ActionRegistry::registerAction(const std::weak_ptr<QAction> action,
                                     const HierarchicalId& uniqueId)
 {
     registerAction(action, uniqueId, "", {});
 }
 
-void ActionRegistry::registerAction(std::weak_ptr<QAction> action,
+void ActionRegistry::registerAction(const std::weak_ptr<QAction> action,
                                     const HierarchicalId& uniqueId,
                                     std::string description)
 {
@@ -28,15 +28,15 @@ void ActionRegistry::registerAction(std::weak_ptr<QAction> action,
 }
 
 void ActionRegistry::registerAction(
-    std::weak_ptr<QAction> action, const HierarchicalId& uniqueId,
+    const std::weak_ptr<QAction> action, const HierarchicalId& uniqueId,
     const std::vector<QKeySequence>& defaultKeySequences)
 {
     registerAction(action, uniqueId, "", defaultKeySequences);
 }
 
 void ActionRegistry::registerAction(
-    std::weak_ptr<QAction> action, const HierarchicalId& uniqueId,
-    std::string description,
+    const std::weak_ptr<QAction> action, const HierarchicalId& uniqueId,
+    const std::string description,
     const std::vector<QKeySequence>& defaultKeySequences)
 {
     if (m_actions.find(uniqueId) != m_actions.end()) {
@@ -58,25 +58,25 @@ void ActionRegistry::registerAction(
         qtDefaultSequences << seq;
     }
 
-    auto userKeySequences = loadUserKeySequences(uniqueId);
+    const auto userKeySequences = loadUserKeySequences(uniqueId);
 
     Action const detailedAction{action, description, qtDefaultSequences,
                                 userKeySequences};
 
     if (!action.expired()) {
-        auto sharedAction = action.lock();
+        const auto sharedAction = action.lock();
         sharedAction->setStatusTip(QString::fromStdString(description));
-        auto shortcuts = detailedAction.getActiveKeySequences();
-        sharedAction->setShortcuts(
-            (shortcuts.size() == 1 && shortcuts.at(0).isEmpty())
-                ? QList<QKeySequence>()
-                : shortcuts);
+        const auto shortcuts = detailedAction.getActiveKeySequences();
+        sharedAction->setShortcuts(shortcuts.size() == 1 &&
+                                           shortcuts.at(0).isEmpty()
+                                       ? QList<QKeySequence>()
+                                       : shortcuts);
     }
     m_actions.try_emplace(uniqueId, detailedAction);
 }
 
 QList<QKeySequence> ActionRegistry::loadUserKeySequences(
-    const HierarchicalId& uniqueId)
+    const HierarchicalId& uniqueId) const
 {
     auto settingsId{HierarchicalId("Keymap")};
     for (const auto* i : uniqueId) {
@@ -86,8 +86,8 @@ QList<QKeySequence> ActionRegistry::loadUserKeySequences(
     return QKeySequence::listFromString(settings.value(settingsId).toString());
 }
 
-void aide::ActionRegistry::modifyShortcutsForAction(
-    HierarchicalId id, const QList<QKeySequence>& shortcuts)
+void ActionRegistry::modifyShortcutsForAction(
+    const HierarchicalId id, const QList<QKeySequence>& shortcuts)
 {
     auto settingsId{HierarchicalId("Keymap")};
     for (const auto* i : id) {
@@ -114,7 +114,7 @@ const std::map<HierarchicalId, Action>& ActionRegistry::actions() const
 
 std::optional<QAction*> ActionRegistry::action(const HierarchicalId& id) const
 {
-    if (auto it = m_actions.find(id); it != m_actions.end()) {
+    if (const auto it = m_actions.find(id); it != m_actions.end()) {
         return it->second.action.lock().get();
     }
 
@@ -138,13 +138,13 @@ std::string ActionRegistry::printKeySequences(
     return combined.erase(combined.size() - 2);
 }
 
-aide::MenuContainerInterface* ActionRegistry::createMenu(
-    const aide::HierarchicalId& uniqueId)
+MenuContainerInterface* ActionRegistry::createMenu(
+    const HierarchicalId& uniqueId)
 {
     return createMenu(uniqueId, nullptr);
 }
 
-aide::MenuContainerInterface* ActionRegistry::createMenu(
+MenuContainerInterface* ActionRegistry::createMenu(
     const HierarchicalId& uniqueId, QWidget* parent)
 {
     if (m_menus.find(uniqueId) == m_menus.end()) {
@@ -154,10 +154,10 @@ aide::MenuContainerInterface* ActionRegistry::createMenu(
     return m_menus.at(uniqueId).get();
 }
 
-std::optional<MenuContainerInterface*> aide::ActionRegistry::getMenuContainer(
+std::optional<MenuContainerInterface*> ActionRegistry::getMenuContainer(
     const HierarchicalId& uniqueId) const
 {
-    if (auto it = m_menus.find(uniqueId); it != m_menus.end()) {
+    if (const auto it = m_menus.find(uniqueId); it != m_menus.end()) {
         return it->second.get();
     }
 

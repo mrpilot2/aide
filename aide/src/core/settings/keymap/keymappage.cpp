@@ -69,8 +69,7 @@ aide::core::KeyMapPageWidgetInterface* KeymapPage::keyMapWidget() const
     return m_widget;
 }
 
-const std::shared_ptr<KeyMapTreeModel>& aide::core::KeymapPage::getTreeModel()
-    const
+const std::shared_ptr<KeyMapTreeModel>& KeymapPage::getTreeModel() const
 {
     return showUseCase.getTreeModel();
 }

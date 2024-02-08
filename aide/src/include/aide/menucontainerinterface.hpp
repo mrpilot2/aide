@@ -15,7 +15,7 @@ namespace aide
     {
         Q_OBJECT
     public:
-        virtual ~MenuContainerInterface();
+        ~MenuContainerInterface() override;
 
         [[nodiscard]] virtual QMenu* menu() const = 0;
     };

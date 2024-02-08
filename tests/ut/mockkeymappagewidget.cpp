@@ -9,7 +9,7 @@ aide::test::MockKeyMapPageWidget::MockKeyMapPageWidget(QWidget* parent)
 {}
 
 void aide::test::MockKeyMapPageWidget::setTreeModel(
-    std::shared_ptr<QAbstractItemModel> model)
+    const std::shared_ptr<QAbstractItemModel> model)
 {
     treeModelWasSet = true;
     treeModel       = model;
@@ -26,7 +26,7 @@ int aide::test::MockKeyMapPageWidget::numberOfRowsInTree() const
 }
 
 void aide::test::MockKeyMapPageWidget::showContextMenu(
-    const aide::core::ContextMenuEntries& entries)
+    const core::ContextMenuEntries& entries)
 {
     contextMenuWasSet             = true;
     numberOfSetContextMenuEntries = entries.size();
@@ -44,7 +44,8 @@ size_t aide::test::MockKeyMapPageWidget::numberOfContextMenuEntries() const
 }
 
 aide::core::ContextMenuItemType
-aide::test::MockKeyMapPageWidget::contextMenuItemTypeAt(size_t index) const
+aide::test::MockKeyMapPageWidget::contextMenuItemTypeAt(
+    const size_t index) const
 {
     return contextMenuEntries.at(index).type;
 }

@@ -22,8 +22,8 @@ TEST_CASE("A new keymap tree model without any action registered")
 {
     auto logger = std::make_shared<NullLogger>();
     MockSettings settings;
-    auto registry(std::make_shared<ActionRegistry>(settings, logger));
-    KeyMapTreeModel treeModel(registry);
+    const auto registry(std::make_shared<ActionRegistry>(settings, logger));
+    const KeyMapTreeModel treeModel(registry);
 
     SECTION("has no rows")
     {
@@ -48,7 +48,7 @@ TEST_CASE("A new keymap tree model with one action registered")
     auto logger = std::make_shared<NullLogger>();
     auto registry(std::make_shared<ActionRegistry>(settings, logger));
 
-    std::shared_ptr<QAction> action{std::make_shared<QAction>()};
+    auto action{std::make_shared<QAction>()};
     registry->registerAction(action, HierarchicalId("New File"));
     KeyMapTreeModel treeModel(registry);
 
@@ -91,7 +91,7 @@ TEST_CASE("A new keymap tree model with multiple actions registered")
     auto logger = std::make_shared<NullLogger>();
     auto registry(std::make_shared<ActionRegistry>(settings, logger));
 
-    std::shared_ptr<QAction> action{std::make_shared<QAction>()};
+    auto action{std::make_shared<QAction>()};
 
     registry->registerAction(action, HierarchicalId("Main Menu")("Close"));
     registry->registerAction(action, HierarchicalId("Main Menu")("New File"));
@@ -126,8 +126,8 @@ TEST_CASE("A new keymap tree model with multiple actions registered")
     {
         auto parentIndex = treeModel.index(0, 0);
 
-        const int row   = 5;
-        auto childIndex = treeModel.index(row, 0, parentIndex);
+        constexpr int row = 5;
+        auto childIndex   = treeModel.index(row, 0, parentIndex);
 
         REQUIRE(!childIndex.isValid());
     }
@@ -146,8 +146,8 @@ TEST_CASE("Any keymap tree model")
     auto logger = std::make_shared<NullLogger>();
     auto registry(std::make_shared<ActionRegistry>(settings, logger));
 
-    std::shared_ptr<QAction> action{std::make_shared<QAction>(
-        QIcon::fromTheme("application-exit"), "abc", nullptr)};
+    auto action{std::make_shared<QAction>(QIcon::fromTheme("application-exit"),
+                                          "abc", nullptr)};
     auto id = HierarchicalId("Main Menu")("Close");
     registry->registerAction(action, id, "Thoughtful description");
 
@@ -211,8 +211,7 @@ TEST_CASE("Any keymap tree model")
 
     SECTION("does not show icon if action has not assigned one")
     {
-        std::shared_ptr<QAction> newAction{
-            std::make_shared<QAction>("New", nullptr)};
+        auto newAction{std::make_shared<QAction>("New", nullptr)};
         auto newId = HierarchicalId("Main Menu")("New");
         registry->registerAction(newAction, newId, "Thoughtful description");
 

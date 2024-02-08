@@ -18,7 +18,7 @@ AddShortcutDialog::AddShortcutDialog(QWidget* parent)
 
 AddShortcutDialog::~AddShortcutDialog() = default;
 
-void AddShortcutDialog::setAssignedActionDescription(const QString& text)
+void AddShortcutDialog::setAssignedActionDescription(const QString& text) const
 {
     ui->shortCutNameLabel->setText(text);
 }

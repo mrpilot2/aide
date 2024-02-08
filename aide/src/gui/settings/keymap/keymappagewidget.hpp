@@ -36,7 +36,7 @@ namespace aide::gui
         void showContextMenu(const core::ContextMenuEntries& entries) override;
 
     private slots:
-        void onUserRequestedContextMenuViaRightClick(const QPoint& point);
+        void onUserRequestedContextMenuViaRightClick(const QPoint& point) const;
 
     private:
         void connectSignals() const;

@@ -29,11 +29,11 @@ namespace aide::gui
 
         void onUserRequestedContextMenuViaDoubleClick(const QModelIndex& index);
 
-        void onUserRequestedToResetCurrentShortcutsToDefault();
+        void onUserRequestedToResetCurrentShortcutsToDefault() const;
 
-        void onUserRequestedToRemoveAShortcut();
+        void onUserRequestedToRemoveAShortcut() const;
 
-        void onUserRequestedToAddAKeyboardShortcut();
+        void onUserRequestedToAddAKeyboardShortcut() const;
 
     private:
         const std::shared_ptr<core::KeyMapTreeModel>& keyMapTreeModel;

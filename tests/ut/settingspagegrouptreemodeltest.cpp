@@ -15,10 +15,11 @@ using aide::test::MockSettingsPage;
 TEST_CASE("A new settings page group tree model without registered page")
 {
     SettingsPageRegistry::deleteAllPages();
-    SettingsPageGroupTreeModel treeModel;
 
     SECTION("has no rows")
     {
+        SettingsPageGroupTreeModel treeModel;
+
         REQUIRE(treeModel.rowCount() == 0);
     }
 }
@@ -30,7 +31,7 @@ TEST_CASE("A new settings page group tree model with one registered page")
     SettingsPageRegistry::addPage(
         std::make_unique<MockSettingsPage>(HierarchicalId("MockTestPage")));
 
-    SettingsPageGroupTreeModel treeModel;
+    const SettingsPageGroupTreeModel treeModel;
 
     SECTION("has one row")
     {
@@ -44,7 +45,7 @@ TEST_CASE("A new settings page group tree model with one registered page")
 
     SECTION("provides group in first column and first row")
     {
-        QModelIndex index(treeModel.index(0, 0));
+        const QModelIndex index(treeModel.index(0, 0));
         REQUIRE(
             treeModel.data(index, Qt::DisplayRole).toString().toStdString() ==
             "MockTestPage");
@@ -52,9 +53,9 @@ TEST_CASE("A new settings page group tree model with one registered page")
 
     SECTION("does not have parent in first row")
     {
-        QModelIndex index(treeModel.index(0, 0));
+        const QModelIndex index(treeModel.index(0, 0));
 
-        auto parentIndex = treeModel.parent(index);
+        const auto parentIndex = treeModel.parent(index);
         REQUIRE(!parentIndex.isValid());
     }
 
@@ -103,7 +104,7 @@ TEST_CASE("A new settings page group tree model with multiple registered page")
     {
         auto parentIndex = treeModel.index(0, 0);
 
-        const auto rowIndexTooHigh{5};
+        constexpr auto rowIndexTooHigh{5};
         auto childIndex = treeModel.index(rowIndexTooHigh, 0, parentIndex);
 
         REQUIRE(!childIndex.isValid());
@@ -145,7 +146,7 @@ TEST_CASE("Any settings page group tree model")
 
     SECTION("removes item flags for invalid index")
     {
-        const auto rowIndexTooHigh{5};
+        constexpr auto rowIndexTooHigh{5};
         QModelIndex index = treeModel.index(rowIndexTooHigh, 0);
 
         REQUIRE(treeModel.flags(index).testFlag(Qt::NoItemFlags));

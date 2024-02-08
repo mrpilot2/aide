@@ -79,8 +79,9 @@ void SearchFilterResultDelegate::highlightMatches(
                                match.capturedEnd() - match.capturedStart()));
 #endif
 
-            auto rectStartPos{std::min(rect.left() + startPos, rect.right())};
-            auto rectEndPos{std::min(rect.left() + endPos, rect.right())};
+            const auto rectStartPos{
+                std::min(rect.left() + startPos, rect.right())};
+            const auto rectEndPos{std::min(rect.left() + endPos, rect.right())};
 
             painter->save();
             const QRect paintRect(QPoint(rectStartPos, rect.top()),

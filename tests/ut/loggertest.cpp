@@ -30,7 +30,7 @@ TEST_CASE("Test different log levels", "[Logger]")
 
     [[maybe_unused]] auto res = std::remove(logFileName);
 
-    Logger logger = Logger(FileName(logFileName));
+    auto logger = Logger(FileName(logFileName));
 
 #if SPDLOG_ACTIVE_LEVEL <= SPDLOG_LEVEL_TRACE
 

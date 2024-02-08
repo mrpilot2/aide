@@ -2,8 +2,6 @@
 
 #include <utility>
 
-#include <QApplication>
-
 #include "commonsettingskeys.hpp"
 #include "settingsinterface.hpp"
 
@@ -19,7 +17,7 @@ ApplicationClose::ApplicationClose(ApplicationCloseViewWeakPtr v,
 
 bool ApplicationClose::isCloseAllowed() const
 {
-    auto ptr = view.lock();
+    const auto ptr = view.lock();
 
     const auto askForExitConfirmation =
         settings.value(KEYS().SYSTEM.ASK_EXIT_CONFIRMATION, true);

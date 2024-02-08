@@ -3,7 +3,7 @@
 using aide::core::UserSelection;
 using aide::test::MockApplicationCloseView;
 
-std::tuple<aide::core::UserSelection, bool>
+std::tuple<UserSelection, bool>
 MockApplicationCloseView::letUserConfirmApplicationClose()
 {
     hasAsked = true;

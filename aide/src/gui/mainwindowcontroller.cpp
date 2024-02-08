@@ -29,11 +29,10 @@ MainWindowController::MainWindowController(
 {}
 
 void MainWindowController::onUserWantsToQuitApplication(
-    QCloseEvent* event, const QByteArray& geometry, const QByteArray& state)
+    QCloseEvent* event, const QByteArray& geometry,
+    const QByteArray& state) const
 {
-    const auto allowedToClose = applicationCloseInteractor.isCloseAllowed();
-
-    if (allowedToClose) {
+    if (applicationCloseInteractor.isCloseAllowed()) {
         saveGeometryAndStateInteractor.saveGeometryAndState(geometry, state);
         event->accept();
     } else {
@@ -41,15 +40,15 @@ void MainWindowController::onUserWantsToQuitApplication(
     }
 }
 
-void MainWindowController::onUserWantsToShowSettingsDialog()
+void MainWindowController::onUserWantsToShowSettingsDialog() const
 {
     showSettingsDialogInteractor.showSettingsDialog();
 }
 
-void MainWindowController::onUserWantsToShowAboutAideDialog()
+void MainWindowController::onUserWantsToShowAboutAideDialog() const
 {
-    auto dialog = std::make_shared<AboutAideDialog>(m_mainWindow.get());
-    AboutAideUseCase useCase(dialog,
-                             core::LoggerFactory::createLogger("AboutAide"));
+    const auto dialog = std::make_shared<AboutAideDialog>(m_mainWindow.get());
+    const AboutAideUseCase useCase(
+        dialog, core::LoggerFactory::createLogger("AboutAide"));
     useCase.showAboutAideInformation();
 }

@@ -13,6 +13,7 @@
 #include "aide/gui/widgets/searchfilterwidget.hpp"
 #include "catch2/catch.hpp"
 
+using aide::HierarchicalId;
 using aide::widgets::SearchFilterWidget;
 
 TEST_CASE("Any search filter widget ")
@@ -27,7 +28,7 @@ TEST_CASE("Any search filter widget ")
     Q_INIT_RESOURCE(ut_icons);
 
     QMainWindow mainWindow;
-    SearchFilterWidget searchFilterWidget(aide::HierarchicalId("test"),
+    SearchFilterWidget searchFilterWidget(HierarchicalId("test"),
                                           QKeySequence(Qt::Key_F), &mainWindow);
 
     SECTION(" allows empty search icon")

@@ -50,7 +50,7 @@ TEST_CASE("Any keymap context menu provider")
 
     SECTION("does not provide a menu if no action is assigned to tree item")
     {
-        std::shared_ptr<QAction> action{std::make_shared<QAction>()};
+        auto action{std::make_shared<QAction>()};
 
         registry->registerAction(
             action, HierarchicalId("Main Menu")("File")("New File"));
@@ -68,7 +68,7 @@ TEST_CASE("Any keymap context menu provider")
         "provides only add shortcut action if selected index is valid and "
         "action is assigned but no default action or user shortcut is assigned")
     {
-        std::shared_ptr<QAction> action{std::make_shared<QAction>()};
+        auto action{std::make_shared<QAction>()};
 
         registry->registerAction(
             action, HierarchicalId("Main Menu")("File")("New File"));
@@ -92,7 +92,7 @@ TEST_CASE("Any keymap context menu provider")
         "provides remove shortcut action if action is assigned with one "
         "shortcut")
     {
-        std::shared_ptr<QAction> action{std::make_shared<QAction>()};
+        auto action{std::make_shared<QAction>()};
 
         registry->registerAction(
             action, HierarchicalId("Main Menu")("File")("New File"),
@@ -120,7 +120,7 @@ TEST_CASE("Any keymap context menu provider")
     SECTION(
         "provides remove shortcut action for every shortcut assigned to action")
     {
-        std::shared_ptr<QAction> action{std::make_shared<QAction>()};
+        auto action{std::make_shared<QAction>()};
 
         registry->registerAction(
             action, HierarchicalId("Main Menu")("File")("New File"),
@@ -150,7 +150,7 @@ TEST_CASE("Any keymap context menu provider")
 
         settings.setValue(settingsKey, "Shift+5");
 
-        std::shared_ptr<QAction> action{std::make_shared<QAction>()};
+        auto action{std::make_shared<QAction>()};
 
         registry->registerAction(
             action, HierarchicalId("Main Menu")("File")("New File"),

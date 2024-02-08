@@ -13,7 +13,7 @@ TEST_CASE("Any settings page")
     {
         const auto expectedId{HierarchicalId("Test")("Mock")};
 
-        MockSettingsPage page;
+        const MockSettingsPage page;
 
         REQUIRE(expectedId == page.group());
     }

@@ -3,27 +3,27 @@
 using aide::gui::SettingsDialogController;
 
 SettingsDialogController::SettingsDialogController(
-    aide::core::SettingsDialogChangePageController& changePageController)
+    core::SettingsDialogChangePageController& changePageController)
     : controller{changePageController}
 {}
 
 void SettingsDialogController::onUserChangedSelectedPage(
-    const QItemSelection& selected, const QItemSelection& deselected)
+    const QItemSelection& selected, const QItemSelection& deselected) const
 {
     controller.changeSelectedPage(selected, deselected);
 }
 
-void SettingsDialogController::onUserChangedAGuiElement()
+void SettingsDialogController::onUserChangedAGuiElement() const
 {
     controller.anyGuiElementHasChanged();
 }
 
-void SettingsDialogController::onUserWantsToResetCurrentPage()
+void SettingsDialogController::onUserWantsToResetCurrentPage() const
 {
     controller.resetCurrentPage();
 }
 
-void SettingsDialogController::onUserWantsToApplySettingsPages()
+void SettingsDialogController::onUserWantsToApplySettingsPages() const
 {
     controller.applyModifiedSettingsPages();
 }

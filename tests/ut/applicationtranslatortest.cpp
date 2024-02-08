@@ -29,7 +29,7 @@ TEST_CASE("Default ApplicationTranslator")
     {
         ApplicationTranslator translator(std::make_shared<NullLogger>());
 
-        const std::set<std::string> availableTranslations{
+        const std::set availableTranslations{
             translator.getAvailableTranslations()};
 
         // On Ubuntu 20.04 United States is written with a space, on older
@@ -67,7 +67,7 @@ TEST_CASE("ApplicationTranslator with additional path")
                                                     QString("ut"));
         REQUIRE(translator.getAvailableTranslations().size() == 1);
 
-        const std::set<std::string> availableTranslations{
+        const std::set availableTranslations{
             translator.getAvailableTranslations()};
         REQUIRE(availableTranslations.find("Swedish (Sweden)") !=
                 availableTranslations.end());

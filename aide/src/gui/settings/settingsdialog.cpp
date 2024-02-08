@@ -1,6 +1,5 @@
 #include "settingsdialog.hpp"
 
-#include <iostream>
 #include <utility>
 
 #include <QList>
@@ -58,7 +57,7 @@ void SettingsDialog::connectSignals()
 }
 
 void SettingsDialog::restoreGeometryAndState(
-    SettingsDialogGeometryAndStateData geometryAndStateData)
+    const SettingsDialogGeometryAndStateData geometryAndStateData)
 {
     this->restoreGeometry(geometryAndStateData.dialogGeometry);
     ui->splitter->restoreGeometry(geometryAndStateData.splitterGeometry);
@@ -86,7 +85,7 @@ SettingsDialogGeometryAndStateData SettingsDialog::currentGeometry() const
         const auto& index = selectedIndexes.at(0);
 
         if (index.isValid()) {
-            auto completeGroupIndex =
+            const auto completeGroupIndex =
                 ui->treeView->model()->index(index.row(), 0, index.parent());
             const auto* const treeItem =
                 static_cast<TreeItem*>(completeGroupIndex.internalPointer());
@@ -103,11 +102,12 @@ SettingsDialogGeometryAndStateData SettingsDialog::currentGeometry() const
 
 UserSelection SettingsDialog::executeDialog()
 {
-    return (this->exec() == QDialog::Accepted) ? UserSelection::Ok
-                                               : UserSelection::Cancel;
+    return this->exec() == QDialog::Accepted ? UserSelection::Ok
+                                             : UserSelection::Cancel;
 }
 
-void SettingsDialog::setTreeModel(std::shared_ptr<QAbstractItemModel> model)
+void SettingsDialog::setTreeModel(
+    const std::shared_ptr<QAbstractItemModel> model)
 {
     ui->treeView->setModel(model.get());
     ui->treeView->resizeColumnToContents(0);
@@ -146,23 +146,23 @@ void SettingsDialog::showEmptyPageWidget()
     }
 }
 
-void SettingsDialog::showResetLabel(bool show)
+void SettingsDialog::showResetLabel(const bool show)
 {
     ui->resetLabel->setVisible(show);
 }
 
-void SettingsDialog::enableApplyButton(bool enable)
+void SettingsDialog::enableApplyButton(const bool enable)
 {
     ui->leaveDialogButtonBox->button(QDialogButtonBox::Apply)
         ->setEnabled(enable);
 }
 
-void SettingsDialog::installChangeDetector(QObject* widget)
+void SettingsDialog::installChangeDetector(QObject* widget) const
 {
-    aide::gui::installChangeDetector(widget, settingsController);
+    gui::installChangeDetector(widget, settingsController);
 }
 
-void SettingsDialog::unInstallChangeDetector(QObject* widget)
+void SettingsDialog::unInstallChangeDetector(QObject* widget) const
 {
-    aide::gui::unInstallChangeDetector(widget, settingsController);
+    gui::unInstallChangeDetector(widget, settingsController);
 }

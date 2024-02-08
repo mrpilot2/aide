@@ -26,7 +26,7 @@ TEST_CASE("Any main window")
     QApplication app(numberOfArgs, appName.data());
 
     MockSettings settings;
-    auto registry = std::make_shared<ActionRegistry>(
+    const auto registry = std::make_shared<ActionRegistry>(
         settings, std::make_shared<NullLogger>());
     MainWindow mainWindow(std::make_shared<NullLogger>(), nullptr);
 

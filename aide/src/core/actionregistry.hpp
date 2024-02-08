@@ -59,7 +59,7 @@ namespace aide
             const std::vector<QKeySequence>& keySequences);
 
         QList<QKeySequence> loadUserKeySequences(
-            const HierarchicalId& uniqueId);
+            const HierarchicalId& uniqueId) const;
 
         SettingsInterface& settings;
 

@@ -13,8 +13,8 @@ using aide::Action;
 using aide::core::KeyMapTreeModel;
 using aide::core::TreeItemPtr;
 
-aide::core::KeyMapTreeModel::KeyMapTreeModel(
-    ActionRegistryInterfacePtr registry, QObject* parent)
+KeyMapTreeModel::KeyMapTreeModel(ActionRegistryInterfacePtr registry,
+                                 QObject* parent)
     : TreeModel(parent, std::make_shared<TreeItem>(
                             std::vector<QVariant>({{"Action", "Shortcuts"}})))
     , actionRegistry{std::move(registry)}
@@ -67,8 +67,8 @@ void KeyMapTreeModel::setupModelData()
     }
 }
 
-std::optional<TreeItemPtr> aide::core::KeyMapTreeModel::existingTreeItemForId(
-    const aide::core::TreeItemPtr& current, const char* const& id)
+std::optional<TreeItemPtr> KeyMapTreeModel::existingTreeItemForId(
+    const TreeItemPtr& current, const char* const& id)
 {
     for (size_t i = 0; i < current->childCount(); ++i) {
         if (current->child(i)->data(0) == id) { return current->child(i); }
@@ -76,9 +76,9 @@ std::optional<TreeItemPtr> aide::core::KeyMapTreeModel::existingTreeItemForId(
     return {};
 }
 
-QVariant aide::core::KeyMapTreeModel::headerData(int section,
-                                                 Qt::Orientation orientation,
-                                                 int role) const
+QVariant KeyMapTreeModel::headerData(const int section,
+                                     const Qt::Orientation orientation,
+                                     const int role) const
 {
     if (role == Qt::TextAlignmentRole && section == 1) {
         return Qt::AlignRight;
@@ -86,7 +86,7 @@ QVariant aide::core::KeyMapTreeModel::headerData(int section,
     return TreeModel::headerData(section, orientation, role);
 }
 
-QVariant KeyMapTreeModel::data(const QModelIndex& index, int role) const
+QVariant KeyMapTreeModel::data(const QModelIndex& index, const int role) const
 {
     if (!index.isValid()) { return {}; }
 
@@ -95,15 +95,15 @@ QVariant KeyMapTreeModel::data(const QModelIndex& index, int role) const
     }
 
     if (role == Qt::ToolTipRole && index.column() == 0) {
-        if (auto action = findCorrespondingAction(index)) {
+        if (const auto action = findCorrespondingAction(index)) {
             return QString::fromStdString(action->description);
         }
     }
 
     if (role == Qt::DecorationRole && index.column() == 0) {
-        auto action = findCorrespondingAction(index);
+        const auto action = findCorrespondingAction(index);
         if (!action) { return QIcon::fromTheme("folder"); }
-        if (auto qaction = action->action.lock(); qaction != nullptr) {
+        if (const auto qaction = action->action.lock(); qaction != nullptr) {
             return qaction->icon();
         }
         return QIcon::fromTheme("folder");
@@ -123,8 +123,8 @@ QVariant KeyMapTreeModel::data(const QModelIndex& index, int role) const
     return {};
 }
 
-bool aide::core::KeyMapTreeModel::setData(const QModelIndex& index,
-                                          const QVariant& value, int role)
+bool KeyMapTreeModel::setData(const QModelIndex& index, const QVariant& value,
+                              const int role)
 {
     if (role == Qt::DisplayRole) {
         auto* item = static_cast<TreeItem*>(index.internalPointer());
@@ -148,52 +148,53 @@ std::optional<Action> KeyMapTreeModel::findCorrespondingAction(
 
     auto actions = actionRegistry->actions();
 
-    if (auto it = std::find_if(actions.begin(), actions.end(),
-                               [&completeGroupName](const auto& action) {
-                                   return action.first.name() ==
-                                          completeGroupName;
-                               });
+    if (const auto it = std::find_if(actions.begin(), actions.end(),
+                                     [&completeGroupName](const auto& action) {
+                                         return action.first.name() ==
+                                                completeGroupName;
+                                     });
         it != actions.end()) {
         return it->second;
     }
     return {};
 }
 
-std::optional<TreeItemPtr> aide::core::KeyMapTreeModel::findItemForActionId(
-    const aide::HierarchicalId& id)
+std::optional<TreeItemPtr> KeyMapTreeModel::findItemForActionId(
+    const HierarchicalId& id) const
 {
     return recursivelyFindItemForActionId(m_rootItem, id);
 }
 
-std::optional<TreeItemPtr>
-aide::core::KeyMapTreeModel::recursivelyFindItemForActionId(
-    TreeItemPtr item, const aide::HierarchicalId& id)
+std::optional<TreeItemPtr> KeyMapTreeModel::recursivelyFindItemForActionId(
+    TreeItemPtr item, const HierarchicalId& id)
 {
-    if (auto completeGroupName{
+    if (const auto completeGroupName{
             item->getHiddenUserData().toString().toStdString()};
         completeGroupName == id.name()) {
         return item;
     }
 
     for (size_t i = 0; i < item->childCount(); ++i) {
-        auto res = recursivelyFindItemForActionId(item->child(i), id);
-        if (res) { return res; }
+        if (auto res = recursivelyFindItemForActionId(item->child(i), id);
+            res.has_value()) {
+            return res;
+        }
     }
     return {};
 }
 
-bool aide::core::KeyMapTreeModel::isAnyUserSelectedKeySequencesInGroup(
+bool KeyMapTreeModel::isAnyUserSelectedKeySequencesInGroup(
     const QModelIndex& index) const
 {
     if (!index.isValid()) { return false; }
 
-    if (auto action = findCorrespondingAction(index)) {
+    if (const auto action = findCorrespondingAction(index)) {
         auto const* item = static_cast<TreeItem*>(index.internalPointer());
-        auto currentKeySequences =
+        const auto currentKeySequences =
             QKeySequence::listFromString(item->data(1).toString());
 
-        return (!Action::areKeySequencesTheSame(action->defaultKeySequences,
-                                                currentKeySequences));
+        return !Action::areKeySequencesTheSame(action->defaultKeySequences,
+                                               currentKeySequences);
     }
 
     bool found = false;

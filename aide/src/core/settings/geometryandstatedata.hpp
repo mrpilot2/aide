@@ -7,11 +7,11 @@ namespace aide::core
 {
     struct SettingsDialogGeometryAndStateData
     {
-        QByteArray dialogGeometry{};
-        QByteArray splitterGeometry{};
-        QByteArray splitterState{};
-        QByteArray treeViewGeometry{};
-        QString selectedTreeViewItem{};
+        QByteArray dialogGeometry;
+        QByteArray splitterGeometry;
+        QByteArray splitterState;
+        QByteArray treeViewGeometry;
+        QString selectedTreeViewItem;
 
         bool operator==(const SettingsDialogGeometryAndStateData& rhs) const
         {

@@ -11,7 +11,7 @@ MockSettingsPage::MockSettingsPage()
     : MockSettingsPage(HierarchicalId("Test")("Mock"))
 {}
 
-MockSettingsPage::MockSettingsPage(const aide::HierarchicalId& group)
+MockSettingsPage::MockSettingsPage(const HierarchicalId& group)
     : SettingsPage(group)
 {
     // NOLINTNEXTLINE
@@ -28,7 +28,7 @@ QWidget* MockSettingsPage::widget()
     return mockWidget.get();
 }
 
-void MockSettingsPage::simulateModified(bool modified)
+void MockSettingsPage::simulateModified(const bool modified)
 {
     pageIsModified = modified;
 }

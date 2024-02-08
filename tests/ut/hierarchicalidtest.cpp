@@ -87,7 +87,7 @@ TEST_CASE("Hierarchical Id ")
     SECTION("can be used with range based for loop")
     {
         const auto hId{HierarchicalId("Main Menu")("File")("Quit")};
-        const std::array<const char*, 3> expected{
+        constexpr std::array<const char*, 3> expected{
             {"Main Menu", "File", "Quit"}};
 
         size_t index{0};
@@ -101,7 +101,7 @@ TEST_CASE("Hierarchical Id ")
     SECTION("can be used with iterator for loop")
     {
         const auto hId{HierarchicalId("Main Menu")("File")("Quit")};
-        const std::array<const char*, 2> expected{{"File", "Quit"}};
+        constexpr std::array<const char*, 2> expected{{"File", "Quit"}};
 
         size_t index{0};
         for (auto iterator = hId.begin() + 1; iterator != hId.end();

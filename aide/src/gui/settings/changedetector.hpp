@@ -1,16 +1,16 @@
 #ifndef AIDE_CHANGE_DETECTOR_HPP
 #define AIDE_CHANGE_DETECTOR_HPP
 
-#include <QObject>
-
 #include "settingsdialogcontroller.hpp"
+
+class QObject;
 
 namespace aide::gui
 {
-    void installChangeDetector(QObject* widget,
+    void installChangeDetector(const QObject* widget,
                                const SettingsDialogControllerPtr& controller);
 
-    void unInstallChangeDetector(QObject* widget,
+    void unInstallChangeDetector(const QObject* widget,
                                  const SettingsDialogControllerPtr& controller);
 
 } // namespace aide::gui

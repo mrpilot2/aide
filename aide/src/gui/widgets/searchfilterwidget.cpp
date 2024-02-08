@@ -2,7 +2,6 @@
 
 #include <iostream>
 
-#include <QIcon>
 #include <QLineEdit>
 #include <QMenu>
 #include <QObject>
@@ -17,7 +16,7 @@
 
 using aide::widgets::SearchFilterWidget;
 
-SearchFilterWidget::SearchFilterWidget(const aide::HierarchicalId& id,
+SearchFilterWidget::SearchFilterWidget(const HierarchicalId& id,
                                        const QKeySequence& showHideShortcut,
                                        QWidget* parent)
     : QWidget(parent)
@@ -31,7 +30,7 @@ SearchFilterWidget::SearchFilterWidget(const aide::HierarchicalId& id,
 {
     m_ui->setupUi(this);
 
-    auto guiSettings = aide::AideSettingsProvider::versionableSettings();
+    const auto guiSettings = AideSettingsProvider::versionableSettings();
 
     bool visibilitySetting{true};
 
@@ -93,27 +92,27 @@ SearchFilterWidget::SearchFilterWidget(const aide::HierarchicalId& id,
 
 SearchFilterWidget::~SearchFilterWidget() = default;
 
-void SearchFilterWidget::onUserRequestsToChangeVisibility(bool visible)
+void SearchFilterWidget::onUserRequestsToChangeVisibility(const bool visible)
 {
     this->setVisible(visible);
 
-    if (auto guiSettings = aide::AideSettingsProvider::versionableSettings();
+    if (const auto guiSettings = AideSettingsProvider::versionableSettings();
         guiSettings != nullptr) {
         guiSettings->setValue(m_visibilitySettingsKey, visible);
     }
 }
 
-void SearchFilterWidget::setSearchIcon(const QIcon& icon)
+void SearchFilterWidget::setSearchIcon(const QIcon& icon) const
 {
     m_ui->toolButton->setIcon(icon);
 }
 
-void SearchFilterWidget::setSourceModel(QAbstractItemModel* model)
+void SearchFilterWidget::setSourceModel(QAbstractItemModel* model) const
 {
     m_filterModel->setSourceModel(model);
 }
 
-QSortFilterProxyModel* SearchFilterWidget::getFilterModel()
+QSortFilterProxyModel* SearchFilterWidget::getFilterModel() const
 {
     return m_filterModel.get();
 }
@@ -129,12 +128,12 @@ void SearchFilterWidget::textChanged(const QString& text)
     m_typingTimer->start(TYPING_FILTER_DELAY);
 }
 
-void SearchFilterWidget::matchCaseStateChanged(bool state)
+void SearchFilterWidget::matchCaseStateChanged(const bool state) const
 {
     m_filterModel->setFilterCaseSensitivity(
         m_ui->matchCase->isChecked() ? Qt::CaseSensitive : Qt::CaseInsensitive);
 
-    if (auto guiSettings = aide::AideSettingsProvider::versionableSettings();
+    if (const auto guiSettings = AideSettingsProvider::versionableSettings();
         guiSettings != nullptr) {
         guiSettings->setValue(m_matchCaseSettingsKey, state);
 
@@ -142,12 +141,12 @@ void SearchFilterWidget::matchCaseStateChanged(bool state)
     }
 }
 
-void SearchFilterWidget::regexStateChanged(bool state)
+void SearchFilterWidget::regexStateChanged(const bool state) const
 {
     m_filterModel->setFilterOption(m_ui->regularExpression->isChecked()
                                        ? FilterOption::Regex
                                        : FilterOption::Wildcard);
-    if (auto guiSettings = aide::AideSettingsProvider::versionableSettings();
+    if (const auto guiSettings = AideSettingsProvider::versionableSettings();
         guiSettings != nullptr) {
         guiSettings->setValue(m_regexSettingsKey, state);
 
@@ -155,7 +154,7 @@ void SearchFilterWidget::regexStateChanged(bool state)
     }
 }
 
-void SearchFilterWidget::filterEntries()
+void SearchFilterWidget::filterEntries() const
 {
     if (m_filterModel == nullptr || m_filterModel->sourceModel() == nullptr) {
         return;

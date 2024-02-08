@@ -18,7 +18,7 @@ namespace aide::core
         KeymapContextMenuProvider(KeyMapTreeModel* model,
                                   KeyMapPageWidgetRawPtr view);
 
-        void createAndShowContextMenu(const QModelIndex& index);
+        void createAndShowContextMenu(const QModelIndex& index) const;
 
     private:
         KeyMapTreeModel* treeModel;

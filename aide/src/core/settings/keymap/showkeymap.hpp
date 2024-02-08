@@ -16,7 +16,7 @@ namespace aide::core
         ShowKeyMap(ActionRegistryInterfacePtr registry,
                    KeyMapPageWidgetRawPtr widget);
 
-        void fillTreeView();
+        void fillTreeView() const;
 
         [[nodiscard]] const std::shared_ptr<KeyMapTreeModel>& getTreeModel()
             const;

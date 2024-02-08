@@ -5,7 +5,6 @@
 
 #include <QDialog>
 
-#include "settings/settingsdialoggeometryandstatecontroller.hpp"
 #include "settings/settingsdialoginterface.hpp"
 #include "settingsdialogcontroller.hpp"
 #include "userselection.hpp"
@@ -60,9 +59,9 @@ namespace aide::gui
     private:
         void connectSignals();
 
-        void installChangeDetector(QObject* widget);
+        void installChangeDetector(QObject* widget) const;
 
-        void unInstallChangeDetector(QObject* widget);
+        void unInstallChangeDetector(QObject* widget) const;
 
         std::unique_ptr<Ui::SettingsDialog> ui;
 

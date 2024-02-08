@@ -11,7 +11,7 @@ using aide::widgets::SearchLineEdit;
 void SearchLineEdit::setTags(QList<QString> tags)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    m_tags = QSet<QString>(tags.begin(), tags.end());
+    m_tags = QSet(tags.begin(), tags.end());
 #else
     m_tags = tags.toSet();
 #endif

@@ -88,9 +88,9 @@ TEST_CASE("Second new child item")
 {
     auto parent =
         std::make_shared<TreeItem>(std::vector<QVariant>({"abc"}), nullptr);
-    auto child1 =
+    const auto child1 =
         std::make_shared<TreeItem>(std::vector<QVariant>({{"def", 2}}), parent);
-    auto child2 =
+    const auto child2 =
         std::make_shared<TreeItem>(std::vector<QVariant>({3, true}), parent);
     parent->appendChild(child1);
     parent->appendChild(child2);
@@ -115,9 +115,9 @@ TEST_CASE("Any tree item")
 {
     auto parent =
         std::make_shared<TreeItem>(std::vector<QVariant>({"abc"}), nullptr);
-    auto child1 =
+    const auto child1 =
         std::make_shared<TreeItem>(std::vector<QVariant>({{"def", 2}}), parent);
-    auto child2 =
+    const auto child2 =
         std::make_shared<TreeItem>(std::vector<QVariant>({3, true}), parent);
     parent->appendChild(child1);
     parent->appendChild(child2);

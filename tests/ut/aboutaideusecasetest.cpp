@@ -14,8 +14,7 @@ using aide::tests::MockAboutDialog;
 
 TEST_CASE("Any AboutAideUseCase")
 {
-    std::shared_ptr<MockAboutDialog> const dialog{
-        std::make_shared<MockAboutDialog>()};
+    auto const dialog{std::make_shared<MockAboutDialog>()};
 
     AboutAideUseCase useCase{dialog,
                              std::make_shared<aide::test::NullLogger>()};

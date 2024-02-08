@@ -12,7 +12,6 @@
 #include "actionregistry.hpp"
 #include "aideconstants.hpp"
 #include "applicationtranslator.hpp"
-#include "hierarchicalid.hpp"
 #include "mainwindowcontroller.hpp"
 #include "menucontainerinterface.hpp"
 #include "settings/settingsdialog.hpp"
@@ -50,7 +49,8 @@ void MainWindow::setMainWindowController(
     registerActions(actionRegistry);
 }
 
-void MainWindow::restoreGeometryAndState(QByteArray geometry, QByteArray state)
+void MainWindow::restoreGeometryAndState(const QByteArray geometry,
+                                         const QByteArray state)
 {
     this->restoreGeometry(geometry);
     this->restoreState(state);
@@ -132,13 +132,12 @@ void MainWindow::closeEvent(QCloseEvent* event)
     m_controller->onUserWantsToQuitApplication(event, this->saveGeometry(),
                                                this->saveState());
 }
-std::tuple<aide::core::UserSelection, bool>
-MainWindow::letUserConfirmApplicationClose()
+std::tuple<UserSelection, bool> MainWindow::letUserConfirmApplicationClose()
 {
     logger->debug("Asking user for confirmation to close application");
-    auto messageBox = std::make_unique<QMessageBox>(this);
+    const auto messageBox = std::make_unique<QMessageBox>(this);
 
-    auto checkBox =
+    const auto checkBox =
         std::make_unique<QCheckBox>(tr("Don't ask again"), messageBox.get());
 
     messageBox->setWindowTitle(tr("Confirm exit"));
@@ -151,7 +150,7 @@ MainWindow::letUserConfirmApplicationClose()
         layout != nullptr) {
         layout->addWidget(checkBox.get(), 2, 0);
     }
-    auto reply = messageBox->exec();
+    const auto reply = messageBox->exec();
 
     logger->debug("User requested to{} ask for exit confirmation again",
                   checkBox->isChecked() ? " do not" : "");

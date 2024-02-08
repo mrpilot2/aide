@@ -9,7 +9,7 @@
 
 using aide::QtSettings;
 
-QtSettings::QtSettings(bool versionable)
+QtSettings::QtSettings(const bool versionable)
 {
     if (versionable) {
         m_settings = std::make_unique<QSettings>();
@@ -22,7 +22,7 @@ QtSettings::QtSettings(bool versionable)
 
 QtSettings::~QtSettings() = default;
 
-void QtSettings::setValue(const aide::HierarchicalId& groupAndKey,
+void QtSettings::setValue(const HierarchicalId& groupAndKey,
                           const QVariant& value)
 {
     const auto* key = *(groupAndKey.end() - 1);
@@ -38,12 +38,12 @@ void QtSettings::setValue(const aide::HierarchicalId& groupAndKey,
     }
 }
 
-QVariant QtSettings::value(const aide::HierarchicalId& groupAndKey)
+QVariant QtSettings::value(const HierarchicalId& groupAndKey)
 {
     return value(groupAndKey, QVariant());
 }
 
-QVariant QtSettings::value(const aide::HierarchicalId& groupAndKey,
+QVariant QtSettings::value(const HierarchicalId& groupAndKey,
                            const QVariant& defaultValue)
 {
     const auto* key = *(groupAndKey.end() - 1);
@@ -64,7 +64,7 @@ QVariant QtSettings::value(const aide::HierarchicalId& groupAndKey,
     return settingsValue != QVariant() ? settingsValue : defaultValue;
 }
 
-void aide::QtSettings::removeKey(const aide::HierarchicalId& groupAndKey)
+void QtSettings::removeKey(const HierarchicalId& groupAndKey)
 {
     const auto* key = *(groupAndKey.end() - 1);
     const auto group =
@@ -81,11 +81,11 @@ void aide::QtSettings::removeKey(const aide::HierarchicalId& groupAndKey)
     }
 }
 
-void aide::QtSettings::save()
+void QtSettings::save()
 {
     m_settings->sync();
 }
-void aide::QtSettings::load()
+void QtSettings::load()
 {
     m_settings->sync();
 }

@@ -12,7 +12,7 @@
 using aide::widgets::MultiColumnSortFilterProxyModel;
 
 void MultiColumnSortFilterProxyModel::setFilterForColumn(
-    int column, const QString& filterText)
+    const int column, const QString& filterText)
 {
     if (m_columnFilterMap.count(column) > 0) {
         m_columnFilterMap.at(column) =
@@ -28,20 +28,20 @@ void MultiColumnSortFilterProxyModel::clearFilterForAllColumns()
     m_columnFilterMap.clear();
 }
 
-void MultiColumnSortFilterProxyModel::clearFilterForColumn(int column)
+void MultiColumnSortFilterProxyModel::clearFilterForColumn(const int column)
 {
     if (m_columnFilterMap.count(column) > 0) {
         m_columnFilterMap.erase(column);
     }
 }
 
-void MultiColumnSortFilterProxyModel::setFilterOption(FilterOption option)
+void MultiColumnSortFilterProxyModel::setFilterOption(const FilterOption option)
 {
     m_option = option;
 }
 
-bool aide::widgets::MultiColumnSortFilterProxyModel::filterAcceptsRow(
-    int source_row, const QModelIndex& source_parent) const
+bool MultiColumnSortFilterProxyModel::filterAcceptsRow(
+    const int source_row, const QModelIndex& source_parent) const
 {
     if (m_columnFilterMap.empty()) {
         return QSortFilterProxyModel::filterAcceptsRow(source_row,
@@ -78,7 +78,7 @@ bool aide::widgets::MultiColumnSortFilterProxyModel::filterAcceptsRow(
 }
 
 QRegularExpression MultiColumnSortFilterProxyModel::getRegexForColumn(
-    int column) const
+    const int column) const
 {
     if (m_columnFilterMap.count(column) == 0) { return {}; }
 

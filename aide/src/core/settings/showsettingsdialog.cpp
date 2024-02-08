@@ -13,9 +13,9 @@
 using aide::core::SettingsPageGroupTreeModel;
 using aide::core::ShowSettingsDialog;
 
-aide::core::ShowSettingsDialog::ShowSettingsDialog(
-    aide::core::SettingsDialogWeakPtr dialog, SettingsInterface& settings,
-    LoggerPtr loggerInterface)
+ShowSettingsDialog::ShowSettingsDialog(SettingsDialogWeakPtr dialog,
+                                       SettingsInterface& settings,
+                                       LoggerPtr loggerInterface)
     : settingsDialog{std::move(dialog)}
     , logger{std::move(loggerInterface)}
     , saveGeometryAndState(settingsDialog, settings)
@@ -23,7 +23,7 @@ aide::core::ShowSettingsDialog::ShowSettingsDialog(
 
 void ShowSettingsDialog::showSettingsDialog()
 {
-    auto dialog = settingsDialog.lock();
+    const auto dialog = settingsDialog.lock();
 
     if (dialog == nullptr) { return; }
 
@@ -41,10 +41,11 @@ void ShowSettingsDialog::showSettingsDialog()
         p->widget()->setVisible(false);
     });
 
-    auto lastSelectedTreeItem = saveGeometryAndState.selectedTreeViewItem();
+    const auto lastSelectedTreeItem =
+        saveGeometryAndState.selectedTreeViewItem();
 
     if (!lastSelectedTreeItem.isEmpty()) {
-        auto index = treeModel->recursivelyFindSelectedTreeItemIndex(
+        const auto index = treeModel->recursivelyFindSelectedTreeItemIndex(
             lastSelectedTreeItem, QModelIndex());
 
         dialog->setSelectedGroupIndex(index);
@@ -52,7 +53,7 @@ void ShowSettingsDialog::showSettingsDialog()
         dialog->setSelectedGroupIndex(treeModel->index(0, 0, QModelIndex()));
     }
 
-    auto result = dialog->executeDialog();
+    const auto result = dialog->executeDialog();
 
     saveGeometryAndState.saveGeometryAndState(dialog->currentGeometry());
 
@@ -69,9 +70,9 @@ void ShowSettingsDialog::changeSelectedPage(
 {
     checkChangeSelectedPagePreConditions(selected);
 
-    auto selectedIndex = selected.indexes().at(0);
+    const auto selectedIndex = selected.indexes().at(0);
 
-    if (auto view = settingsDialog.lock(); view != nullptr) {
+    if (const auto view = settingsDialog.lock(); view != nullptr) {
         updateDisplayName(selectedIndex);
 
         currentlySelectedPage =
@@ -111,39 +112,39 @@ void ShowSettingsDialog::checkChangeSelectedPagePreConditions(
 void ShowSettingsDialog::updateDisplayName(
     const QModelIndex& selectedIndex) const
 {
-    auto completeGroupIndex =
+    const auto completeGroupIndex =
         treeModel->index(selectedIndex.row(), 0, selectedIndex.parent());
-    auto* treeItem =
+    const auto* treeItem =
         static_cast<TreeItem*>(completeGroupIndex.internalPointer());
-    auto completeGroupString{treeItem->getHiddenUserData()
-                                 .toString()
-                                 .replace("/", " > ")
-                                 .toStdString()};
+    const auto completeGroupString{treeItem->getHiddenUserData()
+                                       .toString()
+                                       .replace("/", " > ")
+                                       .toStdString()};
 
     logger->trace("User changed settings page to {} ", completeGroupString);
 
-    if (auto d = settingsDialog.lock(); d != nullptr) {
+    if (const auto d = settingsDialog.lock(); d != nullptr) {
         d->setSelectedPageDisplayName(completeGroupString);
     }
 }
 
 void ShowSettingsDialog::showSelectedPageWidget(QWidget* widget) const
 {
-    if (auto d = settingsDialog.lock(); d != nullptr) {
+    if (const auto d = settingsDialog.lock(); d != nullptr) {
         d->showSelectedPageWidget(widget);
     }
 }
 
 void ShowSettingsDialog::showEmptyPageWidget() const
 {
-    if (auto d = settingsDialog.lock(); d != nullptr) {
+    if (const auto d = settingsDialog.lock(); d != nullptr) {
         d->showEmptyPageWidget();
     }
 }
 
 void ShowSettingsDialog::anyGuiElementHasChanged()
 {
-    if (auto d = settingsDialog.lock();
+    if (const auto d = settingsDialog.lock();
         d != nullptr && currentlySelectedPage != nullptr) {
         d->showResetLabel(currentlySelectedPage->isModified());
         const auto& pages = SettingsPageRegistry::settingsPages();

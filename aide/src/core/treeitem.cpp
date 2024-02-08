@@ -25,7 +25,7 @@ QVariant TreeItem::getHiddenUserData() const
     return hiddenUserData;
 }
 
-TreeItemPtr TreeItem::child(size_t row)
+TreeItemPtr TreeItem::child(const size_t row)
 {
     if (row >= childItems.size()) { return nullptr; }
     return childItems.at(row);
@@ -41,13 +41,13 @@ size_t TreeItem::columnCount() const
     return itemData.size();
 }
 
-QVariant TreeItem::data(size_t column) const
+QVariant TreeItem::data(const size_t column) const
 {
     if (column >= itemData.size()) { return {}; }
     return itemData.at(column);
 }
 
-bool aide::core::TreeItem::setData(size_t column, const QVariant& data)
+bool TreeItem::setData(const size_t column, const QVariant& data)
 {
     if (column > itemData.size() - 1) { return false; }
 
@@ -58,7 +58,7 @@ bool aide::core::TreeItem::setData(size_t column, const QVariant& data)
 
 int64_t TreeItem::row() const
 {
-    if (auto parent = parentItem.lock(); parent != nullptr) {
+    if (const auto parent = parentItem.lock(); parent != nullptr) {
         const auto childs{parent->childItems};
 
         return std::distance(

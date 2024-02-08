@@ -3,7 +3,7 @@
 using aide::HierarchicalId;
 using aide::core::SettingsPage;
 
-SettingsPage::SettingsPage(aide::HierarchicalId group)
+SettingsPage::SettingsPage(HierarchicalId group)
     : settingsGroup{std::move(group)}
 {}
 

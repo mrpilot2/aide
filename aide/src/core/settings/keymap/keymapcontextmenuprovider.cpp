@@ -15,7 +15,7 @@ KeymapContextMenuProvider::KeymapContextMenuProvider(
 {}
 
 void KeymapContextMenuProvider::createAndShowContextMenu(
-    const QModelIndex& index)
+    const QModelIndex& index) const
 {
     if (!index.isValid() || !treeModel->findCorrespondingAction(index)) {
         return;
@@ -27,9 +27,9 @@ void KeymapContextMenuProvider::createAndShowContextMenu(
          KeymapContextMenuProvider::tr("Add keyboard shortcut").toStdString(),
          QKeySequence()});
 
-    auto action = treeModel->findCorrespondingAction(index);
+    const auto action = treeModel->findCorrespondingAction(index);
 
-    auto* item = static_cast<TreeItem*>(index.internalPointer());
+    const auto* item = static_cast<TreeItem*>(index.internalPointer());
     auto keySequenceInModel{
         QKeySequence::listFromString(item->data(1).toString())};
 

@@ -12,4 +12,4 @@ namespace aide::core
     };
 } // namespace aide::core
 
-#endif // AIDE_APPLICATION_CLOSE_INPUT_HPP
+#endif // AIDE_APPLICATION_CLOSE_CONTROLLER_HPP

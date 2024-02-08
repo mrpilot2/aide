@@ -10,8 +10,8 @@
 
 #include <aide/hierarchicalid.hpp>
 
-static constexpr const auto VISIBILITY_TOGGLE_DELAY = 200;
-static constexpr const auto TYPING_FILTER_DELAY     = 300;
+static constexpr auto VISIBILITY_TOGGLE_DELAY = 200;
+static constexpr auto TYPING_FILTER_DELAY     = 300;
 namespace Ui
 {
     class SearchFilterWidget;
@@ -32,17 +32,17 @@ namespace aide::widgets
     {
         Q_OBJECT
     public:
-        explicit SearchFilterWidget(const aide::HierarchicalId& id,
+        explicit SearchFilterWidget(const HierarchicalId& id,
                                     const QKeySequence& showHideShortcut,
                                     QWidget* parent);
 
         ~SearchFilterWidget() override;
 
-        void setSearchIcon(const QIcon& icon);
+        void setSearchIcon(const QIcon& icon) const;
 
-        void setSourceModel(QAbstractItemModel* model);
+        void setSourceModel(QAbstractItemModel* model) const;
 
-        QSortFilterProxyModel* getFilterModel();
+        QSortFilterProxyModel* getFilterModel() const;
 
         QAbstractItemDelegate* getItemDelegate();
 
@@ -51,10 +51,10 @@ namespace aide::widgets
 
         void textChanged(const QString& text);
 
-        void matchCaseStateChanged(bool state);
-        void regexStateChanged(bool state);
+        void matchCaseStateChanged(bool state) const;
+        void regexStateChanged(bool state) const;
 
-        void filterEntries();
+        void filterEntries() const;
 
     private:
         std::unique_ptr<Ui::SearchFilterWidget> m_ui;
@@ -65,9 +65,9 @@ namespace aide::widgets
         std::unique_ptr<MultiColumnSortFilterProxyModel> m_filterModel;
 
         QAction m_showHideAction;
-        const aide::HierarchicalId m_visibilitySettingsKey;
-        const aide::HierarchicalId m_matchCaseSettingsKey;
-        const aide::HierarchicalId m_regexSettingsKey;
+        const HierarchicalId m_visibilitySettingsKey;
+        const HierarchicalId m_matchCaseSettingsKey;
+        const HierarchicalId m_regexSettingsKey;
 
         bool m_aboutToClose{false};
     };

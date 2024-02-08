@@ -20,7 +20,7 @@ void installChangeDetectorForItemViews(
 {
     if (const auto* itemView = qobject_cast<const QAbstractItemView*>(child);
         itemView != nullptr) {
-        if (auto* itemModel = itemView->model(); itemModel != nullptr) {
+        if (const auto* itemModel = itemView->model(); itemModel != nullptr) {
             QObject::connect(
                 itemModel, &QAbstractItemModel::columnsInserted,
                 settingsController,
@@ -183,9 +183,9 @@ void installChangeDetectorForButtons(
 }
 
 void aide::gui::installChangeDetector(
-    QObject* widget, const SettingsDialogControllerPtr& controller)
+    const QObject* const widget, const SettingsDialogControllerPtr& controller)
 {
-    auto* settingsController = controller.get();
+    const auto* settingsController = controller.get();
 
     for (auto* child : widget->children()) {
         installChangeDetector(child, controller);
@@ -209,11 +209,11 @@ void aide::gui::installChangeDetector(
 }
 
 void aide::gui::unInstallChangeDetector(
-    QObject* widget, const SettingsDialogControllerPtr& controller)
+    const QObject* const widget, const SettingsDialogControllerPtr& controller)
 {
     widget->disconnect(controller.get());
 
-    for (auto* child : widget->children()) {
+    for (const auto* child : widget->children()) {
         unInstallChangeDetector(child, controller);
     }
 }

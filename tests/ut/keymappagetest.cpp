@@ -62,7 +62,7 @@ TEST_CASE("Any keymap page")
     auto logger = std::make_shared<NullLogger>();
     auto registry(std::make_shared<ActionRegistry>(settings, logger));
 
-    std::shared_ptr<QAction> const action{std::make_shared<QAction>()};
+    auto const action{std::make_shared<QAction>()};
 
     registry->registerAction(action,
                              HierarchicalId("Main Menu")("File")("New File"),

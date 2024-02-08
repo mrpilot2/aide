@@ -21,7 +21,7 @@ namespace aide::gui
 
         ~ThirdPartyLicensesDialog() override;
 
-        void setLicensesText(const QString& text);
+        void setLicensesText(const QString& text) const;
 
     private:
         std::unique_ptr<Ui::ThirdPartyLicensesDialog> m_ui;

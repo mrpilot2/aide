@@ -27,7 +27,7 @@ void KeymapPageWidget::setController(KeyMapPageControllerPtr controller)
     connectSignals();
 }
 
-void aide::gui::KeymapPageWidget::connectSignals() const
+void KeymapPageWidget::connectSignals() const
 {
     connect(
         ui->treeView, &QTreeView::doubleClicked, keymapPageController.get(),
@@ -37,16 +37,16 @@ void aide::gui::KeymapPageWidget::connectSignals() const
 }
 
 void KeymapPageWidget::onUserRequestedContextMenuViaRightClick(
-    const QPoint& point)
+    const QPoint& point) const
 {
-    QModelIndex index = ui->treeView->indexAt(point);
+    const QModelIndex index = ui->treeView->indexAt(point);
     keymapPageController->requestContextMenuForIndex(index);
 }
 
-void aide::gui::KeymapPageWidget::setTreeModel(
-    std::shared_ptr<QAbstractItemModel> model)
+void KeymapPageWidget::setTreeModel(
+    const std::shared_ptr<QAbstractItemModel> model)
 {
-    bool isFirstModelSet(ui->treeView->model() == nullptr);
+    const bool isFirstModelSet(ui->treeView->model() == nullptr);
 
     ui->treeView->setModel(model.get());
 
@@ -57,17 +57,16 @@ void aide::gui::KeymapPageWidget::setTreeModel(
     }
 }
 
-void aide::gui::KeymapPageWidget::showContextMenu(
-    const aide::core::ContextMenuEntries& entries)
+void KeymapPageWidget::showContextMenu(const core::ContextMenuEntries& entries)
 {
     QMenu menu(ui->treeView);
 
     for (const auto& entry : entries) {
         switch (entry.type) {
-        case aide::core::ContextMenuItemType::SEPARATOR:
+        case core::ContextMenuItemType::SEPARATOR:
             menu.addSeparator();
             break;
-        case aide::core::ContextMenuItemType::REMOVE_SHORTCUT:
+        case core::ContextMenuItemType::REMOVE_SHORTCUT:
         {
             auto* action =
                 new QAction(QString::fromStdString(entry.displayText), &menu);
@@ -78,13 +77,13 @@ void aide::gui::KeymapPageWidget::showContextMenu(
             menu.addAction(action);
             break;
         }
-        case aide::core::ContextMenuItemType::RESET_TO_DEFAULTS:
+        case core::ContextMenuItemType::RESET_TO_DEFAULTS:
             menu.addAction(QString::fromStdString(entry.displayText),
                            keymapPageController.get(),
                            &KeyMapPageWidgetController::
                                onUserRequestedToResetCurrentShortcutsToDefault);
             break;
-        case aide::core::ContextMenuItemType::ADD_KEYBOARD_SHORTCUT:
+        case core::ContextMenuItemType::ADD_KEYBOARD_SHORTCUT:
             menu.addAction(QString::fromStdString(entry.displayText),
                            keymapPageController.get(),
                            &KeyMapPageWidgetController::

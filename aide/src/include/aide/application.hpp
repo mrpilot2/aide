@@ -49,7 +49,8 @@ namespace aide
         [[nodiscard]] std::shared_ptr<gui::TranslatorInterface> translator()
             const;
 
-        [[nodiscard]] std::shared_ptr<AideSettingsProvider> settingsProvider();
+        [[nodiscard]] std::shared_ptr<AideSettingsProvider> settingsProvider()
+            const;
 
         [[nodiscard]] ActionRegistryInterfacePtr actionRegistry() const;
 

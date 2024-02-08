@@ -15,6 +15,7 @@
 #include "settings/showsettingsdialogcontroller.hpp"
 
 using aide::HierarchicalId;
+using aide::core::SettingsPageGroupTreeModel;
 using aide::core::SettingsPageRegistry;
 using aide::core::ShowSettingsDialog;
 using aide::core::ShowSettingsDialogController;
@@ -55,7 +56,7 @@ TEST_CASE("Any show settings dialog use case")
         SettingsPageRegistry::addPage(std::make_unique<MockSettingsPage>(
             HierarchicalId("MockTestPage")("Subpage1")));
 
-        aide::core::SettingsPageGroupTreeModel treeModel;
+        SettingsPageGroupTreeModel treeModel;
 
         useCase.showSettingsDialog();
 
@@ -75,7 +76,7 @@ TEST_CASE("Any show settings dialog use case")
         SettingsPageRegistry::addPage(std::make_unique<MockSettingsPage>(
             HierarchicalId("MockTestPage")("Subpage1")));
 
-        aide::core::SettingsPageGroupTreeModel treeModel;
+        SettingsPageGroupTreeModel treeModel;
 
         useCase.showSettingsDialog();
 
@@ -94,7 +95,7 @@ TEST_CASE("Any show settings dialog use case")
             std::shared_ptr<aide::core::SettingsDialogChangePageController>(
                 std::make_shared<ShowSettingsDialog>(view, settings, logger));
 
-        aide::core::SettingsPageGroupTreeModel treeModel;
+        SettingsPageGroupTreeModel treeModel;
 
         REQUIRE_THROWS_AS(
             base->changeSelectedPage(
@@ -112,7 +113,7 @@ TEST_CASE("Any show settings dialog use case")
         SettingsPageRegistry::addPage(
             std::make_unique<MockSettingsPage>(HierarchicalId("MockTestPage")));
 
-        aide::core::SettingsPageGroupTreeModel treeModel;
+        SettingsPageGroupTreeModel treeModel;
 
         useCase.showSettingsDialog();
 
@@ -136,7 +137,7 @@ TEST_CASE("Any show settings dialog use case")
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
         SettingsPageRegistry::addPage(page);
 
-        aide::core::SettingsPageGroupTreeModel treeModel;
+        SettingsPageGroupTreeModel treeModel;
 
         useCase.showSettingsDialog();
 
@@ -163,7 +164,7 @@ TEST_CASE("Any show settings dialog use case")
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
         SettingsPageRegistry::addPage(page);
 
-        aide::core::SettingsPageGroupTreeModel treeModel;
+        SettingsPageGroupTreeModel treeModel;
 
         useCase.showSettingsDialog();
 
@@ -190,7 +191,7 @@ TEST_CASE("Any show settings dialog use case")
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
         SettingsPageRegistry::addPage(page);
 
-        aide::core::SettingsPageGroupTreeModel treeModel;
+        SettingsPageGroupTreeModel treeModel;
 
         useCase.showSettingsDialog();
 
@@ -221,7 +222,7 @@ TEST_CASE("Any show settings dialog use case")
         SettingsPageRegistry::addPage(page1);
         SettingsPageRegistry::addPage(page2);
 
-        aide::core::SettingsPageGroupTreeModel treeModel;
+        SettingsPageGroupTreeModel treeModel;
 
         useCase.showSettingsDialog();
 
@@ -253,7 +254,7 @@ TEST_CASE("Any show settings dialog use case")
         SettingsPageRegistry::addPage(page1);
         SettingsPageRegistry::addPage(page2);
 
-        aide::core::SettingsPageGroupTreeModel treeModel;
+        SettingsPageGroupTreeModel treeModel;
 
         useCase.showSettingsDialog();
 
@@ -283,7 +284,7 @@ TEST_CASE("Any show settings dialog use case")
         SettingsPageRegistry::addPage(page1);
         SettingsPageRegistry::addPage(page2);
 
-        aide::core::SettingsPageGroupTreeModel treeModel;
+        SettingsPageGroupTreeModel treeModel;
 
         useCase.showSettingsDialog();
 
@@ -314,7 +315,7 @@ TEST_CASE("Any show settings dialog use case")
         SettingsPageRegistry::addPage(page1);
         SettingsPageRegistry::addPage(page2);
 
-        aide::core::SettingsPageGroupTreeModel treeModel;
+        SettingsPageGroupTreeModel treeModel;
 
         page1->simulateModified(false);
         page2->simulateModified(true);
@@ -339,7 +340,7 @@ TEST_CASE("Any show settings dialog use case")
         SettingsPageRegistry::addPage(page1);
         SettingsPageRegistry::addPage(page2);
 
-        aide::core::SettingsPageGroupTreeModel treeModel;
+        SettingsPageGroupTreeModel treeModel;
 
         useCase.showSettingsDialog();
 
@@ -374,7 +375,7 @@ TEST_CASE("Any show settings dialog use case")
         SettingsPageRegistry::addPage(page1);
         SettingsPageRegistry::addPage(page2);
 
-        aide::core::SettingsPageGroupTreeModel treeModel;
+        SettingsPageGroupTreeModel treeModel;
 
         page1->simulateModified(true);
         page2->simulateModified(false);
@@ -442,9 +443,9 @@ TEST_CASE("Any show settings dialog use case")
 
 TEST_CASE("Any settings dialog", "[Issue 36]")
 {
-    auto view = std::make_shared<MockSettingsDialog>();
+    const auto view = std::make_shared<MockSettingsDialog>();
     MockSettings settings;
-    auto logger = std::make_shared<NullLogger>();
+    const auto logger = std::make_shared<NullLogger>();
     ShowSettingsDialog useCase{view, settings, logger};
 
     SECTION(

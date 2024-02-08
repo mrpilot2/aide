@@ -32,8 +32,7 @@ AboutAideDialog::AboutAideDialog(QWidget* parent)
 
 AboutAideDialog::~AboutAideDialog() = default;
 
-void AboutAideDialog::showAboutInformation(
-    const aide::core::AideInformation& info)
+void AboutAideDialog::showAboutInformation(const core::AideInformation& info)
 {
     const auto locale{QLocale::system()};
     const auto textToDisplay{
@@ -78,8 +77,8 @@ void AboutAideDialog::onThirdPartyLibrariesLinkClicked() const
 
 void AboutAideDialog::copySystemInfoToClipBoard() const
 {
-    auto memoryInBytes{SystemMemory::getAvailableRAMInBytes()};
-    auto memoryInfo{QString("%1 MB").arg(
+    const auto memoryInBytes{SystemMemory::getAvailableRAMInBytes()};
+    const auto memoryInfo{QString("%1 MB").arg(
         memoryInBytes.has_value()
             ? QString::number(memoryInBytes.value() / BYTE_TO_MEGABYTE)
             : "Undefined")};

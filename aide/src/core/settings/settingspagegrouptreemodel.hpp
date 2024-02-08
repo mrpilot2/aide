@@ -3,11 +3,11 @@
 
 #include <optional>
 
-#include <QObject>
-
 #include "settings/settingspage.hpp"
 #include "treeitem.hpp"
 #include "treemodel.hpp"
+
+class QObject;
 
 namespace aide::core
 {

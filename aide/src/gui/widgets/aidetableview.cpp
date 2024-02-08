@@ -1,6 +1,3 @@
-//
-// Created by markus on 5/3/21.
-//
 
 #include "widgets/aidetableview.hpp"
 
@@ -23,8 +20,8 @@ AideTableView::AideTableView(QWidget* parent)
 void AideTableView::paintEvent(QPaintEvent* event)
 {
     QString textToDisplay(placeHolderText);
-    if ((model() != nullptr) &&
-        (model()->rowCount() > 0 && model()->columnCount() > 0)) {
+    if (model() != nullptr && model()->rowCount() > 0 &&
+        model()->columnCount() > 0) {
         QTableView::paintEvent(event);
         return;
     }

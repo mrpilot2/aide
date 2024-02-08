@@ -19,7 +19,7 @@ namespace aide::gui
         explicit AddShortcutDialog(QWidget* parent = nullptr);
         ~AddShortcutDialog() override;
 
-        void setAssignedActionDescription(const QString& text);
+        void setAssignedActionDescription(const QString& text) const;
 
         QKeySequence userSelectedKeySequence() const;
 

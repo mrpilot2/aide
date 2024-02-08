@@ -1,8 +1,6 @@
 #ifndef AIDE_SETTINGS_DIALOG_GEOMETRY_AND_STATE_CONTROLLER_HPP
 #define AIDE_SETTINGS_DIALOG_GEOMETRY_AND_STATE_CONTROLLER_HPP
 
-#include <QByteArray>
-
 #include "geometryandstatedata.hpp"
 
 namespace aide::core

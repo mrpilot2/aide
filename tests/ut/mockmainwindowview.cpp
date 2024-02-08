@@ -2,8 +2,8 @@
 
 using aide::test::MockMainWindowView;
 
-void MockMainWindowView::restoreGeometryAndState(QByteArray geometry,
-                                                 QByteArray state)
+void MockMainWindowView::restoreGeometryAndState(const QByteArray geometry,
+                                                 const QByteArray state)
 {
     currentGeometry = geometry;
     currentState    = state;

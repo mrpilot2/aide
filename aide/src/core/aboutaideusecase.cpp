@@ -23,15 +23,15 @@ void AboutAideUseCase::showAboutAideInformation() const
 {
     AideInformation info;
 
-    info.versionInfo = aide::build_information::AIDE_VERSION_STRING;
-    info.gitHash     = aide::build_information::GIT_HASH;
+    info.versionInfo = build_information::AIDE_VERSION_STRING;
+    info.gitHash     = build_information::GIT_HASH;
 
     info.buildDate =
         QLocale("en_US").toDate(QString(__DATE__).simplified(), "MMM d yyyy");
-    info.compiler        = aide::build_information::CMAKE_CXX_COMPILER;
-    info.compilerVersion = aide::build_information::CMAKE_CXX_COMPILER_VERSION;
-    info.buildType       = aide::build_information::CMAKE_BUILD_TYPE;
-    info.compileFlags    = aide::build_information::COMPILE_FLAGS;
+    info.compiler        = build_information::CMAKE_CXX_COMPILER;
+    info.compilerVersion = build_information::CMAKE_CXX_COMPILER_VERSION;
+    info.buildType       = build_information::CMAKE_BUILD_TYPE;
+    info.compileFlags    = build_information::COMPILE_FLAGS;
 
     info.whatsNewUrl =
         "https://github.com/mrpilot2/aide/releases/tag/v" + info.versionInfo;
@@ -39,7 +39,7 @@ void AboutAideUseCase::showAboutAideInformation() const
     info.thirdPartyLicensesHtml = getThirdPartyLicenses();
 
     if (!m_presenter.expired()) {
-        auto sharedPtr{m_presenter.lock()};
+        const auto sharedPtr{m_presenter.lock()};
         sharedPtr->showAboutInformation(info);
     }
 }

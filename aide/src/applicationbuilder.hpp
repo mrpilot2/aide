@@ -1,8 +1,6 @@
 #ifndef AIDE_APPLICATION_BUILDER_HPP
 #define AIDE_APPLICATION_BUILDER_HPP
 
-#include <QString>
-
 #include <settings/keymap/keymappage.hpp>
 
 #include "actionregistry.hpp"
@@ -15,7 +13,6 @@
 #include "loggerinterface.hpp"
 #include "mainwindowgeometryandstate.hpp"
 #include "settings/keymap/keymappagewidgetcontroller.hpp"
-#include "settings/keymap/showkeymap.hpp"
 #include "settings/showsettingsdialog.hpp"
 
 namespace aide

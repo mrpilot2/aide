@@ -1,6 +1,3 @@
-//
-// Created by markus on 5/3/21.
-//
 
 #include "widgets/aidetreeview.hpp"
 
@@ -23,7 +20,7 @@ AideTreeView::AideTreeView(QWidget* parent)
 void AideTreeView::paintEvent(QPaintEvent* event)
 {
     QString textToDisplay(placeHolderText);
-    if ((model() != nullptr) && model()->rowCount() > 0) {
+    if (model() != nullptr && model()->rowCount() > 0) {
         QTreeView::paintEvent(event);
         return;
     }
@@ -35,7 +32,7 @@ void AideTreeView::paintEvent(QPaintEvent* event)
     }
 
     if (sourceModel != nullptr && model() != nullptr &&
-        (model()->rowCount() != sourceModel->rowCount())) {
+        model()->rowCount() != sourceModel->rowCount()) {
         textToDisplay.append(
             QApplication::translate("AideTableView", " due to active filter"));
     }

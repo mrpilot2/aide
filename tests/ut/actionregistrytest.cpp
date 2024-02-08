@@ -23,7 +23,7 @@ TEST_CASE("A new action registry ")
     SECTION(" has no actions registered")
     {
         MockSettings settings;
-        ActionRegistry registry{settings, std::make_shared<NullLogger>()};
+        const ActionRegistry registry{settings, std::make_shared<NullLogger>()};
 
         REQUIRE(registry.actions().empty());
     }
@@ -111,8 +111,7 @@ TEST_CASE("Any action registry ")
 
         registry.registerAction(
             action, id,
-            std::vector<QKeySequence>(
-                {QKeySequence("Alt+F4"), QKeySequence("Alt+F3")}));
+            std::vector({QKeySequence("Alt+F4"), QKeySequence("Alt+F3")}));
 
         REQUIRE(registry.actions().at(id).defaultKeySequences.size() == 2);
         REQUIRE(action->shortcuts().size() == 2);
@@ -127,8 +126,7 @@ TEST_CASE("Any action registry ")
 
         settings.setValue(settingsKey, QKeySequence("5"));
 
-        registry.registerAction(action, id,
-                                std::vector<QKeySequence>({QKeySequence("4")}));
+        registry.registerAction(action, id, std::vector({QKeySequence("4")}));
 
         REQUIRE(action->shortcuts().size() == 1);
         REQUIRE(action->shortcuts() ==
@@ -143,8 +141,8 @@ TEST_CASE("Any action registry ")
 
         settings.setValue(settingsKey, QKeySequence());
 
-        registry.registerAction(
-            action, id, std::vector<QKeySequence>({QKeySequence("Alt+F4")}));
+        registry.registerAction(action, id,
+                                std::vector({QKeySequence("Alt+F4")}));
 
         REQUIRE(action->shortcuts().isEmpty());
     }
@@ -158,11 +156,9 @@ TEST_CASE("Any action registry ")
 
         settings.setValue(settingsKey, QKeySequence("F5"));
 
-        registry.registerAction(
-            action, id, std::vector<QKeySequence>({QKeySequence("F4")}));
+        registry.registerAction(action, id, std::vector({QKeySequence("F4")}));
 
-        registry.modifyShortcutsForAction(
-            id, QList<QKeySequence>({QKeySequence("F6")}));
+        registry.modifyShortcutsForAction(id, QList({QKeySequence("F6")}));
 
         REQUIRE(action->shortcuts() ==
                 QList<QKeySequence>({QKeySequence("F6")}));
@@ -180,11 +176,9 @@ TEST_CASE("Any action registry ")
 
         settings.setValue(settingsKey, QKeySequence("F5"));
 
-        registry.registerAction(
-            action, id, std::vector<QKeySequence>({QKeySequence("F4")}));
+        registry.registerAction(action, id, std::vector({QKeySequence("F4")}));
 
-        registry.modifyShortcutsForAction(
-            id, QList<QKeySequence>({QKeySequence("F4")}));
+        registry.modifyShortcutsForAction(id, QList({QKeySequence("F4")}));
 
         REQUIRE(action->shortcuts() ==
                 QList<QKeySequence>({QKeySequence("F4")}));
@@ -197,8 +191,7 @@ TEST_CASE("Any action registry ")
         auto action = std::make_shared<QAction>("&File", nullptr);
         const HierarchicalId id{HierarchicalId("MainMenu")("File")};
 
-        registry.registerAction(
-            action, id, std::vector<QKeySequence>({QKeySequence("F4")}));
+        registry.registerAction(action, id, std::vector({QKeySequence("F4")}));
 
         REQUIRE(registry.action(id).has_value());
         REQUIRE(registry.action(id).value() == action.get());

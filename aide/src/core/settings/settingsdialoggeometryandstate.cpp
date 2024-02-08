@@ -10,7 +10,7 @@ using aide::core::SettingsDialogWeakPtr;
 using aide::core::settings::KEYS;
 
 SettingsDialogGeometryAndState::SettingsDialogGeometryAndState(
-    SettingsDialogWeakPtr v, aide::SettingsInterface& unversionableSettings)
+    SettingsDialogWeakPtr v, SettingsInterface& unversionableSettings)
     : view{std::move(v)}
     , settings{unversionableSettings}
 {}
@@ -49,7 +49,7 @@ void SettingsDialogGeometryAndState::restoreGeometryAndState()
         settings.value(KEYS().UI.SETTINGS_DIALOG_TREE_VIEW_SELECTED_ITEM_KEY)
             .toString();
     {
-        auto ptr = view.lock();
+        const auto ptr = view.lock();
         if (ptr == nullptr) { return; }
 
         ptr->restoreGeometryAndState(data);

@@ -32,7 +32,7 @@ Application::Application(int& argc, char* argv[])
             "meaningful location.");
     }
 
-    const int delayedSetupTimeInMs(1000);
+    constexpr int delayedSetupTimeInMs(1000);
     // NOLINTNEXTLINE
     auto* timer = new QTimer(this);
     timer->setSingleShot(true);
@@ -43,17 +43,17 @@ Application::Application(int& argc, char* argv[])
     timer->start(delayedSetupTimeInMs);
 }
 
-LoggerPtr aide::Application::logger()
+LoggerPtr Application::logger()
 {
     return logger(QApplication::applicationName().toStdString());
 }
 
-LoggerPtr aide::Application::logger(const std::string& loggerName)
+LoggerPtr Application::logger(const std::string& loggerName)
 {
     return ApplicationBuilder::setupLogger(loggerName);
 }
 
-std::shared_ptr<QMainWindow> aide::Application::mainWindow() const
+std::shared_ptr<QMainWindow> Application::mainWindow() const
 {
     return m_appBuilder->mainWindow();
 }
@@ -69,6 +69,7 @@ std::shared_ptr<TranslatorInterface> Application::translator() const
 }
 
 std::shared_ptr<aide::AideSettingsProvider> Application::settingsProvider()
+    const
 {
     return m_appBuilder->settingsProvider();
 }

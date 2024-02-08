@@ -61,7 +61,7 @@ void ApplicationTranslator::addAdditionalTranslationFilePath(
 void ApplicationTranslator::installNewTranslator(const QDir& path,
                                                  const QString& fileName)
 {
-    auto currentTranslator =
+    const auto currentTranslator =
         m_translator.emplace_back(std::make_shared<QTranslator>());
     if (currentTranslator->load(QLocale(), fileName, QLatin1String("_"),
                                 path.absolutePath())) {
@@ -86,7 +86,7 @@ std::set<std::string> ApplicationTranslator::getAvailableTranslations() const
     if (appLanguages.empty()) {
         std::set<std::string> languages{};
 
-        auto languageFiles =
+        const auto languageFiles =
             libraryTranslationPath(logger).entryList(QStringList("*.qm"));
 
         const auto languagesInCurrentPath{fetchLanguages(languageFiles)};

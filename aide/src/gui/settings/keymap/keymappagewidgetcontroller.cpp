@@ -26,7 +26,7 @@ void KeyMapPageWidgetController::requestContextMenuForIndex(
 {
     currentIndex = keyMapTreeModel->index(index.row(), 1, index.parent());
 
-    KeymapContextMenuProvider creator{keyMapTreeModel.get(), keyMapView};
+    const KeymapContextMenuProvider creator{keyMapTreeModel.get(), keyMapView};
     creator.createAndShowContextMenu(index);
 }
 
@@ -37,9 +37,10 @@ void KeyMapPageWidgetController::onUserRequestedContextMenuViaDoubleClick(
 }
 
 void KeyMapPageWidgetController::
-    onUserRequestedToResetCurrentShortcutsToDefault()
+    onUserRequestedToResetCurrentShortcutsToDefault() const
 {
-    if (auto action = keyMapTreeModel->findCorrespondingAction(currentIndex)) {
+    if (const auto action =
+            keyMapTreeModel->findCorrespondingAction(currentIndex)) {
         keyMapTreeModel->setData(
             currentIndex,
             QKeySequence::listToString(action->defaultKeySequences),
@@ -47,9 +48,10 @@ void KeyMapPageWidgetController::
     }
 }
 
-void KeyMapPageWidgetController::onUserRequestedToRemoveAShortcut()
+void KeyMapPageWidgetController::onUserRequestedToRemoveAShortcut() const
 {
-    if (auto* action = qobject_cast<QAction*>(sender()); action != nullptr) {
+    if (const auto* action = qobject_cast<QAction*>(sender());
+        action != nullptr) {
         auto treeKeySequences = QKeySequence::listFromString(
             keyMapTreeModel->data(currentIndex, Qt::DisplayRole).toString());
 
@@ -61,16 +63,16 @@ void KeyMapPageWidgetController::onUserRequestedToRemoveAShortcut()
     }
 }
 
-void aide::gui::KeyMapPageWidgetController::
-    onUserRequestedToAddAKeyboardShortcut()
+void KeyMapPageWidgetController::onUserRequestedToAddAKeyboardShortcut() const
 {
-    if (auto action = keyMapTreeModel->findCorrespondingAction(currentIndex)) {
+    if (const auto action =
+            keyMapTreeModel->findCorrespondingAction(currentIndex)) {
         AddShortcutDialog dialog;
 
         dialog.setAssignedActionDescription(
             QString::fromStdString(action->description));
 
-        if (auto res = dialog.exec(); res == QDialog::Accepted) {
+        if (const auto res = dialog.exec(); res == QDialog::Accepted) {
             const auto treeModelData =
                 keyMapTreeModel->data(currentIndex, Qt::DisplayRole).toString();
 

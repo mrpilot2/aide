@@ -4,8 +4,7 @@
 
 using aide::tests::MockAboutDialog;
 
-void MockAboutDialog::showAboutInformation(
-    const aide::core::AideInformation& info)
+void MockAboutDialog::showAboutInformation(const core::AideInformation& info)
 {
     m_info = info;
 }

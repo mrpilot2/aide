@@ -99,7 +99,7 @@ TEST_CASE("Application translator interface is never null", "[Application]")
     int numberOfArgs{1};
     // NOLINTNEXTLINE
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    aide::Application app(numberOfArgs, appName.data());
+    const aide::Application app(numberOfArgs, appName.data());
 
     REQUIRE(app.translator() != nullptr);
 
@@ -114,7 +114,7 @@ TEST_CASE("Application main window is never null", "[Application]")
     int numberOfArgs{1};
     // NOLINTNEXTLINE
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    aide::Application app(numberOfArgs, appName.data());
+    const aide::Application app(numberOfArgs, appName.data());
 
     REQUIRE(app.mainWindow() != nullptr);
 
@@ -129,7 +129,7 @@ TEST_CASE("Application settings provider is never null", "[Application]")
     int numberOfArgs{1};
     // NOLINTNEXTLINE
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    aide::Application app(numberOfArgs, appName.data());
+    const aide::Application app(numberOfArgs, appName.data());
 
     REQUIRE(app.settingsProvider() != nullptr);
 

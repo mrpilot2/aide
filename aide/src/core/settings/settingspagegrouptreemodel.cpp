@@ -55,7 +55,7 @@ void SettingsPageGroupTreeModel::setupModelData(const TreeItemPtr& parent)
 }
 
 QVariant SettingsPageGroupTreeModel::data(const QModelIndex& index,
-                                          int role) const
+                                          const int role) const
 {
     if (!index.isValid()) { return {}; }
 
@@ -65,7 +65,7 @@ QVariant SettingsPageGroupTreeModel::data(const QModelIndex& index,
         return item->data(static_cast<size_t>(index.column()));
     }
     if (role == Qt::ForegroundRole) {
-        auto page = findCorrespondingSettingsPage(index);
+        const auto page = findCorrespondingSettingsPage(index);
 
         return page != nullptr && page->isModified() ? QColor(Qt::blue)
                                                      : QVariant();
@@ -90,11 +90,11 @@ SettingsPagePtr SettingsPageGroupTreeModel::findCorrespondingSettingsPage(
 
     const auto& pages = SettingsPageRegistry::settingsPages();
 
-    if (auto it = std::find_if(pages.begin(), pages.end(),
-                               [&completeGroupName](const auto& page) {
-                                   return page->group().name() ==
-                                          completeGroupName;
-                               });
+    if (const auto it = std::find_if(pages.begin(), pages.end(),
+                                     [&completeGroupName](const auto& page) {
+                                         return page->group().name() ==
+                                                completeGroupName;
+                                     });
         it != pages.end()) {
         return *it;
     }

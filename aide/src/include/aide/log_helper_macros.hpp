@@ -1,6 +1,3 @@
-//
-// Created by markus on 07.04.20.
-//
 
 #ifndef AIDE_LOG_HELPER_MACROS_HPP
 #define AIDE_LOG_HELPER_MACROS_HPP

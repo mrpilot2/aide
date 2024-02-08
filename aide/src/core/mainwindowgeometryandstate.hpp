@@ -18,8 +18,8 @@ namespace aide::core
         MainWindowGeometryAndState(MainWindowInterfaceWeakPtr v,
                                    SettingsInterface& unversionableSettings);
 
-        void saveGeometryAndState(QByteArray geometry,
-                                  QByteArray state) override;
+        void saveGeometryAndState(const QByteArray& geometry,
+                                  const QByteArray& state) override;
 
         void restoreGeometryAndState() override;
 

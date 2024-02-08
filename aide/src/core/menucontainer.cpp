@@ -7,8 +7,9 @@ MenuContainer::MenuContainer(QWidget* parent)
     : m_menu{new QMenu(parent)}
 {}
 
-QMenu* aide::MenuContainer::menu() const
+QMenu* MenuContainer::menu() const
 {
     return m_menu;
 }
-aide::MenuContainer::~MenuContainer() = default;
+
+MenuContainer::~MenuContainer() = default;
