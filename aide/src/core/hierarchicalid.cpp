@@ -1,7 +1,7 @@
 #include "hierarchicalid.hpp"
 
 #include <utility>
-    
+
 using aide::HierarchicalId;
 
 static constexpr char DELIMITER = '/';
