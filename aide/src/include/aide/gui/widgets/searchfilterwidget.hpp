@@ -59,10 +59,10 @@ namespace aide::widgets
     private:
         std::unique_ptr<Ui::SearchFilterWidget> m_ui;
 
-        std::unique_ptr<QTimer> m_typingTimer;
+        QTimer* m_typingTimer;
         QString m_currentFilterText;
 
-        std::unique_ptr<MultiColumnSortFilterProxyModel> m_filterModel;
+        MultiColumnSortFilterProxyModel* m_filterModel;
 
         QAction m_showHideAction;
         const HierarchicalId m_visibilitySettingsKey;

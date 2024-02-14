@@ -20,7 +20,7 @@ SearchFilterWidget::SearchFilterWidget(const HierarchicalId& id,
                                        const QKeySequence& showHideShortcut,
                                        QWidget* parent)
     : QWidget(parent)
-    , m_ui{new Ui::SearchFilterWidget}
+    , m_ui{std::make_unique<Ui::SearchFilterWidget>()}
     , m_typingTimer{new QTimer{this}}
     , m_filterModel(new MultiColumnSortFilterProxyModel(this))
     , m_showHideAction(this)
@@ -50,7 +50,7 @@ SearchFilterWidget::SearchFilterWidget(const HierarchicalId& id,
             &SearchFilterWidget::textChanged);
 
     m_typingTimer->setSingleShot(true);
-    connect(m_typingTimer.get(), &QTimer::timeout, this,
+    connect(m_typingTimer, &QTimer::timeout, this,
             &SearchFilterWidget::filterEntries);
     connect(m_ui->matchCase, &QCheckBox::toggled, this,
             &SearchFilterWidget::matchCaseStateChanged);
@@ -114,7 +114,7 @@ void SearchFilterWidget::setSourceModel(QAbstractItemModel* model) const
 
 QSortFilterProxyModel* SearchFilterWidget::getFilterModel() const
 {
-    return m_filterModel.get();
+    return m_filterModel;
 }
 
 QAbstractItemDelegate* SearchFilterWidget::getItemDelegate()
