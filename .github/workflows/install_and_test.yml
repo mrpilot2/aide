@@ -24,7 +24,7 @@ jobs:
         fetch-depth: 0
 
     - name: Setup Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: 3.7.x
 
@@ -78,9 +78,9 @@ jobs:
 
     - name: Upload Unit Test Results
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
-        name: test_results_installed_lib
+        name: test_results_installed_lib-qt-${{ matrix.qt }}
         path: tests/build*rel/**/*.xml
 
   publish-test-results:

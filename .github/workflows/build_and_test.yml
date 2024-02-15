@@ -57,7 +57,7 @@ jobs:
         uses: ilammy/msvc-dev-cmd@v1
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: 3.7.x
           cache: 'pip'
@@ -68,7 +68,7 @@ jobs:
           pip3 install conan
 
       - name: Setup cmake
-        uses: jwlawson/actions-setup-cmake@v1.14
+        uses: jwlawson/actions-setup-cmake@v2
         with:
           cmake-version: ${{matrix.cmake}}
 
@@ -147,9 +147,9 @@ jobs:
 
       - name: Upload Unit Test Results
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: test_results_${{ matrix.os }}
+          name: test_results_${{ matrix.os }}_cmake-${{ matrix.cmake }}_qt-${{ matrix.qt }}
           path: build*/**/*.xml
 
       - name: Generate and upload coverage reports
