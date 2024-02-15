@@ -164,6 +164,8 @@ jobs:
   publish-test-results:
     name: "Publish Unit Test Results from ${{ matrix. os }}"
     needs: build
+    if: always()
+
     strategy:
       matrix:
         os: [ ubuntu-20.04, ubuntu-22.04 ]
@@ -176,7 +178,6 @@ jobs:
 
       - name: Publish Unit Test Results ${{ matrix.os }}
         uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           check_name: Unit Test Results ${{ matrix.os }}

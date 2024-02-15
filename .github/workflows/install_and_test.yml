@@ -87,6 +87,7 @@ jobs:
     name: "Publish Unit Test Results from installed lib"
     needs: build
     runs-on: ubuntu-20.04
+    if: always()
     steps:
       - name: Download Artifacts
         uses: actions/download-artifact@v3
@@ -95,7 +96,6 @@ jobs:
 
       - name: Publish Unit Test Results installed lib
         uses: EnricoMi/publish-unit-test-result-action@v1.4
-        if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           check_name: Unit Test Results install lib
