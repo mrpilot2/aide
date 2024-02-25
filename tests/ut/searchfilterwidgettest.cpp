@@ -1,5 +1,7 @@
 #include <array>
 
+#include <catch2/catch_test_macros.hpp>
+
 #include <QIcon>
 #include <QLineEdit>
 #include <QMainWindow>
@@ -11,7 +13,6 @@
 #include <aide/hierarchicalid.hpp>
 
 #include "aide/gui/widgets/searchfilterwidget.hpp"
-#include "catch2/catch.hpp"
 
 using aide::HierarchicalId;
 using aide::widgets::SearchFilterWidget;
