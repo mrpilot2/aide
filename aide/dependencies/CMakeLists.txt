@@ -48,11 +48,11 @@ add_license_dependency(
   PROJECT_URL
   "https://github.com/catchorg/Catch2/"
   VERSION
-  "2.13.6"
+  "3.5.2"
   LICENSE
   "Boost Software License 1.0"
   LICENSE_URL
-  "https://github.com/catchorg/Catch2/blob/v2.13.6/LICENSE.txt"
+  "https://github.com/catchorg/Catch2/blob/v3.5.2/LICENSE.txt"
 )
 
 add_license_dependency(
@@ -61,11 +61,11 @@ add_license_dependency(
   PROJECT_URL
   "https://github.com/fmtlib/fmt/"
   VERSION
-  "7.1.3"
+  ${fmt_VERSION}
   LICENSE
   "MIT (custom)"
   LICENSE_URL
-  "https://github.com/fmtlib/fmt/blob/7.1.3/LICENSE.rst"
+  "https://github.com/fmtlib/fmt/blob/${fmt_VERSION}/LICENSE.rst"
 )
 
 add_license_dependency(
@@ -101,11 +101,11 @@ add_license_dependency(
   PROJECT_URL
   "https://github.com/gabime/spdlog/"
   VERSION
-  "1.8.5"
+  v${spdlog_VERSION}
   LICENSE
   "MIT"
   LICENSE_URL
-  "https://github.com/gabime/spdlog/blob/v1.8.5/LICENSE"
+  "https://github.com/gabime/spdlog/blob/v${spdlog_VERSION}/LICENSE"
 )
 
 string(LENGTH ${markdown_content} markdown_length)
