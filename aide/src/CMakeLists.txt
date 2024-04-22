@@ -34,6 +34,12 @@ target_compile_definitions(
   PUBLIC SPDLOG_ACTIVE_LEVEL=${AIDE_LOG_LEVEL}
 )
 
+if(WIN32)
+  target_compile_definitions(
+    AideCore PUBLIC _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING
+  )
+endif()
+
 if(MINIMAL_RUNTIME AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
   target_compile_options(
     AideQt${QT_VERSION_MAJOR}Application PUBLIC -fsanitize-minimal-runtime

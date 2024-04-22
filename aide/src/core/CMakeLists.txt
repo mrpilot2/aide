@@ -48,6 +48,12 @@ target_link_libraries(
 
 target_compile_features(AideCore PRIVATE cxx_std_17)
 
+if(WIN32)
+  target_compile_definitions(
+    AideCore PUBLIC _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING
+  )
+endif()
+
 set(LICENSE_FILE "${CMAKE_INSTALL_PREFIX}/share/doc/aide/licenses.html")
 set(DEVEL_LICENSE_FILE
     "${CMAKE_CURRENT_BINARY_DIR}/../../dependencies/licenses.html"

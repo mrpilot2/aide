@@ -43,6 +43,12 @@ add_executable(
 
 target_link_libraries(aide_demo PRIVATE Aide::AideApplication)
 
+if(WIN32)
+  target_compile_definitions(
+    aide_demo PUBLIC _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING
+  )
+endif()
+
 if(APPLE)
   add_custom_command(
     TARGET aide_demo
