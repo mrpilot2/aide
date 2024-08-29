@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ macos-11, ubuntu-22.04 ]
+        os: [ macos-latest, ubuntu-latest ]
         cmake: [ 3.x ]
         qt: [ "5.15.2", "6.5.0" ]
 
