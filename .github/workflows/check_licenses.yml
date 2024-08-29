@@ -42,11 +42,3 @@ jobs:
           mkdir build
           cd build
           cmake .. -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=conan_provider.cmake -DAIDE_CHECK_LICENSES_AVAILABILITY=ON
-          make doxygen-docs
-
-      - name: Publish doxygen documentation to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          publish_dir: build/aide/doc/html
-          branch: gh_pages
-          github_token: ${{ secrets.GITHUB_TOKEN }}

@@ -65,7 +65,7 @@ add_license_dependency(
   LICENSE
   "MIT (custom)"
   LICENSE_URL
-  "https://github.com/fmtlib/fmt/blob/${fmt_VERSION}/LICENSE.rst"
+  "https://github.com/fmtlib/fmt/blob/${fmt_VERSION}/LICENSE"
 )
 
 add_license_dependency(
