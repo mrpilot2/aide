@@ -19,4 +19,15 @@ macro(add_license_dependency)
   set(markdown_content
       "${markdown_content}### [${ALD_PROJECT}](${ALD_PROJECT_URL})\n\nVersion: ${ALD_VERSION}\n\nLicense: [${ALD_LICENSE}](${ALD_LICENSE_URL})\n\n"
   )
+
+  if(AIDE_CHECK_LICENSES_AVAILABILITY)
+    find_program(CURL curl)
+    execute_process(
+      COMMAND ${CURL} --output /dev/null --silent --head --fail
+              ${ALD_LICENSE_URL} RESULT_VARIABLE LICENSE_NOT_AVAIL
+    )
+    if(LICENSE_NOT_AVAIL GREATER 0)
+      message(SEND_ERROR "License ${ALD_LICENSE_URL} cannot be accessed")
+    endif()
+  endif()
 endmacro()

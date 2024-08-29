@@ -1,0 +1,52 @@
+name: Check third party licenses
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.7.x
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Cache Qt
+        id: cache-qt
+        uses: actions/cache@v4
+        with:
+          path: ../Qt
+          key: ${{ runner.os }}-QtCache
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
+          version: '6.5.0'
+          aqtversion: '==3.1.*'
+
+      - name: Check third party licenses
+        run: |
+          mkdir build
+          cd build
+          cmake .. -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=conan_provider.cmake -DAIDE_CHECK_LICENSES_AVAILABILITY=ON
+          make doxygen-docs
+
+      - name: Publish doxygen documentation to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          publish_dir: build/aide/doc/html
+          branch: gh_pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
