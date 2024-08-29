@@ -22,7 +22,7 @@ License: [Boost Software License 1.0](https://github.com/catchorg/Catch2/blob/v3
 
 Version: 10.2.1
 
-License: [MIT (custom)](https://github.com/fmtlib/fmt/blob/10.2.1/LICENSE.rst)
+License: [MIT (custom)](https://github.com/fmtlib/fmt/blob/10.2.1/LICENSE)
 
 ### [libyang (parts used for ABI check)](https://github.com/CESNET/libyang/blob/master/CMakeModules/ABICheck.cmake)
 
@@ -32,7 +32,7 @@ License: [BSD 3-Clause License](https://github.com/CESNET/libyang/blob/master/LI
 
 ### [Qt](https://www.qt.io/)
 
-Version: 6.2.4
+Version: 6.4.2
 
 License: [(L)GPL](https://www.qt.io/licensing/)
 
