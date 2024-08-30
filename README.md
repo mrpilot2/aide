@@ -6,7 +6,7 @@ A modern, C++ native GUI application framework based on QT5 - using C++11 and la
 ![CI Build and install](https://github.com/mrpilot2/aide/workflows/Build%20standalone%20and%20test%20installed%20lib/badge.svg)
 
 [![codecov](https://codecov.io/gh/mrpilot2/aide/branch/develop/graph/badge.svg)](https://codecov.io/gh/mrpilot2/aide)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6f3c6536d8184f7baec9cc37e4bddaad)](https://app.codacy.com/manual/mrpilot2/aide?utm_source=github.com&utm_medium=referral&utm_content=mrpilot2/aide&utm_campaign=Badge_Grade_Settings)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/fe02ff0018b84583a1e33e2130bdb2bb)](https://app.codacy.com/gh/mrpilot2/aide/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![CodeQL](https://github.com/mrpilot2/aide/workflows/CodeQL/badge.svg)](https://github.com/mrpilot2/aide/actions/workflows/codeql.yml)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
