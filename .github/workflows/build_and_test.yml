@@ -52,7 +52,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: abdes/gha-setup-ninja@master
+      - uses: seanmiddleditch/gha-setup-ninja@v5
 
       - name: Setup Windows environment
         uses: ilammy/msvc-dev-cmd@v1
@@ -173,7 +173,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Download Artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           path: artifacts
 

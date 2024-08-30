@@ -15,7 +15,7 @@ jobs:
         with:
           fetch-depth: 0
           
-      - uses: abdes/gha-setup-ninja@master
+      - uses: seanmiddleditch/gha-setup-ninja@v5
 
       - name: Setup Python
         uses: actions/setup-python@v5
