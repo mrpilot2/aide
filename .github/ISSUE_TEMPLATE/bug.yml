@@ -30,7 +30,7 @@ body:
     attributes:
       label: To reproduce
       description: Steps to reproduce the behavior
-      placholder:
+      placeholder:
           1. Go to '...'
           2. Click on '....'
           3. Scroll down to '....'
@@ -43,7 +43,6 @@ body:
       label: Operating System
       description: What is the impacted environment?
       options:
-        - None
         - Linux
         - Windows
         - MAC
