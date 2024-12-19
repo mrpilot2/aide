@@ -9,15 +9,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ windows-latest, macos-latest, ubuntu-20.04, ubuntu-22.04, ubuntu-24.04 ]
+        os: [ windows-latest, macos-latest, ubuntu-24.04 ]
         cmake: [ 3.24, 3.x ]
         qt: [ "5.15.2", "6.5.0" ]
 
         include:
-          - os: ubuntu-20.04
-            COVERAGE: ON
-            GCOV_TOOL: gcov-9
-
           - os: windows-latest
             WARNINGS_AS_ERRORS: OFF
 
@@ -175,7 +171,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ ubuntu-20.04, ubuntu-22.04, ubuntu-24.04 ]
+        os: [ ubuntu-24.04 ]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Download Artifacts

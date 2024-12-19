@@ -17,7 +17,7 @@ jobs:
           - qt: "6.5.0"
             qt_name: Qt6
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
     - uses: actions/checkout@v4
