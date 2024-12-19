@@ -1,9 +1,10 @@
 #ifndef AIDE_LOGGER_INTERFACE_HPP
 #define AIDE_LOGGER_INTERFACE_HPP
 
+#include <format>
 #include <memory>
+#include <utility>
 
-#include <fmt/format.h>
 #include <string_view>
 
 namespace aide
@@ -14,48 +15,50 @@ namespace aide
         virtual ~LoggerInterface() = default;
 
         template <typename... Args>
-        void trace(std::string_view fmt, const Args&... args) const
+        void trace(const std::format_string<Args...> fmt, Args&&... args) const
         {
-            doLogTrace(doFormat(fmt, args...));
+            doLogTrace(doFormat(fmt, std::forward<Args>(args)...));
         }
 
         template <typename... Args>
-        void debug(std::string_view fmt, const Args&... args) const
+        void debug(const std::format_string<Args...> fmt, Args&&... args) const
         {
-            doLogDebug(doFormat(fmt, args...));
+            doLogDebug(doFormat(fmt, std::forward<Args>(args)...));
         }
 
         template <typename... Args>
-        void info(std::string_view fmt, const Args&... args) const
+        void info(const std::format_string<Args...> fmt, Args&&... args) const
         {
-            doLogInfo(doFormat(fmt, args...));
+            doLogInfo(doFormat(fmt, std::forward<Args>(args)...));
         }
 
         template <typename... Args>
-        void warn(std::string_view fmt, const Args&... args) const
+        void warn(const std::format_string<Args...> fmt, Args&&... args) const
         {
-            doLogWarn(doFormat(fmt, args...));
+            doLogWarn(doFormat(fmt, std::forward<Args>(args)...));
         }
 
         template <typename... Args>
-        void error(std::string_view fmt, const Args&... args) const
+        void error(const std::format_string<Args...> fmt, Args&&... args) const
         {
-            doLogError(doFormat(fmt, args...));
+            doLogError(doFormat(fmt, std::forward<Args>(args)...));
         }
 
         template <typename... Args>
-        void critical(std::string_view fmt, const Args&... args) const
+        void critical(const std::format_string<Args...> fmt,
+                      Args&&... args) const
         {
-            doLogCritical(doFormat(fmt, args...));
+            doLogCritical(doFormat(fmt, std::forward<Args>(args)...));
         }
 
         virtual void flush() = 0;
 
     private:
         template <typename... Args>
-        static std::string doFormat(std::string_view fmt, const Args&... args)
+        static std::string doFormat(const std::format_string<Args...> fmt,
+                                    Args&&... args)
         {
-            return fmt::format(fmt, args...);
+            return std::format(fmt, std::forward<Args>(args)...);
         }
 
         virtual void doLogTrace(std::string_view message) const = 0;
