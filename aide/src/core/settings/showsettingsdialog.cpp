@@ -92,7 +92,7 @@ void ShowSettingsDialog::checkChangeSelectedPagePreConditions(
     const QItemSelection& selected) const
 {
     if (selected.indexes().empty()) {
-        const auto* message{
+        constexpr auto message{
             "ShowSettingsDialog: selected group index (QItemSelection) is "
             "invalid. This should never happen."};
         logger->critical(message);
@@ -100,7 +100,7 @@ void ShowSettingsDialog::checkChangeSelectedPagePreConditions(
     }
 
     if (treeModel == nullptr) {
-        const auto* message{
+        constexpr auto message{
             "ShowSettingsDialog: Tree Model is nullptr. This can only happen, "
             "if changeSelectedPage() was triggered before the user requested "
             "the dialog to show"};

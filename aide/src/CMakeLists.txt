@@ -27,7 +27,7 @@ target_link_libraries(
           aide_options aide_warnings
 )
 
-target_compile_features(AideQt${QT_VERSION_MAJOR}Application PUBLIC cxx_std_17)
+target_compile_features(AideQt${QT_VERSION_MAJOR}Application PUBLIC cxx_std_20)
 
 target_compile_definitions(
   AideQt${QT_VERSION_MAJOR}Application
