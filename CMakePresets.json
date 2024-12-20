@@ -159,7 +159,8 @@
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "gcc",
                 "CMAKE_CXX_COMPILER": "g++",
-                "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+                "aide_PACKAGING_MAINTAINER_MODE": "ON"
             }
         },
         {
@@ -181,7 +182,24 @@
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "clang",
                 "CMAKE_CXX_COMPILER": "clang++",
-                "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+                "aide_PACKAGING_MAINTAINER_MODE": "ON"
+            }
+        },
+        {
+            "name": "abi-compliance-check",
+            "displayName": "ABI compliance check",
+            "description": "Target Unix-like OS, debug build type, check abi compliance",
+            "inherits": "conf-unixlike-common",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "gcc",
+                "CMAKE_CXX_COMPILER": "g++",
+                "CMAKE_BUILD_TYPE": "Debug",
+                "BUILD_SHARED_LIBS": "ON",
+                "aide_PACKAGING_MAINTAINER_MODE": "ON",
+                "aide_ENABLE_ABI_COMPLIANCE_CHECK": "ON",
+                "aide_ENABLE_HARDENING": "OFF",
+                "aide_ENABLE_GLOBAL_HARDENING": "OFF"
             }
         }
     ],

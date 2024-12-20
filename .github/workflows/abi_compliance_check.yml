@@ -8,16 +8,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-22.04 ]
+        os: [ ubuntu-24.04 ]
         cmake: [ 3.x ]
-        qt: [ "5.15.2" ]
+        qt: [ "6.5.0" ]
 
         include:
           - cmake: 3.x
             cmake_name: CMake Latest
 
-          - qt: "5.15.2"
-            qt_name: Qt5
+          - qt: "6.5.0"
+            qt_name: Qt6
 
     runs-on: ${{ matrix.os }}
     defaults:
