@@ -43,7 +43,7 @@ QModelIndex TreeModel::parent(const QModelIndex& index) const
 {
     if (!index.isValid()) { return {}; }
 
-    auto const* childItem = static_cast<TreeItem*>(index.internalPointer());
+    const auto* childItem = static_cast<TreeItem*>(index.internalPointer());
 
     const TreeItemPtr parentItem = childItem->parent().lock();
 
@@ -58,7 +58,7 @@ int TreeModel::rowCount(const QModelIndex& parent) const
 {
     if (parent.column() > 0) { return 0; }
 
-    TreeItem const* parentItem{
+    const TreeItem* parentItem{
         !parent.isValid() ? m_rootItem.get()
                           : static_cast<TreeItem*>(parent.internalPointer())};
 

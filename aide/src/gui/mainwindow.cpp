@@ -59,7 +59,7 @@ void MainWindow::restoreGeometryAndState(const QByteArray geometry,
 void MainWindow::registerActions(
     const ActionRegistryInterfacePtr& actionRegistry)
 {
-    auto const* menuFileContainer{
+    const auto* menuFileContainer{
         actionRegistry->createMenu(CONSTANTS().MENU_FILE, m_ui->menubar)};
     auto* menuFile{menuFileContainer->menu()};
     menuFile->setTitle(QApplication::tr("&File", "MainWindow"));
@@ -88,7 +88,7 @@ void MainWindow::registerActions(
 
     m_ui->menubar->addMenu(menuFile);
 
-    auto const* menuHelpContainer{
+    const auto* menuHelpContainer{
         actionRegistry->createMenu(CONSTANTS().MENU_HELP, m_ui->menubar)};
     auto* menuHelp{menuHelpContainer->menu()};
     menuHelp->setTitle(QApplication::tr("&Help", "MainWindow"));
@@ -117,7 +117,7 @@ std::shared_ptr<TranslatorInterface> MainWindow::translator() const
 QIcon MainWindow::createIconFromTheme(const std::string& iconName)
 {
     QIcon icon;
-    if (QString const iconThemeName = QString::fromStdString(iconName);
+    if (const QString iconThemeName = QString::fromStdString(iconName);
         QIcon::hasThemeIcon(iconThemeName)) {
         icon = QIcon::fromTheme(iconThemeName);
     } else {

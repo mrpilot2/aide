@@ -421,7 +421,8 @@ TEST_CASE("Any show settings dialog use case")
         SettingsPageRegistry::addPage(page1);
         SettingsPageRegistry::addPage(page2);
 
-        const QString dataToBeSaved{QString::fromStdString(page2->group().name())};
+        const QString dataToBeSaved{
+            QString::fromStdString(page2->group().name())};
 
         settings.setValue(KEYS().UI.SETTINGS_DIALOG_TREE_VIEW_SELECTED_ITEM_KEY,
                           dataToBeSaved);

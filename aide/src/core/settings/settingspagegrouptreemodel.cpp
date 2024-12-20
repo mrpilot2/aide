@@ -60,7 +60,7 @@ QVariant SettingsPageGroupTreeModel::data(const QModelIndex& index,
     if (!index.isValid()) { return {}; }
 
     if (role == Qt::DisplayRole) {
-        auto const* item = static_cast<TreeItem*>(index.internalPointer());
+        const auto* item = static_cast<TreeItem*>(index.internalPointer());
 
         return item->data(static_cast<size_t>(index.column()));
     }
@@ -84,7 +84,7 @@ Qt::ItemFlags SettingsPageGroupTreeModel::flags(const QModelIndex& index) const
 SettingsPagePtr SettingsPageGroupTreeModel::findCorrespondingSettingsPage(
     const QModelIndex& selectedIndex)
 {
-    auto const* item = static_cast<TreeItem*>(selectedIndex.internalPointer());
+    const auto* item = static_cast<TreeItem*>(selectedIndex.internalPointer());
 
     auto completeGroupName{item->getHiddenUserData().toString().toStdString()};
 
@@ -108,7 +108,7 @@ QModelIndex SettingsPageGroupTreeModel::recursivelyFindSelectedTreeItemIndex(
     for (int i = 0; i < rowCount(parent); ++i) {
         index = this->index(i, 0, parent);
 
-        if (auto const* item = static_cast<TreeItem*>(index.internalPointer());
+        if (const auto* item = static_cast<TreeItem*>(index.internalPointer());
             item->getHiddenUserData().toString() == groupName) {
             return index;
         }

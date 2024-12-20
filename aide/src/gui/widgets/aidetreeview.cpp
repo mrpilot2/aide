@@ -25,8 +25,8 @@ void AideTreeView::paintEvent(QPaintEvent* event)
         return;
     }
 
-    auto const* sourceModel = model();
-    if (auto const* filterModel = qobject_cast<QSortFilterProxyModel*>(model());
+    const auto* sourceModel = model();
+    if (const auto* filterModel = qobject_cast<QSortFilterProxyModel*>(model());
         filterModel != nullptr) {
         sourceModel = filterModel->sourceModel();
     }

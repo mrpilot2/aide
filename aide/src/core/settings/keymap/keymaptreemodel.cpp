@@ -26,7 +26,7 @@ void KeyMapTreeModel::setupModelData()
 {
     for (const auto& [key, action] : actionRegistry->actions()) {
         TreeItemPtr current    = m_rootItem;
-        auto const& completeId = key;
+        const auto& completeId = key;
 
         for (auto iterator = completeId.begin(); iterator != completeId.end();
              ++iterator) {
@@ -110,7 +110,7 @@ QVariant KeyMapTreeModel::data(const QModelIndex& index, const int role) const
     }
 
     if (role == Qt::DisplayRole) {
-        auto const* item = static_cast<TreeItem*>(index.internalPointer());
+        const auto* item = static_cast<TreeItem*>(index.internalPointer());
 
         return item->data(static_cast<size_t>(index.column()));
     }
@@ -142,7 +142,7 @@ bool KeyMapTreeModel::setData(const QModelIndex& index, const QVariant& value,
 std::optional<Action> KeyMapTreeModel::findCorrespondingAction(
     const QModelIndex& selectedIndex) const
 {
-    auto const* item = static_cast<TreeItem*>(selectedIndex.internalPointer());
+    const auto* item = static_cast<TreeItem*>(selectedIndex.internalPointer());
 
     auto completeGroupName{item->getHiddenUserData().toString().toStdString()};
 
@@ -189,7 +189,7 @@ bool KeyMapTreeModel::isAnyUserSelectedKeySequencesInGroup(
     if (!index.isValid()) { return false; }
 
     if (const auto action = findCorrespondingAction(index)) {
-        auto const* item = static_cast<TreeItem*>(index.internalPointer());
+        const auto* item = static_cast<TreeItem*>(index.internalPointer());
         const auto currentKeySequences =
             QKeySequence::listFromString(item->data(1).toString());
 
