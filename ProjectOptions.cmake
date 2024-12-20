@@ -54,7 +54,7 @@ macro(aide_setup_options)
     option(aide_ENABLE_CACHE "Enable ccache" OFF)
     option(aide_ENABLE_ABI_COMPLIANCE_CHECK "Enable ABI compliance check" OFF)
   else()
-    option(aide_ENABLE_IPO "Enable IPO/LTO" ON)
+    option(aide_ENABLE_IPO "Enable IPO/LTO" OFF)
     option(aide_WARNINGS_AS_ERRORS "Treat Warnings As Errors" ON)
     option(aide_ENABLE_USER_LINKER "Enable user-selected linker" OFF)
     option(aide_ENABLE_SANITIZER_ADDRESS "Enable address sanitizer"

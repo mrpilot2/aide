@@ -14,10 +14,10 @@ using aide::tests::MockAboutDialog;
 
 TEST_CASE("Any AboutAideUseCase")
 {
-    auto const dialog{std::make_shared<MockAboutDialog>()};
+    const auto dialog{std::make_shared<MockAboutDialog>()};
 
-    AboutAideUseCase useCase{dialog,
-                             std::make_shared<aide::test::NullLogger>()};
+    const AboutAideUseCase useCase{dialog,
+                                   std::make_shared<aide::test::NullLogger>()};
 
     SECTION(" passes correct version number to dialog")
     {

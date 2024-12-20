@@ -7,7 +7,7 @@ using aide::AideSettingsProvider;
 
 TEST_CASE("Any AideSettingsProvider")
 {
-    AideSettingsProvider provider;
+    constexpr AideSettingsProvider provider;
 
     SECTION(" provides valid versionable settings")
     {

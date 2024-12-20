@@ -7,19 +7,23 @@
 
 using aide::gui::ApplicationTranslator;
 
-const static QDir& libraryTranslationPath(const aide::LoggerPtr& logger)
+namespace
 {
-    try {
-        static const QDir libTranslationPath{":/aide_library_translations"};
-        return libTranslationPath;
+    const QDir& libraryTranslationPath(const aide::LoggerPtr& logger)
+    {
+        try {
+            static const QDir libTranslationPath{":/aide_library_translations"};
+            return libTranslationPath;
+        }
+        catch (...) {
+            logger->critical(
+                "ApplicationTranslator: Could not create static storage "
+                "duration "
+                "library translation path");
+            std::terminate();
+        }
     }
-    catch (...) {
-        logger->critical(
-            "ApplicationTranslator: Could not create static storage duration "
-            "library translation path");
-        std::terminate();
-    }
-}
+} // namespace
 
 inline void initResources()
 {

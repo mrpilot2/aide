@@ -24,13 +24,13 @@ TEST_CASE("Any search filter widget ")
     int numberOfArgs{1};
     // NOLINTNEXTLINE
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    QApplication app(numberOfArgs, appName.data());
+    const QApplication app(numberOfArgs, appName.data());
 
     Q_INIT_RESOURCE(ut_icons);
 
     QMainWindow mainWindow;
-    SearchFilterWidget searchFilterWidget(HierarchicalId("test"),
-                                          QKeySequence(Qt::Key_F), &mainWindow);
+    const SearchFilterWidget searchFilterWidget(
+        HierarchicalId("test"), QKeySequence(Qt::Key_F), &mainWindow);
 
     SECTION(" allows empty search icon")
     {
@@ -60,7 +60,7 @@ TEST_CASE("Any search filter widget ")
     {
         auto* child = searchFilterWidget.findChild<QLineEdit*>("searchField");
 
-        QSignalSpy spy(child, SIGNAL(textChanged(const QString&)));
+        const QSignalSpy spy(child, SIGNAL(textChanged(const QString&)));
 
         QTest::keyClicks(child, "hello world");
 

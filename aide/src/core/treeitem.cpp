@@ -6,60 +6,60 @@ using aide::core::TreeItem;
 using aide::core::TreeItemPtr;
 
 TreeItem::TreeItem(std::vector<QVariant> data, const TreeItemPtr& parent)
-    : itemData(std::move(data))
-    , parentItem(parent)
+    : m_itemData(std::move(data))
+    , m_parentItem(parent)
 {}
 
 void TreeItem::appendChild(TreeItemPtr child)
 {
-    childItems.push_back(std::move(child));
+    m_childItems.push_back(std::move(child));
 }
 
 void TreeItem::setHiddenUserData(QVariant data)
 {
-    hiddenUserData = std::move(data);
+    m_hiddenUserData = std::move(data);
 }
 
 QVariant TreeItem::getHiddenUserData() const
 {
-    return hiddenUserData;
+    return m_hiddenUserData;
 }
 
 TreeItemPtr TreeItem::child(const size_t row)
 {
-    if (row >= childItems.size()) { return nullptr; }
-    return childItems.at(row);
+    if (row >= m_childItems.size()) { return nullptr; }
+    return m_childItems.at(row);
 }
 
 size_t TreeItem::childCount() const
 {
-    return childItems.size();
+    return m_childItems.size();
 }
 
 size_t TreeItem::columnCount() const
 {
-    return itemData.size();
+    return m_itemData.size();
 }
 
 QVariant TreeItem::data(const size_t column) const
 {
-    if (column >= itemData.size()) { return {}; }
-    return itemData.at(column);
+    if (column >= m_itemData.size()) { return {}; }
+    return m_itemData.at(column);
 }
 
 bool TreeItem::setData(const size_t column, const QVariant& data)
 {
-    if (column > itemData.size() - 1) { return false; }
+    if (column > m_itemData.size() - 1) { return false; }
 
-    itemData.at(column) = data;
+    m_itemData.at(column) = data;
 
     return true;
 }
 
 int64_t TreeItem::row() const
 {
-    if (const auto parent = parentItem.lock(); parent != nullptr) {
-        const auto childs{parent->childItems};
+    if (const auto parentItem = m_parentItem.lock(); parentItem != nullptr) {
+        const auto childs{parentItem->m_childItems};
 
         return std::distance(
             childs.begin(),
@@ -71,5 +71,5 @@ int64_t TreeItem::row() const
 
 std::weak_ptr<TreeItem> TreeItem::parent() const
 {
-    return parentItem;
+    return m_parentItem;
 }

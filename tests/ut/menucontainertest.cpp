@@ -14,11 +14,11 @@ TEST_CASE("A new menu container")
     // NOLINTNEXTLINE
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
 
-    QApplication app(numberOfArgs, appName.data());
+    const QApplication app(numberOfArgs, appName.data());
 
     SECTION(" creates a valid QMenu")
     {
-        MenuContainer const container;
+        const MenuContainer container;
 
         REQUIRE(container.menu() != nullptr);
     }

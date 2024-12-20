@@ -24,18 +24,18 @@ TEST_CASE("Any show keymap use case")
     // NOLINTNEXTLINE
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
 
-    QApplication app{numberOfArgs, appName.data()};
+    const QApplication app{numberOfArgs, appName.data()};
 
     MockSettings settings;
     auto logger = std::make_shared<NullLogger>();
     auto registry(std::make_shared<ActionRegistry>(settings, logger));
 
     auto widget = std::make_shared<MockKeyMapPageWidget>();
-    ShowKeyMap keyMapUseCase{registry, widget.get()};
+    const ShowKeyMap keyMapUseCase{registry, widget.get()};
 
     SECTION("does not crash if widget is nullptr")
     {
-        ShowKeyMap keyMapLocalUseCase{registry, nullptr};
+        const ShowKeyMap keyMapLocalUseCase{registry, nullptr};
 
         REQUIRE_NOTHROW(keyMapLocalUseCase.fillTreeView());
     }

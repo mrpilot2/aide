@@ -28,7 +28,7 @@ TEST_CASE("Any keymap context menu provider")
     // NOLINTNEXTLINE
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
 
-    QApplication app{numberOfArgs, appName.data()};
+    const QApplication app{numberOfArgs, appName.data()};
 
     auto logger = std::make_shared<NullLogger>();
     MockSettings settings;
@@ -39,9 +39,9 @@ TEST_CASE("Any keymap context menu provider")
     SECTION("does not provide a context menu if model index is invalid")
     {
         KeyMapTreeModel treeModel(registry);
-        QModelIndex index(treeModel.index(-3, -1, QModelIndex()));
+        const QModelIndex index(treeModel.index(-3, -1, QModelIndex()));
 
-        KeymapContextMenuProvider provider{&treeModel, widget.get()};
+        const KeymapContextMenuProvider provider{&treeModel, widget.get()};
 
         provider.createAndShowContextMenu(index);
 
@@ -56,9 +56,9 @@ TEST_CASE("Any keymap context menu provider")
             action, HierarchicalId("Main Menu")("File")("New File"));
 
         KeyMapTreeModel treeModel(registry);
-        QModelIndex index(treeModel.index(0, 0, QModelIndex()));
+        const QModelIndex index(treeModel.index(0, 0, QModelIndex()));
 
-        KeymapContextMenuProvider provider{&treeModel, widget.get()};
+        const KeymapContextMenuProvider provider{&treeModel, widget.get()};
         provider.createAndShowContextMenu(index);
 
         REQUIRE(!widget->wasContextMeuSet());
@@ -75,10 +75,10 @@ TEST_CASE("Any keymap context menu provider")
 
         KeyMapTreeModel treeModel(registry);
 
-        QModelIndex index(treeModel.index(
+        const QModelIndex index(treeModel.index(
             0, 0, treeModel.index(0, 0, treeModel.index(0, 0, QModelIndex()))));
 
-        KeymapContextMenuProvider provider{&treeModel, widget.get()};
+        const KeymapContextMenuProvider provider{&treeModel, widget.get()};
         provider.createAndShowContextMenu(index);
 
         REQUIRE(widget->wasContextMeuSet());
@@ -100,10 +100,10 @@ TEST_CASE("Any keymap context menu provider")
 
         KeyMapTreeModel treeModel(registry);
 
-        QModelIndex index(treeModel.index(
+        const QModelIndex index(treeModel.index(
             0, 0, treeModel.index(0, 0, treeModel.index(0, 0, QModelIndex()))));
 
-        KeymapContextMenuProvider provider{&treeModel, widget.get()};
+        const KeymapContextMenuProvider provider{&treeModel, widget.get()};
         provider.createAndShowContextMenu(index);
 
         REQUIRE(widget->wasContextMeuSet());
@@ -128,10 +128,10 @@ TEST_CASE("Any keymap context menu provider")
 
         KeyMapTreeModel treeModel(registry);
 
-        QModelIndex index(treeModel.index(
+        const QModelIndex index(treeModel.index(
             0, 0, treeModel.index(0, 0, treeModel.index(0, 0, QModelIndex()))));
 
-        KeymapContextMenuProvider provider{&treeModel, widget.get()};
+        const KeymapContextMenuProvider provider{&treeModel, widget.get()};
         provider.createAndShowContextMenu(index);
 
         REQUIRE(widget->wasContextMeuSet());
@@ -158,10 +158,10 @@ TEST_CASE("Any keymap context menu provider")
 
         KeyMapTreeModel treeModel(registry);
 
-        QModelIndex index(treeModel.index(
+        const QModelIndex index(treeModel.index(
             0, 0, treeModel.index(0, 0, treeModel.index(0, 0, QModelIndex()))));
 
-        KeymapContextMenuProvider provider{&treeModel, widget.get()};
+        const KeymapContextMenuProvider provider{&treeModel, widget.get()};
         provider.createAndShowContextMenu(index);
 
         REQUIRE(widget->wasContextMeuSet());

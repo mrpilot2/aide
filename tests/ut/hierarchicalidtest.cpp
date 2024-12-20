@@ -11,7 +11,8 @@ TEST_CASE("Hierarchical Id ")
 {
     SECTION("can be constructed with one addLevel")
     {
-        HierarchicalId id = HierarchicalId("Main Menu").addLevel("File");
+        // cppcheck-suppress redundantCopyLocalConst
+        const HierarchicalId id = HierarchicalId("Main Menu").addLevel("File");
 
         REQUIRE("Main Menu/File" == id.name());
     }

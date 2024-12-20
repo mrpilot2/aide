@@ -17,7 +17,7 @@ namespace
     size_t lookForContentInFile(const char* const fileName,
                                 const char* const searchString)
     {
-        std::ifstream logFile(fileName, std::ios::in);
+        const std::ifstream logFile(fileName, std::ios::in);
         std::stringstream fileContent;
         fileContent << logFile.rdbuf();
         return fileContent.str().find(searchString);
@@ -29,7 +29,7 @@ TEST_CASE("Application constructor throws an exception", "[Application]")
     // NOLINTNEXTLINE
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
 
-    std::unique_ptr<aide::Application> app;
+    const std::unique_ptr<aide::Application> app;
 
     SECTION(" if organization name is not set before calling")
     {
@@ -51,7 +51,7 @@ TEST_CASE("Application constructor does not throw an exception",
     // NOLINTNEXTLINE
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
 
-    std::unique_ptr<aide::Application> app;
+    const std::unique_ptr<aide::Application> app;
 
     SECTION(" if organization name is set before calling")
     {
@@ -82,7 +82,7 @@ TEST_CASE("Logger logs into cache directory", "[Application]")
     int numberOfArgs{1};
     // NOLINTNEXTLINE
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    [[maybe_unused]] aide::Application app(numberOfArgs, appName.data());
+    [[maybe_unused]] const aide::Application app(numberOfArgs, appName.data());
 
     aide::Application::logger()->flush();
     REQUIRE(::lookForContentInFile(logFileLocation.c_str(), "Configured") !=

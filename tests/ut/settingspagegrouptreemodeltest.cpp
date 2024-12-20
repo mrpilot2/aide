@@ -18,7 +18,7 @@ TEST_CASE("A new settings page group tree model without registered page")
 
     SECTION("has no rows")
     {
-        SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel;
 
         REQUIRE(treeModel.rowCount() == 0);
     }
@@ -74,7 +74,7 @@ TEST_CASE("A new settings page group tree model with multiple registered page")
     SettingsPageRegistry::addPage(
         std::make_unique<MockSettingsPage>(HierarchicalId("MockTestPage2")));
 
-    SettingsPageGroupTreeModel treeModel;
+    const SettingsPageGroupTreeModel treeModel;
 
     SECTION("use same tree item for same group")
     {
@@ -122,7 +122,7 @@ TEST_CASE("Any settings page group tree model")
 
     SettingsPageRegistry::addPage(mockPage);
 
-    SettingsPageGroupTreeModel treeModel;
+    const SettingsPageGroupTreeModel treeModel;
 
     SECTION("provides horizontal header")
     {
@@ -139,7 +139,7 @@ TEST_CASE("Any settings page group tree model")
 
     SECTION("has selectable items")
     {
-        QModelIndex index = treeModel.index(0, 0);
+        const QModelIndex index = treeModel.index(0, 0);
 
         REQUIRE(treeModel.flags(index).testFlag(Qt::ItemIsSelectable));
     }
@@ -147,7 +147,7 @@ TEST_CASE("Any settings page group tree model")
     SECTION("removes item flags for invalid index")
     {
         constexpr auto rowIndexTooHigh{5};
-        QModelIndex index = treeModel.index(rowIndexTooHigh, 0);
+        const QModelIndex index = treeModel.index(rowIndexTooHigh, 0);
 
         REQUIRE(treeModel.flags(index).testFlag(Qt::NoItemFlags));
     }
@@ -156,7 +156,7 @@ TEST_CASE("Any settings page group tree model")
     {
         mockPage->simulateModified(true);
 
-        QModelIndex index = treeModel.index(0, 0);
+        const QModelIndex index = treeModel.index(0, 0);
 
         REQUIRE(treeModel.data(index, Qt::ForegroundRole) == QColor(Qt::blue));
     }
@@ -165,7 +165,7 @@ TEST_CASE("Any settings page group tree model")
     {
         mockPage->simulateModified(false);
 
-        QModelIndex index = treeModel.index(0, 0);
+        const QModelIndex index = treeModel.index(0, 0);
 
         REQUIRE(treeModel.data(index, Qt::ForegroundRole) == QVariant());
     }
@@ -180,7 +180,7 @@ TEST_CASE("Any settings page group tree model")
         SettingsPageRegistry::addPage(subSubPage1);
         SettingsPageRegistry::addPage(subSubPage2);
 
-        SettingsPageGroupTreeModel recursiveTreeModel;
+        const SettingsPageGroupTreeModel recursiveTreeModel;
 
         auto root          = recursiveTreeModel.index(0, 0, QModelIndex());
         auto subPage       = recursiveTreeModel.index(0, 0, root);
@@ -203,7 +203,7 @@ TEST_CASE("Any settings page group tree model")
         SettingsPageRegistry::addPage(subSubPage1);
         SettingsPageRegistry::addPage(subSubPage2);
 
-        SettingsPageGroupTreeModel recursiveTreeModel;
+        const SettingsPageGroupTreeModel recursiveTreeModel;
 
         auto root          = recursiveTreeModel.index(1, 0, QModelIndex());
         auto subPage       = recursiveTreeModel.index(0, 0, root);

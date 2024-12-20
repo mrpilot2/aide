@@ -42,7 +42,7 @@ TEST_CASE("A new keymap tree model with one action registered")
     // NOLINTNEXTLINE
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
 
-    QApplication app{numberOfArgs, appName.data()};
+    const QApplication app{numberOfArgs, appName.data()};
 
     MockSettings settings;
     auto logger = std::make_shared<NullLogger>();
@@ -50,7 +50,7 @@ TEST_CASE("A new keymap tree model with one action registered")
 
     auto action{std::make_shared<QAction>()};
     registry->registerAction(action, HierarchicalId("New File"));
-    KeyMapTreeModel treeModel(registry);
+    const KeyMapTreeModel treeModel(registry);
 
     SECTION("has one row")
     {
@@ -64,7 +64,7 @@ TEST_CASE("A new keymap tree model with one action registered")
 
     SECTION("provides action id in first column and row")
     {
-        QModelIndex index(treeModel.index(0, 0));
+        const QModelIndex index(treeModel.index(0, 0));
         REQUIRE(
             treeModel.data(index, Qt::DisplayRole).toString().toStdString() ==
             "New File");
@@ -72,7 +72,7 @@ TEST_CASE("A new keymap tree model with one action registered")
 
     SECTION("does not have parent in first row")
     {
-        QModelIndex index(treeModel.index(0, 0));
+        const QModelIndex index(treeModel.index(0, 0));
 
         auto parentIndex = treeModel.parent(index);
         REQUIRE(!parentIndex.isValid());
@@ -85,7 +85,7 @@ TEST_CASE("A new keymap tree model with multiple actions registered")
     // NOLINTNEXTLINE
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
 
-    QApplication app{numberOfArgs, appName.data()};
+    const QApplication app{numberOfArgs, appName.data()};
 
     MockSettings settings;
     auto logger = std::make_shared<NullLogger>();
@@ -95,7 +95,7 @@ TEST_CASE("A new keymap tree model with multiple actions registered")
 
     registry->registerAction(action, HierarchicalId("Main Menu")("Close"));
     registry->registerAction(action, HierarchicalId("Main Menu")("New File"));
-    KeyMapTreeModel treeModel(registry);
+    const KeyMapTreeModel treeModel(registry);
 
     SECTION("use same tree item for same group")
     {
@@ -140,7 +140,7 @@ TEST_CASE("Any keymap tree model")
     // NOLINTNEXTLINE
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
 
-    QApplication app{numberOfArgs, appName.data()};
+    const QApplication app{numberOfArgs, appName.data()};
 
     MockSettings settings;
     auto logger = std::make_shared<NullLogger>();
@@ -171,7 +171,7 @@ TEST_CASE("Any keymap tree model")
 
     SECTION("has selectable items")
     {
-        QModelIndex index = treeModel.index(0, 0);
+        const QModelIndex index = treeModel.index(0, 0);
 
         REQUIRE(treeModel.flags(index).testFlag(Qt::ItemIsSelectable));
     }
@@ -184,15 +184,15 @@ TEST_CASE("Any keymap tree model")
 
     SECTION("aligns shortcuts on right side")
     {
-        QModelIndex index = treeModel.index(0, 1);
+        const QModelIndex index = treeModel.index(0, 1);
 
         REQUIRE(index.data(Qt::TextAlignmentRole) == Qt::AlignRight);
     }
 
     SECTION("shows action description as tooltip")
     {
-        QModelIndex root = treeModel.index(0, 0, QModelIndex());
-        QModelIndex elem = treeModel.index(0, 0, root);
+        const QModelIndex root = treeModel.index(0, 0, QModelIndex());
+        const QModelIndex elem = treeModel.index(0, 0, root);
 
         REQUIRE(elem.data(Qt::ToolTipRole).toString().toStdString() ==
                 "Thoughtful description");
@@ -200,8 +200,8 @@ TEST_CASE("Any keymap tree model")
 
     SECTION("shows action icon if defined")
     {
-        QModelIndex root = treeModel.index(0, 0, QModelIndex());
-        QModelIndex elem = treeModel.index(0, 0, root);
+        const QModelIndex root = treeModel.index(0, 0, QModelIndex());
+        const QModelIndex elem = treeModel.index(0, 0, root);
 
         const auto icon = elem.data(Qt::DecorationRole).value<QIcon>();
         REQUIRE(
@@ -215,8 +215,8 @@ TEST_CASE("Any keymap tree model")
         auto newId = HierarchicalId("Main Menu")("New");
         registry->registerAction(newAction, newId, "Thoughtful description");
 
-        QModelIndex root = treeModel.index(0, 0, QModelIndex());
-        QModelIndex elem = treeModel.index(1, 0, root);
+        const QModelIndex root = treeModel.index(0, 0, QModelIndex());
+        const QModelIndex elem = treeModel.index(1, 0, root);
 
         REQUIRE(elem.data(Qt::DecorationRole) == QVariant());
     }
@@ -225,7 +225,7 @@ TEST_CASE("Any keymap tree model")
     {
         if (QIcon::themeName().isEmpty()) { return; }
 
-        QModelIndex root = treeModel.index(0, 0, QModelIndex());
+        const QModelIndex root = treeModel.index(0, 0, QModelIndex());
 
         const auto icon = root.data(Qt::DecorationRole).value<QIcon>();
         REQUIRE(icon.pixmap(100, 100).toImage() ==
@@ -234,14 +234,14 @@ TEST_CASE("Any keymap tree model")
 
     SECTION("does not crash if no tooltip is defined for current index")
     {
-        QModelIndex root = treeModel.index(0, 0, QModelIndex());
+        const QModelIndex root = treeModel.index(0, 0, QModelIndex());
 
         REQUIRE(root.data(Qt::ToolTipRole) == QVariant());
     }
 
     SECTION("returns empty QVariant for unsupported role")
     {
-        QModelIndex index = treeModel.index(0, 1);
+        const QModelIndex index = treeModel.index(0, 1);
 
         REQUIRE(treeModel.data(index, Qt::CheckStateRole) == QVariant());
     }
@@ -250,13 +250,15 @@ TEST_CASE("Any keymap tree model")
     {
         const auto item = treeModel.findItemForActionId(id);
 
-        REQUIRE(item.value()->data(0) == "Close");
+        // clang-format off
+        REQUIRE(item.value()->data(0) == "Close"); // NOLINT(bugprone-unchecked-optional-access)
+        // clang-format on
     }
 
     SECTION("directly highlights item with modified key sequences")
     {
-        QModelIndex root = treeModel.index(0, 0, QModelIndex());
-        QModelIndex elem = treeModel.index(0, 1, root);
+        const QModelIndex root = treeModel.index(0, 0, QModelIndex());
+        const QModelIndex elem = treeModel.index(0, 1, root);
 
         treeModel.setData(elem,
                           QKeySequence::listToString({QKeySequence(Qt::Key_0)}),
@@ -267,8 +269,8 @@ TEST_CASE("Any keymap tree model")
 
     SECTION("recursively highlights parent items with modified key sequences")
     {
-        QModelIndex root = treeModel.index(0, 0, QModelIndex());
-        QModelIndex elem = treeModel.index(0, 1, root);
+        const QModelIndex root = treeModel.index(0, 0, QModelIndex());
+        const QModelIndex elem = treeModel.index(0, 1, root);
 
         treeModel.setData(elem,
                           QKeySequence::listToString({QKeySequence(Qt::Key_0)}),

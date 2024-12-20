@@ -38,10 +38,10 @@ LoggerPtr LoggerFactory::setupLogger(const std::string& loggerName)
     }
 
     if (success) {
-        FileName logPath(logLocation.append("/")
-                             .append(QApplication::applicationName())
-                             .append(".log")
-                             .toStdString());
+        const FileName logPath(logLocation.append("/")
+                                   .append(QApplication::applicationName())
+                                   .append(".log")
+                                   .toStdString());
 
         auto logger = std::make_shared<Logger>(logPath, LoggerName(loggerName));
 
@@ -58,7 +58,7 @@ bool LoggerFactory::tryToCreateLogLocationIfItDoesNotExist(
     const QString& logLocation)
 {
     if (!logLocation.isEmpty()) {
-        QDir d;
+        const QDir d;
         if (!d.mkpath(logLocation)) {
             std::cerr << "Could not create standard log directory: "
                       << logLocation.toStdString()

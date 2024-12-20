@@ -29,11 +29,13 @@ void KeymapContextMenuProvider::createAndShowContextMenu(
 
     const auto action = treeModel->findCorrespondingAction(index);
 
+    if (!action.has_value()) { return; }
+
     const auto* item = static_cast<TreeItem*>(index.internalPointer());
     auto keySequenceInModel{
         QKeySequence::listFromString(item->data(1).toString())};
 
-    bool keySequencesAreAllEmpty{
+    const bool keySequencesAreAllEmpty{
         std::all_of(keySequenceInModel.begin(), keySequenceInModel.end(),
                     [](auto elem) { return elem.isEmpty(); })};
     if (!keySequencesAreAllEmpty) {

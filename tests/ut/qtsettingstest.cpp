@@ -21,7 +21,7 @@ TEST_CASE("Versionable Qt Settings")
     QApplication::setApplicationName("aide_test");
     QApplication::setOrganizationName("aide_company");
 
-    QApplication app(numberOfArgs, appName.data());
+    const QApplication app(numberOfArgs, appName.data());
 
     auto settings = QtSettings(true);
 
@@ -97,7 +97,7 @@ TEST_CASE("Un-Versionable Qt Settings")
     QApplication::setApplicationName("aide_test");
     QApplication::setOrganizationName("aide_company");
 
-    QApplication app(numberOfArgs, appName.data());
+    const QApplication app(numberOfArgs, appName.data());
 
     auto settings = QtSettings(false);
 
@@ -113,7 +113,6 @@ TEST_CASE("Un-Versionable Qt Settings")
         const QSettings qsettings(
             QApplication::organizationName(),
             QApplication::applicationName() + "_unversionable");
-        auto fileName = qsettings.fileName().toStdString();
 
         settings.load();
     }

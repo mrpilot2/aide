@@ -60,7 +60,7 @@ void ActionRegistry::registerAction(
 
     const auto userKeySequences = loadUserKeySequences(uniqueId);
 
-    Action const detailedAction{action, description, qtDefaultSequences,
+    const Action detailedAction{action, description, qtDefaultSequences,
                                 userKeySequences};
 
     if (!action.expired()) {
@@ -94,15 +94,15 @@ void ActionRegistry::modifyShortcutsForAction(
         settingsId.addLevel(i);
     }
 
-    auto& action = m_actions.at(id);
+    auto& act = m_actions.at(id);
 
-    action.action.lock()->setShortcuts(shortcuts);
+    act.action.lock()->setShortcuts(shortcuts);
 
-    if (Action::areKeySequencesTheSame(shortcuts, action.defaultKeySequences)) {
-        action.keySequences.clear();
+    if (Action::areKeySequencesTheSame(shortcuts, act.defaultKeySequences)) {
+        act.keySequences.clear();
         settings.removeKey(settingsId);
     } else {
-        action.keySequences = shortcuts;
+        act.keySequences = shortcuts;
         settings.setValue(settingsId, QKeySequence::listToString(shortcuts));
     }
 }

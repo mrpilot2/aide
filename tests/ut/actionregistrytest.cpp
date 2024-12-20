@@ -41,13 +41,13 @@ TEST_CASE("Any action registry ")
     QApplication::setApplicationName("aide_test");
     QApplication::setOrganizationName("aide_company");
 
-    QApplication app{numberOfArgs, appName.data()};
+    const QApplication app{numberOfArgs, appName.data()};
 
     SECTION("can register an action with description and default key sequence")
     {
         auto action = std::make_shared<QAction>("&File", nullptr);
         const HierarchicalId id{HierarchicalId("MainMenu")("File")};
-        QKeySequence defaultKeySequence(QKeySequence::Quit);
+        const QKeySequence defaultKeySequence(QKeySequence::Quit);
         const std::string description("Quit the application");
 
         registry.registerAction(action, id, description, {defaultKeySequence});
@@ -72,7 +72,7 @@ TEST_CASE("Any action registry ")
     {
         auto action = std::make_shared<QAction>("&File", nullptr);
         const HierarchicalId id{HierarchicalId("MainMenu")("File")};
-        QKeySequence defaultKeySequence(QKeySequence::Quit);
+        const QKeySequence defaultKeySequence(QKeySequence::Quit);
 
         registry.registerAction(action, id, {defaultKeySequence});
 
@@ -194,7 +194,9 @@ TEST_CASE("Any action registry ")
         registry.registerAction(action, id, std::vector({QKeySequence("F4")}));
 
         REQUIRE(registry.action(id).has_value());
-        REQUIRE(registry.action(id).value() == action.get());
+        // clang-format off
+        REQUIRE(registry.action(id).value() == action.get()); // NOLINT(bugprone-unchecked-optional-access)
+        // clang-format on
     }
 
     SECTION("non existing actions are received as empty optional")
@@ -206,7 +208,8 @@ TEST_CASE("Any action registry ")
 
     SECTION("allows to add a new menu container")
     {
-        auto* ptr = registry.createMenu(HierarchicalId("MainMenu")("File"));
+        const auto* ptr =
+            registry.createMenu(HierarchicalId("MainMenu")("File"));
 
         REQUIRE(ptr != nullptr);
 
@@ -216,10 +219,10 @@ TEST_CASE("Any action registry ")
 
     SECTION("returns the same menu container if it's already registered")
     {
-        auto* firstInsertion =
+        const auto* firstInsertion =
             registry.createMenu(HierarchicalId("MainMenu")("File"));
 
-        auto* secondInsertion =
+        const auto* secondInsertion =
             registry.createMenu(HierarchicalId("MainMenu")("File"));
 
         REQUIRE(firstInsertion == secondInsertion);
@@ -231,13 +234,14 @@ TEST_CASE("Any action registry ")
     SECTION("added menu containers can be retrieved from registry")
     {
         const auto id{HierarchicalId("MainMenu")("File")};
-        auto* ptr = registry.createMenu(id);
+        const auto* ptr = registry.createMenu(id);
 
         auto result = registry.getMenuContainer(id);
 
         REQUIRE(result.has_value());
 
-        REQUIRE(ptr == result.value());
+        REQUIRE(ptr ==
+                result.value()); // NOLINT(bugprone-unchecked-optional-access)
 
         // NOLINTNEXTLINE normally Qt takes ownership of the menu and deletes it
         delete ptr->menu();
@@ -245,7 +249,7 @@ TEST_CASE("Any action registry ")
 
     SECTION("non existing menu containers are received as empty optional")
     {
-        auto const* firstInsertion =
+        const auto* firstInsertion =
             registry.createMenu(HierarchicalId("MainMenu")("File"));
 
         auto nonExistentMenu =

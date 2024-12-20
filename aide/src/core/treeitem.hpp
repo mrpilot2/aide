@@ -33,11 +33,11 @@ namespace aide::core
         [[nodiscard]] std::weak_ptr<TreeItem> parent() const;
 
     private:
-        std::vector<TreeItemPtr> childItems;
-        std::vector<QVariant> itemData;
-        std::weak_ptr<TreeItem> parentItem;
+        std::vector<TreeItemPtr> m_childItems;
+        std::vector<QVariant> m_itemData;
+        std::weak_ptr<TreeItem> m_parentItem;
 
-        QVariant hiddenUserData;
+        QVariant m_hiddenUserData;
     };
 } // namespace aide::core
 

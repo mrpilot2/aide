@@ -29,8 +29,10 @@ macro(aide_enable_cppcheck WARNINGS_AS_ERRORS CPPCHECK_OPTIONS)
           --suppress=preprocessorErrorDirective
           # false positive with structured bindings (fixed in cppcheck 2.8)
           --suppress=unassignedVariable
+          --suppress=incorrectStringBooleanError
           --suppress=*:*/*_autogen/*.h
-          --std=c++17
+          --std=c++20
+          --library=qt
           --inconclusive
           -DQ_DECLARE_METATYPE
       )

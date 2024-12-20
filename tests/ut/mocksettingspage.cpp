@@ -18,7 +18,7 @@ MockSettingsPage::MockSettingsPage(const HierarchicalId& group)
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
     int numberOfArgs{1};
 
-    QApplication app(numberOfArgs, appName.data());
+    const QApplication app(numberOfArgs, appName.data());
 
     mockWidget = std::make_shared<QWidget>();
 }

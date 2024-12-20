@@ -56,7 +56,7 @@ TEST_CASE("Any show settings dialog use case")
         SettingsPageRegistry::addPage(std::make_unique<MockSettingsPage>(
             HierarchicalId("MockTestPage")("Subpage1")));
 
-        SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel;
 
         useCase.showSettingsDialog();
 
@@ -76,7 +76,7 @@ TEST_CASE("Any show settings dialog use case")
         SettingsPageRegistry::addPage(std::make_unique<MockSettingsPage>(
             HierarchicalId("MockTestPage")("Subpage1")));
 
-        SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel;
 
         useCase.showSettingsDialog();
 
@@ -95,7 +95,7 @@ TEST_CASE("Any show settings dialog use case")
             std::shared_ptr<aide::core::SettingsDialogChangePageController>(
                 std::make_shared<ShowSettingsDialog>(view, settings, logger));
 
-        SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel;
 
         REQUIRE_THROWS_AS(
             base->changeSelectedPage(
@@ -113,7 +113,7 @@ TEST_CASE("Any show settings dialog use case")
         SettingsPageRegistry::addPage(
             std::make_unique<MockSettingsPage>(HierarchicalId("MockTestPage")));
 
-        SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel;
 
         useCase.showSettingsDialog();
 
@@ -137,7 +137,7 @@ TEST_CASE("Any show settings dialog use case")
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
         SettingsPageRegistry::addPage(page);
 
-        SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel;
 
         useCase.showSettingsDialog();
 
@@ -164,7 +164,7 @@ TEST_CASE("Any show settings dialog use case")
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
         SettingsPageRegistry::addPage(page);
 
-        SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel;
 
         useCase.showSettingsDialog();
 
@@ -191,7 +191,7 @@ TEST_CASE("Any show settings dialog use case")
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
         SettingsPageRegistry::addPage(page);
 
-        SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel;
 
         useCase.showSettingsDialog();
 
@@ -222,7 +222,7 @@ TEST_CASE("Any show settings dialog use case")
         SettingsPageRegistry::addPage(page1);
         SettingsPageRegistry::addPage(page2);
 
-        SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel;
 
         useCase.showSettingsDialog();
 
@@ -254,7 +254,7 @@ TEST_CASE("Any show settings dialog use case")
         SettingsPageRegistry::addPage(page1);
         SettingsPageRegistry::addPage(page2);
 
-        SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel;
 
         useCase.showSettingsDialog();
 
@@ -284,7 +284,7 @@ TEST_CASE("Any show settings dialog use case")
         SettingsPageRegistry::addPage(page1);
         SettingsPageRegistry::addPage(page2);
 
-        SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel;
 
         useCase.showSettingsDialog();
 
@@ -315,7 +315,7 @@ TEST_CASE("Any show settings dialog use case")
         SettingsPageRegistry::addPage(page1);
         SettingsPageRegistry::addPage(page2);
 
-        SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel;
 
         page1->simulateModified(false);
         page2->simulateModified(true);
@@ -340,7 +340,7 @@ TEST_CASE("Any show settings dialog use case")
         SettingsPageRegistry::addPage(page1);
         SettingsPageRegistry::addPage(page2);
 
-        SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel;
 
         useCase.showSettingsDialog();
 
@@ -375,7 +375,7 @@ TEST_CASE("Any show settings dialog use case")
         SettingsPageRegistry::addPage(page1);
         SettingsPageRegistry::addPage(page2);
 
-        SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel;
 
         page1->simulateModified(true);
         page2->simulateModified(false);
@@ -421,7 +421,7 @@ TEST_CASE("Any show settings dialog use case")
         SettingsPageRegistry::addPage(page1);
         SettingsPageRegistry::addPage(page2);
 
-        QString dataToBeSaved{QString::fromStdString(page2->group().name())};
+        const QString dataToBeSaved{QString::fromStdString(page2->group().name())};
 
         settings.setValue(KEYS().UI.SETTINGS_DIALOG_TREE_VIEW_SELECTED_ITEM_KEY,
                           dataToBeSaved);

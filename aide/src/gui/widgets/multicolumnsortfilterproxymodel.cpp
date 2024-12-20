@@ -49,7 +49,7 @@ bool MultiColumnSortFilterProxyModel::filterAcceptsRow(
     }
 
     bool result = true;
-    for (auto const& [column_index, filterText] : m_columnFilterMap) {
+    for (const auto& [column_index, filterText] : m_columnFilterMap) {
         auto regex = getRegexForColumn(column_index);
 
         if (column_index == -1) {

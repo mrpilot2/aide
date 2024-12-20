@@ -1,7 +1,7 @@
 [requires]
 fmt/10.2.1
 spdlog/1.13.0
-catch2/3.5.2
+catch2/3.7.1
 
 [generators]
 CMakeDeps

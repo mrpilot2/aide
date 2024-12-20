@@ -23,7 +23,7 @@ TEST_CASE("Any main window")
     QApplication::setApplicationName("aide_test");
     QApplication::setOrganizationName("aide_company");
 
-    QApplication app(numberOfArgs, appName.data());
+    const QApplication app(numberOfArgs, appName.data());
 
     MockSettings settings;
     const auto registry = std::make_shared<ActionRegistry>(

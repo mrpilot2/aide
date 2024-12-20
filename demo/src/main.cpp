@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
     aide::Application::setApplicationName("Fancy_Aide_Demo");
     aide::Application::setApplicationDisplayName("Fancy Aide Demo");
 
-    aide::Application app(argc, argv);
+    const aide::Application app(argc, argv);
 
     app.translator()->addAdditionalTranslationFilePath(
         QDir(":/demo_translations"), QString("demo"));
@@ -68,11 +68,13 @@ int main(int argc, char* argv[])
                     QApplication::tr("This action shows the menu extension "
                                      "capabilities of aIDE."));
             });
+        // clang-format off
         menuFile->insertAction(
-            actionRegistry->action(CONSTANTS().FILE_SETTINGS).value(),
+            actionRegistry->action(CONSTANTS().FILE_SETTINGS).value(), /* NOLINT(bugprone-unchecked-optional-access) */
             actionNewProject.get());
         menuFile->insertSeparator(
-            actionRegistry->action(CONSTANTS().FILE_SETTINGS).value());
+            actionRegistry->action(CONSTANTS().FILE_SETTINGS).value()); /* NOLINT(bugprone-unchecked-optional-access) */
+        // clang-format on
         mainWindow->menuBar()->update();
 
         actionRegistry->registerAction(

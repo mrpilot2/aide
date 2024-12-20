@@ -17,7 +17,7 @@ TEST_CASE("Any application close interactor")
     auto appCloseView = std::make_shared<MockApplicationCloseView>();
     auto settings     = MockSettings();
 
-    ApplicationClose appClose(appCloseView, settings);
+    const ApplicationClose appClose(appCloseView, settings);
 
     SECTION("asks user to confirm close if option is set")
     {

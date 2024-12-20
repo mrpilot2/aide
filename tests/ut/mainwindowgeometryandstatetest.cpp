@@ -21,7 +21,7 @@ TEST_CASE("Any main window geometry and state interactor")
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
     int numberOfArgs{1};
 
-    QApplication app(numberOfArgs, appName.data());
+    const QApplication app(numberOfArgs, appName.data());
 
     auto mainWindowView = std::make_shared<MockMainWindowView>();
     auto settings       = MockSettings();

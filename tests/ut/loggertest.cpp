@@ -15,7 +15,7 @@ namespace
     size_t lookForContentInFile(const char* const fileName,
                                 const char* const searchString)
     {
-        std::ifstream logFile(fileName, std::ios::in);
+        const std::ifstream logFile(fileName, std::ios::in);
         std::stringstream fileContent;
         fileContent << logFile.rdbuf();
         return fileContent.str().find(searchString);
