@@ -1,0 +1,31 @@
+name: CI master
+
+on:
+  push:
+  pull_request:
+    branches:
+      - develop
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  clang_format:
+    uses: ./.github/workflows/clang-format.yml
+    secrets: inherit
+
+  ci_build_and_test:
+    needs: [clang_format]
+    uses: ./.github/workflows/build_and_test.yml
+
+  build_and_test_installed:
+    needs: [clang_format]
+    uses: ./.github/workflows/install_and_test.yml
+
+  check_third_party_license_availability:
+    uses: ./.github/workflows/check_licenses.yml
+
+  static_analyzer:
+    uses: ./.github/workflows/static_analyzer.yml

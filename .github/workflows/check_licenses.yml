@@ -1,9 +1,7 @@
 name: Check third party licenses
 
 on:
-  push:
-    branches:
-      - develop
+  workflow_call:
 
 jobs:
   publish:

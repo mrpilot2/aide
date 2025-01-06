@@ -1,6 +1,7 @@
 name: Build standalone and test installed lib
 
-on: [push]
+on:
+    workflow_call:
 
 jobs:
   build:
