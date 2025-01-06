@@ -76,4 +76,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: abi_compliance_report
-          path: build-shared-dbg/compat_reports/libAide/**/*.html
+          path: |
+            build-shared-dbg/compat_reports/libAide/**/*.html
+            build-shared-dbg/logs/

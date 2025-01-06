@@ -121,7 +121,11 @@ function(aide_perform_abi_compliance_check)
     GENERATE
     OUTPUT ${CMAKE_BINARY_DIR}/abibase.sh
     CONTENT
-      "#!/bin/sh
+      "#!/usr/bin/env bash
+set -x
+
+echo \"Building abi base ${LATEST_RELEASE_TAG}\"
+
 if [ ! -d abibase ]; then mkdir abibase; fi
 cd abibase
 if [ ! -f build/aide/abi_compliance_config.xml ]; then
