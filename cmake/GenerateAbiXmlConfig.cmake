@@ -34,7 +34,7 @@ endforeach()
 
 string(REPLACE ";" "\n" ABI_GCC_DEFINES "${defines}")
 
-list(APPEND ABI_GCC_OPTIONS ${ABI_GCC_DEFINES})
+list(APPEND ABI_GCC_OPTIONS ${ABI_GCC_DEFINES} "-std=c++20")
 string(REPLACE ";" "\n" ABI_GCC_OPTIONS "${ABI_GCC_OPTIONS}")
 
 set(ABI_GCC_DEFINES "")
