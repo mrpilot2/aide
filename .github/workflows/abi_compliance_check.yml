@@ -63,7 +63,13 @@ jobs:
  
       # Shared Debug
       - name: "Shared Debug: Configure"
+        if: github.event_name == 'pull_request'
+        run: cmake -G Ninja -S . -B build-shared-dbg -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=conan_provider.cmake -DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=ON -Daide_PACKAGING_MAINTAINER_MODE=ON -Daide_ENABLE_ABI_COMPLIANCE_CHECK=ON -Daide_ABI_BASE_HASH=${{ github.event.pull_request.base.sha }}
+
+      - name: "Shared Debug: Configure"
+        if: github.event_name != 'pull_request'
         run: cmake -G Ninja -S . -B build-shared-dbg -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=conan_provider.cmake -DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=ON -Daide_PACKAGING_MAINTAINER_MODE=ON -Daide_ENABLE_ABI_COMPLIANCE_CHECK=ON
+
       - name: "Shared Debug: Build"
         run: cmake --build build-shared-dbg --parallel
       - name: "Shared Debug: ABI compliance check"
