@@ -88,10 +88,16 @@ function(aide_perform_abi_compliance_check)
     DEPENDS "${CMAKE_BINARY_DIR}/abi_compliance_config.xml"
   )
 
-  git_describe(LATEST_RELEASE_TAG --tags --match "v*")
+  if(aide_ABI_BASE_HASH)
+    set(LATEST_RELEASE_TAG ${aide_ABI_BASE_HASH})
+  else()
+    git_describe(LATEST_RELEASE_TAG --tags --always --match "v*")
 
-  string(FIND ${LATEST_RELEASE_TAG} "-" pos)
-  string(SUBSTRING ${LATEST_RELEASE_TAG} 0 ${pos} LATEST_RELEASE_TAG)
+    string(FIND ${LATEST_RELEASE_TAG} "-" pos REVERSE)
+    string(SUBSTRING ${LATEST_RELEASE_TAG} 0 ${pos} LATEST_RELEASE_TAG)
+    string(FIND ${LATEST_RELEASE_TAG} "-" pos REVERSE)
+    string(SUBSTRING ${LATEST_RELEASE_TAG} 0 ${pos} LATEST_RELEASE_TAG)
+  endif()
 
   execute_process(
     COMMAND git merge-base --is-ancestor
@@ -151,7 +157,7 @@ fi
     generate_abi_compliance_report
     COMMAND bash ./abibase.sh
     COMMAND
-      cmake -DABI_CHECKER="${ABI_CHECKER}"
+      cmake -DABI_CHECKER="${ABI_CHECKER}" -DABI_DUMPER="${ABI_DUMPER}"
       -DCMAKE_BINARY_DIR="${CMAKE_BINARY_DIR}" -DGIT_HASH="${GIT_HASH}"
       -DLATEST_RELEASE_TAG="${LATEST_RELEASE_TAG}" -P
       "${CURRENT_SCRIPT_DIR}/GenerateAbiComplianceReport.cmake"
