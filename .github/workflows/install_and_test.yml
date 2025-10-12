@@ -4,7 +4,7 @@ on:
     workflow_call:
 
 jobs:
-  build:
+  build_standalone:
     name: ${{ matrix.qt_name }}
     strategy:
       fail-fast: false
@@ -86,8 +86,8 @@ jobs:
 
   publish-test-results:
     name: "Publish Unit Test Results from installed lib"
-    needs: build
-    runs-on: ubuntu-20.04
+    needs: build_standalone
+    runs-on: ubuntu-latest
     if: always()
     steps:
       - name: Download Artifacts

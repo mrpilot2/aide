@@ -37,10 +37,13 @@ if(NOT "${res_var}" STREQUAL "0")
       execute_process(
         COMMAND git show -s ${git_hash} OUTPUT_VARIABLE COMMIT_MESSAGE
       )
-      string(STRIP ${COMMIT_MESSAGE} COMMIT_MESSAGE)
 
-      if(${COMMIT_MESSAGE} MATCHES ".*BREAKING CHANGE:.*"
-         OR ${COMMIT_MESSAGE} MATCHES "^[a-z]+(\(.*\))?!:.*"
+      message(STATUS "Found commit message ${COMMIT_MESSAGE}")
+
+      string(STRIP "${COMMIT_MESSAGE}" COMMIT_MESSAGE)
+
+      if("${COMMIT_MESSAGE}" MATCHES ".*BREAKING CHANGE:.*"
+         OR "${COMMIT_MESSAGE}" MATCHES "^[a-z]+(\(.*\))?!:.*"
       )
         message(
           STATUS

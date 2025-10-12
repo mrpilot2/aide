@@ -1,6 +1,7 @@
 name: CI - ABI compliance check
 
-on: [ push, pull_request, workflow_dispatch ]
+on:
+  workflow_call:
 
 jobs:
   build:

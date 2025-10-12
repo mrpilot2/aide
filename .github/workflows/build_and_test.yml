@@ -1,7 +1,7 @@
 name: CI - Build and Test
 
 on:
-    workflow_call:
+  workflow_call:
 
 jobs:
   build:
@@ -185,7 +185,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           check_name: Unit Test Results ${{ matrix.os }}
           comment_mode: always
-          junit_files: artifacts/test_results_${{ matrix.os}}*/**/tests/ut/*.xml
+          files: artifacts/test_results_${{ matrix.os}}*/**/tests/ut/*.xml
           report_individual_runs: true
           deduplicate_classes_by_file_name: false
 

@@ -2,6 +2,9 @@ name: Run clang-format Linter
 
 on:
   workflow_call:
+    outputs:
+      pushed: 
+        value: ${{ jobs.clang-format.outputs.pushed }}
 
 jobs:
   clang-format:
@@ -20,7 +23,10 @@ jobs:
         clangFormatVersion: 16
         inplace: True
     - uses: EndBug/add-and-commit@v9
+      id: commit
       with:
         author_name: Clang-format Robot
         author_email: bot@github.com
         message: 'style: automatic clang-format changes'
+    outputs:
+      pushed: ${{ steps.commit.outputs.pushed }}

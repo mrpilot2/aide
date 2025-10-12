@@ -4,7 +4,7 @@ on:
   workflow_call:
 
 jobs:
-  publish:
+  check_license:
     runs-on: ubuntu-latest
     steps:
       - name: Check out
