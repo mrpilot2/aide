@@ -9,7 +9,8 @@
 
 namespace aide
 {
-    enum class LogLevel : std::uint8_t {
+    enum class LogLevel : std::uint8_t
+    {
         Trace,
         Debug,
         Info,

@@ -77,9 +77,9 @@ std::vector<spdlog::sink_ptr> Logger::createSinks(std::string logFileName)
 {
     std::vector<spdlog::sink_ptr> sinks;
 #ifndef NDEBUG
-    if (!m_disableLoggingToConsole)
-    {
-        sinks.push_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
+    if (!m_disableLoggingToConsole) {
+        sinks.push_back(
+            std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
     }
 #endif
 
@@ -121,8 +121,7 @@ void Logger::doLogCritical(const std::string_view message) const
 
 void Logger::setLevel(LogLevel level)
 {
-    switch (level)
-    {
+    switch (level) {
     case LogLevel::Trace:
         m_logger->set_level(spdlog::level::trace);
         m_macroLogger->set_level(spdlog::level::trace);

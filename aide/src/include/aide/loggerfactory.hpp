@@ -3,6 +3,7 @@
 #ifndef AIDE_LOGGER_FACTORY_HPP
 #define AIDE_LOGGER_FACTORY_HPP
 
+#include <map>
 #include <string>
 
 #include <aide/loggerinterface.hpp>
@@ -23,6 +24,8 @@ namespace aide::core
 
         static bool tryToCreateLogLocationIfItDoesNotExist(
             const QString& logLocation);
+
+        static std::map<std::string, LoggerPtr>& getLoggers();
     };
 } // namespace aide::core
 

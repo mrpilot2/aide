@@ -14,14 +14,22 @@
 using aide::LoggerPtr;
 using aide::core::LoggerFactory;
 
+std::map<std::string, LoggerPtr>& LoggerFactory::getLoggers()
+{
+    static std::map<std::string, LoggerPtr> loggers = {{}};
+    return loggers;
+}
+
 LoggerPtr LoggerFactory::createLogger()
 {
-    return setupLogger("aide");
+    return createLogger("aide");
 }
 
 LoggerPtr LoggerFactory::createLogger(const std::string& loggerName)
 {
-    return setupLogger(loggerName);
+    getLoggers().insert({loggerName, setupLogger(loggerName)});
+
+    return getLoggers().at(loggerName);
 }
 
 LoggerPtr LoggerFactory::setupLogger(const std::string& loggerName)
