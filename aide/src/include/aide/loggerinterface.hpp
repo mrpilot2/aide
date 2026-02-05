@@ -9,6 +9,16 @@
 
 namespace aide
 {
+    enum class LogLevel : std::uint8_t {
+        Trace,
+        Debug,
+        Info,
+        Warn,
+        Error,
+        Critical,
+        Off
+    };
+
     class LoggerInterface
     {
     public:
@@ -52,6 +62,8 @@ namespace aide
         }
 
         virtual void flush() = 0;
+
+        virtual void setLevel(LogLevel level) = 0;
 
     private:
         template <typename... Args>

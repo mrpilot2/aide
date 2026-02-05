@@ -11,3 +11,7 @@ void NullLogger::doLogWarn([[maybe_unused]] std::string_view message) const {}
 void NullLogger::doLogError([[maybe_unused]] std::string_view message) const {}
 void NullLogger::doLogCritical([[maybe_unused]] std::string_view message) const
 {}
+
+void NullLogger::setLevel([[maybe_unused]] LogLevel level)
+{
+}

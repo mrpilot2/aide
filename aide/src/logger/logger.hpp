@@ -56,6 +56,8 @@ namespace aide
 
         static void disableLoggingToConsole();
 
+        void setLevel(LogLevel level) override;
+
     private:
         void doLogTrace(std::string_view message) const override;
 

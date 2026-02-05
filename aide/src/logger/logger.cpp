@@ -43,6 +43,8 @@ Logger::Logger(const FileName& logFileName, const LoggerName& loggerName)
     m_macroLogger      = std::make_shared<spdlog::logger>(
         loggerName() + std::string("_macro"), begin(macroLogSinks),
         end(macroLogSinks));
+
+    m_logger->info("Create macro logger " + loggerName() + "_macro");
     m_macroLogger->set_level(
         static_cast<spdlog::level::level_enum>(SPDLOG_ACTIVE_LEVEL));
 #ifdef NDEBUG
@@ -115,6 +117,40 @@ void Logger::doLogError(const std::string_view message) const
 void Logger::doLogCritical(const std::string_view message) const
 {
     m_logger->critical(message);
+}
+
+void Logger::setLevel(LogLevel level)
+{
+    switch (level)
+    {
+    case LogLevel::Trace:
+        m_logger->set_level(spdlog::level::trace);
+        m_macroLogger->set_level(spdlog::level::trace);
+        break;
+    case LogLevel::Debug:
+        m_logger->set_level(spdlog::level::debug);
+        m_macroLogger->set_level(spdlog::level::debug);
+        break;
+    case LogLevel::Info:
+        m_logger->set_level(spdlog::level::info);
+        m_macroLogger->set_level(spdlog::level::info);
+        break;
+    case LogLevel::Warn:
+        m_logger->set_level(spdlog::level::warn);
+        m_macroLogger->set_level(spdlog::level::warn);
+        break;
+    case LogLevel::Error:
+        m_logger->set_level(spdlog::level::err);
+        m_macroLogger->set_level(spdlog::level::err);
+        break;
+    case LogLevel::Critical:
+        m_logger->set_level(spdlog::level::critical);
+        m_macroLogger->set_level(spdlog::level::critical);
+        break;
+    case LogLevel::Off:
+        m_logger->set_level(spdlog::level::off);
+        m_macroLogger->set_level(spdlog::level::off);
+    }
 }
 
 void Logger::disableLoggingToConsole()

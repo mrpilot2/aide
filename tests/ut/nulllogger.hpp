@@ -10,6 +10,8 @@ namespace aide::test
     public:
         void flush() override;
 
+        void setLevel(LogLevel level) override;
+
     private:
         void doLogTrace(std::string_view message) const override;
         void doLogDebug(std::string_view message) const override;
