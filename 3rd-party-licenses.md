@@ -20,9 +20,9 @@ License: [Boost Software License 1.0](https://github.com/catchorg/Catch2/blob/v3
 
 ### [fmt](https://github.com/fmtlib/fmt/)
 
-Version: 10.2.1
+Version: 12.1.0
 
-License: [MIT (custom)](https://github.com/fmtlib/fmt/blob/10.2.1/LICENSE)
+License: [MIT (custom)](https://github.com/fmtlib/fmt/blob/12.1.0/LICENSE)
 
 ### [libyang (parts used for ABI check)](https://github.com/CESNET/libyang/blob/master/CMakeModules/ABICheck.cmake)
 
@@ -32,12 +32,12 @@ License: [BSD 3-Clause License](https://github.com/CESNET/libyang/blob/master/LI
 
 ### [Qt](https://www.qt.io/)
 
-Version: 6.4.2
+Version: 6.8.3
 
 License: [(L)GPL](https://www.qt.io/licensing/)
 
 ### [spdlog](https://github.com/gabime/spdlog/)
 
-Version: v1.13.0
+Version: v1.17.0
 
-License: [MIT](https://github.com/gabime/spdlog/blob/v1.13.0/LICENSE)
+License: [MIT](https://github.com/gabime/spdlog/blob/v1.17.0/LICENSE)
