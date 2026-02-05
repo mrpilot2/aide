@@ -13,6 +13,8 @@ using aide::Logger;
 static constexpr unsigned int maxFileSizeInMB{1024 * 1024 * 5};
 static constexpr uint16_t maxNumberOfFiles{3};
 
+bool Logger::m_disableLoggingToConsole{false};
+
 Logger::Logger()
     : Logger(FileName("aide.log"), LoggerName("aide"))
 {}
@@ -73,7 +75,10 @@ std::vector<spdlog::sink_ptr> Logger::createSinks(std::string logFileName)
 {
     std::vector<spdlog::sink_ptr> sinks;
 #ifndef NDEBUG
-    sinks.push_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
+    if (!m_disableLoggingToConsole)
+    {
+        sinks.push_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
+    }
 #endif
 
     sinks.push_back(std::make_shared<spdlog::sinks::rotating_file_sink_mt>(
@@ -110,4 +115,9 @@ void Logger::doLogError(const std::string_view message) const
 void Logger::doLogCritical(const std::string_view message) const
 {
     m_logger->critical(message);
+}
+
+void Logger::disableLoggingToConsole()
+{
+    m_disableLoggingToConsole = true;
 }

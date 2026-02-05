@@ -54,6 +54,8 @@ namespace aide
 
         void flush() override;
 
+        static void disableLoggingToConsole();
+
     private:
         void doLogTrace(std::string_view message) const override;
 
@@ -72,6 +74,8 @@ namespace aide
 
         std::shared_ptr<spdlog::logger> m_logger;
         std::shared_ptr<spdlog::logger> m_macroLogger;
+
+        static bool m_disableLoggingToConsole;
     };
 } // namespace aide
 

@@ -44,6 +44,8 @@ namespace aide
         [[nodiscard]] static aide::LoggerPtr logger(
             const std::string& loggerName);
 
+        static void disableLoggingToConsole();
+
         [[nodiscard]] std::shared_ptr<QMainWindow> mainWindow() const;
 
         [[nodiscard]] std::shared_ptr<gui::TranslatorInterface> translator()

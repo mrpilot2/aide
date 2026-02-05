@@ -4,6 +4,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
+#include "application.hpp"
 #include "logger.hpp"
 
 using aide::FileName;
@@ -112,6 +113,8 @@ TEST_CASE("Test log macros", "[Logger]")
     [[maybe_unused]] auto res = std::remove(logFileName);
 
     auto logger = Logger(FileName(logFileName));
+
+    aide::Application::disableLoggingToConsole();
 
 #if SPDLOG_ACTIVE_LEVEL <= SPDLOG_LEVEL_TRACE
     SECTION(" trace default logger")

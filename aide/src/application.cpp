@@ -53,6 +53,11 @@ LoggerPtr Application::logger(const std::string& loggerName)
     return ApplicationBuilder::setupLogger(loggerName);
 }
 
+void Application::disableLoggingToConsole()
+{
+    Logger::disableLoggingToConsole();
+}
+
 std::shared_ptr<QMainWindow> Application::mainWindow() const
 {
     return m_appBuilder->mainWindow();

@@ -29,6 +29,8 @@ TEST_CASE("Application constructor throws an exception", "[Application]")
     // NOLINTNEXTLINE
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
 
+    aide::Application::disableLoggingToConsole();
+
     const std::unique_ptr<aide::Application> app;
 
     SECTION(" if organization name is not set before calling")
@@ -51,6 +53,8 @@ TEST_CASE("Application constructor does not throw an exception",
     // NOLINTNEXTLINE
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
 
+    aide::Application::disableLoggingToConsole();
+
     const std::unique_ptr<aide::Application> app;
 
     SECTION(" if organization name is set before calling")
@@ -67,6 +71,8 @@ TEST_CASE("Application constructor does not throw an exception",
 
 TEST_CASE("Logger logs into cache directory", "[Application]")
 {
+    aide::Application::disableLoggingToConsole();
+
     aide::Application::setApplicationName("aide_test");
     aide::Application::setOrganizationName("aide_company");
 
@@ -93,6 +99,8 @@ TEST_CASE("Logger logs into cache directory", "[Application]")
 
 TEST_CASE("Application translator interface is never null", "[Application]")
 {
+    aide::Application::disableLoggingToConsole();
+
     aide::Application::setApplicationName("aide_test");
     aide::Application::setOrganizationName("aide_company");
 
@@ -108,6 +116,8 @@ TEST_CASE("Application translator interface is never null", "[Application]")
 
 TEST_CASE("Application main window is never null", "[Application]")
 {
+    aide::Application::disableLoggingToConsole();
+
     aide::Application::setApplicationName("aide_test");
     aide::Application::setOrganizationName("aide_company");
 
@@ -123,6 +133,8 @@ TEST_CASE("Application main window is never null", "[Application]")
 
 TEST_CASE("Application settings provider is never null", "[Application]")
 {
+    aide::Application::disableLoggingToConsole();
+
     aide::Application::setApplicationName("aide_test");
     aide::Application::setOrganizationName("aide_company");
 
