@@ -7,7 +7,7 @@ include(${CMAKE_CURRENT_LIST_DIR}/../cmake/VersionFromGit.cmake)
 version_from_git()
 
 project(
-  aide
+  aide.library
   LANGUAGES CXX
   VERSION ${VERSION}
 )

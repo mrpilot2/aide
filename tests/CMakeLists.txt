@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.24...3.26)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
 project(
-  aide_tests
+  aide.tests
   LANGUAGES CXX
   VERSION 0.1.0
 )
