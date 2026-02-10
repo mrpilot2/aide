@@ -24,6 +24,7 @@ namespace aide::gui
         : public QDialog
         , public core::AideInformationPresenter
     {
+        Q_OBJECT
     public:
         explicit AboutAideDialog(QWidget* parent = nullptr);
 

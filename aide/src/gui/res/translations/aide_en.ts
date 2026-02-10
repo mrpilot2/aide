@@ -8,15 +8,15 @@
         <translation></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;br&gt;&lt;p&gt;aIDE is made possible by &lt;a href=&quot;abc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;open source software&lt;/span&gt;&lt;br/&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation></translation>
     </message>
     <message>
         <source>Copy</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;aIDE is made possible by &lt;a href=&quot;abc&quot;&gt;&lt;span&gt;open source software&lt;/span&gt;&lt;/a&gt;&lt;a href=&quot;abc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#308cc6;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation></translation>
     </message>
 </context>
@@ -119,6 +119,17 @@
     </message>
     <message>
         <source>Reset to default</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
+    <name>aide::gui::AboutAideDialog</name>
+    <message>
+        <source>built on</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>What&apos;s new</source>
         <translation></translation>
     </message>
 </context>

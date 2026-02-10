@@ -9,7 +9,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;br&gt;&lt;p&gt;aIDE is made possible by &lt;a href=&quot;abc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;open source software&lt;/span&gt;&lt;br/&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;br&gt;&lt;p&gt;aIDE wird ermöglicht durch den Einsatz von &lt;a href=&quot;abc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;freier Software&lt;/span&gt;&lt;br/&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;br&gt;&lt;p&gt;aIDE wird ermöglicht durch den Einsatz von &lt;a href=&quot;abc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;freier Software&lt;/span&gt;&lt;br/&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -18,6 +18,10 @@
     <message>
         <source>Copy</source>
         <translation>Kopieren</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;aIDE is made possible by &lt;a href=&quot;abc&quot;&gt;&lt;span&gt;open source software&lt;/span&gt;&lt;/a&gt;&lt;a href=&quot;abc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#308cc6;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;aIDE wird ermöglicht durch den Einsatz von &lt;a href=&quot;abc&quot;&gt;&lt;span&gt;freier Software&lt;/span&gt;&lt;/a&gt;&lt;a href=&quot;abc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#308cc6;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -155,6 +159,17 @@
     <message>
         <source>Reset to default</source>
         <translation>Auf Standard zurücksetzen</translation>
+    </message>
+</context>
+<context>
+    <name>aide::gui::AboutAideDialog</name>
+    <message>
+        <source>built on</source>
+        <translation>gebaut am</translation>
+    </message>
+    <message>
+        <source>What&apos;s new</source>
+        <translation>Was ist neu</translation>
     </message>
 </context>
 <context>

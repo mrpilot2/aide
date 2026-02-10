@@ -37,12 +37,12 @@ void AboutAideDialog::showAboutInformation(const core::AideInformation& info)
     const auto locale{QLocale::system()};
     const auto textToDisplay{
         QString("<h3>aIDE %1</h3><br>"
-                "Build %2, built on %3<br><br><a href=\"%4\">What's new</a>")
+                "Build %2, %3 %4<br><br><a href=\"%5\">%6</a>")
             .arg(QString::fromStdString(info.versionInfo),
-                 QString::fromStdString(info.gitHash),
+                 QString::fromStdString(info.gitHash), tr("built on"),
                  locale.toString(info.buildDate,
                                  QLocale::FormatType::LongFormat),
-                 QString::fromStdString(info.whatsNewUrl))};
+                 QString::fromStdString(info.whatsNewUrl), tr("What's new"))};
 
     m_ui->info->setText(textToDisplay);
 
