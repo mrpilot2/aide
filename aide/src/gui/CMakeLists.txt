@@ -80,6 +80,7 @@ target_link_libraries(
           Qt::Widgets
           aide_options
           aide_warnings
+          aide_coverage
 )
 
 set_source_files_properties(
