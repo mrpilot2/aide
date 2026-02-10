@@ -6,6 +6,9 @@ on:
 jobs:
   build:
     name: ${{ matrix.os }}, ${{ matrix.cmake_name }}, ${{ matrix.qt_name }}
+    permissions:
+      id-token: write
+
     strategy:
       fail-fast: false
       matrix:
@@ -30,6 +33,13 @@ jobs:
             qt_name: Qt5
           - qt: "6.5.0"
             qt_name: Qt6
+
+          - qt: "6.5.0"
+            cmake: 3.x
+            os: ubuntu-24.04
+            COVERAGE: ON
+            GCOV_TOOL: gcov
+
         exclude:
           - os: macos-latest
             qt: 5.15.2
@@ -162,7 +172,7 @@ jobs:
         if: matrix.COVERAGE == 'ON'
         uses: codecov/codecov-action@v4
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+          use_oidc: true
 
   publish-test-results:
     name: "Publish Unit Test Results from ${{ matrix. os }}"
