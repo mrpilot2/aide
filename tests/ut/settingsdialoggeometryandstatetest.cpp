@@ -22,8 +22,11 @@ TEST_CASE("Any settings dialog geometry and state use case")
     SettingsDialogGeometryAndState useCase(settingsDialog, settings);
 
     SettingsDialogGeometryAndStateData dataToBeSaved{
-        QByteArray{"abc"}, QByteArray{"def"}, QByteArray{"123"},
-        QByteArray{"456"}, QString{"Group1/Group2"}};
+        .dialogGeometry       = QByteArray{"abc"},
+        .splitterGeometry     = QByteArray{"def"},
+        .splitterState        = QByteArray{"123"},
+        .treeViewGeometry     = QByteArray{"456"},
+        .selectedTreeViewItem = QString{"Group1/Group2"}};
 
     SECTION("saves dialog geometry in settings")
     {

@@ -21,7 +21,7 @@ QVariant MockSettings::value(const HierarchicalId& groupAndKey)
 QVariant MockSettings::value(const HierarchicalId& groupAndKey,
                              const QVariant& defaultValue)
 {
-    if (inMemorySettings.find(groupAndKey) != inMemorySettings.end()) {
+    if (inMemorySettings.contains(groupAndKey)) {
         return inMemorySettings.at(groupAndKey);
     }
     return defaultValue;

@@ -23,10 +23,7 @@ using aide::gui::MainWindow;
 using aide::gui::MainWindowControllerPtr;
 using aide::gui::TranslatorInterface;
 
-void initIconResource()
-{
-    Q_INIT_RESOURCE(icons);
-}
+extern int qInitResources_icons();
 
 MainWindow::MainWindow(LoggerPtr loggerInterface, QWidget* parent)
     : MainWindowInterface(parent)
@@ -34,7 +31,7 @@ MainWindow::MainWindow(LoggerPtr loggerInterface, QWidget* parent)
     , m_translator{std::make_shared<ApplicationTranslator>(logger)}
     , m_ui(new Ui::MainWindow)
 {
-    initIconResource();
+    qInitResources_icons();
 
     m_ui->setupUi(this);
 }

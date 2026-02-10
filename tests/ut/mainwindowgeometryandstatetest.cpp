@@ -57,7 +57,7 @@ TEST_CASE("Any main window geometry and state interactor")
 
         interactor.restoreGeometryAndState();
 
-        REQUIRE(mainWindowView->state() == state);
+        REQUIRE(mainWindowView->getState() == state);
     }
 
     SECTION("restores window geometry from settings")
@@ -68,7 +68,7 @@ TEST_CASE("Any main window geometry and state interactor")
 
         interactor.restoreGeometryAndState();
 
-        REQUIRE(mainWindowView->geometry() == geometry);
+        REQUIRE(mainWindowView->getGeometry() == geometry);
     }
 
     SECTION("shows window maximized if geometry and state are not saved")

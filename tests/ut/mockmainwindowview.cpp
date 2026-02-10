@@ -9,12 +9,12 @@ void MockMainWindowView::restoreGeometryAndState(const QByteArray geometry,
     currentState    = state;
 }
 
-QByteArray MockMainWindowView::state() const
+const QByteArray& MockMainWindowView::getState() const
 {
     return currentState;
 }
 
-QByteArray MockMainWindowView::geometry() const
+const QByteArray& MockMainWindowView::getGeometry() const
 {
     return currentGeometry;
 }

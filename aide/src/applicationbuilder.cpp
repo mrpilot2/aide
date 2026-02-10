@@ -17,15 +17,15 @@ using aide::gui::SettingsDialogController;
 ApplicationBuilder::ApplicationBuilder()
     : m_settingsProvider(std::make_shared<AideSettingsProvider>())
     , m_actionRegistry{std::make_shared<ActionRegistry>(
-          *(m_settingsProvider->versionableSettings()), m_logger)}
+          *(AideSettingsProvider::versionableSettings()), m_logger)}
     , m_mainWindow(new MainWindow(m_logger, nullptr))
     , m_settingsDialog(std::make_shared<SettingsDialog>(m_mainWindow.get()))
     , m_applicationClose(m_mainWindow,
-                         *(m_settingsProvider->versionableSettings()))
+                         *(AideSettingsProvider::versionableSettings()))
     , m_mainWindowGeometryAndState(
-          m_mainWindow, *(m_settingsProvider->unversionableSettings()))
+          m_mainWindow, *(AideSettingsProvider::unversionableSettings()))
     , m_showSettingsDialog(m_settingsDialog,
-                           *(m_settingsProvider->unversionableSettings()),
+                           *(AideSettingsProvider::unversionableSettings()),
                            m_logger)
     , m_settingsDialogController(
           std::make_shared<SettingsDialogController>(m_showSettingsDialog))

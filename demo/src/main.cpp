@@ -43,12 +43,12 @@ int main(int argc, char* argv[])
         std::make_unique<DemoSettingsPage>(
             aide::HierarchicalId("Demo Page 1")("Demo Subpage 1")(
                 "Demo Subpage 1.1"),
-            app.settingsProvider()->unversionableSettings()));
+            aide::AideSettingsProvider::unversionableSettings()));
     aide::core::SettingsPageRegistry::addPage(
         std::make_unique<DemoSettingsPage>(
             aide::HierarchicalId("Demo Page 1")("Demo Subpage 1")(
                 "Demo Subpage 1.2"),
-            app.settingsProvider()->unversionableSettings()));
+            aide::AideSettingsProvider::unversionableSettings()));
 
     // extend file menu
 

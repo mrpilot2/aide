@@ -31,7 +31,7 @@ TEST_CASE("Application constructor throws an exception", "[Application]")
 
     aide::Application::disableLoggingToConsole();
 
-    const std::unique_ptr<aide::Application> app;
+    [[maybe_unused]] const std::unique_ptr<aide::Application> app;
 
     SECTION(" if organization name is not set before calling")
     {
@@ -55,7 +55,7 @@ TEST_CASE("Application constructor does not throw an exception",
 
     aide::Application::disableLoggingToConsole();
 
-    const std::unique_ptr<aide::Application> app;
+    [[maybe_unused]] const std::unique_ptr<aide::Application> app;
 
     SECTION(" if organization name is set before calling")
     {

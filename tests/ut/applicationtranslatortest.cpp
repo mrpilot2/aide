@@ -34,12 +34,9 @@ TEST_CASE("Default ApplicationTranslator")
 
         // On Ubuntu 20.04 United States is written with a space, on older
         // ubuntu version, there is no space
-        REQUIRE((availableTranslations.find("English (United States)") !=
-                     availableTranslations.end() ||
-                 availableTranslations.find("English (UnitedStates)") !=
-                     availableTranslations.end()));
-        REQUIRE(availableTranslations.find("German (Germany)") !=
-                availableTranslations.end());
+        REQUIRE((availableTranslations.contains("English (United States)") ||
+                 availableTranslations.contains("English (UnitedStates)")));
+        REQUIRE(availableTranslations.contains("German (Germany)"));
     }
 
     SECTION(" allows to translate a standard library string")
@@ -69,8 +66,7 @@ TEST_CASE("ApplicationTranslator with additional path")
 
         const std::set availableTranslations{
             translator.getAvailableTranslations()};
-        REQUIRE(availableTranslations.find("Swedish (Sweden)") !=
-                availableTranslations.end());
+        REQUIRE(availableTranslations.contains("Swedish (Sweden)"));
     }
 
     SECTION(" is able to translate to application language")

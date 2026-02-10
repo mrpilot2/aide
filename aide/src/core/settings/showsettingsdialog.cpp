@@ -36,8 +36,8 @@ void ShowSettingsDialog::showSettingsDialog()
     saveGeometryAndState.restoreGeometryAndState();
 
     const auto& pages = SettingsPageRegistry::settingsPages();
-    std::for_each(pages.begin(), pages.end(), [](const auto& p) {
-        p->reset();
+    std::ranges::for_each(pages, [](const auto& p) {
+        (*p).reset();
         p->widget()->setVisible(false);
     });
 
@@ -76,7 +76,8 @@ void ShowSettingsDialog::changeSelectedPage(
         updateDisplayName(selectedIndex);
 
         currentlySelectedPage =
-            treeModel->findCorrespondingSettingsPage(selectedIndex);
+            SettingsPageGroupTreeModel::findCorrespondingSettingsPage(
+                selectedIndex);
 
         if (currentlySelectedPage != nullptr) {
             showSelectedPageWidget(currentlySelectedPage->widget());
@@ -149,16 +150,15 @@ void ShowSettingsDialog::anyGuiElementHasChanged()
         d->showResetLabel(currentlySelectedPage->isModified());
         const auto& pages = SettingsPageRegistry::settingsPages();
 
-        d->enableApplyButton(
-            std::any_of(pages.begin(), pages.end(),
-                        [](const auto& p) { return p->isModified(); }));
+        d->enableApplyButton(std::ranges::any_of(
+            pages, [](const auto& p) { return p->isModified(); }));
     }
 }
 
 void ShowSettingsDialog::resetCurrentPage()
 {
     if (currentlySelectedPage != nullptr) {
-        currentlySelectedPage->reset();
+        (*currentlySelectedPage).reset();
         anyGuiElementHasChanged();
     }
 }
@@ -167,7 +167,7 @@ void ShowSettingsDialog::resetModifiedSettingsPages()
 {
     const auto& pages = SettingsPageRegistry::settingsPages();
     for (const auto& page : pages) {
-        if (page->isModified()) { page->reset(); }
+        if (page->isModified()) { (*page).reset(); }
     }
 }
 

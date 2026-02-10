@@ -2,8 +2,6 @@
 
 #include <iostream>
 
-#include <QLineEdit>
-#include <QMenu>
 #include <QObject>
 #include <QTimer>
 

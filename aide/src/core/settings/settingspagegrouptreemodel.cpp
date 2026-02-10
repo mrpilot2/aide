@@ -90,11 +90,11 @@ SettingsPagePtr SettingsPageGroupTreeModel::findCorrespondingSettingsPage(
 
     const auto& pages = SettingsPageRegistry::settingsPages();
 
-    if (const auto it = std::find_if(pages.begin(), pages.end(),
-                                     [&completeGroupName](const auto& page) {
-                                         return page->group().name() ==
-                                                completeGroupName;
-                                     });
+    if (const auto it = std::ranges::find_if(
+            pages,
+            [&completeGroupName](const auto& page) {
+                return page->group().name() == completeGroupName;
+            });
         it != pages.end()) {
         return *it;
     }

@@ -39,7 +39,7 @@ void ActionRegistry::registerAction(
     const std::string description,
     const std::vector<QKeySequence>& defaultKeySequences)
 {
-    if (m_actions.find(uniqueId) != m_actions.end()) {
+    if (m_actions.contains(uniqueId)) {
         logger->warn(
             R"(Action with id "{}" is already registered. This is either a "
             "programming error or results from conflicting plugins. This "
@@ -60,8 +60,10 @@ void ActionRegistry::registerAction(
 
     const auto userKeySequences = loadUserKeySequences(uniqueId);
 
-    const Action detailedAction{action, description, qtDefaultSequences,
-                                userKeySequences};
+    const Action detailedAction{.action              = action,
+                                .description         = description,
+                                .defaultKeySequences = qtDefaultSequences,
+                                .keySequences        = userKeySequences};
 
     if (!action.expired()) {
         const auto sharedAction = action.lock();
@@ -147,7 +149,7 @@ MenuContainerInterface* ActionRegistry::createMenu(
 MenuContainerInterface* ActionRegistry::createMenu(
     const HierarchicalId& uniqueId, QWidget* parent)
 {
-    if (m_menus.find(uniqueId) == m_menus.end()) {
+    if (!m_menus.contains(uniqueId)) {
         m_menus.try_emplace(uniqueId, std::make_unique<MenuContainer>(parent));
     }
 

@@ -30,10 +30,9 @@ public:
     void addPage(SettingsPagePtr page)
     {
         auto group = page->group();
-        if (std::find_if(m_settingsPages.begin(), m_settingsPages.end(),
-                         [group](const auto& elem) {
-                             return group == elem->group();
-                         }) != m_settingsPages.end()) {
+        if (std::ranges::find_if(m_settingsPages, [group](const auto& elem) {
+                return group == elem->group();
+            }) != m_settingsPages.end()) {
             throw std::invalid_argument(
                 "SettingsPageRegistry: duplicate registration for group " +
                 page->group().name() + " detected.");

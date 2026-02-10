@@ -30,18 +30,15 @@ bool KeymapPage::isModified() const
 {
     const auto& actions{actionRegistry->actions()};
 
-    return std::any_of(
-        actions.begin(), actions.end(), [this](const auto& keyActionPair) {
-            const auto& [id, action] = keyActionPair;
-            if (auto item =
-                    showUseCase.getTreeModel()->findItemForActionId(id)) {
-                return !action.areKeySequencesTheSame(
-                    QKeySequence::listFromString(
-                        item.value()->data(1).toString()),
-                    action.getActiveKeySequences());
-            }
-            return false;
-        });
+    return std::ranges::any_of(actions, [this](const auto& keyActionPair) {
+        const auto& [id, action] = keyActionPair;
+        if (auto item = showUseCase.getTreeModel()->findItemForActionId(id)) {
+            return !action.areKeySequencesTheSame(
+                QKeySequence::listFromString(item.value()->data(1).toString()),
+                action.getActiveKeySequences());
+        }
+        return false;
+    });
 }
 
 void KeymapPage::reset()

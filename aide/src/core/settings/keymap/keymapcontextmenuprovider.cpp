@@ -35,9 +35,8 @@ void KeymapContextMenuProvider::createAndShowContextMenu(
     auto keySequenceInModel{
         QKeySequence::listFromString(item->data(1).toString())};
 
-    const bool keySequencesAreAllEmpty{
-        std::all_of(keySequenceInModel.begin(), keySequenceInModel.end(),
-                    [](auto elem) { return elem.isEmpty(); })};
+    const bool keySequencesAreAllEmpty{std::ranges::all_of(
+        keySequenceInModel, [](const auto& elem) { return elem.isEmpty(); })};
     if (!keySequencesAreAllEmpty) {
         entries.push_back({ContextMenuItemType::SEPARATOR, "", QKeySequence()});
 
@@ -51,7 +50,7 @@ void KeymapContextMenuProvider::createAndShowContextMenu(
         }
     }
 
-    if (!action->areKeySequencesTheSame(keySequenceInModel,
+    if (!Action::areKeySequencesTheSame(keySequenceInModel,
                                         action->defaultKeySequences)) {
         entries.push_back({ContextMenuItemType::SEPARATOR, "", QKeySequence()});
 

@@ -13,9 +13,9 @@ namespace aide::test
         void restoreGeometryAndState(QByteArray geometry,
                                      QByteArray state) override;
 
-        [[nodiscard]] QByteArray state() const;
+        [[nodiscard]] const QByteArray& getState() const;
 
-        [[nodiscard]] QByteArray geometry() const;
+        [[nodiscard]] const QByteArray& getGeometry() const;
 
     private:
         QByteArray currentState;

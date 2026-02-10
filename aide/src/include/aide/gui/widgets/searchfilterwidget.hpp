@@ -12,6 +12,7 @@
 
 static constexpr auto VISIBILITY_TOGGLE_DELAY = 200;
 static constexpr auto TYPING_FILTER_DELAY     = 300;
+
 namespace Ui
 {
     class SearchFilterWidget;

@@ -31,6 +31,7 @@ macro(aide_enable_cppcheck WARNINGS_AS_ERRORS CPPCHECK_OPTIONS)
           --suppress=unassignedVariable
           --suppress=incorrectStringBooleanError
           --suppress=*:*/*_autogen/*.h
+          --check-level=exhaustive
           --std=c++20
           --library=qt
           --inconclusive

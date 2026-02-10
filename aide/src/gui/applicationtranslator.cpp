@@ -7,6 +7,8 @@
 
 using aide::gui::ApplicationTranslator;
 
+extern int qInitResources_translations();
+
 namespace
 {
     const QDir& libraryTranslationPath(const aide::LoggerPtr& logger)
@@ -25,15 +27,10 @@ namespace
     }
 } // namespace
 
-inline void initResources()
-{
-    Q_INIT_RESOURCE(translations);
-}
-
 ApplicationTranslator::ApplicationTranslator(LoggerPtr loggerInterface)
     : logger{std::move(loggerInterface)}
 {
-    initResources();
+    qInitResources_translations();
 
     logger->info(
         "Current application language is {}",
@@ -111,7 +108,11 @@ std::set<std::string> ApplicationTranslator::fetchLanguages(
 
         const QString languageString(
             QLocale::languageToString(locale.language()) + QLatin1String(" (") +
+#if QT_VERSION >= QT_VERSION_CHECK(6, 6, 0)
+            QLocale::territoryToString(locale.territory()) + QLatin1Char(')'));
+#else
             QLocale::countryToString(locale.country()) + QLatin1Char(')'));
+#endif
 
         languages.emplace(languageString.toStdString());
         logger->debug("Found language {} in file {}",

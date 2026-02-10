@@ -148,11 +148,11 @@ std::optional<Action> KeyMapTreeModel::findCorrespondingAction(
 
     auto actions = actionRegistry->actions();
 
-    if (const auto it = std::find_if(actions.begin(), actions.end(),
-                                     [&completeGroupName](const auto& action) {
-                                         return action.first.name() ==
-                                                completeGroupName;
-                                     });
+    if (const auto it = std::ranges::find_if(
+            actions,
+            [&completeGroupName](const auto& action) {
+                return action.first.name() == completeGroupName;
+            });
         it != actions.end()) {
         return it->second;
     }

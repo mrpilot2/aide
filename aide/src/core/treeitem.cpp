@@ -63,8 +63,9 @@ int64_t TreeItem::row() const
 
         return std::distance(
             childs.begin(),
-            std::find_if(childs.begin(), childs.end(),
-                         [this](auto child) { return child.get() == this; }));
+            std::ranges::find_if(childs, [this](const auto& child) {
+                return child.get() == this;
+            }));
     }
     return 0;
 }
