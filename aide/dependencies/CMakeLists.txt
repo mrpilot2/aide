@@ -92,7 +92,7 @@ add_license_dependency(
   LICENSE
   "(L)GPL"
   LICENSE_URL
-  "https://www.qt.io/licensing/"
+  "https://www.qt.io/development/qt-framework/qt-licensing"
 )
 
 add_license_dependency(
