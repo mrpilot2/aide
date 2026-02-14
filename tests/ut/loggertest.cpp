@@ -1,8 +1,10 @@
 #include <cstdio>
 #include <fstream>
 #include <sstream>
+#include <string>
 
 #include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_string.hpp>
 
 #include "application.hpp"
 #include "logger.hpp"
@@ -13,13 +15,12 @@ using aide::LoggerName;
 
 namespace
 {
-    size_t lookForContentInFile(const char* const fileName,
-                                const char* const searchString)
+    std::string getFileContents(const char* const fileName)
     {
         const std::ifstream logFile(fileName, std::ios::in);
         std::stringstream fileContent;
         fileContent << logFile.rdbuf();
-        return fileContent.str().find(searchString);
+        return fileContent.str();
     }
 } // namespace
 
@@ -40,8 +41,8 @@ TEST_CASE("Test different log levels", "[Logger]")
         logger.trace("This logs to the file");
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "trace") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("trace"));
     }
 
     SECTION(" trace")
@@ -49,8 +50,8 @@ TEST_CASE("Test different log levels", "[Logger]")
         logger.debug("This logs to the file");
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "debug") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("debug"));
     }
 #endif
 
@@ -61,8 +62,8 @@ TEST_CASE("Test different log levels", "[Logger]")
         logger.info("This logs to the file");
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "info") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("info"));
     }
 #endif
 
@@ -73,8 +74,8 @@ TEST_CASE("Test different log levels", "[Logger]")
         logger.warn("This logs to the file");
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "warn") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("warn"));
     }
 #endif
 
@@ -85,8 +86,8 @@ TEST_CASE("Test different log levels", "[Logger]")
         logger.error("This logs to the file");
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "error") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("error"));
     }
 
     SECTION(" critical")
@@ -94,8 +95,8 @@ TEST_CASE("Test different log levels", "[Logger]")
         logger.critical("This logs to the file");
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "critical") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("critical"));
     }
 #endif
 
@@ -122,10 +123,10 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_LOG_TRACE("Test")
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "aide_macro") !=
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "trace") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("aide_macro"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("trace"));
     }
 
     SECTION(" trace available logger")
@@ -136,10 +137,10 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_TRACE("my_fancy_logger", "Test")
         custom_logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") !=
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "trace") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("my_fancy_logger -"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("trace"));
     }
 
     SECTION(" trace unavailable logger")
@@ -147,12 +148,12 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_TRACE("my_fancy_logger", "Test")
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") ==
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "error") !=
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "trying to access") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     !Catch::Matchers::ContainsSubstring("my_fancy_logger -"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("error"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("trying to access"));
     }
 #endif
 
@@ -163,10 +164,10 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_LOG_DEBUG("Test")
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "aide_macro") !=
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "debug") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("aide_macro"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("debug"));
     }
 
     SECTION(" debug available logger")
@@ -177,10 +178,10 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_DEBUG("my_fancy_logger", "Test")
         custom_logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") !=
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "debug") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("my_fancy_logger -"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("debug"));
     }
 
     SECTION(" debug unavailable logger")
@@ -188,12 +189,12 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_DEBUG("my_fancy_logger", "Test")
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") ==
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "error") !=
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "trying to access") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     !Catch::Matchers::ContainsSubstring("my_fancy_logger -"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("error"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("trying to access"));
     }
 #endif
 
@@ -204,10 +205,10 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_LOG_INFO("Test")
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "aide_macro") !=
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "info") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("aide_macro"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("info"));
     }
 
     SECTION(" info available logger")
@@ -218,10 +219,10 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_INFO("my_fancy_logger", "Test")
         custom_logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") !=
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "info") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("my_fancy_logger -"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("info"));
     }
 
     SECTION(" info unavailable logger")
@@ -229,12 +230,12 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_INFO("my_fancy_logger", "Test")
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") ==
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "error") !=
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "trying to access") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     !Catch::Matchers::ContainsSubstring("my_fancy_logger -"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("error"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("trying to access"));
     }
 
 #endif
@@ -246,10 +247,10 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_LOG_WARN("Test")
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "aide_macro") !=
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "warn") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("aide_macro"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("warn"));
     }
 
     SECTION(" warn available logger")
@@ -260,10 +261,10 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_WARN("my_fancy_logger", "Test")
         custom_logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") !=
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "warn") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("my_fancy_logger -"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("warn"));
     }
 
     SECTION(" warn unavailable logger")
@@ -271,12 +272,12 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_WARN("my_fancy_logger", "Test")
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") ==
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "error") !=
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "trying to access") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     !Catch::Matchers::ContainsSubstring("my_fancy_logger -"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("error"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("trying to access"));
     }
 #endif
 
@@ -287,10 +288,10 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_LOG_ERROR("Test info")
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "aide_macro") !=
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "error") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("aide_macro"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("error"));
     }
 
     SECTION(" error available logger")
@@ -301,10 +302,10 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_ERROR("my_fancy_logger", "Test")
         custom_logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") !=
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "error") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("my_fancy_logger -"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("error"));
     }
 
     SECTION(" error unavailable logger")
@@ -312,12 +313,12 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_ERROR("my_fancy_logger", "Test")
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") ==
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "error") !=
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "trying to access") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     !Catch::Matchers::ContainsSubstring("my_fancy_logger -"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("error"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("trying to access"));
     }
 
 #endif
@@ -329,10 +330,10 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_LOG_CRITICAL("Test")
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "aide_macro") !=
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "critical") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("aide_macro"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("critical"));
     }
 
     SECTION(" critical available logger")
@@ -343,10 +344,10 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_CRITICAL("my_fancy_logger", "Test")
         custom_logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") !=
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "critical") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("my_fancy_logger -"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("critical"));
     }
 
     SECTION(" critical unavailable logger")
@@ -354,12 +355,12 @@ TEST_CASE("Test log macros", "[Logger]")
         AIDE_CUSTOM_LOG_CRITICAL("my_fancy_logger", "Test")
         logger.flush();
 
-        REQUIRE(::lookForContentInFile(logFileName, "my_fancy_logger -") ==
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "error") !=
-                std::string::npos);
-        REQUIRE(::lookForContentInFile(logFileName, "trying to access") !=
-                std::string::npos);
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     !Catch::Matchers::ContainsSubstring("my_fancy_logger -"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("error"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("trying to access"));
     }
 #endif
 
