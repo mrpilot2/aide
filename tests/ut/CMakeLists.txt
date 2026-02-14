@@ -133,6 +133,9 @@ enable_testing()
 if(UNIT_TESTS_RUN_ON_CI)
   catch_discover_tests(
     ut.aide
+    EXTRA_ARGS
+    --reporter
+    compact::out=-
     REPORTER
     junit
     OUTPUT_DIR
