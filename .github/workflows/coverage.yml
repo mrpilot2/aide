@@ -1,4 +1,4 @@
-name: CI - ABI compliance check
+name: CI - Generate coverage report
 
 on:
   workflow_call:
@@ -6,6 +6,9 @@ on:
 jobs:
   build:
     name: ${{ matrix.os }}, ${{ matrix.cmake_name }}, ${{ matrix.qt_name }}
+    permissions:
+      id-token: write
+
     strategy:
       fail-fast: false
       matrix:
@@ -20,6 +23,11 @@ jobs:
           - qt: "6.5.0"
             qt_name: Qt6
 
+          - qt: "6.5.0"
+            cmake: 4.x
+            os: ubuntu-24.04
+            GCOV_TOOL: gcov
+
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -32,13 +40,12 @@ jobs:
 
       - uses: seanmiddleditch/gha-setup-ninja@v5
 
-      - name: Setup Windows environment
-        uses: ilammy/msvc-dev-cmd@v1
-
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: 3.x
+          cache: 'pip'
+
       - name: Install pip dependencies
         run: |
           pip3 install wheel setuptools
@@ -52,34 +59,34 @@ jobs:
       - name: Print CMake version
         run: cmake --version
 
-      - name: Install apt dependencies
+      - name: Install and cache apt dependencies
         if: runner.os == 'Linux'
-        run: sudo apt install lcov ^libxcb-* abi-dumper abi-compliance-checker
+        uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: lcov ^libxcb-*
+          version: 1.0
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
+          cache: true
           version: ${{ matrix.qt }}
           aqtversion: '==3.1.*'
 
-      - name: Select base sha
-        if: github.event_name == 'pull_request'
-        id: base_sha
+      # Static Debug
+      - name: "Coverage Workflow (static debug)"
+        run: cmake --workflow --preset workflow-ci-coverage-unix
+        env:
+          QT_QPA_PLATFORM: offscreen
+
+      - name: Generate and coverage reports
+        working-directory: build/ci-coverage-unix
         run: |
-          echo "SHA=-Daide_ABI_BASE_HASH=${{ github.event.pull_request.base.sha }}" >> $GITHUB_OUTPUT
+          lcov --gcov-tool gcov --directory . --capture --output-file coverage.info # capture coverage info
+          lcov --gcov-tool gcov --remove coverage.info '/usr/*' --output-file coverage.info # filter out system
+          lcov --gcov-tool gcov --list coverage.info #debug info
 
-      # Shared Debug with ABI compliance check
-      - name: "ABI Compliance Check: Configure"
-        run: cmake --preset ci-abi-check-unix-shared-debug ${{ steps.base_sha.outputs.SHA }}
-
-      - name: "ABI Compliance Check: Build"
-        run: cmake --build --preset  build-ci-abi-check-unix-shared-debug
-
-      - name: Upload ABI compliance report
-        if: always()
-        uses: actions/upload-artifact@v4
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v4
         with:
-          name: abi_compliance_report
-          path: |
-            build/ci-abi-check-unix-shared-debug/compat_reports/libAide/**/*.html
-            build/ci-abi-check-unix-shared-debug/logs/
+          use_oidc: true

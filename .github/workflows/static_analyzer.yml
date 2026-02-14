@@ -10,11 +10,11 @@ jobs:
       fail-fast: false
       matrix:
         os: [ macos-latest, ubuntu-24.04 ]
-        cmake: [ 3.x ]
+        cmake: [ 4.x ]
         qt: [ "5.15.2", "6.5.0" ]
 
         include:
-          - cmake: 3.x
+          - cmake: 4.x
             cmake_name: CMake Latest
 
           - qt: "5.15.2"
@@ -71,18 +71,9 @@ jobs:
         with:
           version: ${{ matrix.qt }}
           aqtversion: '==3.1.*'
- 
-      - name: Set CMake arguments
-        id: cmake_args
-        run: echo "CMAKE_ARGS=-DUNIT_TESTS_RUN_ON_CI=1" >> $GITHUB_OUTPUT
 
       # Static Debug
-      - name: "Static Debug: Configure"
-        run: cmake -G Ninja -S . -B build-static-dbg -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=conan_provider.cmake -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_DEBUG_POSTFIX=d${{matrix.static_postfix}}" ${{ steps.cmake_args.outputs.CMAKE_ARGS }}
-      - name: "Static Debug: Build"
-        run: cmake --build build-static-dbg --parallel
-      - name: "Static Debug: Test"
-        run:  ASAN_OPTIONS=detect_odr_violation=0 LSAN_OPTIONS=suppressions=lsan.supp ctest --output-on-failure --stop-on-failure
-        working-directory: build-static-dbg
+      - name: "Static Debug: Static analysis"
+        run: cmake --workflow --preset=workflow-ci-static-unix-static-debug
         env:
           QT_QPA_PLATFORM: offscreen

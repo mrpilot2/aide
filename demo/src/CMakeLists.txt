@@ -41,7 +41,10 @@ add_executable(
   main.cpp
 )
 
-target_link_libraries(aide_demo PRIVATE Aide::AideApplication Aide::AideCore)
+target_link_libraries(
+  aide_demo PRIVATE Aide::AideApplication Aide::AideCore aide_warnings
+                    aide_options
+)
 
 if(WIN32)
   target_compile_definitions(

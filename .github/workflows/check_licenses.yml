@@ -35,8 +35,13 @@ jobs:
           version: '6.5.0'
           aqtversion: '==3.1.*'
 
-      - name: Check third party licenses
+      - name: Setup Ninja
+        uses: seanmiddleditch/gha-setup-ninja@v5
+
+      - name: Install pip dependencies
         run: |
-          mkdir build
-          cd build
-          cmake .. -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=conan_provider.cmake -DAIDE_CHECK_LICENSES_AVAILABILITY=ON
+          pip3 install wheel setuptools
+          pip3 install conan
+
+      - name: Check third party licenses
+        run: cmake --workflow --preset workflow-ci-license-check-unix
