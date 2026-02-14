@@ -13,20 +13,16 @@ jobs:
       fail-fast: false
       matrix:
         os: [ windows-latest, macos-latest, ubuntu-24.04 ]
-        cmake: [ 3.24, 3.x ]
+        cmake: [ 3.25, 4.x ]
         qt: [ "5.15.2", "6.5.0" ]
 
         include:
           - os: windows-latest
-            WARNINGS_AS_ERRORS: OFF
-
-          - os: windows-latest
-            static_postfix: _static
             CXX: cl
 
-          - cmake: 3.24
-            cmake_name: CMake 3.24
-          - cmake: 3.x
+          - cmake: 3.25
+            cmake_name: CMake 3.25
+          - cmake: 4.x
             cmake_name: CMake Latest
 
           - qt: "5.15.2"
@@ -35,7 +31,7 @@ jobs:
             qt_name: Qt6
 
           - qt: "6.5.0"
-            cmake: 3.x
+            cmake: 4.x
             os: ubuntu-24.04
             COVERAGE: ON
             GCOV_TOOL: gcov
@@ -96,62 +92,39 @@ jobs:
           cache: true
           version: ${{ matrix.qt }}
           aqtversion: '==3.1.*'
- 
-      - name: Set CMake arguments
-        id: cmake_args
-        run: echo "CMAKE_ARGS=-DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=conan_provider.cmake -DUNIT_TESTS_RUN_ON_CI=1 -Daide_WARNINGS_AS_ERRORS=${{ matrix.WARNINGS_AS_ERRORS || 'ON' }} -Daide_ENABLE_CLANG_TIDY=OFF -Daide_ENABLE_CPPCHECK=OFF -Daide_ENABLE_SANITIZER_ADDRESS=OFF -Daide_ENABLE_SANITIZER_UNDEFINED=OFF -Daide_ENABLE_IPO=OFF" >> $GITHUB_OUTPUT
+
+      - name: Select preset
+        id: preset
+        run: |
+          if [[ "${{ runner.os }}" == "Linux" || "${{ runner.os }}" == "macOS" ]]; then
+            echo "PRESET=workflow-ci-strict-unix" >> $GITHUB_OUTPUT
+          else
+            echo "PRESET=workflow-ci-strict-windows" >> $GITHUB_OUTPUT
+          fi
 
       # Static Debug
-      - name: "Static Debug: Configure"
-        run: cmake -G Ninja -S . -B build-static-dbg -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_DEBUG_POSTFIX=d${{matrix.static_postfix}}" ${{ steps.cmake_args.outputs.CMAKE_ARGS }}
-      - name: "Static Debug: Build"
-        run: cmake --build build-static-dbg --parallel
-      - name: "Static Debug: Test"
-        run: ctest --output-on-failure --stop-on-failure
-        working-directory: build-static-dbg
+      - name: "Static Debug: Workflow"
+        run: cmake --workflow --preset ${{ steps.preset.outputs.PRESET }}-static-debug
         env:
           QT_QPA_PLATFORM: offscreen
 
       # Shared Debug
-      - name: "Shared Debug: Configure"
-        run: cmake -G Ninja -S . -B build-shared-dbg -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEBUG_POSTFIX=d -DBUILD_SHARED_LIBS=ON "-Daide_ENABLE_COVERAGE=${{ matrix.COVERAGE }}" ${{ steps.cmake_args.outputs.CMAKE_ARGS }}
-      - name: "Shared Debug: Build"
-        run: cmake --build build-shared-dbg --parallel
-      - name: "Shared Debug: Test"
-        run: ctest --output-on-failure --stop-on-failure
-        working-directory: build-shared-dbg
+      - name: "Shared Debug: Workflow"
+        run: cmake --workflow --preset ${{ steps.preset.outputs.PRESET }}-shared-debug
         env:
           QT_QPA_PLATFORM: offscreen
 
       # Static Release
-      - name: "Static Release: Configure"
-        run: cmake -G Ninja -S . -B build-static-rel -DCMAKE_BUILD_TYPE=Release "-DCMAKE_RELEASE_POSTFIX=${{matrix.static_postfix}}" ${{ steps.cmake_args.outputs.CMAKE_ARGS }}
-      - name: "Static Release: Build"
-        run: cmake --build build-static-rel --parallel
-      - name: "Static Release: Test"
-        run: ctest --output-on-failure --stop-on-failure
-        working-directory: build-static-rel
+      - name: "Static Release: Workflow"
+        run: cmake --workflow --preset ${{ steps.preset.outputs.PRESET }}-static-release
         env:
           QT_QPA_PLATFORM: offscreen
 
       # Shared Release
-      - name: "Shared Release: Configure"
-        run: cmake -G Ninja -S . -B build-shared-rel -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON ${{ steps.cmake_args.outputs.CMAKE_ARGS }}
-      - name: "Shared Release: Build"
-        run: cmake --build build-shared-rel --parallel
-      - name: "Shared Release: Test"
-        run: ctest --output-on-failure --stop-on-failure
-        working-directory: build-shared-rel
+      - name: "Shared Release: Workflow"
+        run: cmake --workflow --preset ${{ steps.preset.outputs.PRESET }}-shared-release
         env:
           QT_QPA_PLATFORM: offscreen
-
-      # Joint install
-      - name: Install
-        run: |
-          cmake --install build-shared-dbg --prefix install
-          cmake --install build-static-dbg --prefix install
-          cmake --install build-shared-rel --prefix install
-          cmake --install build-static-rel --prefix install
 
       - name: Upload Unit Test Results
         if: always()
@@ -162,7 +135,7 @@ jobs:
 
       - name: Generate and coverage reports
         if: matrix.COVERAGE == 'ON'
-        working-directory: build-shared-dbg
+        working-directory: build/ci-strict-unix-shared-debug
         run: |
           lcov --gcov-tool ${{ matrix.GCOV_TOOL }} --directory . --capture --output-file coverage.info # capture coverage info
           lcov --gcov-tool ${{ matrix.GCOV_TOOL }} --remove coverage.info '/usr/*' --output-file coverage.info # filter out system
