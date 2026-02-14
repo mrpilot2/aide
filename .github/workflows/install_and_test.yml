@@ -61,19 +61,19 @@ jobs:
 
     - name: "Shared Release: Configure"
       working-directory: aide
-      run: cmake -S . -B build-shared-rel -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=../conan_provider.cmake -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -Daide_PACKAGING_MAINTAINER_MODE=ON -DCMAKE_INSTALL_PREFIX=~/.local/build-static-rel/
+      run: cmake -S . -B build-shared-rel -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=../conan_provider.cmake -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -Daide_PACKAGING_MAINTAINER_MODE=ON -DCMAKE_INSTALL_PREFIX=~/.local/build-shared-rel/
     - name: "Shared Release: Build and install"
       working-directory: aide
       run:  cmake --build build-shared-rel --target install --parallel
     - name: "Shared Release: Configure tests"
       working-directory: tests
-      run: cmake -S . -B build-shared-rel -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=../conan_provider.cmake -DCMAKE_INSTALL_PREFIX=~/.local/build-static-rel -Daide_PACKAGING_MAINTAINER_MODE=ON -DUNIT_TESTS_RUN_ON_CI=1
+      run: cmake -S . -B build-shared-rel -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=../conan_provider.cmake -DCMAKE_INSTALL_PREFIX=~/.local/build-shared-rel -Daide_PACKAGING_MAINTAINER_MODE=ON -DUNIT_TESTS_RUN_ON_CI=1
     - name: "Shared Release: Build tests"
       working-directory: tests
-      run: cmake --build build-shared-rel --parallel
+      run: LD_LIBRARY_PATH=~/.local/build-shared-rel/lib cmake --build build-shared-rel --parallel
     - name: "Shared Release: Run tests"
       working-directory: tests/build-shared-rel
-      run: ctest
+      run: LD_LIBRARY_PATH=~/.local/build-shared-rel/lib ctest --output-on-failure
       env:
         QT_QPA_PLATFORM: offscreen
 

@@ -1,4 +1,4 @@
-add_library(AideLogger OBJECT)
+add_library(AideLogger)
 add_library(Aide::AideLogger ALIAS AideLogger)
 
 target_sources(AideLogger PRIVATE logger.cpp)
@@ -15,8 +15,6 @@ target_link_libraries(
   PUBLIC spdlog::spdlog fmt::fmt
   PRIVATE aide_coverage aide_options aide_warnings
 )
-
-set_target_properties(AideLogger PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 set(AIDE_LOG_LEVEL
     "$<IF:$<CONFIG:Debug>,SPDLOG_LEVEL_TRACE,SPDLOG_LEVEL_INFO>"

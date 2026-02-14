@@ -1,7 +1,5 @@
-add_library(AideUtils OBJECT)
+add_library(AideUtils)
 add_library(Aide::AideUtils ALIAS AideUtils)
-
-set_target_properties(AideUtils PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 if(WIN32)
   target_sources(AideUtils PRIVATE systemmemory_win.cpp)

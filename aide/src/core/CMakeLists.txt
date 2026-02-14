@@ -1,6 +1,6 @@
 set(CMAKE_AUTOMOC ON)
 
-add_library(AideCore OBJECT)
+add_library(AideCore)
 add_library(Aide::AideCore ALIAS AideCore)
 
 target_sources(
@@ -42,7 +42,7 @@ target_include_directories(
 
 target_link_libraries(
   AideCore
-  PUBLIC Qt::Core Qt::Widgets AideLogger
+  PUBLIC Qt::Core Qt::Widgets Aide::AideLogger
   PRIVATE Aide::AideBuildInformation aide_coverage aide_options aide_warnings
 )
 

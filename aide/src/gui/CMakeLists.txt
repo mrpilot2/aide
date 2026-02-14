@@ -38,7 +38,7 @@ if(TARGET Qt::lrelease)
   )
 endif()
 
-add_library(AideGui OBJECT)
+add_library(AideGui)
 add_library(Aide::AideGui ALIAS AideGui)
 
 target_sources(

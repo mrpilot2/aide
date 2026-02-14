@@ -93,6 +93,10 @@ target_link_libraries(
           aide_warnings
           Aide::AideBuildInformation
           Aide::AideApplication
+          Aide::AideCore
+          Aide::AideGui
+          Aide::AideLogger
+          Aide::AideUtils
           Aide::AideWidgets
 )
 

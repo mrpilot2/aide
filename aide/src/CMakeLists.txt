@@ -7,10 +7,8 @@ add_library(AideQt${QT_VERSION_MAJOR}Application)
 add_library(Aide::AideApplication ALIAS AideQt${QT_VERSION_MAJOR}Application)
 
 target_sources(
-  AideQt${QT_VERSION_MAJOR}Application
-  PRIVATE $<TARGET_OBJECTS:AideCore> $<TARGET_OBJECTS:AideGui>
-          $<TARGET_OBJECTS:AideLogger> $<TARGET_OBJECTS:AideUtils>
-          application.cpp applicationbuilder.cpp
+  AideQt${QT_VERSION_MAJOR}Application PRIVATE application.cpp
+                                               applicationbuilder.cpp
 )
 
 target_include_directories(
@@ -28,11 +26,6 @@ target_link_libraries(
 )
 
 target_compile_features(AideQt${QT_VERSION_MAJOR}Application PUBLIC cxx_std_20)
-
-target_compile_definitions(
-  AideQt${QT_VERSION_MAJOR}Application
-  PUBLIC SPDLOG_ACTIVE_LEVEL=${AIDE_LOG_LEVEL}
-)
 
 if(WIN32)
   target_compile_definitions(
