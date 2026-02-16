@@ -22,6 +22,12 @@ namespace
         fileContent << logFile.rdbuf();
         return fileContent.str();
     }
+
+    void clearLogFile(const char* const fileName)
+    {
+        std::ofstream file(fileName, std::ios::trunc);
+        file << "" << std::flush;
+    }
 } // namespace
 
 TEST_CASE("Test different log levels", "[Logger]")
@@ -364,5 +370,5 @@ TEST_CASE("Test log macros", "[Logger]")
     }
 #endif
 
-    [[maybe_unused]] auto res1 = std::remove(logFileName);
+    ::clearLogFile(logFileName);
 }

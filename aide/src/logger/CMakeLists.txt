@@ -1,7 +1,7 @@
 add_library(AideLogger)
 add_library(Aide::AideLogger ALIAS AideLogger)
 
-target_sources(AideLogger PRIVATE logger.cpp)
+target_sources(AideLogger PRIVATE logger.cpp loggermacros.cpp)
 
 target_include_directories(
   AideLogger
