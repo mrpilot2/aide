@@ -132,6 +132,10 @@ set_source_files_properties(
     "INSTALL_LICENSE_FILE=\"${LICENSE_FILE}\";DEVEL_LICENSE_FILE=\"${DEVEL_LICENSE_FILE}\""
 )
 
+if(MSVC AND BUILD_SHARED_LIBS)
+  target_compile_definitions(ut.aide PRIVATE BUILD_SHARED_LIBS_ON_MSVC)
+endif()
+
 enable_testing()
 
 if(UNIT_TESTS_RUN_ON_CI)

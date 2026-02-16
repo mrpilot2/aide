@@ -109,6 +109,7 @@ TEST_CASE("Test different log levels", "[Logger]")
     [[maybe_unused]] auto res1 = std::remove(logFileName);
 }
 
+#ifndef BUILD_SHARED_LIBS_ON_MSVC
 // NOLINTNEXTLINE
 TEST_CASE("Test log macros", "[Logger]")
 {
@@ -372,3 +373,4 @@ TEST_CASE("Test log macros", "[Logger]")
 
     ::clearLogFile(logFileName);
 }
+#endif
