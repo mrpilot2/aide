@@ -135,7 +135,7 @@
     },
 
     { "name": "role-ci-static", "hidden": true,
-      "inherits": ["static-analysis", "test-on-ci"]
+      "inherits": ["werror", "static-analysis", "test-on-ci"]
     },
 
     { "name": "dev-unix-static-debug",   "inherits": ["clang","static","debug","role-dev", "platform-unix"] },
@@ -169,11 +169,7 @@
     { "name": "ci-strict-windows-static-debug",   "inherits": ["static","debug","role-ci-strict", "platform-windows"] },
     { "name": "ci-strict-windows-static-release", "inherits": ["static","release","role-ci-strict", "platform-windows"] },
     { "name": "ci-strict-windows-shared-debug",   "inherits": ["shared","debug","role-ci-strict", "platform-windows"] },
-    { "name": "ci-strict-windows-shared-release", "inherits": ["shared","release","role-ci-strict", "platform-windows"] },
-
-    { "name": "ci-static-windows-static",   "inherits": ["static","role-ci-static", "platform-windows"] },
-    { "name": "ci-static-windows-shared",   "inherits": ["shared","role-ci-static", "platform-windows" ] }
-
+    { "name": "ci-strict-windows-shared-release", "inherits": ["shared","release","role-ci-strict", "platform-windows"] }
   ],
 
   "buildPresets": [
@@ -209,9 +205,6 @@
     { "name": "build-ci-strict-windows-static-debug",   "configurePreset": "ci-strict-windows-static-debug" },
     { "name": "build-ci-strict-windows-shared-debug",   "configurePreset": "ci-strict-windows-shared-debug" },
 
-    { "name": "build-ci-static-windows-static-debug",   "configurePreset": "ci-static-windows-static",   "configuration": "Debug" },
-    { "name": "build-ci-static-windows-shared-debug",   "configurePreset": "ci-static-windows-shared",   "configuration": "Debug" },
-
     { "name": "build-dev-windows-static-release",   "configurePreset": "dev-windows-static",   "configuration": "RelWithDebInfo" },
     { "name": "build-dev-windows-shared-release",   "configurePreset": "dev-windows-shared",   "configuration": "RelWithDebInfo" },
 
@@ -219,10 +212,7 @@
     { "name": "build-client-windows-shared-release",   "configurePreset": "client-windows-shared",   "configuration": "RelWithDebInfo" },
 
     { "name": "build-ci-strict-windows-static-release",   "configurePreset": "ci-strict-windows-static-release" },
-    { "name": "build-ci-strict-windows-shared-release",   "configurePreset": "ci-strict-windows-shared-release" },
-
-    { "name": "build-ci-static-windows-static-release",   "configurePreset": "ci-static-windows-static",   "configuration": "RelWithDebInfo" },
-    { "name": "build-ci-static-windows-shared-release",   "configurePreset": "ci-static-windows-shared",   "configuration": "RelWithDebInfo" }
+    { "name": "build-ci-strict-windows-shared-release",   "configurePreset": "ci-strict-windows-shared-release" }
 
   ],
 
@@ -271,9 +261,6 @@
     { "name": "test-ci-strict-windows-static-debug", "inherits": "test-common",   "configurePreset": "ci-strict-windows-static-debug" },
     { "name": "test-ci-strict-windows-shared-debug", "inherits": "test-common",   "configurePreset": "ci-strict-windows-shared-debug" },
 
-    { "name": "test-ci-static-windows-static-debug", "inherits": "test-common",   "configurePreset": "ci-static-windows-static",   "configuration": "Debug" },
-    { "name": "test-ci-static-windows-shared-debug", "inherits": "test-common",   "configurePreset": "ci-static-windows-shared",   "configuration": "Debug" },
-
     { "name": "test-dev-windows-static-release", "inherits": "test-common",   "configurePreset": "dev-windows-static",   "configuration": "RelWithDebInfo" },
     { "name": "test-dev-windows-shared-release", "inherits": "test-common",   "configurePreset": "dev-windows-shared",   "configuration": "RelWithDebInfo" },
 
@@ -281,10 +268,7 @@
     { "name": "test-client-windows-shared-release", "inherits": "test-common",   "configurePreset": "client-windows-shared",   "configuration": "RelWithDebInfo" },
 
     { "name": "test-ci-strict-windows-static-release", "inherits": "test-common",   "configurePreset": "ci-strict-windows-static-release" },
-    { "name": "test-ci-strict-windows-shared-release", "inherits": "test-common",   "configurePreset": "ci-strict-windows-shared-release" },
-
-    { "name": "test-ci-static-windows-static-release", "inherits": "test-common",   "configurePreset": "ci-static-windows-static",   "configuration": "RelWithDebInfo" },
-    { "name": "test-ci-static-windows-shared-release", "inherits": "test-common",   "configurePreset": "ci-static-windows-shared",   "configuration": "RelWithDebInfo" }
+    { "name": "test-ci-strict-windows-shared-release", "inherits": "test-common",   "configurePreset": "ci-strict-windows-shared-release" }
 
   ],
 
@@ -433,41 +417,6 @@
       ]
     },
 
-    {
-      "name": "workflow-ci-static-windows-static-debug",
-      "steps": [
-        { "type": "configure", "name": "ci-static-windows-static" },
-        { "type": "build", "name": "build-ci-static-windows-static-debug" },
-        { "type": "test", "name": "test-ci-static-windows-static-debug" }
-      ]
-    },
-
-    {
-      "name": "workflow-ci-static-windows-static-release",
-      "steps": [
-        { "type": "configure", "name": "ci-static-windows-static" },
-        { "type": "build", "name": "build-ci-static-windows-static-release" },
-        { "type": "test", "name": "test-ci-static-windows-static-release" }
-      ]
-    },
-
-    {
-      "name": "workflow-ci-static-windows-shared-debug",
-      "steps": [
-        { "type": "configure", "name": "ci-static-windows-shared" },
-        { "type": "build", "name": "build-ci-static-windows-shared-debug" },
-        { "type": "test", "name": "test-ci-static-windows-shared-debug" }
-      ]
-    },
-
-    {
-      "name": "workflow-ci-static-windows-shared-release",
-      "steps": [
-        { "type": "configure", "name": "ci-static-windows-shared" },
-        { "type": "build", "name": "build-ci-static-windows-shared-release" },
-        { "type": "test", "name": "test-ci-static-windows-shared-release" }
-      ]
-    },
     {
       "name": "workflow-ci-strict-windows-static-debug",
       "steps": [
