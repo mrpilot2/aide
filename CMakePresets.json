@@ -110,9 +110,14 @@
         "UBSAN_OPTIONS": "print_stacktrace=1"
       }
     },
-
-    { "name": "coverage", "hidden": true,
-      "cacheVariables": { "aide_ENABLE_COVERAGE": "ON" }
+    {
+      "name": "coverage",
+      "hidden": true,
+      "cacheVariables": {
+        "aide_ENABLE_COVERAGE": "ON",
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++"
+      }
     },
 
     { "name": "test-on-ci", "hidden": true,
@@ -126,7 +131,7 @@
     },
 
     { "name": "role-ci-strict", "hidden": true,
-      "inherits": ["werror", "sanitizers", "coverage", "test-on-ci"]
+      "inherits": ["werror", "sanitizers", "test-on-ci"]
     },
 
     { "name": "role-ci-static", "hidden": true,
@@ -147,6 +152,8 @@
     { "name": "ci-strict-unix-static-release", "inherits": ["clang","static","release","role-ci-strict", "platform-unix"], "cacheVariables": { "CMAKE_RELEASE_POSTFIX": "_static" } },
     { "name": "ci-strict-unix-shared-debug",   "inherits": ["clang","shared","debug","role-ci-strict", "platform-unix"], "cacheVariables": { "CMAKE_DEBUG_POSTFIX": "_d" } },
     { "name": "ci-strict-unix-shared-release", "inherits": ["clang","shared","release","role-ci-strict", "platform-unix"] },
+
+    { "name": "ci-coverage-unix", "inherits": ["static","debug","coverage", "platform-unix"] },
 
     { "name": "ci-static-unix-static-debug",   "inherits": ["clang","static","debug","role-ci-static", "platform-unix"] },
     { "name": "ci-static-unix-static-release", "inherits": ["clang","static","release","role-ci-static", "platform-unix"] },
@@ -185,6 +192,8 @@
     { "name": "build-ci-strict-unix-static-release", "configurePreset": "ci-strict-unix-static-release", "jobs": 0 },
     { "name": "build-ci-strict-unix-shared-debug",   "configurePreset": "ci-strict-unix-shared-debug",   "jobs": 0 },
     { "name": "build-ci-strict-unix-shared-release", "configurePreset": "ci-strict-unix-shared-release", "jobs": 0 },
+
+    { "name": "build-ci-coverage-unix", "configurePreset": "ci-coverage-unix", "jobs": 0 },
 
     { "name": "build-ci-static-unix-static-debug",   "configurePreset": "ci-static-unix-static-debug",   "jobs": 0 },
     { "name": "build-ci-static-unix-static-release", "configurePreset": "ci-static-unix-static-release", "jobs": 0 },
@@ -245,6 +254,8 @@
     { "name": "test-ci-strict-unix-static-release", "inherits": "test-common", "configurePreset": "ci-strict-unix-static-release" },
     { "name": "test-ci-strict-unix-shared-debug", "inherits": "test-common",   "configurePreset": "ci-strict-unix-shared-debug" },
     { "name": "test-ci-strict-unix-shared-release", "inherits": "test-common", "configurePreset": "ci-strict-unix-shared-release" },
+
+    { "name": "test-ci-coverage-unix", "inherits": "test-common", "configurePreset": "ci-coverage-unix" },
 
     { "name": "test-ci-static-unix-static-debug", "inherits": "test-common",   "configurePreset": "ci-static-unix-static-debug" },
     { "name": "test-ci-static-unix-static-release", "inherits": "test-common", "configurePreset": "ci-static-unix-static-release" },
@@ -490,6 +501,15 @@
         { "type": "configure", "name": "ci-strict-windows-shared-release" },
         { "type": "build", "name": "build-ci-strict-windows-shared-release" },
         { "type": "test", "name": "test-ci-strict-windows-shared-release" }
+      ]
+    },
+
+    {
+      "name": "workflow-ci-coverage-unix",
+      "steps": [
+        { "type": "configure", "name": "ci-coverage-unix" },
+        { "type": "build", "name": "build-ci-coverage-unix" },
+        { "type": "test", "name": "test-ci-coverage-unix" }
       ]
     }
 
