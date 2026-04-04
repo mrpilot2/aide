@@ -12,7 +12,7 @@
       "name": "base",
       "hidden": true,
       "binaryDir": "${sourceDir}/build/${presetName}",
-      "installDir": "${sourceDir}/install/${presetName}",
+      "installDir": "${sourceDir}/build/install/${presetName}",
       "cacheVariables": {
         "CMAKE_PROJECT_TOP_LEVEL_INCLUDES": "${sourceDir}/conan_provider.cmake",
         "CMAKE_FIND_PACKAGE_PREFER_CONFIG": "TRUE",
@@ -119,7 +119,22 @@
         "CMAKE_CXX_COMPILER": "g++"
       }
     },
+    { "name": "abi-check", "hidden": true,
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++",
+        "aide_ENABLE_ABI_COMPLIANCE_CHECK": "ON",
+        "aide_PACKAGING_MAINTAINER_MODE": "ON"
+      }
+    },
 
+    { "name": "codeql", "hidden": true,
+      "cacheVariables": { "aide_ENABLE_COVERAGE": "ON" }
+    },
+
+    { "name": "doxygen", "hidden": true,
+      "cacheVariables": { "ENABLE_DOXYGEN": "ON" }
+    },
     { "name": "test-on-ci", "hidden": true,
       "cacheVariables": { "UNIT_TESTS_RUN_ON_CI": "ON" }
     },
@@ -160,6 +175,16 @@
     { "name": "ci-static-unix-shared-debug",   "inherits": ["clang","shared","debug","role-ci-static", "platform-unix"] },
     { "name": "ci-static-unix-shared-release", "inherits": ["clang","shared","release","role-ci-static", "platform-unix"] },
 
+    { "name": "ci-abi-check-unix-shared-debug",   "inherits": ["shared","debug","abi-check", "platform-unix"], "cacheVariables": { "CMAKE_DEBUG_POSTFIX": "_d" } },
+
+    { "name": "ci-codeql-unix-debug", "inherits": ["clang","static","debug","codeql", "platform-unix"] },
+
+    { "name": "ci-doxygen-unix", "inherits": ["clang","static","release","doxygen", "platform-unix"] },
+
+    { "name": "ci-license-check-unix", "inherits": ["clang","static","release", "platform-unix"], "cacheVariables": { "AIDE_CHECK_LICENSES_AVAILABILITY": "ON" } },
+
+    { "name": "ci-deploy-unix-shared-release", "inherits": ["clang","shared","release", "test-on-ci", "platform-unix"], "cacheVariables": { "aide_PACKAGING_MAINTAINER_MODE": "ON" } },
+
     { "name": "dev-windows-static",   "inherits": ["static","role-dev", "platform-windows"] },
     { "name": "dev-windows-shared",   "inherits": ["shared","role-dev", "platform-windows"] },
 
@@ -195,6 +220,14 @@
     { "name": "build-ci-static-unix-static-release", "configurePreset": "ci-static-unix-static-release", "jobs": 0 },
     { "name": "build-ci-static-unix-shared-debug",   "configurePreset": "ci-static-unix-shared-debug",   "jobs": 0 },
     { "name": "build-ci-static-unix-shared-release", "configurePreset": "ci-static-unix-shared-release", "jobs": 0 },
+
+    { "name": "build-ci-abi-check-unix-shared-debug", "configurePreset": "ci-abi-check-unix-shared-debug", "jobs": 0, "targets": ["generate_abi_compliance_report"] },
+
+    { "name": "build-ci-codeql-unix-debug", "configurePreset": "ci-codeql-unix-debug", "jobs": 0 },
+
+    { "name": "build-ci-doxygen-unix", "configurePreset": "ci-doxygen-unix", "jobs": 0, "targets": ["doxygen-docs"] },
+
+    { "name": "build-ci-deploy-unix-shared-release", "configurePreset": "ci-deploy-unix-shared-release", "jobs": 0, "targets": ["package"] },
 
     { "name": "build-dev-windows-static-debug",   "configurePreset": "dev-windows-static",   "configuration": "Debug" },
     { "name": "build-dev-windows-shared-debug",   "configurePreset": "dev-windows-shared",   "configuration": "Debug" },
@@ -460,8 +493,46 @@
         { "type": "build", "name": "build-ci-coverage-unix" },
         { "type": "test", "name": "test-ci-coverage-unix" }
       ]
-    }
+    },
 
+    {
+      "name": "workflow-ci-abi-check-unix-shared-debug",
+      "steps": [
+        { "type": "configure", "name": "ci-abi-check-unix-shared-debug" },
+        { "type": "build", "name": "build-ci-abi-check-unix-shared-debug" }
+      ]
+    },
+
+    {
+      "name": "workflow-ci-codeql-unix-debug",
+      "steps": [
+        { "type": "configure", "name": "ci-codeql-unix-debug" },
+        { "type": "build", "name": "build-ci-codeql-unix-debug" }
+      ]
+    },
+
+    {
+      "name": "workflow-ci-doxygen-unix",
+      "steps": [
+        { "type": "configure", "name": "ci-doxygen-unix" },
+        { "type": "build", "name": "build-ci-doxygen-unix" }
+      ]
+    },
+
+    {
+      "name": "workflow-ci-license-check-unix",
+      "steps": [
+        { "type": "configure", "name": "ci-license-check-unix" }
+      ]
+    },
+
+    {
+      "name": "workflow-ci-deploy-unix-shared-release",
+      "steps": [
+        { "type": "configure", "name": "ci-deploy-unix-shared-release" },
+        { "type": "build", "name": "build-ci-deploy-unix-shared-release" }
+      ]
+    }
 
   ]
 }

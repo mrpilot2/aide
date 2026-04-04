@@ -37,21 +37,19 @@ jobs:
           version: '6.5.0'
           aqtversion: '==3.1.*'
 
-
       - name: Install Doxygen
         run:
           sudo apt install doxygen graphviz -y
 
+      - name: Setup Ninja
+        uses: seanmiddleditch/gha-setup-ninja@v5
+
       - name: Build doxygen documentation
-        run: |
-          mkdir build
-          cd build
-          cmake .. -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=conan_provider.cmake -DENABLE_DOXYGEN=ON
-          make doxygen-docs
+        run: cmake --workflow --preset workflow-ci-doxygen-unix
 
       - name: Publish doxygen documentation to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          publish_dir: build/aide/doc/html
+          publish_dir: build/ci-doxygen-unix/aide/doc/html
           branch: gh_pages
           github_token: ${{ secrets.GITHUB_TOKEN }}

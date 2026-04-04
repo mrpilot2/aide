@@ -1,0 +1,76 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 25,
+    "patch": 0
+  },
+  "include": [
+    "../CMakePresets.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "ci-install-lib-unix-static-release",
+      "inherits": [
+        "clang",
+        "static",
+        "release",
+        "test-on-ci",
+        "platform-unix"
+      ],
+      "cacheVariables": {
+        "CMAKE_PROJECT_TOP_LEVEL_INCLUDES": "${sourceDir}/../conan_provider.cmake"
+      }
+    },
+    {
+      "name": "ci-install-lib-unix-shared-release",
+      "inherits": [
+        "clang",
+        "shared",
+        "release",
+        "test-on-ci",
+        "platform-unix"
+      ],
+      "cacheVariables": {
+        "CMAKE_PROJECT_TOP_LEVEL_INCLUDES": "${sourceDir}/../conan_provider.cmake"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "build-ci-install-lib-unix-static-release",
+      "configurePreset": "ci-install-lib-unix-static-release",
+      "jobs": 0,
+      "targets": [
+        "install"
+      ]
+    },
+    {
+      "name": "build-ci-install-lib-unix-shared-release",
+      "configurePreset": "ci-install-lib-unix-shared-release",
+      "jobs": 0,
+      "targets": [
+        "install"
+      ]
+    }
+  ],
+  "workflowPresets": [
+
+    {
+      "name": "workflow-ci-install-lib-unix-static-release",
+      "steps": [
+        { "type": "configure", "name": "ci-install-lib-unix-static-release" },
+        { "type": "build", "name": "build-ci-install-lib-unix-static-release" }
+      ]
+    },
+
+    {
+      "name": "workflow-ci-install-lib-unix-shared-release",
+      "steps": [
+        { "type": "configure", "name": "ci-install-lib-unix-shared-release" },
+        { "type": "build", "name": "build-ci-install-lib-unix-shared-release" }
+      ]
+    }
+
+  ]
+}

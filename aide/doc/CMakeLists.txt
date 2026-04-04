@@ -5,7 +5,7 @@ if(ENABLE_DOXYGEN)
   set(DOXYGEN_CALL_GRAPH YES)
   set(DOXYGEN_EXTRACT_ALL YES)
 
-  find_package(Doxygen REQUIRED dot)
+  find_package(Doxygen REQUIRED COMPONENTS dot)
   doxygen_add_docs(doxygen-docs ${PROJECT_SOURCE_DIR})
 
 endif()

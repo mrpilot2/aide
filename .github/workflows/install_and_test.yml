@@ -41,39 +41,36 @@ jobs:
         version: ${{ matrix.qt }}
         aqtversion: '==3.1.*'
 
-    - name: "Static Release: Configure"
+    - name: Setup Ninja
+      uses: seanmiddleditch/gha-setup-ninja@v5
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: 3.x
+
+    - name: Install pip dependencies
+      run: |
+        pip3 install wheel setuptools
+        pip3 install conan
+
+    - name: "Static Release: Workflow lib install"
       working-directory: aide
-      run: cmake -S . -B build-static-rel -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=../conan_provider.cmake -DCMAKE_BUILD_TYPE=Release -Daide_PACKAGING_MAINTAINER_MODE=ON -DCMAKE_INSTALL_PREFIX=~/.local/build-static-rel/
-    - name: "Static Release: Build and install"
-      working-directory: aide
-      run:  cmake --build build-static-rel --target install --parallel
-    - name: "Static Release: Configure tests"
+      run: cmake --workflow --preset workflow-ci-install-lib-unix-static-release
+
+    - name: "Static Release: Workflow test installed lib"
       working-directory: tests
-      run: cmake -S . -B build-static-rel -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=../conan_provider.cmake -Daide_PACKAGING_MAINTAINER_MODE=ON -DCMAKE_INSTALL_PREFIX=~/.local/build-static-rel -DUNIT_TESTS_RUN_ON_CI=1
-    - name: "Static Release: Build tests"
-      working-directory: tests
-      run: cmake --build build-static-rel --parallel
-    - name: "Static Release: Run tests"
-      working-directory: tests/build-static-rel
-      run: ctest
+      run: cmake --workflow --preset workflow-ci-install-test-unix-static-release
       env:
         QT_QPA_PLATFORM: offscreen
 
-    - name: "Shared Release: Configure"
+    - name: "Shared Release: Workflow lib install"
       working-directory: aide
-      run: cmake -S . -B build-shared-rel -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=../conan_provider.cmake -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -Daide_PACKAGING_MAINTAINER_MODE=ON -DCMAKE_INSTALL_PREFIX=~/.local/build-shared-rel/
-    - name: "Shared Release: Build and install"
-      working-directory: aide
-      run:  cmake --build build-shared-rel --target install --parallel
-    - name: "Shared Release: Configure tests"
+      run: cmake --workflow --preset workflow-ci-install-lib-unix-shared-release
+
+    - name: "Shared Release: Test installed lib"
       working-directory: tests
-      run: cmake -S . -B build-shared-rel -DCMAKE_PROJECT_TOP_LEVEL_INCLUDES=../conan_provider.cmake -DCMAKE_INSTALL_PREFIX=~/.local/build-shared-rel -Daide_PACKAGING_MAINTAINER_MODE=ON -DUNIT_TESTS_RUN_ON_CI=1
-    - name: "Shared Release: Build tests"
-      working-directory: tests
-      run: LD_LIBRARY_PATH=~/.local/build-shared-rel/lib cmake --build build-shared-rel --parallel
-    - name: "Shared Release: Run tests"
-      working-directory: tests/build-shared-rel
-      run: LD_LIBRARY_PATH=~/.local/build-shared-rel/lib ctest --output-on-failure
+      run: cmake --workflow --preset workflow-ci-install-test-unix-shared-release
       env:
         QT_QPA_PLATFORM: offscreen
 
@@ -82,7 +79,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: test_results_installed_lib-qt-${{ matrix.qt }}
-        path: tests/build*rel/**/*.xml
+        path: tests/build*/**/*.xml
 
   publish-test-results:
     name: "Publish Unit Test Results from installed lib"
@@ -102,6 +99,6 @@ jobs:
           check_name: Unit Test Results install lib
           hide_comments: all but latest
           comment_on_pr: true
-          files: artifacts/test_results_installed_lib/build*rel/**/*.xml
+          files: artifacts/test_results_installed_lib/build*/**/*.xml
           report_individual_runs: true
           deduplicate_classes_by_file_name: false
