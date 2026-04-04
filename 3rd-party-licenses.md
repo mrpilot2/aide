@@ -34,7 +34,7 @@ License: [BSD 3-Clause License](https://github.com/CESNET/libyang/blob/master/LI
 
 Version: 6.8.3
 
-License: [(L)GPL](https://www.qt.io/licensing/)
+License: [(L)GPL](https://www.qt.io/development/qt-framework/qt-licensing)
 
 ### [spdlog](https://github.com/gabime/spdlog/)
 
