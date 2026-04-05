@@ -1,5 +1,7 @@
 <map id="aide::QtSettings::value" name="aide::QtSettings::value">
-<area shape="rect" id="node1" title=" " alt="" coords="5,42,176,69"/>
-<area shape="rect" id="node2" href="$classaide_1_1HierarchicalId.html#a82504635ca260302356aed4fcf826656" title=" " alt="" coords="240,5,388,47"/>
-<area shape="rect" id="node3" href="$classaide_1_1HierarchicalId.html#ae4dd5dc79e89c8b84e4bd0f7e1c56e18" title=" " alt="" coords="224,71,404,98"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,42,176,67"/>
+<area shape="rect" id="Node000002" href="$classaide_1_1HierarchicalId.html#a82504635ca260302356aed4fcf826656" title=" " alt="" coords="240,5,388,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="176,41,226,34,226,39,176,46"/>
+<area shape="rect" id="Node000003" href="$classaide_1_1HierarchicalId.html#ae4dd5dc79e89c8b84e4bd0f7e1c56e18" title=" " alt="" coords="224,70,404,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="176,63,211,67,210,72,176,68"/>
 </map>

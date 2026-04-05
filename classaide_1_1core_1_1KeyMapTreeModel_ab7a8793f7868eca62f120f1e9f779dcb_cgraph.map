@@ -1,10 +1,16 @@
 <map id="aide::core::KeyMapTreeModel::data" name="aide::core::KeyMapTreeModel::data">
-<area shape="rect" id="node1" title=" " alt="" coords="5,71,219,112"/>
-<area shape="rect" id="node2" href="$classaide_1_1core_1_1TreeItem.html#a96dce16fe3f78f82c0f56b9a3ee135e9" title=" " alt="" coords="298,5,449,47"/>
-<area shape="rect" id="node3" href="$classaide_1_1core_1_1KeyMapTreeModel.html#a103d564376b170968ffa8396b2180522" title=" " alt="" coords="267,71,480,112"/>
-<area shape="rect" id="node5" href="$classaide_1_1core_1_1TreeModel.html#a2ee9911f44452165395d6d9b9e5181f9" title=" " alt="" coords="293,136,454,177"/>
-<area shape="rect" id="node4" href="$classaide_1_1core_1_1TreeItem.html#a2de620aaafa8e9c28b287b24517299ea" title=" " alt="" coords="528,71,687,112"/>
-<area shape="rect" id="node6" href="$classaide_1_1core_1_1TreeItem.html#a92914c527d122f23667b72bfdc01710c" title=" " alt="" coords="532,136,683,177"/>
-<area shape="rect" id="node7" href="$classaide_1_1core_1_1TreeItem.html#a489e940bfdbaaa5860ab92f35ea935e1" title=" " alt="" coords="735,143,917,170"/>
-<area shape="rect" id="node8" href="$classaide_1_1core_1_1TreeItem.html#a15c185b00c696e84e90a2c733e908e41" title=" " alt="" coords="965,136,1116,177"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,69,219,109"/>
+<area shape="rect" id="Node000002" href="$classaide_1_1core_1_1TreeItem.html#a96dce16fe3f78f82c0f56b9a3ee135e9" title=" " alt="" coords="298,5,449,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="194,67,284,44,285,50,195,72"/>
+<area shape="rect" id="Node000003" href="$classaide_1_1core_1_1KeyMapTreeModel.html#a103d564376b170968ffa8396b2180522" title=" " alt="" coords="267,69,480,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="219,87,253,87,253,92,219,92"/>
+<area shape="rect" id="Node000005" href="$classaide_1_1core_1_1TreeModel.html#a708ec451d6a9dfda530e36284eae78c4" title=" " alt="" coords="293,133,454,173"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="195,107,280,128,279,133,194,112"/>
+<area shape="rect" id="Node000004" href="$classaide_1_1core_1_1TreeItem.html#a2de620aaafa8e9c28b287b24517299ea" title=" " alt="" coords="529,69,688,109"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="480,87,516,87,516,92,480,92"/>
+<area shape="rect" id="Node000006" href="$classaide_1_1core_1_1TreeModel.html#aa0e95fa67da3431bf1eda6c0c24deda0" title=" " alt="" coords="528,133,689,173"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="454,159,514,160,514,165,454,165"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="528,147,468,147,468,142,528,142"/>
+<area shape="rect" id="Node000007" href="$classaide_1_1core_1_1TreeItem.html#a15c185b00c696e84e90a2c733e908e41" title=" " alt="" coords="737,133,888,173"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="690,151,723,151,723,156,690,156"/>
 </map>

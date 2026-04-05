@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['githash_778',['gitHash',['../structaide_1_1core_1_1AideInformation.html#a79a585f2db113cc41f64aac728be1e0f',1,'aide::core::AideInformation::gitHash()'],['../aideinformation_8hpp.html#a334b3d0665bd032f53f7a4d5f653d634',1,'gitHash():&#160;aideinformation.hpp']]]
+  ['file_5fquit_0',['FILE_QUIT',['../structaide_1_1constants_1_1Constants.html#a14d761dd77e68a0fa4ba2fba8df421eb',1,'aide::constants::Constants']]],
+  ['file_5fsettings_1',['FILE_SETTINGS',['../structaide_1_1constants_1_1Constants.html#a4ae129eb2acda3d6873300f301cee24b',1,'aide::constants::Constants']]]
 ];

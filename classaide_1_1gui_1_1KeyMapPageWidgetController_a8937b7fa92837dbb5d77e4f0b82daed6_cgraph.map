@@ -1,4 +1,5 @@
 <map id="aide::gui::KeyMapPageWidgetController::onUserRequestedContextMenuViaDoubleClick" name="aide::gui::KeyMapPageWidgetController::onUserRequestedContextMenuViaDoubleClick">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,265,61"/>
-<area shape="rect" id="node2" href="$classaide_1_1gui_1_1KeyMapPageWidgetController.html#a0ea420aba77fe106eeaa3da4c213bf48" title=" " alt="" coords="313,13,600,54"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,265,60"/>
+<area shape="rect" id="Node000002" href="$classaide_1_1gui_1_1KeyMapPageWidgetController.html#a0ea420aba77fe106eeaa3da4c213bf48" title=" " alt="" coords="313,13,600,53"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="265,30,300,30,300,35,265,35"/>
 </map>

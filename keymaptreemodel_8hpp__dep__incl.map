@@ -1,13 +1,25 @@
 <map id="/home/runner/work/aide/aide/aide/src/core/settings/keymap/keymaptreemodel.hpp" name="/home/runner/work/aide/aide/aide/src/core/settings/keymap/keymaptreemodel.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="447,5,677,61"/>
-<area shape="rect" id="node2" href="$keymapcontextmenuprovider_8cpp.html" title=" " alt="" coords="5,109,305,165"/>
-<area shape="rect" id="node3" href="$keymaptreemodel_8cpp.html" title=" " alt="" coords="329,109,557,165"/>
-<area shape="rect" id="node4" href="$showkeymap_8hpp.html" title=" " alt="" coords="582,109,779,165"/>
-<area shape="rect" id="node11" href="$keymappagewidgetcontroller_8cpp.html" title=" " alt="" coords="803,109,1102,165"/>
-<area shape="rect" id="node5" href="$applicationbuilder_8hpp.html" title=" " alt="" coords="317,325,575,366"/>
-<area shape="rect" id="node8" href="$keymappage_8cpp.html" title=" " alt="" coords="650,317,847,373"/>
-<area shape="rect" id="node9" href="$keymappage_8hpp.html" title=" " alt="" coords="514,213,711,269"/>
-<area shape="rect" id="node10" href="$showkeymap_8cpp.html" title=" " alt="" coords="786,213,983,269"/>
-<area shape="rect" id="node6" href="$application_8cpp.html" title=" " alt="" coords="248,421,460,463"/>
-<area shape="rect" id="node7" href="$applicationbuilder_8cpp.html" title=" " alt="" coords="485,421,741,463"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="447,5,677,60"/>
+<area shape="rect" id="Node000002" href="$keymapcontextmenuprovider_8cpp.html" title=" " alt="" coords="5,108,305,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="444,66,262,111,261,105,442,61"/>
+<area shape="rect" id="Node000003" href="$keymaptreemodel_8cpp.html" title=" " alt="" coords="329,108,557,163"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="522,71,476,110,473,106,519,67"/>
+<area shape="rect" id="Node000004" href="$showkeymap_8hpp.html" title=" " alt="" coords="582,108,779,163"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="605,67,651,106,648,110,602,71"/>
+<area shape="rect" id="Node000011" href="$keymappagewidgetcontroller_8cpp.html" title=" " alt="" coords="803,108,1102,163"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="677,61,852,105,850,111,676,66"/>
+<area shape="rect" id="Node000005" href="$keymappage_8cpp.html" title=" " alt="" coords="446,313,643,368"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="614,172,591,190,572,212,560,237,552,264,547,313,541,313,547,262,555,235,568,209,587,187,611,168"/>
+<area shape="rect" id="Node000006" href="$keymappage_8hpp.html" title=" " alt="" coords="582,211,779,265"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="683,176,683,211,678,211,678,176"/>
+<area shape="rect" id="Node000010" href="$showkeymap_8cpp.html" title=" " alt="" coords="803,211,1001,265"/>
+<area shape="poly" id="edge11_Node000004_Node000010" title=" " alt="" coords="752,166,845,208,843,213,749,171"/>
+<area shape="poly" id="edge10_Node000006_Node000005" title=" " alt="" coords="636,276,582,315,579,311,633,271"/>
+<area shape="rect" id="Node000007" href="$applicationbuilder_8cpp.html" title=" " alt="" coords="553,416,809,456"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="683,279,683,416,678,416,678,279"/>
+<area shape="rect" id="Node000008" href="$applicationbuilder_8hpp.html" title=" " alt="" coords="719,321,976,361"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="737,270,817,318,814,323,734,275"/>
+<area shape="poly" id="edge9_Node000008_Node000007" title=" " alt="" coords="803,370,716,418,713,414,801,365"/>
+<area shape="rect" id="Node000009" href="$application_8cpp.html" title=" " alt="" coords="833,416,1045,456"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="877,369,923,414,919,418,874,372"/>
 </map>

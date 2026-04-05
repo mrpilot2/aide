@@ -1,5 +1,7 @@
 <map id="aide::core::SettingsDialogChangePageController::changeSelectedPage" name="aide::core::SettingsDialogChangePageController::changeSelectedPage">
-<area shape="rect" id="node1" title=" " alt="" coords="567,5,875,47"/>
-<area shape="rect" id="node2" href="$classaide_1_1gui_1_1SettingsDialogController.html#a45aa7f19dbe89339b2292849795608f2" title=" " alt="" coords="235,5,519,47"/>
-<area shape="rect" id="node3" href="$classaide_1_1gui_1_1SettingsDialog.html#a01deeb2fa7da970cb4365a0b49ec72ec" title=" " alt="" coords="5,5,187,47"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="567,5,875,45"/>
+<area shape="rect" id="Node000002" href="$classaide_1_1gui_1_1SettingsDialogController.html#a18f46db1358d244c030f8ff19901f43c" title=" " alt="" coords="235,5,519,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="553,28,519,28,519,23,553,23"/>
+<area shape="rect" id="Node000003" href="$classaide_1_1gui_1_1SettingsDialog.html#a01deeb2fa7da970cb4365a0b49ec72ec" title=" " alt="" coords="5,5,187,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="221,28,187,28,187,23,221,23"/>
 </map>

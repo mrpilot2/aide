@@ -1,7 +1,11 @@
 <map id="/home/runner/work/aide/aide/aide/src/gui/widgets/multicolumnsortfilterproxymodel.cpp" name="/home/runner/work/aide/aide/aide/src/gui/widgets/multicolumnsortfilterproxymodel.cpp">
-<area shape="rect" id="node1" title=" " alt="" coords="228,5,496,61"/>
-<area shape="rect" id="node2" href="$multicolumnsortfilterproxymodel_8hpp.html" title=" " alt="" coords="5,109,271,136"/>
-<area shape="rect" id="node4" title=" " alt="" coords="295,109,429,136"/>
-<area shape="rect" id="node5" title=" " alt="" coords="453,109,607,136"/>
-<area shape="rect" id="node3" title=" " alt="" coords="54,184,222,211"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="228,5,496,60"/>
+<area shape="rect" id="Node000002" href="$multicolumnsortfilterproxymodel_8hpp.html" title=" " alt="" coords="5,108,271,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="295,63,182,105,180,100,293,58"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="295,108,429,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="365,60,365,94,359,94,359,60"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="453,108,607,133"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="415,58,496,99,494,104,412,62"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="54,181,222,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="141,134,141,168,135,168,135,134"/>
 </map>

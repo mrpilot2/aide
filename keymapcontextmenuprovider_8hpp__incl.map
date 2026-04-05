@@ -1,10 +1,17 @@
 <map id="/home/runner/work/aide/aide/aide/src/core/settings/keymap/keymapcontextmenuprovider.hpp" name="/home/runner/work/aide/aide/aide/src/core/settings/keymap/keymapcontextmenuprovider.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="25,5,326,61"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,109,113,136"/>
-<area shape="rect" id="node3" title=" " alt="" coords="138,109,213,136"/>
-<area shape="rect" id="node4" href="$keymappagewidgetinterface_8hpp.html" title=" " alt="" coords="237,109,473,136"/>
-<area shape="rect" id="node5" title=" " alt="" coords="182,184,259,211"/>
-<area shape="rect" id="node6" title=" " alt="" coords="283,184,342,211"/>
-<area shape="rect" id="node7" title=" " alt="" coords="367,184,429,211"/>
-<area shape="rect" id="node8" title=" " alt="" coords="453,184,572,211"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="25,5,326,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,108,113,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="141,62,88,102,85,97,138,58"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="138,108,213,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="178,60,178,94,173,94,173,60"/>
+<area shape="rect" id="Node000004" href="$keymappagewidgetinterface_8hpp.html" title=" " alt="" coords="237,108,473,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="231,58,320,100,318,105,229,62"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="182,181,259,207"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="335,136,256,177,254,172,332,131"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="283,181,342,207"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="351,135,329,171,324,168,346,132"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="367,181,429,207"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="365,132,386,168,382,171,360,135"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="453,181,572,207"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="382,131,476,173,474,178,380,136"/>
 </map>

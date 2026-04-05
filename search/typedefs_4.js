@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['mainwindowcontrollerptr_812',['MainWindowControllerPtr',['../namespaceaide_1_1gui.html#a1936f2b862673fedef3e57c60db70b76',1,'aide::gui']]],
-  ['mainwindowinterfaceweakptr_813',['MainWindowInterfaceWeakPtr',['../namespaceaide_1_1core.html#aa8cd66c7b24f003c18a9f7ad7eee5e65',1,'aide::core']]]
+  ['mainwindowcontrollerptr_0',['MainWindowControllerPtr',['../namespaceaide_1_1gui.html#a1936f2b862673fedef3e57c60db70b76',1,'aide::gui']]],
+  ['mainwindowinterfaceweakptr_1',['MainWindowInterfaceWeakPtr',['../namespaceaide_1_1core.html#aa8cd66c7b24f003c18a9f7ad7eee5e65',1,'aide::core']]],
+  ['menucontainerinterfaceptr_2',['MenuContainerInterfacePtr',['../namespaceaide.html#ad4cc32af1655e3a6955f646ec1ddd757',1,'aide']]]
 ];

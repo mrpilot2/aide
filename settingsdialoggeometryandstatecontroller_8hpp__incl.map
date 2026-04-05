@@ -1,6 +1,7 @@
 <map id="/home/runner/work/aide/aide/aide/src/core/settings/settingsdialoggeometryandstatecontroller.hpp" name="/home/runner/work/aide/aide/aide/src/core/settings/settingsdialoggeometryandstatecontroller.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,332,61"/>
-<area shape="rect" id="node2" title=" " alt="" coords="35,109,132,136"/>
-<area shape="rect" id="node3" href="$geometryandstatedata_8hpp.html" title=" " alt="" coords="156,109,355,136"/>
-<area shape="rect" id="node4" title=" " alt="" coords="169,184,342,211"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,332,60"/>
+<area shape="rect" id="Node000002" href="$geometryandstatedata_8hpp.html" title=" " alt="" coords="69,108,268,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,60,171,94,166,94,166,60"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="82,181,255,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="171,134,171,168,166,168,166,134"/>
 </map>

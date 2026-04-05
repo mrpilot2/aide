@@ -1,4 +1,15 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,89,32"/>
-<area shape="rect" id="node2" href="$classaide_1_1widgets_1_1SearchLineEdit.html" title=" " alt="" coords="137,5,351,32"/>
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,127,80,152"/>
+<area shape="rect" id="Node000001" href="$classaide_1_1MenuContainerInterface.html" title=" " alt="" coords="138,5,353,31"/>
+<area shape="poly" id="edge29_Node000000_Node000001" title=" " alt="" coords="57,113,86,75,105,57,127,41,155,28,157,33,129,46,109,61,90,79,61,116"/>
+<area shape="rect" id="Node000003" href="$classaide_1_1core_1_1KeymapContextMenuProvider.html" title=" " alt="" coords="146,55,345,95"/>
+<area shape="poly" id="edge31_Node000000_Node000003" title=" " alt="" coords="87,119,127,105,166,93,168,98,129,110,89,124"/>
+<area shape="rect" id="Node000004" href="$classaide_1_1gui_1_1KeyMapPageWidgetController.html" title=" " alt="" coords="138,119,353,159"/>
+<area shape="poly" id="edge32_Node000000_Node000004" title=" " alt="" coords="94,137,138,137,138,142,94,142"/>
+<area shape="rect" id="Node000005" href="$classaide_1_1gui_1_1MainWindowController.html" title=" " alt="" coords="128,184,363,209"/>
+<area shape="poly" id="edge33_Node000000_Node000005" title=" " alt="" coords="88,155,129,169,178,181,177,186,127,174,86,160"/>
+<area shape="rect" id="Node000006" href="$classaide_1_1gui_1_1SettingsDialogController.html" title=" " alt="" coords="155,234,336,274"/>
+<area shape="poly" id="edge34_Node000000_Node000006" title=" " alt="" coords="64,161,93,191,129,218,158,232,155,236,127,223,90,195,61,165"/>
+<area shape="rect" id="Node000002" href="$classaide_1_1MenuContainer.html" title=" " alt="" coords="411,5,568,31"/>
+<area shape="poly" id="edge30_Node000001_Node000002" title=" " alt="" coords="367,15,410,15,410,21,367,21"/>
 </map>

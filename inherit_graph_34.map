@@ -1,4 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" title=" " alt="" coords="5,13,173,39"/>
-<area shape="rect" id="node2" href="$classaide_1_1widgets_1_1MultiColumnSortFilterProxyModel.html" title=" " alt="" coords="221,5,421,47"/>
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,13,127,38"/>
+<area shape="rect" id="Node000001" href="$classaide_1_1widgets_1_1SearchFilterResultDelegate.html" title=" " alt="" coords="175,5,369,45"/>
+<area shape="poly" id="edge27_Node000000_Node000001" title=" " alt="" coords="140,23,175,23,175,28,140,28"/>
 </map>

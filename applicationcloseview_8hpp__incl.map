@@ -1,6 +1,9 @@
 <map id="/home/runner/work/aide/aide/aide/src/core/applicationcloseview.hpp" name="/home/runner/work/aide/aide/aide/src/core/applicationcloseview.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,315,47"/>
-<area shape="rect" id="node2" title=" " alt="" coords="31,95,108,121"/>
-<area shape="rect" id="node3" title=" " alt="" coords="133,95,187,121"/>
-<area shape="rect" id="node4" href="$userselection_8hpp.html" title=" " alt="" coords="211,95,349,121"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,315,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="31,93,108,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="140,48,95,86,91,82,136,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="133,93,187,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="163,46,163,79,157,79,157,46"/>
+<area shape="rect" id="Node000004" href="$userselection_8hpp.html" title=" " alt="" coords="211,93,349,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="191,43,252,84,249,88,188,48"/>
 </map>

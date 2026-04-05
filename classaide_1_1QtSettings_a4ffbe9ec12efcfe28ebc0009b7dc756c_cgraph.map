@@ -1,6 +1,10 @@
 <map id="aide::QtSettings::setValue" name="aide::QtSettings::setValue">
-<area shape="rect" id="node1" title=" " alt="" coords="5,71,196,98"/>
-<area shape="rect" id="node2" href="$classaide_1_1HierarchicalId.html#a82504635ca260302356aed4fcf826656" title=" " alt="" coords="260,5,408,47"/>
-<area shape="rect" id="node3" href="$classaide_1_1HierarchicalId.html#ae4dd5dc79e89c8b84e4bd0f7e1c56e18" title=" " alt="" coords="244,71,424,98"/>
-<area shape="rect" id="node4" href="$classaide_1_1QtSettings.html#a82654308b00f4eb487e8d4d2c99a5bcb" title=" " alt="" coords="249,122,419,149"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,70,196,95"/>
+<area shape="rect" id="Node000002" href="$classaide_1_1HierarchicalId.html#a82504635ca260302356aed4fcf826656" title=" " alt="" coords="260,5,408,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="153,67,246,44,247,49,154,73"/>
+<area shape="rect" id="Node000003" href="$classaide_1_1HierarchicalId.html#ae4dd5dc79e89c8b84e4bd0f7e1c56e18" title=" " alt="" coords="244,70,424,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="196,80,230,80,230,85,196,85"/>
+<area shape="rect" id="Node000004" href="$classaide_1_1QtSettings.html#a82654308b00f4eb487e8d4d2c99a5bcb" title=" " alt="" coords="249,143,419,169"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="143,93,280,137,279,142,141,98"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="296,145,288,135,292,125,308,119,334,117,367,121,379,130,376,134,365,125,334,122,309,124,296,129,293,134,300,141"/>
 </map>

@@ -1,4 +1,6 @@
 <map id="aide::ApplicationBuilder::setupLogger" name="aide::ApplicationBuilder::setupLogger">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,183,47"/>
-<area shape="rect" id="node2" href="$classaide_1_1ApplicationBuilder.html#a0c94f592c18009d3a12ae4687e114e55" title=" " alt="" coords="231,5,408,47"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,29,183,69"/>
+<area shape="rect" id="Node000002" href="$classaide_1_1core_1_1LoggerFactory.html#ae4467c4cec93866fa0927d8e411011a6" title=" " alt="" coords="231,29,416,69"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="183,47,217,47,217,52,183,52"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="280,30,278,20,285,10,300,5,323,3,350,6,365,13,362,18,349,11,323,8,301,10,288,15,283,21,286,28"/>
 </map>

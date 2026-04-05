@@ -1,6 +1,13 @@
 <map id="aide::core::TreeItem::data" name="aide::core::TreeItem::data">
-<area shape="rect" id="node1" title=" " alt="" coords="267,71,417,112"/>
-<area shape="rect" id="node2" href="$classaide_1_1core_1_1KeyMapTreeModel.html#ab7a8793f7868eca62f120f1e9f779dcb" title=" " alt="" coords="5,5,219,47"/>
-<area shape="rect" id="node3" href="$classaide_1_1core_1_1SettingsPageGroupTreeModel.html#a244138dbe90a3c7432c8eced93d6e473" title=" " alt="" coords="23,71,201,112"/>
-<area shape="rect" id="node4" href="$classaide_1_1core_1_1TreeItem.html#a22b693730066573d36a9edd1602175bf" title=" " alt="" coords="33,136,191,177"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="528,101,679,141"/>
+<area shape="rect" id="Node000002" href="$classaide_1_1core_1_1KeyMapTreeModel.html#ab7a8793f7868eca62f120f1e9f779dcb" title=" " alt="" coords="267,5,480,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="555,97,479,60,446,48,448,43,481,55,557,92"/>
+<area shape="rect" id="Node000003" href="$classaide_1_1core_1_1SettingsPageGroupTreeModel.html#a244138dbe90a3c7432c8eced93d6e473" title=" " alt="" coords="284,69,463,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="514,112,462,104,463,99,515,106"/>
+<area shape="rect" id="Node000004" href="$classaide_1_1core_1_1TreeItem.html#aea04b54d87c47bcf7e7f34d8221e995c" title=" " alt="" coords="298,133,449,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="515,136,449,146,449,140,514,131"/>
+<area shape="rect" id="Node000006" href="$classaide_1_1core_1_1TreeItem.html#a22b693730066573d36a9edd1602175bf" title=" " alt="" coords="295,197,452,237"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="557,151,481,188,448,200,446,195,479,183,555,146"/>
+<area shape="rect" id="Node000005" href="$classaide_1_1core_1_1KeyMapTreeModel.html#a5393aaceffd4620eaa015a79b83d0bbe" title=" " alt="" coords="5,133,219,173"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="284,156,219,156,219,151,284,151"/>
 </map>

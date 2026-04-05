@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['wildcard_830',['Wildcard',['../namespaceaide_1_1widgets.html#aead4e8894f51f19eca5aeafc29560c51ac4a0dbaac3bd0f3bf581ad822f5fb4b4',1,'aide::widgets']]]
+  ['regex_0',['Regex',['../namespaceaide_1_1widgets.html#aead4e8894f51f19eca5aeafc29560c51a86f600672d32a7be1dd6cb035ac61577',1,'aide::widgets']]],
+  ['remove_5fshortcut_1',['REMOVE_SHORTCUT',['../namespaceaide_1_1core.html#aa6a5c117192574f6ededf42714fb59dba0b0b82b3ac57115a97d05b11f2fbdf0c',1,'aide::core']]],
+  ['reset_5fto_5fdefaults_2',['RESET_TO_DEFAULTS',['../namespaceaide_1_1core.html#aa6a5c117192574f6ededf42714fb59dbaebac92f36c51ceab4e848923c428c940',1,'aide::core']]]
 ];

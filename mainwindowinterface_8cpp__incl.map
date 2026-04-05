@@ -1,6 +1,9 @@
 <map id="/home/runner/work/aide/aide/aide/src/core/mainwindowinterface.cpp" name="/home/runner/work/aide/aide/aide/src/core/mainwindowinterface.cpp">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,319,47"/>
-<area shape="rect" id="node2" href="$mainwindowinterface_8hpp.html" title=" " alt="" coords="67,95,257,121"/>
-<area shape="rect" id="node3" title=" " alt="" coords="63,169,141,196"/>
-<area shape="rect" id="node4" title=" " alt="" coords="165,169,281,196"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,319,45"/>
+<area shape="rect" id="Node000002" href="$mainwindowinterface_8hpp.html" title=" " alt="" coords="67,93,257,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="165,46,165,79,159,79,159,46"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="63,167,141,192"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="154,121,123,158,118,154,150,117"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="165,167,281,192"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="174,117,206,154,202,158,170,121"/>
 </map>

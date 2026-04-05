@@ -1,5 +1,7 @@
 <map id="/home/runner/work/aide/aide/aide/src/gui/settings/keymap/addshortcutdialog.hpp" name="/home/runner/work/aide/aide/aide/src/gui/settings/keymap/addshortcutdialog.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,232,61"/>
-<area shape="rect" id="node2" title=" " alt="" coords="31,109,108,136"/>
-<area shape="rect" id="node3" title=" " alt="" coords="132,109,207,136"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,232,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="31,108,108,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="106,61,85,97,81,95,101,59"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="132,108,207,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="136,59,158,95,153,97,132,61"/>
 </map>

@@ -1,5 +1,11 @@
 <map id="/home/runner/work/aide/aide/aide/src/include/aide/loggerinterface.hpp" name="/home/runner/work/aide/aide/aide/src/include/aide/loggerinterface.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="9,5,194,61"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,109,83,136"/>
-<area shape="rect" id="node3" title=" " alt="" coords="107,109,213,136"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="89,5,274,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,108,72,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="139,62,71,103,68,99,136,58"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="96,108,173,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="169,61,150,97,145,95,165,59"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="198,108,258,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="198,59,218,95,213,97,193,61"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="282,108,379,133"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="228,58,300,99,297,103,226,62"/>
 </map>

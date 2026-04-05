@@ -1,4 +1,9 @@
 <map id="aide::core::ShowKeyMap::getTreeModel" name="aide::core::ShowKeyMap::getTreeModel">
-<area shape="rect" id="node1" title=" " alt="" coords="232,5,413,47"/>
-<area shape="rect" id="node2" href="$classaide_1_1core_1_1KeymapPage.html#af72c3fd412190c7497041ea18c0ac8cc" title=" " alt="" coords="5,5,184,47"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="232,69,413,109"/>
+<area shape="rect" id="Node000002" href="$classaide_1_1core_1_1KeymapPage.html#af72c3fd412190c7497041ea18c0ac8cc" title=" " alt="" coords="5,5,184,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="237,68,166,48,167,43,239,63"/>
+<area shape="rect" id="Node000003" href="$classaide_1_1core_1_1KeymapPage.html#adb1639f529d719b2ffd9184dad9cc700" title=" " alt="" coords="5,69,184,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="218,92,184,92,184,87,218,87"/>
+<area shape="rect" id="Node000004" href="$classaide_1_1core_1_1KeymapPage.html#a93ebcfc5adb6ef1f53d9f2ee404419d6" title=" " alt="" coords="5,133,184,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="239,116,167,136,166,131,237,110"/>
 </map>

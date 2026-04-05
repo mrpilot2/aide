@@ -1,0 +1,11 @@
+<map id="aide::core::SettingsPageGroupTreeModel::findCorrespondingSettingsPage" name="aide::core::SettingsPageGroupTreeModel::findCorrespondingSettingsPage">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,30,260,85"/>
+<area shape="rect" id="Node000002" href="$classaide_1_1core_1_1TreeItem.html#a2de620aaafa8e9c28b287b24517299ea" title=" " alt="" coords="318,5,477,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="260,39,304,34,305,39,260,45"/>
+<area shape="rect" id="Node000003" href="$classaide_1_1core_1_1SettingsPageRegistry.html#ab545e33bcd4f08f67df968f234b00c99" title=" " alt="" coords="308,69,487,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="260,70,295,74,294,80,260,75"/>
+<area shape="rect" id="Node000004" href="$classSettingsPageRegistryPrivate.html#a90ea957ae82b6629b0f89affc39c7308" title=" " alt="" coords="535,37,741,77"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="487,75,521,70,521,76,487,80"/>
+<area shape="rect" id="Node000005" href="$classSettingsPageRegistryPrivate.html#acb3590698410c029ca2ec84262594599" title=" " alt="" coords="535,101,741,141"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="487,99,521,103,521,108,487,104"/>
+</map>

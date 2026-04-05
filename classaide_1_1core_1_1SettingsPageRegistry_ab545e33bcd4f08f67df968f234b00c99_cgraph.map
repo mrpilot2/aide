@@ -1,5 +1,7 @@
 <map id="aide::core::SettingsPageRegistry::settingsPages" name="aide::core::SettingsPageRegistry::settingsPages">
-<area shape="rect" id="node1" title=" " alt="" coords="5,39,184,80"/>
-<area shape="rect" id="node2" href="$classSettingsPageRegistryPrivate.html#a114ae5695e6db6ecd33964e18c9f9faf" title=" " alt="" coords="232,5,439,47"/>
-<area shape="rect" id="node3" href="$classSettingsPageRegistryPrivate.html#af0b8de5174fdb7abe77dd435d0848c93" title=" " alt="" coords="232,71,439,112"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,37,184,77"/>
+<area shape="rect" id="Node000002" href="$classSettingsPageRegistryPrivate.html#a90ea957ae82b6629b0f89affc39c7308" title=" " alt="" coords="232,5,439,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="184,43,218,38,219,44,185,48"/>
+<area shape="rect" id="Node000003" href="$classSettingsPageRegistryPrivate.html#acb3590698410c029ca2ec84262594599" title=" " alt="" coords="232,69,439,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="185,67,219,71,218,76,184,72"/>
 </map>

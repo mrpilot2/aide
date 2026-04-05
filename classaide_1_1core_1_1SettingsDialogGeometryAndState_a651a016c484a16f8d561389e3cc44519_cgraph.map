@@ -1,4 +1,5 @@
 <map id="aide::core::SettingsDialogGeometryAndState::selectedTreeViewItem" name="aide::core::SettingsDialogGeometryAndState::selectedTreeViewItem">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,241,61"/>
-<area shape="rect" id="node2" href="$classaide_1_1SettingsInterface.html#a3d57d89380555575f8e2d181e0b31d4c" title=" " alt="" coords="289,13,459,54"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,241,60"/>
+<area shape="rect" id="Node000002" href="$classaide_1_1SettingsInterface.html#a3d57d89380555575f8e2d181e0b31d4c" title=" " alt="" coords="289,13,459,53"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="241,30,276,30,276,35,241,35"/>
 </map>

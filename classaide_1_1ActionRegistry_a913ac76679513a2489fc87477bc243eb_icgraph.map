@@ -1,0 +1,14 @@
+<map id="aide::ActionRegistry::action" name="aide::ActionRegistry::action">
+<area shape="rect" id="Node000001" title=" " alt="" coords="408,128,561,168"/>
+<area shape="rect" id="Node000002" href="$classaide_1_1ActionRegistry.html#afce9b4442c909839c4d15813c4557c15" title=" " alt="" coords="207,29,360,69"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="429,124,324,72,326,67,432,119"/>
+<area shape="rect" id="Node000003" href="$classaide_1_1ActionRegistry.html#a3561a913982418548642a74385382c72" title=" " alt="" coords="5,59,159,99"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="394,135,158,94,159,89,395,130"/>
+<area shape="rect" id="Node000004" href="$classaide_1_1ActionRegistry.html#a727fb1649bfbe7d70d6c8d7938161c9e" title=" " alt="" coords="207,168,360,208"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="395,169,361,175,360,170,394,163"/>
+<area shape="rect" id="Node000005" href="$classaide_1_1ActionRegistry.html#a234ac5a71230a1d9443e8b126ae8c428" title=" " alt="" coords="207,232,360,272"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="441,177,361,222,336,234,333,229,359,218,439,173"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="317,18,305,11,283,8,264,10,253,15,249,21,251,28,246,30,243,20,249,11,263,5,283,3,307,6,320,13"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="193,65,159,70,158,65,193,60"/>
+<area shape="poly" id="edge6_Node000004_Node000004" title=" " alt="" coords="317,156,305,149,283,147,264,149,253,153,249,159,251,167,246,168,243,158,249,149,263,143,283,141,307,144,320,152"/>
+</map>

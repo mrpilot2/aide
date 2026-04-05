@@ -1,6 +1,16 @@
 <map id="/home/runner/work/aide/aide/aide/src/gui/aboutaidedialog.hpp" name="/home/runner/work/aide/aide/aide/src/gui/aboutaidedialog.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,276,47"/>
-<area shape="rect" id="node2" title=" " alt="" coords="149,169,226,196"/>
-<area shape="rect" id="node3" title=" " alt="" coords="103,95,178,121"/>
-<area shape="rect" id="node4" href="$aideinformationpresenter_8hpp.html" title=" " alt="" coords="203,95,417,121"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="8,5,279,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="69,167,146,192"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="74,48,39,67,24,80,12,95,9,104,9,113,19,131,39,146,63,159,61,163,36,150,15,134,4,115,3,103,8,92,21,76,36,62,71,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="22,93,97,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="125,48,84,86,80,82,121,44"/>
+<area shape="rect" id="Node000004" href="$aideinformation_8hpp.html" title=" " alt="" coords="361,93,515,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="215,43,382,87,381,92,213,48"/>
+<area shape="rect" id="Node000007" href="$aideinformationpresenter_8hpp.html" title=" " alt="" coords="121,93,336,119"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="166,44,208,82,204,86,162,48"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="366,167,425,192"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="433,120,412,156,407,154,429,118"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="449,167,512,192"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="447,118,469,154,465,156,443,120"/>
+<area shape="poly" id="edge7_Node000007_Node000002" title=" " alt="" coords="211,121,140,162,138,157,208,116"/>
 </map>

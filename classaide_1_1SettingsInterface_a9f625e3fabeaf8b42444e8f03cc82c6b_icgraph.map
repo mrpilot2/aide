@@ -1,6 +1,11 @@
 <map id="aide::SettingsInterface::setValue" name="aide::SettingsInterface::setValue">
-<area shape="rect" id="node1" title=" " alt="" coords="553,43,723,84"/>
-<area shape="rect" id="node2" href="$classaide_1_1core_1_1MainWindowGeometryAndState.html#a3affddba98a598636524e59f12499035" title=" " alt="" coords="258,5,502,47"/>
-<area shape="rect" id="node3" href="$classaide_1_1core_1_1SettingsDialogGeometryAndState.html#a6d1e12c430da04f292d3025f6ed36917" title=" " alt="" coords="255,71,505,127"/>
-<area shape="rect" id="node4" href="$classaide_1_1core_1_1ShowSettingsDialog.html#a7a09941d17fcd76a46280643cfe99a1d" title=" " alt="" coords="5,79,207,120"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="553,69,723,109"/>
+<area shape="rect" id="Node000002" href="$classaide_1_1core_1_1ApplicationClose.html#a8c80fbaef5438a99c206b4c74e6ffce7" title=" " alt="" coords="279,5,481,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="543,69,460,48,462,43,544,63"/>
+<area shape="rect" id="Node000003" href="$classaide_1_1core_1_1MainWindowGeometryAndState.html#a03f7e76a11e9bcd26faf2639dc9da216" title=" " alt="" coords="258,69,502,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="539,92,502,92,502,87,539,87"/>
+<area shape="rect" id="Node000004" href="$classaide_1_1core_1_1SettingsDialogGeometryAndState.html#ae76872002b228e55014ce2110912d1b2" title=" " alt="" coords="255,134,505,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="553,116,479,137,478,131,552,110"/>
+<area shape="rect" id="Node000005" href="$classaide_1_1core_1_1ShowSettingsDialog.html#a7a09941d17fcd76a46280643cfe99a1d" title=" " alt="" coords="5,141,207,181"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="241,164,207,164,207,159,241,159"/>
 </map>

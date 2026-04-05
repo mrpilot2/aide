@@ -1,3 +1,15 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structaide_1_1core_1_1AideInformation.html" title=" " alt="" coords="5,5,204,32"/>
+<area shape="rect" id="Node000000" href="$classaide_1_1core_1_1AideInformationPresenter.html" title=" " alt="" coords="5,5,204,45"/>
+<area shape="rect" id="Node000001" href="$classaide_1_1gui_1_1AboutAideDialog.html" title=" " alt="" coords="259,13,453,38"/>
+<area shape="poly" id="edge2_Node000000_Node000001" title=" " alt="" coords="218,23,258,23,258,28,218,28"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="67,94,142,119"/>
+<area shape="poly" id="edge3_Node000002_Node000001" title=" " alt="" coords="146,86,251,47,293,36,294,41,253,52,148,91"/>
+<area shape="rect" id="Node000003" href="$classaide_1_1gui_1_1AddShortcutDialog.html" title=" " alt="" coords="253,62,459,87"/>
+<area shape="poly" id="edge4_Node000002_Node000003" title=" " alt="" coords="155,98,256,85,256,90,156,103"/>
+<area shape="rect" id="Node000004" href="$classaide_1_1gui_1_1SettingsDialog.html" title=" " alt="" coords="265,177,447,202"/>
+<area shape="poly" id="edge5_Node000002_Node000004" title=" " alt="" coords="149,122,253,161,298,174,297,179,251,167,147,127"/>
+<area shape="rect" id="Node000006" href="$classaide_1_1gui_1_1ThirdPartyLicensesDialog.html" title=" " alt="" coords="252,112,460,152"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="156,109,252,119,252,124,155,114"/>
+<area shape="rect" id="Node000005" href="$classaide_1_1core_1_1SettingsDialogInterface.html" title=" " alt="" coords="10,169,199,209"/>
+<area shape="poly" id="edge7_Node000005_Node000004" title=" " alt="" coords="213,187,265,187,265,192,213,192"/>
 </map>
