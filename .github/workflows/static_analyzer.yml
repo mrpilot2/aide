@@ -9,9 +9,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ macos-latest, ubuntu-24.04 ]
-        cmake: [ 4.x ]
-        qt: [ "5.15.2", "6.5.0" ]
+        os: [macos-latest, ubuntu-24.04]
+        cmake: [4.x]
+        qt: ["5.15.2", "6.5.0"]
 
         include:
           - cmake: 4.x

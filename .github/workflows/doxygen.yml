@@ -38,8 +38,7 @@ jobs:
           aqtversion: '==3.1.*'
 
       - name: Install Doxygen
-        run:
-          sudo apt install doxygen graphviz -y
+        run: sudo apt install doxygen graphviz -y
 
       - name: Setup Ninja
         uses: seanmiddleditch/gha-setup-ninja@v5
