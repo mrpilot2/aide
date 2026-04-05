@@ -51,7 +51,7 @@ jobs:
       CC: ${{ matrix.CXX }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -61,7 +61,7 @@ jobs:
         uses: ilammy/msvc-dev-cmd@v1
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: 3.x
           cache: 'pip'
@@ -80,7 +80,7 @@ jobs:
         run: cmake --version
 
       - name: Install Qt
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v4
         with:
           cache: true
           version: ${{ matrix.qt }}
@@ -121,7 +121,7 @@ jobs:
 
       - name: Upload Unit Test Results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: test_results_${{ matrix.os }}_cmake-${{ matrix.cmake }}_qt-${{ matrix.qt }}
           path: build*/**/*.xml
@@ -137,7 +137,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Download Artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: artifacts
 

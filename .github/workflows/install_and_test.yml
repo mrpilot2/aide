@@ -20,12 +20,12 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: 3.x
 
@@ -36,7 +36,7 @@ jobs:
           sudo apt install ^libxcb-*
 
       - name: Install Qt
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v4
         with:
           version: ${{ matrix.qt }}
           aqtversion: '==3.1.*'
@@ -45,7 +45,7 @@ jobs:
         uses: seanmiddleditch/gha-setup-ninja@v5
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: 3.x
 
@@ -76,7 +76,7 @@ jobs:
 
       - name: Upload Unit Test Results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: test_results_installed_lib-qt-${{ matrix.qt }}
           path: tests/build*/**/*.xml
@@ -88,17 +88,16 @@ jobs:
     if: always()
     steps:
       - name: Download Artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: artifacts
 
       - name: Publish Unit Test Results installed lib
-        uses: EnricoMi/publish-unit-test-result-action@v1.4
+        uses: EnricoMi/publish-unit-test-result-action@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           check_name: Unit Test Results install lib
-          hide_comments: all but latest
-          comment_on_pr: true
+          comment_mode: always
           files: artifacts/test_results_installed_lib/build*/**/*.xml
           report_individual_runs: true
           deduplicate_classes_by_file_name: false

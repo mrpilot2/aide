@@ -26,7 +26,7 @@ jobs:
         shell: bash
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -36,7 +36,7 @@ jobs:
         uses: ilammy/msvc-dev-cmd@v1
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: 3.x
       - name: Install pip dependencies
@@ -57,7 +57,7 @@ jobs:
         run: sudo apt install lcov ^libxcb-* abi-dumper abi-compliance-checker
 
       - name: Install Qt
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v4
         with:
           version: ${{ matrix.qt }}
           aqtversion: '==3.1.*'
@@ -77,7 +77,7 @@ jobs:
 
       - name: Upload ABI compliance report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: abi_compliance_report
           path: |
