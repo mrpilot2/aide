@@ -32,7 +32,7 @@ namespace
 
 TEST_CASE("Test different log levels", "[Logger]")
 {
-    std::string const logFileNameStr{TEST_LOG_FILE_LOCATION +
+    const std::string logFileNameStr{TEST_LOG_FILE_LOCATION +
                                      std::string("/aide_test.log")};
     const char* logFileName{logFileNameStr.c_str()};
 
@@ -114,7 +114,7 @@ TEST_CASE("Test different log levels", "[Logger]")
 TEST_CASE("Test log macros", "[Logger]")
 {
     spdlog::drop_all();
-    std::string const logFileNameStr =
+    const std::string logFileNameStr =
         TEST_LOG_FILE_LOCATION + std::string("/aide_test.log");
     const char* logFileName{logFileNameStr.c_str()};
 
