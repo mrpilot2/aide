@@ -2,9 +2,9 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ "develop", "main" ]
+    branches: ["develop", "main"]
   pull_request:
-    branches: [ "develop" ]
+    branches: ["develop"]
   schedule:
     - cron: "33 23 * * 5"
 
@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ cpp ]
+        language: [cpp]
 
     steps:
       - name: Checkout
@@ -57,7 +57,7 @@ jobs:
           config-file: ./.github/codeql/codeql-config.yml
           languages: ${{ matrix.language }}
           queries: +security-and-quality
- 
+
       - name: Configure with preset
         run: cmake --preset ci-codeql-unix-debug
 

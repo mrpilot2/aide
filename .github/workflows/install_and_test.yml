@@ -1,7 +1,7 @@
 name: Build standalone and test installed lib
 
 on:
-    workflow_call:
+  workflow_call:
 
 jobs:
   build_standalone:
@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        qt: [ "5.15.2", "6.5.0" ]
+        qt: ["5.15.2", "6.5.0"]
 
         include:
           - qt: "5.15.2"
@@ -20,66 +20,66 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: 3.x
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
 
-    - name: Install dependencies
-      run: |
-        pip3 install wheel setuptools
-        pip3 install --upgrade -r requirements.txt
-        sudo apt install ^libxcb-*
+      - name: Install dependencies
+        run: |
+          pip3 install wheel setuptools
+          pip3 install --upgrade -r requirements.txt
+          sudo apt install ^libxcb-*
 
-    - name: Install Qt
-      uses: jurplel/install-qt-action@v3
-      with:
-        version: ${{ matrix.qt }}
-        aqtversion: '==3.1.*'
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: ${{ matrix.qt }}
+          aqtversion: '==3.1.*'
 
-    - name: Setup Ninja
-      uses: seanmiddleditch/gha-setup-ninja@v5
+      - name: Setup Ninja
+        uses: seanmiddleditch/gha-setup-ninja@v5
 
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: 3.x
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
 
-    - name: Install pip dependencies
-      run: |
-        pip3 install wheel setuptools
-        pip3 install conan
+      - name: Install pip dependencies
+        run: |
+          pip3 install wheel setuptools
+          pip3 install conan
 
-    - name: "Static Release: Workflow lib install"
-      working-directory: aide
-      run: cmake --workflow --preset workflow-ci-install-lib-unix-static-release
+      - name: "Static Release: Workflow lib install"
+        working-directory: aide
+        run: cmake --workflow --preset workflow-ci-install-lib-unix-static-release
 
-    - name: "Static Release: Workflow test installed lib"
-      working-directory: tests
-      run: cmake --workflow --preset workflow-ci-install-test-unix-static-release
-      env:
-        QT_QPA_PLATFORM: offscreen
+      - name: "Static Release: Workflow test installed lib"
+        working-directory: tests
+        run: cmake --workflow --preset workflow-ci-install-test-unix-static-release
+        env:
+          QT_QPA_PLATFORM: offscreen
 
-    - name: "Shared Release: Workflow lib install"
-      working-directory: aide
-      run: cmake --workflow --preset workflow-ci-install-lib-unix-shared-release
+      - name: "Shared Release: Workflow lib install"
+        working-directory: aide
+        run: cmake --workflow --preset workflow-ci-install-lib-unix-shared-release
 
-    - name: "Shared Release: Test installed lib"
-      working-directory: tests
-      run: cmake --workflow --preset workflow-ci-install-test-unix-shared-release
-      env:
-        QT_QPA_PLATFORM: offscreen
+      - name: "Shared Release: Test installed lib"
+        working-directory: tests
+        run: cmake --workflow --preset workflow-ci-install-test-unix-shared-release
+        env:
+          QT_QPA_PLATFORM: offscreen
 
-    - name: Upload Unit Test Results
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: test_results_installed_lib-qt-${{ matrix.qt }}
-        path: tests/build*/**/*.xml
+      - name: Upload Unit Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test_results_installed_lib-qt-${{ matrix.qt }}
+          path: tests/build*/**/*.xml
 
   publish-test-results:
     name: "Publish Unit Test Results from installed lib"
