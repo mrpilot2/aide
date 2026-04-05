@@ -45,6 +45,8 @@ Logger::Logger(const FileName& logFileName, const LoggerName& loggerName)
         end(macroLogSinks));
 
     m_logger->info("Create macro logger " + loggerName() + "_macro");
+    m_logger->info("binary compatible change");
+
     m_macroLogger->set_level(
         static_cast<spdlog::level::level_enum>(SPDLOG_ACTIVE_LEVEL));
 #ifdef NDEBUG
