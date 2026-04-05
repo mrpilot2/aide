@@ -30,23 +30,16 @@ jobs:
       run:
         shell: bash
 
-    env:
-      # CMake 3.15 doesn't detect Visual Studio correctly without these.
-      CXX: ${{ matrix.CXX }}
-      CC: ${{ matrix.CXX }}
-
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-
-      - uses: seanmiddleditch/gha-setup-ninja@v5
 
       - name: Setup Windows environment
         uses: ilammy/msvc-dev-cmd@v1
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: 3.x
       - name: Install pip dependencies
@@ -67,7 +60,7 @@ jobs:
         run: sudo apt install cppcheck ^libxcb-*
 
       - name: Install Qt
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v4
         with:
           version: ${{ matrix.qt }}
           aqtversion: '==3.1.*'

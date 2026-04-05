@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: 3.x
       - name: Install dependencies
@@ -25,13 +25,13 @@ jobs:
 
       - name: Cache Qt
         id: cache-qt
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ../Qt
           key: ${{ runner.os }}-QtCache
 
       - name: Install Qt
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v4
         with:
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
           version: '6.5.0'
@@ -40,15 +40,11 @@ jobs:
       - name: Install Doxygen
         run: sudo apt install doxygen graphviz -y
 
-      - name: Setup Ninja
-        uses: seanmiddleditch/gha-setup-ninja@v5
-
       - name: Build doxygen documentation
         run: cmake --workflow --preset workflow-ci-doxygen-unix
 
       - name: Publish doxygen documentation to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           publish_dir: build/ci-doxygen-unix/aide/doc/html
-          branch: gh_pages
           github_token: ${{ secrets.GITHUB_TOKEN }}
