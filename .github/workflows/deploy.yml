@@ -15,32 +15,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: 3.x
-      - name: Install pip dependencies
-        run: |
-          pip3 install wheel setuptools
-          pip3 install conan
-
-      - name: Setup cmake
-        uses: jwlawson/actions-setup-cmake@v2
-        with:
-          cmake-version: 4.x
-
-      - name: Print CMake version
-        run: cmake --version
-
-      - name: Install apt dependencies
-        if: runner.os == 'Linux'
-        run: sudo apt install lcov ^libxcb-*
-
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v4
-        with:
-          version: '6.5.0'
-          aqtversion: '==3.1.*'
+      - id: setup_deps
+        uses: ./.github/actions/setup_deps
 
       # Shared Release with packaging
       - name: "Shared Release: Configure and build with preset"

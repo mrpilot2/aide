@@ -24,32 +24,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Python
-        uses: actions/setup-python@v6
+      - id: setup_deps
+        uses: ./.github/actions/setup_deps
         with:
-          python-version: 3.x
-
-      - name: Install dependencies
-        run: |
-          pip3 install wheel setuptools
-          pip3 install --upgrade -r requirements.txt
-          sudo apt install ^libxcb-*
-
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v4
-        with:
-          version: ${{ matrix.qt }}
-          aqtversion: '==3.1.*'
-
-      - name: Setup Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: 3.x
-
-      - name: Install pip dependencies
-        run: |
-          pip3 install wheel setuptools
-          pip3 install conan
+          qt_version: ${{ matrix.qt }}
 
       - name: "Static Release: Workflow lib install"
         working-directory: aide

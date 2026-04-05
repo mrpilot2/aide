@@ -35,35 +35,15 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Windows environment
-        uses: ilammy/msvc-dev-cmd@v1
-
-      - name: Setup Python
-        uses: actions/setup-python@v6
+      - id: setup_deps
+        uses: ./.github/actions/setup_deps
         with:
-          python-version: 3.x
-      - name: Install pip dependencies
-        run: |
-          pip3 install wheel setuptools
-          pip3 install conan
-
-      - name: Setup cmake
-        uses: jwlawson/actions-setup-cmake@v2
-        with:
-          cmake-version: ${{matrix.cmake}}
-
-      - name: Print CMake version
-        run: cmake --version
+          cmake_version: ${{matrix.cmake}}
+          qt_version: ${{ matrix.qt }}
 
       - name: Install apt dependencies
         if: runner.os == 'Linux'
-        run: sudo apt install cppcheck ^libxcb-*
-
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v4
-        with:
-          version: ${{ matrix.qt }}
-          aqtversion: '==3.1.*'
+        run: sudo apt install cppcheck
 
       # Static Debug
       - name: "Static Debug: Static analysis"

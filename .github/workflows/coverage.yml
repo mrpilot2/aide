@@ -38,38 +38,18 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Python
-        uses: actions/setup-python@v6
+      - id: setup_deps
+        uses: ./.github/actions/setup_deps
         with:
-          python-version: 3.x
-          cache: 'pip'
-
-      - name: Install pip dependencies
-        run: |
-          pip3 install wheel setuptools
-          pip3 install conan
-
-      - name: Setup cmake
-        uses: jwlawson/actions-setup-cmake@v2
-        with:
-          cmake-version: ${{matrix.cmake}}
-
-      - name: Print CMake version
-        run: cmake --version
+          cmake_version: ${{matrix.cmake}}
+          qt_version: ${{ matrix.qt }}
 
       - name: Install and cache apt dependencies
         if: runner.os == 'Linux'
         uses: awalsh128/cache-apt-pkgs-action@v1.5.2
         with:
-          packages: lcov ^libxcb-*
+          packages: lcov
           version: 1.0
-
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v4
-        with:
-          cache: true
-          version: ${{ matrix.qt }}
-          aqtversion: '==3.1.*'
 
       # Static Debug
       - name: "Coverage Workflow (static debug)"

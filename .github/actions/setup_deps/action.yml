@@ -1,0 +1,35 @@
+name: "Setup dependencies"
+description: "Install required dependencies"
+inputs:
+  cmake_version:
+    description: "Version of CMake to install"
+    default: 4.x
+  qt_version:
+    description: "Version of Qt to install"
+    default: 6.5.0
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Windows environment
+      uses: ilammy/msvc-dev-cmd@v1
+
+    - name: Install Conan
+      uses: conan-io/setup-conan@v1
+      with:
+        cache_packages: true
+
+    - name: Setup cmake
+      uses: jwlawson/actions-setup-cmake@v2
+      with:
+        cmake-version: ${{inputs.cmake_version}}
+
+    - name: Print CMake version
+      shell: bash
+      run: cmake --version
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v4
+      with:
+        cache: true
+        version: ${{ inputs.qt_version }}
+        aqtversion: '==3.1.*'
