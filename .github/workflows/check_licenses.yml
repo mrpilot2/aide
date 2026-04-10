@@ -2,6 +2,9 @@ name: Check third party licenses
 
 on:
   workflow_call:
+    secrets:
+      token:
+        required: true
 
 jobs:
   check_license:
@@ -10,6 +13,9 @@ jobs:
       - name: Check out
         uses: actions/checkout@v6
         with:
+          repository: ${{ github.repository }}
+          ref: ${{ github.ref }}
+          token: ${{ secrets.token }}
           fetch-depth: 0
 
       - id: setup_deps
@@ -17,3 +23,10 @@ jobs:
 
       - name: Check third party licenses
         run: cmake --workflow --preset workflow-ci-license-check-unix
+
+      - uses: EndBug/add-and-commit@v10
+        id: commit
+        with:
+          author_name: License Check Robot
+          author_email: bot@github.com
+          message: 'chore: automatic third party licenses update'
