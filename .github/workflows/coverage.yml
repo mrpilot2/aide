@@ -46,10 +46,7 @@ jobs:
 
       - name: Install and cache apt dependencies
         if: runner.os == 'Linux'
-        uses: awalsh128/cache-apt-pkgs-action@v1.5.2
-        with:
-          packages: lcov
-          version: 1.0
+        run: sudo apt install lcov
 
       # Static Debug
       - name: "Coverage Workflow (static debug)"
@@ -65,6 +62,6 @@ jobs:
           lcov --gcov-tool gcov --list coverage.info #debug info
 
       - name: Upload coverage reports
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v6
         with:
           use_oidc: true
