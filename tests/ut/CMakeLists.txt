@@ -62,6 +62,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
             keymapcontextmenuprovidertest.cpp
             keymaptreemodeltest.cpp
             keymappagetest.cpp
+            pendingkeymapstatetest.cpp
             loggertest.cpp
             mainwindowgeometryandstatetest.cpp
             mainwindowtest.cpp
@@ -75,7 +76,6 @@ if(NOT PROJECT_IS_TOP_LEVEL)
             qtsettingstest.cpp
             settingsdialoggeometryandstatetest.cpp
             settingspagegrouptreemodeltest.cpp
-            showkeymaptest.cpp
             showsettingsdialogtest.cpp
             systemmemorytest.cpp
             treeitemtest.cpp

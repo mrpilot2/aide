@@ -1,24 +1,18 @@
 
 #include "keymappage.hpp"
 
-#include <actionregistryinterface.hpp>
 #include <utility>
 
-#include <QAction>
-#include <QLabel>
-
-#include "showkeymap.hpp"
-#include "treeitem.hpp"
+#include <QWidget>
 
 using aide::core::KeymapPage;
 using aide::core::KeyMapTreeModel;
 
-KeymapPage::KeymapPage(ActionRegistryInterfacePtr registry,
+KeymapPage::KeymapPage(const ActionRegistryInterfacePtr& registry,
                        KeyMapPageWidgetInterface* widget)
     : SettingsPage(HierarchicalId("Keymap"))
-    , actionRegistry(std::move(registry))
     , m_widget(widget)
-    , showUseCase(actionRegistry, m_widget)
+    , m_controller(registry)
 {}
 
 QWidget* KeymapPage::widget()
@@ -28,37 +22,18 @@ QWidget* KeymapPage::widget()
 
 bool KeymapPage::isModified() const
 {
-    const auto& actions{actionRegistry->actions()};
-
-    return std::ranges::any_of(actions, [this](const auto& keyActionPair) {
-        const auto& [id, action] = keyActionPair;
-        if (auto item = showUseCase.getTreeModel()->findItemForActionId(id)) {
-            return !action.areKeySequencesTheSame(
-                QKeySequence::listFromString(item.value()->data(1).toString()),
-                action.getActiveKeySequences());
-        }
-        return false;
-    });
+    return m_controller.isModified();
 }
 
 void KeymapPage::reset()
 {
-    showUseCase.fillTreeView();
+    m_controller.reset();
+    m_widget->setTreeModel(m_controller.treeModel());
 }
 
 void KeymapPage::apply()
 {
-    for (const auto& [id, action] : actionRegistry->actions()) {
-        if (auto item = showUseCase.getTreeModel()->findItemForActionId(id)) {
-            auto treeModelShortcuts =
-                QKeySequence::listFromString(item.value()->data(1).toString());
-            if (!Action::areKeySequencesTheSame(
-                    treeModelShortcuts, action.getActiveKeySequences())) {
-                actionRegistry->modifyShortcutsForAction(id,
-                                                         treeModelShortcuts);
-            }
-        }
-    }
+    m_controller.apply();
 }
 
 aide::core::KeyMapPageWidgetInterface* KeymapPage::keyMapWidget() const
@@ -68,5 +43,5 @@ aide::core::KeyMapPageWidgetInterface* KeymapPage::keyMapWidget() const
 
 const std::shared_ptr<KeyMapTreeModel>& KeymapPage::getTreeModel() const
 {
-    return showUseCase.getTreeModel();
+    return m_controller.treeModel();
 }

@@ -34,6 +34,9 @@ namespace aide::core
 
         void setupModelData();
 
+        void notifyShortcutsChangedForId(const HierarchicalId& id,
+                                         const QList<QKeySequence>& shortcuts);
+
     private:
         [[nodiscard]] bool isAnyUserSelectedKeySequencesInGroup(
             const QModelIndex& index) const;

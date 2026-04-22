@@ -5,14 +5,15 @@
 #include <settings/settingspage.hpp>
 
 #include "actionregistryinterface.hpp"
-#include "showkeymap.hpp"
+#include "keymapcontroller.hpp"
+#include "keymappagewidgetinterface.hpp"
 
 namespace aide::core
 {
     class KeymapPage : public SettingsPage
     {
     public:
-        explicit KeymapPage(ActionRegistryInterfacePtr registry,
+        explicit KeymapPage(const ActionRegistryInterfacePtr& registry,
                             KeyMapPageWidgetInterface* widget);
 
         QWidget* widget() override;
@@ -26,11 +27,9 @@ namespace aide::core
             const;
 
     private:
-        ActionRegistryInterfacePtr actionRegistry;
-
         KeyMapPageWidgetInterface* m_widget;
 
-        ShowKeyMap showUseCase;
+        KeymapController m_controller;
     };
 } // namespace aide::core
 

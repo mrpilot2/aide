@@ -26,9 +26,10 @@ target_sources(
           settings/settingspageregistry.cpp
           settings/showsettingsdialog.cpp
           settings/keymap/keymapcontextmenuprovider.cpp
+          settings/keymap/keymapcontroller.cpp
           settings/keymap/keymappage.cpp
           settings/keymap/keymaptreemodel.cpp
-          settings/keymap/showkeymap.cpp
+          settings/keymap/pendingkeymapstate.cpp
           treeitem.cpp
           treemodel.cpp
 )

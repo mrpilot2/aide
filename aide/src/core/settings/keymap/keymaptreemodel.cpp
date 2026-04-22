@@ -159,6 +159,16 @@ std::optional<Action> KeyMapTreeModel::findCorrespondingAction(
     return {};
 }
 
+void KeyMapTreeModel::notifyShortcutsChangedForId(
+    const HierarchicalId& id, const QList<QKeySequence>& shortcuts)
+{
+    if (auto item = findItemForActionId(id)) {
+        item.value()->setData(1, QKeySequence::listToString(shortcuts));
+        emit dataChanged(QModelIndex(), QModelIndex(),
+                         {Qt::DisplayRole, Qt::ForegroundRole});
+    }
+}
+
 std::optional<TreeItemPtr> KeyMapTreeModel::findItemForActionId(
     const HierarchicalId& id) const
 {
