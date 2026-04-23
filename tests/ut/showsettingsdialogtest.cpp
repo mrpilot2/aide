@@ -1,8 +1,11 @@
+#include <array>
 #include <stdexcept>
 
 #include <catch2/catch_test_macros.hpp>
 
+#include <QApplication>
 #include <QItemSelection>
+#include <QStandardItemModel>
 
 #include "commonsettingskeys.hpp"
 #include "hierarchicalid.hpp"
@@ -440,6 +443,32 @@ TEST_CASE("Any show settings dialog use case")
     }
 
     SettingsPageRegistry::deleteAllPages();
+}
+
+TEST_CASE(
+    "ShowSettingsDialog changeSelectedPage before showSettingsDialog is called")
+{
+    int numberOfArgs{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+    const QApplication app{numberOfArgs, appName.data()};
+
+    auto view = std::make_shared<MockSettingsDialog>();
+    MockSettings settings;
+    auto logger = std::make_shared<NullLogger>();
+    ShowSettingsDialog useCase{view, settings, logger};
+
+    SECTION("throws std::logic_error when tree model is null")
+    {
+        QStandardItemModel tempModel;
+        tempModel.appendRow(new QStandardItem("item"));
+        const auto validIndex = tempModel.index(0, 0);
+        const QItemSelection nonEmptySelection(validIndex, validIndex);
+
+        REQUIRE_THROWS_AS(
+            useCase.changeSelectedPage(nonEmptySelection, QItemSelection()),
+            std::logic_error);
+    }
 }
 
 TEST_CASE("Any settings dialog", "[Issue 36]")

@@ -182,4 +182,11 @@ TEST_CASE("PendingKeymapState with one registered action")
 
         REQUIRE(registry->actions().at(saveId).keySequences.isEmpty());
     }
+
+    SECTION("pendingShortcuts returns empty list for an unregistered id")
+    {
+        const auto unknownId = HierarchicalId("unknown")("action");
+
+        REQUIRE(state.pendingShortcuts(unknownId).isEmpty());
+    }
 }
