@@ -31,7 +31,6 @@ Pick the highest-priority open issue that is not blocked by another open issue.
 4. **Verify** — run `npm run typecheck` and `npm run test` before committing. Fix any failures before proceeding.
 5. **Commit** — make a single git commit. The message MUST:
    - Follow conventional commit rules
-   - Add a footer `Implemented by RALPH`
    - Include the task completed and any PRD reference
    - List key decisions made
    - List files changed

@@ -38,6 +38,8 @@ cmake --build --preset build-client-unix-static-debug
 ctest --preset test-client-unix-static-debug
 ```
 
+Always use 'dev-' presets to verify the changes and test the code.
+
 Build output lands in `build/<preset-name>/`.
 
 ### Run a single test
