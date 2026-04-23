@@ -12,6 +12,7 @@
 using aide::FileName;
 using aide::Logger;
 using aide::LoggerName;
+using aide::LogLevel;
 
 namespace
 {
@@ -372,5 +373,80 @@ TEST_CASE("Test log macros", "[Logger]")
 #endif
 
     ::clearLogFile(logFileName);
+}
+#endif
+
+TEST_CASE("Logger constructor variants", "[Logger]")
+{
+    const std::string logFileNameStr{TEST_LOG_FILE_LOCATION +
+                                     std::string("/aide_ctor_test.log")};
+    [[maybe_unused]] auto res = std::remove(logFileNameStr.c_str());
+
+    SECTION("default constructor constructs without crash")
+    {
+        spdlog::drop_all();
+        Logger logger;
+        logger.info("default ctor");
+        logger.flush();
+    }
+
+    SECTION("LoggerName constructor constructs without crash")
+    {
+        spdlog::drop_all();
+        Logger logger(LoggerName("test_named_logger"));
+        logger.info("named ctor");
+        logger.flush();
+    }
+
+    [[maybe_unused]] auto res2 = std::remove(logFileNameStr.c_str());
+}
+
+#if SPDLOG_ACTIVE_LEVEL <= SPDLOG_LEVEL_INFO
+// NOLINTNEXTLINE
+TEST_CASE("Logger setLevel filters messages", "[Logger]")
+{
+    const std::string logFileNameStr{TEST_LOG_FILE_LOCATION +
+                                     std::string("/aide_setlevel_test.log")};
+    const char* logFileName{logFileNameStr.c_str()};
+    [[maybe_unused]] auto res = std::remove(logFileName);
+    spdlog::drop_all();
+
+    auto logger = Logger(FileName(logFileName));
+
+    SECTION("setLevel Error suppresses Info messages")
+    {
+        logger.setLevel(LogLevel::Error);
+        logger.info("suppressed info message");
+        logger.flush();
+
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     !Catch::Matchers::ContainsSubstring("suppressed info"));
+    }
+
+    SECTION("setLevel Info allows Info messages through")
+    {
+        logger.setLevel(LogLevel::Info);
+        logger.info("visible info message");
+        logger.flush();
+
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("visible info"));
+    }
+
+    SECTION("raising then lowering level re-enables messages")
+    {
+        logger.setLevel(LogLevel::Error);
+        logger.info("first info");
+        logger.setLevel(LogLevel::Info);
+        logger.info("second info");
+        logger.flush();
+
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     !Catch::Matchers::ContainsSubstring("first info"));
+        REQUIRE_THAT(::getFileContents(logFileName),
+                     Catch::Matchers::ContainsSubstring("second info"));
+    }
+
+    [[maybe_unused]] auto res2 = std::remove(logFileName);
 }
 #endif

@@ -38,6 +38,8 @@ add_executable(ut.aide)
 target_sources(
   ut.aide
   PRIVATE
+    aidetableviewtest.cpp
+    aidetreeviewtest.cpp
     applicationtest.cpp
     buildinformationtest.cpp
     hierarchicalidtest.cpp
@@ -56,13 +58,16 @@ if(NOT PROJECT_IS_TOP_LEVEL)
     ut.aide
     PRIVATE aboutaideusecasetest.cpp
             actionregistrytest.cpp
+            addshortcutdialogtest.cpp
             aidesettingsprovidertest.cpp
             applicationcloseinteractortest.cpp
             $<$<TARGET_EXISTS:Qt::lrelease>:applicationtranslatortest.cpp>
+            changedetectortest.cpp
             keymapcontextmenuprovidertest.cpp
             keymapcontrollertest.cpp
             keymaptreemodeltest.cpp
             keymappagetest.cpp
+            keymappagewidgettest.cpp
             pendingkeymapstatetest.cpp
             loggertest.cpp
             mainwindowgeometryandstatetest.cpp
@@ -76,6 +81,8 @@ if(NOT PROJECT_IS_TOP_LEVEL)
             mocksettingsdialog.cpp
             nulllogger.cpp
             qtsettingstest.cpp
+            searchfilterresultdelegatetest.cpp
+            searchlineedittest.cpp
             settingsdialoggeometryandstatetest.cpp
             settingspagegrouptreemodeltest.cpp
             settingsdialogcontrollertest.cpp
