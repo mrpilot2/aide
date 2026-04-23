@@ -26,11 +26,15 @@ void MultiColumnSortFilterProxyModel::setFilterForColumn(
 void MultiColumnSortFilterProxyModel::clearFilterForAllColumns()
 {
     m_columnFilterMap.clear();
+    invalidateFilter();
 }
 
 void MultiColumnSortFilterProxyModel::clearFilterForColumn(const int column)
 {
-    if (m_columnFilterMap.contains(column)) { m_columnFilterMap.erase(column); }
+    if (m_columnFilterMap.contains(column)) {
+        m_columnFilterMap.erase(column);
+        invalidateFilter();
+    }
 }
 
 void MultiColumnSortFilterProxyModel::setFilterOption(const FilterOption option)
