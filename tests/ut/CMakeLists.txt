@@ -60,6 +60,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
             applicationcloseinteractortest.cpp
             $<$<TARGET_EXISTS:Qt::lrelease>:applicationtranslatortest.cpp>
             keymapcontextmenuprovidertest.cpp
+            keymapcontrollertest.cpp
             keymaptreemodeltest.cpp
             keymappagetest.cpp
             pendingkeymapstatetest.cpp
@@ -67,6 +68,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
             mainwindowgeometryandstatetest.cpp
             mainwindowtest.cpp
             menucontainertest.cpp
+            multicolumnsortfilterproxymodeltest.cpp
             mockaboutdialog.cpp
             mockapplicationcloseview.cpp
             mockkeymappagewidget.cpp
