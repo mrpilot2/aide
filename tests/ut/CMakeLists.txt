@@ -78,6 +78,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
             qtsettingstest.cpp
             settingsdialoggeometryandstatetest.cpp
             settingspagegrouptreemodeltest.cpp
+            settingsdialogcontrollertest.cpp
             showsettingsdialogtest.cpp
             systemmemorytest.cpp
             treeitemtest.cpp

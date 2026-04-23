@@ -278,4 +278,12 @@ TEST_CASE("Any keymap tree model")
 
         REQUIRE(treeModel.data(root, Qt::ForegroundRole) == QColor(Qt::blue));
     }
+
+    SECTION("setData returns false for roles other than DisplayRole")
+    {
+        const QModelIndex root = treeModel.index(0, 0, QModelIndex());
+        const QModelIndex elem = treeModel.index(0, 1, root);
+
+        REQUIRE_FALSE(treeModel.setData(elem, "any", Qt::EditRole));
+    }
 }

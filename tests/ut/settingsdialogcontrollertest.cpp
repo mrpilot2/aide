@@ -1,0 +1,83 @@
+#include <array>
+
+#include <catch2/catch_test_macros.hpp>
+
+#include <QApplication>
+#include <QItemSelection>
+
+#include "settings/settingsdialogchangepagecontroller.hpp"
+#include "settings/settingsdialogcontroller.hpp"
+
+using aide::core::SettingsDialogChangePageController;
+using aide::gui::SettingsDialogController;
+
+namespace
+{
+    class SpyController : public SettingsDialogChangePageController
+    {
+    public:
+        bool changeSelectedPageCalled{false};
+        bool anyGuiElementChangedCalled{false};
+        bool resetCurrentPageCalled{false};
+        bool applyModifiedPagesCalled{false};
+
+        void changeSelectedPage(const QItemSelection& /*selected*/,
+                                const QItemSelection& /*deselected*/) override
+        {
+            changeSelectedPageCalled = true;
+        }
+
+        void anyGuiElementHasChanged() override
+        {
+            anyGuiElementChangedCalled = true;
+        }
+
+        void resetCurrentPage() override { resetCurrentPageCalled = true; }
+
+        void applyModifiedSettingsPages() override
+        {
+            applyModifiedPagesCalled = true;
+        }
+    };
+} // namespace
+
+TEST_CASE(
+    "SettingsDialogController delegates to SettingsDialogChangePageController")
+{
+    int numberOfArgs{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+    const QApplication app{numberOfArgs, appName.data()};
+
+    SpyController spy;
+    const SettingsDialogController controller(spy);
+
+    SECTION("onUserChangedSelectedPage calls changeSelectedPage")
+    {
+        controller.onUserChangedSelectedPage(QItemSelection(),
+                                             QItemSelection());
+
+        REQUIRE(spy.changeSelectedPageCalled);
+    }
+
+    SECTION("onUserChangedAGuiElement calls anyGuiElementHasChanged")
+    {
+        controller.onUserChangedAGuiElement();
+
+        REQUIRE(spy.anyGuiElementChangedCalled);
+    }
+
+    SECTION("onUserWantsToResetCurrentPage calls resetCurrentPage")
+    {
+        controller.onUserWantsToResetCurrentPage();
+
+        REQUIRE(spy.resetCurrentPageCalled);
+    }
+
+    SECTION("onUserWantsToApplySettingsPages calls applyModifiedSettingsPages")
+    {
+        controller.onUserWantsToApplySettingsPages();
+
+        REQUIRE(spy.applyModifiedPagesCalled);
+    }
+}
