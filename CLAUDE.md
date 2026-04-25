@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Build System
 
-Uses CMake 3.25+ with presets (defined in `CMakePresets.json`) and Conan 2 for dependency management (`conanfile.txt`). Conan is invoked automatically via `conan_provider.cmake` as a `CMAKE_PROJECT_TOP_LEVEL_INCLUDES` hook.
+Uses CMake 3.26+ with presets (defined in `CMakePresets.json`) and Conan 2 for dependency management (`conanfile.txt`). Conan is invoked automatically via `conan_provider.cmake` as a `CMAKE_PROJECT_TOP_LEVEL_INCLUDES` hook.
 
 ### Preset naming convention
 

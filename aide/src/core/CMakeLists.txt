@@ -79,7 +79,11 @@ target_include_directories(
 target_link_libraries(
   AideCore
   PUBLIC Qt::Core Qt::Widgets Aide::AideLogger
-  PRIVATE Aide::AideBuildInformation aide_coverage aide_options aide_warnings
+  PRIVATE
+    Aide::AideBuildInformation
+    $<BUILD_LOCAL_INTERFACE:aide_coverage>
+    $<BUILD_LOCAL_INTERFACE:aide_options>
+    $<BUILD_LOCAL_INTERFACE:aide_warnings>
 )
 
 if(WIN32)

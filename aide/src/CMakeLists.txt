@@ -31,9 +31,9 @@ target_link_libraries(
     Aide::AideCore
     Aide::AideGui
     Aide::AideUtils
-    aide_coverage
-    aide_options
-    aide_warnings
+    $<BUILD_LOCAL_INTERFACE:aide_coverage>
+    $<BUILD_LOCAL_INTERFACE:aide_options>
+    $<BUILD_LOCAL_INTERFACE:aide_warnings>
 )
 
 if(WIN32)

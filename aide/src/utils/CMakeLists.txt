@@ -24,5 +24,8 @@ target_include_directories(
 
 target_link_libraries(
   AideUtils
-  PRIVATE aide_coverage aide_options aide_warnings
+  PRIVATE
+    $<BUILD_LOCAL_INTERFACE:aide_coverage>
+    $<BUILD_LOCAL_INTERFACE:aide_options>
+    $<BUILD_LOCAL_INTERFACE:aide_warnings>
 )

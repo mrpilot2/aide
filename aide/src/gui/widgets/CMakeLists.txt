@@ -37,9 +37,9 @@ target_link_libraries(
   AideQt${QT_VERSION_MAJOR}Widgets
   PUBLIC Qt::Widgets
   PRIVATE
-    aide_coverage
-    aide_options
-    aide_warnings
+    $<BUILD_LOCAL_INTERFACE:aide_coverage>
+    $<BUILD_LOCAL_INTERFACE:aide_options>
+    $<BUILD_LOCAL_INTERFACE:aide_warnings>
     Aide::AideLogger
     Aide::AideCore
 )

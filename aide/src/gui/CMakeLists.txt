@@ -87,9 +87,9 @@ target_link_libraries(
     Aide::AideWidgets
     Aide::AideUtils
     Qt::Widgets
-    aide_options
-    aide_warnings
-    aide_coverage
+    $<BUILD_LOCAL_INTERFACE:aide_options>
+    $<BUILD_LOCAL_INTERFACE:aide_warnings>
+    $<BUILD_LOCAL_INTERFACE:aide_coverage>
 )
 
 set_source_files_properties(
