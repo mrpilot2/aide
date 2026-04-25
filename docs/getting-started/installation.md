@@ -87,8 +87,8 @@ The following options can be passed to CMake when consuming aIDE via `FetchConte
 
 | Option | Default | Description |
 |---|---|---|
-| `aide_ENABLE_DEMO` | `ON` | Build the demo application |
-| `aide_ENABLE_HARDENING` | `ON` | Enable compiler hardening flags |
-| `aide_ENABLE_IPO` | `OFF` | Enable link-time optimization |
+| `AIDE_ENABLE_DEMO` | `ON` | Build the demo application |
+| `AIDE_ENABLE_HARDENING` | `ON` | Enable compiler hardening flags |
+| `AIDE_ENABLE_IPO` | `OFF` | Enable link-time optimization |
 
-Set them with `-Daide_ENABLE_DEMO=OFF` on the CMake command line or via `FetchContent_Declare`'s `CMAKE_ARGS`.
+Set them with `-DAIDE_ENABLE_DEMO=OFF` on the CMake command line or via `FetchContent_Declare`'s `CMAKE_ARGS`.

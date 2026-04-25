@@ -19,24 +19,24 @@
         "CMAKE_POSITION_INDEPENDENT_CODE": "TRUE",
         "CMAKE_CXX_STANDARD": "20",
 
-        "aide_ENABLE_IPO": "OFF",
-        "aide_WARNINGS_AS_ERRORS": "OFF",
-        "aide_ENABLE_USER_LINKER": "OFF",
+        "AIDE_ENABLE_IPO": "OFF",
+        "AIDE_WARNINGS_AS_ERRORS": "OFF",
+        "AIDE_ENABLE_USER_LINKER": "OFF",
 
-        "aide_ENABLE_SANITIZER_ADDRESS": "OFF",
-        "aide_ENABLE_SANITIZER_LEAK": "OFF",
-        "aide_ENABLE_SANITIZER_UNDEFINED": "OFF",
-        "aide_ENABLE_SANITIZER_THREAD": "OFF",
-        "aide_ENABLE_SANITIZER_MEMORY": "OFF",
+        "AIDE_ENABLE_SANITIZER_ADDRESS": "OFF",
+        "AIDE_ENABLE_SANITIZER_LEAK": "OFF",
+        "AIDE_ENABLE_SANITIZER_UNDEFINED": "OFF",
+        "AIDE_ENABLE_SANITIZER_THREAD": "OFF",
+        "AIDE_ENABLE_SANITIZER_MEMORY": "OFF",
 
-        "aide_ENABLE_UNITY_BUILD": "OFF",
-        "aide_ENABLE_CLANG_TIDY": "OFF",
-        "aide_ENABLE_CPPCHECK": "OFF",
-        "aide_ENABLE_PCH": "OFF",
-        "aide_ENABLE_CACHE": "OFF",
+        "AIDE_ENABLE_UNITY_BUILD": "OFF",
+        "AIDE_ENABLE_CLANG_TIDY": "OFF",
+        "AIDE_ENABLE_CPPCHECK": "OFF",
+        "AIDE_ENABLE_PCH": "OFF",
+        "AIDE_ENABLE_CACHE": "OFF",
         "aide_ENABLE_ABI_COMPLIANCE_CHECK": "OFF",
 
-        "aide_ENABLE_COVERAGE": "OFF"
+        "AIDE_ENABLE_COVERAGE": "OFF"
       }
     },
 
@@ -102,19 +102,19 @@
 
     { "name": "static-analysis", "hidden": true,
       "cacheVariables": {
-        "aide_ENABLE_CLANG_TIDY": "ON",
-        "aide_ENABLE_CPPCHECK": "ON"
+        "AIDE_ENABLE_CLANG_TIDY": "ON",
+        "AIDE_ENABLE_CPPCHECK": "ON"
       }
     },
 
     { "name": "werror", "hidden": true,
-      "cacheVariables": { "aide_WARNINGS_AS_ERRORS": "ON" }
+      "cacheVariables": { "AIDE_WARNINGS_AS_ERRORS": "ON" }
     },
 
     { "name": "sanitizers", "hidden": true,
       "cacheVariables": {
-        "aide_ENABLE_SANITIZER_ADDRESS": "ON",
-        "aide_ENABLE_SANITIZER_UNDEFINED": "ON"
+        "AIDE_ENABLE_SANITIZER_ADDRESS": "ON",
+        "AIDE_ENABLE_SANITIZER_UNDEFINED": "ON"
       },
       "environment": {
         "ASAN_OPTIONS": "detect_odr_violation=0:detect_stack_use_after_return=1:detect_leaks=0",
@@ -126,7 +126,7 @@
       "name": "coverage",
       "hidden": true,
       "cacheVariables": {
-        "aide_ENABLE_COVERAGE": "ON",
+        "AIDE_ENABLE_COVERAGE": "ON",
         "CMAKE_C_COMPILER": "gcc",
         "CMAKE_CXX_COMPILER": "g++"
       }
@@ -136,19 +136,19 @@
         "CMAKE_C_COMPILER": "gcc",
         "CMAKE_CXX_COMPILER": "g++",
         "aide_ENABLE_ABI_COMPLIANCE_CHECK": "ON",
-        "aide_PACKAGING_MAINTAINER_MODE": "ON"
+        "AIDE_PACKAGING_MAINTAINER_MODE": "ON"
       }
     },
 
     { "name": "codeql", "hidden": true,
-      "cacheVariables": { "aide_ENABLE_COVERAGE": "ON" }
+      "cacheVariables": { "AIDE_ENABLE_COVERAGE": "ON" }
     },
 
     { "name": "doxygen", "hidden": true,
-      "cacheVariables": { "ENABLE_DOXYGEN": "ON" }
+      "cacheVariables": { "AIDE_ENABLE_DOXYGEN": "ON" }
     },
     { "name": "test-on-ci", "hidden": true,
-      "cacheVariables": { "UNIT_TESTS_RUN_ON_CI": "ON" }
+      "cacheVariables": { "AIDE_UNIT_TESTS_RUN_ON_CI": "ON" }
     },
 
     { "name": "role-client", "hidden": true },
@@ -195,7 +195,7 @@
 
     { "name": "ci-license-check-unix", "inherits": ["clang","static","release", "platform-unix"], "cacheVariables": { "AIDE_CHECK_LICENSES_AVAILABILITY": "ON" } },
 
-    { "name": "ci-deploy-unix-shared-release", "inherits": ["clang","shared","release", "test-on-ci", "platform-unix"], "cacheVariables": { "aide_PACKAGING_MAINTAINER_MODE": "ON" } },
+    { "name": "ci-deploy-unix-shared-release", "inherits": ["clang","shared","release", "test-on-ci", "platform-unix"], "cacheVariables": { "AIDE_PACKAGING_MAINTAINER_MODE": "ON" } },
 
     { "name": "dev-windows-static",   "inherits": ["static","role-dev", "platform-windows"] },
     { "name": "dev-windows-shared",   "inherits": ["shared","role-dev", "platform-windows"] },

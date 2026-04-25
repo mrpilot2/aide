@@ -29,10 +29,10 @@ enable_testing()
 add_subdirectory(tests)
 
 if(PROJECT_IS_TOP_LEVEL)
-  option(aide_ENABLE_DEMO "Builds a small demo application" ON)
-  add_feature_info(EnableDemo aide_ENABLE_DEMO "Builds the demo application.")
+  option(AIDE_ENABLE_DEMO "Builds a small demo application" ON)
+  add_feature_info(EnableDemo AIDE_ENABLE_DEMO "Builds the demo application.")
 
-  if(aide_ENABLE_DEMO)
+  if(AIDE_ENABLE_DEMO)
     add_subdirectory(demo)
   endif()
 endif()

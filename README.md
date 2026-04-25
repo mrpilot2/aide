@@ -227,16 +227,16 @@ The following CMake options are available (most are set automatically by presets
 
 | Option                            | Default                     | Description                       |
 |-----------------------------------|-----------------------------|-----------------------------------|
-| `aide_ENABLE_DEMO`                | `ON`                        | Build the demo application        |
-| `aide_ENABLE_COVERAGE`            | `OFF`                       | Enable coverage reporting         |
-| `aide_ENABLE_HARDENING`           | `ON`                        | Enable compiler hardening flags   |
-| `aide_ENABLE_SANITIZER_ADDRESS`   | platform-dependent          | Enable AddressSanitizer           |
-| `aide_ENABLE_SANITIZER_UNDEFINED` | platform-dependent          | Enable UndefinedBehaviorSanitizer |
-| `aide_ENABLE_CLANG_TIDY`          | `OFF` (client) / `ON` (dev) | Enable clang-tidy                 |
-| `aide_ENABLE_CPPCHECK`            | `OFF` (client) / `ON` (dev) | Enable cppcheck                   |
-| `aide_ENABLE_CACHE`               | `OFF` (client) / `ON` (dev) | Enable ccache                     |
-| `aide_ENABLE_IPO`                 | `OFF`                       | Enable link-time optimization     |
-| `aide_WARNINGS_AS_ERRORS`         | `OFF` (client) / `ON` (dev) | Treat warnings as errors          |
+| `AIDE_ENABLE_DEMO`                | `ON`                        | Build the demo application        |
+| `AIDE_ENABLE_COVERAGE`            | `OFF`                       | Enable coverage reporting         |
+| `AIDE_ENABLE_HARDENING`           | `ON`                        | Enable compiler hardening flags   |
+| `AIDE_ENABLE_SANITIZER_ADDRESS`   | platform-dependent          | Enable AddressSanitizer           |
+| `AIDE_ENABLE_SANITIZER_UNDEFINED` | platform-dependent          | Enable UndefinedBehaviorSanitizer |
+| `AIDE_ENABLE_CLANG_TIDY`          | `OFF` (client) / `ON` (dev) | Enable clang-tidy                 |
+| `AIDE_ENABLE_CPPCHECK`            | `OFF` (client) / `ON` (dev) | Enable cppcheck                   |
+| `AIDE_ENABLE_CACHE`               | `OFF` (client) / `ON` (dev) | Enable ccache                     |
+| `AIDE_ENABLE_IPO`                 | `OFF`                       | Enable link-time optimization     |
+| `AIDE_WARNINGS_AS_ERRORS`         | `OFF` (client) / `ON` (dev) | Treat warnings as errors          |
 
 ---
 

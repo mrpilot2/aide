@@ -2,7 +2,7 @@
 include(Catch)
 
 option(
-  UNIT_TESTS_RUN_ON_CI
+  AIDE_UNIT_TESTS_RUN_ON_CI
   "Specify if unit tests are executed on CI - changes reporter"
 )
 
@@ -228,12 +228,12 @@ enable_testing()
 # With coverage enabled, require the reset_coverage_data setup fixture so every
 # discovered test starts from clean .gcda files (see ResetCoverageData.cmake).
 set(aide_coverage_test_properties "")
-if(aide_ENABLE_COVERAGE)
+if(AIDE_ENABLE_COVERAGE)
   set(aide_coverage_test_properties PROPERTIES FIXTURES_REQUIRED coverage_data)
 endif()
 
 function(aide_discover_unit_tests target)
-  if(UNIT_TESTS_RUN_ON_CI)
+  if(AIDE_UNIT_TESTS_RUN_ON_CI)
     catch_discover_tests(
       ${target}
       EXTRA_ARGS

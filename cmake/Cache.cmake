@@ -1,18 +1,25 @@
 # Enable cache if available
 function(aide_enable_cache)
-  set(CACHE_OPTION "ccache" CACHE STRING "Compiler cache to be used")
-  set(CACHE_OPTION_VALUES "ccache" "sccache")
-  set_property(CACHE CACHE_OPTION PROPERTY STRINGS ${CACHE_OPTION_VALUES})
-  list(FIND CACHE_OPTION_VALUES ${CACHE_OPTION} CACHE_OPTION_INDEX)
+  set(AIDE_CACHE_OPTION "ccache" CACHE STRING "Compiler cache to be used")
+  set(AIDE_CACHE_OPTION_VALUES "ccache" "sccache")
+  set_property(
+    CACHE AIDE_CACHE_OPTION
+    PROPERTY STRINGS ${AIDE_CACHE_OPTION_VALUES}
+  )
+  list(
+    FIND AIDE_CACHE_OPTION_VALUES
+    ${AIDE_CACHE_OPTION}
+    AIDE_CACHE_OPTION_INDEX
+  )
 
-  if(${CACHE_OPTION_INDEX} EQUAL -1)
+  if(${AIDE_CACHE_OPTION_INDEX} EQUAL -1)
     message(
       STATUS
-      "Using custom compiler cache system: '${CACHE_OPTION}', explicitly supported entries are ${CACHE_OPTION_VALUES}"
+      "Using custom compiler cache system: '${AIDE_CACHE_OPTION}', explicitly supported entries are ${AIDE_CACHE_OPTION_VALUES}"
     )
   endif()
 
-  find_program(CACHE_BINARY NAMES ${CACHE_OPTION_VALUES})
+  find_program(CACHE_BINARY NAMES ${AIDE_CACHE_OPTION_VALUES})
   if(CACHE_BINARY)
     message(STATUS "${CACHE_BINARY} found and enabled")
     set(
@@ -30,7 +37,7 @@ function(aide_enable_cache)
   else()
     message(
       WARNING
-      "${CACHE_OPTION} is enabled but was not found. Not using it"
+      "${AIDE_CACHE_OPTION} is enabled but was not found. Not using it"
     )
   endif()
 endfunction()
