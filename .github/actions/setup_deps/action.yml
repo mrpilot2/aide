@@ -6,7 +6,7 @@ inputs:
     default: 4.x
   qt_version:
     description: "Version of Qt to install"
-    default: 6.5.0
+    default: 6.8.3
 runs:
   using: "composite"
   steps:

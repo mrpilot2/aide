@@ -14,31 +14,22 @@ jobs:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-24.04]
         cmake: [3.25, 4.x]
-        qt: ["5.15.2", "6.5.0"]
+        qt: [6.8.3]
 
         include:
-          - os: windows-latest
-            CXX: cl
-
           - cmake: 3.25
             cmake_name: CMake 3.25
           - cmake: 4.x
             cmake_name: CMake Latest
 
-          - qt: "5.15.2"
-            qt_name: Qt5
-          - qt: "6.5.0"
+          - qt: 6.8.3
             qt_name: Qt6
 
-          - qt: "6.5.0"
+          - os: ubuntu-24.04
             cmake: 4.x
-            os: ubuntu-24.04
-            COVERAGE: ON
-            GCOV_TOOL: gcov
-
-        exclude:
-          - os: macos-latest
+            cmake_name: CMake Latest
             qt: 5.15.2
+            qt_name: Qt5
 
     runs-on: ${{ matrix.os }}
     defaults:

@@ -11,19 +11,14 @@ jobs:
       matrix:
         os: [macos-latest, ubuntu-24.04]
         cmake: [4.x]
-        qt: ["5.15.2", "6.5.0"]
+        qt: [6.8.3]
 
         include:
           - cmake: 4.x
             cmake_name: CMake Latest
 
-          - qt: "5.15.2"
-            qt_name: Qt5
-          - qt: "6.5.0"
+          - qt: 6.8.3
             qt_name: Qt6
-        exclude:
-          - os: macos-latest
-            qt: 5.15.2
 
     runs-on: ${{ matrix.os }}
     defaults:

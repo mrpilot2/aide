@@ -14,16 +14,16 @@ jobs:
       matrix:
         os: [ubuntu-24.04]
         cmake: [4.x]
-        qt: ["6.5.0"]
+        qt: [6.8.3]
 
         include:
           - cmake: 4.x
             cmake_name: CMake Latest
 
-          - qt: "6.5.0"
+          - qt: 6.8.3
             qt_name: Qt6
 
-          - qt: "6.5.0"
+          - qt: 6.8.3
             cmake: 4.x
             os: ubuntu-24.04
             GCOV_TOOL: gcov
