@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.26)
 
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/../cmake)
 
 project(aide.tests LANGUAGES CXX VERSION 0.1.0)
 
-include(${CMAKE_CURRENT_LIST_DIR}/../cmake/CheckRequiredCXXStandard.cmake)
+include(CheckRequiredCXXStandard)
 
 if(PROJECT_IS_TOP_LEVEL)
-  include(${CMAKE_CURRENT_LIST_DIR}/../cmake/PreventInSourceBuilds.cmake)
+  include(PreventInSourceBuilds)
   include(${CMAKE_CURRENT_LIST_DIR}/../ProjectOptions.cmake)
 
   aide_setup_options()

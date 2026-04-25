@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.26)
 
-include(${CMAKE_CURRENT_LIST_DIR}/../cmake/VersionFromGit.cmake)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/../cmake)
+
+include(VersionFromGit)
 
 version_from_git()
 
@@ -8,10 +10,10 @@ project(aide.library LANGUAGES CXX VERSION ${VERSION})
 
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-include(${CMAKE_CURRENT_LIST_DIR}/../cmake/CheckRequiredCXXStandard.cmake)
+include(CheckRequiredCXXStandard)
 
 if(PROJECT_IS_TOP_LEVEL)
-  include(${CMAKE_CURRENT_LIST_DIR}/../cmake/PreventInSourceBuilds.cmake)
+  include(PreventInSourceBuilds)
   include(${CMAKE_CURRENT_LIST_DIR}/../ProjectOptions.cmake)
 
   aide_setup_options()
@@ -29,7 +31,7 @@ add_subdirectory(doc)
 add_subdirectory(src)
 
 if(aide_ENABLE_ABI_COMPLIANCE_CHECK)
-  include(cmake/AbiComplianceCheck.cmake)
+  include(AbiComplianceCheck)
   aide_perform_abi_compliance_check(Aide::AideApplication Aide::AideWidgets)
 endif()
 

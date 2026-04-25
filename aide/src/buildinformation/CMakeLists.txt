@@ -1,6 +1,4 @@
-include(
-  ${CMAKE_CURRENT_LIST_DIR}/../../../cmake/GetGitRevisionDescription.cmake
-)
+include(GetGitRevisionDescription)
 
 git_describe(GIT_HASH --tags --always --dirty --match "v*")
 

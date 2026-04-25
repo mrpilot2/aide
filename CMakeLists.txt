@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 3.26)
 
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
+
 include(FeatureSummary)
 
-include(cmake/VersionFromGit.cmake)
+include(VersionFromGit)
 
 version_from_git()
 
@@ -10,9 +12,9 @@ project(aide LANGUAGES CXX VERSION ${VERSION})
 
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-include(cmake/CheckRequiredCXXStandard.cmake)
+include(CheckRequiredCXXStandard)
 
-include(cmake/PreventInSourceBuilds.cmake)
+include(PreventInSourceBuilds)
 include(ProjectOptions.cmake)
 
 aide_setup_options()

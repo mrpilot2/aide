@@ -1,4 +1,4 @@
-include(cmake/SystemLink.cmake)
+include(SystemLink)
 include(CMakeDependentOption)
 include(CheckCXXCompilerFlag)
 include(FeatureSummary)
@@ -186,14 +186,14 @@ endmacro()
 
 macro(aide_global_options)
   if(aide_ENABLE_IPO)
-    include(cmake/InterproceduralOptimization.cmake)
+    include(InterproceduralOptimization)
     aide_enable_ipo()
   endif()
 
   aide_supports_sanitizers()
 
   if(aide_ENABLE_HARDENING AND aide_ENABLE_GLOBAL_HARDENING)
-    include(cmake/Hardening.cmake)
+    include(Hardening)
     if(
       NOT SUPPORTS_UBSAN
       OR aide_ENABLE_SANITIZER_UNDEFINED
@@ -214,24 +214,24 @@ endmacro()
 
 macro(aide_local_options)
   if(PROJECT_IS_TOP_LEVEL)
-    include(cmake/StandardProjectSettings.cmake)
+    include(StandardProjectSettings)
   endif()
 
   add_library(aide_warnings INTERFACE)
   add_library(aide_options INTERFACE)
   add_library(aide_coverage INTERFACE)
 
-  include(cmake/CompilerWarnings.cmake)
+  include(CompilerWarnings)
   aide_set_project_warnings(
     aide_warnings ${aide_WARNINGS_AS_ERRORS} "" "" "" ""
   )
 
   if(aide_ENABLE_USER_LINKER)
-    include(cmake/Linker.cmake)
+    include(Linker)
     configure_linker(aide_options)
   endif()
 
-  include(cmake/Sanitizers.cmake)
+  include(Sanitizers)
   aide_enable_sanitizers(
     aide_options ${aide_ENABLE_SANITIZER_ADDRESS} ${aide_ENABLE_SANITIZER_LEAK}
     ${aide_ENABLE_SANITIZER_UNDEFINED} ${aide_ENABLE_SANITIZER_THREAD}
@@ -251,11 +251,11 @@ macro(aide_local_options)
   endif()
 
   if(aide_ENABLE_CACHE)
-    include(cmake/Cache.cmake)
+    include(Cache)
     aide_enable_cache()
   endif()
 
-  include(cmake/StaticAnalyzers.cmake)
+  include(StaticAnalyzers)
   if(aide_ENABLE_CLANG_TIDY)
     aide_enable_clang_tidy(aide_options ${aide_WARNINGS_AS_ERRORS})
   endif()
@@ -267,12 +267,12 @@ macro(aide_local_options)
   endif()
 
   if(aide_ENABLE_COVERAGE)
-    include(cmake/Tests.cmake)
+    include(Tests)
     aide_enable_coverage(aide_coverage)
   endif()
 
   if(aide_ENABLE_ABI_COMPLIANCE_CHECK)
-    include(cmake/AbiComplianceCheck.cmake)
+    include(AbiComplianceCheck)
     aide_enable_compliance_check(aide_options)
   endif()
 
@@ -285,7 +285,7 @@ macro(aide_local_options)
   endif()
 
   if(aide_ENABLE_HARDENING AND NOT aide_ENABLE_GLOBAL_HARDENING)
-    include(cmake/Hardening.cmake)
+    include(Hardening)
     if(
       NOT SUPPORTS_UBSAN
       OR aide_ENABLE_SANITIZER_UNDEFINED
