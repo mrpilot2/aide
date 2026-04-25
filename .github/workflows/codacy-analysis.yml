@@ -27,6 +27,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
+      - id: setup_deps
+        uses: ./.github/actions/setup_deps
+
       - name: Run Codacy Analysis CLI
         uses: codacy/codacy-analysis-cli-action@v4
         with:
