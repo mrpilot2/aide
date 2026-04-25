@@ -59,7 +59,7 @@ jobs:
         run: cmake --preset ci-codeql-unix-debug
 
       - name: Build cpp
-        run: cmake --build ./build/ci-codeql-unix-debug -- -j2
+        run: cmake --build ./build/ci-codeql-unix-debug
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v4
