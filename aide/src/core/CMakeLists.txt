@@ -8,6 +8,8 @@ target_sources(
   PRIVATE aboutaideusecase.cpp
           aidesettingsprovider.cpp
           actionregistry.cpp
+          appearancemanager.cpp
+          ../include/aide/appearancemanager.hpp
           applicationclose.cpp
           hierarchicalid.cpp
           loggerfactory.cpp

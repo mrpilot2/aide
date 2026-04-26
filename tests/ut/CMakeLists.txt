@@ -40,6 +40,7 @@ target_sources(
   PRIVATE
     aidetableviewtest.cpp
     aidetreeviewtest.cpp
+    appearancemanagertest.cpp
     applicationtest.cpp
     buildinformationtest.cpp
     hierarchicalidtest.cpp
