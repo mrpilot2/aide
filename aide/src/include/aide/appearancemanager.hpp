@@ -46,11 +46,19 @@ namespace aide
 
         const Theme& findTheme(const QString& name) const;
         void restoreFromSettings();
+        void reapplySystemTheme();
 
         std::shared_ptr<SettingsInterface> m_settings;
         std::vector<Theme> m_themes;
         QString m_activeThemeName;
         QFont m_activeFont;
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+        void updateSystemThemeConnection();
+
+    private slots:
+        void onOsColorSchemeChanged();
+#endif
     };
 } // namespace aide
 

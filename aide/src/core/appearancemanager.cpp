@@ -5,6 +5,10 @@
 
 #include <QApplication>
 #include <QColor>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+#include <QGuiApplication>
+#include <QStyleHints>
+#endif
 
 #include "aide/hierarchicalid.hpp"
 #include "aide/settingsinterface.hpp"
@@ -148,6 +152,10 @@ void AppearanceManager::applyAppearance(const QString& themeName,
     // cppcheck-suppress knownConditionTrueFalse
     if (newScheme != oldScheme) { emit colorSchemeChanged(newScheme); }
     emit appearanceChanged();
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+    updateSystemThemeConnection();
+#endif
 }
 
 // static
@@ -267,4 +275,38 @@ void AppearanceManager::restoreFromSettings()
 
     applyTheme(theme);
     QApplication::setFont(m_activeFont);
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+    updateSystemThemeConnection();
+#endif
 }
+
+void AppearanceManager::reapplySystemTheme()
+{
+    const auto oldScheme = colorScheme();
+    applyTheme(findTheme(SYSTEM_THEME_NAME));
+    const auto newScheme = colorScheme();
+    // cppcheck-suppress knownConditionTrueFalse
+    if (newScheme != oldScheme) { emit colorSchemeChanged(newScheme); }
+    emit appearanceChanged();
+}
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+void AppearanceManager::updateSystemThemeConnection()
+{
+    auto* hints = QGuiApplication::styleHints();
+    if (m_activeThemeName == SYSTEM_THEME_NAME) {
+        connect(hints, &QStyleHints::colorSchemeChanged, this,
+                &AppearanceManager::onOsColorSchemeChanged,
+                Qt::UniqueConnection);
+    } else {
+        disconnect(hints, &QStyleHints::colorSchemeChanged, this,
+                   &AppearanceManager::onOsColorSchemeChanged);
+    }
+}
+
+void AppearanceManager::onOsColorSchemeChanged()
+{
+    reapplySystemTheme();
+}
+#endif
