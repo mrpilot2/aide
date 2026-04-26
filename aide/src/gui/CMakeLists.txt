@@ -48,6 +48,7 @@ target_sources(
     mainwindow.cpp
     mainwindowcontroller.cpp
     thirdpartylicensesdialog.cpp
+    settings/appearancepage.cpp
     settings/changedetector.cpp
     settings/settingsdialog.cpp
     settings/settingsdialogcontroller.cpp
