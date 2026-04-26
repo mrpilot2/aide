@@ -10,7 +10,7 @@ Think of it as the [IntelliJ Platform](https://www.jetbrains.com/opensource/idea
 [![codecov](https://codecov.io/gh/mrpilot2/aide/branch/develop/graph/badge.svg)](https://codecov.io/gh/mrpilot2/aide)
 [![CodeQL](https://github.com/mrpilot2/aide/actions/workflows/codeql.yml/badge.svg)](https://github.com/mrpilot2/aide/actions/workflows/codeql.yml)
 
-[![All Contributors](https://img.shields.io/github/all-contributors/mrpilot2/aide?color=ee8449&style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/github/all-contributors/mrpilot2/aide?color=ee8449&style=flat-square)](Contributors.md)
 
 ---
 
