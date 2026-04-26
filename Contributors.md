@@ -4,11 +4,14 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
-  <tr>
-    <td align="center"><a href="https://github.com/mrpilot2"><img src="https://avatars0.githubusercontent.com/u/12819580?v=4" width="100px;" alt=""/><br /><sub><b>Markus Reitboeck</b></sub></a><br /><a href="https://github.com/mrpilot2/aide/commits?author=mrpilot2" title="Code">💻</a> <a href="https://github.com/mrpilot2/aide/commits?author=mrpilot2" title="Documentation">📖</a></td>
-  </tr>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://anthropic.com/claude-code"><img src="https://avatars.githubusercontent.com/u/81847?v=4?s=100" width="100px;" alt="Claude"/><br /><sub><b>Claude</b></sub></a><br /><a href="#doc-claude" title="Documentation">📖</a></td>
+    </tr>
+  </tbody>
 </table>
 
-<!-- markdownlint-enable -->
+<!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
