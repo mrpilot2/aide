@@ -12,25 +12,25 @@ TEST_CASE("A new settings page registry")
 {
     SECTION(" is empty")
     {
-        REQUIRE(SettingsPageRegistry::settingsPages().empty());
+        const SettingsPageRegistry registry;
+        REQUIRE(registry.settingsPages().empty());
     }
 }
 
 TEST_CASE("Any settings page registry")
 {
-    SettingsPageRegistry::deleteAllPages();
+    SettingsPageRegistry registry;
 
     SECTION(" can store a settings page")
     {
-        SettingsPageRegistry::addPage(std::make_unique<MockSettingsPage>());
-        REQUIRE(SettingsPageRegistry::settingsPages().size() == 1);
+        registry.addPage(std::make_unique<MockSettingsPage>());
+        REQUIRE(registry.settingsPages().size() == 1);
     }
 
     SECTION(" cannot store a settings page with duplicate group")
     {
-        SettingsPageRegistry::addPage(std::make_unique<MockSettingsPage>());
+        registry.addPage(std::make_unique<MockSettingsPage>());
 
-        REQUIRE_THROWS(SettingsPageRegistry::addPage(
-            std::make_unique<MockSettingsPage>()));
+        REQUIRE_THROWS(registry.addPage(std::make_unique<MockSettingsPage>()));
     }
 }

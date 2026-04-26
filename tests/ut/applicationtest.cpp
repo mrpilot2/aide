@@ -8,9 +8,6 @@
 #include <QtCore/QStandardPaths>
 
 #include <aide/application.hpp>
-#include <aide/settings/settingspageregistry.hpp>
-
-using aide::core::SettingsPageRegistry;
 
 namespace
 {
@@ -43,8 +40,6 @@ TEST_CASE("Application constructor throws an exception", "[Application]")
             std::make_unique<aide::Application>(argc, appName.data()),
             std::runtime_error);
     }
-
-    SettingsPageRegistry::deleteAllPages();
 }
 
 TEST_CASE("Application constructor does not throw an exception",
@@ -65,8 +60,6 @@ TEST_CASE("Application constructor does not throw an exception",
         REQUIRE_NOTHROW(
             std::make_unique<aide::Application>(argc, appName.data()));
     }
-
-    SettingsPageRegistry::deleteAllPages();
 }
 
 TEST_CASE("Logger logs into cache directory", "[Application]")
@@ -93,8 +86,6 @@ TEST_CASE("Logger logs into cache directory", "[Application]")
     aide::Application::logger()->flush();
     REQUIRE(::lookForContentInFile(logFileLocation.c_str(), "Configured") !=
             std::string::npos);
-
-    SettingsPageRegistry::deleteAllPages();
 }
 
 TEST_CASE("Application translator interface is never null", "[Application]")
@@ -110,8 +101,6 @@ TEST_CASE("Application translator interface is never null", "[Application]")
     const aide::Application app(numberOfArgs, appName.data());
 
     REQUIRE(app.translator() != nullptr);
-
-    SettingsPageRegistry::deleteAllPages();
 }
 
 TEST_CASE("Application main window is never null", "[Application]")
@@ -127,8 +116,6 @@ TEST_CASE("Application main window is never null", "[Application]")
     const aide::Application app(numberOfArgs, appName.data());
 
     REQUIRE(app.mainWindow() != nullptr);
-
-    SettingsPageRegistry::deleteAllPages();
 }
 
 TEST_CASE("Application settings provider is never null", "[Application]")
@@ -144,6 +131,4 @@ TEST_CASE("Application settings provider is never null", "[Application]")
     const aide::Application app(numberOfArgs, appName.data());
 
     REQUIRE(app.settingsProvider() != nullptr);
-
-    SettingsPageRegistry::deleteAllPages();
 }

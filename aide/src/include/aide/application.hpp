@@ -8,6 +8,7 @@
 
 #include <aide/actionregistryinterface.hpp>
 #include <aide/loggerinterface.hpp>
+#include <aide/settings/settingspageregistry.hpp>
 
 class QMainWindow;
 
@@ -55,6 +56,8 @@ namespace aide
             const;
 
         [[nodiscard]] ActionRegistryInterfacePtr actionRegistry() const;
+
+        [[nodiscard]] core::SettingsPageRegistry& settingsPageRegistry() const;
 
     private:
         static bool isOrganizationNameSet();

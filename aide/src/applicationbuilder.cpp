@@ -1,7 +1,6 @@
 #include "applicationbuilder.hpp"
 
 #include <settings/keymap/keymappage.hpp>
-#include <settings/settingspageregistry.hpp>
 
 #include "loggerfactory.hpp"
 
@@ -24,7 +23,7 @@ ApplicationBuilder::ApplicationBuilder()
                          *(AideSettingsProvider::versionableSettings()))
     , m_mainWindowGeometryAndState(
           m_mainWindow, *(AideSettingsProvider::unversionableSettings()))
-    , m_showSettingsDialog(m_settingsDialog,
+    , m_showSettingsDialog(m_settingsDialog, m_settingsPageRegistry,
                            *(AideSettingsProvider::unversionableSettings()),
                            m_logger)
     , m_settingsDialogController(
@@ -39,8 +38,6 @@ ApplicationBuilder::ApplicationBuilder()
     , m_keymapPageController(std::make_shared<gui::KeyMapPageWidgetController>(
           m_keyMapPage->getTreeModel(), m_keyMapPage->keyMapWidget()))
 {
-    core::SettingsPageRegistry::deleteAllPages();
-
     m_mainWindow->setMainWindowController(m_mainController, m_actionRegistry);
     m_settingsDialog->setController(m_settingsDialogController);
 
@@ -52,7 +49,7 @@ ApplicationBuilder::ApplicationBuilder()
         widget->setController(m_keymapPageController);
     }
 
-    core::SettingsPageRegistry::addPage(m_keyMapPage);
+    m_settingsPageRegistry.addPage(m_keyMapPage);
 }
 
 LoggerPtr ApplicationBuilder::logger() const
@@ -84,4 +81,9 @@ ApplicationBuilder::settingsProvider() const
 aide::ActionRegistryInterfacePtr ApplicationBuilder::actionRegistry() const
 {
     return m_actionRegistry;
+}
+
+aide::core::SettingsPageRegistry& ApplicationBuilder::settingsPageRegistry()
+{
+    return m_settingsPageRegistry;
 }

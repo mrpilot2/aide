@@ -11,9 +11,11 @@ using aide::core::SettingsPageGroupTreeModel;
 using aide::core::SettingsPagePtr;
 using aide::core::TreeItemPtr;
 
-SettingsPageGroupTreeModel::SettingsPageGroupTreeModel(QObject* parent)
+SettingsPageGroupTreeModel::SettingsPageGroupTreeModel(
+    SettingsPageRegistry& registry, QObject* parent)
     : TreeModel(parent, std::make_shared<TreeItem>(
                             std::vector<QVariant>({{"Group"}}), nullptr))
+    , m_registry(registry)
 {
     setupModelData(m_rootItem);
 }
@@ -29,7 +31,7 @@ std::optional<TreeItemPtr> SettingsPageGroupTreeModel::existingTreeItemForGroup(
 
 void SettingsPageGroupTreeModel::setupModelData(const TreeItemPtr& parent)
 {
-    const auto& pages = SettingsPageRegistry::settingsPages();
+    const auto& pages = m_registry.settingsPages();
 
     for (const auto& page : pages) {
         TreeItemPtr current = parent;
@@ -82,13 +84,13 @@ Qt::ItemFlags SettingsPageGroupTreeModel::flags(const QModelIndex& index) const
 }
 
 SettingsPagePtr SettingsPageGroupTreeModel::findCorrespondingSettingsPage(
-    const QModelIndex& selectedIndex)
+    const QModelIndex& selectedIndex) const
 {
     const auto* item = static_cast<TreeItem*>(selectedIndex.internalPointer());
 
     auto completeGroupName{item->getHiddenUserData().toString().toStdString()};
 
-    const auto& pages = SettingsPageRegistry::settingsPages();
+    const auto& pages = m_registry.settingsPages();
 
     if (const auto it = std::ranges::find_if(
             pages,

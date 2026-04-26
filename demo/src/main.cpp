@@ -12,7 +12,6 @@
 #include <aide/application.hpp>
 #include <aide/gui/translatorinterface.hpp>
 #include <aide/menucontainerinterface.hpp>
-#include <aide/settings/settingspageregistry.hpp>
 
 #include "demosettingspage.hpp"
 
@@ -39,16 +38,14 @@ int main(int argc, char* argv[])
 
     mainWindow->setCentralWidget(description);
 
-    aide::core::SettingsPageRegistry::addPage(
-        std::make_unique<DemoSettingsPage>(
-            aide::HierarchicalId("Demo Page 1")("Demo Subpage 1")(
-                "Demo Subpage 1.1"),
-            aide::AideSettingsProvider::unversionableSettings()));
-    aide::core::SettingsPageRegistry::addPage(
-        std::make_unique<DemoSettingsPage>(
-            aide::HierarchicalId("Demo Page 1")("Demo Subpage 1")(
-                "Demo Subpage 1.2"),
-            aide::AideSettingsProvider::unversionableSettings()));
+    app.settingsPageRegistry().addPage(std::make_unique<DemoSettingsPage>(
+        aide::HierarchicalId("Demo Page 1")("Demo Subpage 1")(
+            "Demo Subpage 1.1"),
+        aide::AideSettingsProvider::unversionableSettings()));
+    app.settingsPageRegistry().addPage(std::make_unique<DemoSettingsPage>(
+        aide::HierarchicalId("Demo Page 1")("Demo Subpage 1")(
+            "Demo Subpage 1.2"),
+        aide::AideSettingsProvider::unversionableSettings()));
 
     // extend file menu
 

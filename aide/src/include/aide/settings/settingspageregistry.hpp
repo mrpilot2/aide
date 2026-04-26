@@ -12,18 +12,19 @@ namespace aide::core
     class SettingsPageRegistry
     {
     public:
-        SettingsPageRegistry()                                       = delete;
-        ~SettingsPageRegistry()                                      = delete;
+        SettingsPageRegistry()                                       = default;
+        ~SettingsPageRegistry()                                      = default;
         SettingsPageRegistry(const SettingsPageRegistry&)            = delete;
         SettingsPageRegistry& operator=(const SettingsPageRegistry&) = delete;
         SettingsPageRegistry(SettingsPageRegistry&&)                 = delete;
         SettingsPageRegistry& operator=(SettingsPageRegistry&&)      = delete;
 
-        static void addPage(SettingsPagePtr page);
+        void addPage(SettingsPagePtr page);
 
-        static const SettingsPageList& settingsPages();
+        [[nodiscard]] const SettingsPageList& settingsPages() const;
 
-        static void deleteAllPages() noexcept;
+    private:
+        SettingsPageList m_settingsPages;
     };
 } // namespace aide::core
 

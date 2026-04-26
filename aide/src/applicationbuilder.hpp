@@ -2,6 +2,7 @@
 #define AIDE_APPLICATION_BUILDER_HPP
 
 #include <settings/keymap/keymappage.hpp>
+#include <settings/settingspageregistry.hpp>
 
 #include "actionregistry.hpp"
 #include "aidesettingsprovider.hpp"
@@ -31,6 +32,8 @@ namespace aide
 
         [[nodiscard]] ActionRegistryInterfacePtr actionRegistry() const;
 
+        [[nodiscard]] aide::core::SettingsPageRegistry& settingsPageRegistry();
+
         static LoggerPtr setupLogger(const std::string& loggerName);
 
     private:
@@ -38,6 +41,8 @@ namespace aide
         static LoggerPtr setupLogger();
 
         aide::LoggerPtr m_logger{ApplicationBuilder::setupLogger()};
+
+        aide::core::SettingsPageRegistry m_settingsPageRegistry;
 
         std::shared_ptr<AideSettingsProvider> m_settingsProvider;
 
