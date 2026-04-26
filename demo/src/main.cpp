@@ -5,14 +5,18 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QMessageBox>
+#include <QPalette>
 #include <QString>
 
 #include <aide/aideconstants.hpp>
 #include <aide/aidesettingsprovider.hpp>
 #include <aide/application.hpp>
+#include <aide/colorscheme.hpp>
 #include <aide/gui/translatorinterface.hpp>
 #include <aide/menucontainerinterface.hpp>
+#include <aide/theme.hpp>
 
+#include "colorschemereactor.hpp"
 #include "demosettingspage.hpp"
 
 using aide::constants::CONSTANTS;
@@ -27,6 +31,37 @@ int main(int argc, char* argv[])
 
     app.translator()->addAdditionalTranslationFilePath(
         QDir(":/demo_translations"), QString("demo"));
+
+    // Register a consumer-defined theme
+    constexpr int blueWindowR{220};
+    constexpr int blueWindowG{235};
+    constexpr int blueWindowB{255};
+    constexpr int blueButtonR{200};
+    constexpr int blueButtonG{220};
+    constexpr int blueButtonB{255};
+    QPalette bluePalette;
+    bluePalette.setColor(QPalette::Window,
+                         QColor(blueWindowR, blueWindowG, blueWindowB));
+    bluePalette.setColor(QPalette::WindowText, Qt::black);
+    bluePalette.setColor(QPalette::Base, Qt::white);
+    bluePalette.setColor(QPalette::Button,
+                         QColor(blueButtonR, blueButtonG, blueButtonB));
+    bluePalette.setColor(QPalette::ButtonText, Qt::black);
+    app.appearanceManager().registerTheme(
+        {"Demo Blue", bluePalette, "aide-dark", {}});
+
+    // Add icon search path for the System theme based on current color scheme
+    app.appearanceManager().addIconSearchPath(
+        "System",
+        demo::iconPathForScheme(app.appearanceManager().colorScheme()));
+
+    // Update demo icon search path when the OS color scheme changes. A
+    // string-based connection to a QObject slot is used on purpose; see
+    // demo::ColorSchemeReactor for the rationale.
+    demo::ColorSchemeReactor colorSchemeReactor(app.appearanceManager());
+    QObject::connect(
+        &app.appearanceManager(), SIGNAL(colorSchemeChanged(aide::ColorScheme)),
+        &colorSchemeReactor, SLOT(onColorSchemeChanged(aide::ColorScheme)));
 
     auto mainWindow = app.mainWindow();
 
