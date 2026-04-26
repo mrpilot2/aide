@@ -25,6 +25,8 @@ namespace aide
                                    QObject* parent = nullptr);
 
         void registerTheme(Theme theme);
+        void addIconSearchPath(const QString& themeName,
+                               const QString& searchPath);
 
         [[nodiscard]] QStringList themeNames() const;
         [[nodiscard]] QString activeThemeName() const;
@@ -44,6 +46,9 @@ namespace aide
         static ColorScheme schemeFromPalette(const QPalette& palette);
         static void applyTheme(const Theme& theme);
 
+        static void applyIconSettings(const Theme& theme);
+
+        Theme& findTheme(const QString& name);
         const Theme& findTheme(const QString& name) const;
         void restoreFromSettings();
         void reapplySystemTheme();

@@ -111,6 +111,13 @@ std::shared_ptr<TranslatorInterface> MainWindow::translator() const
     return m_translator;
 }
 
+void MainWindow::refreshIcons()
+{
+    if (m_actionQuit) {
+        m_actionQuit->setIcon(createIconFromTheme("application-exit"));
+    }
+}
+
 QIcon MainWindow::createIconFromTheme(const std::string& iconName)
 {
     QIcon icon;

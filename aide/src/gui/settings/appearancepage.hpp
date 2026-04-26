@@ -31,6 +31,8 @@ namespace aide
             void apply() override;
 
         private:
+            void syncControlsToManager();
+
             aide::AppearanceManager& m_manager;
             QComboBox* m_themeCombo{nullptr};
             QFontComboBox* m_fontCombo{nullptr};

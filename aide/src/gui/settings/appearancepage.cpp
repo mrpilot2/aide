@@ -40,7 +40,7 @@ AppearancePage::AppearancePage(aide::AppearanceManager& manager,
     layout->addRow(tr("Size:"), m_fontSizeSpinBox);
     setLayout(layout);
 
-    reset();
+    syncControlsToManager();
 }
 
 QWidget* AppearancePage::widget()
@@ -55,7 +55,7 @@ bool AppearancePage::isModified() const
            m_fontSizeSpinBox->value() != m_appliedFontSize;
 }
 
-void AppearancePage::reset()
+void AppearancePage::syncControlsToManager()
 {
     m_themeCombo->setCurrentText(m_manager.activeThemeName());
     m_fontCombo->setCurrentFont(QFont{m_manager.activeFont().family()});
@@ -67,6 +67,11 @@ void AppearancePage::reset()
     m_appliedTheme      = m_themeCombo->currentText();
     m_appliedFontFamily = m_fontCombo->currentFont().family();
     m_appliedFontSize   = m_fontSizeSpinBox->value();
+}
+
+void AppearancePage::reset()
+{
+    syncControlsToManager();
 }
 
 void AppearancePage::apply()

@@ -4,6 +4,7 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include <QApplication>
+#include <QIcon>
 #include <QSignalSpy>
 
 #include <aide/appearancemanager.hpp>
@@ -63,22 +64,22 @@ TEST_CASE("AppearanceManager registerTheme", "[AppearanceManager]")
 
     SECTION("succeeds for a new unique theme name")
     {
-        const Theme custom{"CustomTheme", QPalette{}, "", ""};
+        const Theme custom{"CustomTheme", QPalette{}, "", {}};
         REQUIRE_NOTHROW(manager.registerTheme(custom));
         REQUIRE(manager.themeNames().contains("CustomTheme"));
     }
 
     SECTION("throws on duplicate consumer-defined name")
     {
-        manager.registerTheme({"CustomTheme", QPalette{}, "", ""});
+        manager.registerTheme({"CustomTheme", QPalette{}, "", {}});
         REQUIRE_THROWS_AS(
-            manager.registerTheme({"CustomTheme", QPalette{}, "", ""}),
+            manager.registerTheme({"CustomTheme", QPalette{}, "", {}}),
             std::invalid_argument);
     }
 
     SECTION("throws when name matches a built-in theme")
     {
-        REQUIRE_THROWS_AS(manager.registerTheme({"Light", QPalette{}, "", ""}),
+        REQUIRE_THROWS_AS(manager.registerTheme({"Light", QPalette{}, "", {}}),
                           std::invalid_argument);
     }
 }
@@ -205,4 +206,98 @@ TEST_CASE("AppearanceManager settings save and restore", "[AppearanceManager]")
         const AppearanceManager manager{std::make_shared<MockSettings>()};
         REQUIRE(manager.activeThemeName() == "System");
     }
+}
+
+TEST_CASE("AppearanceManager addIconSearchPath for known theme",
+          "[AppearanceManager]")
+{
+    int argc{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+    const QApplication app{argc, appName.data()};
+
+    AppearanceManager manager{std::make_shared<MockSettings>()};
+
+    REQUIRE_NOTHROW(manager.addIconSearchPath("Light", ":/some/icon/path"));
+}
+
+TEST_CASE("AppearanceManager addIconSearchPath for unknown theme",
+          "[AppearanceManager]")
+{
+    int argc{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+    const QApplication app{argc, appName.data()};
+
+    AppearanceManager manager{std::make_shared<MockSettings>()};
+
+    REQUIRE_THROWS_AS(manager.addIconSearchPath("Unknown", ":/some/icon/path"),
+                      std::invalid_argument);
+}
+
+TEST_CASE("AppearanceManager addIconSearchPath accumulates paths",
+          "[AppearanceManager]")
+{
+    int argc{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+    const QApplication app{argc, appName.data()};
+
+    AppearanceManager manager{std::make_shared<MockSettings>()};
+    manager.addIconSearchPath("Light", ":/path/one");
+    manager.addIconSearchPath("Light", ":/path/two");
+
+    manager.applyAppearance("Light", QApplication::font().family(),
+                            QApplication::font().pointSize());
+
+    const auto paths = QIcon::themeSearchPaths();
+    REQUIRE(paths.contains(":/path/one"));
+    REQUIRE(paths.contains(":/path/two"));
+}
+
+TEST_CASE("AppearanceManager Light theme uses dark icon set",
+          "[AppearanceManager]")
+{
+    int argc{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+    const QApplication app{argc, appName.data()};
+
+    AppearanceManager manager{std::make_shared<MockSettings>()};
+    manager.applyAppearance("Light", QApplication::font().family(),
+                            QApplication::font().pointSize());
+    REQUIRE(QIcon::themeName() == "aide-dark");
+}
+
+TEST_CASE("AppearanceManager Dark theme uses light icon set",
+          "[AppearanceManager]")
+{
+    int argc{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+    const QApplication app{argc, appName.data()};
+
+    AppearanceManager manager{std::make_shared<MockSettings>()};
+    manager.applyAppearance("Dark", QApplication::font().family(),
+                            QApplication::font().pointSize());
+    REQUIRE(QIcon::themeName() == "aide-light");
+}
+
+TEST_CASE(
+    "AppearanceManager System theme icon set matches resolved color scheme",
+    "[AppearanceManager]")
+{
+    int argc{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+    const QApplication app{argc, appName.data()};
+
+    AppearanceManager manager{std::make_shared<MockSettings>()};
+    manager.applyAppearance("System", QApplication::font().family(),
+                            QApplication::font().pointSize());
+
+    const auto scheme = manager.colorScheme();
+    const auto* expected =
+        (scheme == ColorScheme::Light) ? "aide-dark" : "aide-light";
+    REQUIRE(QIcon::themeName() == expected);
 }

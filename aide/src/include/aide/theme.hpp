@@ -3,6 +3,7 @@
 
 #include <QPalette>
 #include <QString>
+#include <QStringList>
 
 namespace aide
 {
@@ -11,7 +12,7 @@ namespace aide
         QString name;
         QPalette palette;
         QString iconThemeName;
-        QString iconSearchPath;
+        QStringList iconSearchPaths;
     };
 } // namespace aide
 

@@ -5,6 +5,7 @@
 
 #include <QApplication>
 #include <QColor>
+#include <QIcon>
 #if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
 #include <QGuiApplication>
 #include <QStyleHints>
@@ -15,9 +16,12 @@
 
 namespace
 {
-    constexpr auto SYSTEM_THEME_NAME = "System";
-    constexpr auto LIGHT_THEME_NAME  = "Light";
-    constexpr auto DARK_THEME_NAME   = "Dark";
+    constexpr auto SYSTEM_THEME_NAME        = "System";
+    constexpr auto LIGHT_THEME_NAME         = "Light";
+    constexpr auto DARK_THEME_NAME          = "Dark";
+    constexpr auto LIGHT_ICON_THEME         = "aide-light";
+    constexpr auto DARK_ICON_THEME          = "aide-dark";
+    constexpr auto BUILTIN_ICON_SEARCH_PATH = ":/aide/icons";
 
     constexpr double LUMINANCE_LIGHT_THRESHOLD = 0.5;
 
@@ -82,9 +86,16 @@ AppearanceManager::AppearanceManager(
     : QObject(parent)
     , m_settings(std::move(settings))
 {
-    m_themes.push_back({SYSTEM_THEME_NAME, QPalette{}, "", ""});
-    m_themes.push_back({LIGHT_THEME_NAME, lightPalette(), "", ""});
-    m_themes.push_back({DARK_THEME_NAME, darkPalette(), "", ""});
+    m_themes.push_back(
+        {SYSTEM_THEME_NAME, QPalette{}, "", {BUILTIN_ICON_SEARCH_PATH}});
+    m_themes.push_back({LIGHT_THEME_NAME,
+                        lightPalette(),
+                        DARK_ICON_THEME,
+                        {BUILTIN_ICON_SEARCH_PATH}});
+    m_themes.push_back({DARK_THEME_NAME,
+                        darkPalette(),
+                        LIGHT_ICON_THEME,
+                        {BUILTIN_ICON_SEARCH_PATH}});
 
     restoreFromSettings();
 }
@@ -100,6 +111,12 @@ void AppearanceManager::registerTheme(Theme theme)
             theme.name.toStdString() + "'");
     }
     m_themes.push_back(std::move(theme));
+}
+
+void AppearanceManager::addIconSearchPath(const QString& themeName,
+                                          const QString& searchPath)
+{
+    findTheme(themeName).iconSearchPaths.append(searchPath);
 }
 
 QStringList AppearanceManager::themeNames() const
@@ -142,6 +159,7 @@ void AppearanceManager::applyAppearance(const QString& themeName,
     m_activeFont      = QFont{fontFamily, fontSizePoints};
 
     applyTheme(theme);
+    applyIconSettings(theme);
     QApplication::setFont(m_activeFont);
 
     m_settings->setValue(settingsKeys().theme, themeName);
@@ -242,6 +260,33 @@ void AppearanceManager::applyTheme(const Theme& theme)
     }
 }
 
+// static
+void AppearanceManager::applyIconSettings(const Theme& theme)
+{
+    QString iconThemeName = theme.iconThemeName;
+    if (theme.name == SYSTEM_THEME_NAME) {
+        const auto scheme = schemeFromPalette(QApplication::palette());
+        iconThemeName =
+            (scheme == ColorScheme::Light) ? DARK_ICON_THEME : LIGHT_ICON_THEME;
+    }
+
+    if (!iconThemeName.isEmpty()) {
+        QIcon::setThemeName(iconThemeName);
+        QIcon::setThemeSearchPaths(theme.iconSearchPaths);
+    }
+}
+
+Theme& AppearanceManager::findTheme(const QString& name)
+{
+    const auto it = std::ranges::find_if(
+        m_themes, [&name](const auto& thm) { return thm.name == name; });
+    if (it == m_themes.end()) {
+        throw std::invalid_argument("AppearanceManager: unknown theme '" +
+                                    name.toStdString() + "'");
+    }
+    return *it;
+}
+
 const Theme& AppearanceManager::findTheme(const QString& name) const
 {
     const auto it = std::ranges::find_if(
@@ -274,6 +319,7 @@ void AppearanceManager::restoreFromSettings()
     m_activeFont      = QFont{family, size};
 
     applyTheme(theme);
+    applyIconSettings(theme);
     QApplication::setFont(m_activeFont);
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
@@ -283,8 +329,10 @@ void AppearanceManager::restoreFromSettings()
 
 void AppearanceManager::reapplySystemTheme()
 {
-    const auto oldScheme = colorScheme();
-    applyTheme(findTheme(SYSTEM_THEME_NAME));
+    const auto oldScheme    = colorScheme();
+    const auto& systemTheme = findTheme(SYSTEM_THEME_NAME);
+    applyTheme(systemTheme);
+    applyIconSettings(systemTheme);
     const auto newScheme = colorScheme();
     // cppcheck-suppress knownConditionTrueFalse
     if (newScheme != oldScheme) { emit colorSchemeChanged(newScheme); }
