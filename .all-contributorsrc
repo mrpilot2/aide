@@ -10,11 +10,23 @@
   "contributorsPerLine": 7,
   "contributors": [
     {
-      "login" : "mrpilot2",
-      "name" : "Markus Reitboeck",
-      "avatar_url" : "https://avatars0.githubusercontent.com/u/12819580?v=4",
-      "profile" : "https://github.com/mrpilot2",
-      "contributions" : [ "code", "doc" ]
+      "login": "mrpilot2",
+      "name": "Markus Reitboeck",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/12819580?v=4",
+      "profile": "https://github.com/mrpilot2",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "codacy-badger",
+      "name": "Codacy Badger",
+      "avatar_url": "https://avatars.githubusercontent.com/u/23704769?v=4",
+      "profile": "https://www.codacy.com",
+      "contributions": [
+        "doc"
+      ]
     }
   ]
 }
