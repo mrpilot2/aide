@@ -110,3 +110,36 @@ Central to action and settings lookup — a dot-separated string (e.g. `"aide.fi
 - Commit messages follow **Conventional Commits** (`feat:`, `fix:`, `ci:`, `chore:`, etc.) — enforced by pre-commit hook.
 - Releases are managed by **release-please** acting on the `main` branch; development happens on `develop`.
 - The `demo/` directory contains a runnable example application consuming the library — useful reference for how `ApplicationBuilder` is used.
+
+## Common pitfalls
+
+### Magic numbers in dev/ci-static builds
+
+`readability-magic-numbers` is active and treated as an error. Any numeric literal — including color component values like `QColor(220, 235, 255)` — must be extracted to named `constexpr` variables before they appear in source.
+
+### cppcheck virtualCallInConstructor
+
+Calling a virtual method (e.g. `reset()`) from a constructor is flagged. Fix: extract a private non-virtual helper (e.g. `syncToModel()`) that both the constructor and the virtual method call.
+
+### Pre-commit clang-format modifies files in-place
+
+When `git commit` fails because clang-format rewrote a file, the hook has already applied the fix. Re-stage the modified file (`git add <file>`) and run `git commit` again. Never use `--no-verify`.
+
+### Catch2 cognitive complexity
+
+clang-tidy enforces a cognitive complexity ceiling (~25). Deep `SECTION` nesting in Catch2 tests can exceed it. Split into separate `TEST_CASE` functions instead of nesting further.
+
+### Qt icon theme resource layout
+
+For `QIcon::fromTheme()` to resolve icons from embedded `.qrc` resources the path structure must be:
+
+```
+<qrc-prefix>/<theme-name>/index.theme
+<qrc-prefix>/<theme-name>/scalable/<category>/<icon-name>.svg
+```
+
+The `qrc` prefix must match the path passed to `QIcon::setThemeSearchPaths()`.
+
+### AppearanceManager and SettingsPageRegistry are instance-based
+
+`SettingsPageRegistry` is an instance member of `ApplicationBuilder`, not a static singleton. Access it via `app.settingsPageRegistry()` (returns a reference). There is no `deleteAllPages()` — registry lifetime is tied to `ApplicationBuilder`.
