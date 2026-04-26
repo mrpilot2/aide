@@ -1,6 +1,7 @@
 #ifndef AIDE_APPLICATION_BUILDER_HPP
 #define AIDE_APPLICATION_BUILDER_HPP
 
+#include <aide/appearancemanager.hpp>
 #include <settings/keymap/keymappage.hpp>
 #include <settings/settingspageregistry.hpp>
 
@@ -34,6 +35,8 @@ namespace aide
 
         [[nodiscard]] aide::core::SettingsPageRegistry& settingsPageRegistry();
 
+        [[nodiscard]] aide::AppearanceManager& appearanceManager();
+
         static LoggerPtr setupLogger(const std::string& loggerName);
 
     private:
@@ -43,6 +46,9 @@ namespace aide
         aide::LoggerPtr m_logger{ApplicationBuilder::setupLogger()};
 
         aide::core::SettingsPageRegistry m_settingsPageRegistry;
+
+        aide::AppearanceManager m_appearanceManager{
+            AideSettingsProvider::versionableSettings()};
 
         std::shared_ptr<AideSettingsProvider> m_settingsProvider;
 

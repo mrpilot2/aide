@@ -88,3 +88,8 @@ aide::core::SettingsPageRegistry& Application::settingsPageRegistry() const
 {
     return m_appBuilder->settingsPageRegistry();
 }
+
+aide::AppearanceManager& Application::appearanceManager() const
+{
+    return m_appBuilder->appearanceManager();
+}

@@ -7,6 +7,7 @@
 #include <QApplication>
 
 #include <aide/actionregistryinterface.hpp>
+#include <aide/appearancemanager.hpp>
 #include <aide/loggerinterface.hpp>
 #include <aide/settings/settingspageregistry.hpp>
 
@@ -58,6 +59,8 @@ namespace aide
         [[nodiscard]] ActionRegistryInterfacePtr actionRegistry() const;
 
         [[nodiscard]] core::SettingsPageRegistry& settingsPageRegistry() const;
+
+        [[nodiscard]] AppearanceManager& appearanceManager() const;
 
     private:
         static bool isOrganizationNameSet();

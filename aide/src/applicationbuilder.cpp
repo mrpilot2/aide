@@ -2,6 +2,7 @@
 
 #include <settings/keymap/keymappage.hpp>
 
+#include "gui/settings/appearancepage.hpp"
 #include "loggerfactory.hpp"
 
 using aide::ApplicationBuilder;
@@ -49,7 +50,22 @@ ApplicationBuilder::ApplicationBuilder()
         widget->setController(m_keymapPageController);
     }
 
+    m_settingsPageRegistry.addPage(
+        std::make_shared<gui::AppearancePage>(m_appearanceManager));
     m_settingsPageRegistry.addPage(m_keyMapPage);
+
+    // String-based connect on purpose: a pointer-to-member connect references
+    // the sender's and receiver's staticMetaObject data symbols, which are not
+    // exported across DLL boundaries on MSVC (CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS
+    // exports functions, not data). The string form resolves the signal/slot
+    // at runtime via the exported virtual metaObject(), so it links there.
+    QObject::connect(&m_appearanceManager, SIGNAL(appearanceChanged()),
+                     m_mainWindow.get(), SLOT(refreshIcons()));
+}
+
+aide::AppearanceManager& ApplicationBuilder::appearanceManager()
+{
+    return m_appearanceManager;
 }
 
 LoggerPtr ApplicationBuilder::logger() const
