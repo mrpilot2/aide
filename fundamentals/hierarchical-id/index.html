@@ -12,29 +12,31 @@
         <meta name="author" content="Markus Reitböck">
       
       
-        <link rel="canonical" href="https://mrpilot2.github.io/aide/">
+        <link rel="canonical" href="https://mrpilot2.github.io/aide/fundamentals/hierarchical-id/">
       
       
+        <link rel="prev" href="../../getting-started/quick-start/">
       
-        <link rel="next" href="getting-started/overview/">
+      
+        <link rel="next" href="../application-lifecycle/">
       
       
         
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>aIDE Developer Guide</title>
+        <title>HierarchicalId - aIDE Developer Guide</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -53,9 +55,9 @@
       
     
     
-      <link rel="stylesheet" href="stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#aide-developer-guide" class="md-skip">
+        <a href="#hierarchicalid" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +98,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="aIDE Developer Guide" class="md-header__button md-logo" aria-label="aIDE Developer Guide" data-md-component="logo">
+    <a href="../.." title="aIDE Developer Guide" class="md-header__button md-logo" aria-label="aIDE Developer Guide" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -116,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              HierarchicalId
             
           </span>
         </div>
@@ -234,7 +236,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="aIDE Developer Guide" class="md-nav__button md-logo" aria-label="aIDE Developer Guide" data-md-component="logo">
+    <a href="../.." title="aIDE Developer Guide" class="md-nav__button md-logo" aria-label="aIDE Developer Guide" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -261,37 +263,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Home
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -307,59 +282,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-aide-provides" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What aIDE provides
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Getting started
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Requirements
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -425,7 +347,7 @@
   
   
     <li class="md-nav__item">
-      <a href="getting-started/overview/" class="md-nav__link">
+      <a href="../../getting-started/overview/" class="md-nav__link">
         
   
   
@@ -453,7 +375,7 @@
   
   
     <li class="md-nav__item">
-      <a href="getting-started/installation/" class="md-nav__link">
+      <a href="../../getting-started/installation/" class="md-nav__link">
         
   
   
@@ -481,7 +403,7 @@
   
   
     <li class="md-nav__item">
-      <a href="getting-started/quick-start/" class="md-nav__link">
+      <a href="../../getting-started/quick-start/" class="md-nav__link">
         
   
   
@@ -513,8 +435,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -525,13 +449,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
@@ -552,7 +474,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -567,10 +489,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="fundamentals/hierarchical-id/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HierarchicalId
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -586,6 +535,109 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#constructing-a-hierarchicalid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructing a HierarchicalId
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Constructing a HierarchicalId">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chaining-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chaining modes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-the-string-representation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting the string representation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparisons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparisons
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iterating-over-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Iterating over levels
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-in-aide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in aIDE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pre-defined-ids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pre-defined IDs
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -598,7 +650,7 @@
   
   
     <li class="md-nav__item">
-      <a href="fundamentals/application-lifecycle/" class="md-nav__link">
+      <a href="../application-lifecycle/" class="md-nav__link">
         
   
   
@@ -687,7 +739,7 @@
   
   
     <li class="md-nav__item">
-      <a href="core/action-registry/" class="md-nav__link">
+      <a href="../../core/action-registry/" class="md-nav__link">
         
   
   
@@ -766,7 +818,7 @@
   
   
     <li class="md-nav__item">
-      <a href="core/settings/settings-interface/" class="md-nav__link">
+      <a href="../../core/settings/settings-interface/" class="md-nav__link">
         
   
   
@@ -794,7 +846,7 @@
   
   
     <li class="md-nav__item">
-      <a href="core/settings/adding-settings-pages/" class="md-nav__link">
+      <a href="../../core/settings/adding-settings-pages/" class="md-nav__link">
         
   
   
@@ -830,7 +882,7 @@
   
   
     <li class="md-nav__item">
-      <a href="core/key-bindings/" class="md-nav__link">
+      <a href="../../core/key-bindings/" class="md-nav__link">
         
   
   
@@ -858,7 +910,7 @@
   
   
     <li class="md-nav__item">
-      <a href="core/logging/" class="md-nav__link">
+      <a href="../../core/logging/" class="md-nav__link">
         
   
   
@@ -947,7 +999,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/main-window/" class="md-nav__link">
+      <a href="../../ui/main-window/" class="md-nav__link">
         
   
   
@@ -1026,7 +1078,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/widgets/aidetreeview/" class="md-nav__link">
+      <a href="../../ui/widgets/aidetreeview/" class="md-nav__link">
         
   
   
@@ -1054,7 +1106,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/widgets/aidetableview/" class="md-nav__link">
+      <a href="../../ui/widgets/aidetableview/" class="md-nav__link">
         
   
   
@@ -1082,7 +1134,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/widgets/search-filter-widget/" class="md-nav__link">
+      <a href="../../ui/widgets/search-filter-widget/" class="md-nav__link">
         
   
   
@@ -1110,7 +1162,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/widgets/search-line-edit/" class="md-nav__link">
+      <a href="../../ui/widgets/search-line-edit/" class="md-nav__link">
         
   
   
@@ -1146,7 +1198,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/translations/" class="md-nav__link">
+      <a href="../../ui/translations/" class="md-nav__link">
         
   
   
@@ -1181,7 +1233,7 @@
   
   
     <li class="md-nav__item">
-      <a href="demo/walkthrough/" class="md-nav__link">
+      <a href="../../demo/walkthrough/" class="md-nav__link">
         
   
   
@@ -1262,7 +1314,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api-reference/" class="md-nav__link">
+      <a href="../../api-reference/" class="md-nav__link">
         
   
   
@@ -1290,7 +1342,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api-reference/index_classes/" class="md-nav__link">
+      <a href="../../api-reference/index_classes/" class="md-nav__link">
         
   
   
@@ -1318,7 +1370,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api-reference/index_namespaces/" class="md-nav__link">
+      <a href="../../api-reference/index_namespaces/" class="md-nav__link">
         
   
   
@@ -1353,7 +1405,7 @@
   
   
     <li class="md-nav__item">
-      <a href="contributing/" class="md-nav__link">
+      <a href="../../contributing/" class="md-nav__link">
         
   
   
@@ -1380,7 +1432,7 @@
   
   
     <li class="md-nav__item">
-      <a href="maintainers/" class="md-nav__link">
+      <a href="../../maintainers/" class="md-nav__link">
         
   
   
@@ -1427,10 +1479,38 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-aide-provides" class="md-nav__link">
+  <a href="#constructing-a-hierarchicalid" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What aIDE provides
+        Constructing a HierarchicalId
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Constructing a HierarchicalId">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chaining-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chaining modes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-the-string-representation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Getting the string representation
       
     </span>
   </a>
@@ -1438,10 +1518,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
+  <a href="#comparisons" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Getting started
+        Comparisons
       
     </span>
   </a>
@@ -1449,10 +1529,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
+  <a href="#iterating-over-levels" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Requirements
+        Iterating over levels
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-in-aide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage in aIDE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pre-defined-ids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pre-defined IDs
       
     </span>
   </a>
@@ -1477,6 +1579,46 @@
   
 
 
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Fundamentals
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
               
               <article class="md-content__inner md-typeset">
                 
@@ -1487,82 +1629,140 @@
   
 
 
-<h1 id="aide-developer-guide">aIDE Developer Guide<a class="headerlink" href="#aide-developer-guide" title="Permanent link">&para;</a></h1>
-<p><strong>aIDE</strong> is a C++20/Qt framework library for building Qt-based desktop applications. It eliminates the boilerplate of a Qt desktop application — giving you a pre-wired action registry, settings dialog, configurable keybindings, and structured logging out of the box, so you can focus on your application's unique functionality.</p>
-<p>Think of it as the <a href="https://www.jetbrains.com/opensource/idea/">IntelliJ Platform</a>, but for C++20 and Qt.</p>
+<h1 id="hierarchicalid">HierarchicalId<a class="headerlink" href="#hierarchicalid" title="Permanent link">&para;</a></h1>
+<p><code>aide::HierarchicalId</code> is the central addressing scheme in aIDE. It is a dot-separated string identifier that represents a path through a tree — used as the key for actions, menus, and settings values.</p>
+<p><strong>Header:</strong> <code>aide/hierarchicalid.hpp</code></p>
 <hr />
-<h2 id="what-aide-provides">What aIDE provides<a class="headerlink" href="#what-aide-provides" title="Permanent link">&para;</a></h2>
+<h2 id="constructing-a-hierarchicalid">Constructing a HierarchicalId<a class="headerlink" href="#constructing-a-hierarchicalid" title="Permanent link">&para;</a></h2>
+<p>A <code>HierarchicalId</code> is constructed from a root-level <code>const char*</code>, then extended level by level using <code>operator()</code> or <code>addLevel()</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// Single-level ID</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">aide</span><span class="o">::</span><span class="n">HierarchicalId</span><span class="w"> </span><span class="n">id</span><span class="p">(</span><span class="s">&quot;Main Menu&quot;</span><span class="p">);</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1">// name() → &quot;Main Menu&quot;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1">// Multi-level via operator()</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">aide</span><span class="o">::</span><span class="n">HierarchicalId</span><span class="w"> </span><span class="n">fileNew</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aide</span><span class="o">::</span><span class="n">HierarchicalId</span><span class="p">(</span><span class="s">&quot;Main Menu&quot;</span><span class="p">)(</span><span class="s">&quot;File&quot;</span><span class="p">)(</span><span class="s">&quot;New&quot;</span><span class="p">);</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1">// name() → &quot;Main Menu.File.New&quot;</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1">// Equivalent with addLevel()</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">aide</span><span class="o">::</span><span class="n">HierarchicalId</span><span class="w"> </span><span class="n">fileNew2</span><span class="w"> </span><span class="o">=</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="n">aide</span><span class="o">::</span><span class="n">HierarchicalId</span><span class="p">(</span><span class="s">&quot;Main Menu&quot;</span><span class="p">).</span><span class="n">addLevel</span><span class="p">(</span><span class="s">&quot;File&quot;</span><span class="p">).</span><span class="n">addLevel</span><span class="p">(</span><span class="s">&quot;New&quot;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="chaining-modes">Chaining modes<a class="headerlink" href="#chaining-modes" title="Permanent link">&para;</a></h3>
+<p><code>operator()</code> and <code>addLevel()</code> have two overloads each:</p>
+<ul>
+<li><strong>Non-const (in-place):</strong> mutates the existing object and returns a reference.</li>
+<li><strong>Const (building from an existing id):</strong> returns a new object, leaving the original unchanged.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">aide</span><span class="o">::</span><span class="n">HierarchicalId</span><span class="w"> </span><span class="n">base</span><span class="p">(</span><span class="s">&quot;Main Menu&quot;</span><span class="p">);</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1">// Building new IDs from a shared base</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">aide</span><span class="o">::</span><span class="n">HierarchicalId</span><span class="w"> </span><span class="n">fileMenu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base</span><span class="p">(</span><span class="s">&quot;File&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// const overload — base unchanged</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">aide</span><span class="o">::</span><span class="n">HierarchicalId</span><span class="w"> </span><span class="n">helpMenu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base</span><span class="p">(</span><span class="s">&quot;Help&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// base is still &quot;Main Menu&quot;</span>
+</code></pre></div>
+<p>This is how <code>aide::constants::CONSTANTS()</code> defines all its IDs: each constant is built from a shared base.</p>
+<hr />
+<h2 id="getting-the-string-representation">Getting the string representation<a class="headerlink" href="#getting-the-string-representation" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">aide</span><span class="o">::</span><span class="n">HierarchicalId</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aide</span><span class="o">::</span><span class="n">HierarchicalId</span><span class="p">(</span><span class="s">&quot;Main Menu&quot;</span><span class="p">)(</span><span class="s">&quot;File&quot;</span><span class="p">)(</span><span class="s">&quot;New&quot;</span><span class="p">);</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="p">.</span><span class="n">name</span><span class="p">();</span><span class="w">  </span><span class="c1">// &quot;Main Menu.File.New&quot;</span>
+</code></pre></div>
+<hr />
+<h2 id="comparisons">Comparisons<a class="headerlink" href="#comparisons" title="Permanent link">&para;</a></h2>
+<p><code>HierarchicalId</code> supports <code>==</code>, <code>!=</code>, <code>&lt;</code>, and <code>&gt;</code>, making it usable as a <code>std::map</code> key:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">aide</span><span class="o">::</span><span class="n">HierarchicalId</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="s">&quot;Foo&quot;</span><span class="p">)(</span><span class="s">&quot;Bar&quot;</span><span class="p">);</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">aide</span><span class="o">::</span><span class="n">HierarchicalId</span><span class="w"> </span><span class="n">b</span><span class="p">(</span><span class="s">&quot;Foo&quot;</span><span class="p">)(</span><span class="s">&quot;Bar&quot;</span><span class="p">);</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">assert</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">aide</span><span class="o">::</span><span class="n">HierarchicalId</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">myMap</span><span class="p">;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="n">myMap</span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+</code></pre></div>
+<hr />
+<h2 id="iterating-over-levels">Iterating over levels<a class="headerlink" href="#iterating-over-levels" title="Permanent link">&para;</a></h2>
+<p><code>begin()</code> and <code>end()</code> iterate over the raw <code>const char*</code> levels:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">aide</span><span class="o">::</span><span class="n">HierarchicalId</span><span class="w"> </span><span class="n">id</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">)(</span><span class="s">&quot;B&quot;</span><span class="p">)(</span><span class="s">&quot;C&quot;</span><span class="p">);</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">id</span><span class="p">.</span><span class="n">end</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">it</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="c1">// *it is &quot;A&quot;, then &quot;B&quot;, then &quot;C&quot;</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="usage-in-aide">Usage in aIDE<a class="headerlink" href="#usage-in-aide" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Feature</th>
-<th>Description</th>
+<th>Context</th>
+<th>Example</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Action Registry</strong></td>
-<td>Register <code>QAction</code>s under a <code>HierarchicalId</code> and look them up or bind them to menus anywhere in your application</td>
+<td>Registering a menu</td>
+<td><code>actionRegistry-&gt;createMenu(HierarchicalId("Main Menu")("File"))</code></td>
 </tr>
 <tr>
-<td><strong>Settings Dialog</strong></td>
-<td>A tree-structured settings UI; add your own pages with a single <code>SettingsPageRegistry::addPage()</code> call</td>
+<td>Registering an action</td>
+<td><code>actionRegistry-&gt;registerAction(action, HierarchicalId("Main Menu")("File")("Save"))</code></td>
 </tr>
 <tr>
-<td><strong>Configurable Keybindings</strong></td>
-<td>Per-action key sequences stored in <code>QSettings</code>, editable through the built-in keymap settings page</td>
+<td>Looking up an action</td>
+<td><code>actionRegistry-&gt;action(HierarchicalId("Main Menu")("File")("Save"))</code></td>
 </tr>
 <tr>
-<td><strong>Structured Logging</strong></td>
-<td>spdlog-based logging behind a <code>LoggerInterface</code>, keeping components decoupled from the logging backend</td>
+<td>Settings key</td>
+<td><code>settings-&gt;setValue(HierarchicalId("MyApp")("fontSize"), 12)</code></td>
 </tr>
 <tr>
-<td><strong>Translation Support</strong></td>
-<td><code>TranslatorInterface</code> integrates Qt's <code>QTranslator</code> with a hook for loading additional translation files</td>
-</tr>
-<tr>
-<td><strong>Qt Widgets</strong></td>
-<td>Ready-made <code>AideTreeView</code>, <code>AideTableView</code>, <code>SearchFilterWidget</code>, and <code>SearchLineEdit</code> with placeholder text and tag highlighting</td>
+<td>Settings page group</td>
+<td><code>SettingsPage(HierarchicalId("My App")("Editor")("Fonts"))</code></td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="getting-started">Getting started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
-<p>New to aIDE? Start here:</p>
-<ol>
-<li><a href="getting-started/overview/">Overview</a> — understand the architecture and key concepts</li>
-<li><a href="getting-started/installation/">Installation</a> — integrate aIDE into your CMake project</li>
-<li><a href="getting-started/quick-start/">Quick Start</a> — build your first aIDE application in minutes</li>
-</ol>
-<hr />
-<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
+<h2 id="pre-defined-ids">Pre-defined IDs<a class="headerlink" href="#pre-defined-ids" title="Permanent link">&para;</a></h2>
+<p>aIDE ships with a set of pre-defined IDs in <code>aide/aideconstants.hpp</code>. Access them through the <code>CONSTANTS()</code> function:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;aide/aideconstants.hpp&gt;</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">using</span><span class="w"> </span><span class="n">aide</span><span class="o">::</span><span class="n">constants</span><span class="o">::</span><span class="n">CONSTANTS</span><span class="p">;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="k">auto</span><span class="w"> </span><span class="n">fileSettingsAction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actionRegistry</span><span class="o">-&gt;</span><span class="n">action</span><span class="p">(</span><span class="n">CONSTANTS</span><span class="p">().</span><span class="n">FILE_SETTINGS</span><span class="p">);</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="k">auto</span><span class="w"> </span><span class="n">fileQuitAction</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">actionRegistry</span><span class="o">-&gt;</span><span class="n">action</span><span class="p">(</span><span class="n">CONSTANTS</span><span class="p">().</span><span class="n">FILE_QUIT</span><span class="p">);</span>
+</code></pre></div>
 <table>
 <thead>
 <tr>
-<th>Dependency</th>
-<th>Minimum version</th>
+<th>Constant</th>
+<th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>CMake</td>
-<td>3.25</td>
+<td><code>CONSTANTS().MAIN_MENU</code></td>
+<td><code>"Main Menu"</code></td>
 </tr>
 <tr>
-<td>C++ compiler</td>
-<td>C++20 (GCC 10+, Clang 12+, MSVC 2019 16.11+)</td>
+<td><code>CONSTANTS().MENU_FILE</code></td>
+<td><code>"Main Menu.File"</code></td>
 </tr>
 <tr>
-<td>Qt</td>
-<td>5.15 LTS or 6.5+</td>
+<td><code>CONSTANTS().MENU_HELP</code></td>
+<td><code>"Main Menu.Help"</code></td>
 </tr>
 <tr>
-<td>Conan</td>
-<td>2.x <em>(recommended)</em></td>
+<td><code>CONSTANTS().FILE_SETTINGS</code></td>
+<td><code>"Main Menu.File.Settings"</code></td>
+</tr>
+<tr>
+<td><code>CONSTANTS().FILE_QUIT</code></td>
+<td><code>"Main Menu.File.Quit"</code></td>
+</tr>
+<tr>
+<td><code>CONSTANTS().HELP_ABOUT_AIDE</code></td>
+<td><code>"Main Menu.Help.About Aide"</code></td>
+</tr>
+<tr>
+<td><code>CONSTANTS().HELP_ABOUT_QT</code></td>
+<td><code>"Main Menu.Help.About Qt"</code></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Platforms:</strong> Linux, macOS, Windows.</p>
 
 
 
@@ -1620,10 +1820,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "content.code.annotate"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

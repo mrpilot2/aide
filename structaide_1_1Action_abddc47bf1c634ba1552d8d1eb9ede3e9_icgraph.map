@@ -1,7 +1,0 @@
-<map id="aide::Action::areKeySequencesTheSame" name="aide::Action::areKeySequencesTheSame">
-<area shape="rect" id="Node000001" title=" " alt="" coords="361,37,584,77"/>
-<area shape="rect" id="Node000002" href="$classaide_1_1core_1_1KeymapPage.html#af72c3fd412190c7497041ea18c0ac8cc" title=" " alt="" coords="70,5,249,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="347,47,248,37,249,32,348,42"/>
-<area shape="rect" id="Node000003" href="$classaide_1_1core_1_1KeymapContextMenuProvider.html#a14fe3054d1d111b8340a1af38ca841e4" title=" " alt="" coords="5,69,313,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="348,73,314,76,313,71,347,67"/>
-</map>

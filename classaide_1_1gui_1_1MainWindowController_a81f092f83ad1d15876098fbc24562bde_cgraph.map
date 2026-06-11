@@ -1,8 +1,0 @@
-<map id="aide::gui::MainWindowController::onUserWantsToShowAboutAideDialog" name="aide::gui::MainWindowController::onUserWantsToShowAboutAideDialog">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,61,280,101"/>
-<area shape="rect" id="Node000002" href="$classaide_1_1core_1_1LoggerFactory.html#ae4467c4cec93866fa0927d8e411011a6" title=" " alt="" coords="355,29,540,69"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="280,64,341,58,341,63,281,70"/>
-<area shape="rect" id="Node000003" href="$classaide_1_1core_1_1AboutAideUseCase.html#ad496254862ea2149af42af6a8cfb19e4" title=" " alt="" coords="328,93,567,133"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="281,93,314,97,314,102,280,98"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="391,30,388,20,397,10,417,5,447,3,482,5,501,13,500,18,481,11,447,8,418,10,400,15,393,21,396,28"/>
-</map>

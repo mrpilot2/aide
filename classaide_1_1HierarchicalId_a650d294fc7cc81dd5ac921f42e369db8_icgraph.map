@@ -1,9 +1,0 @@
-<map id="aide::HierarchicalId::name" name="aide::HierarchicalId::name">
-<area shape="rect" id="Node000001" title=" " alt="" coords="207,69,355,109"/>
-<area shape="rect" id="Node000002" href="$classaide_1_1HierarchicalId.html#acd8f9520dc74fd4a96aedaf74fb63ea1" title=" " alt="" coords="8,5,156,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="204,68,144,48,145,43,206,63"/>
-<area shape="rect" id="Node000003" href="$classaide_1_1HierarchicalId.html#a025c30c6a1d7561d9878fcc37d0bb8c4" title=" " alt="" coords="8,69,156,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="193,92,156,92,156,87,193,87"/>
-<area shape="rect" id="Node000004" href="$classaide_1_1ActionRegistry.html#a234ac5a71230a1d9443e8b126ae8c428" title=" " alt="" coords="5,133,159,173"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="206,116,145,136,144,131,204,111"/>
-</map>

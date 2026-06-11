@@ -1,9 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" title=" " alt="" coords="5,35,161,60"/>
-<area shape="rect" id="Node000001" href="$classaide_1_1core_1_1TreeModel.html" title=" " alt="" coords="209,35,371,60"/>
-<area shape="poly" id="edge23_Node000000_Node000001" title=" " alt="" coords="175,45,209,45,209,50,175,50"/>
-<area shape="rect" id="Node000002" href="$classaide_1_1core_1_1KeyMapTreeModel.html" title=" " alt="" coords="419,5,632,31"/>
-<area shape="poly" id="edge24_Node000001_Node000002" title=" " alt="" coords="384,33,423,28,423,33,384,38"/>
-<area shape="rect" id="Node000003" href="$classaide_1_1core_1_1SettingsPageGroupTreeModel.html" title=" " alt="" coords="436,55,615,95"/>
-<area shape="poly" id="edge25_Node000001_Node000003" title=" " alt="" coords="385,56,436,62,435,67,384,61"/>
-</map>

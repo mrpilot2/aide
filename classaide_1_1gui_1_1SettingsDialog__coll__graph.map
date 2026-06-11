@@ -1,7 +1,0 @@
-<map id="aide::gui::SettingsDialog" name="aide::gui::SettingsDialog">
-<area shape="rect" id="Node000001" title=" " alt="" coords="29,93,211,119"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,13,80,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="66,46,110,91,107,95,62,50"/>
-<area shape="rect" id="Node000003" href="$classaide_1_1core_1_1SettingsDialogInterface.html" title=" " alt="" coords="104,5,293,45"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="172,57,134,95,130,91,168,53"/>
-</map>

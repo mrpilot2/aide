@@ -12,29 +12,31 @@
         <meta name="author" content="Markus Reitböck">
       
       
-        <link rel="canonical" href="https://mrpilot2.github.io/aide/">
+        <link rel="canonical" href="https://mrpilot2.github.io/aide/core/settings/settings-interface/">
       
       
+        <link rel="prev" href="../../action-registry/">
       
-        <link rel="next" href="getting-started/overview/">
+      
+        <link rel="next" href="../adding-settings-pages/">
       
       
         
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>aIDE Developer Guide</title>
+        <title>SettingsInterface - aIDE Developer Guide</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -53,9 +55,9 @@
       
     
     
-      <link rel="stylesheet" href="stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#aide-developer-guide" class="md-skip">
+        <a href="#settingsinterface" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +98,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="aIDE Developer Guide" class="md-header__button md-logo" aria-label="aIDE Developer Guide" data-md-component="logo">
+    <a href="../../.." title="aIDE Developer Guide" class="md-header__button md-logo" aria-label="aIDE Developer Guide" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -116,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              SettingsInterface
             
           </span>
         </div>
@@ -234,7 +236,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="aIDE Developer Guide" class="md-nav__button md-logo" aria-label="aIDE Developer Guide" data-md-component="logo">
+    <a href="../../.." title="aIDE Developer Guide" class="md-nav__button md-logo" aria-label="aIDE Developer Guide" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -261,37 +263,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Home
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -307,59 +282,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-aide-provides" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What aIDE provides
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Getting started
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Requirements
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -425,7 +347,7 @@
   
   
     <li class="md-nav__item">
-      <a href="getting-started/overview/" class="md-nav__link">
+      <a href="../../../getting-started/overview/" class="md-nav__link">
         
   
   
@@ -453,7 +375,7 @@
   
   
     <li class="md-nav__item">
-      <a href="getting-started/installation/" class="md-nav__link">
+      <a href="../../../getting-started/installation/" class="md-nav__link">
         
   
   
@@ -481,7 +403,7 @@
   
   
     <li class="md-nav__item">
-      <a href="getting-started/quick-start/" class="md-nav__link">
+      <a href="../../../getting-started/quick-start/" class="md-nav__link">
         
   
   
@@ -570,7 +492,7 @@
   
   
     <li class="md-nav__item">
-      <a href="fundamentals/hierarchical-id/" class="md-nav__link">
+      <a href="../../../fundamentals/hierarchical-id/" class="md-nav__link">
         
   
   
@@ -598,7 +520,7 @@
   
   
     <li class="md-nav__item">
-      <a href="fundamentals/application-lifecycle/" class="md-nav__link">
+      <a href="../../../fundamentals/application-lifecycle/" class="md-nav__link">
         
   
   
@@ -630,8 +552,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -642,13 +566,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
@@ -669,7 +591,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -687,7 +609,7 @@
   
   
     <li class="md-nav__item">
-      <a href="core/action-registry/" class="md-nav__link">
+      <a href="../../action-registry/" class="md-nav__link">
         
   
   
@@ -712,6 +634,8 @@
                 
   
   
+    
+  
   
   
     
@@ -721,13 +645,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
         
           
           <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
@@ -748,7 +670,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -763,10 +685,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="core/settings/settings-interface/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SettingsInterface
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -782,6 +731,87 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-two-settings-stores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The two settings stores
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reading-and-writing-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reading and writing values
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reading and writing values">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#removing-a-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removing a key
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#saving-and-loading" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Saving and loading
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-settings-in-a-settingspage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using settings in a SettingsPage
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -794,7 +824,7 @@
   
   
     <li class="md-nav__item">
-      <a href="core/settings/adding-settings-pages/" class="md-nav__link">
+      <a href="../adding-settings-pages/" class="md-nav__link">
         
   
   
@@ -830,7 +860,7 @@
   
   
     <li class="md-nav__item">
-      <a href="core/key-bindings/" class="md-nav__link">
+      <a href="../../key-bindings/" class="md-nav__link">
         
   
   
@@ -858,7 +888,7 @@
   
   
     <li class="md-nav__item">
-      <a href="core/logging/" class="md-nav__link">
+      <a href="../../logging/" class="md-nav__link">
         
   
   
@@ -947,7 +977,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/main-window/" class="md-nav__link">
+      <a href="../../../ui/main-window/" class="md-nav__link">
         
   
   
@@ -1026,7 +1056,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/widgets/aidetreeview/" class="md-nav__link">
+      <a href="../../../ui/widgets/aidetreeview/" class="md-nav__link">
         
   
   
@@ -1054,7 +1084,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/widgets/aidetableview/" class="md-nav__link">
+      <a href="../../../ui/widgets/aidetableview/" class="md-nav__link">
         
   
   
@@ -1082,7 +1112,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/widgets/search-filter-widget/" class="md-nav__link">
+      <a href="../../../ui/widgets/search-filter-widget/" class="md-nav__link">
         
   
   
@@ -1110,7 +1140,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/widgets/search-line-edit/" class="md-nav__link">
+      <a href="../../../ui/widgets/search-line-edit/" class="md-nav__link">
         
   
   
@@ -1146,7 +1176,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/translations/" class="md-nav__link">
+      <a href="../../../ui/translations/" class="md-nav__link">
         
   
   
@@ -1181,7 +1211,7 @@
   
   
     <li class="md-nav__item">
-      <a href="demo/walkthrough/" class="md-nav__link">
+      <a href="../../../demo/walkthrough/" class="md-nav__link">
         
   
   
@@ -1262,7 +1292,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api-reference/" class="md-nav__link">
+      <a href="../../../api-reference/" class="md-nav__link">
         
   
   
@@ -1290,7 +1320,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api-reference/index_classes/" class="md-nav__link">
+      <a href="../../../api-reference/index_classes/" class="md-nav__link">
         
   
   
@@ -1318,7 +1348,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api-reference/index_namespaces/" class="md-nav__link">
+      <a href="../../../api-reference/index_namespaces/" class="md-nav__link">
         
   
   
@@ -1353,7 +1383,7 @@
   
   
     <li class="md-nav__item">
-      <a href="contributing/" class="md-nav__link">
+      <a href="../../../contributing/" class="md-nav__link">
         
   
   
@@ -1380,7 +1410,7 @@
   
   
     <li class="md-nav__item">
-      <a href="maintainers/" class="md-nav__link">
+      <a href="../../../maintainers/" class="md-nav__link">
         
   
   
@@ -1427,10 +1457,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-aide-provides" class="md-nav__link">
+  <a href="#the-two-settings-stores" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What aIDE provides
+        The two settings stores
       
     </span>
   </a>
@@ -1438,10 +1468,38 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
+  <a href="#reading-and-writing-values" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Getting started
+        Reading and writing values
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reading and writing values">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#removing-a-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Removing a key
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#saving-and-loading" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Saving and loading
       
     </span>
   </a>
@@ -1449,10 +1507,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
+  <a href="#using-settings-in-a-settingspage" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Requirements
+        Using settings in a SettingsPage
       
     </span>
   </a>
@@ -1477,6 +1535,64 @@
   
 
 
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../action-registry/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Core Concepts
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Settings
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
               
               <article class="md-content__inner md-typeset">
                 
@@ -1487,82 +1603,96 @@
   
 
 
-<h1 id="aide-developer-guide">aIDE Developer Guide<a class="headerlink" href="#aide-developer-guide" title="Permanent link">&para;</a></h1>
-<p><strong>aIDE</strong> is a C++20/Qt framework library for building Qt-based desktop applications. It eliminates the boilerplate of a Qt desktop application — giving you a pre-wired action registry, settings dialog, configurable keybindings, and structured logging out of the box, so you can focus on your application's unique functionality.</p>
-<p>Think of it as the <a href="https://www.jetbrains.com/opensource/idea/">IntelliJ Platform</a>, but for C++20 and Qt.</p>
+<h1 id="settingsinterface">SettingsInterface<a class="headerlink" href="#settingsinterface" title="Permanent link">&para;</a></h1>
+<p><code>aide::SettingsInterface</code> is the abstraction over <code>QSettings</code>. It is used throughout aIDE and your application to read and write persistent key-value data addressed by <code>HierarchicalId</code>.</p>
+<p><strong>Header:</strong> <code>aide/settingsinterface.hpp</code></p>
 <hr />
-<h2 id="what-aide-provides">What aIDE provides<a class="headerlink" href="#what-aide-provides" title="Permanent link">&para;</a></h2>
+<h2 id="the-two-settings-stores">The two settings stores<a class="headerlink" href="#the-two-settings-stores" title="Permanent link">&para;</a></h2>
+<p>aIDE maintains two separate <code>SettingsInterface</code> instances, accessible via <code>aide::AideSettingsProvider</code>:</p>
 <table>
 <thead>
 <tr>
-<th>Feature</th>
-<th>Description</th>
+<th>Store</th>
+<th>Accessor</th>
+<th>Use for</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Action Registry</strong></td>
-<td>Register <code>QAction</code>s under a <code>HierarchicalId</code> and look them up or bind them to menus anywhere in your application</td>
+<td><strong>Versionable</strong></td>
+<td><code>AideSettingsProvider::versionableSettings()</code></td>
+<td>Application state that should be reset on a version upgrade (e.g. cached data, layout that changes between versions)</td>
 </tr>
 <tr>
-<td><strong>Settings Dialog</strong></td>
-<td>A tree-structured settings UI; add your own pages with a single <code>SettingsPageRegistry::addPage()</code> call</td>
-</tr>
-<tr>
-<td><strong>Configurable Keybindings</strong></td>
-<td>Per-action key sequences stored in <code>QSettings</code>, editable through the built-in keymap settings page</td>
-</tr>
-<tr>
-<td><strong>Structured Logging</strong></td>
-<td>spdlog-based logging behind a <code>LoggerInterface</code>, keeping components decoupled from the logging backend</td>
-</tr>
-<tr>
-<td><strong>Translation Support</strong></td>
-<td><code>TranslatorInterface</code> integrates Qt's <code>QTranslator</code> with a hook for loading additional translation files</td>
-</tr>
-<tr>
-<td><strong>Qt Widgets</strong></td>
-<td>Ready-made <code>AideTreeView</code>, <code>AideTableView</code>, <code>SearchFilterWidget</code>, and <code>SearchLineEdit</code> with placeholder text and tag highlighting</td>
+<td><strong>Unversionable</strong></td>
+<td><code>AideSettingsProvider::unversionableSettings()</code></td>
+<td>User preferences that should survive version upgrades (e.g. theme, editor font size)</td>
 </tr>
 </tbody>
 </table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;aide/aidesettingsprovider.hpp&gt;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">auto</span><span class="w"> </span><span class="n">prefs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">aide</span><span class="o">::</span><span class="n">AideSettingsProvider</span><span class="o">::</span><span class="n">unversionableSettings</span><span class="p">();</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">auto</span><span class="w"> </span><span class="n">cache</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">aide</span><span class="o">::</span><span class="n">AideSettingsProvider</span><span class="o">::</span><span class="n">versionableSettings</span><span class="p">();</span>
+</code></pre></div>
+<p>Both are <code>shared_ptr&lt;aide::SettingsInterface&gt;</code>.</p>
 <hr />
-<h2 id="getting-started">Getting started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
-<p>New to aIDE? Start here:</p>
-<ol>
-<li><a href="getting-started/overview/">Overview</a> — understand the architecture and key concepts</li>
-<li><a href="getting-started/installation/">Installation</a> — integrate aIDE into your CMake project</li>
-<li><a href="getting-started/quick-start/">Quick Start</a> — build your first aIDE application in minutes</li>
-</ol>
+<h2 id="reading-and-writing-values">Reading and writing values<a class="headerlink" href="#reading-and-writing-values" title="Permanent link">&para;</a></h2>
+<p>Keys are <code>HierarchicalId</code>s; values are <code>QVariant</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">auto</span><span class="w"> </span><span class="n">settings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aide</span><span class="o">::</span><span class="n">AideSettingsProvider</span><span class="o">::</span><span class="n">unversionableSettings</span><span class="p">();</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1">// Write</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">settings</span><span class="o">-&gt;</span><span class="n">setValue</span><span class="p">(</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">aide</span><span class="o">::</span><span class="n">HierarchicalId</span><span class="p">(</span><span class="s">&quot;MyApp&quot;</span><span class="p">)(</span><span class="s">&quot;Editor&quot;</span><span class="p">)(</span><span class="s">&quot;fontSize&quot;</span><span class="p">),</span><span class="w"> </span><span class="mi">14</span><span class="p">);</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1">// Read (throws if key absent — use the defaultValue overload in practice)</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">QVariant</span><span class="w"> </span><span class="n">raw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">settings</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">(</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="n">aide</span><span class="o">::</span><span class="n">HierarchicalId</span><span class="p">(</span><span class="s">&quot;MyApp&quot;</span><span class="p">)(</span><span class="s">&quot;Editor&quot;</span><span class="p">)(</span><span class="s">&quot;fontSize&quot;</span><span class="p">));</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1">// Read with default</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="kt">int</span><span class="w"> </span><span class="n">fontSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">settings</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">(</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="n">aide</span><span class="o">::</span><span class="n">HierarchicalId</span><span class="p">(</span><span class="s">&quot;MyApp&quot;</span><span class="p">)(</span><span class="s">&quot;Editor&quot;</span><span class="p">)(</span><span class="s">&quot;fontSize&quot;</span><span class="p">),</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="mi">12</span><span class="p">).</span><span class="n">toInt</span><span class="p">();</span>
+</code></pre></div>
+<h3 id="removing-a-key">Removing a key<a class="headerlink" href="#removing-a-key" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">settings</span><span class="o">-&gt;</span><span class="n">removeKey</span><span class="p">(</span><span class="n">aide</span><span class="o">::</span><span class="n">HierarchicalId</span><span class="p">(</span><span class="s">&quot;MyApp&quot;</span><span class="p">)(</span><span class="s">&quot;Editor&quot;</span><span class="p">)(</span><span class="s">&quot;fontSize&quot;</span><span class="p">));</span>
+</code></pre></div>
 <hr />
-<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Dependency</th>
-<th>Minimum version</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CMake</td>
-<td>3.25</td>
-</tr>
-<tr>
-<td>C++ compiler</td>
-<td>C++20 (GCC 10+, Clang 12+, MSVC 2019 16.11+)</td>
-</tr>
-<tr>
-<td>Qt</td>
-<td>5.15 LTS or 6.5+</td>
-</tr>
-<tr>
-<td>Conan</td>
-<td>2.x <em>(recommended)</em></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Platforms:</strong> Linux, macOS, Windows.</p>
+<h2 id="saving-and-loading">Saving and loading<a class="headerlink" href="#saving-and-loading" title="Permanent link">&para;</a></h2>
+<p>aIDE calls <code>save()</code> and <code>load()</code> automatically during the settings dialog apply/reset cycle, and on application shutdown. You generally do not need to call these manually. They are exposed on the interface in case you need explicit control:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">settings</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">();</span><span class="w">  </span><span class="c1">// flush to QSettings backend</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">settings</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">();</span><span class="w">  </span><span class="c1">// reload from QSettings backend</span>
+</code></pre></div>
+<hr />
+<h2 id="using-settings-in-a-settingspage">Using settings in a SettingsPage<a class="headerlink" href="#using-settings-in-a-settingspage" title="Permanent link">&para;</a></h2>
+<p>The standard pattern is to accept a <code>shared_ptr&lt;SettingsInterface&gt;</code> in your <code>SettingsPage</code> constructor and use it inside <code>apply()</code> and <code>reset()</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">MySettingsPage</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">aide</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">SettingsPage</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">public</span><span class="o">:</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="n">MySettingsPage</span><span class="p">(</span><span class="n">aide</span><span class="o">::</span><span class="n">HierarchicalId</span><span class="w"> </span><span class="n">group</span><span class="p">,</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">                   </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">aide</span><span class="o">::</span><span class="n">SettingsInterface</span><span class="o">&gt;</span><span class="w"> </span><span class="n">settings</span><span class="p">)</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">SettingsPage</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">group</span><span class="p">))</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">        </span><span class="p">,</span><span class="w"> </span><span class="n">m_settings</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">settings</span><span class="p">))</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="p">{}</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">apply</span><span class="p">()</span><span class="w"> </span><span class="k">override</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">        </span><span class="n">m_settings</span><span class="o">-&gt;</span><span class="n">setValue</span><span class="p">(</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">            </span><span class="n">aide</span><span class="o">::</span><span class="n">HierarchicalId</span><span class="p">(</span><span class="s">&quot;MyApp&quot;</span><span class="p">)(</span><span class="s">&quot;fontSize&quot;</span><span class="p">),</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">            </span><span class="n">m_ui</span><span class="o">-&gt;</span><span class="n">fontSizeSpinBox</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">());</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">reset</span><span class="p">()</span><span class="w"> </span><span class="k">override</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_settings</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">(</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">            </span><span class="n">aide</span><span class="o">::</span><span class="n">HierarchicalId</span><span class="p">(</span><span class="s">&quot;MyApp&quot;</span><span class="p">)(</span><span class="s">&quot;fontSize&quot;</span><span class="p">),</span><span class="w"> </span><span class="mi">12</span><span class="p">).</span><span class="n">toInt</span><span class="p">();</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">        </span><span class="n">m_ui</span><span class="o">-&gt;</span><span class="n">fontSizeSpinBox</span><span class="o">-&gt;</span><span class="n">setValue</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="k">private</span><span class="o">:</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">aide</span><span class="o">::</span><span class="n">SettingsInterface</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_settings</span><span class="p">;</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="p">};</span>
+</code></pre></div>
 
 
 
@@ -1620,10 +1750,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "content.code.annotate"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

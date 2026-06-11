@@ -1,7 +1,0 @@
-<map id="aide::core::ApplicationClose::isCloseAllowed" name="aide::core::ApplicationClose::isCloseAllowed">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,37,208,77"/>
-<area shape="rect" id="Node000002" href="$classaide_1_1SettingsInterface.html#a9f625e3fabeaf8b42444e8f03cc82c6b" title=" " alt="" coords="256,5,425,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="208,41,242,36,243,41,208,46"/>
-<area shape="rect" id="Node000003" href="$classaide_1_1SettingsInterface.html#a3d57d89380555575f8e2d181e0b31d4c" title=" " alt="" coords="256,69,425,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="208,69,243,73,242,79,208,74"/>
-</map>

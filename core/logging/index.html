@@ -12,29 +12,31 @@
         <meta name="author" content="Markus Reitböck">
       
       
-        <link rel="canonical" href="https://mrpilot2.github.io/aide/">
+        <link rel="canonical" href="https://mrpilot2.github.io/aide/core/logging/">
       
       
+        <link rel="prev" href="../key-bindings/">
       
-        <link rel="next" href="getting-started/overview/">
+      
+        <link rel="next" href="../../ui/main-window/">
       
       
         
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>aIDE Developer Guide</title>
+        <title>Logging - aIDE Developer Guide</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -53,9 +55,9 @@
       
     
     
-      <link rel="stylesheet" href="stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#aide-developer-guide" class="md-skip">
+        <a href="#logging" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +98,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="aIDE Developer Guide" class="md-header__button md-logo" aria-label="aIDE Developer Guide" data-md-component="logo">
+    <a href="../.." title="aIDE Developer Guide" class="md-header__button md-logo" aria-label="aIDE Developer Guide" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -116,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Logging
             
           </span>
         </div>
@@ -234,7 +236,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="aIDE Developer Guide" class="md-nav__button md-logo" aria-label="aIDE Developer Guide" data-md-component="logo">
+    <a href="../.." title="aIDE Developer Guide" class="md-nav__button md-logo" aria-label="aIDE Developer Guide" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -261,37 +263,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Home
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -307,59 +282,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-aide-provides" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What aIDE provides
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Getting started
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Requirements
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -425,7 +347,7 @@
   
   
     <li class="md-nav__item">
-      <a href="getting-started/overview/" class="md-nav__link">
+      <a href="../../getting-started/overview/" class="md-nav__link">
         
   
   
@@ -453,7 +375,7 @@
   
   
     <li class="md-nav__item">
-      <a href="getting-started/installation/" class="md-nav__link">
+      <a href="../../getting-started/installation/" class="md-nav__link">
         
   
   
@@ -481,7 +403,7 @@
   
   
     <li class="md-nav__item">
-      <a href="getting-started/quick-start/" class="md-nav__link">
+      <a href="../../getting-started/quick-start/" class="md-nav__link">
         
   
   
@@ -570,7 +492,7 @@
   
   
     <li class="md-nav__item">
-      <a href="fundamentals/hierarchical-id/" class="md-nav__link">
+      <a href="../../fundamentals/hierarchical-id/" class="md-nav__link">
         
   
   
@@ -598,7 +520,7 @@
   
   
     <li class="md-nav__item">
-      <a href="fundamentals/application-lifecycle/" class="md-nav__link">
+      <a href="../../fundamentals/application-lifecycle/" class="md-nav__link">
         
   
   
@@ -630,8 +552,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -642,13 +566,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
@@ -669,7 +591,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -687,7 +609,7 @@
   
   
     <li class="md-nav__item">
-      <a href="core/action-registry/" class="md-nav__link">
+      <a href="../action-registry/" class="md-nav__link">
         
   
   
@@ -766,7 +688,7 @@
   
   
     <li class="md-nav__item">
-      <a href="core/settings/settings-interface/" class="md-nav__link">
+      <a href="../settings/settings-interface/" class="md-nav__link">
         
   
   
@@ -794,7 +716,7 @@
   
   
     <li class="md-nav__item">
-      <a href="core/settings/adding-settings-pages/" class="md-nav__link">
+      <a href="../settings/adding-settings-pages/" class="md-nav__link">
         
   
   
@@ -830,7 +752,7 @@
   
   
     <li class="md-nav__item">
-      <a href="core/key-bindings/" class="md-nav__link">
+      <a href="../key-bindings/" class="md-nav__link">
         
   
   
@@ -855,10 +777,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="core/logging/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logging
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -874,6 +823,120 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#accessing-the-default-logger" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessing the default logger
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#named-loggers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Named loggers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log levels
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Log levels">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-the-log-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting the log level
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disabling-console-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Disabling console output
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#macro-based-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Macro-based logging
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#injecting-the-logger-into-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Injecting the logger into components
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-file-location" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log file location
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -947,7 +1010,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/main-window/" class="md-nav__link">
+      <a href="../../ui/main-window/" class="md-nav__link">
         
   
   
@@ -1026,7 +1089,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/widgets/aidetreeview/" class="md-nav__link">
+      <a href="../../ui/widgets/aidetreeview/" class="md-nav__link">
         
   
   
@@ -1054,7 +1117,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/widgets/aidetableview/" class="md-nav__link">
+      <a href="../../ui/widgets/aidetableview/" class="md-nav__link">
         
   
   
@@ -1082,7 +1145,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/widgets/search-filter-widget/" class="md-nav__link">
+      <a href="../../ui/widgets/search-filter-widget/" class="md-nav__link">
         
   
   
@@ -1110,7 +1173,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/widgets/search-line-edit/" class="md-nav__link">
+      <a href="../../ui/widgets/search-line-edit/" class="md-nav__link">
         
   
   
@@ -1146,7 +1209,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/translations/" class="md-nav__link">
+      <a href="../../ui/translations/" class="md-nav__link">
         
   
   
@@ -1181,7 +1244,7 @@
   
   
     <li class="md-nav__item">
-      <a href="demo/walkthrough/" class="md-nav__link">
+      <a href="../../demo/walkthrough/" class="md-nav__link">
         
   
   
@@ -1262,7 +1325,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api-reference/" class="md-nav__link">
+      <a href="../../api-reference/" class="md-nav__link">
         
   
   
@@ -1290,7 +1353,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api-reference/index_classes/" class="md-nav__link">
+      <a href="../../api-reference/index_classes/" class="md-nav__link">
         
   
   
@@ -1318,7 +1381,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api-reference/index_namespaces/" class="md-nav__link">
+      <a href="../../api-reference/index_namespaces/" class="md-nav__link">
         
   
   
@@ -1353,7 +1416,7 @@
   
   
     <li class="md-nav__item">
-      <a href="contributing/" class="md-nav__link">
+      <a href="../../contributing/" class="md-nav__link">
         
   
   
@@ -1380,7 +1443,7 @@
   
   
     <li class="md-nav__item">
-      <a href="maintainers/" class="md-nav__link">
+      <a href="../../maintainers/" class="md-nav__link">
         
   
   
@@ -1427,10 +1490,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-aide-provides" class="md-nav__link">
+  <a href="#accessing-the-default-logger" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What aIDE provides
+        Accessing the default logger
       
     </span>
   </a>
@@ -1438,10 +1501,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
+  <a href="#named-loggers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Getting started
+        Named loggers
       
     </span>
   </a>
@@ -1449,10 +1512,71 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
+  <a href="#log-levels" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Requirements
+        Log levels
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Log levels">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-the-log-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting the log level
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disabling-console-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Disabling console output
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#macro-based-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Macro-based logging
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#injecting-the-logger-into-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Injecting the logger into components
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-file-location" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log file location
       
     </span>
   </a>
@@ -1477,6 +1601,46 @@
   
 
 
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../action-registry/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Core Concepts
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
               
               <article class="md-content__inner md-typeset">
                 
@@ -1487,82 +1651,120 @@
   
 
 
-<h1 id="aide-developer-guide">aIDE Developer Guide<a class="headerlink" href="#aide-developer-guide" title="Permanent link">&para;</a></h1>
-<p><strong>aIDE</strong> is a C++20/Qt framework library for building Qt-based desktop applications. It eliminates the boilerplate of a Qt desktop application — giving you a pre-wired action registry, settings dialog, configurable keybindings, and structured logging out of the box, so you can focus on your application's unique functionality.</p>
-<p>Think of it as the <a href="https://www.jetbrains.com/opensource/idea/">IntelliJ Platform</a>, but for C++20 and Qt.</p>
+<h1 id="logging">Logging<a class="headerlink" href="#logging" title="Permanent link">&para;</a></h1>
+<p>aIDE provides a structured, spdlog-backed logging system behind a <code>LoggerInterface</code>. Components receive a <code>LoggerPtr</code> via injection, keeping them decoupled from the logging backend.</p>
+<p><strong>Headers:</strong><br />
+- <code>aide/loggerinterface.hpp</code> — the interface<br />
+- <code>aide/loggerfactory.hpp</code> — for creating named loggers outside of <code>Application</code><br />
+- <code>aide/log_helper_macros.hpp</code> — macro-based logging (avoids <code>shared_ptr</code> overhead in hot paths)</p>
 <hr />
-<h2 id="what-aide-provides">What aIDE provides<a class="headerlink" href="#what-aide-provides" title="Permanent link">&para;</a></h2>
+<h2 id="accessing-the-default-logger">Accessing the default logger<a class="headerlink" href="#accessing-the-default-logger" title="Permanent link">&para;</a></h2>
+<p>The default logger is always available via <code>aide::Application::logger()</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">auto</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aide</span><span class="o">::</span><span class="n">Application</span><span class="o">::</span><span class="n">logger</span><span class="p">();</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">log</span><span class="o">-&gt;</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Application started&quot;</span><span class="p">);</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">log</span><span class="o">-&gt;</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Loading config from {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">configPath</span><span class="p">);</span>
+</code></pre></div>
+<hr />
+<h2 id="named-loggers">Named loggers<a class="headerlink" href="#named-loggers" title="Permanent link">&para;</a></h2>
+<p>Named loggers write to a separate log sink, making it easier to filter output by module:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">auto</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aide</span><span class="o">::</span><span class="n">Application</span><span class="o">::</span><span class="n">logger</span><span class="p">(</span><span class="s">&quot;my_module&quot;</span><span class="p">);</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">log</span><span class="o">-&gt;</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Module initialised&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>Multiple calls with the same name return the same logger instance.</p>
+<p>To create a named logger outside of an <code>Application</code> (e.g. in a library component):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;aide/loggerfactory.hpp&gt;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">auto</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aide</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">LoggerFactory</span><span class="o">::</span><span class="n">createLogger</span><span class="p">(</span><span class="s">&quot;my_module&quot;</span><span class="p">);</span>
+</code></pre></div>
+<hr />
+<h2 id="log-levels">Log levels<a class="headerlink" href="#log-levels" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">log</span><span class="o">-&gt;</span><span class="n">trace</span><span class="p">(</span><span class="s">&quot;Very detailed, high-frequency trace: value={}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">log</span><span class="o">-&gt;</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Debug information useful during development&quot;</span><span class="p">);</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">log</span><span class="o">-&gt;</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Normal operational message&quot;</span><span class="p">);</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">log</span><span class="o">-&gt;</span><span class="n">warn</span><span class="p">(</span><span class="s">&quot;Something unexpected but recoverable: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">detail</span><span class="p">);</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">log</span><span class="o">-&gt;</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;An error occurred: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">errorMessage</span><span class="p">);</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="n">log</span><span class="o">-&gt;</span><span class="n">critical</span><span class="p">(</span><span class="s">&quot;Unrecoverable failure: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">fatalDetail</span><span class="p">);</span>
+</code></pre></div>
+<p>All methods accept <code>std::format</code>-style format strings.</p>
+<h3 id="setting-the-log-level">Setting the log level<a class="headerlink" href="#setting-the-log-level" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">log</span><span class="o">-&gt;</span><span class="n">setLevel</span><span class="p">(</span><span class="n">aide</span><span class="o">::</span><span class="n">LogLevel</span><span class="o">::</span><span class="n">Warn</span><span class="p">);</span><span class="w">  </span><span class="c1">// suppress Trace, Debug, Info</span>
+</code></pre></div>
+<p><code>LogLevel</code> values: <code>Trace</code>, <code>Debug</code>, <code>Info</code>, <code>Warn</code>, <code>Error</code>, <code>Critical</code>, <code>Off</code>.</p>
+<hr />
+<h2 id="disabling-console-output">Disabling console output<a class="headerlink" href="#disabling-console-output" title="Permanent link">&para;</a></h2>
+<p>By default, log messages go to both the console and a log file. To suppress the console sink:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">aide</span><span class="o">::</span><span class="n">Application</span><span class="o">::</span><span class="n">disableLoggingToConsole</span><span class="p">();</span>
+</code></pre></div>
+<p>Call this <strong>before</strong> constructing <code>aide::Application</code>.</p>
+<hr />
+<h2 id="macro-based-logging">Macro-based logging<a class="headerlink" href="#macro-based-logging" title="Permanent link">&para;</a></h2>
+<p>For hot paths where constructing a <code>shared_ptr&lt;LoggerInterface&gt;</code> per call is undesirable, use the logging macros from <code>aide/log_helper_macros.hpp</code>. They call into spdlog directly:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;aide/log_helper_macros.hpp&gt;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1">// Default logger</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">AIDE_LOG_TRACE</span><span class="p">(</span><span class="s">&quot;trace message: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">AIDE_LOG_DEBUG</span><span class="p">(</span><span class="s">&quot;debug: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="n">AIDE_LOG_INFO</span><span class="p">(</span><span class="s">&quot;info: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">AIDE_LOG_WARN</span><span class="p">(</span><span class="s">&quot;warn: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="n">AIDE_LOG_ERROR</span><span class="p">(</span><span class="s">&quot;error: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="n">AIDE_LOG_CRITICAL</span><span class="p">(</span><span class="s">&quot;critical: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="c1">// Named logger</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="n">AIDE_CUSTOM_LOG_INFO</span><span class="p">(</span><span class="s">&quot;my_module&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;info from module: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="n">AIDE_CUSTOM_LOG_ERROR</span><span class="p">(</span><span class="s">&quot;my_module&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;error in module: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+</code></pre></div>
+<p>If the named logger does not exist, the macros fall back to the default logger and emit a warning about the missing name.</p>
+<hr />
+<h2 id="injecting-the-logger-into-components">Injecting the logger into components<a class="headerlink" href="#injecting-the-logger-into-components" title="Permanent link">&para;</a></h2>
+<p>The recommended pattern is to accept a <code>LoggerPtr</code> in the constructor, allowing test doubles and different loggers per component:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;aide/loggerinterface.hpp&gt;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">MyComponent</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">{</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="k">public</span><span class="o">:</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="k">explicit</span><span class="w"> </span><span class="n">MyComponent</span><span class="p">(</span><span class="n">aide</span><span class="o">::</span><span class="n">LoggerPtr</span><span class="w"> </span><span class="n">logger</span><span class="p">)</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">m_log</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">logger</span><span class="p">))</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">    </span><span class="p">{}</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">doWork</span><span class="p">()</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">        </span><span class="n">m_log</span><span class="o">-&gt;</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Starting work&quot;</span><span class="p">);</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">        </span><span class="c1">// ...</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="k">private</span><span class="o">:</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">    </span><span class="n">aide</span><span class="o">::</span><span class="n">LoggerPtr</span><span class="w"> </span><span class="n">m_log</span><span class="p">;</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="p">};</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="c1">// At the call site:</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="n">MyComponent</span><span class="w"> </span><span class="n">comp</span><span class="p">(</span><span class="n">aide</span><span class="o">::</span><span class="n">Application</span><span class="o">::</span><span class="n">logger</span><span class="p">(</span><span class="s">&quot;my_component&quot;</span><span class="p">));</span>
+</code></pre></div>
+<hr />
+<h2 id="log-file-location">Log file location<a class="headerlink" href="#log-file-location" title="Permanent link">&para;</a></h2>
+<p>Log files are written to the platform's standard application data directory:</p>
 <table>
 <thead>
 <tr>
-<th>Feature</th>
-<th>Description</th>
+<th>Platform</th>
+<th>Path</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Action Registry</strong></td>
-<td>Register <code>QAction</code>s under a <code>HierarchicalId</code> and look them up or bind them to menus anywhere in your application</td>
+<td>Linux</td>
+<td><code>~/.local/share/&lt;OrgName&gt;/&lt;AppName&gt;/</code></td>
 </tr>
 <tr>
-<td><strong>Settings Dialog</strong></td>
-<td>A tree-structured settings UI; add your own pages with a single <code>SettingsPageRegistry::addPage()</code> call</td>
+<td>macOS</td>
+<td><code>~/Library/Application Support/&lt;OrgName&gt;/&lt;AppName&gt;/</code></td>
 </tr>
 <tr>
-<td><strong>Configurable Keybindings</strong></td>
-<td>Per-action key sequences stored in <code>QSettings</code>, editable through the built-in keymap settings page</td>
-</tr>
-<tr>
-<td><strong>Structured Logging</strong></td>
-<td>spdlog-based logging behind a <code>LoggerInterface</code>, keeping components decoupled from the logging backend</td>
-</tr>
-<tr>
-<td><strong>Translation Support</strong></td>
-<td><code>TranslatorInterface</code> integrates Qt's <code>QTranslator</code> with a hook for loading additional translation files</td>
-</tr>
-<tr>
-<td><strong>Qt Widgets</strong></td>
-<td>Ready-made <code>AideTreeView</code>, <code>AideTableView</code>, <code>SearchFilterWidget</code>, and <code>SearchLineEdit</code> with placeholder text and tag highlighting</td>
+<td>Windows</td>
+<td><code>%APPDATA%\&lt;OrgName&gt;\&lt;AppName&gt;\</code></td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="getting-started">Getting started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
-<p>New to aIDE? Start here:</p>
-<ol>
-<li><a href="getting-started/overview/">Overview</a> — understand the architecture and key concepts</li>
-<li><a href="getting-started/installation/">Installation</a> — integrate aIDE into your CMake project</li>
-<li><a href="getting-started/quick-start/">Quick Start</a> — build your first aIDE application in minutes</li>
-</ol>
-<hr />
-<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Dependency</th>
-<th>Minimum version</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CMake</td>
-<td>3.25</td>
-</tr>
-<tr>
-<td>C++ compiler</td>
-<td>C++20 (GCC 10+, Clang 12+, MSVC 2019 16.11+)</td>
-</tr>
-<tr>
-<td>Qt</td>
-<td>5.15 LTS or 6.5+</td>
-</tr>
-<tr>
-<td>Conan</td>
-<td>2.x <em>(recommended)</em></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Platforms:</strong> Linux, macOS, Windows.</p>
+<p>The file name is <code>&lt;AppName&gt;.log</code>. Old logs are rotated automatically.</p>
 
 
 
@@ -1620,10 +1822,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "content.code.annotate"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

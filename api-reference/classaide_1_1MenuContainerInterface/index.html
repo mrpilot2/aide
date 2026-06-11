@@ -12,29 +12,27 @@
         <meta name="author" content="Markus Reitböck">
       
       
-        <link rel="canonical" href="https://mrpilot2.github.io/aide/">
+        <link rel="canonical" href="https://mrpilot2.github.io/aide/api-reference/classaide_1_1MenuContainerInterface/">
       
       
-      
-        <link rel="next" href="getting-started/overview/">
       
       
         
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>aIDE Developer Guide</title>
+        <title>aide::MenuContainerInterface - aIDE Developer Guide</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -53,9 +51,9 @@
       
     
     
-      <link rel="stylesheet" href="stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#aide-developer-guide" class="md-skip">
+        <a href="#aidemenucontainerinterface" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +94,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="aIDE Developer Guide" class="md-header__button md-logo" aria-label="aIDE Developer Guide" data-md-component="logo">
+    <a href="../.." title="aIDE Developer Guide" class="md-header__button md-logo" aria-label="aIDE Developer Guide" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -116,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              aide::MenuContainerInterface
             
           </span>
         </div>
@@ -234,7 +232,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="aIDE Developer Guide" class="md-nav__button md-logo" aria-label="aIDE Developer Guide" data-md-component="logo">
+    <a href="../.." title="aIDE Developer Guide" class="md-nav__button md-logo" aria-label="aIDE Developer Guide" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -261,37 +259,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Home
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -307,59 +278,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-aide-provides" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What aIDE provides
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Getting started
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Requirements
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -425,7 +343,7 @@
   
   
     <li class="md-nav__item">
-      <a href="getting-started/overview/" class="md-nav__link">
+      <a href="../../getting-started/overview/" class="md-nav__link">
         
   
   
@@ -453,7 +371,7 @@
   
   
     <li class="md-nav__item">
-      <a href="getting-started/installation/" class="md-nav__link">
+      <a href="../../getting-started/installation/" class="md-nav__link">
         
   
   
@@ -481,7 +399,7 @@
   
   
     <li class="md-nav__item">
-      <a href="getting-started/quick-start/" class="md-nav__link">
+      <a href="../../getting-started/quick-start/" class="md-nav__link">
         
   
   
@@ -570,7 +488,7 @@
   
   
     <li class="md-nav__item">
-      <a href="fundamentals/hierarchical-id/" class="md-nav__link">
+      <a href="../../fundamentals/hierarchical-id/" class="md-nav__link">
         
   
   
@@ -598,7 +516,7 @@
   
   
     <li class="md-nav__item">
-      <a href="fundamentals/application-lifecycle/" class="md-nav__link">
+      <a href="../../fundamentals/application-lifecycle/" class="md-nav__link">
         
   
   
@@ -687,7 +605,7 @@
   
   
     <li class="md-nav__item">
-      <a href="core/action-registry/" class="md-nav__link">
+      <a href="../../core/action-registry/" class="md-nav__link">
         
   
   
@@ -766,7 +684,7 @@
   
   
     <li class="md-nav__item">
-      <a href="core/settings/settings-interface/" class="md-nav__link">
+      <a href="../../core/settings/settings-interface/" class="md-nav__link">
         
   
   
@@ -794,7 +712,7 @@
   
   
     <li class="md-nav__item">
-      <a href="core/settings/adding-settings-pages/" class="md-nav__link">
+      <a href="../../core/settings/adding-settings-pages/" class="md-nav__link">
         
   
   
@@ -830,7 +748,7 @@
   
   
     <li class="md-nav__item">
-      <a href="core/key-bindings/" class="md-nav__link">
+      <a href="../../core/key-bindings/" class="md-nav__link">
         
   
   
@@ -858,7 +776,7 @@
   
   
     <li class="md-nav__item">
-      <a href="core/logging/" class="md-nav__link">
+      <a href="../../core/logging/" class="md-nav__link">
         
   
   
@@ -947,7 +865,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/main-window/" class="md-nav__link">
+      <a href="../../ui/main-window/" class="md-nav__link">
         
   
   
@@ -1026,7 +944,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/widgets/aidetreeview/" class="md-nav__link">
+      <a href="../../ui/widgets/aidetreeview/" class="md-nav__link">
         
   
   
@@ -1054,7 +972,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/widgets/aidetableview/" class="md-nav__link">
+      <a href="../../ui/widgets/aidetableview/" class="md-nav__link">
         
   
   
@@ -1082,7 +1000,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/widgets/search-filter-widget/" class="md-nav__link">
+      <a href="../../ui/widgets/search-filter-widget/" class="md-nav__link">
         
   
   
@@ -1110,7 +1028,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/widgets/search-line-edit/" class="md-nav__link">
+      <a href="../../ui/widgets/search-line-edit/" class="md-nav__link">
         
   
   
@@ -1146,7 +1064,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ui/translations/" class="md-nav__link">
+      <a href="../../ui/translations/" class="md-nav__link">
         
   
   
@@ -1181,7 +1099,7 @@
   
   
     <li class="md-nav__item">
-      <a href="demo/walkthrough/" class="md-nav__link">
+      <a href="../../demo/walkthrough/" class="md-nav__link">
         
   
   
@@ -1262,7 +1180,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api-reference/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   
@@ -1290,7 +1208,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api-reference/index_classes/" class="md-nav__link">
+      <a href="../index_classes/" class="md-nav__link">
         
   
   
@@ -1318,7 +1236,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api-reference/index_namespaces/" class="md-nav__link">
+      <a href="../index_namespaces/" class="md-nav__link">
         
   
   
@@ -1353,7 +1271,7 @@
   
   
     <li class="md-nav__item">
-      <a href="contributing/" class="md-nav__link">
+      <a href="../../contributing/" class="md-nav__link">
         
   
   
@@ -1380,7 +1298,7 @@
   
   
     <li class="md-nav__item">
-      <a href="maintainers/" class="md-nav__link">
+      <a href="../../maintainers/" class="md-nav__link">
         
   
   
@@ -1427,10 +1345,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-aide-provides" class="md-nav__link">
+  <a href="#public-functions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What aIDE provides
+        Public Functions
       
     </span>
   </a>
@@ -1438,24 +1356,41 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
+  <a href="#public-functions-documentation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Getting started
+        Public Functions Documentation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Public Functions Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#function-menucontainerinterface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        function ~MenuContainerInterface
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#function-menu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Requirements
+        function menu
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1487,88 +1422,48 @@
   
 
 
-<h1 id="aide-developer-guide">aIDE Developer Guide<a class="headerlink" href="#aide-developer-guide" title="Permanent link">&para;</a></h1>
-<p><strong>aIDE</strong> is a C++20/Qt framework library for building Qt-based desktop applications. It eliminates the boilerplate of a Qt desktop application — giving you a pre-wired action registry, settings dialog, configurable keybindings, and structured logging out of the box, so you can focus on your application's unique functionality.</p>
-<p>Think of it as the <a href="https://www.jetbrains.com/opensource/idea/">IntelliJ Platform</a>, but for C++20 and Qt.</p>
-<hr />
-<h2 id="what-aide-provides">What aIDE provides<a class="headerlink" href="#what-aide-provides" title="Permanent link">&para;</a></h2>
+<h1 id="aidemenucontainerinterface">aide::MenuContainerInterface<a class="headerlink" href="#aidemenucontainerinterface" title="Permanent link">&para;</a></h1>
+<p><code>#include &lt;menucontainerinterface.hpp&gt;</code></p>
+<p>Inherits from QObject</p>
+<p>Inherited by <a href="../classaide_1_1MenuContainer/">aide::MenuContainer</a></p>
+<h2 id="public-functions">Public Functions<a class="headerlink" href="#public-functions" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Feature</th>
-<th>Description</th>
+<th></th>
+<th>Name</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Action Registry</strong></td>
-<td>Register <code>QAction</code>s under a <code>HierarchicalId</code> and look them up or bind them to menus anywhere in your application</td>
+<td></td>
+<td><strong><a href="./#function-~menucontainerinterface">~MenuContainerInterface</a></strong>() override</td>
 </tr>
 <tr>
-<td><strong>Settings Dialog</strong></td>
-<td>A tree-structured settings UI; add your own pages with a single <code>SettingsPageRegistry::addPage()</code> call</td>
-</tr>
-<tr>
-<td><strong>Configurable Keybindings</strong></td>
-<td>Per-action key sequences stored in <code>QSettings</code>, editable through the built-in keymap settings page</td>
-</tr>
-<tr>
-<td><strong>Structured Logging</strong></td>
-<td>spdlog-based logging behind a <code>LoggerInterface</code>, keeping components decoupled from the logging backend</td>
-</tr>
-<tr>
-<td><strong>Translation Support</strong></td>
-<td><code>TranslatorInterface</code> integrates Qt's <code>QTranslator</code> with a hook for loading additional translation files</td>
-</tr>
-<tr>
-<td><strong>Qt Widgets</strong></td>
-<td>Ready-made <code>AideTreeView</code>, <code>AideTableView</code>, <code>SearchFilterWidget</code>, and <code>SearchLineEdit</code> with placeholder text and tag highlighting</td>
+<td>virtual QMenu *</td>
+<td><strong><a href="./#function-menu">menu</a></strong>() const =0</td>
 </tr>
 </tbody>
 </table>
+<h2 id="public-functions-documentation">Public Functions Documentation<a class="headerlink" href="#public-functions-documentation" title="Permanent link">&para;</a></h2>
+<h3 id="function-menucontainerinterface">function ~MenuContainerInterface<a class="headerlink" href="#function-menucontainerinterface" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">~</span><span class="n">MenuContainerInterface</span><span class="p">()</span><span class="w"> </span><span class="k">override</span>
+</code></pre></div>
+<h3 id="function-menu">function menu<a class="headerlink" href="#function-menu" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">virtual</span><span class="w"> </span><span class="n">QMenu</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">menu</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="mi">0</span>
+</code></pre></div>
+<p><strong>Reimplemented by</strong>: <a href="../classaide_1_1MenuContainer/#function-menu">aide::MenuContainer::menu</a></p>
 <hr />
-<h2 id="getting-started">Getting started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
-<p>New to aIDE? Start here:</p>
-<ol>
-<li><a href="getting-started/overview/">Overview</a> — understand the architecture and key concepts</li>
-<li><a href="getting-started/installation/">Installation</a> — integrate aIDE into your CMake project</li>
-<li><a href="getting-started/quick-start/">Quick Start</a> — build your first aIDE application in minutes</li>
-</ol>
-<hr />
-<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Dependency</th>
-<th>Minimum version</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CMake</td>
-<td>3.25</td>
-</tr>
-<tr>
-<td>C++ compiler</td>
-<td>C++20 (GCC 10+, Clang 12+, MSVC 2019 16.11+)</td>
-</tr>
-<tr>
-<td>Qt</td>
-<td>5.15 LTS or 6.5+</td>
-</tr>
-<tr>
-<td>Conan</td>
-<td>2.x <em>(recommended)</em></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Platforms:</strong> Linux, macOS, Windows.</p>
+<p>Updated on 2026-06-11 at 23:35:26 +0000</p>
 
 
 
 
 
 
+
+  
+  
 
 
 
@@ -1620,10 +1515,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "content.code.annotate"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
