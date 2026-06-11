@@ -1,12 +1,14 @@
-name: Publish Doxygen GitHub Pages
+name: Publish Documentation to GitHub Pages
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
-  publish:
+  docs:
+    name: Build and deploy docs
     runs-on: ubuntu-latest
     steps:
       - name: Check out
@@ -14,17 +16,45 @@ jobs:
         with:
           fetch-depth: 0
 
-      - id: setup_deps
-        uses: ./.github/actions/setup_deps
-
       - name: Install Doxygen
-        run: sudo apt install doxygen graphviz -y
+        run: sudo apt-get install -y doxygen
 
-      - name: Build doxygen documentation
-        run: cmake --workflow --preset workflow-ci-doxygen-unix
+      - name: Generate Doxygen XML
+        run: |
+          mkdir -p build/doxygen
+          doxygen docs/Doxyfile
 
-      - name: Publish doxygen documentation to GitHub Pages
+      - name: Install doxybook2
+        run: |
+          curl -L https://github.com/matusnovak/doxybook2/releases/download/v1.5.0/doxybook2-linux-amd64-v1.5.0.zip -o doxybook2.zip
+          unzip doxybook2.zip -d doxybook2
+          sudo install doxybook2/bin/doxybook2 /usr/local/bin/doxybook2
+
+      - name: Generate API reference Markdown
+        run: |
+          doxybook2 \
+            --input build/doxygen/xml \
+            --output docs/api-reference \
+            --config .doxybook/config.json
+          rm -f docs/api-reference/index_files.md \
+                docs/api-reference/index_groups.md \
+                docs/api-reference/index_examples.md \
+                docs/api-reference/index_pages.md
+          sed -i '/^!!! info "CI-generated content"/,/^---$/d' docs/api-reference/index.md
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install MkDocs and plugins
+        run: pip install mkdocs-material
+
+      - name: Build MkDocs site
+        run: mkdocs build --strict
+
+      - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          publish_dir: build/ci-doxygen-unix/aide/doc/html
+          publish_dir: site
           github_token: ${{ secrets.GITHUB_TOKEN }}

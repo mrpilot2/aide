@@ -1,0 +1,21 @@
+PROJECT_NAME           = "aIDE"
+PROJECT_BRIEF          = "C++/Qt application framework library"
+OUTPUT_DIRECTORY       = build/doxygen
+INPUT                  = aide/src/include \
+                         aide/src/core \
+                         aide/src/gui \
+                         aide/src/logger
+RECURSIVE              = YES
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = YES
+GENERATE_HTML          = NO
+GENERATE_LATEX         = NO
+GENERATE_XML           = YES
+XML_OUTPUT             = xml
+QUIET                  = YES
+WARN_IF_UNDOCUMENTED   = NO
+FILE_PATTERNS          = *.hpp *.h *.cpp
+EXCLUDE_PATTERNS       = */test* */_* */moc_* */ui_*
+CALLER_GRAPH           = NO
+CALL_GRAPH             = NO
