@@ -1,0 +1,91 @@
+site_name: aIDE Developer Guide
+site_url: https://mrpilot2.github.io/aide
+site_description: Developer guide for the aIDE C++/Qt application framework library
+site_author: Markus Reitböck
+repo_name: mrpilot2/aide
+repo_url: https://github.com/mrpilot2/aide
+edit_uri: edit/develop/docs/
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.copy
+    - content.code.annotate
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets:
+      base_path:
+        - "."
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Overview: getting-started/overview.md
+    - Installation: getting-started/installation.md
+    - Quick Start: getting-started/quick-start.md
+  - Fundamentals:
+    - HierarchicalId: fundamentals/hierarchical-id.md
+    - Application Lifecycle: fundamentals/application-lifecycle.md
+  - Core Concepts:
+    - Action Registry: core/action-registry.md
+    - Settings:
+      - SettingsInterface: core/settings/settings-interface.md
+      - Adding Settings Pages: core/settings/adding-settings-pages.md
+    - Key Bindings: core/key-bindings.md
+    - Logging: core/logging.md
+  - UI Components:
+    - Main Window: ui/main-window.md
+    - Widgets:
+      - AideTreeView: ui/widgets/aidetreeview.md
+      - AideTableView: ui/widgets/aidetableview.md
+      - SearchFilterWidget: ui/widgets/search-filter-widget.md
+      - SearchLineEdit: ui/widgets/search-line-edit.md
+    - Translations: ui/translations.md
+  - Demo Application: demo/walkthrough.md
+  - Resources:
+    - Overview: api-reference/index.md
+    - Classes: api-reference/index_classes.md
+    - Namespaces: api-reference/index_namespaces.md
+  - Contributing: contributing.md
+  - Maintainers: maintainers.md

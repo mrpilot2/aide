@@ -1,0 +1,15 @@
+{
+  "baseUrl": "",
+  "useFolders": false,
+  "indexInFolders": false,
+  "linkSuffix": ".md",
+  "linkLowercase": false,
+  "fileExt": "md",
+  "mainPageInRoot": false,
+  "mainPageName": "indexpage",
+  "sort": false,
+  "foldersToGenerate": [
+    "classes",
+    "namespaces"
+  ]
+}

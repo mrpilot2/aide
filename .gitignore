@@ -1,3 +1,6 @@
 **/build*/
 !aide/src/buildinformation/
 install/
+site/
+docs/api-reference/*
+!docs/api-reference/index.md
