@@ -9,10 +9,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        qt: [6.8.3]
+        qt: [6.9.2]
 
         include:
-          - qt: 6.8.3
+          - qt: 6.9.2
             qt_name: Qt6
 
     runs-on: ubuntu-24.04

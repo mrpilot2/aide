@@ -12,9 +12,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-24.04]
+        os: [windows-2022, macos-latest, ubuntu-24.04]
         cmake: [3.25, 4.x]
-        qt: [6.8.3]
+        qt: [6.9.2]
 
         include:
           - cmake: 3.25
@@ -22,7 +22,7 @@ jobs:
           - cmake: 4.x
             cmake_name: CMake Latest
 
-          - qt: 6.8.3
+          - qt: 6.9.2
             qt_name: Qt6
 
           - os: ubuntu-24.04
