@@ -2,6 +2,7 @@
 #define AIDE_SHOW_SETTINGS_DIALOG_HPP
 
 #include <settings/settingspage.hpp>
+#include <settings/settingspageregistry.hpp>
 
 #include "loggerinterface.hpp"
 #include "settingsdialogchangepagecontroller.hpp"
@@ -18,6 +19,7 @@ namespace aide::core
     {
     public:
         explicit ShowSettingsDialog(SettingsDialogWeakPtr dialog,
+                                    SettingsPageRegistry& registry,
                                     SettingsInterface& settings,
                                     LoggerPtr loggerInterface);
 
@@ -42,8 +44,9 @@ namespace aide::core
 
         void showEmptyPageWidget() const;
 
-        static void resetModifiedSettingsPages();
+        void resetModifiedSettingsPages() const;
 
+        SettingsPageRegistry& m_registry;
         SettingsDialogWeakPtr settingsDialog;
         std::shared_ptr<SettingsPageGroupTreeModel> treeModel;
 

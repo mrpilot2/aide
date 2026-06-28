@@ -48,6 +48,7 @@ target_sources(
     mainwindow.cpp
     mainwindowcontroller.cpp
     thirdpartylicensesdialog.cpp
+    settings/appearancepage.cpp
     settings/changedetector.cpp
     settings/settingsdialog.cpp
     settings/settingsdialogcontroller.cpp
@@ -59,6 +60,7 @@ target_sources(
     $<$<TARGET_EXISTS:Qt::lrelease>:${CMAKE_CURRENT_BINARY_DIR}/translations.qrc
     ${QM_FILES}>
     res/icons/icons.qrc
+    res/icons/icon_themes.qrc
 )
 
 target_include_directories(

@@ -13,6 +13,7 @@
 #include "mocksettingsdialog.hpp"
 #include "mocksettingspage.hpp"
 #include "nulllogger.hpp"
+#include "settings/settingspagegrouptreemodel.hpp"
 #include "settings/settingspageregistry.hpp"
 #include "settings/showsettingsdialog.hpp"
 #include "settings/showsettingsdialogcontroller.hpp"
@@ -33,7 +34,8 @@ TEST_CASE("Any show settings dialog use case")
     auto view = std::make_shared<MockSettingsDialog>();
     MockSettings settings;
     auto logger = std::make_shared<NullLogger>();
-    ShowSettingsDialog useCase{view, settings, logger};
+    SettingsPageRegistry registry;
+    ShowSettingsDialog useCase{view, registry, settings, logger};
 
     SECTION("shows settings dialog if requested by user")
     {
@@ -45,7 +47,8 @@ TEST_CASE("Any show settings dialog use case")
     SECTION("works with base class pointer")
     {
         std::unique_ptr<ShowSettingsDialogController> base =
-            std::make_unique<ShowSettingsDialog>(view, settings, logger);
+            std::make_unique<ShowSettingsDialog>(view, registry, settings,
+                                                 logger);
 
         base->showSettingsDialog();
 
@@ -54,12 +57,10 @@ TEST_CASE("Any show settings dialog use case")
 
     SECTION("show display name of selected group")
     {
-        SettingsPageRegistry::deleteAllPages();
-
-        SettingsPageRegistry::addPage(std::make_unique<MockSettingsPage>(
+        registry.addPage(std::make_unique<MockSettingsPage>(
             HierarchicalId("MockTestPage")("Subpage1")));
 
-        const SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel{registry};
 
         useCase.showSettingsDialog();
 
@@ -74,12 +75,10 @@ TEST_CASE("Any show settings dialog use case")
 
     SECTION("throws an exception if selected group is invalid")
     {
-        SettingsPageRegistry::deleteAllPages();
-
-        SettingsPageRegistry::addPage(std::make_unique<MockSettingsPage>(
+        registry.addPage(std::make_unique<MockSettingsPage>(
             HierarchicalId("MockTestPage")("Subpage1")));
 
-        const SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel{registry};
 
         useCase.showSettingsDialog();
 
@@ -96,9 +95,10 @@ TEST_CASE("Any show settings dialog use case")
     {
         auto base =
             std::shared_ptr<aide::core::SettingsDialogChangePageController>(
-                std::make_shared<ShowSettingsDialog>(view, settings, logger));
+                std::make_shared<ShowSettingsDialog>(view, registry, settings,
+                                                     logger));
 
-        const SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel{registry};
 
         REQUIRE_THROWS_AS(
             base->changeSelectedPage(
@@ -111,12 +111,10 @@ TEST_CASE("Any show settings dialog use case")
 
     SECTION("show selected page widget")
     {
-        SettingsPageRegistry::deleteAllPages();
-
-        SettingsPageRegistry::addPage(
+        registry.addPage(
             std::make_unique<MockSettingsPage>(HierarchicalId("MockTestPage")));
 
-        const SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel{registry};
 
         useCase.showSettingsDialog();
 
@@ -134,13 +132,11 @@ TEST_CASE("Any show settings dialog use case")
     SECTION(
         "shows reset label if any GUI element has changed and page is modified")
     {
-        SettingsPageRegistry::deleteAllPages();
-
         auto page =
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
-        SettingsPageRegistry::addPage(page);
+        registry.addPage(page);
 
-        const SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel{registry};
 
         useCase.showSettingsDialog();
 
@@ -161,13 +157,11 @@ TEST_CASE("Any show settings dialog use case")
         "hide reset label if any GUI element has changed and page is not "
         "modified")
     {
-        SettingsPageRegistry::deleteAllPages();
-
         auto page =
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
-        SettingsPageRegistry::addPage(page);
+        registry.addPage(page);
 
-        const SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel{registry};
 
         useCase.showSettingsDialog();
 
@@ -188,13 +182,11 @@ TEST_CASE("Any show settings dialog use case")
         "enables apply button if any GUI element has changed and page is "
         "modified")
     {
-        SettingsPageRegistry::deleteAllPages();
-
         auto page =
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
-        SettingsPageRegistry::addPage(page);
+        registry.addPage(page);
 
-        const SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel{registry};
 
         useCase.showSettingsDialog();
 
@@ -215,17 +207,15 @@ TEST_CASE("Any show settings dialog use case")
         "disables apply button if any GUI element has changed and no page is "
         "modified")
     {
-        SettingsPageRegistry::deleteAllPages();
-
         auto page1 =
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
         auto page2 =
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage2"));
 
-        SettingsPageRegistry::addPage(page1);
-        SettingsPageRegistry::addPage(page2);
+        registry.addPage(page1);
+        registry.addPage(page2);
 
-        const SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel{registry};
 
         useCase.showSettingsDialog();
 
@@ -247,17 +237,15 @@ TEST_CASE("Any show settings dialog use case")
         "does not disable apply button if any GUI element has changed and is "
         "modified but another page is modified")
     {
-        SettingsPageRegistry::deleteAllPages();
-
         auto page1 =
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
         auto page2 =
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage2"));
 
-        SettingsPageRegistry::addPage(page1);
-        SettingsPageRegistry::addPage(page2);
+        registry.addPage(page1);
+        registry.addPage(page2);
 
-        const SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel{registry};
 
         useCase.showSettingsDialog();
 
@@ -277,17 +265,15 @@ TEST_CASE("Any show settings dialog use case")
 
     SECTION("applies settings for modified pages if user presses apply button")
     {
-        SettingsPageRegistry::deleteAllPages();
-
         auto page1 =
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
         auto page2 =
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage2"));
 
-        SettingsPageRegistry::addPage(page1);
-        SettingsPageRegistry::addPage(page2);
+        registry.addPage(page1);
+        registry.addPage(page2);
 
-        const SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel{registry};
 
         useCase.showSettingsDialog();
 
@@ -308,17 +294,13 @@ TEST_CASE("Any show settings dialog use case")
 
     SECTION("applies settings for modified pages if user presses Ok button")
     {
-        SettingsPageRegistry::deleteAllPages();
-
         auto page1 =
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
         auto page2 =
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage2"));
 
-        SettingsPageRegistry::addPage(page1);
-        SettingsPageRegistry::addPage(page2);
-
-        const SettingsPageGroupTreeModel treeModel;
+        registry.addPage(page1);
+        registry.addPage(page2);
 
         page1->simulateModified(false);
         page2->simulateModified(true);
@@ -333,17 +315,15 @@ TEST_CASE("Any show settings dialog use case")
 
     SECTION("resets currently shown page if user presses reset label")
     {
-        SettingsPageRegistry::deleteAllPages();
-
         auto page1 =
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
         auto page2 =
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage2"));
 
-        SettingsPageRegistry::addPage(page1);
-        SettingsPageRegistry::addPage(page2);
+        registry.addPage(page1);
+        registry.addPage(page2);
 
-        const SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel{registry};
 
         useCase.showSettingsDialog();
 
@@ -368,17 +348,13 @@ TEST_CASE("Any show settings dialog use case")
 
     SECTION("resets all modified pages if user cancels")
     {
-        SettingsPageRegistry::deleteAllPages();
-
         auto page1 =
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
         auto page2 =
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage2"));
 
-        SettingsPageRegistry::addPage(page1);
-        SettingsPageRegistry::addPage(page2);
-
-        const SettingsPageGroupTreeModel treeModel;
+        registry.addPage(page1);
+        registry.addPage(page2);
 
         page1->simulateModified(true);
         page2->simulateModified(false);
@@ -395,15 +371,13 @@ TEST_CASE("Any show settings dialog use case")
 
     SECTION("selects first item when executed if none was save")
     {
-        SettingsPageRegistry::deleteAllPages();
-
         auto page1 =
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
         auto page2 =
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage2"));
 
-        SettingsPageRegistry::addPage(page1);
-        SettingsPageRegistry::addPage(page2);
+        registry.addPage(page1);
+        registry.addPage(page2);
 
         useCase.showSettingsDialog();
 
@@ -414,15 +388,13 @@ TEST_CASE("Any show settings dialog use case")
 
     SECTION("selects last selected when executed if it was saved")
     {
-        SettingsPageRegistry::deleteAllPages();
-
         auto page1 =
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
         auto page2 = std::make_shared<MockSettingsPage>(
             HierarchicalId("MockTestPage2")("Subpage1")("Subpage2"));
 
-        SettingsPageRegistry::addPage(page1);
-        SettingsPageRegistry::addPage(page2);
+        registry.addPage(page1);
+        registry.addPage(page2);
 
         const QString dataToBeSaved{
             QString::fromStdString(page2->group().name())};
@@ -441,8 +413,6 @@ TEST_CASE("Any show settings dialog use case")
         REQUIRE(view->getSelectedGroupIndex().parent().parent().parent() ==
                 QModelIndex());
     }
-
-    SettingsPageRegistry::deleteAllPages();
 }
 
 TEST_CASE(
@@ -456,7 +426,8 @@ TEST_CASE(
     auto view = std::make_shared<MockSettingsDialog>();
     MockSettings settings;
     auto logger = std::make_shared<NullLogger>();
-    ShowSettingsDialog useCase{view, settings, logger};
+    SettingsPageRegistry registry;
+    ShowSettingsDialog useCase{view, registry, settings, logger};
 
     SECTION("throws std::logic_error when tree model is null")
     {
@@ -476,7 +447,8 @@ TEST_CASE("Any settings dialog", "[Issue 36]")
     const auto view = std::make_shared<MockSettingsDialog>();
     MockSettings settings;
     const auto logger = std::make_shared<NullLogger>();
-    ShowSettingsDialog useCase{view, settings, logger};
+    SettingsPageRegistry registry;
+    ShowSettingsDialog useCase{view, registry, settings, logger};
 
     SECTION(
         "shall not crash if anyGuiElementChanged is called with empty page ")

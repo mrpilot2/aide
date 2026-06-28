@@ -14,11 +14,11 @@ using aide::test::MockSettingsPage;
 
 TEST_CASE("A new settings page group tree model without registered page")
 {
-    SettingsPageRegistry::deleteAllPages();
+    SettingsPageRegistry registry;
 
     SECTION("has no rows")
     {
-        const SettingsPageGroupTreeModel treeModel;
+        const SettingsPageGroupTreeModel treeModel{registry};
 
         REQUIRE(treeModel.rowCount() == 0);
     }
@@ -26,12 +26,11 @@ TEST_CASE("A new settings page group tree model without registered page")
 
 TEST_CASE("A new settings page group tree model with one registered page")
 {
-    SettingsPageRegistry::deleteAllPages();
-
-    SettingsPageRegistry::addPage(
+    SettingsPageRegistry registry;
+    registry.addPage(
         std::make_unique<MockSettingsPage>(HierarchicalId("MockTestPage")));
 
-    const SettingsPageGroupTreeModel treeModel;
+    const SettingsPageGroupTreeModel treeModel{registry};
 
     SECTION("has one row")
     {
@@ -58,23 +57,19 @@ TEST_CASE("A new settings page group tree model with one registered page")
         const auto parentIndex = treeModel.parent(index);
         REQUIRE(!parentIndex.isValid());
     }
-
-    SettingsPageRegistry::deleteAllPages();
 }
 
 TEST_CASE("A new settings page group tree model with multiple registered page")
 {
-    SettingsPageRegistry::deleteAllPages();
-
-    SettingsPageRegistry::addPage(std::make_unique<MockSettingsPage>(
+    SettingsPageRegistry registry;
+    registry.addPage(std::make_unique<MockSettingsPage>(
         HierarchicalId("MockTestPage")("Subpage1")));
-    SettingsPageRegistry::addPage(std::make_unique<MockSettingsPage>(
+    registry.addPage(std::make_unique<MockSettingsPage>(
         HierarchicalId("MockTestPage")("Subpage2")));
-
-    SettingsPageRegistry::addPage(
+    registry.addPage(
         std::make_unique<MockSettingsPage>(HierarchicalId("MockTestPage2")));
 
-    const SettingsPageGroupTreeModel treeModel;
+    const SettingsPageGroupTreeModel treeModel{registry};
 
     SECTION("use same tree item for same group")
     {
@@ -109,20 +104,16 @@ TEST_CASE("A new settings page group tree model with multiple registered page")
 
         REQUIRE(!childIndex.isValid());
     }
-
-    SettingsPageRegistry::deleteAllPages();
 }
 
 TEST_CASE("Any settings page group tree model")
 {
-    SettingsPageRegistry::deleteAllPages();
-
+    SettingsPageRegistry registry;
     auto mockPage =
         std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
+    registry.addPage(mockPage);
 
-    SettingsPageRegistry::addPage(mockPage);
-
-    const SettingsPageGroupTreeModel treeModel;
+    const SettingsPageGroupTreeModel treeModel{registry};
 
     SECTION("provides horizontal header")
     {
@@ -172,15 +163,16 @@ TEST_CASE("Any settings page group tree model")
 
     SECTION("can recursively be search for a ModelIndex by group name")
     {
+        SettingsPageRegistry extraRegistry;
         auto subSubPage1 = std::make_shared<MockSettingsPage>(
             HierarchicalId("MockTestPage")("SubPage")("SubSubPage1"));
         auto subSubPage2 = std::make_shared<MockSettingsPage>(
             HierarchicalId("MockTestPage")("SubPage")("SubSubPage2"));
 
-        SettingsPageRegistry::addPage(subSubPage1);
-        SettingsPageRegistry::addPage(subSubPage2);
+        extraRegistry.addPage(subSubPage1);
+        extraRegistry.addPage(subSubPage2);
 
-        const SettingsPageGroupTreeModel recursiveTreeModel;
+        const SettingsPageGroupTreeModel recursiveTreeModel{extraRegistry};
 
         auto root          = recursiveTreeModel.index(0, 0, QModelIndex());
         auto subPage       = recursiveTreeModel.index(0, 0, root);
@@ -193,17 +185,16 @@ TEST_CASE("Any settings page group tree model")
 
     SECTION("can recursively be search for a ModelIndex by group name test 2")
     {
-        SettingsPageRegistry::deleteAllPages();
-
+        SettingsPageRegistry extraRegistry;
         auto subSubPage1 =
             std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
         auto subSubPage2 = std::make_shared<MockSettingsPage>(
             HierarchicalId("MockTestPage2")("SubPage")("SubSubPage2"));
 
-        SettingsPageRegistry::addPage(subSubPage1);
-        SettingsPageRegistry::addPage(subSubPage2);
+        extraRegistry.addPage(subSubPage1);
+        extraRegistry.addPage(subSubPage2);
 
-        const SettingsPageGroupTreeModel recursiveTreeModel;
+        const SettingsPageGroupTreeModel recursiveTreeModel{extraRegistry};
 
         auto root          = recursiveTreeModel.index(1, 0, QModelIndex());
         auto subPage       = recursiveTreeModel.index(0, 0, root);
@@ -213,6 +204,4 @@ TEST_CASE("Any settings page group tree model")
                     QString::fromStdString(subSubPage2->group().name()),
                     QModelIndex()) == expectedIndex);
     }
-
-    SettingsPageRegistry::deleteAllPages();
 }

@@ -47,6 +47,9 @@ namespace aide::gui
         std::tuple<aide::core::UserSelection, bool>
         letUserConfirmApplicationClose() override;
 
+    public slots:
+        void refreshIcons();
+
     private:
         void closeEvent(QCloseEvent* event) override;
 

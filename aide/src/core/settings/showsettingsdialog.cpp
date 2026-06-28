@@ -8,15 +8,16 @@
 #include <QWidget>
 
 #include "settings/settingspage.hpp"
-#include "settings/settingspageregistry.hpp"
 
 using aide::core::SettingsPageGroupTreeModel;
 using aide::core::ShowSettingsDialog;
 
 ShowSettingsDialog::ShowSettingsDialog(SettingsDialogWeakPtr dialog,
+                                       SettingsPageRegistry& registry,
                                        SettingsInterface& settings,
                                        LoggerPtr loggerInterface)
-    : settingsDialog{std::move(dialog)}
+    : m_registry(registry)
+    , settingsDialog{std::move(dialog)}
     , logger{std::move(loggerInterface)}
     , saveGeometryAndState(settingsDialog, settings)
 {}
@@ -30,12 +31,12 @@ void ShowSettingsDialog::showSettingsDialog()
     dialog->showEmptyPageWidget();
     dialog->setSelectedPageDisplayName("");
 
-    treeModel = std::make_shared<SettingsPageGroupTreeModel>();
+    treeModel = std::make_shared<SettingsPageGroupTreeModel>(m_registry);
     dialog->setTreeModel(treeModel);
 
     saveGeometryAndState.restoreGeometryAndState();
 
-    const auto& pages = SettingsPageRegistry::settingsPages();
+    const auto& pages = m_registry.settingsPages();
     std::ranges::for_each(pages, [](const auto& p) {
         (*p).reset();
         p->widget()->setVisible(false);
@@ -76,8 +77,7 @@ void ShowSettingsDialog::changeSelectedPage(
         updateDisplayName(selectedIndex);
 
         currentlySelectedPage =
-            SettingsPageGroupTreeModel::findCorrespondingSettingsPage(
-                selectedIndex);
+            treeModel->findCorrespondingSettingsPage(selectedIndex);
 
         if (currentlySelectedPage != nullptr) {
             showSelectedPageWidget(currentlySelectedPage->widget());
@@ -148,7 +148,7 @@ void ShowSettingsDialog::anyGuiElementHasChanged()
     if (const auto d = settingsDialog.lock();
         d != nullptr && currentlySelectedPage != nullptr) {
         d->showResetLabel(currentlySelectedPage->isModified());
-        const auto& pages = SettingsPageRegistry::settingsPages();
+        const auto& pages = m_registry.settingsPages();
 
         d->enableApplyButton(std::ranges::any_of(
             pages, [](const auto& p) { return p->isModified(); }));
@@ -163,9 +163,9 @@ void ShowSettingsDialog::resetCurrentPage()
     }
 }
 
-void ShowSettingsDialog::resetModifiedSettingsPages()
+void ShowSettingsDialog::resetModifiedSettingsPages() const
 {
-    const auto& pages = SettingsPageRegistry::settingsPages();
+    const auto& pages = m_registry.settingsPages();
     for (const auto& page : pages) {
         if (page->isModified()) { (*page).reset(); }
     }
@@ -173,7 +173,7 @@ void ShowSettingsDialog::resetModifiedSettingsPages()
 
 void ShowSettingsDialog::applyModifiedSettingsPages()
 {
-    const auto& pages = SettingsPageRegistry::settingsPages();
+    const auto& pages = m_registry.settingsPages();
     for (const auto& page : pages) {
         if (page->isModified()) {
             page->apply();

@@ -173,6 +173,21 @@
     </message>
 </context>
 <context>
+    <name>aide::gui::AppearancePage</name>
+    <message>
+        <source>Theme:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>aide::gui::MainWindow</name>
     <message>
         <source>Quit</source>

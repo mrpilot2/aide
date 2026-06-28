@@ -4,6 +4,7 @@
 #include <optional>
 
 #include "settings/settingspage.hpp"
+#include "settings/settingspageregistry.hpp"
 #include "treeitem.hpp"
 #include "treemodel.hpp"
 
@@ -16,7 +17,8 @@ namespace aide::core
         Q_OBJECT
 
     public:
-        explicit SettingsPageGroupTreeModel(QObject* parent = nullptr);
+        explicit SettingsPageGroupTreeModel(SettingsPageRegistry& registry,
+                                            QObject* parent = nullptr);
 
         [[nodiscard]] QVariant data(const QModelIndex& index,
                                     int role) const override;
@@ -24,17 +26,19 @@ namespace aide::core
         [[nodiscard]] Qt::ItemFlags flags(
             const QModelIndex& index) const override;
 
-        [[nodiscard]] static SettingsPagePtr findCorrespondingSettingsPage(
-            const QModelIndex& selectedIndex);
+        [[nodiscard]] SettingsPagePtr findCorrespondingSettingsPage(
+            const QModelIndex& selectedIndex) const;
 
         [[nodiscard]] QModelIndex recursivelyFindSelectedTreeItemIndex(
             const QString& groupName, const QModelIndex& parent) const;
 
     private:
-        static void setupModelData(const TreeItemPtr& parent);
+        void setupModelData(const TreeItemPtr& parent);
 
         static std::optional<TreeItemPtr> existingTreeItemForGroup(
             const TreeItemPtr& current, const char* group);
+
+        SettingsPageRegistry& m_registry;
     };
 } // namespace aide::core
 

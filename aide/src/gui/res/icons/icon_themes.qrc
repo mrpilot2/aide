@@ -1,0 +1,10 @@
+<RCC>
+  <qresource prefix="/aide/icons">
+    <file alias="aide-dark/index.theme">themes/aide-dark/index.theme</file>
+    <file alias="aide-dark/scalable/actions/application-exit.svg">themes/aide-dark/scalable/actions/application-exit.svg</file>
+    <file alias="aide-dark/scalable/places/folder.svg">themes/aide-dark/scalable/places/folder.svg</file>
+    <file alias="aide-light/index.theme">themes/aide-light/index.theme</file>
+    <file alias="aide-light/scalable/actions/application-exit.svg">themes/aide-light/scalable/actions/application-exit.svg</file>
+    <file alias="aide-light/scalable/places/folder.svg">themes/aide-light/scalable/places/folder.svg</file>
+  </qresource>
+</RCC>

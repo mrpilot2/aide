@@ -13,6 +13,7 @@ Think of it as the [IntelliJ Platform](https://www.jetbrains.com/opensource/idea
 | **Action Registry** | Register `QAction`s under a `HierarchicalId` and look them up or bind them to menus anywhere in your application |
 | **Settings Dialog** | A tree-structured settings UI; add your own pages with a single `SettingsPageRegistry::addPage()` call |
 | **Configurable Keybindings** | Per-action key sequences stored in `QSettings`, editable through the built-in keymap settings page |
+| **Appearance** | Built-in System/Light/Dark themes with custom theme support, an Appearance settings page, and automatic OS dark/light mode following |
 | **Structured Logging** | spdlog-based logging behind a `LoggerInterface`, keeping components decoupled from the logging backend |
 | **Translation Support** | `TranslatorInterface` integrates Qt's `QTranslator` with a hook for loading additional translation files |
 | **Qt Widgets** | Ready-made `AideTreeView`, `AideTableView`, `SearchFilterWidget`, and `SearchLineEdit` with placeholder text and tag highlighting |

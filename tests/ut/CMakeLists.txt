@@ -40,6 +40,7 @@ target_sources(
   PRIVATE
     aidetableviewtest.cpp
     aidetreeviewtest.cpp
+    appearancemanagertest.cpp
     applicationtest.cpp
     buildinformationtest.cpp
     hierarchicalidtest.cpp
@@ -59,6 +60,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
     PRIVATE aboutaideusecasetest.cpp
             actionregistrytest.cpp
             addshortcutdialogtest.cpp
+            appearancepagetest.cpp
             aidesettingsprovidertest.cpp
             applicationcloseinteractortest.cpp
             $<$<TARGET_EXISTS:Qt::lrelease>:applicationtranslatortest.cpp>
