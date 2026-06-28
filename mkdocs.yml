@@ -69,6 +69,7 @@ nav:
     - Application Lifecycle: fundamentals/application-lifecycle.md
   - Core Concepts:
     - Action Registry: core/action-registry.md
+    - Appearance: core/appearance.md
     - Settings:
       - SettingsInterface: core/settings/settings-interface.md
       - Adding Settings Pages: core/settings/adding-settings-pages.md
