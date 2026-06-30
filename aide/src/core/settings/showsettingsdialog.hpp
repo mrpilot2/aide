@@ -42,8 +42,9 @@ namespace aide::core
         void applyModifiedSettingsPages() override;
 
     private:
-        void checkChangeSelectedPagePreConditions(
-            const QItemSelection& selected) const;
+        void checkTreeModelIsInitialized() const;
+
+        void clearSelectedPage();
 
         void updateDisplayName(const QModelIndex& selectedIndex) const;
 

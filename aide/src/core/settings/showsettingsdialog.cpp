@@ -73,7 +73,16 @@ void ShowSettingsDialog::changeSelectedPage(
     const QItemSelection& selected,
     [[maybe_unused]] const QItemSelection& deselected)
 {
-    checkChangeSelectedPagePreConditions(selected);
+    if (selected.indexes().empty()) {
+        // Filtering the tree can remove the selected row, in which case the
+        // selection model emits selectionChanged() with an empty selection.
+        // This is a legitimate runtime event, not a programming error, so it
+        // must be handled gracefully instead of throwing.
+        clearSelectedPage();
+        return;
+    }
+
+    checkTreeModelIsInitialized();
 
     const auto selectedIndex = mapToSourceIndex(selected.indexes().at(0));
 
@@ -130,17 +139,8 @@ const QString& ShowSettingsDialog::currentSearchPattern() const
     return m_currentSearchPattern;
 }
 
-void ShowSettingsDialog::checkChangeSelectedPagePreConditions(
-    const QItemSelection& selected) const
+void ShowSettingsDialog::checkTreeModelIsInitialized() const
 {
-    if (selected.indexes().empty()) {
-        constexpr auto message{
-            "ShowSettingsDialog: selected group index (QItemSelection) is "
-            "invalid. This should never happen."};
-        logger->critical(message);
-        throw std::invalid_argument(message);
-    }
-
     if (treeModel == nullptr) {
         constexpr auto message{
             "ShowSettingsDialog: Tree Model is nullptr. This can only happen, "
@@ -148,6 +148,16 @@ void ShowSettingsDialog::checkChangeSelectedPagePreConditions(
             "the dialog to show"};
         logger->critical(message);
         throw std::logic_error(message);
+    }
+}
+
+void ShowSettingsDialog::clearSelectedPage()
+{
+    currentlySelectedPage = nullptr;
+
+    if (const auto view = settingsDialog.lock(); view != nullptr) {
+        showEmptyPageWidget();
+        view->showResetLabel(false);
     }
 }
 
