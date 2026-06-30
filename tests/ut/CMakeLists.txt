@@ -96,6 +96,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
             searchfilterresultdelegatetest.cpp
             searchlineedittest.cpp
             settingsdialoggeometryandstatetest.cpp
+            settingspagefilterproxymodeltest.cpp
             settingspagegrouptreemodeltest.cpp
             settingsdialogcontrollertest.cpp
             showsettingsdialogtest.cpp

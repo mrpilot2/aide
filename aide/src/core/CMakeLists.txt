@@ -28,6 +28,8 @@ target_sources(
           settings/settingsdialogchangepagecontroller.cpp
           settings/settingsdialoggeometryandstate.cpp
           settings/settingspage.cpp
+          settings/settingspagefilterproxymodel.cpp
+          settings/settingspagefilterproxymodel.hpp
           settings/settingspagegrouptreemodel.cpp
           settings/settingspagegrouptreemodel.hpp
           settings/settingspageregistry.cpp

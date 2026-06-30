@@ -31,8 +31,11 @@ void ShowSettingsDialog::showSettingsDialog()
     dialog->showEmptyPageWidget();
     dialog->setSelectedPageDisplayName("");
 
-    treeModel = std::make_shared<SettingsPageGroupTreeModel>(m_registry);
-    dialog->setTreeModel(treeModel);
+    treeModel  = std::make_shared<SettingsPageGroupTreeModel>(m_registry);
+    proxyModel = std::make_shared<SettingsPageFilterProxyModel>();
+    proxyModel->setSourceModel(treeModel.get());
+    proxyModel->setSearchPattern(m_currentSearchPattern);
+    dialog->setTreeModel(proxyModel);
 
     saveGeometryAndState.restoreGeometryAndState();
 
@@ -49,9 +52,10 @@ void ShowSettingsDialog::showSettingsDialog()
         const auto index = treeModel->recursivelyFindSelectedTreeItemIndex(
             lastSelectedTreeItem, QModelIndex());
 
-        dialog->setSelectedGroupIndex(index);
+        dialog->setSelectedGroupIndex(mapFromSourceIndex(index));
     } else {
-        dialog->setSelectedGroupIndex(treeModel->index(0, 0, QModelIndex()));
+        dialog->setSelectedGroupIndex(
+            mapFromSourceIndex(treeModel->index(0, 0, QModelIndex())));
     }
 
     const auto result = dialog->executeDialog();
@@ -71,7 +75,7 @@ void ShowSettingsDialog::changeSelectedPage(
 {
     checkChangeSelectedPagePreConditions(selected);
 
-    const auto selectedIndex = selected.indexes().at(0);
+    const auto selectedIndex = mapToSourceIndex(selected.indexes().at(0));
 
     if (const auto view = settingsDialog.lock(); view != nullptr) {
         updateDisplayName(selectedIndex);
@@ -93,8 +97,27 @@ void ShowSettingsDialog::searchPatternChanged(const QString& pattern)
 {
     m_currentSearchPattern = pattern;
 
+    if (proxyModel != nullptr) { proxyModel->setSearchPattern(pattern); }
+
     logger->trace("User changed settings search pattern to {} ",
                   pattern.toStdString());
+}
+
+QModelIndex ShowSettingsDialog::mapToSourceIndex(const QModelIndex& index) const
+{
+    if (proxyModel != nullptr && index.model() == proxyModel.get()) {
+        return proxyModel->mapToSource(index);
+    }
+    return index;
+}
+
+QModelIndex ShowSettingsDialog::mapFromSourceIndex(
+    const QModelIndex& sourceIndex) const
+{
+    if (proxyModel != nullptr && sourceIndex.isValid()) {
+        return proxyModel->mapFromSource(sourceIndex);
+    }
+    return sourceIndex;
 }
 
 const QString& ShowSettingsDialog::currentSearchPattern() const

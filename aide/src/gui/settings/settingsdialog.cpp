@@ -2,9 +2,11 @@
 
 #include <utility>
 
+#include <QAbstractItemModel>
 #include <QLineEdit>
 #include <QList>
 #include <QPushButton>
+#include <QSortFilterProxyModel>
 #include <QWidget>
 
 #include "changedetector.hpp"
@@ -94,11 +96,18 @@ SettingsDialogGeometryAndStateData SettingsDialog::currentGeometry() const
 
     auto selectedIndexes = ui->treeView->selectionModel()->selectedIndexes();
     if (!selectedIndexes.empty()) {
-        const auto& index = selectedIndexes.at(0);
+        auto index                      = selectedIndexes.at(0);
+        QAbstractItemModel* sourceModel = ui->treeView->model();
+
+        if (auto* proxy =
+                qobject_cast<QSortFilterProxyModel*>(ui->treeView->model())) {
+            index       = proxy->mapToSource(index);
+            sourceModel = proxy->sourceModel();
+        }
 
         if (index.isValid()) {
             const auto completeGroupIndex =
-                ui->treeView->model()->index(index.row(), 0, index.parent());
+                sourceModel->index(index.row(), 0, index.parent());
             const auto* const treeItem =
                 static_cast<TreeItem*>(completeGroupIndex.internalPointer());
             const auto completeGroupString{

@@ -10,6 +10,7 @@
 #include "settingsdialogchangepagecontroller.hpp"
 #include "settingsdialoggeometryandstate.hpp"
 #include "settingsdialoginterface.hpp"
+#include "settingspagefilterproxymodel.hpp"
 #include "settingspagegrouptreemodel.hpp"
 #include "showsettingsdialogcontroller.hpp"
 
@@ -52,9 +53,16 @@ namespace aide::core
 
         void resetModifiedSettingsPages() const;
 
+        [[nodiscard]] QModelIndex mapToSourceIndex(
+            const QModelIndex& index) const;
+
+        [[nodiscard]] QModelIndex mapFromSourceIndex(
+            const QModelIndex& sourceIndex) const;
+
         SettingsPageRegistry& m_registry;
         SettingsDialogWeakPtr settingsDialog;
         std::shared_ptr<SettingsPageGroupTreeModel> treeModel;
+        std::shared_ptr<SettingsPageFilterProxyModel> proxyModel;
 
         const LoggerPtr logger;
         SettingsPagePtr currentlySelectedPage{nullptr};
