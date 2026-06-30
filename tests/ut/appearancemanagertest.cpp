@@ -54,22 +54,33 @@ TEST_CASE("AppearanceManager registerTheme", "[AppearanceManager]")
 
     SECTION("succeeds for a new unique theme name")
     {
-        const Theme custom{"CustomTheme", QPalette{}, "", {}};
+        const Theme custom{.name            = "CustomTheme",
+                           .palette         = QPalette{},
+                           .iconThemeName   = "",
+                           .iconSearchPaths = {}};
         REQUIRE_NOTHROW(manager.registerTheme(custom));
         REQUIRE(manager.themeNames().contains("CustomTheme"));
     }
 
     SECTION("throws on duplicate consumer-defined name")
     {
-        manager.registerTheme({"CustomTheme", QPalette{}, "", {}});
-        REQUIRE_THROWS_AS(
-            manager.registerTheme({"CustomTheme", QPalette{}, "", {}}),
-            std::invalid_argument);
+        manager.registerTheme({.name            = "CustomTheme",
+                               .palette         = QPalette{},
+                               .iconThemeName   = "",
+                               .iconSearchPaths = {}});
+        REQUIRE_THROWS_AS(manager.registerTheme({.name          = "CustomTheme",
+                                                 .palette       = QPalette{},
+                                                 .iconThemeName = "",
+                                                 .iconSearchPaths = {}}),
+                          std::invalid_argument);
     }
 
     SECTION("throws when name matches a built-in theme")
     {
-        REQUIRE_THROWS_AS(manager.registerTheme({"Light", QPalette{}, "", {}}),
+        REQUIRE_THROWS_AS(manager.registerTheme({.name            = "Light",
+                                                 .palette         = QPalette{},
+                                                 .iconThemeName   = "",
+                                                 .iconSearchPaths = {}}),
                           std::invalid_argument);
     }
 }

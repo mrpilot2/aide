@@ -47,8 +47,10 @@ int main(int argc, char* argv[])
     bluePalette.setColor(QPalette::Button,
                          QColor(blueButtonR, blueButtonG, blueButtonB));
     bluePalette.setColor(QPalette::ButtonText, Qt::black);
-    app.appearanceManager().registerTheme(
-        {"Demo Blue", bluePalette, "aide-dark", {}});
+    app.appearanceManager().registerTheme({.name            = "Demo Blue",
+                                           .palette         = bluePalette,
+                                           .iconThemeName   = "aide-dark",
+                                           .iconSearchPaths = {}});
 
     // Add icon search path for the System theme based on current color scheme
     app.appearanceManager().addIconSearchPath(

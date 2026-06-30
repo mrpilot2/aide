@@ -245,7 +245,7 @@ ColorScheme AppearanceManager::schemeFromPalette(const QPalette& palette)
     const auto red   = static_cast<double>(bg.redF());
     const auto green = static_cast<double>(bg.greenF());
     const auto blue  = static_cast<double>(bg.blueF());
-    const double lum = 0.2126 * red + 0.7152 * green + 0.0722 * blue;
+    const double lum = (0.2126 * red) + (0.7152 * green) + (0.0722 * blue);
     return lum > LUMINANCE_LIGHT_THRESHOLD ? ColorScheme::Light
                                            : ColorScheme::Dark;
 }
