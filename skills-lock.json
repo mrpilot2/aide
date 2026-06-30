@@ -19,7 +19,8 @@
     "tdd": {
       "source": "mattpocock/skills",
       "sourceType": "github",
-      "computedHash": "ad055544599481182d0079c4198e85da26677cb408a677be2da04915375f0427"
+      "skillPath": "skills/engineering/tdd/SKILL.md",
+      "computedHash": "e08f6a9f1e64b4054c270f996d9a8c239589ec182856e22672ed08cf91ca0817"
     },
     "to-issues": {
       "source": "mattpocock/skills",
