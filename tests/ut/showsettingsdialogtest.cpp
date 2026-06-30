@@ -73,22 +73,25 @@ TEST_CASE("Any show settings dialog use case")
         REQUIRE(view->displayName() == "MockTestPage");
     }
 
-    SECTION("throws an exception if selected group is invalid")
+    SECTION("clears the page without throwing when the selection is emptied")
     {
-        registry.addPage(std::make_unique<MockSettingsPage>(
-            HierarchicalId("MockTestPage")("Subpage1")));
+        registry.addPage(
+            std::make_unique<MockSettingsPage>(HierarchicalId("MockTestPage")));
 
         const SettingsPageGroupTreeModel treeModel{registry};
 
         useCase.showSettingsDialog();
 
-        REQUIRE_THROWS_AS(
-            useCase.changeSelectedPage(
-                QItemSelection(treeModel.index(0, 0, QModelIndex()),
-                               treeModel.index(-1, -1, QModelIndex())),
-                QItemSelection(treeModel.index(-1, -1, QModelIndex()),
-                               treeModel.index(-1, -1, QModelIndex()))),
-            std::invalid_argument);
+        const QItemSelection pageSelection(
+            treeModel.index(0, 0, QModelIndex()),
+            treeModel.index(0, 0, QModelIndex()));
+
+        useCase.changeSelectedPage(pageSelection, QItemSelection());
+
+        // Filtering removes the selected row, so the selection model emits
+        // selectionChanged() with an empty selection. This must not abort.
+        REQUIRE_NOTHROW(
+            useCase.changeSelectedPage(QItemSelection(), pageSelection));
     }
 
     SECTION("can be used with base class interface to change page")
@@ -97,6 +100,9 @@ TEST_CASE("Any show settings dialog use case")
             std::shared_ptr<aide::core::SettingsDialogChangePageController>(
                 std::make_shared<ShowSettingsDialog>(view, registry, settings,
                                                      logger));
+
+        registry.addPage(
+            std::make_unique<MockSettingsPage>(HierarchicalId("MockTestPage")));
 
         const SettingsPageGroupTreeModel treeModel{registry};
 
