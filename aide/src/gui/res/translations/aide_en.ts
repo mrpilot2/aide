@@ -99,6 +99,10 @@
         <source>&lt;a href=&quot;http://&quot;&gt;Reset&lt;/a&gt;</source>
         <translation></translation>
     </message>
+    <message>
+        <source>Search settings…</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ThirdPartyLicensesDialog</name>

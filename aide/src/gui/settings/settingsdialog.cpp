@@ -2,6 +2,7 @@
 
 #include <utility>
 
+#include <QLineEdit>
 #include <QList>
 #include <QPushButton>
 #include <QWidget>
@@ -62,6 +63,9 @@ void SettingsDialog::connectSignals()
     connect(ui->leaveDialogButtonBox->button(QDialogButtonBox::Apply),
             &QPushButton::clicked, settingsController.get(),
             &SettingsDialogController::onUserWantsToApplySettingsPages);
+    connect(ui->searchLineEdit, &QLineEdit::textChanged,
+            settingsController.get(),
+            &SettingsDialogController::onUserChangedSearchPattern);
 }
 
 void SettingsDialog::restoreGeometryAndState(

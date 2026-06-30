@@ -42,6 +42,8 @@ namespace
                                 const QItemSelection& /*deselected*/) override
         {}
 
+        void searchPatternChanged(const QString& /*pattern*/) override {}
+
         void anyGuiElementHasChanged() override
         {
             anyGuiElementChangedCalled = true;

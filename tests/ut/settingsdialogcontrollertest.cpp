@@ -3,6 +3,7 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include <QItemSelection>
+#include <QString>
 
 #include "settings/settingsdialogchangepagecontroller.hpp"
 #include "settings/settingsdialogcontroller.hpp"
@@ -19,11 +20,19 @@ namespace
         bool anyGuiElementChangedCalled{false};
         bool resetCurrentPageCalled{false};
         bool applyModifiedPagesCalled{false};
+        bool searchPatternChangedCalled{false};
+        QString lastSearchPattern;
 
         void changeSelectedPage(const QItemSelection& /*selected*/,
                                 const QItemSelection& /*deselected*/) override
         {
             changeSelectedPageCalled = true;
+        }
+
+        void searchPatternChanged(const QString& pattern) override
+        {
+            searchPatternChangedCalled = true;
+            lastSearchPattern          = pattern;
         }
 
         void anyGuiElementHasChanged() override
@@ -73,5 +82,13 @@ TEST_CASE(
         controller.onUserWantsToApplySettingsPages();
 
         REQUIRE(spy.applyModifiedPagesCalled);
+    }
+
+    SECTION("onUserChangedSearchPattern forwards the pattern")
+    {
+        controller.onUserChangedSearchPattern("needle");
+
+        REQUIRE(spy.searchPatternChangedCalled);
+        REQUIRE(spy.lastSearchPattern == "needle");
     }
 }
