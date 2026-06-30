@@ -5,6 +5,7 @@
 
 #include <QItemSelection>
 #include <QObject>
+#include <QString>
 
 #include "settings/settingsdialogchangepagecontroller.hpp"
 
@@ -23,6 +24,8 @@ namespace aide::gui
     public slots:
         void onUserChangedSelectedPage(const QItemSelection& selected,
                                        const QItemSelection& deselected) const;
+
+        void onUserChangedSearchPattern(const QString& pattern) const;
 
         void onUserChangedAGuiElement() const;
 

@@ -1,6 +1,8 @@
 #ifndef AIDE_SHOW_SETTINGS_DIALOG_HPP
 #define AIDE_SHOW_SETTINGS_DIALOG_HPP
 
+#include <QString>
+
 #include <settings/settingspage.hpp>
 #include <settings/settingspageregistry.hpp>
 
@@ -28,6 +30,10 @@ namespace aide::core
         void changeSelectedPage(const QItemSelection& selected,
                                 const QItemSelection& deselected) override;
 
+        void searchPatternChanged(const QString& pattern) override;
+
+        [[nodiscard]] const QString& currentSearchPattern() const;
+
         void anyGuiElementHasChanged() override;
 
         void resetCurrentPage() override;
@@ -52,6 +58,8 @@ namespace aide::core
 
         const LoggerPtr logger;
         SettingsPagePtr currentlySelectedPage{nullptr};
+
+        QString m_currentSearchPattern;
 
         SettingsDialogGeometryAndState saveGeometryAndState;
     };

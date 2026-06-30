@@ -2,6 +2,7 @@
 #define AIDE_SETTINGS_DIALOG_CHANGE_PAGE_CONTROLLER_HPP
 
 class QItemSelection;
+class QString;
 
 namespace aide::core
 {
@@ -21,6 +22,8 @@ namespace aide::core
 
         virtual void changeSelectedPage(const QItemSelection& selected,
                                         const QItemSelection& deselected) = 0;
+
+        virtual void searchPatternChanged(const QString& pattern) = 0;
 
         virtual void anyGuiElementHasChanged() = 0;
 

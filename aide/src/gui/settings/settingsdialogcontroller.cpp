@@ -13,6 +13,12 @@ void SettingsDialogController::onUserChangedSelectedPage(
     controller.changeSelectedPage(selected, deselected);
 }
 
+void SettingsDialogController::onUserChangedSearchPattern(
+    const QString& pattern) const
+{
+    controller.searchPatternChanged(pattern);
+}
+
 void SettingsDialogController::onUserChangedAGuiElement() const
 {
     controller.anyGuiElementHasChanged();

@@ -89,6 +89,19 @@ void ShowSettingsDialog::changeSelectedPage(
     }
 }
 
+void ShowSettingsDialog::searchPatternChanged(const QString& pattern)
+{
+    m_currentSearchPattern = pattern;
+
+    logger->trace("User changed settings search pattern to {} ",
+                  pattern.toStdString());
+}
+
+const QString& ShowSettingsDialog::currentSearchPattern() const
+{
+    return m_currentSearchPattern;
+}
+
 void ShowSettingsDialog::checkChangeSelectedPagePreConditions(
     const QItemSelection& selected) const
 {

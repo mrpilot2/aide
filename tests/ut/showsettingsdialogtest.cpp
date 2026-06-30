@@ -108,6 +108,15 @@ TEST_CASE("Any show settings dialog use case")
             std::logic_error);
     }
 
+    SECTION("stores search pattern forwarded from the dialog")
+    {
+        useCase.showSettingsDialog();
+
+        useCase.searchPatternChanged("needle");
+
+        REQUIRE(useCase.currentSearchPattern() == "needle");
+    }
+
     SECTION("show selected page widget")
     {
         registry.addPage(
