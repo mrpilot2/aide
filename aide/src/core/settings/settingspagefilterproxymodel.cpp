@@ -2,6 +2,7 @@
 
 #include <QModelIndex>
 
+#include "searchpattern.hpp"
 #include "settingspagegrouptreemodel.hpp"
 
 using aide::core::SettingsPageFilterProxyModel;
@@ -27,9 +28,9 @@ bool SettingsPageFilterProxyModel::filterAcceptsRow(
 
     const auto displayName =
         sourceModel()->data(index, Qt::DisplayRole).toString();
-    if (displayName.contains(m_searchPattern, Qt::CaseInsensitive)) {
-        return true;
-    }
+
+    const auto words = tokenizeSearchPattern(m_searchPattern);
+    if (matchesAnyWord(displayName, words)) { return true; }
 
     if (const auto* treeModel =
             qobject_cast<const SettingsPageGroupTreeModel*>(sourceModel())) {

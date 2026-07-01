@@ -8,6 +8,8 @@
 #include <QString>
 #include <QWidget>
 
+#include "settings/searchpattern.hpp"
+
 using aide::HierarchicalId;
 using aide::core::SettingsPage;
 
@@ -46,8 +48,10 @@ bool SettingsPage::matches(const QString& pattern)
     QWidget* pageWidget = widget();
     if (pageWidget == nullptr) { return false; }
 
-    const auto contains = [&pattern](const QString& text) {
-        return text.contains(pattern, Qt::CaseInsensitive);
+    const auto words = tokenizeSearchPattern(pattern);
+
+    const auto contains = [&words](const QString& text) {
+        return matchesAnyWord(text, words);
     };
 
     const auto labels = pageWidget->findChildren<QLabel*>();

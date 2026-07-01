@@ -114,8 +114,23 @@ TEST_CASE("A settings page filter proxy model filtering by page content")
 
     SECTION("hides pages when neither name nor content matches")
     {
-        proxy.setSearchPattern("nonexistent content");
+        proxy.setSearchPattern("zzz qqq");
 
         REQUIRE(proxy.rowCount() == 0);
+    }
+
+    SECTION("shows a page whose content matches any one of the search words")
+    {
+        proxy.setSearchPattern("server nonexistent");
+
+        REQUIRE(proxy.rowCount() == 1);
+        REQUIRE(displayName(proxy, 0) == "Network");
+    }
+
+    SECTION("shows pages matched by different words on different pages")
+    {
+        proxy.setSearchPattern("appearance server");
+
+        REQUIRE(proxy.rowCount() == 2);
     }
 }

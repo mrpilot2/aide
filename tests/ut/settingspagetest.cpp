@@ -86,6 +86,32 @@ TEST_CASE("Searching a settings page")
 
         REQUIRE_FALSE(page.matches("nonexistent"));
     }
+
+    SECTION("matches when the words are spread across different widgets")
+    {
+        auto* first  = new QLabel("Font family", page.widget());
+        auto* second = new QCheckBox("Show line numbers", page.widget());
+        (void)first;
+        (void)second;
+
+        REQUIRE(page.matches("font numbers"));
+    }
+
+    SECTION("matches when only one of several words is present")
+    {
+        auto* label = new QLabel("Enable dark mode", page.widget());
+        (void)label;
+
+        REQUIRE(page.matches("dark nonexistent"));
+    }
+
+    SECTION("does not match when none of the words are present")
+    {
+        auto* label = new QLabel("Enable dark mode", page.widget());
+        (void)label;
+
+        REQUIRE_FALSE(page.matches("foo bar"));
+    }
 }
 
 TEST_CASE("Highlighting a settings page")
