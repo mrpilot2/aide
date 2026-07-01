@@ -32,7 +32,7 @@ License: [BSD 3-Clause License](https://github.com/CESNET/libyang/blob/master/LI
 
 ### [Qt](https://www.qt.io/)
 
-Version: 6.8.3
+Version: 6.9.2
 
 License: [(L)GPL](https://www.qt.io/development/qt-framework/qt-licensing)
 
