@@ -70,8 +70,8 @@ namespace
     {
         if (isHighlightedContent(widget, pattern)) { return true; }
 
-        const auto children =
-            widget->findChildren<QWidget*>(Qt::FindDirectChildrenOnly);
+        const auto children = widget->findChildren<QWidget*>(
+            QString(), Qt::FindDirectChildrenOnly);
         return std::ranges::any_of(children, [&pattern](const QWidget* child) {
             return subtreeContainsHighlight(child, pattern);
         });
@@ -91,8 +91,8 @@ namespace
     void grayOutNonMatching(QWidget* widget, const QString& pattern)
     {
         if (subtreeContainsHighlight(widget, pattern)) {
-            const auto children =
-                widget->findChildren<QWidget*>(Qt::FindDirectChildrenOnly);
+            const auto children = widget->findChildren<QWidget*>(
+                QString(), Qt::FindDirectChildrenOnly);
             for (auto* child : children) {
                 grayOutNonMatching(child, pattern);
             }
@@ -165,8 +165,8 @@ void SettingsPage::highlight(const QString& pattern)
     }
     if (pattern.isEmpty()) { return; }
 
-    const auto topLevel =
-        pageWidget->findChildren<QWidget*>(Qt::FindDirectChildrenOnly);
+    const auto topLevel = pageWidget->findChildren<QWidget*>(
+        QString(), Qt::FindDirectChildrenOnly);
     for (auto* child : topLevel) {
         grayOutNonMatching(child, pattern);
     }
