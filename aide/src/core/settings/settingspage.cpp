@@ -3,13 +3,9 @@
 #include <algorithm>
 
 #include <QAbstractButton>
-#include <QAbstractSpinBox>
-#include <QComboBox>
 #include <QGraphicsOpacityEffect>
 #include <QGroupBox>
 #include <QLabel>
-#include <QLineEdit>
-#include <QSlider>
 #include <QString>
 #include <QWidget>
 
@@ -45,41 +41,64 @@ namespace
             const bool match =
                 !clear && textOf(child).contains(pattern, Qt::CaseInsensitive);
             child->setStyleSheet(match ? highlightStyleSheet : "");
-            applyDimming(child, !clear && !match);
         }
     }
 
     /**
-     * @brief Whether a line edit is an editor embedded in another control.
+     * @brief Whether a widget bears text that matches the pattern.
      *
-     * Spin boxes and editable combo boxes host their own child QLineEdit. Such
-     * editors must not be dimmed individually, otherwise they would stack a
-     * second opacity effect on top of the one already applied to their host.
+     * Only the widget types that carry searchable text and therefore receive
+     * the highlight border participate: labels, buttons/check boxes and group
+     * boxes. Every other widget is treated as non-matching content, consistent
+     * with highlightMatchingWidgets().
      */
-    bool isEmbeddedEditor(const QLineEdit* lineEdit)
+    bool isHighlightedContent(const QWidget* widget, const QString& pattern)
     {
-        const QObject* parent = lineEdit->parent();
-        return qobject_cast<const QAbstractSpinBox*>(parent) != nullptr ||
-               qobject_cast<const QComboBox*>(parent) != nullptr;
+        if (const auto* label = qobject_cast<const QLabel*>(widget)) {
+            return label->text().contains(pattern, Qt::CaseInsensitive);
+        }
+        if (const auto* button = qobject_cast<const QAbstractButton*>(widget)) {
+            return button->text().contains(pattern, Qt::CaseInsensitive);
+        }
+        if (const auto* groupBox = qobject_cast<const QGroupBox*>(widget)) {
+            return groupBox->title().contains(pattern, Qt::CaseInsensitive);
+        }
+        return false;
     }
 
-    // Non-text input controls never participate in matching, so they are
-    // dimmed whenever a search is active and restored when it is cleared.
-    void dimAuxiliaryControls(QWidget* page, bool searchActive)
+    bool subtreeContainsHighlight(const QWidget* widget, const QString& pattern)
     {
-        for (auto* child : page->findChildren<QComboBox*>()) {
-            applyDimming(child, searchActive);
+        if (isHighlightedContent(widget, pattern)) { return true; }
+
+        const auto children =
+            widget->findChildren<QWidget*>(Qt::FindDirectChildrenOnly);
+        return std::ranges::any_of(children, [&pattern](const QWidget* child) {
+            return subtreeContainsHighlight(child, pattern);
+        });
+    }
+
+    /**
+     * @brief Dims every widget that is not a match or an ancestor of one.
+     *
+     * A subtree that contains a match is descended into so the match and its
+     * ancestors stay at full opacity while their non-matching siblings are
+     * dimmed. A subtree with no match at all is dimmed as a whole through a
+     * single opacity effect on its root, which also covers a compound
+     * control's internal widgets (e.g. a spin box's embedded line edit)
+     * without stacking effects. This is deliberately type-independent so that
+     * any standard Qt widget on a client-provided page is handled.
+     */
+    void grayOutNonMatching(QWidget* widget, const QString& pattern)
+    {
+        if (subtreeContainsHighlight(widget, pattern)) {
+            const auto children =
+                widget->findChildren<QWidget*>(Qt::FindDirectChildrenOnly);
+            for (auto* child : children) {
+                grayOutNonMatching(child, pattern);
+            }
+            return;
         }
-        for (auto* child : page->findChildren<QAbstractSpinBox*>()) {
-            applyDimming(child, searchActive);
-        }
-        for (auto* child : page->findChildren<QSlider*>()) {
-            applyDimming(child, searchActive);
-        }
-        for (auto* child : page->findChildren<QLineEdit*>()) {
-            if (isEmbeddedEditor(child)) { continue; }
-            applyDimming(child, searchActive);
-        }
+        applyDimming(widget, true);
     }
 } // namespace
 
@@ -139,5 +158,16 @@ void SettingsPage::highlight(const QString& pattern)
         pageWidget, pattern,
         [](const QGroupBox* groupBox) { return groupBox->title(); });
 
-    dimAuxiliaryControls(pageWidget, !pattern.isEmpty());
+    // Clear any dimming from a previous search before recomputing it.
+    const auto allWidgets = pageWidget->findChildren<QWidget*>();
+    for (auto* child : allWidgets) {
+        child->setGraphicsEffect(nullptr);
+    }
+    if (pattern.isEmpty()) { return; }
+
+    const auto topLevel =
+        pageWidget->findChildren<QWidget*>(Qt::FindDirectChildrenOnly);
+    for (auto* child : topLevel) {
+        grayOutNonMatching(child, pattern);
+    }
 }
