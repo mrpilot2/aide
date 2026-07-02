@@ -44,9 +44,11 @@ namespace aide::core
          * The default implementation applies a brownish-orange border via a
          * style sheet to every common child widget (labels, buttons, check
          * boxes, group boxes) whose text contains the pattern, and removes the
-         * border from widgets that do not match. Matching is case-insensitive
-         * substring matching, consistent with matches(). An empty pattern
-         * removes all highlights.
+         * border from widgets that do not match. Non-matching widgets of those
+         * same types are additionally dimmed via a reduced-opacity effect so
+         * the matching controls stand out, while matching widgets stay at full
+         * opacity. Matching is case-insensitive substring matching, consistent
+         * with matches(). An empty pattern removes all highlights and dimming.
          */
         virtual void highlight(const QString& pattern);
 

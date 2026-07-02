@@ -3,8 +3,10 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include <QCheckBox>
+#include <QGraphicsOpacityEffect>
 #include <QGroupBox>
 #include <QLabel>
+#include <QPushButton>
 #include <QWidget>
 
 #include <aide/hierarchicalid.hpp>
@@ -176,5 +178,70 @@ TEST_CASE("Highlighting a settings page")
         page.highlight("editor");
 
         REQUIRE(groupBox->styleSheet().contains("#8B4513"));
+    }
+}
+
+namespace
+{
+    [[nodiscard]] bool isDimmed(const QWidget* widget)
+    {
+        const auto* effect = qobject_cast<const QGraphicsOpacityEffect*>(
+            widget->graphicsEffect());
+        return effect != nullptr && effect->opacity() < 1.0;
+    }
+} // namespace
+
+TEST_CASE("Graying out non-matching content on a settings page")
+{
+    ContentSettingsPage page;
+
+    SECTION("dims a non-matching label while a search is active")
+    {
+        auto* nonMatching = new QLabel("Show line numbers", page.widget());
+
+        page.highlight("dark");
+
+        REQUIRE(isDimmed(nonMatching));
+    }
+
+    SECTION("keeps a matching label at full opacity with its border")
+    {
+        auto* matching = new QLabel("Enable dark mode", page.widget());
+
+        page.highlight("dark");
+
+        REQUIRE_FALSE(isDimmed(matching));
+        REQUIRE(matching->styleSheet().contains("#8B4513"));
+    }
+
+    SECTION("dims non-matching buttons and group boxes too")
+    {
+        auto* button   = new QPushButton("Show line numbers", page.widget());
+        auto* groupBox = new QGroupBox("Editor settings", page.widget());
+
+        page.highlight("dark");
+
+        REQUIRE(isDimmed(button));
+        REQUIRE(isDimmed(groupBox));
+    }
+
+    SECTION("removes the dimming from all widgets when the search is cleared")
+    {
+        auto* nonMatching = new QLabel("Show line numbers", page.widget());
+
+        page.highlight("dark");
+        page.highlight("");
+
+        REQUIRE_FALSE(isDimmed(nonMatching));
+    }
+
+    SECTION("re-evaluates dimming when the search pattern changes")
+    {
+        auto* label = new QLabel("Enable dark mode", page.widget());
+
+        page.highlight("dark");
+        page.highlight("line");
+
+        REQUIRE(isDimmed(label));
     }
 }
