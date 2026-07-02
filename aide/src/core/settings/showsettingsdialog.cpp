@@ -7,6 +7,7 @@
 #include <QPersistentModelIndex>
 #include <QWidget>
 
+#include "settings/searchpattern.hpp"
 #include "settings/settingspage.hpp"
 
 using aide::core::SettingsPageGroupTreeModel;
@@ -112,12 +113,55 @@ void ShowSettingsDialog::searchPatternChanged(const QString& pattern)
 
     if (proxyModel != nullptr) { proxyModel->setSearchPattern(pattern); }
 
+    autoSelectBestMatchingPage();
+
     if (currentlySelectedPage != nullptr) {
         currentlySelectedPage->highlight(pattern);
     }
 
     logger->trace("User changed settings search pattern to {} ",
                   pattern.toStdString());
+}
+
+void ShowSettingsDialog::collectVisiblePages(
+    const QModelIndex& proxyParent,
+    std::vector<std::pair<QModelIndex, SettingsPagePtr>>& out) const
+{
+    const auto rows = proxyModel->rowCount(proxyParent);
+    for (int row = 0; row < rows; ++row) {
+        const auto proxyIndex = proxyModel->index(row, 0, proxyParent);
+
+        if (auto page = treeModel->findCorrespondingSettingsPage(
+                mapToSourceIndex(proxyIndex))) {
+            out.emplace_back(proxyIndex, std::move(page));
+        }
+
+        collectVisiblePages(proxyIndex, out);
+    }
+}
+
+void ShowSettingsDialog::autoSelectBestMatchingPage()
+{
+    if (proxyModel == nullptr || treeModel == nullptr) { return; }
+
+    const auto words = tokenizeSearchPattern(m_currentSearchPattern);
+    if (words.isEmpty()) { return; }
+
+    std::vector<std::pair<QModelIndex, SettingsPagePtr>> pages;
+    collectVisiblePages(QModelIndex(), pages);
+
+    std::vector<double> scores;
+    scores.reserve(pages.size());
+    for (const auto& [proxyIndex, page] : pages) {
+        scores.push_back(page->score(words));
+    }
+
+    const auto best = SettingsPageRanker::bestPage(scores);
+    if (!best.has_value()) { return; }
+
+    if (const auto view = settingsDialog.lock(); view != nullptr) {
+        view->setSelectedGroupIndex(pages.at(*best).first);
+    }
 }
 
 void ShowSettingsDialog::commitCurrentSearchPattern()

@@ -199,6 +199,65 @@ TEST_CASE("Any show settings dialog use case")
         REQUIRE(label->styleSheet().contains("#8B4513"));
     }
 
+    SECTION("auto-selects the page whose content best matches the search")
+    {
+        // "Alpha" is registered first (tree row 0) but only buries the word;
+        // "Beta" (row 1) has the exact-word match and should win.
+        registry.addPage(std::make_unique<MockSettingsPage>(
+            HierarchicalId("Alpha"), "Change font size"));
+        registry.addPage(std::make_unique<MockSettingsPage>(
+            HierarchicalId("Beta"), "Font:"));
+
+        useCase.showSettingsDialog();
+
+        // The dialog opens on the first page.
+        REQUIRE(view->getSelectedGroupIndex().row() == 0);
+
+        useCase.searchPatternChanged("font");
+
+        REQUIRE(view->getSelectedGroupIndex().row() == 1);
+        REQUIRE(view->getSelectedGroupIndex().parent() == QModelIndex());
+    }
+
+    SECTION("ranks a multi-word search by the sum of best per-word scores")
+    {
+        // "Alpha" scores high on one word only ("Font:" -> 0.8); "Beta"
+        // scores on both words across two widgets and so wins on the sum.
+        registry.addPage(std::make_unique<MockSettingsPage>(
+            HierarchicalId("Alpha"), "Font:"));
+        auto beta = std::make_shared<MockSettingsPage>(HierarchicalId("Beta"),
+                                                       "Font family");
+        (void)new QLabel("Size:", beta->widget());
+        registry.addPage(beta);
+
+        useCase.showSettingsDialog();
+
+        useCase.searchPatternChanged("font size");
+
+        REQUIRE(view->getSelectedGroupIndex().row() == 1);
+    }
+
+    SECTION("does not auto-select a prior search's best page on reopen")
+    {
+        registry.addPage(std::make_unique<MockSettingsPage>(
+            HierarchicalId("Alpha"), "Change font size"));
+        registry.addPage(std::make_unique<MockSettingsPage>(
+            HierarchicalId("Beta"), "Font:"));
+
+        useCase.showSettingsDialog();
+
+        useCase.searchPatternChanged("font");
+        REQUIRE(view->getSelectedGroupIndex().row() == 1);
+
+        // The dialog reopens with an empty search field.
+        useCase.searchPatternChanged("");
+        useCase.showSettingsDialog();
+
+        // Reopening starts fresh: the first page is selected, not the page a
+        // prior search had auto-selected.
+        REQUIRE(view->getSelectedGroupIndex().row() == 0);
+    }
+
     SECTION("show selected page widget")
     {
         registry.addPage(

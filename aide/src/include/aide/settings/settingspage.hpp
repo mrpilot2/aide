@@ -3,6 +3,8 @@
 
 #include <memory>
 
+#include <QStringList>
+
 #include <aide/hierarchicalid.hpp>
 
 class QString;
@@ -37,6 +39,18 @@ namespace aide::core
          * search additional or custom content.
          */
         [[nodiscard]] virtual bool matches(const QString& pattern);
+
+        /**
+         * @brief Scores how well the page's content matches the search words.
+         *
+         * For every word the best (closest) match among the page's matchable
+         * child widgets (labels, buttons, check boxes, group boxes) is taken -
+         * where a match's score is the fraction of the widget's text it covers
+         * - and those best per-word scores are summed. A higher score means a
+         * more exact match, so the settings dialog can auto-select the page
+         * that best fits the search. Words matching no widget contribute 0.
+         */
+        [[nodiscard]] virtual double score(const QStringList& words);
 
         /**
          * @brief Highlights child widgets whose text matches a search pattern.

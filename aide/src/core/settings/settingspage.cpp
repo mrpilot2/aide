@@ -10,6 +10,7 @@
 #include <QWidget>
 
 #include "settings/searchpattern.hpp"
+#include "settings/textmatcher.hpp"
 
 using aide::HierarchicalId;
 using aide::core::SettingsPage;
@@ -142,6 +143,31 @@ bool SettingsPage::matches(const QString& pattern)
     return std::ranges::any_of(groupBoxes, [&](const QGroupBox* groupBox) {
         return contains(groupBox->title());
     });
+}
+
+double SettingsPage::score(const QStringList& words)
+{
+    QWidget* pageWidget = widget();
+    if (pageWidget == nullptr) { return 0.0; }
+
+    QStringList texts;
+
+    const auto labels = pageWidget->findChildren<QLabel*>();
+    for (const auto* label : labels) {
+        texts.append(label->text());
+    }
+
+    const auto buttons = pageWidget->findChildren<QAbstractButton*>();
+    for (const auto* button : buttons) {
+        texts.append(button->text());
+    }
+
+    const auto groupBoxes = pageWidget->findChildren<QGroupBox*>();
+    for (const auto* groupBox : groupBoxes) {
+        texts.append(groupBox->title());
+    }
+
+    return TextMatcher::score(texts, words);
 }
 
 void SettingsPage::highlight(const QString& pattern)

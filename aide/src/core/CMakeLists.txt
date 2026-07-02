@@ -35,6 +35,10 @@ target_sources(
           settings/searchpattern.hpp
           settings/searchhistory.cpp
           settings/searchhistory.hpp
+          settings/settingspageranker.cpp
+          settings/settingspageranker.hpp
+          settings/textmatcher.cpp
+          settings/textmatcher.hpp
           settings/settingspageregistry.cpp
           settings/showsettingsdialog.cpp
           settings/keymap/keymapcontextmenuprovider.cpp

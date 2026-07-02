@@ -100,7 +100,9 @@ if(NOT PROJECT_IS_TOP_LEVEL)
             settingspagefilterproxymodeltest.cpp
             settingspagegrouptreemodeltest.cpp
             settingsdialogcontrollertest.cpp
+            settingspagerankertest.cpp
             showsettingsdialogtest.cpp
+            textmatchertest.cpp
             systemmemorytest.cpp
             treeitemtest.cpp
   )
