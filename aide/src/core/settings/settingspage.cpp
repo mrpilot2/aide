@@ -3,9 +3,13 @@
 #include <algorithm>
 
 #include <QAbstractButton>
+#include <QAbstractSpinBox>
+#include <QComboBox>
 #include <QGraphicsOpacityEffect>
 #include <QGroupBox>
 #include <QLabel>
+#include <QLineEdit>
+#include <QSlider>
 #include <QString>
 #include <QWidget>
 
@@ -42,6 +46,39 @@ namespace
                 !clear && textOf(child).contains(pattern, Qt::CaseInsensitive);
             child->setStyleSheet(match ? highlightStyleSheet : "");
             applyDimming(child, !clear && !match);
+        }
+    }
+
+    /**
+     * @brief Whether a line edit is an editor embedded in another control.
+     *
+     * Spin boxes and editable combo boxes host their own child QLineEdit. Such
+     * editors must not be dimmed individually, otherwise they would stack a
+     * second opacity effect on top of the one already applied to their host.
+     */
+    bool isEmbeddedEditor(const QLineEdit* lineEdit)
+    {
+        const QObject* parent = lineEdit->parent();
+        return qobject_cast<const QAbstractSpinBox*>(parent) != nullptr ||
+               qobject_cast<const QComboBox*>(parent) != nullptr;
+    }
+
+    // Non-text input controls never participate in matching, so they are
+    // dimmed whenever a search is active and restored when it is cleared.
+    void dimAuxiliaryControls(QWidget* page, bool searchActive)
+    {
+        for (auto* child : page->findChildren<QComboBox*>()) {
+            applyDimming(child, searchActive);
+        }
+        for (auto* child : page->findChildren<QAbstractSpinBox*>()) {
+            applyDimming(child, searchActive);
+        }
+        for (auto* child : page->findChildren<QSlider*>()) {
+            applyDimming(child, searchActive);
+        }
+        for (auto* child : page->findChildren<QLineEdit*>()) {
+            if (isEmbeddedEditor(child)) { continue; }
+            applyDimming(child, searchActive);
         }
     }
 } // namespace
@@ -101,4 +138,6 @@ void SettingsPage::highlight(const QString& pattern)
     highlightMatchingWidgets<QGroupBox>(
         pageWidget, pattern,
         [](const QGroupBox* groupBox) { return groupBox->title(); });
+
+    dimAuxiliaryControls(pageWidget, !pattern.isEmpty());
 }
