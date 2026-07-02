@@ -3,6 +3,7 @@
 #include <algorithm>
 
 #include <QAbstractButton>
+#include <QGraphicsOpacityEffect>
 #include <QGroupBox>
 #include <QLabel>
 #include <QString>
@@ -16,6 +17,18 @@ using aide::core::SettingsPage;
 namespace
 {
     constexpr auto* highlightStyleSheet = "border: 2px solid #8B4513;";
+    constexpr auto dimmedOpacity        = 0.35;
+
+    void applyDimming(QWidget* widget, bool dim)
+    {
+        if (dim) {
+            auto* effect = new QGraphicsOpacityEffect(widget);
+            effect->setOpacity(dimmedOpacity);
+            widget->setGraphicsEffect(effect);
+        } else {
+            widget->setGraphicsEffect(nullptr);
+        }
+    }
 
     template <typename WidgetType, typename TextAccessor>
     void highlightMatchingWidgets(QWidget* page, const QString& pattern,
@@ -28,6 +41,7 @@ namespace
             const bool match =
                 !clear && textOf(child).contains(pattern, Qt::CaseInsensitive);
             child->setStyleSheet(match ? highlightStyleSheet : "");
+            applyDimming(child, !clear && !match);
         }
     }
 } // namespace
