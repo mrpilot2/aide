@@ -1,6 +1,7 @@
 #include <memory>
 
 #include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
 
 #include <QCheckBox>
 #include <QComboBox>
@@ -122,6 +123,70 @@ TEST_CASE("Searching a settings page")
         (void)label;
 
         REQUIRE_FALSE(page.matches("foo bar"));
+    }
+}
+
+TEST_CASE("Scoring a settings page against search words")
+{
+    using Catch::Matchers::WithinAbs;
+    constexpr auto tolerance = 0.0001;
+
+    // "font" (4 chars) covers "Font:" (5 chars).
+    constexpr auto kFontExact = 0.8;
+    // "font" (4 chars) buried in "Change font size" (16 chars).
+    constexpr auto kFontBuried = 0.25;
+    // "font" 0.8 against "Font:" + "size" 1.0 against "Size".
+    constexpr auto kFontPlusSizeExact = 1.8;
+
+    ContentSettingsPage page;
+
+    SECTION("scores an exact-word label higher than a buried one")
+    {
+        auto* exact = new QLabel("Font:", page.widget());
+        (void)exact;
+
+        REQUIRE_THAT(page.score(QStringList{"font"}),
+                     WithinAbs(kFontExact, tolerance));
+    }
+
+    SECTION("scores a word buried in a longer label low")
+    {
+        auto* buried = new QLabel("Change font size", page.widget());
+        (void)buried;
+
+        REQUIRE_THAT(page.score(QStringList{"font"}),
+                     WithinAbs(kFontBuried, tolerance));
+    }
+
+    SECTION("takes the best-scoring widget for a word")
+    {
+        auto* buried = new QLabel("Change font size", page.widget());
+        auto* exact  = new QLabel("Font:", page.widget());
+        (void)buried;
+        (void)exact;
+
+        REQUIRE_THAT(page.score(QStringList{"font"}),
+                     WithinAbs(kFontExact, tolerance));
+    }
+
+    SECTION("sums the best per-word scores across widgets")
+    {
+        auto* label    = new QLabel("Font:", page.widget());
+        auto* checkBox = new QCheckBox("Size", page.widget());
+        (void)label;
+        (void)checkBox;
+
+        REQUIRE_THAT(page.score(QStringList{"font", "size"}),
+                     WithinAbs(kFontPlusSizeExact, tolerance));
+    }
+
+    SECTION("scores a page with no matching widget as 0")
+    {
+        auto* label = new QLabel("Editor", page.widget());
+        (void)label;
+
+        REQUIRE_THAT(page.score(QStringList{"font"}),
+                     WithinAbs(0.0, tolerance));
     }
 }
 

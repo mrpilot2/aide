@@ -1,6 +1,10 @@
 #ifndef AIDE_SHOW_SETTINGS_DIALOG_HPP
 #define AIDE_SHOW_SETTINGS_DIALOG_HPP
 
+#include <utility>
+#include <vector>
+
+#include <QModelIndex>
 #include <QString>
 
 #include <settings/settingspage.hpp>
@@ -13,6 +17,7 @@
 #include "settingsdialoginterface.hpp"
 #include "settingspagefilterproxymodel.hpp"
 #include "settingspagegrouptreemodel.hpp"
+#include "settingspageranker.hpp"
 #include "showsettingsdialogcontroller.hpp"
 
 namespace aide::core
@@ -46,6 +51,12 @@ namespace aide::core
 
     private:
         void checkTreeModelIsInitialized() const;
+
+        void autoSelectBestMatchingPage();
+
+        void collectVisiblePages(
+            const QModelIndex& proxyParent,
+            std::vector<std::pair<QModelIndex, SettingsPagePtr>>& out) const;
 
         void clearSelectedPage();
 
