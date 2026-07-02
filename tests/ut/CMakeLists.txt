@@ -86,6 +86,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
             mainwindowtest.cpp
             menucontainertest.cpp
             multicolumnsortfilterproxymodeltest.cpp
+            searchhistorytest.cpp
             mockaboutdialog.cpp
             mockapplicationcloseview.cpp
             mockkeymappagewidget.cpp

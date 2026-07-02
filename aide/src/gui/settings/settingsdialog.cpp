@@ -68,6 +68,9 @@ void SettingsDialog::connectSignals()
     connect(ui->searchLineEdit, &QLineEdit::textChanged,
             settingsController.get(),
             &SettingsDialogController::onUserChangedSearchPattern);
+    connect(ui->searchLineEdit, &QLineEdit::returnPressed,
+            settingsController.get(),
+            &SettingsDialogController::onUserCommittedSearchPattern);
 }
 
 void SettingsDialog::restoreGeometryAndState(

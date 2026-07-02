@@ -21,6 +21,7 @@ namespace
         bool resetCurrentPageCalled{false};
         bool applyModifiedPagesCalled{false};
         bool searchPatternChangedCalled{false};
+        bool commitCurrentSearchPatternCalled{false};
         QString lastSearchPattern;
 
         void changeSelectedPage(const QItemSelection& /*selected*/,
@@ -33,6 +34,11 @@ namespace
         {
             searchPatternChangedCalled = true;
             lastSearchPattern          = pattern;
+        }
+
+        void commitCurrentSearchPattern() override
+        {
+            commitCurrentSearchPatternCalled = true;
         }
 
         void anyGuiElementHasChanged() override
@@ -90,5 +96,12 @@ TEST_CASE(
 
         REQUIRE(spy.searchPatternChangedCalled);
         REQUIRE(spy.lastSearchPattern == "needle");
+    }
+
+    SECTION("onUserCommittedSearchPattern commits the current pattern")
+    {
+        controller.onUserCommittedSearchPattern();
+
+        REQUIRE(spy.commitCurrentSearchPatternCalled);
     }
 }

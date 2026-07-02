@@ -13,6 +13,7 @@
 #include "mocksettingsdialog.hpp"
 #include "mocksettingspage.hpp"
 #include "nulllogger.hpp"
+#include "settings/searchhistory.hpp"
 #include "settings/settingspagegrouptreemodel.hpp"
 #include "settings/settingspageregistry.hpp"
 #include "settings/showsettingsdialog.hpp"
@@ -122,6 +123,34 @@ TEST_CASE("Any show settings dialog use case")
         useCase.searchPatternChanged("needle");
 
         REQUIRE(useCase.currentSearchPattern() == "needle");
+    }
+
+    SECTION("commits the current search pattern to history on demand")
+    {
+        useCase.searchPatternChanged("font");
+
+        useCase.commitCurrentSearchPattern();
+
+        const aide::core::SearchHistory history{settings};
+        REQUIRE(history.entries() == QStringList{"font"});
+    }
+
+    SECTION("commits an active non-empty search pattern when closing")
+    {
+        useCase.searchPatternChanged("color");
+
+        useCase.showSettingsDialog();
+
+        const aide::core::SearchHistory history{settings};
+        REQUIRE(history.entries() == QStringList{"color"});
+    }
+
+    SECTION("does not commit an empty search pattern when closing")
+    {
+        useCase.showSettingsDialog();
+
+        const aide::core::SearchHistory history{settings};
+        REQUIRE(history.entries().isEmpty());
     }
 
     SECTION("highlights the current page when the search pattern changes")

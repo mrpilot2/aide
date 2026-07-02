@@ -44,6 +44,8 @@ namespace
 
         void searchPatternChanged(const QString& /*pattern*/) override {}
 
+        void commitCurrentSearchPattern() override {}
+
         void anyGuiElementHasChanged() override
         {
             anyGuiElementChangedCalled = true;

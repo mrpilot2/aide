@@ -20,6 +20,7 @@ ShowSettingsDialog::ShowSettingsDialog(SettingsDialogWeakPtr dialog,
     , settingsDialog{std::move(dialog)}
     , logger{std::move(loggerInterface)}
     , saveGeometryAndState(settingsDialog, settings)
+    , searchHistory(settings)
 {}
 
 void ShowSettingsDialog::showSettingsDialog()
@@ -61,6 +62,8 @@ void ShowSettingsDialog::showSettingsDialog()
     const auto result = dialog->executeDialog();
 
     saveGeometryAndState.saveGeometryAndState(dialog->currentGeometry());
+
+    commitCurrentSearchPattern();
 
     if (result == UserSelection::Ok) {
         applyModifiedSettingsPages();
@@ -115,6 +118,11 @@ void ShowSettingsDialog::searchPatternChanged(const QString& pattern)
 
     logger->trace("User changed settings search pattern to {} ",
                   pattern.toStdString());
+}
+
+void ShowSettingsDialog::commitCurrentSearchPattern()
+{
+    searchHistory.commit(m_currentSearchPattern);
 }
 
 QModelIndex ShowSettingsDialog::mapToSourceIndex(const QModelIndex& index) const

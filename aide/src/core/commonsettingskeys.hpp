@@ -37,6 +37,8 @@ namespace aide::core::settings
             const HierarchicalId SETTINGS_DIALOG_TREE_VIEW_SELECTED_ITEM_KEY{
                 HierarchicalId("State")("SettingsDialog")("TreeView")(
                     "SelectedItem")};
+            const HierarchicalId SETTINGS_DIALOG_SEARCH_HISTORY_KEY{
+                HierarchicalId("State")("SettingsDialog")("SearchHistory")};
         } ALIGNMENT(128);
 
         const Ui UI{};

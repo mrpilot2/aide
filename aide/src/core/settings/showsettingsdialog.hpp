@@ -7,6 +7,7 @@
 #include <settings/settingspageregistry.hpp>
 
 #include "loggerinterface.hpp"
+#include "searchhistory.hpp"
 #include "settingsdialogchangepagecontroller.hpp"
 #include "settingsdialoggeometryandstate.hpp"
 #include "settingsdialoginterface.hpp"
@@ -32,6 +33,8 @@ namespace aide::core
                                 const QItemSelection& deselected) override;
 
         void searchPatternChanged(const QString& pattern) override;
+
+        void commitCurrentSearchPattern() override;
 
         [[nodiscard]] const QString& currentSearchPattern() const;
 
@@ -71,6 +74,8 @@ namespace aide::core
         QString m_currentSearchPattern;
 
         SettingsDialogGeometryAndState saveGeometryAndState;
+
+        SearchHistory searchHistory;
     };
 } // namespace aide::core
 
