@@ -45,12 +45,12 @@ namespace aide::core
          * style sheet to every common child widget (labels, buttons, check
          * boxes, group boxes) whose text contains the pattern, and removes the
          * border from widgets that do not match. While a search is active every
-         * other control on the page is dimmed via a reduced-opacity effect so
-         * the matching controls stand out: this covers the non-matching text
-         * widgets as well as input controls that never match (combo boxes, line
-         * edits, spin boxes, sliders). Matching widgets stay at full opacity.
-         * Matching is case-insensitive substring matching, consistent with
-         * matches(). An empty pattern removes all highlights and dimming.
+         * other widget on the page - regardless of its type, so client-provided
+         * pages are handled too - is dimmed via a reduced-opacity effect so the
+         * matching controls stand out, while matching widgets and their
+         * containing ancestors stay at full opacity. Matching is
+         * case-insensitive substring matching, consistent with matches(). An
+         * empty pattern removes all highlights and dimming.
          */
         virtual void highlight(const QString& pattern);
 

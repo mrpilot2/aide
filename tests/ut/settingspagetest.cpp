@@ -4,13 +4,18 @@
 
 #include <QCheckBox>
 #include <QComboBox>
+#include <QDateEdit>
 #include <QGraphicsOpacityEffect>
 #include <QGroupBox>
+#include <QKeySequenceEdit>
 #include <QLabel>
 #include <QLineEdit>
+#include <QPlainTextEdit>
 #include <QPushButton>
 #include <QSlider>
 #include <QSpinBox>
+#include <QTextEdit>
+#include <QVBoxLayout>
 #include <QWidget>
 
 #include <aide/hierarchicalid.hpp>
@@ -285,5 +290,37 @@ TEST_CASE("Graying out non-matching content on a settings page")
         auto* embedded = spinBox->findChild<QLineEdit*>();
         REQUIRE(embedded != nullptr);
         REQUIRE_FALSE(isDimmed(embedded));
+    }
+
+    SECTION("dims arbitrary widget types the client may use")
+    {
+        auto* textEdit  = new QTextEdit(page.widget());
+        auto* plainEdit = new QPlainTextEdit(page.widget());
+        auto* keyEdit   = new QKeySequenceEdit(page.widget());
+        auto* dateEdit  = new QDateEdit(page.widget());
+
+        page.highlight("dark");
+
+        REQUIRE(isDimmed(textEdit));
+        REQUIRE(isDimmed(plainEdit));
+        REQUIRE(isDimmed(keyEdit));
+        REQUIRE(isDimmed(dateEdit));
+    }
+
+    SECTION("keeps a match and its container bright while dimming siblings")
+    {
+        auto* container = new QWidget(page.widget());
+        auto* layout    = new QVBoxLayout(container);
+        auto* match     = new QLabel("Enable dark mode", container);
+        auto* sibling   = new QLineEdit(container);
+        layout->addWidget(match);
+        layout->addWidget(sibling);
+
+        page.highlight("dark");
+
+        REQUIRE_FALSE(isDimmed(match));
+        REQUIRE(match->styleSheet().contains("#8B4513"));
+        REQUIRE_FALSE(isDimmed(container));
+        REQUIRE(isDimmed(sibling));
     }
 }
