@@ -3,7 +3,7 @@
 
 #include <algorithm>
 
-#include <QRegularExpression>
+#include <QChar>
 #include <QString>
 #include <QStringList>
 
@@ -14,12 +14,14 @@ namespace aide::core
      *
      * Consecutive whitespace is collapsed and leading/trailing whitespace is
      * ignored, so an empty or all-whitespace pattern yields an empty list.
+     * QString::simplified() normalises every run of whitespace (spaces, tabs,
+     * newlines) to a single space, so a plain split on the space character is
+     * enough - no regular expression is required.
      */
     [[nodiscard]] inline QStringList tokenizeSearchPattern(
         const QString& pattern)
     {
-        static const QRegularExpression whitespace{"\\s+"};
-        return pattern.split(whitespace, Qt::SkipEmptyParts);
+        return pattern.simplified().split(QChar(' '), Qt::SkipEmptyParts);
     }
 
     /**
