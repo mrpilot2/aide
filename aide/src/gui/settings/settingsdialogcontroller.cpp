@@ -19,6 +19,11 @@ void SettingsDialogController::onUserChangedSearchPattern(
     controller.searchPatternChanged(pattern);
 }
 
+void SettingsDialogController::onUserCommittedSearchPattern() const
+{
+    controller.commitCurrentSearchPattern();
+}
+
 void SettingsDialogController::onUserChangedAGuiElement() const
 {
     controller.anyGuiElementHasChanged();

@@ -33,6 +33,8 @@ target_sources(
           settings/settingspagegrouptreemodel.cpp
           settings/settingspagegrouptreemodel.hpp
           settings/searchpattern.hpp
+          settings/searchhistory.cpp
+          settings/searchhistory.hpp
           settings/settingspageregistry.cpp
           settings/showsettingsdialog.cpp
           settings/keymap/keymapcontextmenuprovider.cpp

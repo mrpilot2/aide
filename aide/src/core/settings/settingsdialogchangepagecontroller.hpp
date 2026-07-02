@@ -25,6 +25,8 @@ namespace aide::core
 
         virtual void searchPatternChanged(const QString& pattern) = 0;
 
+        virtual void commitCurrentSearchPattern() = 0;
+
         virtual void anyGuiElementHasChanged() = 0;
 
         virtual void resetCurrentPage() = 0;

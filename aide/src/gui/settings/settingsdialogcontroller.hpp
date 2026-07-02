@@ -27,6 +27,8 @@ namespace aide::gui
 
         void onUserChangedSearchPattern(const QString& pattern) const;
 
+        void onUserCommittedSearchPattern() const;
+
         void onUserChangedAGuiElement() const;
 
         void onUserWantsToResetCurrentPage() const;
