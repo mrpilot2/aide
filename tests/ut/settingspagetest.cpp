@@ -3,10 +3,14 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include <QCheckBox>
+#include <QComboBox>
 #include <QGraphicsOpacityEffect>
 #include <QGroupBox>
 #include <QLabel>
+#include <QLineEdit>
 #include <QPushButton>
+#include <QSlider>
+#include <QSpinBox>
 #include <QWidget>
 
 #include <aide/hierarchicalid.hpp>
@@ -243,5 +247,43 @@ TEST_CASE("Graying out non-matching content on a settings page")
         page.highlight("line");
 
         REQUIRE(isDimmed(label));
+    }
+
+    SECTION("dims non-text input controls while a search is active")
+    {
+        auto* comboBox = new QComboBox(page.widget());
+        auto* lineEdit = new QLineEdit(page.widget());
+        auto* spinBox  = new QSpinBox(page.widget());
+        auto* slider   = new QSlider(page.widget());
+
+        page.highlight("dark");
+
+        REQUIRE(isDimmed(comboBox));
+        REQUIRE(isDimmed(lineEdit));
+        REQUIRE(isDimmed(spinBox));
+        REQUIRE(isDimmed(slider));
+    }
+
+    SECTION("removes dimming from input controls when the search is cleared")
+    {
+        auto* comboBox = new QComboBox(page.widget());
+        auto* spinBox  = new QSpinBox(page.widget());
+
+        page.highlight("dark");
+        page.highlight("");
+
+        REQUIRE_FALSE(isDimmed(comboBox));
+        REQUIRE_FALSE(isDimmed(spinBox));
+    }
+
+    SECTION("does not doubly dim the editor embedded in a spin box")
+    {
+        auto* spinBox = new QSpinBox(page.widget());
+
+        page.highlight("dark");
+
+        auto* embedded = spinBox->findChild<QLineEdit*>();
+        REQUIRE(embedded != nullptr);
+        REQUIRE_FALSE(isDimmed(embedded));
     }
 }
