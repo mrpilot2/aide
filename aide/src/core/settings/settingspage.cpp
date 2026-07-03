@@ -11,6 +11,25 @@
 using aide::HierarchicalId;
 using aide::core::SettingsPage;
 
+namespace
+{
+    constexpr auto* highlightStyleSheet = "border: 2px solid #8B4513;";
+
+    template <typename WidgetType, typename TextAccessor>
+    void highlightMatchingWidgets(QWidget* page, const QString& pattern,
+                                  TextAccessor textOf)
+    {
+        const bool clear = pattern.isEmpty();
+
+        const auto widgets = page->findChildren<WidgetType*>();
+        for (auto* child : widgets) {
+            const bool match =
+                !clear && textOf(child).contains(pattern, Qt::CaseInsensitive);
+            child->setStyleSheet(match ? highlightStyleSheet : "");
+        }
+    }
+} // namespace
+
 SettingsPage::SettingsPage(HierarchicalId group)
     : settingsGroup{std::move(group)}
 {}
@@ -49,4 +68,19 @@ bool SettingsPage::matches(const QString& pattern)
     return std::ranges::any_of(groupBoxes, [&](const QGroupBox* groupBox) {
         return contains(groupBox->title());
     });
+}
+
+void SettingsPage::highlight(const QString& pattern)
+{
+    QWidget* pageWidget = widget();
+    if (pageWidget == nullptr) { return; }
+
+    highlightMatchingWidgets<QLabel>(
+        pageWidget, pattern, [](const QLabel* label) { return label->text(); });
+    highlightMatchingWidgets<QAbstractButton>(
+        pageWidget, pattern,
+        [](const QAbstractButton* button) { return button->text(); });
+    highlightMatchingWidgets<QGroupBox>(
+        pageWidget, pattern,
+        [](const QGroupBox* groupBox) { return groupBox->title(); });
 }

@@ -3,6 +3,7 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include <QCheckBox>
+#include <QGroupBox>
 #include <QLabel>
 #include <QWidget>
 
@@ -84,5 +85,70 @@ TEST_CASE("Searching a settings page")
         (void)label;
 
         REQUIRE_FALSE(page.matches("nonexistent"));
+    }
+}
+
+TEST_CASE("Highlighting a settings page")
+{
+    ContentSettingsPage page;
+
+    SECTION("gives a matching label a brownish-orange border")
+    {
+        auto* label = new QLabel("Enable dark mode", page.widget());
+
+        page.highlight("dark");
+
+        REQUIRE(label->styleSheet().contains("#8B4513"));
+    }
+
+    SECTION("does not highlight a label that does not match")
+    {
+        auto* matching    = new QLabel("Enable dark mode", page.widget());
+        auto* nonMatching = new QLabel("Show line numbers", page.widget());
+
+        page.highlight("dark");
+
+        REQUIRE(matching->styleSheet().contains("#8B4513"));
+        REQUIRE_FALSE(nonMatching->styleSheet().contains("#8B4513"));
+    }
+
+    SECTION("gives a matching check box a brownish-orange border")
+    {
+        auto* checkBox = new QCheckBox("Show line numbers", page.widget());
+
+        page.highlight("line numbers");
+
+        REQUIRE(checkBox->styleSheet().contains("#8B4513"));
+    }
+
+    SECTION("updates highlights when the search pattern changes")
+    {
+        auto* label    = new QLabel("Enable dark mode", page.widget());
+        auto* checkBox = new QCheckBox("Show line numbers", page.widget());
+
+        page.highlight("dark");
+        page.highlight("line numbers");
+
+        REQUIRE_FALSE(label->styleSheet().contains("#8B4513"));
+        REQUIRE(checkBox->styleSheet().contains("#8B4513"));
+    }
+
+    SECTION("removes all highlights when the search is cleared")
+    {
+        auto* label = new QLabel("Enable dark mode", page.widget());
+
+        page.highlight("dark");
+        page.highlight("");
+
+        REQUIRE_FALSE(label->styleSheet().contains("#8B4513"));
+    }
+
+    SECTION("gives a matching group box a brownish-orange border")
+    {
+        auto* groupBox = new QGroupBox("Editor settings", page.widget());
+
+        page.highlight("editor");
+
+        REQUIRE(groupBox->styleSheet().contains("#8B4513"));
     }
 }

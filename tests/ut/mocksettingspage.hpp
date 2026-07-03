@@ -20,7 +20,7 @@ namespace aide::test
         MockSettingsPage(const HierarchicalId& group,
                          const QString& searchableText);
 
-        ~MockSettingsPage() override = default;
+        ~MockSettingsPage() override;
 
         QWidget* widget() override;
 

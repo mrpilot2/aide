@@ -86,6 +86,7 @@ void ShowSettingsDialog::changeSelectedPage(
         if (currentlySelectedPage != nullptr) {
             showSelectedPageWidget(currentlySelectedPage->widget());
             view->showResetLabel(currentlySelectedPage->isModified());
+            currentlySelectedPage->highlight(m_currentSearchPattern);
         } else {
             showEmptyPageWidget();
             view->showResetLabel(false);
@@ -98,6 +99,10 @@ void ShowSettingsDialog::searchPatternChanged(const QString& pattern)
     m_currentSearchPattern = pattern;
 
     if (proxyModel != nullptr) { proxyModel->setSearchPattern(pattern); }
+
+    if (currentlySelectedPage != nullptr) {
+        currentlySelectedPage->highlight(pattern);
+    }
 
     logger->trace("User changed settings search pattern to {} ",
                   pattern.toStdString());
