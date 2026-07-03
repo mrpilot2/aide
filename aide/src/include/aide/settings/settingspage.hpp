@@ -5,6 +5,7 @@
 
 #include <aide/hierarchicalid.hpp>
 
+class QString;
 class QWidget;
 
 namespace aide::core
@@ -26,6 +27,16 @@ namespace aide::core
         [[nodiscard]] virtual QWidget* widget() = 0;
 
         [[nodiscard]] virtual bool isModified() const = 0;
+
+        /**
+         * @brief Returns whether the page's content matches a search pattern.
+         *
+         * The default implementation performs a case-insensitive substring
+         * search across the text of common child widgets (labels, buttons,
+         * check boxes, group boxes) on the page. Pages can override this to
+         * search additional or custom content.
+         */
+        [[nodiscard]] virtual bool matches(const QString& pattern);
 
         virtual void reset() = 0;
 
