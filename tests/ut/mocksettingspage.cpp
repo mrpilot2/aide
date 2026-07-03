@@ -1,5 +1,7 @@
 #include "mocksettingspage.hpp"
 
+#include <QLabel>
+#include <QString>
 #include <QWidget>
 
 using aide::test::MockSettingsPage;
@@ -9,9 +11,18 @@ MockSettingsPage::MockSettingsPage()
 {}
 
 MockSettingsPage::MockSettingsPage(const HierarchicalId& group)
+    : MockSettingsPage(group, QString())
+{}
+
+MockSettingsPage::MockSettingsPage(const HierarchicalId& group,
+                                   const QString& searchableText)
     : SettingsPage(group)
     , mockWidget{std::make_shared<QWidget>()}
-{}
+{
+    if (!searchableText.isEmpty()) {
+        new QLabel(searchableText, mockWidget.get());
+    }
+}
 
 QWidget* MockSettingsPage::widget()
 {

@@ -3,6 +3,8 @@
 
 #include <aide/settings/settingspage.hpp>
 
+class QString;
+
 namespace aide
 {
     class HierarchicalId;
@@ -15,6 +17,8 @@ namespace aide::test
     public:
         MockSettingsPage();
         explicit MockSettingsPage(const HierarchicalId& group);
+        MockSettingsPage(const HierarchicalId& group,
+                         const QString& searchableText);
 
         ~MockSettingsPage() override = default;
 

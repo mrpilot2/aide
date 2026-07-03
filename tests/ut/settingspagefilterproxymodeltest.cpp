@@ -90,3 +90,32 @@ TEST_CASE("A settings page filter proxy model")
         REQUIRE(proxy.rowCount() == 2);
     }
 }
+
+TEST_CASE("A settings page filter proxy model filtering by page content")
+{
+    SettingsPageRegistry registry;
+    registry.addPage(std::make_unique<MockSettingsPage>(
+        HierarchicalId("Network"), "Proxy server address"));
+    registry.addPage(
+        std::make_unique<MockSettingsPage>(HierarchicalId("Appearance")));
+
+    auto treeModel = std::make_shared<SettingsPageGroupTreeModel>(registry);
+
+    SettingsPageFilterProxyModel proxy;
+    proxy.setSourceModel(treeModel.get());
+
+    SECTION("shows a page whose content matches even if the name does not")
+    {
+        proxy.setSearchPattern("server address");
+
+        REQUIRE(proxy.rowCount() == 1);
+        REQUIRE(displayName(proxy, 0) == "Network");
+    }
+
+    SECTION("hides pages when neither name nor content matches")
+    {
+        proxy.setSearchPattern("nonexistent content");
+
+        REQUIRE(proxy.rowCount() == 0);
+    }
+}

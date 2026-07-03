@@ -2,9 +2,10 @@
 #define AIDE_SETTINGS_PAGE_FILTER_PROXY_MODEL_HPP
 
 #include <QSortFilterProxyModel>
+#include <QString>
 
+class QModelIndex;
 class QObject;
-class QString;
 
 namespace aide::core
 {
@@ -30,6 +31,20 @@ namespace aide::core
          * An empty pattern restores the full tree.
          */
         void setSearchPattern(const QString& pattern);
+
+    protected:
+        /**
+         * @brief Accepts a row when its display name or page content matches.
+         *
+         * A row is kept when its display name contains the pattern or, for
+         * rows that correspond to a settings page, when the page's content
+         * matches the pattern. Recursive filtering keeps ancestors visible.
+         */
+        [[nodiscard]] bool filterAcceptsRow(
+            int sourceRow, const QModelIndex& sourceParent) const override;
+
+    private:
+        QString m_searchPattern;
     };
 } // namespace aide::core
 
