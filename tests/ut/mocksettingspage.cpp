@@ -1,8 +1,5 @@
 #include "mocksettingspage.hpp"
 
-#include <array>
-
-#include <QApplication>
 #include <QWidget>
 
 using aide::test::MockSettingsPage;
@@ -13,15 +10,8 @@ MockSettingsPage::MockSettingsPage()
 
 MockSettingsPage::MockSettingsPage(const HierarchicalId& group)
     : SettingsPage(group)
-{
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-
-    const QApplication app(numberOfArgs, appName.data());
-
-    mockWidget = std::make_shared<QWidget>();
-}
+    , mockWidget{std::make_shared<QWidget>()}
+{}
 
 QWidget* MockSettingsPage::widget()
 {

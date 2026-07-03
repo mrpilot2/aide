@@ -20,11 +20,6 @@ using aide::test::MockSettings;
 
 TEST_CASE("AppearanceManager has three built-in themes", "[AppearanceManager]")
 {
-    int argc{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{argc, appName.data()};
-
     const AppearanceManager manager{std::make_shared<MockSettings>()};
 
     SECTION("total count is three")
@@ -55,11 +50,6 @@ TEST_CASE("AppearanceManager has three built-in themes", "[AppearanceManager]")
 
 TEST_CASE("AppearanceManager registerTheme", "[AppearanceManager]")
 {
-    int argc{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{argc, appName.data()};
-
     AppearanceManager manager{std::make_shared<MockSettings>()};
 
     SECTION("succeeds for a new unique theme name")
@@ -86,11 +76,6 @@ TEST_CASE("AppearanceManager registerTheme", "[AppearanceManager]")
 
 TEST_CASE("AppearanceManager colorScheme", "[AppearanceManager]")
 {
-    int argc{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{argc, appName.data()};
-
     AppearanceManager manager{std::make_shared<MockSettings>()};
 
     SECTION("Light theme returns Light")
@@ -118,11 +103,6 @@ TEST_CASE("AppearanceManager colorScheme", "[AppearanceManager]")
 
 TEST_CASE("AppearanceManager colorSchemeChanged signal", "[AppearanceManager]")
 {
-    int argc{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{argc, appName.data()};
-
     qRegisterMetaType<aide::ColorScheme>();
 
     AppearanceManager manager{std::make_shared<MockSettings>()};
@@ -158,11 +138,6 @@ TEST_CASE("AppearanceManager colorSchemeChanged signal", "[AppearanceManager]")
 
 TEST_CASE("AppearanceManager appearanceChanged signal", "[AppearanceManager]")
 {
-    int argc{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{argc, appName.data()};
-
     AppearanceManager manager{std::make_shared<MockSettings>()};
 
     SECTION("is emitted on every applyAppearance call")
@@ -180,11 +155,6 @@ TEST_CASE("AppearanceManager appearanceChanged signal", "[AppearanceManager]")
 
 TEST_CASE("AppearanceManager settings save and restore", "[AppearanceManager]")
 {
-    int argc{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{argc, appName.data()};
-
     auto settings = std::make_shared<MockSettings>();
 
     SECTION("restores theme, font family, and font size from settings")
@@ -211,11 +181,6 @@ TEST_CASE("AppearanceManager settings save and restore", "[AppearanceManager]")
 TEST_CASE("AppearanceManager addIconSearchPath for known theme",
           "[AppearanceManager]")
 {
-    int argc{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{argc, appName.data()};
-
     AppearanceManager manager{std::make_shared<MockSettings>()};
 
     REQUIRE_NOTHROW(manager.addIconSearchPath("Light", ":/some/icon/path"));
@@ -224,11 +189,6 @@ TEST_CASE("AppearanceManager addIconSearchPath for known theme",
 TEST_CASE("AppearanceManager addIconSearchPath for unknown theme",
           "[AppearanceManager]")
 {
-    int argc{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{argc, appName.data()};
-
     AppearanceManager manager{std::make_shared<MockSettings>()};
 
     REQUIRE_THROWS_AS(manager.addIconSearchPath("Unknown", ":/some/icon/path"),
@@ -238,11 +198,6 @@ TEST_CASE("AppearanceManager addIconSearchPath for unknown theme",
 TEST_CASE("AppearanceManager addIconSearchPath accumulates paths",
           "[AppearanceManager]")
 {
-    int argc{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{argc, appName.data()};
-
     AppearanceManager manager{std::make_shared<MockSettings>()};
     manager.addIconSearchPath("Light", ":/path/one");
     manager.addIconSearchPath("Light", ":/path/two");
@@ -258,11 +213,6 @@ TEST_CASE("AppearanceManager addIconSearchPath accumulates paths",
 TEST_CASE("AppearanceManager Light theme uses dark icon set",
           "[AppearanceManager]")
 {
-    int argc{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{argc, appName.data()};
-
     AppearanceManager manager{std::make_shared<MockSettings>()};
     manager.applyAppearance("Light", QApplication::font().family(),
                             QApplication::font().pointSize());
@@ -272,11 +222,6 @@ TEST_CASE("AppearanceManager Light theme uses dark icon set",
 TEST_CASE("AppearanceManager Dark theme uses light icon set",
           "[AppearanceManager]")
 {
-    int argc{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{argc, appName.data()};
-
     AppearanceManager manager{std::make_shared<MockSettings>()};
     manager.applyAppearance("Dark", QApplication::font().family(),
                             QApplication::font().pointSize());
@@ -287,11 +232,6 @@ TEST_CASE(
     "AppearanceManager System theme icon set matches resolved color scheme",
     "[AppearanceManager]")
 {
-    int argc{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{argc, appName.data()};
-
     AppearanceManager manager{std::make_shared<MockSettings>()};
     manager.applyAppearance("System", QApplication::font().family(),
                             QApplication::font().pointSize());

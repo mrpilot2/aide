@@ -2,7 +2,6 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include <QApplication>
 #include <QGroupBox>
 #include <QKeySequenceEdit>
 #include <QLabel>
@@ -13,11 +12,6 @@ using aide::gui::AddShortcutDialog;
 
 TEST_CASE("AddShortcutDialog", "[AddShortcutDialog]")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-    const QApplication app(numberOfArgs, appName.data());
-
     SECTION("can be constructed without parent")
     {
         const AddShortcutDialog dialog;

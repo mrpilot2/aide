@@ -21,10 +21,6 @@ TEST_CASE("Any search filter widget ")
 {
     aide::Application::setApplicationName("test");
     aide::Application::setOrganizationName("org");
-    int numberOfArgs{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app(numberOfArgs, appName.data());
 
     Q_INIT_RESOURCE(ut_icons);
 

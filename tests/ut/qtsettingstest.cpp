@@ -14,14 +14,8 @@ using aide::QtSettings;
 
 TEST_CASE("Versionable Qt Settings")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-
     QApplication::setApplicationName("aide_test");
     QApplication::setOrganizationName("aide_company");
-
-    const QApplication app(numberOfArgs, appName.data());
 
     auto settings = QtSettings(true);
 
@@ -90,14 +84,8 @@ TEST_CASE("Versionable Qt Settings")
 
 TEST_CASE("Un-Versionable Qt Settings")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-
     QApplication::setApplicationName("aide_test");
     QApplication::setOrganizationName("aide_company");
-
-    const QApplication app(numberOfArgs, appName.data());
 
     auto settings = QtSettings(false);
 

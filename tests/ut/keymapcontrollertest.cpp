@@ -4,7 +4,6 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include <QApplication>
 #include <QKeySequence>
 #include <QList>
 
@@ -97,11 +96,6 @@ namespace
 
 TEST_CASE("A new KeymapController with no actions registered")
 {
-    int numberOfArgs{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{numberOfArgs, appName.data()};
-
     auto registry = std::make_shared<StubRegistry>();
     const KeymapController controller(registry);
 
@@ -118,11 +112,6 @@ TEST_CASE("A new KeymapController with no actions registered")
 
 TEST_CASE("KeymapController with one registered action")
 {
-    int numberOfArgs{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{numberOfArgs, appName.data()};
-
     const auto saveId = HierarchicalId("file")("save");
 
     auto registry = std::make_shared<StubRegistry>();

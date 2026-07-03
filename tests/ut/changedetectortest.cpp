@@ -4,7 +4,6 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include <QAbstractButton>
-#include <QApplication>
 #include <QCheckBox>
 #include <QComboBox>
 #include <QDateTimeEdit>
@@ -56,11 +55,6 @@ namespace
 
 TEST_CASE("installChangeDetector for QLineEdit", "[ChangeDetector]")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-    const QApplication app(numberOfArgs, appName.data());
-
     SpyChangePageController spy;
     auto controller =
         std::make_shared<aide::gui::SettingsDialogController>(spy);
@@ -79,11 +73,6 @@ TEST_CASE("installChangeDetector for QLineEdit", "[ChangeDetector]")
 
 TEST_CASE("installChangeDetector for QTextEdit", "[ChangeDetector]")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-    const QApplication app(numberOfArgs, appName.data());
-
     SpyChangePageController spy;
     auto controller =
         std::make_shared<aide::gui::SettingsDialogController>(spy);
@@ -102,11 +91,6 @@ TEST_CASE("installChangeDetector for QTextEdit", "[ChangeDetector]")
 
 TEST_CASE("installChangeDetector for QPlainTextEdit", "[ChangeDetector]")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-    const QApplication app(numberOfArgs, appName.data());
-
     SpyChangePageController spy;
     auto controller =
         std::make_shared<aide::gui::SettingsDialogController>(spy);
@@ -125,11 +109,6 @@ TEST_CASE("installChangeDetector for QPlainTextEdit", "[ChangeDetector]")
 
 TEST_CASE("installChangeDetector for QPushButton", "[ChangeDetector]")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-    const QApplication app(numberOfArgs, appName.data());
-
     SpyChangePageController spy;
     auto controller =
         std::make_shared<aide::gui::SettingsDialogController>(spy);
@@ -148,11 +127,6 @@ TEST_CASE("installChangeDetector for QPushButton", "[ChangeDetector]")
 
 TEST_CASE("installChangeDetector for QCheckBox", "[ChangeDetector]")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-    const QApplication app(numberOfArgs, appName.data());
-
     SpyChangePageController spy;
     auto controller =
         std::make_shared<aide::gui::SettingsDialogController>(spy);
@@ -171,11 +145,6 @@ TEST_CASE("installChangeDetector for QCheckBox", "[ChangeDetector]")
 
 TEST_CASE("installChangeDetector for QSpinBox", "[ChangeDetector]")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-    const QApplication app(numberOfArgs, appName.data());
-
     SpyChangePageController spy;
     auto controller =
         std::make_shared<aide::gui::SettingsDialogController>(spy);
@@ -195,11 +164,6 @@ TEST_CASE("installChangeDetector for QSpinBox", "[ChangeDetector]")
 
 TEST_CASE("installChangeDetector for QDoubleSpinBox", "[ChangeDetector]")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-    const QApplication app(numberOfArgs, appName.data());
-
     SpyChangePageController spy;
     auto controller =
         std::make_shared<aide::gui::SettingsDialogController>(spy);
@@ -219,11 +183,6 @@ TEST_CASE("installChangeDetector for QDoubleSpinBox", "[ChangeDetector]")
 
 TEST_CASE("installChangeDetector for QComboBox", "[ChangeDetector]")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-    const QApplication app(numberOfArgs, appName.data());
-
     SpyChangePageController spy;
     auto controller =
         std::make_shared<aide::gui::SettingsDialogController>(spy);
@@ -245,11 +204,6 @@ TEST_CASE("installChangeDetector for QComboBox", "[ChangeDetector]")
 
 TEST_CASE("installChangeDetector for QSlider", "[ChangeDetector]")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-    const QApplication app(numberOfArgs, appName.data());
-
     SpyChangePageController spy;
     auto controller =
         std::make_shared<aide::gui::SettingsDialogController>(spy);
@@ -270,11 +224,6 @@ TEST_CASE("installChangeDetector for QSlider", "[ChangeDetector]")
 
 TEST_CASE("installChangeDetector for QDateTimeEdit", "[ChangeDetector]")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-    const QApplication app(numberOfArgs, appName.data());
-
     SpyChangePageController spy;
     auto controller =
         std::make_shared<aide::gui::SettingsDialogController>(spy);
@@ -293,11 +242,6 @@ TEST_CASE("installChangeDetector for QDateTimeEdit", "[ChangeDetector]")
 
 TEST_CASE("installChangeDetector for QKeySequenceEdit", "[ChangeDetector]")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-    const QApplication app(numberOfArgs, appName.data());
-
     SpyChangePageController spy;
     auto controller =
         std::make_shared<aide::gui::SettingsDialogController>(spy);
@@ -317,11 +261,6 @@ TEST_CASE("installChangeDetector for QKeySequenceEdit", "[ChangeDetector]")
 TEST_CASE("installChangeDetector for QAbstractItemView with model",
           "[ChangeDetector]")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-    const QApplication app(numberOfArgs, appName.data());
-
     SpyChangePageController spy;
     auto controller =
         std::make_shared<aide::gui::SettingsDialogController>(spy);
@@ -344,11 +283,6 @@ TEST_CASE("installChangeDetector for QAbstractItemView with model",
 TEST_CASE("installChangeDetector recurses into nested widgets",
           "[ChangeDetector]")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-    const QApplication app(numberOfArgs, appName.data());
-
     SpyChangePageController spy;
     auto controller =
         std::make_shared<aide::gui::SettingsDialogController>(spy);
@@ -368,11 +302,6 @@ TEST_CASE("installChangeDetector recurses into nested widgets",
 
 TEST_CASE("unInstallChangeDetector", "[ChangeDetector]")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-    const QApplication app(numberOfArgs, appName.data());
-
     SpyChangePageController spy;
     auto controller =
         std::make_shared<aide::gui::SettingsDialogController>(spy);

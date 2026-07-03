@@ -34,14 +34,8 @@ TEST_CASE("Any action registry ")
     MockSettings settings;
     ActionRegistry registry{settings, std::make_shared<NullLogger>()};
 
-    int numberOfArgs{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-
     QApplication::setApplicationName("aide_test");
     QApplication::setOrganizationName("aide_company");
-
-    const QApplication app{numberOfArgs, appName.data()};
 
     SECTION("can register an action with description and default key sequence")
     {

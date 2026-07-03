@@ -16,11 +16,6 @@ namespace
 
 TEST_CASE("SearchLineEdit", "[SearchLineEdit]")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-    const QApplication app(numberOfArgs, appName.data());
-
     SECTION("can be constructed")
     {
         const SearchLineEdit edit;

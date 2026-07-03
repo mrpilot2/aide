@@ -18,11 +18,6 @@ namespace
 
 TEST_CASE("AideTreeView construction", "[AideTreeView]")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-    const QApplication app(numberOfArgs, appName.data());
-
     SECTION("can be constructed with null parent")
     {
         const AideTreeView view(nullptr);
@@ -38,11 +33,6 @@ TEST_CASE("AideTreeView construction", "[AideTreeView]")
 
 TEST_CASE("AideTreeView paint paths", "[AideTreeView]")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-    const QApplication app(numberOfArgs, appName.data());
-
     SECTION("paints without crash when model is null")
     {
         AideTreeView view(nullptr);

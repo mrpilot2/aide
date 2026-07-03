@@ -18,11 +18,6 @@ using aide::gui::KeymapPageWidget;
 
 TEST_CASE("KeymapPageWidget construction", "[KeymapPageWidget]")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-    const QApplication app(numberOfArgs, appName.data());
-
     SECTION("can be constructed with null parent")
     {
         const KeymapPageWidget widget;
@@ -32,11 +27,6 @@ TEST_CASE("KeymapPageWidget construction", "[KeymapPageWidget]")
 
 TEST_CASE("KeymapPageWidget setTreeModel", "[KeymapPageWidget]")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-    const QApplication app(numberOfArgs, appName.data());
-
     KeymapPageWidget widget;
     const auto* treeView = widget.findChild<QTreeView*>("treeView");
     REQUIRE(treeView != nullptr);
@@ -62,11 +52,6 @@ TEST_CASE("KeymapPageWidget setTreeModel", "[KeymapPageWidget]")
 
 TEST_CASE("KeymapPageWidget showContextMenu", "[KeymapPageWidget]")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-    const QApplication app(numberOfArgs, appName.data());
-
     KeymapPageWidget widget;
     widget.show();
     QApplication::processEvents();

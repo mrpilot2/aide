@@ -16,14 +16,8 @@ using aide::test::NullLogger;
 
 TEST_CASE("Any main window")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-
     QApplication::setApplicationName("aide_test");
     QApplication::setOrganizationName("aide_company");
-
-    const QApplication app(numberOfArgs, appName.data());
 
     MockSettings settings;
     const auto registry = std::make_shared<ActionRegistry>(

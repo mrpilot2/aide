@@ -26,11 +26,6 @@ namespace
 
 TEST_CASE("AppearancePage initial state", "[AppearancePage]")
 {
-    int argc{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{argc, appName.data()};
-
     AppearanceManager manager{std::make_shared<MockSettings>()};
     manager.applyAppearance("Light", QApplication::font().family(),
                             TEST_FONT_SIZE);
@@ -60,11 +55,6 @@ TEST_CASE("AppearancePage initial state", "[AppearancePage]")
 
 TEST_CASE("AppearancePage modified detection", "[AppearancePage]")
 {
-    int argc{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{argc, appName.data()};
-
     AppearanceManager manager{std::make_shared<MockSettings>()};
     manager.applyAppearance("Light", QApplication::font().family(),
                             TEST_FONT_SIZE);
@@ -90,11 +80,6 @@ TEST_CASE("AppearancePage modified detection", "[AppearancePage]")
 
 TEST_CASE("AppearancePage reset", "[AppearancePage]")
 {
-    int argc{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{argc, appName.data()};
-
     AppearanceManager manager{std::make_shared<MockSettings>()};
     manager.applyAppearance("Light", QApplication::font().family(),
                             TEST_FONT_SIZE);
@@ -122,11 +107,6 @@ TEST_CASE("AppearancePage reset", "[AppearancePage]")
 
 TEST_CASE("AppearancePage apply", "[AppearancePage]")
 {
-    int argc{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{argc, appName.data()};
-
     AppearanceManager manager{std::make_shared<MockSettings>()};
     manager.applyAppearance("Light", QApplication::font().family(),
                             TEST_FONT_SIZE);

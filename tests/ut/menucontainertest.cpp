@@ -2,20 +2,12 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include <QApplication>
-
 #include "menucontainer.hpp"
 
 using aide::MenuContainer;
 
 TEST_CASE("A new menu container")
 {
-    int numberOfArgs{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-
-    const QApplication app(numberOfArgs, appName.data());
-
     SECTION(" creates a valid QMenu")
     {
         const MenuContainer container;

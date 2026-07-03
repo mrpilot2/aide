@@ -3,7 +3,6 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include <QApplication>
 #include <QItemSelection>
 #include <QStandardItemModel>
 
@@ -418,11 +417,6 @@ TEST_CASE("Any show settings dialog use case")
 TEST_CASE(
     "ShowSettingsDialog changeSelectedPage before showSettingsDialog is called")
 {
-    int numberOfArgs{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{numberOfArgs, appName.data()};
-
     auto view = std::make_shared<MockSettingsDialog>();
     MockSettings settings;
     auto logger = std::make_shared<NullLogger>();

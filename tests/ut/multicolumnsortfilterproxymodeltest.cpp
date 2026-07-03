@@ -2,7 +2,6 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include <QApplication>
 #include <QStandardItemModel>
 
 #include "widgets/multicolumnsortfilterproxymodel.hpp"
@@ -26,11 +25,6 @@ namespace
 
 TEST_CASE("A MultiColumnSortFilterProxyModel with no filter set")
 {
-    int numberOfArgs{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{numberOfArgs, appName.data()};
-
     QStandardItemModel source;
     source.appendRow({new QStandardItem("foo"), new QStandardItem("bar")});
     source.appendRow({new QStandardItem("baz"), new QStandardItem("qux")});
@@ -51,11 +45,6 @@ TEST_CASE("A MultiColumnSortFilterProxyModel with no filter set")
 
 TEST_CASE("A MultiColumnSortFilterProxyModel filtering on a specific column")
 {
-    int numberOfArgs{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{numberOfArgs, appName.data()};
-
     MultiColumnSortFilterProxyModel proxy;
     auto* source = makeTwoColumnModel();
     proxy.setSourceModel(source);
@@ -109,11 +98,6 @@ TEST_CASE("A MultiColumnSortFilterProxyModel filtering on a specific column")
 TEST_CASE(
     "A MultiColumnSortFilterProxyModel with multiple column filters applied")
 {
-    int numberOfArgs{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{numberOfArgs, appName.data()};
-
     MultiColumnSortFilterProxyModel proxy;
     auto* source = makeTwoColumnModel();
     proxy.setSourceModel(source);
@@ -140,11 +124,6 @@ TEST_CASE(
 
 TEST_CASE("A MultiColumnSortFilterProxyModel filtering across all columns")
 {
-    int numberOfArgs{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{numberOfArgs, appName.data()};
-
     MultiColumnSortFilterProxyModel proxy;
     auto* source = makeTwoColumnModel();
     proxy.setSourceModel(source);

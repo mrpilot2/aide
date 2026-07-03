@@ -2,7 +2,6 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include <QApplication>
 #include <QPainter>
 #include <QPixmap>
 #include <QStandardItemModel>
@@ -43,11 +42,6 @@ namespace
 
 TEST_CASE("SearchFilterResultDelegate paint", "[SearchFilterResultDelegate]")
 {
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    int numberOfArgs{1};
-    const QApplication app(numberOfArgs, appName.data());
-
     QPixmap pixmap(kPixmapWidth, kPixmapHeight);
     QPainter painter(&pixmap);
     const QStyleOptionViewItem option{makeOption()};

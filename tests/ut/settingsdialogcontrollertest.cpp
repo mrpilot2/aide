@@ -2,7 +2,6 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include <QApplication>
 #include <QItemSelection>
 
 #include "settings/settingsdialogchangepagecontroller.hpp"
@@ -44,11 +43,6 @@ namespace
 TEST_CASE(
     "SettingsDialogController delegates to SettingsDialogChangePageController")
 {
-    int numberOfArgs{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const QApplication app{numberOfArgs, appName.data()};
-
     SpyController spy;
     const SettingsDialogController controller(spy);
 

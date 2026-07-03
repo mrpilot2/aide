@@ -4,7 +4,6 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include <QApplication>
 #include <QModelIndex>
 
 #include <settings/keymap/keymapcontextmenuprovider.hpp>
@@ -24,12 +23,6 @@ using aide::test::NullLogger;
 
 TEST_CASE("Any keymap context menu provider")
 {
-    int numberOfArgs{1};
-    // NOLINTNEXTLINE
-    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-
-    const QApplication app{numberOfArgs, appName.data()};
-
     auto logger = std::make_shared<NullLogger>();
     MockSettings settings;
     auto registry(std::make_shared<ActionRegistry>(settings, logger));

@@ -9,9 +9,20 @@ add_library(aide_catch_main STATIC catch_main.cpp)
 target_link_libraries(
   aide_catch_main
   PUBLIC Catch2::Catch2
-  PRIVATE Aide::AideApplication
+  PRIVATE Aide::AideApplication Qt::Widgets
 )
 target_compile_features(aide_catch_main PUBLIC cxx_std_11)
+
+# Separate entry point for the [Application] tests: aide::Application is itself
+# a QApplication, so those tests must not run alongside the process-global
+# QApplication created in catch_main.cpp. This main deliberately creates none.
+add_library(aide_catch_main_application STATIC catch_main_application.cpp)
+target_link_libraries(
+  aide_catch_main_application
+  PUBLIC Catch2::Catch2
+  PRIVATE Aide::AideApplication
+)
+target_compile_features(aide_catch_main_application PUBLIC cxx_std_11)
 
 set(CMAKE_AUTORCC ON)
 
@@ -41,7 +52,6 @@ target_sources(
     aidetableviewtest.cpp
     aidetreeviewtest.cpp
     appearancemanagertest.cpp
-    applicationtest.cpp
     buildinformationtest.cpp
     hierarchicalidtest.cpp
     mocksettings.cpp
@@ -148,28 +158,78 @@ if(MSVC AND BUILD_SHARED_LIBS)
   target_compile_definitions(ut.aide PRIVATE BUILD_SHARED_LIBS_ON_MSVC)
 endif()
 
-enable_testing()
+add_executable(ut.aide.application)
 
-if(UNIT_TESTS_RUN_ON_CI)
-  catch_discover_tests(
-    ut.aide
-    EXTRA_ARGS
-    --reporter
-    compact::out=-
-    REPORTER
-    junit
-    OUTPUT_DIR
-    ${CMAKE_CURRENT_BINARY_DIR}
-    OUTPUT_SUFFIX
-    .xml
-    WORKING_DIRECTORY
-    ${CMAKE_CURRENT_LIST_DIR}/../../
-  )
-else()
-  catch_discover_tests(
-    ut.aide REPORTER console WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/../../
+target_sources(ut.aide.application PRIVATE applicationtest.cpp mocksettings.cpp)
+
+target_link_libraries(
+  ut.aide.application
+  PRIVATE aide_catch_main_application
+          Qt::Core
+          Qt::Widgets
+          Qt::Test
+          aide_coverage
+          aide_options
+          aide_warnings
+          Aide::AideBuildInformation
+          Aide::AideApplication
+          Aide::AideCore
+          Aide::AideGui
+          Aide::AideLogger
+          Aide::AideUtils
+          Aide::AideWidgets
+)
+
+if(NOT PROJECT_IS_TOP_LEVEL)
+  target_include_directories(
+    ut.aide.application PRIVATE ${CMAKE_SOURCE_DIR}/aide/src/include
+                                ${CMAKE_SOURCE_DIR}/aide/src/include/aide
   )
 endif()
+
+if(APPLE)
+  add_custom_command(
+    TARGET ut.aide.application
+    POST_BUILD
+    COMMAND ${CMAKE_INSTALL_NAME_TOOL} -add_rpath "${Qt5_DIR}/../../"
+            $<TARGET_FILE:ut.aide.application>
+  )
+endif()
+
+if(MSVC AND BUILD_SHARED_LIBS)
+  target_compile_definitions(
+    ut.aide.application PRIVATE BUILD_SHARED_LIBS_ON_MSVC
+  )
+endif()
+
+enable_testing()
+
+function(aide_discover_unit_tests target)
+  if(UNIT_TESTS_RUN_ON_CI)
+    catch_discover_tests(
+      ${target}
+      EXTRA_ARGS
+      --reporter
+      compact::out=-
+      REPORTER
+      junit
+      OUTPUT_DIR
+      ${CMAKE_CURRENT_BINARY_DIR}
+      OUTPUT_SUFFIX
+      .xml
+      WORKING_DIRECTORY
+      ${CMAKE_CURRENT_LIST_DIR}/../../
+    )
+  else()
+    catch_discover_tests(
+      ${target} REPORTER console WORKING_DIRECTORY
+      ${CMAKE_CURRENT_LIST_DIR}/../../
+    )
+  endif()
+endfunction()
+
+aide_discover_unit_tests(ut.aide)
+aide_discover_unit_tests(ut.aide.application)
 
 set_source_files_properties(
   loggertest.cpp
