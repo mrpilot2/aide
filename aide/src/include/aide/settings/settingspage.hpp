@@ -38,6 +38,18 @@ namespace aide::core
          */
         [[nodiscard]] virtual bool matches(const QString& pattern);
 
+        /**
+         * @brief Highlights child widgets whose text matches a search pattern.
+         *
+         * The default implementation applies a brownish-orange border via a
+         * style sheet to every common child widget (labels, buttons, check
+         * boxes, group boxes) whose text contains the pattern, and removes the
+         * border from widgets that do not match. Matching is case-insensitive
+         * substring matching, consistent with matches(). An empty pattern
+         * removes all highlights.
+         */
+        virtual void highlight(const QString& pattern);
+
         virtual void reset() = 0;
 
         virtual void apply() = 0;

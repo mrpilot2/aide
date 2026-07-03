@@ -1,5 +1,7 @@
 #include "mocksettingspage.hpp"
 
+#include <memory>
+
 #include <QLabel>
 #include <QString>
 #include <QWidget>
@@ -23,6 +25,8 @@ MockSettingsPage::MockSettingsPage(const HierarchicalId& group,
         new QLabel(searchableText, mockWidget.get());
     }
 }
+
+MockSettingsPage::~MockSettingsPage() = default;
 
 QWidget* MockSettingsPage::widget()
 {

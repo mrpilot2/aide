@@ -4,6 +4,7 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include <QItemSelection>
+#include <QLabel>
 #include <QStandardItemModel>
 
 #include "commonsettingskeys.hpp"
@@ -115,6 +116,52 @@ TEST_CASE("Any show settings dialog use case")
         useCase.searchPatternChanged("needle");
 
         REQUIRE(useCase.currentSearchPattern() == "needle");
+    }
+
+    SECTION("highlights the current page when the search pattern changes")
+    {
+        auto page = std::make_shared<MockSettingsPage>(
+            HierarchicalId("MockTestPage"), "Enable dark mode");
+        registry.addPage(page);
+
+        const SettingsPageGroupTreeModel treeModel{registry};
+
+        useCase.showSettingsDialog();
+
+        useCase.changeSelectedPage(
+            QItemSelection(treeModel.index(0, 0, QModelIndex()),
+                           treeModel.index(0, 0, QModelIndex())),
+            QItemSelection(treeModel.index(-1, -1, QModelIndex()),
+                           treeModel.index(-1, -1, QModelIndex())));
+
+        useCase.searchPatternChanged("dark");
+
+        auto* label = page->widget()->findChild<QLabel*>();
+        REQUIRE(label != nullptr);
+        REQUIRE(label->styleSheet().contains("#8B4513"));
+    }
+
+    SECTION("highlights a newly selected page while a search is active")
+    {
+        auto page = std::make_shared<MockSettingsPage>(
+            HierarchicalId("MockTestPage"), "Enable dark mode");
+        registry.addPage(page);
+
+        const SettingsPageGroupTreeModel treeModel{registry};
+
+        useCase.showSettingsDialog();
+
+        useCase.searchPatternChanged("dark");
+
+        useCase.changeSelectedPage(
+            QItemSelection(treeModel.index(0, 0, QModelIndex()),
+                           treeModel.index(0, 0, QModelIndex())),
+            QItemSelection(treeModel.index(-1, -1, QModelIndex()),
+                           treeModel.index(-1, -1, QModelIndex())));
+
+        auto* label = page->widget()->findChild<QLabel*>();
+        REQUIRE(label != nullptr);
+        REQUIRE(label->styleSheet().contains("#8B4513"));
     }
 
     SECTION("show selected page widget")
