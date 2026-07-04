@@ -28,6 +28,21 @@ namespace aide::core
          */
         [[nodiscard]] static std::optional<std::size_t> bestPage(
             const std::vector<double>& scores);
+
+        /**
+         * @brief Index of the best page, keeping the current page sticky.
+         *
+         * Like @ref bestPage, but if @p currentPage refers to a page that still
+         * matches (its score is greater than zero) it is pinned to the top
+         * regardless of whether another page scores higher, so the view does
+         * not jump away from a page the user is still looking at. The pin
+         * releases as soon as the current page stops matching. An empty or
+         * out-of-range @p currentPage disables pinning and falls back to plain
+         * best-score selection.
+         */
+        [[nodiscard]] static std::optional<std::size_t> bestPage(
+            const std::vector<double>& scores,
+            std::optional<std::size_t> currentPage);
     };
 } // namespace aide::core
 

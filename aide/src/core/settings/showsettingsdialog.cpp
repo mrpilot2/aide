@@ -152,11 +152,13 @@ void ShowSettingsDialog::autoSelectBestMatchingPage()
 
     std::vector<double> scores;
     scores.reserve(pages.size());
-    for (const auto& [proxyIndex, page] : pages) {
-        scores.push_back(page->score(words));
+    std::optional<std::size_t> currentPage;
+    for (std::size_t i = 0; i < pages.size(); ++i) {
+        scores.push_back(pages[i].second->score(words));
+        if (pages[i].second == currentlySelectedPage) { currentPage = i; }
     }
 
-    const auto best = SettingsPageRanker::bestPage(scores);
+    const auto best = SettingsPageRanker::bestPage(scores, currentPage);
     if (!best.has_value()) { return; }
 
     if (const auto view = settingsDialog.lock(); view != nullptr) {
