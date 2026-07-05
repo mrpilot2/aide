@@ -1,4 +1,5 @@
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
 
 add_library(AideCore)
 add_library(Aide::AideCore ALIAS AideCore)
@@ -10,6 +11,10 @@ target_sources(
           actionregistry.cpp
           appearancemanager.cpp
           ../include/aide/appearancemanager.hpp
+          # Icon theme resource lives with AppearanceManager, which activates
+          # the aide-dark / aide-light themes and must be able to resolve
+          # :/aide/icons regardless of whether the GUI layer is linked.
+          ../gui/res/icons/icon_themes.qrc
           applicationclose.cpp
           hierarchicalid.cpp
           loggerfactory.cpp

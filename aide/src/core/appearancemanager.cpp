@@ -81,11 +81,19 @@ using aide::AppearanceManager;
 using aide::ColorScheme;
 using aide::Theme;
 
+// Forces the icon_themes.qrc resource object (compiled into AideCore) to be
+// linked and self-registered even in a static build, so :/aide/icons is
+// available whenever AppearanceManager activates the aide-dark / aide-light
+// themes. Declared at global scope: the generated symbol is not namespaced.
+extern int qInitResources_icon_themes();
+
 AppearanceManager::AppearanceManager(
     std::shared_ptr<SettingsInterface> settings, QObject* parent)
     : QObject(parent)
     , m_settings(std::move(settings))
 {
+    qInitResources_icon_themes();
+
     m_themes.push_back(
         {SYSTEM_THEME_NAME, QPalette{}, "", {BUILTIN_ICON_SEARCH_PATH}});
     m_themes.push_back({LIGHT_THEME_NAME,
