@@ -24,6 +24,7 @@ using aide::gui::MainWindowControllerPtr;
 using aide::gui::TranslatorInterface;
 
 extern int qInitResources_icons();
+extern int qInitResources_icon_themes();
 
 MainWindow::MainWindow(LoggerPtr loggerInterface, QWidget* parent)
     : MainWindowInterface(parent)
@@ -32,6 +33,7 @@ MainWindow::MainWindow(LoggerPtr loggerInterface, QWidget* parent)
     , m_ui(new Ui::MainWindow)
 {
     qInitResources_icons();
+    qInitResources_icon_themes();
 
     m_ui->setupUi(this);
 }

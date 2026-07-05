@@ -221,6 +221,24 @@ TEST_CASE("AppearanceManager addIconSearchPath accumulates paths",
     REQUIRE(paths.contains(":/path/two"));
 }
 
+TEST_CASE(
+    "AppearanceManager bundled icon theme resolves a menu icon at runtime",
+    "[AppearanceManager]")
+{
+    int argc{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+    const QApplication app{argc, appName.data()};
+
+    AppearanceManager manager{std::make_shared<MockSettings>()};
+    manager.applyAppearance("Light", QApplication::font().family(),
+                            QApplication::font().pointSize());
+
+    REQUIRE(QIcon::themeName() == "aide-dark");
+    REQUIRE(QIcon::hasThemeIcon("application-exit"));
+    REQUIRE_FALSE(QIcon::fromTheme("application-exit").isNull());
+}
+
 TEST_CASE("AppearanceManager Light theme uses dark icon set",
           "[AppearanceManager]")
 {
