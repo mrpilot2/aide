@@ -199,6 +199,36 @@ TEST_CASE("Any show settings dialog use case")
         REQUIRE(label->styleSheet().contains("#8B4513"));
     }
 
+    SECTION("clears the current page highlight when a GUI element is edited")
+    {
+        auto page = std::make_shared<MockSettingsPage>(
+            HierarchicalId("MockTestPage"), "Enable dark mode");
+        registry.addPage(page);
+
+        const SettingsPageGroupTreeModel treeModel{registry};
+
+        useCase.showSettingsDialog();
+
+        useCase.changeSelectedPage(
+            QItemSelection(treeModel.index(0, 0, QModelIndex()),
+                           treeModel.index(0, 0, QModelIndex())),
+            QItemSelection(treeModel.index(-1, -1, QModelIndex()),
+                           treeModel.index(-1, -1, QModelIndex())));
+
+        useCase.searchPatternChanged("dark");
+
+        auto* label = page->widget()->findChild<QLabel*>();
+        REQUIRE(label != nullptr);
+        REQUIRE(label->styleSheet().contains("#8B4513"));
+
+        useCase.anyGuiElementHasChanged();
+
+        // Editing a control clears the page's highlight/dimming ...
+        REQUIRE(label->styleSheet().isEmpty());
+        // ... but leaves the search text (and thus the filtered tree) intact.
+        REQUIRE(useCase.currentSearchPattern() == "dark");
+    }
+
     SECTION("auto-selects the page whose content best matches the search")
     {
         // "Alpha" is registered first (tree row 0) but only buries the word;
