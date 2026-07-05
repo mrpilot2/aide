@@ -135,6 +135,16 @@ TEST_CASE("Any show settings dialog use case")
         REQUIRE(history.entries() == QStringList{"font"});
     }
 
+    SECTION("provides the persisted search history to the dialog on show")
+    {
+        useCase.searchPatternChanged("font");
+        useCase.commitCurrentSearchPattern();
+
+        useCase.showSettingsDialog();
+
+        REQUIRE(view->searchHistory() == QStringList{"font"});
+    }
+
     SECTION("commits an active non-empty search pattern when closing")
     {
         useCase.searchPatternChanged("color");

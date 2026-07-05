@@ -38,6 +38,16 @@ void MockSettingsDialog::showSelectedPageWidget(QWidget* widget)
 
 void MockSettingsDialog::showEmptyPageWidget() {}
 
+void MockSettingsDialog::setSearchHistory(const QStringList& entries)
+{
+    searchHistoryEntries = entries;
+}
+
+const QStringList& MockSettingsDialog::searchHistory() const
+{
+    return searchHistoryEntries;
+}
+
 QWidget* MockSettingsDialog::currentlyShownWidget() const
 {
     return settingsWidget;

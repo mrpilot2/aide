@@ -1,6 +1,8 @@
 #ifndef AIDE_MOCK_SETTINGS_DIALOG_HPP
 #define AIDE_MOCK_SETTINGS_DIALOG_HPP
 
+#include <QStringList>
+
 #include "settings/settingsdialoginterface.hpp"
 #include "userselection.hpp"
 namespace aide::test
@@ -33,6 +35,10 @@ namespace aide::test
 
         void showEmptyPageWidget() override;
 
+        void setSearchHistory(const QStringList& entries) override;
+
+        [[nodiscard]] const QStringList& searchHistory() const;
+
         [[nodiscard]] QWidget* currentlyShownWidget() const;
 
         void showResetLabel(bool show) override;
@@ -61,6 +67,8 @@ namespace aide::test
         core::SettingsDialogGeometryAndStateData geometryAndStateData;
 
         QModelIndex selectedGroupIndex{QModelIndex()};
+
+        QStringList searchHistoryEntries;
     };
 } // namespace aide::test
 

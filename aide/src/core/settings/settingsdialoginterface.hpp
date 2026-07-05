@@ -4,6 +4,8 @@
 #include <memory>
 #include <string>
 
+#include <QStringList>
+
 #include "settings/geometryandstatedata.hpp"
 #include "userselection.hpp"
 
@@ -37,6 +39,10 @@ namespace aide::core
         virtual void showSelectedPageWidget(QWidget* widget) = 0;
 
         virtual void showEmptyPageWidget() = 0;
+
+        virtual void setSearchHistory(
+            [[maybe_unused]] const QStringList& entries)
+        {}
 
         virtual void showResetLabel(bool show) = 0;
 

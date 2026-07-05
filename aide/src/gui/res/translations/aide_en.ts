@@ -90,6 +90,13 @@
     </message>
 </context>
 <context>
+    <name>SearchLineEdit</name>
+    <message>
+        <source>Show recent searches</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SettingsDialog</name>
     <message>
         <source>Settings</source>

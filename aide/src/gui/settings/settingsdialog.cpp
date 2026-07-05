@@ -7,8 +7,10 @@
 #include <QList>
 #include <QPushButton>
 #include <QSortFilterProxyModel>
+#include <QStringList>
 #include <QWidget>
 
+#include "aide/gui/widgets/searchlineedit.hpp"
 #include "changedetector.hpp"
 #include "treeitem.hpp"
 #include "ui_settingsdialog.h"
@@ -164,6 +166,11 @@ void SettingsDialog::showSelectedPageWidget(QWidget* widget)
         unInstallChangeDetector(oldWidget);
         installChangeDetector(widget);
     }
+}
+
+void SettingsDialog::setSearchHistory(const QStringList& entries)
+{
+    ui->searchLineEdit->setHistory(entries);
 }
 
 void SettingsDialog::showEmptyPageWidget()

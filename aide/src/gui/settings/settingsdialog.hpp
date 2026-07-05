@@ -52,6 +52,8 @@ namespace aide::gui
 
         void showEmptyPageWidget() override;
 
+        void setSearchHistory(const QStringList& entries) override;
+
         void showResetLabel(bool show) override;
 
         void enableApplyButton(bool enable) override;
