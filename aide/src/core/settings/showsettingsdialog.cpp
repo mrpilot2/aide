@@ -82,6 +82,15 @@ void ShowSettingsDialog::changeSelectedPage(
         // selection model emits selectionChanged() with an empty selection.
         // This is a legitimate runtime event, not a programming error, so it
         // must be handled gracefully instead of throwing.
+        //
+        // While a search is active this empty selection is only transient: the
+        // filter dropped the current row but a best-matching page still exists.
+        // Re-run the auto-selection so the panel keeps showing that page
+        // instead of blanking out. Only fall back to clearing when nothing
+        // matches.
+        if (!m_currentSearchPattern.isEmpty() && autoSelectBestMatchingPage()) {
+            return;
+        }
         clearSelectedPage();
         return;
     }
@@ -140,12 +149,12 @@ void ShowSettingsDialog::collectVisiblePages(
     }
 }
 
-void ShowSettingsDialog::autoSelectBestMatchingPage()
+bool ShowSettingsDialog::autoSelectBestMatchingPage()
 {
-    if (proxyModel == nullptr || treeModel == nullptr) { return; }
+    if (proxyModel == nullptr || treeModel == nullptr) { return false; }
 
     const auto words = tokenizeSearchPattern(m_currentSearchPattern);
-    if (words.isEmpty()) { return; }
+    if (words.isEmpty()) { return false; }
 
     std::vector<std::pair<QModelIndex, SettingsPagePtr>> pages;
     collectVisiblePages(QModelIndex(), pages);
@@ -159,11 +168,16 @@ void ShowSettingsDialog::autoSelectBestMatchingPage()
     }
 
     const auto best = SettingsPageRanker::bestPage(scores, currentPage);
-    if (!best.has_value()) { return; }
+    if (!best.has_value()) { return false; }
+
+    const auto& bestIndex = pages.at(*best).first;
+    if (!bestIndex.isValid()) { return false; }
 
     if (const auto view = settingsDialog.lock(); view != nullptr) {
-        view->setSelectedGroupIndex(pages.at(*best).first);
+        view->setSelectedGroupIndex(bestIndex);
+        return true;
     }
+    return false;
 }
 
 void ShowSettingsDialog::commitCurrentSearchPattern()

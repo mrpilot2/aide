@@ -52,7 +52,7 @@ namespace aide::core
     private:
         void checkTreeModelIsInitialized() const;
 
-        void autoSelectBestMatchingPage();
+        bool autoSelectBestMatchingPage();
 
         void collectVisiblePages(
             const QModelIndex& proxyParent,
