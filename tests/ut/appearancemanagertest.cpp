@@ -280,6 +280,10 @@ TEST_CASE("Bundled aide icon theme resources are registered at runtime",
     REQUIRE(QFile::exists(":/aide/icons/aide-light/index.theme"));
     REQUIRE(QFile::exists(
         ":/aide/icons/aide-dark/scalable/actions/application-exit.svg"));
+    REQUIRE(
+        QFile::exists(":/aide/icons/aide-dark/scalable/actions/edit-find.svg"));
+    REQUIRE(QFile::exists(
+        ":/aide/icons/aide-light/scalable/actions/edit-find.svg"));
 }
 
 TEST_CASE("AppearanceManager Light theme uses dark icon set",
