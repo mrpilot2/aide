@@ -143,3 +143,17 @@ The `qrc` prefix must match the path passed to `QIcon::setThemeSearchPaths()`.
 ### AppearanceManager and SettingsPageRegistry are instance-based
 
 `SettingsPageRegistry` is an instance member of `ApplicationBuilder`, not a static singleton. Access it via `app.settingsPageRegistry()` (returns a reference). There is no `deleteAllPages()` — registry lifetime is tied to `ApplicationBuilder`.
+
+## Agent skills
+
+### Issue tracker
+
+Issues are tracked in the mrpilot2/aide GitHub Issues (via the `gh` CLI); external PRs are not a triage surface. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Canonical vocabulary, unmodified: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context layout (`CONTEXT.md` + `docs/adr/` at repo root). See `docs/agents/domain.md`.
