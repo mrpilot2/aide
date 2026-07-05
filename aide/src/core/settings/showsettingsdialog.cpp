@@ -271,6 +271,12 @@ void ShowSettingsDialog::anyGuiElementHasChanged()
 
         d->enableApplyButton(std::ranges::any_of(
             pages, [](const auto& p) { return p->isModified(); }));
+
+        // Editing a control clears the current page's search highlight and
+        // dimming so stale highlighting does not linger over a page the user
+        // is actively changing. The search text and the filtered tree are
+        // left untouched - only this page's visual highlight is reset.
+        currentlySelectedPage->highlight("");
     }
 }
 
