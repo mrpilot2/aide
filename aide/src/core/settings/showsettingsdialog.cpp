@@ -60,6 +60,8 @@ void ShowSettingsDialog::showSettingsDialog()
             mapFromSourceIndex(treeModel->index(0, 0, QModelIndex())));
     }
 
+    dialog->setSearchHistory(searchHistory.entries());
+
     const auto result = dialog->executeDialog();
 
     saveGeometryAndState.saveGeometryAndState(dialog->currentGeometry());
@@ -183,6 +185,12 @@ bool ShowSettingsDialog::autoSelectBestMatchingPage()
 void ShowSettingsDialog::commitCurrentSearchPattern()
 {
     searchHistory.commit(m_currentSearchPattern);
+
+    // Keep the on-demand history dropdown in sync so a repeat within the same
+    // session reflects the updated most-recent-first order.
+    if (const auto d = settingsDialog.lock(); d != nullptr) {
+        d->setSearchHistory(searchHistory.entries());
+    }
 }
 
 QModelIndex ShowSettingsDialog::mapToSourceIndex(const QModelIndex& index) const

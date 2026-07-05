@@ -42,7 +42,7 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="QLineEdit" name="searchLineEdit">
+        <widget class="aide::widgets::SearchLineEdit" name="searchLineEdit">
          <property name="placeholderText">
           <string>Search settings…</string>
          </property>
@@ -165,6 +165,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>aide::widgets::SearchLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>aide/gui/widgets/searchlineedit.hpp</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
