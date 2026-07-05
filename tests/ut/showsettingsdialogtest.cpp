@@ -30,6 +30,23 @@ using aide::test::MockSettingsDialog;
 using aide::test::MockSettingsPage;
 using aide::test::NullLogger;
 
+namespace
+{
+    QItemSelection groupSelection(const SettingsPageGroupTreeModel& treeModel,
+                                  int row)
+    {
+        return {treeModel.index(row, 0, QModelIndex()),
+                treeModel.index(row, 0, QModelIndex())};
+    }
+
+    void selectGroup(ShowSettingsDialog& useCase,
+                     const SettingsPageGroupTreeModel& treeModel, int row)
+    {
+        useCase.changeSelectedPage(groupSelection(treeModel, row),
+                                   groupSelection(treeModel, -1));
+    }
+} // namespace
+
 TEST_CASE("Any show settings dialog use case")
 {
     auto view = std::make_shared<MockSettingsDialog>();
@@ -65,11 +82,7 @@ TEST_CASE("Any show settings dialog use case")
 
         useCase.showSettingsDialog();
 
-        useCase.changeSelectedPage(
-            QItemSelection(treeModel.index(0, 0, QModelIndex()),
-                           treeModel.index(0, 0, QModelIndex())),
-            QItemSelection(treeModel.index(-1, -1, QModelIndex()),
-                           treeModel.index(-1, -1, QModelIndex())));
+        selectGroup(useCase, treeModel, 0);
 
         REQUIRE(view->displayName() == "MockTestPage");
     }
@@ -108,11 +121,8 @@ TEST_CASE("Any show settings dialog use case")
         const SettingsPageGroupTreeModel treeModel{registry};
 
         REQUIRE_THROWS_AS(
-            base->changeSelectedPage(
-                QItemSelection(treeModel.index(0, 0, QModelIndex()),
-                               treeModel.index(0, 0, QModelIndex())),
-                QItemSelection(treeModel.index(-1, -1, QModelIndex()),
-                               treeModel.index(-1, -1, QModelIndex()))),
+            base->changeSelectedPage(groupSelection(treeModel, 0),
+                                     groupSelection(treeModel, -1)),
             std::logic_error);
     }
 
@@ -173,11 +183,7 @@ TEST_CASE("Any show settings dialog use case")
 
         useCase.showSettingsDialog();
 
-        useCase.changeSelectedPage(
-            QItemSelection(treeModel.index(0, 0, QModelIndex()),
-                           treeModel.index(0, 0, QModelIndex())),
-            QItemSelection(treeModel.index(-1, -1, QModelIndex()),
-                           treeModel.index(-1, -1, QModelIndex())));
+        selectGroup(useCase, treeModel, 0);
 
         useCase.searchPatternChanged("dark");
 
@@ -198,11 +204,7 @@ TEST_CASE("Any show settings dialog use case")
 
         useCase.searchPatternChanged("dark");
 
-        useCase.changeSelectedPage(
-            QItemSelection(treeModel.index(0, 0, QModelIndex()),
-                           treeModel.index(0, 0, QModelIndex())),
-            QItemSelection(treeModel.index(-1, -1, QModelIndex()),
-                           treeModel.index(-1, -1, QModelIndex())));
+        selectGroup(useCase, treeModel, 0);
 
         auto* label = page->widget()->findChild<QLabel*>();
         REQUIRE(label != nullptr);
@@ -219,11 +221,7 @@ TEST_CASE("Any show settings dialog use case")
 
         useCase.showSettingsDialog();
 
-        useCase.changeSelectedPage(
-            QItemSelection(treeModel.index(0, 0, QModelIndex()),
-                           treeModel.index(0, 0, QModelIndex())),
-            QItemSelection(treeModel.index(-1, -1, QModelIndex()),
-                           treeModel.index(-1, -1, QModelIndex())));
+        selectGroup(useCase, treeModel, 0);
 
         useCase.searchPatternChanged("dark");
 
@@ -309,11 +307,7 @@ TEST_CASE("Any show settings dialog use case")
 
         REQUIRE(view->currentlyShownWidget() == nullptr);
 
-        useCase.changeSelectedPage(
-            QItemSelection(treeModel.index(0, 0, QModelIndex()),
-                           treeModel.index(0, 0, QModelIndex())),
-            QItemSelection(treeModel.index(-1, -1, QModelIndex()),
-                           treeModel.index(-1, -1, QModelIndex())));
+        selectGroup(useCase, treeModel, 0);
 
         REQUIRE(view->currentlyShownWidget() != nullptr);
     }
@@ -329,11 +323,7 @@ TEST_CASE("Any show settings dialog use case")
 
         useCase.showSettingsDialog();
 
-        useCase.changeSelectedPage(
-            QItemSelection(treeModel.index(0, 0, QModelIndex()),
-                           treeModel.index(0, 0, QModelIndex())),
-            QItemSelection(treeModel.index(-1, -1, QModelIndex()),
-                           treeModel.index(-1, -1, QModelIndex())));
+        selectGroup(useCase, treeModel, 0);
 
         page->simulateModified(true);
 
@@ -354,11 +344,7 @@ TEST_CASE("Any show settings dialog use case")
 
         useCase.showSettingsDialog();
 
-        useCase.changeSelectedPage(
-            QItemSelection(treeModel.index(0, 0, QModelIndex()),
-                           treeModel.index(0, 0, QModelIndex())),
-            QItemSelection(treeModel.index(-1, -1, QModelIndex()),
-                           treeModel.index(-1, -1, QModelIndex())));
+        selectGroup(useCase, treeModel, 0);
 
         page->simulateModified(false);
 
@@ -379,11 +365,7 @@ TEST_CASE("Any show settings dialog use case")
 
         useCase.showSettingsDialog();
 
-        useCase.changeSelectedPage(
-            QItemSelection(treeModel.index(0, 0, QModelIndex()),
-                           treeModel.index(0, 0, QModelIndex())),
-            QItemSelection(treeModel.index(-1, -1, QModelIndex()),
-                           treeModel.index(-1, -1, QModelIndex())));
+        selectGroup(useCase, treeModel, 0);
 
         page->simulateModified(true);
 
@@ -408,11 +390,7 @@ TEST_CASE("Any show settings dialog use case")
 
         useCase.showSettingsDialog();
 
-        useCase.changeSelectedPage(
-            QItemSelection(treeModel.index(0, 0, QModelIndex()),
-                           treeModel.index(0, 0, QModelIndex())),
-            QItemSelection(treeModel.index(-1, -1, QModelIndex()),
-                           treeModel.index(-1, -1, QModelIndex())));
+        selectGroup(useCase, treeModel, 0);
 
         page1->simulateModified(false);
         page2->simulateModified(false);
@@ -438,11 +416,7 @@ TEST_CASE("Any show settings dialog use case")
 
         useCase.showSettingsDialog();
 
-        useCase.changeSelectedPage(
-            QItemSelection(treeModel.index(0, 0, QModelIndex()),
-                           treeModel.index(0, 0, QModelIndex())),
-            QItemSelection(treeModel.index(-1, -1, QModelIndex()),
-                           treeModel.index(-1, -1, QModelIndex())));
+        selectGroup(useCase, treeModel, 0);
 
         page1->simulateModified(false);
         page2->simulateModified(true);
@@ -466,11 +440,7 @@ TEST_CASE("Any show settings dialog use case")
 
         useCase.showSettingsDialog();
 
-        useCase.changeSelectedPage(
-            QItemSelection(treeModel.index(0, 0, QModelIndex()),
-                           treeModel.index(0, 0, QModelIndex())),
-            QItemSelection(treeModel.index(-1, -1, QModelIndex()),
-                           treeModel.index(-1, -1, QModelIndex())));
+        selectGroup(useCase, treeModel, 0);
 
         page1->simulateModified(false);
         page2->simulateModified(true);
@@ -516,11 +486,7 @@ TEST_CASE("Any show settings dialog use case")
 
         useCase.showSettingsDialog();
 
-        useCase.changeSelectedPage(
-            QItemSelection(treeModel.index(1, 0, QModelIndex()),
-                           treeModel.index(1, 0, QModelIndex())),
-            QItemSelection(treeModel.index(-1, -1, QModelIndex()),
-                           treeModel.index(-1, -1, QModelIndex())));
+        selectGroup(useCase, treeModel, 1);
 
         page1->simulateModified(true);
         page2->simulateModified(true);
