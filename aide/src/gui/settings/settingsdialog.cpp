@@ -86,7 +86,8 @@ void SettingsDialog::setSelectedGroupIndex(const QModelIndex& index)
 {
     if (!index.isValid()) { return; }
     ui->treeView->selectionModel()->setCurrentIndex(
-        index, QItemSelectionModel::SelectionFlag::SelectCurrent);
+        index, QItemSelectionModel::SelectionFlag::ClearAndSelect |
+                   QItemSelectionModel::SelectionFlag::Rows);
 }
 
 SettingsDialogGeometryAndStateData SettingsDialog::currentGeometry() const
