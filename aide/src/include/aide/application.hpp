@@ -8,6 +8,7 @@
 
 #include <aide/actionregistryinterface.hpp>
 #include <aide/appearancemanager.hpp>
+#include <aide/applicationconfig.hpp>
 #include <aide/loggerinterface.hpp>
 #include <aide/settings/settingspageregistry.hpp>
 
@@ -41,6 +42,9 @@ namespace aide
         // NOLINTNEXTLINE
         explicit Application(int& argc, char* argv[]);
 
+        // NOLINTNEXTLINE
+        Application(int& argc, char* argv[], const ApplicationConfig& config);
+
         [[nodiscard]] static aide::LoggerPtr logger();
 
         [[nodiscard]] static aide::LoggerPtr logger(
@@ -61,6 +65,8 @@ namespace aide
         [[nodiscard]] core::SettingsPageRegistry& settingsPageRegistry() const;
 
         [[nodiscard]] AppearanceManager& appearanceManager() const;
+
+        [[nodiscard]] const ApplicationConfig& config() const;
 
     private:
         static bool isOrganizationNameSet();

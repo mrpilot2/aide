@@ -132,3 +132,39 @@ TEST_CASE("Application settings provider is never null", "[Application]")
 
     REQUIRE(app.settingsProvider() != nullptr);
 }
+
+TEST_CASE("Application enables every feature without a config", "[Application]")
+{
+    aide::Application::disableLoggingToConsole();
+
+    aide::Application::setApplicationName("aide_test");
+    aide::Application::setOrganizationName("aide_company");
+
+    int numberOfArgs{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+    const aide::Application app(numberOfArgs, appName.data());
+
+    REQUIRE(app.config().isEnabled(
+        aide::ApplicationConfig::Feature::ViewFullscreenAction));
+}
+
+TEST_CASE("Application exposes the config it was constructed with",
+          "[Application]")
+{
+    aide::Application::disableLoggingToConsole();
+
+    aide::Application::setApplicationName("aide_test");
+    aide::Application::setOrganizationName("aide_company");
+
+    int numberOfArgs{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+    const aide::Application app(
+        numberOfArgs, appName.data(),
+        aide::ApplicationConfig{}.setEnabled(
+            aide::ApplicationConfig::Feature::ViewFullscreenAction, false));
+
+    REQUIRE_FALSE(app.config().isEnabled(
+        aide::ApplicationConfig::Feature::ViewFullscreenAction));
+}

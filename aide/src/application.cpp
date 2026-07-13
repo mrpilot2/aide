@@ -16,13 +16,19 @@ using aide::gui::TranslatorInterface;
 
 // NOLINTNEXTLINE
 Application::Application(int& argc, char* argv[])
+    : Application(argc, argv, ApplicationConfig{})
+{}
+
+// NOLINTNEXTLINE
+Application::Application(int& argc, char* argv[],
+                         const ApplicationConfig& config)
     : QApplication(argc, argv)
 {
     AideSettingsProvider::provideVersionableSettings(
         std::make_shared<QtSettings>(true));
     AideSettingsProvider::provideUnVersionableSettings(
         std::make_shared<QtSettings>(false));
-    m_appBuilder = std::make_shared<ApplicationBuilder>();
+    m_appBuilder = std::make_shared<ApplicationBuilder>(config);
 
     if (!isOrganizationNameSet()) {
         throw std::runtime_error(
@@ -92,4 +98,9 @@ aide::core::SettingsPageRegistry& Application::settingsPageRegistry() const
 aide::AppearanceManager& Application::appearanceManager() const
 {
     return m_appBuilder->appearanceManager();
+}
+
+const aide::ApplicationConfig& Application::config() const
+{
+    return m_appBuilder->config();
 }

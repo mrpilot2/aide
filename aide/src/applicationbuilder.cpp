@@ -1,5 +1,7 @@
 #include "applicationbuilder.hpp"
 
+#include <utility>
+
 #include <settings/keymap/keymappage.hpp>
 
 #include "gui/settings/appearancepage.hpp"
@@ -14,11 +16,12 @@ using aide::gui::MainWindowController;
 using aide::gui::SettingsDialog;
 using aide::gui::SettingsDialogController;
 
-ApplicationBuilder::ApplicationBuilder()
-    : m_settingsProvider(std::make_shared<AideSettingsProvider>())
+ApplicationBuilder::ApplicationBuilder(ApplicationConfig config)
+    : m_config(std::move(config))
+    , m_settingsProvider(std::make_shared<AideSettingsProvider>())
     , m_actionRegistry{std::make_shared<ActionRegistry>(
           *(AideSettingsProvider::versionableSettings()), m_logger)}
-    , m_mainWindow(new MainWindow(m_logger, nullptr))
+    , m_mainWindow(new MainWindow(m_logger, m_config, nullptr))
     , m_settingsDialog(std::make_shared<SettingsDialog>(m_mainWindow.get()))
     , m_applicationClose(m_mainWindow,
                          *(AideSettingsProvider::versionableSettings()))
@@ -66,6 +69,11 @@ ApplicationBuilder::ApplicationBuilder()
 aide::AppearanceManager& ApplicationBuilder::appearanceManager()
 {
     return m_appearanceManager;
+}
+
+const aide::ApplicationConfig& ApplicationBuilder::config() const
+{
+    return m_config;
 }
 
 LoggerPtr ApplicationBuilder::logger() const

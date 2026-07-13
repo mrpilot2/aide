@@ -4,6 +4,7 @@
 #include <utility>
 
 #include <QCheckBox>
+#include <QEvent>
 #include <QLayout>
 #include <QMessageBox>
 #include <QObject>
@@ -25,9 +26,11 @@ using aide::gui::TranslatorInterface;
 
 extern int qInitResources_icons();
 
-MainWindow::MainWindow(LoggerPtr loggerInterface, QWidget* parent)
+MainWindow::MainWindow(LoggerPtr loggerInterface, ApplicationConfig config,
+                       QWidget* parent)
     : MainWindowInterface(parent)
     , logger{std::move(loggerInterface)}
+    , m_config{std::move(config)}
     , m_translator{std::make_shared<ApplicationTranslator>(logger)}
     , m_ui(new Ui::MainWindow)
 {
@@ -85,6 +88,8 @@ void MainWindow::registerActions(
 
     m_ui->menubar->addMenu(menuFile);
 
+    registerViewMenu(actionRegistry);
+
     const auto* menuHelpContainer{
         actionRegistry->createMenu(CONSTANTS().MENU_HELP, m_ui->menubar)};
     auto* menuHelp{menuHelpContainer->menu()};
@@ -104,6 +109,62 @@ void MainWindow::registerActions(
 
     actionRegistry->registerAction(m_actionAboutQt, CONSTANTS().HELP_ABOUT_QT);
     m_ui->menubar->addMenu(menuHelp);
+}
+
+void MainWindow::registerViewMenu(
+    const ActionRegistryInterfacePtr& actionRegistry)
+{
+    // Gating: not created, not registered. When the feature is disabled the
+    // action is neither built nor registered, and the View menu - which would
+    // otherwise be empty - is not created either, so it leaves no trace in the
+    // menu bar or the key-binding editor.
+    if (!m_config.isEnabled(ApplicationConfig::Feature::ViewFullscreenAction)) {
+        return;
+    }
+
+    const auto* menuViewContainer{
+        actionRegistry->createMenu(CONSTANTS().MENU_VIEW, m_ui->menubar)};
+    auto* menuView{menuViewContainer->menu()};
+    menuView->setTitle(QApplication::tr("&View", "MainWindow"));
+
+    m_actionFullScreen = std::make_shared<QAction>(tr("Full Screen"), this);
+    m_actionFullScreen->setCheckable(true);
+    m_actionFullScreen->setChecked(
+        windowState().testFlag(Qt::WindowFullScreen));
+    connect(m_actionFullScreen.get(), &QAction::triggered, this,
+            &MainWindow::toggleFullScreen);
+    menuView->addAction(m_actionFullScreen.get());
+
+    actionRegistry->registerAction(m_actionFullScreen,
+                                   CONSTANTS().VIEW_FULLSCREEN,
+                                   tr("Toggle full screen mode").toStdString(),
+                                   {QKeySequence(Qt::Key_F11)});
+
+    m_ui->menubar->addMenu(menuView);
+}
+
+void MainWindow::toggleFullScreen()
+{
+    if (windowState().testFlag(Qt::WindowFullScreen)) {
+        // Clearing only the full-screen flag restores the previous
+        // (maximized or normal) window state that Qt preserved.
+        setWindowState(windowState() & ~Qt::WindowFullScreen);
+    } else {
+        showFullScreen();
+    }
+}
+
+void MainWindow::changeEvent(QEvent* event)
+{
+    if (event->type() == QEvent::WindowStateChange &&
+        m_actionFullScreen != nullptr) {
+        // Drive the checkmark from the real window state so it stays truthful
+        // whether the change came from F11, from geometry restore on launch,
+        // or from the window manager.
+        m_actionFullScreen->setChecked(
+            windowState().testFlag(Qt::WindowFullScreen));
+    }
+    MainWindowInterface::changeEvent(event);
 }
 
 std::shared_ptr<TranslatorInterface> MainWindow::translator() const

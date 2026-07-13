@@ -12,11 +12,14 @@ namespace aide::constants
         // default menus
         const HierarchicalId MAIN_MENU{HierarchicalId("Main Menu")};
         const HierarchicalId MENU_FILE{MAIN_MENU.addLevel("File")};
+        const HierarchicalId MENU_VIEW{MAIN_MENU.addLevel("View")};
         const HierarchicalId MENU_HELP{MAIN_MENU.addLevel("Help")};
 
         // actions
         const HierarchicalId FILE_SETTINGS{MENU_FILE.addLevel("Settings")};
         const HierarchicalId FILE_QUIT{MENU_FILE.addLevel("Quit")};
+
+        const HierarchicalId VIEW_FULLSCREEN{MENU_VIEW.addLevel("Full Screen")};
 
         const HierarchicalId HELP_ABOUT_AIDE{MENU_HELP.addLevel("About Aide")};
         const HierarchicalId HELP_ABOUT_QT{MENU_HELP.addLevel("About Qt")};
