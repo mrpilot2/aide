@@ -44,6 +44,15 @@ int main(int argc, char* argv[])
                          QColor(blueWindowR, blueWindowG, blueWindowB));
     bluePalette.setColor(QPalette::WindowText, Qt::black);
     bluePalette.setColor(QPalette::Base, Qt::white);
+    // Text roles must be set explicitly: unset roles fall back to the system
+    // default palette, which is light on a dark-default desktop and leaves
+    // line edits and item views (tree/table) unreadable on the white Base.
+    bluePalette.setColor(QPalette::Text, Qt::black);
+    bluePalette.setColor(QPalette::AlternateBase,
+                         QColor(blueWindowR, blueWindowG, blueWindowB));
+    bluePalette.setColor(QPalette::ToolTipBase, Qt::white);
+    bluePalette.setColor(QPalette::ToolTipText, Qt::black);
+    bluePalette.setColor(QPalette::HighlightedText, Qt::white);
     bluePalette.setColor(QPalette::Button,
                          QColor(blueButtonR, blueButtonG, blueButtonB));
     bluePalette.setColor(QPalette::ButtonText, Qt::black);
