@@ -65,6 +65,24 @@ TEST_CASE("A main window with the full screen feature enabled")
                                                 QKeySequence(Qt::Key_F11),
                                             }));
     }
+
+    SECTION("toggling full screen preserves the maximized state")
+    {
+        mainWindow.setWindowState(Qt::WindowMaximized);
+
+        const auto action = registry->action(CONSTANTS().VIEW_FULLSCREEN);
+        REQUIRE(action.has_value());
+
+        // NOLINTNEXTLINE(bugprone-unchecked-optional-access)
+        action.value()->trigger();
+        REQUIRE(mainWindow.windowState().testFlag(Qt::WindowFullScreen));
+        REQUIRE(mainWindow.windowState().testFlag(Qt::WindowMaximized));
+
+        // NOLINTNEXTLINE(bugprone-unchecked-optional-access)
+        action.value()->trigger();
+        REQUIRE_FALSE(mainWindow.windowState().testFlag(Qt::WindowFullScreen));
+        REQUIRE(mainWindow.windowState().testFlag(Qt::WindowMaximized));
+    }
 }
 
 TEST_CASE("A main window with the full screen feature disabled")
