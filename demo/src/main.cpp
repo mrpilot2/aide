@@ -56,10 +56,15 @@ int main(int argc, char* argv[])
     bluePalette.setColor(QPalette::Button,
                          QColor(blueButtonR, blueButtonG, blueButtonB));
     bluePalette.setColor(QPalette::ButtonText, Qt::black);
-    app.appearanceManager().registerTheme({.name            = "Demo Blue",
-                                           .palette         = bluePalette,
-                                           .iconThemeName   = "aide-dark",
-                                           .iconSearchPaths = {}});
+    // Demo Blue ships its own icon set (white glyphs on a blue badge) so it is
+    // easily told apart from aIDE's built-in aide-dark / aide-light icons. The
+    // theme name must match the directory under the search path (see
+    // demo_icons.qrc: :/demo/icons/demo-blue/index.theme).
+    app.appearanceManager().registerTheme(
+        {.name            = "Demo Blue",
+         .palette         = bluePalette,
+         .iconThemeName   = "demo-blue",
+         .iconSearchPaths = {":/demo/icons"}});
 
     // Add icon search path for the System theme based on current color scheme
     app.appearanceManager().addIconSearchPath(

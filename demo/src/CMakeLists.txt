@@ -37,6 +37,7 @@ add_executable(
   aide_demo
   $<$<TARGET_EXISTS:Qt::lrelease>:${CMAKE_CURRENT_BINARY_DIR}/demo_translations.qrc
   ${QM_FILES}>
+  res/icons/demo_icons.qrc
   colorschemereactor.hpp
   demosettingspage.cpp
   main.cpp

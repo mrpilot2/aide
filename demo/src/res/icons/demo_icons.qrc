@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="/demo/icons">
+    <file alias="demo-blue/index.theme">themes/demo-blue/index.theme</file>
+    <file alias="demo-blue/scalable/actions/application-exit.svg">themes/demo-blue/scalable/actions/application-exit.svg</file>
+    <file alias="demo-blue/scalable/actions/edit-find.svg">themes/demo-blue/scalable/actions/edit-find.svg</file>
+    <file alias="demo-blue/scalable/places/folder.svg">themes/demo-blue/scalable/places/folder.svg</file>
+  </qresource>
+</RCC>
