@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <filesystem>
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -378,9 +379,12 @@ TEST_CASE("Test log macros", "[Logger]")
 
 TEST_CASE("Logger constructor variants", "[Logger]")
 {
-    const std::string logFileNameStr{TEST_LOG_FILE_LOCATION +
-                                     std::string("/aide_ctor_test.log")};
-    [[maybe_unused]] auto res = std::remove(logFileNameStr.c_str());
+    // The default and LoggerName constructors hardcode FileName("aide.log"),
+    // which the rotating sink writes relative to the current working directory.
+    // Run from the build dir so the stray file never lands in the repo root.
+    const std::filesystem::path previousWorkingDir{
+        std::filesystem::current_path()};
+    std::filesystem::current_path(TEST_LOG_FILE_LOCATION);
 
     SECTION("default constructor constructs without crash")
     {
@@ -398,7 +402,11 @@ TEST_CASE("Logger constructor variants", "[Logger]")
         logger.flush();
     }
 
-    [[maybe_unused]] auto res2 = std::remove(logFileNameStr.c_str());
+    std::filesystem::current_path(previousWorkingDir);
+    [[maybe_unused]] auto res =
+        std::remove((std::filesystem::path{TEST_LOG_FILE_LOCATION} / "aide.log")
+                        .string()
+                        .c_str());
 }
 
 #if SPDLOG_ACTIVE_LEVEL <= SPDLOG_LEVEL_INFO
