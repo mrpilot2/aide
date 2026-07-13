@@ -4,6 +4,7 @@
 
 #include <QStandardItemModel>
 #include <QTreeView>
+#include <QWidget>
 
 #include "settings/settingsdialog.hpp"
 
@@ -39,6 +40,22 @@ TEST_CASE("SettingsDialog programmatic page selection", "[SettingsDialog]")
         REQUIRE(tree->selectionModel()->selectedRows().size() == 1);
         REQUIRE(tree->selectionModel()->selectedRows().at(0).row() == 1);
     }
+}
+
+TEST_CASE("SettingsDialog shows a hidden page widget", "[SettingsDialog]")
+{
+    SettingsDialog dialog;
+
+    // Pages are hidden up front when the dialog opens; showing a page must make
+    // its widget visible again instead of leaving an empty panel. The scroll
+    // area takes ownership of the widget, so it is freed with the dialog.
+    auto* page = new QWidget;
+    page->hide();
+    REQUIRE(page->isHidden());
+
+    dialog.showSelectedPageWidget(page);
+
+    REQUIRE_FALSE(page->isHidden());
 }
 
 TEST_CASE("SettingsDialog does not free a page it does not own",

@@ -153,6 +153,13 @@ void SettingsDialog::showSelectedPageWidget(QWidget* widget)
 
     ui->settingsPageScrollArea->setWidget(widget);
 
+    // Pages are hidden up front when the dialog opens, and
+    // QScrollArea::setWidget does not reliably re-show an explicitly hidden
+    // widget when it is set while nested inside the search auto-selection flow.
+    // Show it explicitly so the auto-selected page renders instead of showing
+    // an empty panel.
+    if (widget != nullptr) { widget->show(); }
+
     if (oldWidget != widget) {
         unInstallChangeDetector(oldWidget);
         installChangeDetector(widget);
