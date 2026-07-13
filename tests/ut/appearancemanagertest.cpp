@@ -188,6 +188,51 @@ TEST_CASE("AppearanceManager settings save and restore", "[AppearanceManager]")
         const AppearanceManager manager{std::make_shared<MockSettings>()};
         REQUIRE(manager.activeThemeName() == "System");
     }
+
+    SECTION("honors a persisted theme registered after construction")
+    {
+        constexpr int testFontSize = 14;
+        {
+            AppearanceManager writer{settings};
+            writer.registerTheme({.name            = "Demo Blue",
+                                  .palette         = QPalette{},
+                                  .iconThemeName   = "",
+                                  .iconSearchPaths = {}});
+            writer.applyAppearance("Demo Blue", "Courier", testFontSize);
+        }
+
+        // The consumer theme is not known at construction, so restore falls
+        // back to the default System theme ...
+        AppearanceManager reader{settings};
+        REQUIRE(reader.activeThemeName() == "System");
+
+        // ... but registering it later must apply the persisted choice.
+        reader.registerTheme({.name            = "Demo Blue",
+                              .palette         = QPalette{},
+                              .iconThemeName   = "",
+                              .iconSearchPaths = {}});
+        REQUIRE(reader.activeThemeName() == "Demo Blue");
+        REQUIRE(reader.activeFont().family() == "Courier");
+        REQUIRE(reader.activeFont().pointSize() == testFontSize);
+    }
+
+    SECTION("does not switch when a non-persisted theme is registered later")
+    {
+        constexpr int testFontSize = 14;
+        {
+            AppearanceManager writer{settings};
+            writer.applyAppearance("Dark", "Courier", testFontSize);
+        }
+
+        AppearanceManager reader{settings};
+        REQUIRE(reader.activeThemeName() == "Dark");
+
+        reader.registerTheme({.name            = "Demo Blue",
+                              .palette         = QPalette{},
+                              .iconThemeName   = "",
+                              .iconSearchPaths = {}});
+        REQUIRE(reader.activeThemeName() == "Dark");
+    }
 }
 
 TEST_CASE("AppearanceManager addIconSearchPath for known theme",

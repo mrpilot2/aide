@@ -118,7 +118,31 @@ void AppearanceManager::registerTheme(Theme theme)
             "AppearanceManager: duplicate theme name '" +
             theme.name.toStdString() + "'");
     }
+    const auto themeName = theme.name;
     m_themes.push_back(std::move(theme));
+
+    honorPersistedThemeIfPending(themeName);
+}
+
+void AppearanceManager::honorPersistedThemeIfPending(const QString& themeName)
+{
+    // When the constructor ran restoreFromSettings() this theme may not have
+    // existed yet (consumers register themes after the manager is built), so
+    // the persisted selection fell back to the default. Now that the theme is
+    // available, honor the user's stored choice.
+    const QString savedTheme =
+        m_settings->value(settingsKeys().theme, QString{SYSTEM_THEME_NAME})
+            .toString();
+    if (savedTheme != themeName || m_activeThemeName == savedTheme) { return; }
+
+    const auto appFont = QApplication::font();
+    const QString family =
+        m_settings->value(settingsKeys().fontFamily, appFont.family())
+            .toString();
+    const int size =
+        m_settings->value(settingsKeys().fontSize, appFont.pointSize()).toInt();
+
+    applyAppearance(savedTheme, family, size);
 }
 
 void AppearanceManager::addIconSearchPath(const QString& themeName,
