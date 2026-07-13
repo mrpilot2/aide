@@ -37,6 +37,14 @@ SettingsDialog::SettingsDialog(QWidget* parent)
 
 SettingsDialog::~SettingsDialog()
 {
+    // Settings pages are owned by the SettingsPageRegistry (a shared_ptr,
+    // frequently a make_shared allocation where the object lives inside the
+    // control block). QScrollArea::setWidget took Qt ownership of whichever
+    // page is currently shown, so Qt's child deletion would call operator
+    // delete / free() on a pointer it does not own - corrupting the heap for a
+    // make_shared page. Release the current page first so only its real owner
+    // frees it. The default placeholder widget is ours, so delete it here.
+    ui->settingsPageScrollArea->takeWidget();
     // NOLINTNEXTLINE
     delete ui->defaultScrollAreaWidget;
 }
