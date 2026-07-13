@@ -6,6 +6,7 @@
 #include <QApplication>
 #include <QComboBox>
 #include <QFontComboBox>
+#include <QPalette>
 #include <QSpinBox>
 
 #include <aide/appearancemanager.hpp>
@@ -102,6 +103,44 @@ TEST_CASE("AppearancePage reset", "[AppearancePage]")
         REQUIRE_FALSE(page.isModified());
         REQUIRE(combo->currentText() == "Light");
         REQUIRE(spinBox->value() == TEST_FONT_SIZE);
+    }
+}
+
+TEST_CASE("AppearancePage picks up themes registered after construction",
+          "[AppearancePage]")
+{
+    AppearanceManager manager{std::make_shared<MockSettings>()};
+    manager.applyAppearance("Light", QApplication::font().family(),
+                            TEST_FONT_SIZE);
+
+    AppearancePage page{manager};
+
+    // A consumer registers a theme after ApplicationBuilder (and thus the
+    // page) has already been constructed.
+    manager.registerTheme({.name            = "Demo Blue",
+                           .palette         = QPalette{},
+                           .iconThemeName   = "",
+                           .iconSearchPaths = {}});
+
+    auto* combo = page.widget()->findChild<QComboBox*>();
+    REQUIRE(combo != nullptr);
+
+    SECTION("theme is absent until the controls are refreshed")
+    {
+        REQUIRE(combo->findText("Demo Blue") == -1);
+    }
+
+    SECTION("reset refreshes the theme list")
+    {
+        page.reset();
+        REQUIRE(combo->findText("Demo Blue") != -1);
+    }
+
+    SECTION("refreshed list keeps the active theme selected")
+    {
+        page.reset();
+        REQUIRE(combo->currentText() == "Light");
+        REQUIRE_FALSE(page.isModified());
     }
 }
 
