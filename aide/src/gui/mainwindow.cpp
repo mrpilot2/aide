@@ -145,13 +145,12 @@ void MainWindow::registerViewMenu(
 
 void MainWindow::toggleFullScreen()
 {
-    if (windowState().testFlag(Qt::WindowFullScreen)) {
-        // Clearing only the full-screen flag restores the previous
-        // (maximized or normal) window state that Qt preserved.
-        setWindowState(windowState() & ~Qt::WindowFullScreen);
-    } else {
-        showFullScreen();
-    }
+    // Toggle only the full-screen flag so the underlying maximized/normal
+    // state is preserved: leaving full screen returns the window to whatever
+    // it was before, in particular a maximized window stays maximized.
+    // QWidget::showFullScreen() would instead clear the maximized flag, so it
+    // is deliberately not used here.
+    setWindowState(windowState() ^ Qt::WindowFullScreen);
 }
 
 void MainWindow::changeEvent(QEvent* event)
