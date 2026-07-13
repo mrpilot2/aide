@@ -3,6 +3,7 @@
 #include <QComboBox>
 #include <QFontComboBox>
 #include <QFormLayout>
+#include <QSignalBlocker>
 #include <QSpinBox>
 
 #include "aide/appearancemanager.hpp"
@@ -25,10 +26,6 @@ AppearancePage::AppearancePage(aide::AppearanceManager& manager,
     , m_fontCombo(new QFontComboBox(this))
     , m_fontSizeSpinBox(new QSpinBox(this))
 {
-    for (const auto& name : manager.themeNames()) {
-        m_themeCombo->addItem(name);
-    }
-
     m_fontCombo->setFontFilters(QFontComboBox::ScalableFonts);
 
     m_fontSizeSpinBox->setRange(MIN_FONT_SIZE, MAX_FONT_SIZE);
@@ -57,6 +54,13 @@ bool AppearancePage::isModified() const
 
 void AppearancePage::syncControlsToManager()
 {
+    // Repopulate the theme list rather than doing it once in the constructor:
+    // consumers may register themes after ApplicationBuilder (and thus this
+    // page) is constructed, so refresh whenever the dialog is (re)opened.
+    const QSignalBlocker blocker(m_themeCombo);
+    m_themeCombo->clear();
+    m_themeCombo->addItems(m_manager.themeNames());
+
     m_themeCombo->setCurrentText(m_manager.activeThemeName());
     m_fontCombo->setCurrentFont(QFont{m_manager.activeFont().family()});
     m_fontSizeSpinBox->setValue(m_manager.activeFont().pointSize());
