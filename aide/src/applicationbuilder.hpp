@@ -2,6 +2,7 @@
 #define AIDE_APPLICATION_BUILDER_HPP
 
 #include <aide/appearancemanager.hpp>
+#include <aide/applicationconfig.hpp>
 #include <settings/keymap/keymappage.hpp>
 #include <settings/settingspageregistry.hpp>
 
@@ -22,7 +23,9 @@ namespace aide
     class ApplicationBuilder
     {
     public:
-        ApplicationBuilder();
+        explicit ApplicationBuilder(ApplicationConfig config = {});
+
+        [[nodiscard]] const ApplicationConfig& config() const;
 
         [[nodiscard]] std::shared_ptr<aide::LoggerInterface> logger() const;
 
@@ -49,6 +52,8 @@ namespace aide
 
         aide::AppearanceManager m_appearanceManager{
             AideSettingsProvider::versionableSettings()};
+
+        aide::ApplicationConfig m_config;
 
         std::shared_ptr<AideSettingsProvider> m_settingsProvider;
 

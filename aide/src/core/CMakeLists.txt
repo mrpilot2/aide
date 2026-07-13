@@ -11,6 +11,8 @@ target_sources(
           actionregistry.cpp
           appearancemanager.cpp
           ../include/aide/appearancemanager.hpp
+          ../applicationconfig.cpp
+          ../include/aide/applicationconfig.hpp
           # Icon theme resource lives with AppearanceManager, which activates
           # the aide-dark / aide-light themes and must be able to resolve
           # :/aide/icons regardless of whether the GUI layer is linked.

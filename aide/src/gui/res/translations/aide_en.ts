@@ -61,6 +61,11 @@
         <comment>MainWindow</comment>
         <translation></translation>
     </message>
+    <message>
+        <source>&amp;View</source>
+        <comment>MainWindow</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SearchFilterWidget</name>
@@ -196,6 +201,14 @@
     <message>
         <source>About</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Full Screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggle full screen mode</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

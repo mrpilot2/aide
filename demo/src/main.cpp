@@ -27,7 +27,13 @@ int main(int argc, char* argv[])
     aide::Application::setApplicationName("Fancy_Aide_Demo");
     aide::Application::setApplicationDisplayName("Fancy Aide Demo");
 
-    const aide::Application app(argc, argv);
+    // The demo keeps every built-in feature enabled and passes the config
+    // explicitly to show the API. A consumer that did not want the
+    // View -> Full Screen action would disable it here, e.g.:
+    //   config.setEnabled(
+    //       aide::ApplicationConfig::Feature::ViewFullscreenAction, false);
+    const aide::ApplicationConfig config;
+    const aide::Application app(argc, argv, config);
 
     app.translator()->addAdditionalTranslationFilePath(
         QDir(":/demo_translations"), QString("demo"));

@@ -5,6 +5,7 @@
 #include <memory>
 
 #include <aide/actionregistryinterface.hpp>
+#include <aide/applicationconfig.hpp>
 
 #include "applicationclose.hpp"
 #include "loggerinterface.hpp"
@@ -29,7 +30,8 @@ namespace aide::gui
     {
         Q_OBJECT
     public:
-        explicit MainWindow(LoggerPtr loggerInterface, QWidget* parent);
+        MainWindow(LoggerPtr loggerInterface, ApplicationConfig config,
+                   QWidget* parent);
         ~MainWindow() override;
         MainWindow(const MainWindow&)             = delete;
         MainWindow& operator=(const MainWindow&)  = delete;
@@ -50,15 +52,24 @@ namespace aide::gui
     public slots:
         void refreshIcons();
 
+    protected:
+        void changeEvent(QEvent* event) override;
+
     private:
         void closeEvent(QCloseEvent* event) override;
 
         void registerActions(const ActionRegistryInterfacePtr& actionRegistry);
 
+        void registerViewMenu(const ActionRegistryInterfacePtr& actionRegistry);
+
+        void toggleFullScreen();
+
         [[nodiscard]] static QIcon createIconFromTheme(
             const std::string& iconName);
 
         LoggerPtr logger;
+
+        ApplicationConfig m_config;
 
         MainWindowControllerPtr m_controller;
 
@@ -66,6 +77,7 @@ namespace aide::gui
         std::unique_ptr<Ui::MainWindow> m_ui;
         std::shared_ptr<QAction> m_actionSettings;
         std::shared_ptr<QAction> m_actionQuit;
+        std::shared_ptr<QAction> m_actionFullScreen;
         std::shared_ptr<QAction> m_actionAboutAide;
         std::shared_ptr<QAction> m_actionAboutQt;
     };

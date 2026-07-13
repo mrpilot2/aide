@@ -52,6 +52,7 @@ target_sources(
     aidetableviewtest.cpp
     aidetreeviewtest.cpp
     appearancemanagertest.cpp
+    applicationconfigtest.cpp
     buildinformationtest.cpp
     hierarchicalidtest.cpp
     mocksettings.cpp
