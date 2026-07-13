@@ -301,6 +301,26 @@ TEST_CASE("AppearanceManager Dark theme uses light icon set",
 }
 
 TEST_CASE(
+    "AppearanceManager consumer theme reusing a bundled icon set keeps the "
+    "built-in search path",
+    "[AppearanceManager]")
+{
+    // A consumer theme that reuses aIDE's aide-dark icons but registers no
+    // search paths of its own must still resolve them from :/aide/icons.
+    AppearanceManager manager{std::make_shared<MockSettings>()};
+    manager.registerTheme({.name            = "Consumer",
+                           .palette         = QPalette{},
+                           .iconThemeName   = "aide-dark",
+                           .iconSearchPaths = {}});
+
+    manager.applyAppearance("Consumer", QApplication::font().family(),
+                            QApplication::font().pointSize());
+
+    REQUIRE(QIcon::themeName() == "aide-dark");
+    REQUIRE(QIcon::themeSearchPaths().contains(":/aide/icons"));
+}
+
+TEST_CASE(
     "AppearanceManager System theme icon set matches resolved color scheme",
     "[AppearanceManager]")
 {

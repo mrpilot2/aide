@@ -304,7 +304,14 @@ void AppearanceManager::applyIconSettings(const Theme& theme)
 
     if (!iconThemeName.isEmpty()) {
         QIcon::setThemeName(iconThemeName);
-        QIcon::setThemeSearchPaths(theme.iconSearchPaths);
+        // Keep the built-in resource path searchable so consumer themes that
+        // reuse aIDE's bundled aide-dark / aide-light icon themes resolve even
+        // when they register no icon search paths of their own.
+        auto searchPaths = theme.iconSearchPaths;
+        if (!searchPaths.contains(BUILTIN_ICON_SEARCH_PATH)) {
+            searchPaths.append(BUILTIN_ICON_SEARCH_PATH);
+        }
+        QIcon::setThemeSearchPaths(searchPaths);
     }
 }
 
