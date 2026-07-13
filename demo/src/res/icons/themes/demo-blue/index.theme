@@ -1,0 +1,16 @@
+[Icon Theme]
+Name=demo-blue
+Comment=Demo Blue custom icons (white glyph on a blue badge) for light backgrounds
+Directories=scalable/actions,scalable/places
+
+[scalable/actions]
+Size=48
+Type=Scalable
+MinSize=1
+MaxSize=256
+
+[scalable/places]
+Size=48
+Type=Scalable
+MinSize=1
+MaxSize=256
