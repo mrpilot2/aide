@@ -51,6 +51,7 @@ namespace aide
         Theme& findTheme(const QString& name);
         const Theme& findTheme(const QString& name) const;
         void restoreFromSettings();
+        void honorPersistedThemeIfPending(const QString& themeName);
         void reapplySystemTheme();
 
         std::shared_ptr<SettingsInterface> m_settings;
