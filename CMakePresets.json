@@ -271,7 +271,11 @@
       },
       "execution": {
         "noTestsAction": "error",
-        "stopOnFailure": true
+        "stopOnFailure": true,
+        "repeat": {
+          "mode": "until-pass",
+          "count": 3
+        }
       }
     },
 
