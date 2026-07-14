@@ -63,5 +63,3 @@ target_sources(
 )
 
 target_link_libraries(AideBuildInformation)
-
-target_compile_features(AideBuildInformation INTERFACE cxx_std_14)

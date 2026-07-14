@@ -79,8 +79,6 @@ target_include_directories(
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}/../include/aide/gui
 )
 
-target_compile_features(AideGui PUBLIC cxx_std_17)
-
 target_link_libraries(
   AideGui
   PRIVATE

@@ -26,5 +26,3 @@ target_link_libraries(
   AideUtils
   PRIVATE aide_coverage aide_options aide_warnings
 )
-
-target_compile_features(AideUtils PUBLIC cxx_std_17)

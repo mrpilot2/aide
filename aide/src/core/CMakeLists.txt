@@ -82,8 +82,6 @@ target_link_libraries(
   PRIVATE Aide::AideBuildInformation aide_coverage aide_options aide_warnings
 )
 
-target_compile_features(AideCore PRIVATE cxx_std_17)
-
 if(WIN32)
   target_compile_definitions(
     AideCore

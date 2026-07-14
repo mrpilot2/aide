@@ -10,6 +10,8 @@ project(aide LANGUAGES CXX VERSION ${VERSION})
 
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+include(cmake/CheckRequiredCXXStandard.cmake)
+
 include(cmake/PreventInSourceBuilds.cmake)
 include(ProjectOptions.cmake)
 

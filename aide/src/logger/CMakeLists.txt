@@ -50,5 +50,3 @@ target_compile_definitions(
   AideLogger
   PUBLIC SPDLOG_ACTIVE_LEVEL=${AIDE_LOG_LEVEL}
 )
-
-target_compile_features(AideLogger PUBLIC cxx_std_20)

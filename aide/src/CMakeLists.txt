@@ -36,8 +36,6 @@ target_link_libraries(
     aide_warnings
 )
 
-target_compile_features(AideQt${QT_VERSION_MAJOR}Application PUBLIC cxx_std_20)
-
 if(WIN32)
   target_compile_definitions(
     AideCore

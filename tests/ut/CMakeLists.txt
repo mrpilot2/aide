@@ -13,7 +13,6 @@ target_link_libraries(
   PRIVATE Aide::AideApplication Qt::Widgets aide_options aide_warnings
           aide_coverage
 )
-target_compile_features(aide_catch_main PUBLIC cxx_std_11)
 
 # Separate entry point for the [Application] tests: aide::Application is itself
 # a QApplication, so those tests must not run alongside the process-global
@@ -27,7 +26,6 @@ target_link_libraries(
   PUBLIC Catch2::Catch2
   PRIVATE Aide::AideApplication aide_options aide_warnings aide_coverage
 )
-target_compile_features(aide_catch_main_application PUBLIC cxx_std_11)
 
 set(CMAKE_AUTORCC ON)
 
