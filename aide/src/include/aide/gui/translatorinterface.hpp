@@ -5,6 +5,7 @@
 #include <string>
 
 class QDir;
+class QString;
 
 namespace aide::gui
 {

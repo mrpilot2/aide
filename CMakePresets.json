@@ -175,7 +175,7 @@
     { "name": "client-unix-shared-debug",   "inherits": ["clang","shared","debug","role-client", "platform-unix"] },
     { "name": "client-unix-shared-release", "inherits": ["clang","shared","release","role-client", "platform-unix"] },
 
-    { "name": "ci-strict-unix-static-debug",   "inherits": ["clang","static","debug","role-ci-strict", "platform-unix"], "cacheVariables": { "CMAKE_DEBUG_POSTFIX": "_d_static" } },
+    { "name": "ci-strict-unix-static-debug",   "inherits": ["clang","static","debug","role-ci-strict", "platform-unix"], "cacheVariables": { "CMAKE_DEBUG_POSTFIX": "_d_static", "CMAKE_VERIFY_INTERFACE_HEADER_SETS": "ON" } },
     { "name": "ci-strict-unix-static-release", "inherits": ["clang","static","release","role-ci-strict", "platform-unix"], "cacheVariables": { "CMAKE_RELEASE_POSTFIX": "_static" } },
     { "name": "ci-strict-unix-shared-debug",   "inherits": ["clang","shared","debug","role-ci-strict", "platform-unix"], "cacheVariables": { "CMAKE_DEBUG_POSTFIX": "_d" } },
     { "name": "ci-strict-unix-shared-release", "inherits": ["clang","shared","release","role-ci-strict", "platform-unix"] },

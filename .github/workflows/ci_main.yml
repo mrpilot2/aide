@@ -16,32 +16,28 @@ jobs:
     uses: ./.github/workflows/clang-format.yml
     secrets: inherit
 
-  abi_compliance_check:
+  verify_interface_header_sets:
     needs: clang_format
     # if clang-format changes code a new build is triggered, skip executing this build
     if: ${{ needs.clang_format.outputs.pushed == 'false' }}
+    uses: ./.github/workflows/verify_interface_header_sets.yml
+
+  abi_compliance_check:
+    needs: verify_interface_header_sets
     uses: ./.github/workflows/abi_compliance_check.yml
 
   build_and_test:
-    needs: clang_format
-    # if clang-format changes code a new build is triggered, skip executing this build
-    if: ${{ needs.clang_format.outputs.pushed == 'false' }}
+    needs: verify_interface_header_sets
     uses: ./.github/workflows/build_and_test.yml
 
   coverage:
-    needs: clang_format
-    # if clang-format changes code a new build is triggered, skip executing this build
-    if: ${{ needs.clang_format.outputs.pushed == 'false' }}
+    needs: verify_interface_header_sets
     uses: ./.github/workflows/coverage.yml
 
   build_and_test_installed:
-    needs: clang_format
-    # if clang-format changes code a new build is triggered, skip executing this build
-    if: ${{ needs.clang_format.outputs.pushed == 'false' }}
+    needs: verify_interface_header_sets
     uses: ./.github/workflows/install_and_test.yml
 
   static_analyzer:
-    needs: clang_format
-    # if clang-format changes code a new build is triggered, skip executing this build
-    if: ${{ needs.clang_format.outputs.pushed == 'false' }}
+    needs: verify_interface_header_sets
     uses: ./.github/workflows/static_analyzer.yml

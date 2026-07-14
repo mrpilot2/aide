@@ -1,0 +1,28 @@
+name: CI - Build and Test
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    name: Verify Interface Header Sets
+
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - id: setup_deps
+        uses: ./.github/actions/setup_deps
+
+      # Static Debug
+      - name: "Static Debug: Configure"
+        run: cmake --preset ci-strict-unix-static-debug
+
+      - name: "Static Debug: Verify header file sets"
+        run: cmake --build --preset build-ci-strict-unix-static-debug --target all_verify_interface_header_sets
