@@ -137,7 +137,7 @@
     <name>SearchLineEdit</name>
     <message>
         <source>Show recent searches</source>
-        <translation type="unfinished"></translation>
+        <translation>Letzte Suchanfragen anzeigen</translation>
     </message>
 </context>
 <context>
@@ -152,7 +152,7 @@
     </message>
     <message>
         <source>Search settings…</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen durchsuchen…</translation>
     </message>
 </context>
 <context>
@@ -192,15 +192,15 @@
     <name>aide::gui::AppearancePage</name>
     <message>
         <source>Theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>Design:</translation>
     </message>
     <message>
         <source>Font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Schriftart:</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Größe:</translation>
     </message>
 </context>
 <context>

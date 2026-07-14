@@ -12,47 +12,47 @@
     <name>DemoSettingsPage</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formular</translation>
     </message>
     <message>
         <source>RadioB&amp;utton</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Optionsfeld</translation>
     </message>
     <message>
         <source>CheckBox</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrollkästchen</translation>
     </message>
     <message>
         <source>RadioBu&amp;tton</source>
-        <translation type="unfinished"></translation>
+        <translation>Options&amp;feld</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>3</source>
-        <translation type="unfinished"></translation>
+        <translation>3</translation>
     </message>
     <message>
         <source>Ctrl+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+F</translation>
     </message>
     <message>
         <source>GroupBox</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppenfeld</translation>
     </message>
     <message>
         <source>RadioButton</source>
-        <translation type="unfinished"></translation>
+        <translation>Optionsfeld</translation>
     </message>
     <message>
         <source>Add to table after 1 second</source>
-        <translation type="unfinished"></translation>
+        <translation>Nach 1 Sekunde zur Tabelle hinzufügen</translation>
     </message>
 </context>
 <context>
