@@ -3,7 +3,7 @@
 #define AIDE_AIDE_CONSTANTS_HPP
 
 #include <aide/hierarchicalid.hpp>
-#include <aide/log_helper_macros.hpp>
+#include <aide/logger/log_helper_macros.hpp>
 
 namespace aide::constants
 {

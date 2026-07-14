@@ -4,8 +4,8 @@ aIDE provides a structured, spdlog-backed logging system behind a `LoggerInterfa
 
 **Headers:**  
 - `aide/loggerinterface.hpp` — the interface  
-- `aide/loggerfactory.hpp` — for creating named loggers outside of `Application`  
-- `aide/log_helper_macros.hpp` — macro-based logging (avoids `shared_ptr` overhead in hot paths)
+- `aide/logger/loggerfactory.hpp` — for creating named loggers outside of `Application`  
+- `aide/logger/log_helper_macros.hpp` — macro-based logging (avoids `shared_ptr` overhead in hot paths)
 
 ---
 
@@ -35,7 +35,7 @@ Multiple calls with the same name return the same logger instance.
 To create a named logger outside of an `Application` (e.g. in a library component):
 
 ```cpp
-#include <aide/loggerfactory.hpp>
+#include <aide/logger/loggerfactory.hpp>
 
 auto log = aide::core::LoggerFactory::createLogger("my_module");
 ```
@@ -79,10 +79,10 @@ Call this **before** constructing `aide::Application`.
 
 ## Macro-based logging
 
-For hot paths where constructing a `shared_ptr<LoggerInterface>` per call is undesirable, use the logging macros from `aide/log_helper_macros.hpp`. They call into spdlog directly:
+For hot paths where constructing a `shared_ptr<LoggerInterface>` per call is undesirable, use the logging macros from `aide/logger/log_helper_macros.hpp`. They call into spdlog directly:
 
 ```cpp
-#include <aide/log_helper_macros.hpp>
+#include <aide/logger/log_helper_macros.hpp>
 
 // Default logger
 AIDE_LOG_TRACE("trace message: {}", value);

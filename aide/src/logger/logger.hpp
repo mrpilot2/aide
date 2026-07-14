@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include <aide/log_helper_macros.hpp>
+#include <aide/logger/log_helper_macros.hpp>
 #include <aide/loggerinterface.hpp>
 #include <spdlog/spdlog.h>
 #include <string_view>

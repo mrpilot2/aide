@@ -7,7 +7,7 @@
 #include "aboutaidedialog.hpp"
 #include "aboutaideusecase.hpp"
 #include "applicationclosecontroller.hpp"
-#include "loggerfactory.hpp"
+#include "logger/loggerfactory.hpp"
 #include "mainwindow.hpp"
 #include "mainwindowgeometryandstatecontroller.hpp"
 

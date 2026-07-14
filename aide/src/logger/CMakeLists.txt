@@ -10,8 +10,8 @@ target_sources(
       BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/../include
       FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/loggerinterface.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/loggerfactory.hpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/log_helper_macros.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/logger/loggerfactory.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/logger/log_helper_macros.hpp
 )
 
 target_include_directories(

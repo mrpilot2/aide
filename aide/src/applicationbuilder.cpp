@@ -5,7 +5,7 @@
 #include <settings/keymap/keymappage.hpp>
 
 #include "gui/settings/appearancepage.hpp"
-#include "loggerfactory.hpp"
+#include "logger/loggerfactory.hpp"
 
 using aide::ApplicationBuilder;
 using aide::LoggerPtr;

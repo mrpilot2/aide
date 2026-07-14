@@ -51,8 +51,8 @@ aide/aidesettingsprovider.hpp
 aide/aideconstants.hpp
 aide/hierarchicalid.hpp
 aide/loggerinterface.hpp
-aide/loggerfactory.hpp
-aide/log_helper_macros.hpp
+aide/logger/loggerfactory.hpp
+aide/logger/log_helper_macros.hpp
 aide/menucontainerinterface.hpp
 aide/settingsinterface.hpp
 aide/settings/settingspage.hpp
