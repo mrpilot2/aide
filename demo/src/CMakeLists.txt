@@ -44,13 +44,14 @@ add_executable(
 )
 
 target_link_libraries(
-  aide_demo PRIVATE Aide::AideApplication Aide::AideCore aide_warnings
-                    aide_options
+  aide_demo
+  PRIVATE Aide::AideApplication Aide::AideCore aide_warnings aide_options
 )
 
 if(WIN32)
   target_compile_definitions(
-    aide_demo PUBLIC _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING
+    aide_demo
+    PUBLIC _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING
   )
 endif()
 
@@ -58,7 +59,8 @@ if(APPLE)
   add_custom_command(
     TARGET aide_demo
     POST_BUILD
-    COMMAND ${CMAKE_INSTALL_NAME_TOOL} -add_rpath "${Qt5_DIR}/../../"
-            $<TARGET_FILE:aide_demo>
+    COMMAND
+      ${CMAKE_INSTALL_NAME_TOOL} -add_rpath "${Qt5_DIR}/../../"
+      $<TARGET_FILE:aide_demo>
   )
 endif()

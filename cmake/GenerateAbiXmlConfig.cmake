@@ -10,10 +10,7 @@ function(unescape_args)
     list(REMOVE_ITEM ${arg} "")
 
     string(REPLACE ";" "\n" ${arg} "${${arg}}")
-    set(${arg}
-        "${${arg}}"
-        PARENT_SCOPE
-    )
+    set(${arg} "${${arg}}" PARENT_SCOPE)
   endforeach()
 endfunction()
 
@@ -46,12 +43,19 @@ if(ABI_SEARCH_LIBS)
   endforeach()
 
   list(REMOVE_DUPLICATES search_libs)
-  list(REPLACE ";" "\n" ABI_SEARCH_LIBS "${search_libs}")
+  list(
+    REPLACE
+    ";"
+    "\n"
+    ABI_SEARCH_LIBS
+    "${search_libs}"
+  )
 endif()
 
 message("Writing file to ${CMAKE_BINARY_DIR}/abi_compliance_check.xml")
 # generate XML for abi-compliance-checker
 configure_file(
   "${CMAKE_ABI_DIR}/abi_compliance_config.xml.in"
-  "${CMAKE_BINARY_DIR}/abi_compliance_config.xml" @ONLY
+  "${CMAKE_BINARY_DIR}/abi_compliance_config.xml"
+  @ONLY
 )

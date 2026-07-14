@@ -23,8 +23,9 @@ string(REPLACE ";" "$<SEMICOLON>" APP_COMPILE_FLAGS "${APP_COMPILE_FLAGS}")
 # two step process so that generator expressions are evaluated
 add_custom_command(
   OUTPUT "${CMAKE_BINARY_DIR}/include/aide/buildinformation.hpp"
-  COMMAND
-    ${CMAKE_COMMAND} ARGS -DOUTPUT_PATH=${CMAKE_BINARY_DIR}
+  COMMAND ${CMAKE_COMMAND}
+  ARGS
+    -DOUTPUT_PATH=${CMAKE_BINARY_DIR}
     -DCMAKE_CURRENT_LIST_DIR=${CMAKE_CURRENT_LIST_DIR}
     -DPROJECT_VERSION="${PROJECT_VERSION}"
     -DPROJECT_VERSION_MAJOR="${PROJECT_VERSION_MAJOR}"
@@ -44,8 +45,8 @@ add_custom_target(
 )
 
 set_source_files_properties(
-  ${CMAKE_BINARY_DIR}/include/aide/buildinformation.hpp PROPERTIES GENERATED
-                                                                   TRUE
+  ${CMAKE_BINARY_DIR}/include/aide/buildinformation.hpp
+  PROPERTIES GENERATED TRUE
 )
 
 add_library(AideBuildInformation INTERFACE)
@@ -61,8 +62,10 @@ target_sources(
 )
 
 target_include_directories(
-  AideBuildInformation INTERFACE $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include/>
-                                 $<INSTALL_INTERFACE:include/aide>
+  AideBuildInformation
+  INTERFACE
+    $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include/>
+    $<INSTALL_INTERFACE:include/aide>
 )
 
 target_link_libraries(AideBuildInformation)

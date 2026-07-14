@@ -3,7 +3,8 @@ execute_process(
     ${ABI_CHECKER} -l libAide -v1 ${LATEST_RELEASE_TAG} -old
     ${CMAKE_BINARY_DIR}/abibase/build/aide/abi_compliance_config.xml -v2
     ${GIT_HASH} -new ${CMAKE_BINARY_DIR}/aide/abi_compliance_config.xml
-  WORKING_DIRECTORY ${CMAKE_BINARY_DIR} COMMAND_ECHO STDOUT
+  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+  COMMAND_ECHO STDOUT
   RESULT_VARIABLE res_var
 )
 
@@ -13,41 +14,47 @@ if(NOT "${res_var}" STREQUAL "0")
   if(NOT "${res_var}" STREQUAL "1")
     message(
       FATAL_ERROR
-        "ABI compliance checker error ${res_var}. Status of Binary and Source compatibility cannot be checked from return-code. Fix ABI compliance checker error and try again."
+      "ABI compliance checker error ${res_var}. Status of Binary and Source compatibility cannot be checked from return-code. Fix ABI compliance checker error and try again."
     )
   else()
     message(
       STATUS
-        "ABI compliance checker detected incompatibility. If any commit between ${GIT_HASH} (HEAD) and ${LATEST_RELEASE_TAG} is marked as breaking change, this is OK."
+      "ABI compliance checker detected incompatibility. If any commit between ${GIT_HASH} (HEAD) and ${LATEST_RELEASE_TAG} is marked as breaking change, this is OK."
     )
 
     execute_process(
       COMMAND git rev-list --ancestry-path ${LATEST_RELEASE_TAG}..${GIT_HASH}
       OUTPUT_VARIABLE GIT_HASHES_TO_BE_CHECKED
     )
-    string(REPLACE "\n" ";" GIT_HASHES_TO_BE_CHECKED
-                   ${GIT_HASHES_TO_BE_CHECKED}
+    string(
+      REPLACE "\n"
+      ";"
+      GIT_HASHES_TO_BE_CHECKED
+      ${GIT_HASHES_TO_BE_CHECKED}
     )
     set(found_breaking_change FALSE)
     foreach(git_hash ${GIT_HASHES_TO_BE_CHECKED})
       message(
-        STATUS "Checking if commit ${git_hash} is marked as breaking change."
+        STATUS
+        "Checking if commit ${git_hash} is marked as breaking change."
       )
 
       execute_process(
-        COMMAND git show -s ${git_hash} OUTPUT_VARIABLE COMMIT_MESSAGE
+        COMMAND git show -s ${git_hash}
+        OUTPUT_VARIABLE COMMIT_MESSAGE
       )
 
       message(STATUS "Found commit message ${COMMIT_MESSAGE}")
 
       string(STRIP "${COMMIT_MESSAGE}" COMMIT_MESSAGE)
 
-      if("${COMMIT_MESSAGE}" MATCHES ".*BREAKING CHANGE:.*"
-         OR "${COMMIT_MESSAGE}" MATCHES "^[a-z]+(\(.*\))?!:.*"
+      if(
+        "${COMMIT_MESSAGE}" MATCHES ".*BREAKING CHANGE:.*"
+        OR "${COMMIT_MESSAGE}" MATCHES "^[a-z]+(\(.*\))?!:.*"
       )
         message(
           STATUS
-            "Commit ${git_hash} is marked as breaking change. Major version will be increased in next release. All OK"
+          "Commit ${git_hash} is marked as breaking change. Major version will be increased in next release. All OK"
         )
         set(found_breaking_change TRUE)
         break()
@@ -57,14 +64,13 @@ if(NOT "${res_var}" STREQUAL "0")
     if(NOT found_breaking_change)
       message(
         FATAL_ERROR
-          "ABI compliance checker detected incompatibility but no commit is marked as breaking change. Find the breaking change and mark the commit as such to make this check pass."
+        "ABI compliance checker detected incompatibility but no commit is marked as breaking change. Find the breaking change and mark the commit as such to make this check pass."
       )
     endif()
-
   endif()
 else()
   message(
     STATUS
-      "Generating ABI compliance report finished without any error. Binary and Source compatibility is given."
+    "Generating ABI compliance report finished without any error. Binary and Source compatibility is given."
   )
 endif()

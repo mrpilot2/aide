@@ -13,18 +13,22 @@ function(target_include_system_directories target)
       endif()
       if(${scope} STREQUAL "INTERFACE" OR ${scope} STREQUAL "PUBLIC")
         target_include_directories(
-          ${target} ${_SYSTEM} ${scope}
+          ${target}
+          ${_SYSTEM}
+          ${scope}
           "$<BUILD_INTERFACE:${lib_include_dirs}>"
           "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
         )
       else()
         target_include_directories(
-          ${target} ${_SYSTEM} ${scope} ${lib_include_dirs}
+          ${target}
+          ${_SYSTEM}
+          ${scope}
+          ${lib_include_dirs}
         )
       endif()
     endforeach()
   endforeach()
-
 endfunction()
 
 # Include the directories of a library target as system directories (which

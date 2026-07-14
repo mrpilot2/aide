@@ -6,11 +6,7 @@ include(cmake/VersionFromGit.cmake)
 
 version_from_git()
 
-project(
-  aide
-  LANGUAGES CXX
-  VERSION ${VERSION}
-)
+project(aide LANGUAGES CXX VERSION ${VERSION})
 
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -29,14 +25,12 @@ enable_testing()
 add_subdirectory(tests)
 
 if(PROJECT_IS_TOP_LEVEL)
-
   option(aide_ENABLE_DEMO "Builds a small demo application" ON)
   add_feature_info(EnableDemo aide_ENABLE_DEMO "Builds the demo application.")
 
   if(aide_ENABLE_DEMO)
     add_subdirectory(demo)
   endif()
-
 endif()
 
 feature_summary(WHAT ALL)

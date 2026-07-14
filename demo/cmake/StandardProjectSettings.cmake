@@ -1,21 +1,26 @@
 macro(standard_project_settings)
   # Set a default build type if none was specified
   get_property(IS_MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
-  if(NOT ${IS_MULTI_CONFIG}
-     AND NOT CMAKE_BUILD_TYPE
-     AND NOT CMAKE_CONFIGURATION_TYPES
+  if(
+    NOT ${IS_MULTI_CONFIG}
+    AND NOT CMAKE_BUILD_TYPE
+    AND NOT CMAKE_CONFIGURATION_TYPES
   )
     message(
-      STATUS "Setting build type to 'RelWithDebInfo' as none was specified."
+      STATUS
+      "Setting build type to 'RelWithDebInfo' as none was specified."
     )
-    set(CMAKE_BUILD_TYPE
-        RelWithDebInfo
-        CACHE STRING "Choose the type of build." FORCE
+    set(
+      CMAKE_BUILD_TYPE
+      RelWithDebInfo
+      CACHE STRING
+      "Choose the type of build."
+      FORCE
     )
     # Set the possible values of build type for cmake-gui, ccmake
     set_property(
-      CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel"
-                                      "RelWithDebInfo"
+      CACHE CMAKE_BUILD_TYPE
+      PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo"
     )
   endif()
 
@@ -36,5 +41,4 @@ macro(standard_project_settings)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
   endif()
-
 endmacro()

@@ -64,9 +64,10 @@ target_sources(
 
 target_include_directories(
   AideGui
-  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/>
-         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/aide>
-         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+  PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/aide>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}/../include/aide/gui
 )
 
@@ -74,14 +75,15 @@ target_compile_features(AideGui PUBLIC cxx_std_17)
 
 target_link_libraries(
   AideGui
-  PRIVATE Aide::AideCore
-          Aide::AideLogger
-          Aide::AideWidgets
-          Aide::AideUtils
-          Qt::Widgets
-          aide_options
-          aide_warnings
-          aide_coverage
+  PRIVATE
+    Aide::AideCore
+    Aide::AideLogger
+    Aide::AideWidgets
+    Aide::AideUtils
+    Qt::Widgets
+    aide_options
+    aide_warnings
+    aide_coverage
 )
 
 set_source_files_properties(

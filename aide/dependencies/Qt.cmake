@@ -1,30 +1,22 @@
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
 
-find_package(
-  Qt6
-  COMPONENTS Core Widgets
-  QUIET
-)
+find_package(Qt6 COMPONENTS Core Widgets QUIET)
 
 if(TARGET Qt6::Core)
-  find_package(
-    Qt6
-    COMPONENTS Core Widgets
-    REQUIRED
-  )
+  find_package(Qt6 COMPONENTS Core Widgets REQUIRED)
 
   find_package(Qt6LinguistTools)
 else()
   if(NOT TARGET Qt5::Core)
-    find_package(
-      Qt5
-      COMPONENTS Core Widgets
-      REQUIRED
-    )
+    find_package(Qt5 COMPONENTS Core Widgets REQUIRED)
 
     if(TARGET Qt5::Core)
       set_target_properties(
-        Qt5::Core Qt5::Widgets Qt5::moc Qt5::uic Qt5::rcc
+        Qt5::Core
+        Qt5::Widgets
+        Qt5::moc
+        Qt5::uic
+        Qt5::rcc
         PROPERTIES IMPORTED_GLOBAL TRUE
       )
       if(NOT TARGET Qt::Core)

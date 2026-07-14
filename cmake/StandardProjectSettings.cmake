@@ -1,16 +1,20 @@
 # Set a default build type if none was specified
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   message(
-    STATUS "Setting build type to 'RelWithDebInfo' as none was specified."
+    STATUS
+    "Setting build type to 'RelWithDebInfo' as none was specified."
   )
-  set(CMAKE_BUILD_TYPE
-      RelWithDebInfo
-      CACHE STRING "Choose the type of build." FORCE
+  set(
+    CMAKE_BUILD_TYPE
+    RelWithDebInfo
+    CACHE STRING
+    "Choose the type of build."
+    FORCE
   )
   # Set the possible values of build type for cmake-gui, ccmake
   set_property(
-    CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel"
-                                    "RelWithDebInfo"
+    CACHE CMAKE_BUILD_TYPE
+    PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo"
   )
 endif()
 
@@ -52,7 +56,7 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" AND MSVC_VERSION GREATER 1900)
 else()
   message(
     STATUS
-      "No colored compiler diagnostic set for '${CMAKE_CXX_COMPILER_ID}' compiler."
+    "No colored compiler diagnostic set for '${CMAKE_CXX_COMPILER_ID}' compiler."
   )
 endif()
 

@@ -1,14 +1,26 @@
 macro(add_license_dependency)
   set(noValueArgs MARKDOWN_ONLY)
-  set(oneValueArgs PROJECT PROJECT_URL VERSION LICENSE LICENSE_URL)
+  set(
+    oneValueArgs
+    PROJECT
+    PROJECT_URL
+    VERSION
+    LICENSE
+    LICENSE_URL
+  )
   set(multiValueArgs "")
   cmake_parse_arguments(
-    ALD "${noValueArgs}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN}
+    ALD
+    "${noValueArgs}"
+    "${oneValueArgs}"
+    "${multiValueArgs}"
+    ${ARGN}
   )
 
   if(NOT ALD_MARKDOWN_ONLY)
-    set(table_content
-        "${table_content}<tr valign=\"top\"><td class=\"firstColumn\"><a class=\"name\"
+    set(
+      table_content
+      "${table_content}<tr valign=\"top\"><td class=\"firstColumn\"><a class=\"name\"
     href=\"${ALD_PROJECT_URL}\">${ALD_PROJECT}</a> <span class=\"version\">${ALD_VERSION}</span></td><td
     class=\"secondColumn\"><a
     class=\"license\"
@@ -16,15 +28,17 @@ macro(add_license_dependency)
     )
   endif()
 
-  set(markdown_content
-      "${markdown_content}### [${ALD_PROJECT}](${ALD_PROJECT_URL})\n\nVersion: ${ALD_VERSION}\n\nLicense: [${ALD_LICENSE}](${ALD_LICENSE_URL})\n\n"
+  set(
+    markdown_content
+    "${markdown_content}### [${ALD_PROJECT}](${ALD_PROJECT_URL})\n\nVersion: ${ALD_VERSION}\n\nLicense: [${ALD_LICENSE}](${ALD_LICENSE_URL})\n\n"
   )
 
   if(AIDE_CHECK_LICENSES_AVAILABILITY)
     find_program(CURL curl)
     execute_process(
-      COMMAND ${CURL} --output /dev/null --silent --head --fail
-              ${ALD_LICENSE_URL} RESULT_VARIABLE LICENSE_NOT_AVAIL
+      COMMAND
+        ${CURL} --output /dev/null --silent --head --fail ${ALD_LICENSE_URL}
+      RESULT_VARIABLE LICENSE_NOT_AVAIL
     )
     if(LICENSE_NOT_AVAIL GREATER 0)
       message(SEND_ERROR "License ${ALD_LICENSE_URL} cannot be accessed")

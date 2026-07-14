@@ -3,8 +3,9 @@ include("${CMAKE_CURRENT_LIST_DIR}/Utilities.cmake")
 macro(detect_architecture)
   # detect the architecture
   string(TOLOWER "${CMAKE_SYSTEM_PROCESSOR}" CMAKE_SYSTEM_PROCESSOR_LOWER)
-  if(CMAKE_SYSTEM_PROCESSOR_LOWER STREQUAL x86 OR CMAKE_SYSTEM_PROCESSOR_LOWER
-                                                  MATCHES "^i[3456]86$"
+  if(
+    CMAKE_SYSTEM_PROCESSOR_LOWER STREQUAL x86
+    OR CMAKE_SYSTEM_PROCESSOR_LOWER MATCHES "^i[3456]86$"
   )
     set(VCVARSALL_ARCH x86)
   elseif(
@@ -15,8 +16,9 @@ macro(detect_architecture)
     set(VCVARSALL_ARCH x64)
   elseif(CMAKE_SYSTEM_PROCESSOR_LOWER STREQUAL arm)
     set(VCVARSALL_ARCH arm)
-  elseif(CMAKE_SYSTEM_PROCESSOR_LOWER STREQUAL arm64
-         OR CMAKE_SYSTEM_PROCESSOR_LOWER STREQUAL aarch64
+  elseif(
+    CMAKE_SYSTEM_PROCESSOR_LOWER STREQUAL arm64
+    OR CMAKE_SYSTEM_PROCESSOR_LOWER STREQUAL aarch64
   )
     set(VCVARSALL_ARCH arm64)
   else()
@@ -26,7 +28,7 @@ macro(detect_architecture)
       set(VCVARSALL_ARCH x64)
       message(
         STATUS
-          "Unkown architecture CMAKE_SYSTEM_PROCESSOR: ${CMAKE_SYSTEM_PROCESSOR_LOWER} - using x64"
+        "Unkown architecture CMAKE_SYSTEM_PROCESSOR: ${CMAKE_SYSTEM_PROCESSOR_LOWER} - using x64"
       )
     endif()
   endif()
@@ -36,15 +38,17 @@ endmacro()
 function(run_vcvarsall)
   # if MSVC but VSCMD_VER is not set, which means vcvarsall has not run
   if(MSVC AND "$ENV{VSCMD_VER}" STREQUAL "")
-
     # find vcvarsall.bat
     get_filename_component(MSVC_DIR ${CMAKE_CXX_COMPILER} DIRECTORY)
     find_file(
       VCVARSALL_FILE
       NAMES vcvarsall.bat
-      PATHS "${MSVC_DIR}" "${MSVC_DIR}/.." "${MSVC_DIR}/../.."
-            "${MSVC_DIR}/../../../../../../../.."
-            "${MSVC_DIR}/../../../../../../.."
+      PATHS
+        "${MSVC_DIR}"
+        "${MSVC_DIR}/.."
+        "${MSVC_DIR}/../.."
+        "${MSVC_DIR}/../../../../../../../.."
+        "${MSVC_DIR}/../../../../../../.."
       PATH_SUFFIXES "VC/Auxiliary/Build" "Common7/Tools" "Tools"
     )
 
@@ -55,7 +59,7 @@ function(run_vcvarsall)
       # run vcvarsall and print the environment variables
       message(
         STATUS
-          "Running `${VCVARSALL_FILE} ${VCVARSALL_ARCH}` to set up the MSVC environment"
+        "Running `${VCVARSALL_FILE} ${VCVARSALL_ARCH}` to set up the MSVC environment"
       )
       execute_process(
         COMMAND
@@ -73,11 +77,10 @@ function(run_vcvarsall)
 
       # set the environment variables
       set_env_from_string("${VCVARSALL_ENV}")
-
     else()
       message(
         WARNING
-          "Could not find `vcvarsall.bat` for automatic MSVC environment preparation. Please manually open the MSVC command prompt and rebuild the project.
+        "Could not find `vcvarsall.bat` for automatic MSVC environment preparation. Please manually open the MSVC command prompt and rebuild the project.
       "
       )
     endif()

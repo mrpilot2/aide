@@ -116,6 +116,8 @@ configure_file(licenses.hml.in licenses.html @ONLY)
 
 if(AIDE_CHECK_LICENSES_AVAILABILITY)
   configure_file(
-    licenses.md.in ${CMAKE_CURRENT_LIST_DIR}/../../3rd-party-licenses.md @ONLY
+    licenses.md.in
+    ${CMAKE_CURRENT_LIST_DIR}/../../3rd-party-licenses.md
+    @ONLY
   )
 endif()

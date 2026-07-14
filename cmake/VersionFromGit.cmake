@@ -30,7 +30,11 @@ function(version_from_git)
   set(oneValueArgs GIT_EXECUTABLE INCLUDE_HASH LOG TIMESTAMP)
   set(multiValueArgs)
   cmake_parse_arguments(
-    ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN}
+    ARG
+    "${options}"
+    "${oneValueArgs}"
+    "${multiValueArgs}"
+    ${ARGN}
   )
 
   # Defaults
@@ -55,11 +59,13 @@ function(version_from_git)
     RESULT_VARIABLE git_result
     OUTPUT_VARIABLE git_describe
     ERROR_VARIABLE git_error
-    OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_STRIP_TRAILING_WHITESPACE
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    ERROR_STRIP_TRAILING_WHITESPACE
   )
   if(NOT git_result EQUAL 0)
     message(
-      FATAL_ERROR "[MunkeiVersionFromGit] Failed to execute Git: ${git_error}"
+      FATAL_ERROR
+      "[MunkeiVersionFromGit] Failed to execute Git: ${git_error}"
     )
   endif()
 
@@ -70,17 +76,20 @@ function(version_from_git)
     RESULT_VARIABLE git_result
     OUTPUT_VARIABLE git_tag
     ERROR_VARIABLE git_error
-    OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_STRIP_TRAILING_WHITESPACE
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    ERROR_STRIP_TRAILING_WHITESPACE
   )
   if(NOT git_result EQUAL 0)
     message(
-      FATAL_ERROR "[MunkeiVersionFromGit] Failed to execute Git: ${git_error}"
+      FATAL_ERROR
+      "[MunkeiVersionFromGit] Failed to execute Git: ${git_error}"
     )
   endif()
 
-  if(git_tag
-     MATCHES
-     "^v(0|[1-9][0-9]*)[.](0|[1-9][0-9]*)[.](0|[1-9][0-9]*)(-[.0-9A-Za-z-]+)?([+][.0-9A-Za-z-]+)?$"
+  if(
+    git_tag
+      MATCHES
+      "^v(0|[1-9][0-9]*)[.](0|[1-9][0-9]*)[.](0|[1-9][0-9]*)(-[.0-9A-Za-z-]+)?([+][.0-9A-Za-z-]+)?$"
   )
     set(version_major "${CMAKE_MATCH_1}")
     set(version_minor "${CMAKE_MATCH_2}")
@@ -90,7 +99,7 @@ function(version_from_git)
   else()
     message(
       FATAL_ERROR
-        "[MunkeiVersionFromGit] Git tag isn't valid semantic version: [${git_tag}]"
+      "[MunkeiVersionFromGit] Git tag isn't valid semantic version: [${git_tag}]"
     )
   endif()
 
@@ -121,7 +130,6 @@ function(version_from_git)
   endif()
 
   if(NOT git_at_a_tag)
-
     if(ARG_INCLUDE_HASH)
       list(APPEND metadata "${git_hash}")
     endif(ARG_INCLUDE_HASH)
@@ -131,7 +139,6 @@ function(version_from_git)
       string(TIMESTAMP timestamp "${ARG_TIMESTAMP}" ${ARG_UTC})
       list(APPEND metadata "${timestamp}")
     endif(DEFINED ARG_TIMESTAMP)
-
   endif()
 
   # Join
@@ -145,7 +152,7 @@ function(version_from_git)
   if(ARG_LOG)
     message(
       STATUS
-        "[MunkeiVersionFromGit] Version: ${version}
+      "[MunkeiVersionFromGit] Version: ${version}
      Git tag:     [${git_tag}]
      Git hash:    [${git_hash}]
      Decorated:   [${git_describe}]
@@ -156,29 +163,10 @@ function(version_from_git)
   endif(ARG_LOG)
 
   # Set parent scope variables
-  set(GIT_TAG
-      ${git_tag}
-      PARENT_SCOPE
-  )
-  set(SEMVER
-      ${semver}
-      PARENT_SCOPE
-  )
-  set(VERSION
-      ${version}
-      PARENT_SCOPE
-  )
-  set(VERSION_MAJOR
-      ${version_major}
-      PARENT_SCOPE
-  )
-  set(VERSION_MINOR
-      ${version_minor}
-      PARENT_SCOPE
-  )
-  set(VERSION_PATCH
-      ${version_patch}
-      PARENT_SCOPE
-  )
-
+  set(GIT_TAG ${git_tag} PARENT_SCOPE)
+  set(SEMVER ${semver} PARENT_SCOPE)
+  set(VERSION ${version} PARENT_SCOPE)
+  set(VERSION_MAJOR ${version_major} PARENT_SCOPE)
+  set(VERSION_MINOR ${version_minor} PARENT_SCOPE)
+  set(VERSION_PATCH ${version_patch} PARENT_SCOPE)
 endfunction(version_from_git)

@@ -5,30 +5,18 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 include(StandardProjectSettings)
 standard_project_settings()
 
-project(
-  aide_demo
-  LANGUAGES CXX
-  VERSION 0.1.0
-)
+project(aide_demo LANGUAGES CXX VERSION 0.1.0)
 
 if(NOT TARGET Aide::AideApplication)
   find_package(Aide 0.1 REQUIRED)
 endif()
 
-find_package(
-  Qt6
-  COMPONENTS Core Widgets
-  QUIET
-)
+find_package(Qt6 COMPONENTS Core Widgets QUIET)
 
 if(TARGET Qt6::Core)
   find_package(Qt6LinguistTools)
 else()
-  find_package(
-    Qt5
-    COMPONENTS Core Widgets
-    REQUIRED
-  )
+  find_package(Qt5 COMPONENTS Core Widgets REQUIRED)
 
   if(NOT TARGET Qt::Core)
     add_library(Qt::Core ALIAS Qt5::Core)

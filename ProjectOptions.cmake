@@ -4,16 +4,24 @@ include(CheckCXXCompilerFlag)
 include(FeatureSummary)
 
 macro(aide_supports_sanitizers)
-  if((CMAKE_CXX_COMPILER_ID MATCHES ".*Clang.*" OR CMAKE_CXX_COMPILER_ID MATCHES
-                                                   ".*GNU.*") AND NOT WIN32
+  if(
+    (
+      CMAKE_CXX_COMPILER_ID MATCHES ".*Clang.*"
+      OR CMAKE_CXX_COMPILER_ID MATCHES ".*GNU.*"
+    )
+    AND NOT WIN32
   )
     set(SUPPORTS_UBSAN ON)
   else()
     set(SUPPORTS_UBSAN OFF)
   endif()
 
-  if((CMAKE_CXX_COMPILER_ID MATCHES ".*Clang.*" OR CMAKE_CXX_COMPILER_ID MATCHES
-                                                   ".*GNU.*") AND WIN32
+  if(
+    (
+      CMAKE_CXX_COMPILER_ID MATCHES ".*Clang.*"
+      OR CMAKE_CXX_COMPILER_ID MATCHES ".*GNU.*"
+    )
+    AND WIN32
   )
     set(SUPPORTS_ASAN OFF)
   else()
@@ -32,8 +40,10 @@ macro(aide_setup_options)
 
   cmake_dependent_option(
     aide_ENABLE_GLOBAL_HARDENING
-    "Attempt to push hardening options to built dependencies" ON
-    aide_ENABLE_HARDENING OFF
+    "Attempt to push hardening options to built dependencies"
+    ON
+    aide_ENABLE_HARDENING
+    OFF
   )
 
   aide_supports_sanitizers()
@@ -57,12 +67,16 @@ macro(aide_setup_options)
     option(aide_ENABLE_IPO "Enable IPO/LTO" OFF)
     option(aide_WARNINGS_AS_ERRORS "Treat Warnings As Errors" ON)
     option(aide_ENABLE_USER_LINKER "Enable user-selected linker" OFF)
-    option(aide_ENABLE_SANITIZER_ADDRESS "Enable address sanitizer"
-           ${SUPPORTS_ASAN}
+    option(
+      aide_ENABLE_SANITIZER_ADDRESS
+      "Enable address sanitizer"
+      ${SUPPORTS_ASAN}
     )
     option(aide_ENABLE_SANITIZER_LEAK "Enable leak sanitizer" OFF)
-    option(aide_ENABLE_SANITIZER_UNDEFINED "Enable undefined sanitizer"
-           ${SUPPORTS_UBSAN}
+    option(
+      aide_ENABLE_SANITIZER_UNDEFINED
+      "Enable undefined sanitizer"
+      ${SUPPORTS_UBSAN}
     )
     option(aide_ENABLE_SANITIZER_THREAD "Enable thread sanitizer" OFF)
     option(aide_ENABLE_SANITIZER_MEMORY "Enable memory sanitizer" OFF)
@@ -75,57 +89,77 @@ macro(aide_setup_options)
   endif()
 
   add_feature_info(
-    AIDE_ENABLE_COVERAGE aide_ENABLE_COVERAGE "Enable coverage reporting"
+    AIDE_ENABLE_COVERAGE
+    aide_ENABLE_COVERAGE
+    "Enable coverage reporting"
   )
   add_feature_info(
-    AIDE_ENABLE_HARDENING aide_ENABLE_HARDENING "Enable hardening"
+    AIDE_ENABLE_HARDENING
+    aide_ENABLE_HARDENING
+    "Enable hardening"
   )
   add_feature_info(
-    AIDE_ENABLE_GLOBAL_HARDENING aide_ENABLE_GLOBAL_HARDENING
+    AIDE_ENABLE_GLOBAL_HARDENING
+    aide_ENABLE_GLOBAL_HARDENING
     "Attempt to push hardening options to built dependencies"
   )
 
   add_feature_info(AIDE_ENABLE_IPO aide_ENABLE_IPO "Enable IPO/LTO")
   add_feature_info(
-    AIDE_WARNINGS_AS_ERRORS aide_WARNINGS_AS_ERRORS "Treat Warnings As Errors"
+    AIDE_WARNINGS_AS_ERRORS
+    aide_WARNINGS_AS_ERRORS
+    "Treat Warnings As Errors"
   )
   add_feature_info(
-    AIDE_ENABLE_USER_LINKER aide_ENABLE_USER_LINKER
+    AIDE_ENABLE_USER_LINKER
+    aide_ENABLE_USER_LINKER
     "Enable user-selected linker"
   )
   add_feature_info(
-    AIDE_ENABLE_SANITIZER_ADDRESS aide_ENABLE_SANITIZER_ADDRESS
+    AIDE_ENABLE_SANITIZER_ADDRESS
+    aide_ENABLE_SANITIZER_ADDRESS
     "Enable address sanitizer"
   )
   add_feature_info(
-    AIDE_ENABLE_SANITIZER_LEAK aide_ENABLE_SANITIZER_LEAK
+    AIDE_ENABLE_SANITIZER_LEAK
+    aide_ENABLE_SANITIZER_LEAK
     "Enable leak sanitizer"
   )
   add_feature_info(
-    AIDE_ENABLE_SANITIZER_UNDEFINED aide_ENABLE_SANITIZER_UNDEFINED
+    AIDE_ENABLE_SANITIZER_UNDEFINED
+    aide_ENABLE_SANITIZER_UNDEFINED
     "Enable undefined sanitizer"
   )
   add_feature_info(
-    AIDE_ENABLE_SANITIZER_THREAD aide_ENABLE_SANITIZER_THREAD
+    AIDE_ENABLE_SANITIZER_THREAD
+    aide_ENABLE_SANITIZER_THREAD
     "Enable thread sanitizer"
   )
   add_feature_info(
-    AIDE_ENABLE_SANITIZER_MEMORY aide_ENABLE_SANITIZER_MEMORY
+    AIDE_ENABLE_SANITIZER_MEMORY
+    aide_ENABLE_SANITIZER_MEMORY
     "Enable memory sanitizer"
   )
   add_feature_info(
-    AIDE_ENABLE_UNITY_BUILD aide_ENABLE_UNITY_BUILD "Enable unity builds"
+    AIDE_ENABLE_UNITY_BUILD
+    aide_ENABLE_UNITY_BUILD
+    "Enable unity builds"
   )
   add_feature_info(
-    AIDE_ENABLE_CLANG_TIDY aide_ENABLE_CLANG_TIDY "Enable clang-tidy"
+    AIDE_ENABLE_CLANG_TIDY
+    aide_ENABLE_CLANG_TIDY
+    "Enable clang-tidy"
   )
   add_feature_info(
-    AIDE_ENABLE_CPPCHECK aide_ENABLE_CPPCHECK "Enable cpp-check analysis"
+    AIDE_ENABLE_CPPCHECK
+    aide_ENABLE_CPPCHECK
+    "Enable cpp-check analysis"
   )
   add_feature_info(AIDE_ENABLE_PCH aide_ENABLE_PCH "Enable precompiled headers")
   add_feature_info(AIDE_ENABLE_CACHE aide_ENABLE_CACHE "Enable ccache")
   add_feature_info(
-    AIDE_ENABLE_ABI_COMPLIANCE_CHECK aide_ENABLE_ABI_COMPLIANCE_CHECK
+    AIDE_ENABLE_ABI_COMPLIANCE_CHECK
+    aide_ENABLE_ABI_COMPLIANCE_CHECK
     "Enable ABI compliance check"
   )
 
@@ -148,7 +182,6 @@ macro(aide_setup_options)
       aide_ENABLE_ABI_COMPLIANCE_CHECK
     )
   endif()
-
 endmacro()
 
 macro(aide_global_options)
@@ -161,11 +194,12 @@ macro(aide_global_options)
 
   if(aide_ENABLE_HARDENING AND aide_ENABLE_GLOBAL_HARDENING)
     include(cmake/Hardening.cmake)
-    if(NOT SUPPORTS_UBSAN
-       OR aide_ENABLE_SANITIZER_UNDEFINED
-       OR aide_ENABLE_SANITIZER_ADDRESS
-       OR aide_ENABLE_SANITIZER_THREAD
-       OR aide_ENABLE_SANITIZER_LEAK
+    if(
+      NOT SUPPORTS_UBSAN
+      OR aide_ENABLE_SANITIZER_UNDEFINED
+      OR aide_ENABLE_SANITIZER_ADDRESS
+      OR aide_ENABLE_SANITIZER_THREAD
+      OR aide_ENABLE_SANITIZER_LEAK
     )
       set(ENABLE_UBSAN_MINIMAL_RUNTIME FALSE)
     else()
@@ -205,12 +239,14 @@ macro(aide_local_options)
   )
 
   set_target_properties(
-    aide_options PROPERTIES UNITY_BUILD ${aide_ENABLE_UNITY_BUILD}
+    aide_options
+    PROPERTIES UNITY_BUILD ${aide_ENABLE_UNITY_BUILD}
   )
 
   if(aide_ENABLE_PCH)
     target_precompile_headers(
-      aide_options INTERFACE <vector> <string> <utility>
+      aide_options
+      INTERFACE <vector> <string> <utility>
     )
   endif()
 
@@ -250,11 +286,12 @@ macro(aide_local_options)
 
   if(aide_ENABLE_HARDENING AND NOT aide_ENABLE_GLOBAL_HARDENING)
     include(cmake/Hardening.cmake)
-    if(NOT SUPPORTS_UBSAN
-       OR aide_ENABLE_SANITIZER_UNDEFINED
-       OR aide_ENABLE_SANITIZER_ADDRESS
-       OR aide_ENABLE_SANITIZER_THREAD
-       OR aide_ENABLE_SANITIZER_LEAK
+    if(
+      NOT SUPPORTS_UBSAN
+      OR aide_ENABLE_SANITIZER_UNDEFINED
+      OR aide_ENABLE_SANITIZER_ADDRESS
+      OR aide_ENABLE_SANITIZER_THREAD
+      OR aide_ENABLE_SANITIZER_LEAK
     )
       set(ENABLE_UBSAN_MINIMAL_RUNTIME FALSE)
     else()
@@ -262,5 +299,4 @@ macro(aide_local_options)
     endif()
     aide_enable_hardening(aide_options OFF ${ENABLE_UBSAN_MINIMAL_RUNTIME})
   endif()
-
 endmacro()

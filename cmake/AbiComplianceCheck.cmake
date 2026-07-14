@@ -1,8 +1,9 @@
 set(CURRENT_SCRIPT_DIR ${CMAKE_CURRENT_LIST_DIR})
 
 function(aide_enable_compliance_check project_name)
-  if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES
-                                             ".*Clang"
+  if(
+    CMAKE_CXX_COMPILER_ID STREQUAL "GNU"
+    OR CMAKE_CXX_COMPILER_ID MATCHES ".*Clang"
   )
     target_compile_options(${project_name} INTERFACE -g -Og)
     target_link_libraries(${project_name} INTERFACE -Og)
@@ -20,7 +21,9 @@ function(aide_perform_abi_compliance_check)
   # find abi-checker
   find_program(ABI_CHECKER abi-compliance-checker)
   find_package_handle_standard_args(
-    abi-compliance-checker DEFAULT_MSG ABI_CHECKER
+    abi-compliance-checker
+    DEFAULT_MSG
+    ABI_CHECKER
   )
   if(NOT ABI_CHECKER)
     message(FATAL_ERROR "Program abi-compliance-checker not found!")
@@ -35,11 +38,13 @@ function(aide_perform_abi_compliance_check)
   foreach(lib ${ARGV})
     get_target_property(headers ${lib} INCLUDE_DIRECTORIES)
     list(APPEND ABI_HEADERS "${headers}")
-    list(APPEND ABI_INCLUDES
-         "$<TARGET_PROPERTY:${lib},INTERFACE_INCLUDE_DIRECTORIES>"
+    list(
+      APPEND ABI_INCLUDES
+      "$<TARGET_PROPERTY:${lib},INTERFACE_INCLUDE_DIRECTORIES>"
     )
-    list(APPEND ABI_INCLUDES
-         "$<TARGET_PROPERTY:${lib},INTERFACE_SYSTEM_INCLUDE_DIRECTORIES>"
+    list(
+      APPEND ABI_INCLUDES
+      "$<TARGET_PROPERTY:${lib},INTERFACE_SYSTEM_INCLUDE_DIRECTORIES>"
     )
     list(APPEND ABI_LIBS "$<TARGET_LINKER_FILE:${lib}>")
 
@@ -71,10 +76,10 @@ function(aide_perform_abi_compliance_check)
 
   add_custom_command(
     OUTPUT "${CMAKE_BINARY_DIR}/abi_compliance_config.xml"
-    COMMAND
-      ${CMAKE_COMMAND} ARGS -DABI_VERSION="${GIT_HASH}"
-      -DABI_HEADERS="${ABI_HEADERS}" -DABI_LIBS="${ABI_LIBS}"
-      -DABI_INCLUDE_PATHS="${ABI_INCLUDES}"
+    COMMAND ${CMAKE_COMMAND}
+    ARGS
+      -DABI_VERSION="${GIT_HASH}" -DABI_HEADERS="${ABI_HEADERS}"
+      -DABI_LIBS="${ABI_LIBS}" -DABI_INCLUDE_PATHS="${ABI_INCLUDES}"
       -DABI_GCC_OPTIONS="${ABI_GCC_OPTIONS}"
       -DABI_GCC_DEFINES="${ABI_GCC_DEFINES}"
       -DABI_SEARCH_LIBS="${ABI_SEARCH_LIBS}"
@@ -100,9 +105,11 @@ function(aide_perform_abi_compliance_check)
   endif()
 
   execute_process(
-    COMMAND git merge-base --is-ancestor
-            4d2d9b265021cc4fa3f6bcba20f4e4d7f5c40957 ${LATEST_RELEASE_TAG}
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR} COMMAND_ECHO STDOUT
+    COMMAND
+      git merge-base --is-ancestor 4d2d9b265021cc4fa3f6bcba20f4e4d7f5c40957
+      ${LATEST_RELEASE_TAG}
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    COMMAND_ECHO STDOUT
     RESULT_VARIABLE res_var
   )
 
@@ -112,7 +119,7 @@ function(aide_perform_abi_compliance_check)
 
   message(
     STATUS
-      "Abi Compliance Checker - compare against latest release ${LATEST_RELEASE_TAG}"
+    "Abi Compliance Checker - compare against latest release ${LATEST_RELEASE_TAG}"
   )
 
   # get URL for fetching origin
@@ -124,8 +131,7 @@ function(aide_perform_abi_compliance_check)
 
   # generate script for generating the base ABI dump
   file(
-    GENERATE
-    OUTPUT ${CMAKE_BINARY_DIR}/abibase.sh
+    GENERATE OUTPUT ${CMAKE_BINARY_DIR}/abibase.sh
     CONTENT
       "#!/usr/bin/env bash
 set -x
@@ -168,5 +174,4 @@ fi
     COMMENT
       "Checking ABI compatibility of version ${LATEST_RELEASE_TAG} and revision ${GIT_HASH}"
   )
-
 endfunction()

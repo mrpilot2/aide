@@ -10,10 +10,7 @@ function(unescape_args)
     list(REMOVE_ITEM ${arg} "")
 
     string(REPLACE ";" " " ${arg} "${${arg}}")
-    set(${arg}
-        "${${arg}}"
-        PARENT_SCOPE
-    )
+    set(${arg} "${${arg}}" PARENT_SCOPE)
   endforeach()
 endfunction()
 

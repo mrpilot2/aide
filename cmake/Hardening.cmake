@@ -1,24 +1,25 @@
 include(CheckCXXCompilerFlag)
 
 macro(aide_enable_hardening target global ubsan_minimal_runtime)
-
   message(STATUS "** Enabling Hardening (Target ${target}) **")
 
   if(MSVC)
-    set(NEW_COMPILE_OPTIONS
-        "${NEW_COMPILE_OPTIONS} /sdl /DYNAMICBASE /guard:cf"
+    set(
+      NEW_COMPILE_OPTIONS
+      "${NEW_COMPILE_OPTIONS} /sdl /DYNAMICBASE /guard:cf"
     )
     message(
-      STATUS "*** MSVC flags: /sdl /DYNAMICBASE /guard:cf /NXCOMPAT /CETCOMPAT"
+      STATUS
+      "*** MSVC flags: /sdl /DYNAMICBASE /guard:cf /NXCOMPAT /CETCOMPAT"
     )
     set(NEW_LINK_OPTIONS "${NEW_LINK_OPTIONS} /NXCOMPAT /CETCOMPAT")
-
   elseif(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang|GNU")
     set(NEW_CXX_DEFINITIONS "${NEW_CXX_DEFINITIONS} -D_GLIBCXX_ASSERTIONS")
     message(STATUS "*** GLIBC++ Assertions (vector[], string[], ...) enabled")
 
-    set(NEW_COMPILE_OPTIONS
-        "${NEW_COMPILE_OPTIONS} -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=3"
+    set(
+      NEW_COMPILE_OPTIONS
+      "${NEW_COMPILE_OPTIONS} -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=3"
     )
     message(STATUS "*** g++/clang _FORTIFY_SOURCE=3 enabled")
 
@@ -36,7 +37,7 @@ macro(aide_enable_hardening target global ubsan_minimal_runtime)
     else()
       message(
         STATUS
-          "*** g++/clang -fstack-protector-strong NOT enabled (not supported)"
+        "*** g++/clang -fstack-protector-strong NOT enabled (not supported)"
       )
     endif()
 
@@ -46,27 +47,29 @@ macro(aide_enable_hardening target global ubsan_minimal_runtime)
       message(STATUS "*** g++/clang -fcf-protection enabled")
     else()
       message(
-        STATUS "*** g++/clang -fcf-protection NOT enabled (not supported)"
+        STATUS
+        "*** g++/clang -fcf-protection NOT enabled (not supported)"
       )
     endif()
 
     check_cxx_compiler_flag(-fstack-clash-protection CLASH_PROTECTION)
     if(CLASH_PROTECTION)
       if(LINUX OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-        set(NEW_COMPILE_OPTIONS
-            "${NEW_COMPILE_OPTIONS} -fstack-clash-protection"
+        set(
+          NEW_COMPILE_OPTIONS
+          "${NEW_COMPILE_OPTIONS} -fstack-clash-protection"
         )
         message(STATUS "*** g++/clang -fstack-clash-protection enabled")
       else()
         message(
           STATUS
-            "*** g++/clang -fstack-clash-protection NOT enabled (clang on non-Linux)"
+          "*** g++/clang -fstack-clash-protection NOT enabled (clang on non-Linux)"
         )
       endif()
     else()
       message(
         STATUS
-          "*** g++/clang -fstack-clash-protection NOT enabled (not supported)"
+        "*** g++/clang -fstack-clash-protection NOT enabled (not supported)"
       )
     endif()
   endif()
@@ -78,24 +81,28 @@ macro(aide_enable_hardening target global ubsan_minimal_runtime)
     )
     # false positive on macos build with AppleClang 13
     if(MINIMAL_RUNTIME AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
-      set(NEW_COMPILE_OPTIONS
-          "${NEW_COMPILE_OPTIONS} -fsanitize=undefined -fsanitize-minimal-runtime"
+      set(
+        NEW_COMPILE_OPTIONS
+        "${NEW_COMPILE_OPTIONS} -fsanitize=undefined -fsanitize-minimal-runtime"
       )
-      set(NEW_LINK_OPTIONS
-          "${NEW_LINK_OPTIONS} -fsanitize=undefined -fsanitize-minimal-runtime"
+      set(
+        NEW_LINK_OPTIONS
+        "${NEW_LINK_OPTIONS} -fsanitize=undefined -fsanitize-minimal-runtime"
       )
 
       if(NOT ${global})
-        set(NEW_COMPILE_OPTIONS
-            "${NEW_COMPILE_OPTIONS} -fno-sanitize-recover=undefined"
+        set(
+          NEW_COMPILE_OPTIONS
+          "${NEW_COMPILE_OPTIONS} -fno-sanitize-recover=undefined"
         )
-        set(NEW_LINK_OPTIONS
-            "${NEW_LINK_OPTIONS} -fno-sanitize-recover=undefined"
+        set(
+          NEW_LINK_OPTIONS
+          "${NEW_LINK_OPTIONS} -fno-sanitize-recover=undefined"
         )
       else()
         message(
           STATUS
-            "** not enabling -fno-sanitize-recover=undefined for global consumption"
+          "** not enabling -fno-sanitize-recover=undefined for global consumption"
         )
       endif()
 

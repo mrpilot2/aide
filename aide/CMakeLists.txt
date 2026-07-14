@@ -6,14 +6,9 @@ include(${CMAKE_CURRENT_LIST_DIR}/../cmake/VersionFromGit.cmake)
 
 version_from_git()
 
-project(
-  aide.library
-  LANGUAGES CXX
-  VERSION ${VERSION}
-)
+project(aide.library LANGUAGES CXX VERSION ${VERSION})
 
 if(PROJECT_IS_TOP_LEVEL)
-
   include(${CMAKE_CURRENT_LIST_DIR}/../cmake/PreventInSourceBuilds.cmake)
   include(${CMAKE_CURRENT_LIST_DIR}/../ProjectOptions.cmake)
 

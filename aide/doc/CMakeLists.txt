@@ -7,5 +7,4 @@ if(ENABLE_DOXYGEN)
 
   find_package(Doxygen REQUIRED COMPONENTS dot)
   doxygen_add_docs(doxygen-docs ${PROJECT_SOURCE_DIR})
-
 endif()
