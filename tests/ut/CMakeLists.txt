@@ -210,6 +210,13 @@ endif()
 
 enable_testing()
 
+# With coverage enabled, require the reset_coverage_data setup fixture so every
+# discovered test starts from clean .gcda files (see ResetCoverageData.cmake).
+set(aide_coverage_test_properties "")
+if(aide_ENABLE_COVERAGE)
+  set(aide_coverage_test_properties PROPERTIES FIXTURES_REQUIRED coverage_data)
+endif()
+
 function(aide_discover_unit_tests target)
   if(UNIT_TESTS_RUN_ON_CI)
     catch_discover_tests(
@@ -225,17 +232,38 @@ function(aide_discover_unit_tests target)
       .xml
       WORKING_DIRECTORY
       ${CMAKE_CURRENT_LIST_DIR}/../../
+      ${aide_coverage_test_properties}
     )
   else()
     catch_discover_tests(
-      ${target} REPORTER console WORKING_DIRECTORY
+      ${target}
+      REPORTER
+      console
+      WORKING_DIRECTORY
       ${CMAKE_CURRENT_LIST_DIR}/../../
+      ${aide_coverage_test_properties}
     )
   endif()
 endfunction()
 
 aide_discover_unit_tests(ut.aide)
 aide_discover_unit_tests(ut.aide.application)
+
+# Setup fixture that clears stale coverage data before the instrumented test
+# binaries run. Prevents a killed process from poisoning later runs with a
+# corrupt .gcda that crashes the gcov writeout at exit.
+if(aide_ENABLE_COVERAGE)
+  add_test(
+    NAME reset_coverage_data
+    COMMAND
+      ${CMAKE_COMMAND} -DGCDA_ROOT=${CMAKE_BINARY_DIR} -P
+      ${CMAKE_CURRENT_LIST_DIR}/ResetCoverageData.cmake
+  )
+  set_tests_properties(
+    reset_coverage_data
+    PROPERTIES FIXTURES_SETUP coverage_data
+  )
+endif()
 
 set_source_files_properties(
   loggertest.cpp
