@@ -3,11 +3,20 @@ add_library(Aide::AideLogger ALIAS AideLogger)
 
 target_sources(AideLogger PRIVATE logger.cpp loggermacros.cpp)
 
-target_include_directories(
+target_sources(
   AideLogger
   PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/>
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/>
+    FILE_SET HEADERS
+      BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/../include
+      FILES
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/loggerinterface.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/loggerfactory.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/log_helper_macros.hpp
+)
+
+target_include_directories(
+  AideLogger
+  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/>
   PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/>
 )
 

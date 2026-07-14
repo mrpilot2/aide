@@ -57,15 +57,9 @@ add_dependencies(AideBuildInformation aide_generate_build_information)
 target_sources(
   AideBuildInformation
   INTERFACE
-    $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include/aide/buildinformation.hpp>
-    $<INSTALL_INTERFACE:include/aide/aide/buildinformation.hpp>
-)
-
-target_include_directories(
-  AideBuildInformation
-  INTERFACE
-    $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include/>
-    $<INSTALL_INTERFACE:include/aide>
+    FILE_SET HEADERS
+      BASE_DIRS ${CMAKE_BINARY_DIR}/include
+      FILES ${CMAKE_BINARY_DIR}/include/aide/buildinformation.hpp
 )
 
 target_link_libraries(AideBuildInformation)

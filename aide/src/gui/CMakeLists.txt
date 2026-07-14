@@ -62,10 +62,18 @@ target_sources(
     res/icons/icons.qrc
 )
 
+target_sources(
+  AideGui
+  PUBLIC
+    FILE_SET HEADERS
+      BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/../include
+      FILES
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/gui/translatorinterface.hpp
+)
+
 target_include_directories(
   AideGui
   PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/aide>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
   PRIVATE ${CMAKE_CURRENT_LIST_DIR}/../include/aide/gui

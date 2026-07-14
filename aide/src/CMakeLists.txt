@@ -11,10 +11,16 @@ target_sources(
   PRIVATE application.cpp applicationbuilder.cpp
 )
 
+target_sources(
+  AideQt${QT_VERSION_MAJOR}Application
+  PUBLIC
+    FILE_SET HEADERS
+      BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
+      FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/aide/application.hpp
+)
+
 target_include_directories(
   AideQt${QT_VERSION_MAJOR}Application
-  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/>
-  PUBLIC $<INSTALL_INTERFACE:include/aide/>
   PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/aide/>
 )
 

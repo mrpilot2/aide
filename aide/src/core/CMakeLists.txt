@@ -11,9 +11,7 @@ target_sources(
     aidesettingsprovider.cpp
     actionregistry.cpp
     appearancemanager.cpp
-    ../include/aide/appearancemanager.hpp
     ../applicationconfig.cpp
-    ../include/aide/applicationconfig.hpp
     # Icon theme resource lives with AppearanceManager, which activates
     # the aide-dark / aide-light themes and must be able to resolve
     # :/aide/icons regardless of whether the GUI layer is linked.
@@ -25,7 +23,6 @@ target_sources(
     mainwindowinterface.cpp
     menucontainer.cpp
     menucontainerinterface.cpp
-    ../include/aide/menucontainerinterface.hpp
     qtsettings.cpp
     settingsinterface.cpp
     settings/settingsdialogchangepagecontroller.cpp
@@ -53,9 +50,28 @@ target_sources(
     treemodel.cpp
 )
 
+target_sources(
+  AideCore
+  PUBLIC
+    FILE_SET HEADERS
+      BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/../include
+      FILES
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/actionregistryinterface.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/aideconstants.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/aidesettingsprovider.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/appearancemanager.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/applicationconfig.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/colorscheme.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/hierarchicalid.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/menucontainerinterface.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/settingsinterface.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/theme.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/settings/settingspage.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/settings/settingspageregistry.hpp
+)
+
 target_include_directories(
   AideCore
-  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/>
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
   PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/>
 )

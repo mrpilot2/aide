@@ -26,6 +26,7 @@ install(
     aide_options
   EXPORT AideTargets
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/aide COMPONENT Devel
 )
 
 install(
@@ -39,18 +40,6 @@ export(
   EXPORT AideTargets
   FILE "${CMAKE_BINARY_DIR}/AideQt${QT_VERSION_MAJOR}Targets.cmake"
   NAMESPACE Aide::
-)
-
-install(
-  DIRECTORY ../src/include/aide
-  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/aide/
-  COMPONENT Devel
-)
-
-install(
-  DIRECTORY ${CMAKE_BINARY_DIR}/include/aide
-  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/aide/
-  COMPONENT Devel
 )
 
 install(

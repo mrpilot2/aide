@@ -9,10 +9,16 @@ else()
   target_sources(AideUtils PRIVATE systemmemory_mac.cpp)
 endif()
 
+target_sources(
+  AideUtils
+  PUBLIC
+    FILE_SET HEADERS
+      BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/../include
+      FILES ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/utils/systemmemory.hpp
+)
+
 target_include_directories(
   AideUtils
-  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/>
-  PUBLIC $<INSTALL_INTERFACE:include/aide/>
   PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/>
 )
 
