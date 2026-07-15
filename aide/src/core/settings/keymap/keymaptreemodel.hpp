@@ -7,6 +7,8 @@
 #include <treeitem.hpp>
 #include <treemodel.hpp>
 
+class QMenu;
+
 namespace aide::core
 {
     class KeyMapTreeModel : public TreeModel
@@ -31,6 +33,12 @@ namespace aide::core
 
         [[nodiscard]] std::optional<TreeItemPtr> findItemForActionId(
             const HierarchicalId& id) const;
+
+        [[nodiscard]] std::optional<QMenu*> findCorrespondingMenu(
+            const QModelIndex& selectedIndex) const;
+
+        [[nodiscard]] std::optional<QString> translatedLabel(
+            const QModelIndex& index) const;
 
         void setupModelData();
 

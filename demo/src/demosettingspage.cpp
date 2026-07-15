@@ -206,6 +206,31 @@ void DemoSettingsPage::createWidget()
             &DemoSettingsPage::insertIntoTableWidget);
 }
 
+QStringList DemoSettingsPage::groupTitles() const
+{
+    // Every page sharing a group segment must translate it identically -
+    // the two DemoSettingsPage instances registered in main.cpp both go
+    // through "Demo Page 1" / "Demo Subpage 1", so this maps each known raw
+    // segment to the same tr()'d title regardless of which page resolves it
+    // first.
+    QStringList titles;
+    for (const auto* segment : group()) {
+        const auto raw = QString::fromUtf8(segment);
+        if (raw == QLatin1String("Demo Page 1")) {
+            titles << tr("Demo Page 1");
+        } else if (raw == QLatin1String("Demo Subpage 1")) {
+            titles << tr("Demo Subpage 1");
+        } else if (raw == QLatin1String("Demo Subpage 1.1")) {
+            titles << tr("Demo Subpage 1.1");
+        } else if (raw == QLatin1String("Demo Subpage 1.2")) {
+            titles << tr("Demo Subpage 1.2");
+        } else {
+            titles << raw;
+        }
+    }
+    return titles;
+}
+
 bool DemoSettingsPage::isModified() const
 {
     if (m_widget == nullptr || m_ui == nullptr) { return false; }

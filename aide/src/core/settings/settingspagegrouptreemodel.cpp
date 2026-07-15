@@ -1,5 +1,7 @@
 #include "settingspagegrouptreemodel.hpp"
 
+#include <iterator>
+
 #include <QColor>
 
 #include "hierarchicalid.hpp"
@@ -64,6 +66,12 @@ QVariant SettingsPageGroupTreeModel::data(const QModelIndex& index,
     if (role == Qt::DisplayRole) {
         const auto* item = static_cast<TreeItem*>(index.internalPointer());
 
+        if (index.column() == 0) {
+            if (const auto title = translatedGroupTitle(index)) {
+                return *title;
+            }
+        }
+
         return item->data(static_cast<size_t>(index.column()));
     }
     if (role == Qt::ForegroundRole) {
@@ -74,6 +82,16 @@ QVariant SettingsPageGroupTreeModel::data(const QModelIndex& index,
     }
 
     return {};
+}
+
+QVariant SettingsPageGroupTreeModel::headerData(
+    const int section, const Qt::Orientation orientation, const int role) const
+{
+    if (role == Qt::DisplayRole && orientation == Qt::Horizontal &&
+        section == 0) {
+        return tr("Group");
+    }
+    return TreeModel::headerData(section, orientation, role);
 }
 
 Qt::ItemFlags SettingsPageGroupTreeModel::flags(const QModelIndex& index) const
@@ -101,6 +119,44 @@ SettingsPagePtr SettingsPageGroupTreeModel::findCorrespondingSettingsPage(
         return *it;
     }
     return nullptr;
+}
+
+qsizetype SettingsPageGroupTreeModel::depthOf(const TreeItem* item) const
+{
+    qsizetype depth = 0;
+    for (auto parent = item->parent().lock();
+         parent != nullptr && parent != m_rootItem;
+         parent = parent->parent().lock()) {
+        ++depth;
+    }
+    return depth;
+}
+
+std::optional<QString> SettingsPageGroupTreeModel::translatedGroupTitle(
+    const QModelIndex& selectedIndex) const
+{
+    const auto* item = static_cast<TreeItem*>(selectedIndex.internalPointer());
+
+    auto completeGroupName{item->getHiddenUserData().toString().toStdString()};
+    const auto depth = depthOf(item);
+
+    const auto& pages = m_registry.settingsPages();
+
+    const auto it = std::ranges::find_if(pages, [&](const auto& page) {
+        const auto& group = page->group();
+        if (std::distance(group.begin(), group.end()) <= depth) {
+            return false;
+        }
+        return HierarchicalId(group.begin(), group.begin() + depth + 1)
+                   .name() == completeGroupName;
+    });
+
+    if (it == pages.end()) { return {}; }
+
+    const auto titles = (*it)->groupTitles();
+    if (titles.size() <= depth) { return {}; }
+
+    return titles.at(depth);
 }
 
 QModelIndex SettingsPageGroupTreeModel::recursivelyFindSelectedTreeItemIndex(

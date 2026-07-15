@@ -83,6 +83,10 @@ namespace aide
 
         [[nodiscard]] virtual std::optional<MenuContainerInterface*>
         getMenuContainer(const HierarchicalId& uniqueId) const = 0;
+
+        [[nodiscard]] virtual const std::map<HierarchicalId,
+                                             MenuContainerInterfacePtr>&
+        menus() const = 0;
     };
 
     using ActionRegistryInterfacePtr = std::shared_ptr<ActionRegistryInterface>;

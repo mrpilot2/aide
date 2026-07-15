@@ -1,6 +1,8 @@
 #ifndef AIDE_MOCK_SETTINGS_PAGE_HPP
 #define AIDE_MOCK_SETTINGS_PAGE_HPP
 
+#include <optional>
+
 #include <aide/settings/settingspage.hpp>
 
 class QString;
@@ -28,6 +30,10 @@ namespace aide::test
 
         [[nodiscard]] bool isModified() const override;
 
+        void setGroupTitles(QStringList titles);
+
+        [[nodiscard]] QStringList groupTitles() const override;
+
         void reset() override;
 
         [[nodiscard]] bool wasResetCalled() const;
@@ -50,6 +56,8 @@ namespace aide::test
         bool resetWasCalled{false};
 
         uint16_t resetCounter{0};
+
+        std::optional<QStringList> overriddenGroupTitles;
     };
 } // namespace aide::test
 

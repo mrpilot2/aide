@@ -6,12 +6,41 @@
 
 #include <QAction>
 #include <QColor>
+#include <QMenu>
 
 #include <aide/hierarchicalid.hpp>
 
 using aide::Action;
 using aide::core::KeyMapTreeModel;
 using aide::core::TreeItemPtr;
+
+namespace
+{
+    // Qt exposes no public API to strip a menu/action mnemonic marker, so a
+    // leading '&' before a character is a mnemonic and is removed, while a
+    // literal ampersand is escaped as '&&' in Qt's convention and collapses
+    // to a single '&'. Anything else, including a trailing ellipsis, is left
+    // untouched.
+    QString stripMnemonic(const QString& text)
+    {
+        QString result;
+        result.reserve(text.size());
+
+        for (qsizetype i = 0; i < text.size(); ++i) {
+            if (text.at(i) != QLatin1Char('&')) {
+                result += text.at(i);
+                continue;
+            }
+
+            if (const auto next = i + 1;
+                next < text.size() && text.at(next) == QLatin1Char('&')) {
+                result += QLatin1Char('&');
+                i = next;
+            }
+        }
+        return result;
+    }
+} // namespace
 
 KeyMapTreeModel::KeyMapTreeModel(ActionRegistryInterfacePtr registry,
                                  QObject* parent)
@@ -83,6 +112,10 @@ QVariant KeyMapTreeModel::headerData(const int section,
     if (role == Qt::TextAlignmentRole && section == 1) {
         return Qt::AlignRight;
     }
+    if (role == Qt::DisplayRole && orientation == Qt::Horizontal) {
+        if (section == 0) { return tr("Action"); }
+        if (section == 1) { return tr("Shortcuts"); }
+    }
     return TreeModel::headerData(section, orientation, role);
 }
 
@@ -111,6 +144,10 @@ QVariant KeyMapTreeModel::data(const QModelIndex& index, const int role) const
 
     if (role == Qt::DisplayRole) {
         const auto* item = static_cast<TreeItem*>(index.internalPointer());
+
+        if (index.column() == 0) {
+            if (const auto label = translatedLabel(index)) { return *label; }
+        }
 
         return item->data(static_cast<size_t>(index.column()));
     }
@@ -155,6 +192,44 @@ std::optional<Action> KeyMapTreeModel::findCorrespondingAction(
             });
         it != actions.end()) {
         return it->second;
+    }
+    return {};
+}
+
+std::optional<QString> KeyMapTreeModel::translatedLabel(
+    const QModelIndex& index) const
+{
+    if (const auto action = findCorrespondingAction(index)) {
+        if (const auto qaction = action->action.lock();
+            qaction != nullptr && !qaction->text().isEmpty()) {
+            return stripMnemonic(qaction->text());
+        }
+        return {};
+    }
+
+    if (const auto menu = findCorrespondingMenu(index);
+        menu && *menu != nullptr && !(*menu)->title().isEmpty()) {
+        return stripMnemonic((*menu)->title());
+    }
+    return {};
+}
+
+std::optional<QMenu*> KeyMapTreeModel::findCorrespondingMenu(
+    const QModelIndex& selectedIndex) const
+{
+    const auto* item = static_cast<TreeItem*>(selectedIndex.internalPointer());
+
+    auto completeGroupName{item->getHiddenUserData().toString().toStdString()};
+
+    const auto& menus = actionRegistry->menus();
+
+    if (const auto it = std::ranges::find_if(
+            menus,
+            [&completeGroupName](const auto& menu) {
+                return menu.first.name() == completeGroupName;
+            });
+        it != menus.end()) {
+        return it->second->menu();
     }
     return {};
 }

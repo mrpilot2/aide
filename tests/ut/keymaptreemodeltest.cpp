@@ -2,6 +2,8 @@
 
 #include <catch2/catch_test_macros.hpp>
 
+#include <QMenu>
+
 #include "actionregistry.hpp"
 #include "hierarchicalid.hpp"
 #include "mocksettings.hpp"
@@ -265,5 +267,79 @@ TEST_CASE("Any keymap tree model")
         const QModelIndex elem = treeModel.index(0, 1, root);
 
         REQUIRE_FALSE(treeModel.setData(elem, "any", Qt::EditRole));
+    }
+}
+
+TEST_CASE("Keymap tree model translated labels")
+{
+    MockSettings settings;
+    auto logger = std::make_shared<NullLogger>();
+    auto registry(std::make_shared<ActionRegistry>(settings, logger));
+
+    SECTION("leaf label uses the action's text with mnemonic stripped")
+    {
+        auto action{std::make_shared<QAction>(QString("&Close"), nullptr)};
+        registry->registerAction(action, HierarchicalId("Main Menu")("Close"));
+
+        const KeyMapTreeModel treeModel(registry);
+        const QModelIndex root = treeModel.index(0, 0);
+        const QModelIndex elem = treeModel.index(0, 0, root);
+
+        REQUIRE(treeModel.data(elem, Qt::DisplayRole).toString() == "Close");
+    }
+
+    SECTION("leaf label keeps a trailing ellipsis")
+    {
+        auto action{
+            std::make_shared<QAction>(QString("&New project ..."), nullptr)};
+        registry->registerAction(action, HierarchicalId("Main Menu")("New"));
+
+        const KeyMapTreeModel treeModel(registry);
+        const QModelIndex root = treeModel.index(0, 0);
+        const QModelIndex elem = treeModel.index(0, 0, root);
+
+        REQUIRE(treeModel.data(elem, Qt::DisplayRole).toString() ==
+                "New project ...");
+    }
+
+    SECTION("leaf label falls back to the raw id when the action has expired")
+    {
+        {
+            auto action{std::make_shared<QAction>(QString("Close"), nullptr)};
+            registry->registerAction(action,
+                                     HierarchicalId("Main Menu")("Close"));
+        }
+
+        const KeyMapTreeModel treeModel(registry);
+        const QModelIndex root = treeModel.index(0, 0);
+        const QModelIndex elem = treeModel.index(0, 0, root);
+
+        REQUIRE(treeModel.data(elem, Qt::DisplayRole).toString() == "Close");
+    }
+
+    SECTION("group label uses the corresponding menu's title")
+    {
+        auto action{std::make_shared<QAction>(QString("Close"), nullptr)};
+        registry->registerAction(action, HierarchicalId("Main Menu")("Close"));
+
+        auto* menuContainer = registry->createMenu(HierarchicalId("Main Menu"));
+        menuContainer->menu()->setTitle("&Main");
+
+        const KeyMapTreeModel treeModel(registry);
+        const QModelIndex root = treeModel.index(0, 0);
+
+        REQUIRE(treeModel.data(root, Qt::DisplayRole).toString() == "Main");
+    }
+
+    SECTION("group label falls back to the raw id when no menu backs it")
+    {
+        auto action{std::make_shared<QAction>(QString("Close"), nullptr)};
+        registry->registerAction(action, HierarchicalId("Main Menu")("Close"));
+
+        const KeyMapTreeModel treeModel(registry);
+        const QModelIndex root = treeModel.index(0, 0);
+
+        REQUIRE(treeModel.data(root, Qt::DisplayRole).toString() ==
+                "Main Menu");
     }
 }

@@ -17,6 +17,7 @@ using aide::ActionRegistryInterface;
 using aide::ActionRegistryInterfacePtr;
 using aide::HierarchicalId;
 using aide::MenuContainerInterface;
+using aide::MenuContainerInterfacePtr;
 using aide::core::PendingKeymapState;
 
 namespace
@@ -82,8 +83,15 @@ namespace
             return {};
         }
 
+        [[nodiscard]] const std::map<HierarchicalId, MenuContainerInterfacePtr>&
+        menus() const override
+        {
+            return m_menus;
+        }
+
     private:
         std::map<HierarchicalId, Action> m_actions;
+        std::map<HierarchicalId, MenuContainerInterfacePtr> m_menus;
     };
 } // namespace
 

@@ -26,6 +26,18 @@ namespace aide::core
 
         [[nodiscard]] const HierarchicalId& group() const;
 
+        /**
+         * @brief Returns one translated title per segment of group().
+         *
+         * Used as the display labels for this page's nodes in the
+         * settings-page group tree, resolved live whenever the tree is
+         * shown. The default implementation returns the raw group()
+         * segments, so pages that don't override this keep showing their
+         * untranslated ids. An override should return its titles via tr()
+         * so lupdate can extract them automatically.
+         */
+        [[nodiscard]] virtual QStringList groupTitles() const;
+
         [[nodiscard]] virtual QWidget* widget() = 0;
 
         [[nodiscard]] virtual bool isModified() const = 0;

@@ -54,6 +54,22 @@
         <source>Add to table after 1 second</source>
         <translation>Nach 1 Sekunde zur Tabelle hinzufügen</translation>
     </message>
+    <message>
+        <source>Demo Page 1</source>
+        <translation>Demo-Seite 1</translation>
+    </message>
+    <message>
+        <source>Demo Subpage 1</source>
+        <translation>Demo-Unterseite 1</translation>
+    </message>
+    <message>
+        <source>Demo Subpage 1.1</source>
+        <translation>Demo-Unterseite 1.1</translation>
+    </message>
+    <message>
+        <source>Demo Subpage 1.2</source>
+        <translation>Demo-Unterseite 1.2</translation>
+    </message>
 </context>
 <context>
     <name>QApplication</name>

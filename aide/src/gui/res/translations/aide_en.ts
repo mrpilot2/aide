@@ -66,6 +66,11 @@
         <comment>MainWindow</comment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Keymap</source>
+        <comment>KeymapPage</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SearchFilterWidget</name>
@@ -124,6 +129,17 @@
     </message>
 </context>
 <context>
+    <name>aide::core::KeyMapTreeModel</name>
+    <message>
+        <source>Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shortcuts</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>aide::core::KeymapContextMenuProvider</name>
     <message>
         <source>Add keyboard shortcut</source>
@@ -136,6 +152,13 @@
     <message>
         <source>Reset to default</source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>aide::core::SettingsPageGroupTreeModel</name>
+    <message>
+        <source>Group</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -161,6 +184,14 @@
     </message>
     <message>
         <source>Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Appearance &amp; Behavior</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Appearance</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

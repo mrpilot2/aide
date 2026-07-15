@@ -54,6 +54,22 @@
         <source>Add to table after 1 second</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Demo Page 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Demo Subpage 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Demo Subpage 1.1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Demo Subpage 1.2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QApplication</name>

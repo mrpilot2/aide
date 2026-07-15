@@ -134,3 +134,32 @@ TEST_CASE("A settings page filter proxy model filtering by page content")
         REQUIRE(proxy.rowCount() == 2);
     }
 }
+
+TEST_CASE("A settings page filter proxy model matching translated titles")
+{
+    SettingsPageRegistry registry;
+    auto page =
+        std::make_shared<MockSettingsPage>(HierarchicalId("Appearance"));
+    page->setGroupTitles({"Erscheinungsbild"});
+    registry.addPage(page);
+
+    auto treeModel = std::make_shared<SettingsPageGroupTreeModel>(registry);
+
+    SettingsPageFilterProxyModel proxy;
+    proxy.setSourceModel(treeModel.get());
+
+    SECTION("matches the translated display text rather than the raw id")
+    {
+        proxy.setSearchPattern("Erscheinungsbild");
+
+        REQUIRE(proxy.rowCount() == 1);
+        REQUIRE(displayName(proxy, 0) == "Erscheinungsbild");
+    }
+
+    SECTION("no longer matches the untranslated raw id")
+    {
+        proxy.setSearchPattern("Appearance");
+
+        REQUIRE(proxy.rowCount() == 0);
+    }
+}
