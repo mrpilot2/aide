@@ -50,6 +50,15 @@ CATCH_REGISTER_LISTENER(QApplicationLifetime)
 
 int main(int argc, char* argv[])
 {
+    // Widget tests never need a real compositor, and the Wayland QPA plugin
+    // refuses to grab popups (QCompleter, QMenu, ...) for a window that
+    // hasn't received real input focus from the compositor - something an
+    // automated test run never gets on a host with a live desktop session.
+    // Default to offscreen, matching CI, but let an explicit override win.
+    if (!qEnvironmentVariableIsSet("QT_QPA_PLATFORM")) {
+        qputenv("QT_QPA_PLATFORM", "offscreen");
+    }
+
     aide::AideSettingsProvider::provideVersionableSettings(
         std::make_shared<aide::test::MockSettings>());
     aide::AideSettingsProvider::provideUnVersionableSettings(
