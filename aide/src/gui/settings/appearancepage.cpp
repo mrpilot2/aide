@@ -52,6 +52,11 @@ bool AppearancePage::isModified() const
            m_fontSizeSpinBox->value() != m_appliedFontSize;
 }
 
+QStringList AppearancePage::groupTitles() const
+{
+    return {tr("Appearance & Behavior"), tr("Appearance")};
+}
+
 void AppearancePage::syncControlsToManager()
 {
     // Repopulate the theme list rather than doing it once in the constructor:

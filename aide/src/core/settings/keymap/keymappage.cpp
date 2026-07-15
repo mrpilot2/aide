@@ -3,6 +3,7 @@
 
 #include <utility>
 
+#include <QApplication>
 #include <QWidget>
 
 using aide::core::KeymapPage;
@@ -23,6 +24,11 @@ QWidget* KeymapPage::widget()
 bool KeymapPage::isModified() const
 {
     return m_controller.isModified();
+}
+
+QStringList KeymapPage::groupTitles() const
+{
+    return {QApplication::tr("Keymap", "KeymapPage")};
 }
 
 void KeymapPage::reset()

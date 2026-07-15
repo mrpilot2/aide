@@ -1,6 +1,7 @@
 #include "mocksettingspage.hpp"
 
 #include <memory>
+#include <utility>
 
 #include <QLabel>
 #include <QString>
@@ -41,6 +42,16 @@ void MockSettingsPage::simulateModified(const bool modified)
 bool MockSettingsPage::isModified() const
 {
     return pageIsModified;
+}
+
+void MockSettingsPage::setGroupTitles(QStringList titles)
+{
+    overriddenGroupTitles = std::move(titles);
+}
+
+QStringList MockSettingsPage::groupTitles() const
+{
+    return overriddenGroupTitles.value_or(SettingsPage::groupTitles());
 }
 
 void MockSettingsPage::reset()

@@ -31,6 +31,8 @@ public:
 
     [[nodiscard]] bool isModified() const override;
 
+    [[nodiscard]] QStringList groupTitles() const override;
+
     void reset() override;
 
     void apply() override;

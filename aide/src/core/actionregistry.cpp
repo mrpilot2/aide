@@ -169,3 +169,9 @@ std::optional<MenuContainerInterface*> ActionRegistry::getMenuContainer(
         uniqueId.name());
     return {};
 }
+
+const std::map<HierarchicalId, aide::MenuContainerInterfacePtr>&
+ActionRegistry::menus() const
+{
+    return m_menus;
+}

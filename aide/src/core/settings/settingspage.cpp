@@ -114,6 +114,15 @@ const HierarchicalId& SettingsPage::group() const
     return settingsGroup;
 }
 
+QStringList SettingsPage::groupTitles() const
+{
+    QStringList titles;
+    for (const auto* segment : settingsGroup) {
+        titles << QString::fromUtf8(segment);
+    }
+    return titles;
+}
+
 bool SettingsPage::matches(const QString& pattern)
 {
     QWidget* pageWidget = widget();

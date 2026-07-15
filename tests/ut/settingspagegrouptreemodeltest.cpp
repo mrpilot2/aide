@@ -205,3 +205,63 @@ TEST_CASE("Any settings page group tree model")
                     QModelIndex()) == expectedIndex);
     }
 }
+
+TEST_CASE("Settings page group tree model translated titles")
+{
+    SECTION("overridden groupTitles is reflected in the display data")
+    {
+        SettingsPageRegistry registry;
+        auto page =
+            std::make_shared<MockSettingsPage>(HierarchicalId("MockTestPage"));
+        page->setGroupTitles({"Translated Title"});
+        registry.addPage(page);
+
+        const SettingsPageGroupTreeModel treeModel{registry};
+        const QModelIndex index = treeModel.index(0, 0);
+
+        REQUIRE(treeModel.data(index, Qt::DisplayRole).toString() ==
+                "Translated Title");
+    }
+
+    SECTION("default groupTitles falls back to the raw id segments")
+    {
+        SettingsPageRegistry registry;
+        registry.addPage(
+            std::make_unique<MockSettingsPage>(HierarchicalId("MockTestPage")));
+
+        const SettingsPageGroupTreeModel treeModel{registry};
+        const QModelIndex index = treeModel.index(0, 0);
+
+        REQUIRE(treeModel.data(index, Qt::DisplayRole).toString() ==
+                "MockTestPage");
+    }
+
+    SECTION("first registered page wins for a shared intermediate group")
+    {
+        SettingsPageRegistry registry;
+        auto first = std::make_shared<MockSettingsPage>(
+            HierarchicalId("Shared")("First"));
+        first->setGroupTitles({"First Title", "First Child"});
+        auto second = std::make_shared<MockSettingsPage>(
+            HierarchicalId("Shared")("Second"));
+        second->setGroupTitles({"Second Title", "Second Child"});
+
+        registry.addPage(first);
+        registry.addPage(second);
+
+        const SettingsPageGroupTreeModel treeModel{registry};
+        const QModelIndex sharedIndex = treeModel.index(0, 0);
+
+        REQUIRE(treeModel.data(sharedIndex, Qt::DisplayRole).toString() ==
+                "First Title");
+    }
+
+    SECTION("provides translated group header")
+    {
+        SettingsPageRegistry registry;
+        const SettingsPageGroupTreeModel treeModel{registry};
+
+        REQUIRE(treeModel.headerData(0, Qt::Horizontal, Qt::DisplayRole)
+                    .toString() == "Group");
+    }
+}

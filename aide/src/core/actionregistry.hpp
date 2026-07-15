@@ -54,6 +54,9 @@ namespace aide
         [[nodiscard]] std::optional<MenuContainerInterface*> getMenuContainer(
             const HierarchicalId& uniqueId) const override;
 
+        [[nodiscard]] const std::map<HierarchicalId, MenuContainerInterfacePtr>&
+        menus() const override;
+
     private:
         static std::string printKeySequences(
             const std::vector<QKeySequence>& keySequences);

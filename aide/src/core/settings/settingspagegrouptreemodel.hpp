@@ -23,6 +23,10 @@ namespace aide::core
         [[nodiscard]] QVariant data(const QModelIndex& index,
                                     int role) const override;
 
+        [[nodiscard]] QVariant headerData(int section,
+                                          Qt::Orientation orientation,
+                                          int role) const override;
+
         [[nodiscard]] Qt::ItemFlags flags(
             const QModelIndex& index) const override;
 
@@ -37,6 +41,11 @@ namespace aide::core
 
         static std::optional<TreeItemPtr> existingTreeItemForGroup(
             const TreeItemPtr& current, const char* group);
+
+        [[nodiscard]] std::optional<QString> translatedGroupTitle(
+            const QModelIndex& selectedIndex) const;
+
+        [[nodiscard]] qsizetype depthOf(const TreeItem* item) const;
 
         SettingsPageRegistry& m_registry;
     };
