@@ -59,12 +59,10 @@ namespace aide
         QString m_activeThemeName;
         QFont m_activeFont;
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
         void updateSystemThemeConnection();
 
     private slots:
         void onOsColorSchemeChanged();
-#endif
     };
 } // namespace aide
 

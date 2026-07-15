@@ -10,16 +10,22 @@ add_library(aide_catch_main OBJECT catch_main.cpp sanitizerdefaults.cpp)
 target_link_libraries(
   aide_catch_main
   PUBLIC Catch2::Catch2
-  PRIVATE Aide::AideApplication Qt::Widgets aide_options aide_warnings
-          aide_coverage
+  PRIVATE
+    Aide::AideApplication
+    Qt::Widgets
+    aide_options
+    aide_warnings
+    aide_coverage
 )
 
 # Separate entry point for the [Application] tests: aide::Application is itself
 # a QApplication, so those tests must not run alongside the process-global
 # QApplication created in catch_main.cpp. This main deliberately creates none.
 add_library(
-  aide_catch_main_application OBJECT catch_main_application.cpp
-                                     sanitizerdefaults.cpp
+  aide_catch_main_application
+  OBJECT
+  catch_main_application.cpp
+  sanitizerdefaults.cpp
 )
 target_link_libraries(
   aide_catch_main_application
@@ -32,15 +38,9 @@ set(CMAKE_AUTORCC ON)
 if(TARGET Qt::lrelease)
   set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
 
-  if(Qt6Core_VERSION_MAJOR)
-    qt_create_translation(
-      QM_FILES ${CMAKE_CURRENT_SOURCE_DIR} res/ut_sv.ts OPTIONS -locations none
-    )
-  else()
-    qt5_create_translation(
-      QM_FILES ${CMAKE_CURRENT_SOURCE_DIR} res/ut_sv.ts OPTIONS -locations none
-    )
-  endif()
+  qt_create_translation(
+    QM_FILES ${CMAKE_CURRENT_SOURCE_DIR} res/ut_sv.ts OPTIONS -locations none
+  )
 
   configure_file(
     res/ut_translations.qrc.in
@@ -152,7 +152,7 @@ if(APPLE)
     TARGET ut.aide
     POST_BUILD
     COMMAND
-      ${CMAKE_INSTALL_NAME_TOOL} -add_rpath "${Qt5_DIR}/../../"
+      ${CMAKE_INSTALL_NAME_TOOL} -add_rpath "${Qt6_DIR}/../../"
       $<TARGET_FILE:ut.aide>
   )
 endif()
@@ -211,7 +211,7 @@ if(APPLE)
     TARGET ut.aide.application
     POST_BUILD
     COMMAND
-      ${CMAKE_INSTALL_NAME_TOOL} -add_rpath "${Qt5_DIR}/../../"
+      ${CMAKE_INSTALL_NAME_TOOL} -add_rpath "${Qt6_DIR}/../../"
       $<TARGET_FILE:ut.aide.application>
   )
 endif()
@@ -264,12 +264,15 @@ aide_discover_unit_tests(ut.aide.application)
 # binaries run. Prevents a killed process from poisoning later runs with a
 # corrupt .gcda that crashes the gcov writeout at exit.
 if(aide_ENABLE_COVERAGE)
-  add_test(NAME reset_coverage_data
-           COMMAND ${CMAKE_COMMAND} -DGCDA_ROOT=${CMAKE_BINARY_DIR} -P
-                   ${CMAKE_CURRENT_LIST_DIR}/ResetCoverageData.cmake
+  add_test(
+    NAME reset_coverage_data
+    COMMAND
+      ${CMAKE_COMMAND} -DGCDA_ROOT=${CMAKE_BINARY_DIR} -P
+      ${CMAKE_CURRENT_LIST_DIR}/ResetCoverageData.cmake
   )
   set_tests_properties(
-    reset_coverage_data PROPERTIES FIXTURES_SETUP coverage_data
+    reset_coverage_data
+    PROPERTIES FIXTURES_SETUP coverage_data
   )
 endif()
 

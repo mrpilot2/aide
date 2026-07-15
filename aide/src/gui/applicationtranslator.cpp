@@ -36,14 +36,9 @@ ApplicationTranslator::ApplicationTranslator(LoggerPtr loggerInterface)
         "Current application language is {}",
         QLocale::languageToString(QLocale::system().language()).toStdString());
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     [[maybe_unused]] auto res{m_qtTranslator.load(
         "qt_" + QLocale::system().name(),
         QLibraryInfo::path(QLibraryInfo::TranslationsPath))};
-#else
-    m_qtTranslator.load("qt_" + QLocale::system().name(),
-                        QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-#endif
 
     QApplication::installTranslator(&m_qtTranslator);
 

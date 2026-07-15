@@ -35,7 +35,7 @@ Think of it as the [IntelliJ Platform](https://www.jetbrains.com/opensource/idea
 - **Configurable Keybindings** — per-action key sequences stored in `QSettings`, editable through the built-in keybinding settings page
 - **Structured Logging** — [spdlog](https://github.com/gabime/spdlog)-based logging behind a `LoggerInterface`, so your components stay decoupled from the logging backend
 - **Translation Support** — `TranslatorInterface` integrates Qt's `QTranslator` with an easy hook for loading additional translation files
-- **Qt5 & Qt6** — supports both; Qt6 is preferred when available
+- **Qt6** — built and shipped against Qt 6.5+
 - **C++20** — modern, interface-driven design with no exceptions in public API
 
 ---
@@ -58,7 +58,7 @@ The following features are planned for future releases:
 |------------|----------------|
 | CMake      | 3.25            |
 | C++ compiler | C++20 (GCC 10+, Clang 12+, MSVC 2019 16.11+) |
-| Qt         | Qt 5.15 LTS **or** Qt 6.5+ |
+| Qt         | Qt 6.5+ |
 | Conan      | 2.x *(recommended for dependency management)* |
 
 **Platforms:** Linux, macOS, Windows.
@@ -183,7 +183,7 @@ aIDE uses CMake presets for all build configurations.
 - CMake 3.25+
 - Conan 2.x (`pip install conan`)
 - Clang or GCC (recommended for the `dev` preset)
-- Qt 5.15+ or Qt 6.5+
+- Qt 6.5+
 
 ### Quick start (developer build)
 

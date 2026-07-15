@@ -74,10 +74,10 @@ aIDE headers are namespaced under `aide/`. A minimal include set for a typical c
 |---|---|
 | CMake | 3.25 |
 | C++ compiler | C++20 — GCC 10+, Clang 12+, or MSVC 2019 16.11+ |
-| Qt | 5.15 LTS **or** 6.5+ |
+| Qt | 6.5+ |
 | Conan | 2.x *(if using the Conan integration)* |
 
-Qt 6 is preferred when available. aIDE builds and tests against both Qt 5.15 and Qt 6.5+ in CI.
+aIDE builds and tests against Qt 6.5+ in CI.
 
 ---
 

@@ -74,12 +74,6 @@ SearchFilterWidget::SearchFilterWidget(const HierarchicalId& id,
     connect(&m_showHideAction, &QAction::toggled, this,
             &SearchFilterWidget::onUserRequestsToChangeVisibility);
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
-    m_ui->regularExpression->setChecked(true);
-    m_ui->regularExpression->hide();
-    regexStateChanged(m_ui->regularExpression->isChecked());
-#endif
-
     // Set visibility delayed - overridden functions shall not be called
     // in constructor
     // NOLINTNEXTLINE

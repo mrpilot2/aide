@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**aIDE** is a C++20/Qt5+Qt6 framework library for building Qt-based desktop applications. It provides reusable components including action registry, settings management, key binding UI, and logging infrastructure. Consumers embed aIDE as a CMake dependency and compose an `Application` via `ApplicationBuilder`.
+**aIDE** is a C++20/Qt6 (minimum 6.5) framework library for building Qt-based desktop applications. It provides reusable components including action registry, settings management, key binding UI, and logging infrastructure. Consumers embed aIDE as a CMake dependency and compose an `Application` via `ApplicationBuilder`.
 
 ## Build System
 

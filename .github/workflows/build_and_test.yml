@@ -25,12 +25,6 @@ jobs:
           - qt: 6.9.2
             qt_name: Qt6
 
-          - os: ubuntu-24.04
-            cmake: 4.x
-            cmake_name: CMake Latest
-            qt: 5.15.2
-            qt_name: Qt5
-
     runs-on: ${{ matrix.os }}
     defaults:
       run:

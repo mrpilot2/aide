@@ -5,27 +5,15 @@ set(CMAKE_AUTOMOC ON)
 
 if(TARGET Qt::lrelease)
   set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
-  if(Qt6Core_VERSION_MAJOR)
-    qt_create_translation(
-      QM_FILES
-      ${CMAKE_CURRENT_SOURCE_DIR}
-      res/demo_de.ts
-      res/demo_en.ts
-      OPTIONS
-      -locations
-      none
-    )
-  else()
-    qt5_create_translation(
-      QM_FILES
-      ${CMAKE_CURRENT_SOURCE_DIR}
-      res/demo_de.ts
-      res/demo_en.ts
-      OPTIONS
-      -locations
-      none
-    )
-  endif()
+  qt_create_translation(
+    QM_FILES
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    res/demo_de.ts
+    res/demo_en.ts
+    OPTIONS
+    -locations
+    none
+  )
 
   configure_file(
     res/demo_translations.qrc.in
@@ -60,7 +48,7 @@ if(APPLE)
     TARGET aide_demo
     POST_BUILD
     COMMAND
-      ${CMAKE_INSTALL_NAME_TOOL} -add_rpath "${Qt5_DIR}/../../"
+      ${CMAKE_INSTALL_NAME_TOOL} -add_rpath "${Qt6_DIR}/../../"
       $<TARGET_FILE:aide_demo>
   )
 endif()

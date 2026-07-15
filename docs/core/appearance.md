@@ -74,11 +74,11 @@ Registered themes appear automatically in the Appearance settings page combo box
 
 ---
 
-## Following the OS color scheme (Qt 6.5+)
+## Following the OS color scheme
 
-When the active theme is **System** and you are building against **Qt 6.5 or newer**, `AppearanceManager` connects to `QStyleHints::colorSchemeChanged`. If the user switches their OS between light and dark mode while the app is running, the palette and icon theme are re-applied live and the appropriate signals are emitted.
+When the active theme is **System**, `AppearanceManager` connects to `QStyleHints::colorSchemeChanged`. If the user switches their OS between light and dark mode while the app is running, the palette and icon theme are re-applied live and the appropriate signals are emitted.
 
-The connection is wired up only while **System** is active; selecting a fixed theme disconnects it. On Qt 5 and Qt 6 versions below 6.5 the **System** theme still works but does not update until the next launch.
+The connection is wired up only while **System** is active; selecting a fixed theme disconnects it.
 
 ---
 
