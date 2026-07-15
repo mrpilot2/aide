@@ -25,10 +25,10 @@ aide_local_options()
 
 add_subdirectory(aide)
 
-enable_testing()
-add_subdirectory(tests)
-
 if(PROJECT_IS_TOP_LEVEL)
+  enable_testing()
+  add_subdirectory(tests)
+
   option(AIDE_ENABLE_DEMO "Builds a small demo application" ON)
   add_feature_info(EnableDemo AIDE_ENABLE_DEMO "Builds the demo application.")
 
