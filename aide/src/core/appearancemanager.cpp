@@ -303,14 +303,35 @@ void AppearanceManager::applyIconSettings(const Theme& theme)
     }
 
     if (!iconThemeName.isEmpty()) {
+        // Capture the platform icon theme and its search paths once, before we
+        // override them. QIcon::setThemeSearchPaths() replaces the list, so
+        // without this the platform icon directories (/usr/share/icons, …)
+        // become unreachable. Keeping them — plus a fallback theme — lets icons
+        // the bundled aide-* themes don't provide still resolve. The most
+        // visible case is the window-*-symbolic icons the Wayland client-side
+        // decoration draws its title-bar buttons from.
+        static const QString platformThemeName = QIcon::themeName();
+        static const QStringList platformSearchPaths =
+            QIcon::themeSearchPaths();
+
+        QStringList searchPaths = theme.iconSearchPaths;
+        for (const auto& path : platformSearchPaths) {
+            if (!searchPaths.contains(path)) { searchPaths.append(path); }
+        }
+
+        if (!platformThemeName.isEmpty() &&
+            platformThemeName != iconThemeName) {
+            QIcon::setFallbackThemeName(platformThemeName);
+        }
         QIcon::setThemeName(iconThemeName);
+
         // Keep the built-in resource path searchable so consumer themes that
         // reuse aIDE's bundled aide-dark / aide-light icon themes resolve even
         // when they register no icon search paths of their own.
-        auto searchPaths = theme.iconSearchPaths;
         if (!searchPaths.contains(BUILTIN_ICON_SEARCH_PATH)) {
             searchPaths.append(BUILTIN_ICON_SEARCH_PATH);
         }
+
         QIcon::setThemeSearchPaths(searchPaths);
     }
 }
