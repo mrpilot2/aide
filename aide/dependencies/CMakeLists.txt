@@ -1,13 +1,5 @@
-find_package(spdlog REQUIRED)
-find_package(fmt REQUIRED)
-
-if(TARGET spdlog::spdlog)
-  set_target_properties(spdlog::spdlog PROPERTIES IMPORTED_GLOBAL TRUE)
-endif()
-
-if(TARGET fmt::fmt)
-  set_target_properties(fmt::fmt PROPERTIES IMPORTED_GLOBAL TRUE)
-endif()
+find_package(spdlog REQUIRED GLOBAL)
+find_package(fmt REQUIRED GLOBAL)
 
 include(${CMAKE_CURRENT_LIST_DIR}/addlicensedependency.cmake)
 
