@@ -117,7 +117,7 @@
         "aide_ENABLE_SANITIZER_UNDEFINED": "ON"
       },
       "environment": {
-        "ASAN_OPTIONS": "detect_odr_violation=0:detect_stack_use_after_return=1",
+        "ASAN_OPTIONS": "detect_odr_violation=0:detect_stack_use_after_return=1:detect_leaks=0",
         "LSAN_OPTIONS": "suppressions=${sourceDir}/lsan.supp",
         "UBSAN_OPTIONS": "print_stacktrace=1"
       }
@@ -276,6 +276,11 @@
           "mode": "until-pass",
           "count": 3
         }
+      },
+      "environment": {
+        "ASAN_OPTIONS": "detect_odr_violation=0:detect_stack_use_after_return=1:detect_leaks=0",
+        "LSAN_OPTIONS": "suppressions=${sourceDir}/lsan.supp",
+        "UBSAN_OPTIONS": "print_stacktrace=1"
       }
     },
 

@@ -5,22 +5,26 @@ option(UNIT_TESTS_RUN_ON_CI
        "Specify if unit tests are executed on CI - changes reporter"
 )
 
-add_library(aide_catch_main STATIC catch_main.cpp)
+add_library(aide_catch_main OBJECT catch_main.cpp sanitizerdefaults.cpp)
 target_link_libraries(
   aide_catch_main
   PUBLIC Catch2::Catch2
-  PRIVATE Aide::AideApplication Qt::Widgets
+  PRIVATE Aide::AideApplication Qt::Widgets aide_options aide_warnings
+          aide_coverage
 )
 target_compile_features(aide_catch_main PUBLIC cxx_std_11)
 
 # Separate entry point for the [Application] tests: aide::Application is itself
 # a QApplication, so those tests must not run alongside the process-global
 # QApplication created in catch_main.cpp. This main deliberately creates none.
-add_library(aide_catch_main_application STATIC catch_main_application.cpp)
+add_library(
+  aide_catch_main_application OBJECT catch_main_application.cpp
+                                     sanitizerdefaults.cpp
+)
 target_link_libraries(
   aide_catch_main_application
   PUBLIC Catch2::Catch2
-  PRIVATE Aide::AideApplication
+  PRIVATE Aide::AideApplication aide_options aide_warnings aide_coverage
 )
 target_compile_features(aide_catch_main_application PUBLIC cxx_std_11)
 
@@ -236,12 +240,8 @@ function(aide_discover_unit_tests target)
     )
   else()
     catch_discover_tests(
-      ${target}
-      REPORTER
-      console
-      WORKING_DIRECTORY
-      ${CMAKE_CURRENT_LIST_DIR}/../../
-      ${aide_coverage_test_properties}
+      ${target} REPORTER console WORKING_DIRECTORY
+      ${CMAKE_CURRENT_LIST_DIR}/../../ ${aide_coverage_test_properties}
     )
   endif()
 endfunction()
@@ -253,15 +253,12 @@ aide_discover_unit_tests(ut.aide.application)
 # binaries run. Prevents a killed process from poisoning later runs with a
 # corrupt .gcda that crashes the gcov writeout at exit.
 if(aide_ENABLE_COVERAGE)
-  add_test(
-    NAME reset_coverage_data
-    COMMAND
-      ${CMAKE_COMMAND} -DGCDA_ROOT=${CMAKE_BINARY_DIR} -P
-      ${CMAKE_CURRENT_LIST_DIR}/ResetCoverageData.cmake
+  add_test(NAME reset_coverage_data
+           COMMAND ${CMAKE_COMMAND} -DGCDA_ROOT=${CMAKE_BINARY_DIR} -P
+                   ${CMAKE_CURRENT_LIST_DIR}/ResetCoverageData.cmake
   )
   set_tests_properties(
-    reset_coverage_data
-    PROPERTIES FIXTURES_SETUP coverage_data
+    reset_coverage_data PROPERTIES FIXTURES_SETUP coverage_data
   )
 endif()
 
