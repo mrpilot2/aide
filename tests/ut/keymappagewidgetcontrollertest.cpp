@@ -63,9 +63,14 @@ TEST_CASE("A key map page widget controller handling an existing shortcut")
 
         QAction removeAction;
         removeAction.setData(otherSequence);
-        QObject::connect(
-            &removeAction, &QAction::triggered, &controller,
-            &KeyMapPageWidgetController::onUserRequestedToRemoveAShortcut);
+        // String-based connect on purpose: a pointer-to-member connect
+        // references the sender's and receiver's staticMetaObject data
+        // symbols, which are not exported across DLL boundaries on MSVC
+        // (CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS exports functions, not data).
+        // The string form resolves the signal/slot at runtime via the
+        // exported virtual metaObject(), so it links there.
+        QObject::connect(&removeAction, SIGNAL(triggered()), &controller,
+                         SLOT(onUserRequestedToRemoveAShortcut()));
 
         removeAction.trigger();
 
