@@ -205,9 +205,6 @@ macro(aide_global_options)
     else()
       set(ENABLE_UBSAN_MINIMAL_RUNTIME TRUE)
     endif()
-    message(
-      "${AIDE_ENABLE_HARDENING} ${ENABLE_UBSAN_MINIMAL_RUNTIME} ${AIDE_ENABLE_SANITIZER_UNDEFINED}"
-    )
     aide_enable_hardening(aide_options ON ${ENABLE_UBSAN_MINIMAL_RUNTIME})
   endif()
 endmacro()
