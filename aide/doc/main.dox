@@ -1,8 +1,8 @@
 /** \mainpage aIDE
  * \section intro_sec Introduction
  *
- * aide is a modern, C++ native GUI application framework based on QT5 -
- * using C++11 and later
+ * aide is a modern, C++ native GUI application framework based on Qt6 -
+ * using C++20 and later
  *
- * Using aide it's easy to generate GUI application based on QT5
+ * Using aide it's easy to generate GUI application based on Qt6
  */

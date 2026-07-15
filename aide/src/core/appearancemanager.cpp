@@ -5,11 +5,9 @@
 
 #include <QApplication>
 #include <QColor>
-#include <QIcon>
-#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
 #include <QGuiApplication>
+#include <QIcon>
 #include <QStyleHints>
-#endif
 
 #include "aide/hierarchicalid.hpp"
 #include "aide/settingsinterface.hpp"
@@ -203,9 +201,7 @@ void AppearanceManager::applyAppearance(const QString& themeName,
     if (newScheme != oldScheme) { emit colorSchemeChanged(newScheme); }
     emit appearanceChanged();
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
     updateSystemThemeConnection();
-#endif
 }
 
 // static
@@ -382,9 +378,7 @@ void AppearanceManager::restoreFromSettings()
     applyIconSettings(theme);
     QApplication::setFont(m_activeFont);
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
     updateSystemThemeConnection();
-#endif
 }
 
 void AppearanceManager::reapplySystemTheme()
@@ -399,7 +393,6 @@ void AppearanceManager::reapplySystemTheme()
     emit appearanceChanged();
 }
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
 void AppearanceManager::updateSystemThemeConnection()
 {
     auto* hints = QGuiApplication::styleHints();
@@ -417,4 +410,3 @@ void AppearanceManager::onOsColorSchemeChanged()
 {
     reapplySystemTheme();
 }
-#endif

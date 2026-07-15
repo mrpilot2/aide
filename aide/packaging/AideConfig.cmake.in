@@ -22,11 +22,10 @@ set_target_properties(
 
 include(CMakeFindDependencyMacro)
 
-find_dependency(Qt@QT_VERSION_MAJOR@ COMPONENTS Core Widgets)
-
-if(TARGET Qt5::Core)
-  if(NOT TARGET Qt::Core)
-    add_library(Qt::Core ALIAS Qt5::Core)
-    add_library(Qt::Widgets ALIAS Qt5::Widgets)
-  endif()
-endif()
+find_dependency(
+  Qt@QT_VERSION_MAJOR@
+  6.5
+  COMPONENTS
+  Core
+  Widgets
+)

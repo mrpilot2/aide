@@ -1,5 +1,4 @@
 leak:libQt6*
-leak:libQt5*
 leak:libfontconfig*
 leak:libqoffscreen*
 leak:libwayland*

@@ -8,29 +8,16 @@ add_subdirectory(widgets)
 if(TARGET Qt::lrelease)
   set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
 
-  if(Qt6Core_VERSION_MAJOR)
-    qt_create_translation(
-      QM_FILES
-      ${CMAKE_CURRENT_SOURCE_DIR}
-      ${CMAKE_CURRENT_SOURCE_DIR}/../core
-      res/translations/aide_de_DE.ts
-      res/translations/aide_en.ts
-      OPTIONS
-      -locations
-      none
-    )
-  else()
-    qt5_create_translation(
-      QM_FILES
-      ${CMAKE_CURRENT_SOURCE_DIR}
-      ${CMAKE_CURRENT_SOURCE_DIR}/../core
-      res/translations/aide_de_DE.ts
-      res/translations/aide_en.ts
-      OPTIONS
-      -locations
-      none
-    )
-  endif()
+  qt_create_translation(
+    QM_FILES
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/../core
+    res/translations/aide_de_DE.ts
+    res/translations/aide_en.ts
+    OPTIONS
+    -locations
+    none
+  )
 
   configure_file(
     res/translations/translations.qrc.in

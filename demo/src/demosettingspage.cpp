@@ -182,9 +182,6 @@ DemoSettingsPage::DemoSettingsPage(
     , m_widget(nullptr)
 {
     qRegisterMetaType<WidgetState>("WidgetState");
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    qRegisterMetaTypeStreamOperators<WidgetState>("WidgetState");
-#endif
     m_tableInsertTimer->setInterval(1000);
 }
 

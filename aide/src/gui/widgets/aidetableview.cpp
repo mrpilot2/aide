@@ -40,14 +40,7 @@ void AideTableView::paintEvent(QPaintEvent* event)
 
     QPainter painter(viewport());
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
-    const auto placeHolderTextAlpha{128};
-    QColor textColor{palette().text().color()};
-    textColor.setAlpha(placeHolderTextAlpha);
-    painter.setPen(textColor);
-#else
     painter.setPen(palette().placeholderText().color());
-#endif
 
     QRect textRect = painter.fontMetrics().boundingRect(textToDisplay);
     textRect.moveCenter(viewport()->rect().center());

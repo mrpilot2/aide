@@ -137,16 +137,9 @@ namespace
                 spinBox, qOverload<int>(&QSpinBox::valueChanged),
                 settingsController,
                 &aide::gui::SettingsDialogController::onUserChangedAGuiElement);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
             QObject::connect(
                 spinBox, &QSpinBox::textChanged, settingsController,
                 &aide::gui::SettingsDialogController::onUserChangedAGuiElement);
-#else
-            QObject::connect(
-                spinBox, qOverload<const QString&>(&QSpinBox::valueChanged),
-                settingsController,
-                &aide::gui::SettingsDialogController::onUserChangedAGuiElement);
-#endif
         }
         if (const auto* spinBox = qobject_cast<const QDoubleSpinBox*>(child);
             spinBox != nullptr) {
@@ -154,17 +147,9 @@ namespace
                 spinBox, qOverload<double>(&QDoubleSpinBox::valueChanged),
                 settingsController,
                 &aide::gui::SettingsDialogController::onUserChangedAGuiElement);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
             QObject::connect(
                 spinBox, &QDoubleSpinBox::textChanged, settingsController,
                 &aide::gui::SettingsDialogController::onUserChangedAGuiElement);
-#else
-            QObject::connect(
-                spinBox,
-                qOverload<const QString&>(&QDoubleSpinBox::valueChanged),
-                settingsController,
-                &aide::gui::SettingsDialogController::onUserChangedAGuiElement);
-#endif
         }
     }
 
