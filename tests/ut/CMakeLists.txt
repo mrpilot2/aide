@@ -85,9 +85,11 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       keymapcontrollertest.cpp
       keymaptreemodeltest.cpp
       keymappagetest.cpp
+      keymappagewidgetcontrollertest.cpp
       keymappagewidgettest.cpp
       pendingkeymapstatetest.cpp
       loggertest.cpp
+      mainwindowcontrollertest.cpp
       mainwindowgeometryandstatetest.cpp
       mainwindowtest.cpp
       menucontainertest.cpp
@@ -112,6 +114,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       textmatchertest.cpp
       systemmemorytest.cpp
       treeitemtest.cpp
+      treemodeltest.cpp
   )
 endif()
 
