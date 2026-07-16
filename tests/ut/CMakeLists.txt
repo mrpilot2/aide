@@ -81,6 +81,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       applicationcloseinteractortest.cpp
       $<$<TARGET_EXISTS:Qt::lrelease>:applicationtranslatortest.cpp>
       changedetectortest.cpp
+      desktopentrynameresolvertest.cpp
       keymapcontextmenuprovidertest.cpp
       keymapcontrollertest.cpp
       keymaptreemodeltest.cpp

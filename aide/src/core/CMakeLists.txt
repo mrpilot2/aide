@@ -17,6 +17,7 @@ target_sources(
     # :/aide/icons regardless of whether the GUI layer is linked.
     ../gui/res/icons/icon_themes.qrc
     applicationclose.cpp
+    desktopentrynameresolver.cpp
     hierarchicalid.cpp
     loggerfactory.cpp
     mainwindowgeometryandstate.cpp
