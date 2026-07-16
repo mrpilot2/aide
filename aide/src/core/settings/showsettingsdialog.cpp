@@ -240,14 +240,25 @@ void ShowSettingsDialog::clearSelectedPage()
 void ShowSettingsDialog::updateDisplayName(
     const QModelIndex& selectedIndex) const
 {
-    const auto completeGroupIndex =
-        treeModel->index(selectedIndex.row(), 0, selectedIndex.parent());
-    const auto* treeItem =
-        static_cast<TreeItem*>(completeGroupIndex.internalPointer());
-    const auto completeGroupString{treeItem->getHiddenUserData()
-                                       .toString()
-                                       .replace("/", " > ")
-                                       .toStdString()};
+    // selectedIndex may not belong to treeModel (tests exercise this with a
+    // throwaway model built from the same registry), so the ancestor chain
+    // is walked via QModelIndex::parent() - safe, since it stays within
+    // selectedIndex's own model - and each row is replayed against treeModel
+    // to resolve the translated title, mirroring how the row/parent pair was
+    // already re-resolved against treeModel before this fix.
+    std::vector<int> rows;
+    for (auto index = selectedIndex; index.isValid(); index = index.parent()) {
+        rows.push_back(index.row());
+    }
+    std::ranges::reverse(rows);
+
+    QStringList segments;
+    QModelIndex mappedIndex;
+    for (const auto row : rows) {
+        mappedIndex = treeModel->index(row, 0, mappedIndex);
+        segments << treeModel->data(mappedIndex, Qt::DisplayRole).toString();
+    }
+    const auto completeGroupString{segments.join(" > ").toStdString()};
 
     logger->trace("User changed settings page to {} ", completeGroupString);
 

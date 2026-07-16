@@ -334,6 +334,19 @@ TEST_CASE("Keymap tree model translated labels")
     SECTION("group label falls back to the raw id when no menu backs it")
     {
         auto action{std::make_shared<QAction>(QString("Close"), nullptr)};
+        registry->registerAction(action,
+                                 HierarchicalId("Main Menu")("File")("Close"));
+
+        const KeyMapTreeModel treeModel(registry);
+        const QModelIndex root  = treeModel.index(0, 0);
+        const QModelIndex group = treeModel.index(0, 0, root);
+
+        REQUIRE(treeModel.data(group, Qt::DisplayRole).toString() == "File");
+    }
+
+    SECTION("root 'Main Menu' group label translates even without a menu")
+    {
+        auto action{std::make_shared<QAction>(QString("Close"), nullptr)};
         registry->registerAction(action, HierarchicalId("Main Menu")("Close"));
 
         const KeyMapTreeModel treeModel(registry);
