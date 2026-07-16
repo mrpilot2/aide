@@ -89,6 +89,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       keymappagewidgettest.cpp
       pendingkeymapstatetest.cpp
       loggertest.cpp
+      loggerfactorytest.cpp
       mainwindowcontrollertest.cpp
       mainwindowgeometryandstatetest.cpp
       mainwindowtest.cpp
