@@ -23,6 +23,7 @@ using aide::core::LoggerFactory;
 using aide::core::ShowLogInFileManagerUseCase;
 using aide::test::EnvVarGuard;
 using aide::test::StandardPathsTestModeGuard;
+using aide::test::UnwritableCacheLocationGuard;
 using aide::tests::MockFileManagerLauncher;
 
 namespace
@@ -113,14 +114,23 @@ TEST_CASE("A ShowLogInFileManagerUseCase with an unresolvable log file path",
 
     // Strip write permission from the sandbox root so QDir::mkpath() can
     // never create a subdirectory underneath it - this simulates "no
-    // writable location" for both the cache and the temp-dir fallback, the
-    // same technique used in loggerfactorytest.cpp.
+    // writable location" for the temp-dir fallback, the same technique
+    // used in loggerfactorytest.cpp.
     REQUIRE(QFile::setPermissions(
         sandbox.path(), QFileDevice::ReadOwner | QFileDevice::ExeOwner));
 
     const StandardPathsTestModeGuard testModeGuard;
-    const EnvVarGuard homeGuard("HOME", sandbox.path());
+
+    // CacheLocation is blocked directly rather than via a HOME override -
+    // see UnwritableCacheLocationGuard for why HOME doesn't reliably
+    // isolate it on every platform.
+    const UnwritableCacheLocationGuard cacheGuard;
+
+    // TempLocation reads TMPDIR on Unix and TMP/TEMP on Windows - override
+    // all three so the fallback is blocked on every platform.
     const EnvVarGuard tmpdirGuard("TMPDIR", sandbox.path() + "/tmp");
+    const EnvVarGuard tmpGuard("TMP", sandbox.path() + "/tmp");
+    const EnvVarGuard tempGuard("TEMP", sandbox.path() + "/tmp");
 
     REQUIRE_FALSE(LoggerFactory::logFilePath().has_value());
 
