@@ -8,6 +8,7 @@
 #include <QColor>
 #include <QMenu>
 
+#include <aide/aideconstants.hpp>
 #include <aide/hierarchicalid.hpp>
 
 using aide::Action;
@@ -211,6 +212,17 @@ std::optional<QString> KeyMapTreeModel::translatedLabel(
         menu && *menu != nullptr && !(*menu)->title().isEmpty()) {
         return stripMnemonic((*menu)->title());
     }
+
+    // The root "Main Menu" group represents the QMenuBar itself, which is
+    // never registered as a MenuContainerInterface, so it never resolves to
+    // a QMenu title above. It is an aIDE-owned constant rather than
+    // consumer-defined text, so aIDE translates it directly here.
+    const auto* item = static_cast<TreeItem*>(index.internalPointer());
+    if (item->data(0).toString().toStdString() ==
+        aide::constants::CONSTANTS().MAIN_MENU.name()) {
+        return tr("Main Menu");
+    }
+
     return {};
 }
 

@@ -138,6 +138,10 @@
         <source>Shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Main Menu</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>aide::core::KeymapContextMenuProvider</name>

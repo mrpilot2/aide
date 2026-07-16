@@ -87,6 +87,25 @@ TEST_CASE("Any show settings dialog use case")
         REQUIRE(view->displayName() == "MockTestPage");
     }
 
+    SECTION("show translated breadcrumb display name for nested group")
+    {
+        auto page = std::make_unique<MockSettingsPage>(
+            HierarchicalId("RawTop")("RawSub"));
+        page->setGroupTitles({"Translated Top", "Translated Sub"});
+        registry.addPage(std::move(page));
+
+        const SettingsPageGroupTreeModel treeModel{registry};
+
+        useCase.showSettingsDialog();
+
+        const QModelIndex topRow = treeModel.index(0, 0, QModelIndex());
+        const QModelIndex subRow = treeModel.index(0, 0, topRow);
+        useCase.changeSelectedPage({subRow, subRow},
+                                   groupSelection(treeModel, -1));
+
+        REQUIRE(view->displayName() == "Translated Top > Translated Sub");
+    }
+
     SECTION("clears the page without throwing when the selection is emptied")
     {
         registry.addPage(

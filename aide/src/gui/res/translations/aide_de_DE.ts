@@ -177,6 +177,10 @@
         <source>Shortcuts</source>
         <translation>Tastenkürzel</translation>
     </message>
+    <message>
+        <source>Main Menu</source>
+        <translation>Hauptmenü</translation>
+    </message>
 </context>
 <context>
     <name>aide::core::KeymapContextMenuProvider</name>
