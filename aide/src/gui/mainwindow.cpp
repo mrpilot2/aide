@@ -6,15 +6,18 @@
 #include <QCheckBox>
 #include <QEvent>
 #include <QLayout>
+#include <QMenu>
 #include <QMessageBox>
 #include <QObject>
 #include <QPushButton>
+#include <QString>
 
 #include "actionregistry.hpp"
 #include "aideconstants.hpp"
 #include "applicationtranslator.hpp"
 #include "mainwindowcontroller.hpp"
 #include "menucontainerinterface.hpp"
+#include "osfilemanagerlauncher.hpp"
 #include "settings/settingsdialog.hpp"
 #include "ui_mainwindow.h"
 
@@ -95,6 +98,8 @@ void MainWindow::registerActions(
     auto* menuHelp{menuHelpContainer->menu()};
     menuHelp->setTitle(QApplication::tr("&Help", "MainWindow"));
 
+    registerShowLogInFileManagerAction(menuHelp, actionRegistry);
+
     m_actionAboutAide = std::make_shared<QAction>(tr("About") + " aIDE", this);
     connect(m_actionAboutAide.get(), &QAction::triggered, m_controller.get(),
             &MainWindowController::onUserWantsToShowAboutAideDialog);
@@ -141,6 +146,32 @@ void MainWindow::registerViewMenu(
                                    {QKeySequence(Qt::Key_F11)});
 
     m_ui->menubar->addMenu(menuView);
+}
+
+void MainWindow::registerShowLogInFileManagerAction(
+    QMenu* menuHelp, const ActionRegistryInterfacePtr& actionRegistry)
+{
+    // Gating: not created, not registered, mirroring registerViewMenu above.
+    // This feature defaults to disabled since it is only appropriate for
+    // developer-facing consumer applications.
+    if (!m_config.isEnabled(
+            ApplicationConfig::Feature::ShowLogInFileManagerAction)) {
+        return;
+    }
+
+    const core::OsFileManagerLauncher launcher;
+    m_actionShowLogInFileManager = std::make_shared<QAction>(
+        tr("Show Log in %1")
+            .arg(QString::fromStdString(launcher.displayName())),
+        this);
+    connect(m_actionShowLogInFileManager.get(), &QAction::triggered,
+            m_controller.get(),
+            &MainWindowController::onUserWantsToShowLogInFileManager);
+    menuHelp->addAction(m_actionShowLogInFileManager.get());
+    menuHelp->addSeparator();
+
+    actionRegistry->registerAction(m_actionShowLogInFileManager,
+                                   CONSTANTS().HELP_SHOW_LOG_IN_FILE_MANAGER);
 }
 
 void MainWindow::toggleFullScreen()

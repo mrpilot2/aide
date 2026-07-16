@@ -30,6 +30,8 @@ private:
         switch (feature) {
         case Feature::ViewFullscreenAction:
             return true;
+        case Feature::ShowLogInFileManagerAction:
+            return false;
         }
         return true;
     }

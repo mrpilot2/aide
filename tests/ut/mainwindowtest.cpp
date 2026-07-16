@@ -113,3 +113,56 @@ TEST_CASE("A main window with the full screen feature disabled")
             registry->getMenuContainer(CONSTANTS().MENU_VIEW).has_value());
     }
 }
+
+TEST_CASE("A main window with the show-log-in-file-manager feature enabled")
+{
+    QApplication::setApplicationName("aide_test");
+    QApplication::setOrganizationName("aide_company");
+
+    MockSettings settings;
+    const auto registry = std::make_shared<ActionRegistry>(
+        settings, std::make_shared<NullLogger>());
+
+    MainWindow mainWindow(
+        std::make_shared<NullLogger>(),
+        ApplicationConfig{}.setEnabled(
+            ApplicationConfig::Feature::ShowLogInFileManagerAction, true),
+        nullptr);
+    mainWindow.setMainWindowController(nullptr, registry);
+
+    SECTION("registers the show-log-in-file-manager action")
+    {
+        REQUIRE(registry->action(CONSTANTS().HELP_SHOW_LOG_IN_FILE_MANAGER)
+                    .has_value());
+    }
+
+    SECTION("does not bind a default key sequence")
+    {
+        REQUIRE(registry->actions()
+                    .at(CONSTANTS().HELP_SHOW_LOG_IN_FILE_MANAGER)
+                    .defaultKeySequences.empty());
+    }
+}
+
+TEST_CASE(
+    "A main window with the show-log-in-file-manager feature left at its "
+    "default")
+{
+    QApplication::setApplicationName("aide_test");
+    QApplication::setOrganizationName("aide_company");
+
+    MockSettings settings;
+    const auto registry = std::make_shared<ActionRegistry>(
+        settings, std::make_shared<NullLogger>());
+
+    MainWindow mainWindow(std::make_shared<NullLogger>(), ApplicationConfig{},
+                          nullptr);
+    mainWindow.setMainWindowController(nullptr, registry);
+
+    SECTION("does not register the show-log-in-file-manager action")
+    {
+        REQUIRE_FALSE(
+            registry->action(CONSTANTS().HELP_SHOW_LOG_IN_FILE_MANAGER)
+                .has_value());
+    }
+}

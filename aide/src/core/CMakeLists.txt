@@ -23,8 +23,10 @@ target_sources(
     mainwindowinterface.cpp
     menucontainer.cpp
     menucontainerinterface.cpp
+    osfilemanagerlauncher.cpp
     qtsettings.cpp
     settingsinterface.cpp
+    showloginfilemanagerusecase.cpp
     settings/settingsdialogchangepagecontroller.cpp
     settings/settingsdialoggeometryandstate.cpp
     settings/settingspage.cpp

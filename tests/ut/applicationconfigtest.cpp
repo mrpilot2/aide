@@ -42,6 +42,24 @@ TEST_CASE("An application config")
                 &config);
     }
 
+    SECTION("defaults the show-log-in-file-manager feature to disabled")
+    {
+        const ApplicationConfig config;
+
+        REQUIRE_FALSE(config.isEnabled(Feature::ShowLogInFileManagerAction));
+    }
+
+    SECTION(
+        "reflects an explicit opt-in for the show-log-in-file-manager "
+        "feature")
+    {
+        ApplicationConfig config;
+
+        config.setEnabled(Feature::ShowLogInFileManagerAction, true);
+
+        REQUIRE(config.isEnabled(Feature::ShowLogInFileManagerAction));
+    }
+
     SECTION("a copy carries overrides independently of the original")
     {
         ApplicationConfig original;

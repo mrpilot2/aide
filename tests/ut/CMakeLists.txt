@@ -98,6 +98,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       searchhistorytest.cpp
       mockaboutdialog.cpp
       mockapplicationcloseview.cpp
+      mockfilemanagerlauncher.cpp
       mockkeymappagewidget.cpp
       mockmainwindowview.cpp
       mocksettingsdialog.cpp
@@ -111,6 +112,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       settingspagegrouptreemodeltest.cpp
       settingsdialogcontrollertest.cpp
       settingspagerankertest.cpp
+      showloginfilemanagerusecasetest.cpp
       showsettingsdialogtest.cpp
       textmatchertest.cpp
       systemmemorytest.cpp

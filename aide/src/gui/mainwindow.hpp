@@ -18,6 +18,7 @@ namespace Ui
 } // namespace Ui
 
 class QIcon;
+class QMenu;
 class QWidget;
 
 namespace aide::gui
@@ -62,6 +63,9 @@ namespace aide::gui
 
         void registerViewMenu(const ActionRegistryInterfacePtr& actionRegistry);
 
+        void registerShowLogInFileManagerAction(
+            QMenu* menuHelp, const ActionRegistryInterfacePtr& actionRegistry);
+
         void toggleFullScreen();
 
         [[nodiscard]] static QIcon createIconFromTheme(
@@ -78,6 +82,7 @@ namespace aide::gui
         std::shared_ptr<QAction> m_actionSettings;
         std::shared_ptr<QAction> m_actionQuit;
         std::shared_ptr<QAction> m_actionFullScreen;
+        std::shared_ptr<QAction> m_actionShowLogInFileManager;
         std::shared_ptr<QAction> m_actionAboutAide;
         std::shared_ptr<QAction> m_actionAboutQt;
     };

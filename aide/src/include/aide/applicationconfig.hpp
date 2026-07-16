@@ -12,7 +12,12 @@ namespace aide
      * A client fills in an ApplicationConfig programmatically and hands it to
      * the aide::Application at construction time to declare which built-in
      * features the application uses. Every feature defaults to enabled, so a
-     * zero-configuration application behaves exactly like today's aIDE.
+     * zero-configuration application behaves exactly like today's aIDE - with
+     * one documented exception: ShowLogInFileManagerAction defaults to
+     * disabled, since it is only appropriate for developer-facing consumer
+     * applications and would otherwise expose a concept (the log file) that
+     * end users of most aIDE-based applications have no reason to know
+     * about.
      *
      * The type is an ordinary copyable value with a private implementation
      * (pImpl) so its binary layout stays stable as new toggles are added:
@@ -33,6 +38,10 @@ namespace aide
         {
             /// Checkable View → Full Screen action bound to F11.
             ViewFullscreenAction,
+
+            /// Help → "Show Log in <File Manager>" action. Defaults to
+            /// disabled, unlike every other feature in this enum.
+            ShowLogInFileManagerAction,
         };
 
         ApplicationConfig();

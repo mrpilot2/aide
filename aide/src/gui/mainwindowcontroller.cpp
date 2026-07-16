@@ -10,6 +10,8 @@
 #include "logger/loggerfactory.hpp"
 #include "mainwindow.hpp"
 #include "mainwindowgeometryandstatecontroller.hpp"
+#include "osfilemanagerlauncher.hpp"
+#include "showloginfilemanagerusecase.hpp"
 
 using aide::core::AboutAideUseCase;
 using aide::core::ApplicationCloseController;
@@ -51,4 +53,12 @@ void MainWindowController::onUserWantsToShowAboutAideDialog() const
     const AboutAideUseCase useCase(
         dialog, core::LoggerFactory::createLogger("AboutAide"));
     useCase.showAboutAideInformation();
+}
+
+void MainWindowController::onUserWantsToShowLogInFileManager()
+{
+    const auto launcher = std::make_shared<core::OsFileManagerLauncher>();
+    const core::ShowLogInFileManagerUseCase useCase(
+        launcher, core::LoggerFactory::createLogger("ShowLogInFileManager"));
+    useCase.showLogInFileManager();
 }
