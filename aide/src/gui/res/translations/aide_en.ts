@@ -245,5 +245,9 @@
         <source>Toggle full screen mode</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show Log in %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

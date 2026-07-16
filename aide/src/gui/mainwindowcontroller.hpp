@@ -35,6 +35,12 @@ namespace aide::gui
                                           const QByteArray& geometry,
                                           const QByteArray& state) const;
 
+        // Not a member of the instance's state, so it is a plain static
+        // method rather than an instance slot; it is still connected via
+        // the new-style pointer-based connect() with the controller
+        // instance supplied as the context object.
+        static void onUserWantsToShowLogInFileManager();
+
     public slots:
         void onUserWantsToShowSettingsDialog() const;
 

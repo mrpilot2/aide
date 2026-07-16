@@ -32,7 +32,14 @@ int main(int argc, char* argv[])
     // View -> Full Screen action would disable it here, e.g.:
     //   config.setEnabled(
     //       aide::ApplicationConfig::Feature::ViewFullscreenAction, false);
-    const aide::ApplicationConfig config;
+    //
+    // One exception: ShowLogInFileManagerAction defaults to disabled since
+    // it is only appropriate for developer-facing consumer applications.
+    // The demo opts in explicitly so the feature is visibly exercised by
+    // anyone running it.
+    aide::ApplicationConfig config;
+    config.setEnabled(
+        aide::ApplicationConfig::Feature::ShowLogInFileManagerAction, true);
     const aide::Application app(argc, argv, config);
 
     app.translator()->addAdditionalTranslationFilePath(
