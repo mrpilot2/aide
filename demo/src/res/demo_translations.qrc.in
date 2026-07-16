@@ -2,5 +2,10 @@
 <qresource prefix="/demo_translations">
     <file alias="demo_de.qm">${CMAKE_CURRENT_BINARY_DIR}/demo_de.qm</file>
     <file alias="demo_en.qm">${CMAKE_CURRENT_BINARY_DIR}/demo_en.qm</file>
+    <file alias="demo_zh_CN.qm">${CMAKE_CURRENT_BINARY_DIR}/demo_zh_CN.qm</file>
+    <file alias="demo_hi_IN.qm">${CMAKE_CURRENT_BINARY_DIR}/demo_hi_IN.qm</file>
+    <file alias="demo_es_ES.qm">${CMAKE_CURRENT_BINARY_DIR}/demo_es_ES.qm</file>
+    <file alias="demo_fr_FR.qm">${CMAKE_CURRENT_BINARY_DIR}/demo_fr_FR.qm</file>
+    <file alias="demo_ar_SA.qm">${CMAKE_CURRENT_BINARY_DIR}/demo_ar_SA.qm</file>
 </qresource>
 </RCC>
