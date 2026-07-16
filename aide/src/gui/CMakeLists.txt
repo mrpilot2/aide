@@ -14,6 +14,11 @@ if(TARGET Qt::lrelease)
     ${CMAKE_CURRENT_SOURCE_DIR}/../core
     res/translations/aide_de_DE.ts
     res/translations/aide_en.ts
+    res/translations/aide_zh_CN.ts
+    res/translations/aide_hi_IN.ts
+    res/translations/aide_es_ES.ts
+    res/translations/aide_fr_FR.ts
+    res/translations/aide_ar_SA.ts
     OPTIONS
     -locations
     none

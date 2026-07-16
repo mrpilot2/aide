@@ -10,6 +10,11 @@ if(TARGET Qt::lrelease)
     ${CMAKE_CURRENT_SOURCE_DIR}
     res/demo_de.ts
     res/demo_en.ts
+    res/demo_zh_CN.ts
+    res/demo_hi_IN.ts
+    res/demo_es_ES.ts
+    res/demo_fr_FR.ts
+    res/demo_ar_SA.ts
     OPTIONS
     -locations
     none

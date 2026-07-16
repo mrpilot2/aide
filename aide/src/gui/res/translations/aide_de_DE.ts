@@ -103,7 +103,7 @@
     <message>
         <source>&amp;View</source>
         <comment>MainWindow</comment>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ansicht</translation>
     </message>
     <message>
         <source>Keymap</source>
@@ -278,11 +278,11 @@
     </message>
     <message>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Vollbild</translation>
     </message>
     <message>
         <source>Toggle full screen mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Vollbildmodus umschalten</translation>
     </message>
 </context>
 </TS>

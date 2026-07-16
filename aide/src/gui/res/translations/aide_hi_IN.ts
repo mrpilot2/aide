@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ar_SA">
+<TS version="2.1" language="hi_IN">
 <context>
     <name>AboutAideDialog</name>
     <message>
         <source>About aIDE</source>
-        <translation>حول aIDE</translation>
+        <translation>aIDE के बारे में</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;aIDE is made possible by &lt;a href=&quot;abc&quot;&gt;&lt;span&gt;open source software&lt;/span&gt;&lt;/a&gt;&lt;a href=&quot;abc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#308cc6;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;أصبح aIDE ممكنًا بفضل &lt;a href=&quot;abc&quot;&gt;&lt;span&gt;برمجيات مفتوحة المصدر&lt;/span&gt;&lt;/a&gt;&lt;a href=&quot;abc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#308cc6;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;aIDE को संभव बनाया गया है &lt;a href=&quot;abc&quot;&gt;&lt;span&gt;ओपन सोर्स सॉफ़्टवेयर&lt;/span&gt;&lt;/a&gt;&lt;a href=&quot;abc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#308cc6;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -17,36 +17,36 @@
     </message>
     <message>
         <source>Copy</source>
-        <translation>نسخ</translation>
+        <translation>कॉपी करें</translation>
     </message>
 </context>
 <context>
     <name>AddShortcutDialog</name>
     <message>
         <source>Add Keyboard Shortcut</source>
-        <translation>إضافة اختصار لوحة المفاتيح</translation>
+        <translation>कीबोर्ड शॉर्टकट जोड़ें</translation>
     </message>
     <message>
         <source>Already assigned to:</source>
-        <translation>مُخصص بالفعل لـ:</translation>
+        <translation>पहले से इसे सौंपा गया:</translation>
     </message>
 </context>
 <context>
     <name>AideTableView</name>
     <message>
         <source>There are no elements in this view</source>
-        <translation>لا توجد عناصر في هذا العرض</translation>
+        <translation>इस दृश्य में कोई तत्व नहीं है</translation>
     </message>
     <message>
         <source> due to active filter</source>
-        <translation> بسبب وجود عامل تصفية نشط</translation>
+        <translation> सक्रिय फ़िल्टर के कारण</translation>
     </message>
 </context>
 <context>
     <name>AideTreeView</name>
     <message>
         <source>There are no elements in this view</source>
-        <translation>لا توجد عناصر في هذا العرض</translation>
+        <translation>इस दृश्य में कोई तत्व नहीं है</translation>
     </message>
 </context>
 <context>
@@ -54,41 +54,41 @@
     <message>
         <source>Keymap</source>
         <comment>KeymapPage</comment>
-        <translation>اختصارات لوحة المفاتيح</translation>
+        <translation>कीमैप</translation>
     </message>
     <message>
         <source>&amp;File</source>
         <comment>MainWindow</comment>
-        <translation>&amp;ملف</translation>
+        <translation>&amp;फ़ाइल</translation>
     </message>
     <message>
         <source>&amp;Help</source>
         <comment>MainWindow</comment>
-        <translation>&amp;مساعدة</translation>
+        <translation>&amp;सहायता</translation>
     </message>
     <message>
         <source>&amp;View</source>
         <comment>MainWindow</comment>
-        <translation>&amp;عرض</translation>
+        <translation>&amp;दृश्य</translation>
     </message>
 </context>
 <context>
     <name>SearchFilterWidget</name>
     <message>
         <source>Form</source>
-        <translation>نموذج</translation>
+        <translation>फ़ॉर्म</translation>
     </message>
     <message>
         <source>Search ...</source>
-        <translation>بحث ...</translation>
+        <translation>खोजें ...</translation>
     </message>
     <message>
         <source>Regular E&amp;xpression</source>
-        <translation>تعبير &amp;نمطي</translation>
+        <translation>रेगुलर ए&amp;क्सप्रेशन</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>إغلاق</translation>
+        <translation>बंद करें</translation>
     </message>
     <message>
         <source>Esc</source>
@@ -96,154 +96,154 @@
     </message>
     <message>
         <source>Match &amp;Case</source>
-        <translation>مطابقة حالة الأ&amp;حرف</translation>
+        <translation>केस मिला&amp;एं</translation>
     </message>
 </context>
 <context>
     <name>SearchLineEdit</name>
     <message>
         <source>Show recent searches</source>
-        <translation>إظهار عمليات البحث الأخيرة</translation>
+        <translation>हाल की खोजें दिखाएं</translation>
     </message>
 </context>
 <context>
     <name>SettingsDialog</name>
     <message>
         <source>Settings</source>
-        <translation>الإعدادات</translation>
+        <translation>सेटिंग्स</translation>
     </message>
     <message>
         <source>Search settings…</source>
-        <translation>البحث في الإعدادات…</translation>
+        <translation>सेटिंग्स खोजें…</translation>
     </message>
     <message>
         <source>&lt;a href=&quot;http://&quot;&gt;Reset&lt;/a&gt;</source>
-        <translation>&lt;a href=&quot;http://&quot;&gt;إعادة تعيين&lt;/a&gt;</translation>
+        <translation>&lt;a href=&quot;http://&quot;&gt;रीसेट करें&lt;/a&gt;</translation>
     </message>
 </context>
 <context>
     <name>ThirdPartyLicensesDialog</name>
     <message>
         <source>Third-party licenses</source>
-        <translation>تراخيص الجهات الخارجية</translation>
+        <translation>तृतीय-पक्ष लाइसेंस</translation>
     </message>
 </context>
 <context>
     <name>aide::core::KeyMapTreeModel</name>
     <message>
         <source>Action</source>
-        <translation>إجراء</translation>
+        <translation>क्रिया</translation>
     </message>
     <message>
         <source>Shortcuts</source>
-        <translation>الاختصارات</translation>
+        <translation>शॉर्टकट</translation>
     </message>
     <message>
         <source>Main Menu</source>
-        <translation>القائمة الرئيسية</translation>
+        <translation>मुख्य मेनू</translation>
     </message>
 </context>
 <context>
     <name>aide::core::KeymapContextMenuProvider</name>
     <message>
         <source>Add keyboard shortcut</source>
-        <translation>إضافة اختصار لوحة مفاتيح</translation>
+        <translation>कीबोर्ड शॉर्टकट जोड़ें</translation>
     </message>
     <message>
         <source>Remove %1</source>
-        <translation>إزالة %1</translation>
+        <translation>%1 हटाएं</translation>
     </message>
     <message>
         <source>Reset to default</source>
-        <translation>إعادة التعيين إلى الافتراضي</translation>
+        <translation>डिफ़ॉल्ट पर रीसेट करें</translation>
     </message>
 </context>
 <context>
     <name>aide::core::SettingsPageGroupTreeModel</name>
     <message>
         <source>Group</source>
-        <translation>مجموعة</translation>
+        <translation>समूह</translation>
     </message>
 </context>
 <context>
     <name>aide::gui::AboutAideDialog</name>
     <message>
         <source>built on</source>
-        <translation>تم البناء في</translation>
+        <translation>निर्मित तिथि</translation>
     </message>
     <message>
         <source>What&apos;s new</source>
-        <translation>ما الجديد</translation>
+        <translation>नया क्या है</translation>
     </message>
 </context>
 <context>
     <name>aide::gui::AppearancePage</name>
     <message>
         <source>Theme:</source>
-        <translation>السمة:</translation>
+        <translation>थीम:</translation>
     </message>
     <message>
         <source>Font:</source>
-        <translation>الخط:</translation>
+        <translation>फ़ॉन्ट:</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation>الحجم:</translation>
+        <translation>आकार:</translation>
     </message>
     <message>
         <source>Appearance &amp; Behavior</source>
-        <translation>المظهر والسلوك</translation>
+        <translation>रूप और व्यवहार</translation>
     </message>
     <message>
         <source>Appearance</source>
-        <translation>المظهر</translation>
+        <translation>रूप</translation>
     </message>
 </context>
 <context>
     <name>aide::gui::MainWindow</name>
     <message>
         <source>Settings</source>
-        <translation>الإعدادات</translation>
+        <translation>सेटिंग्स</translation>
     </message>
     <message>
         <source>Edit application settings</source>
-        <translation>تحرير إعدادات التطبيق</translation>
+        <translation>एप्लिकेशन सेटिंग्स संपादित करें</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation>إنهاء</translation>
+        <translation>बाहर निकलें</translation>
     </message>
     <message>
         <source>Quits the application</source>
-        <translation>يُنهي التطبيق</translation>
+        <translation>एप्लिकेशन बंद करता है</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>حول</translation>
+        <translation>परिचय</translation>
     </message>
     <message>
         <source>About Qt</source>
-        <translation>حول Qt</translation>
+        <translation>Qt के बारे में</translation>
     </message>
     <message>
         <source>Full Screen</source>
-        <translation>ملء الشاشة</translation>
+        <translation>पूर्ण स्क्रीन</translation>
     </message>
     <message>
         <source>Toggle full screen mode</source>
-        <translation>تبديل وضع ملء الشاشة</translation>
+        <translation>पूर्ण स्क्रीन मोड टॉगल करें</translation>
     </message>
     <message>
         <source>Don&apos;t ask again</source>
-        <translation>عدم السؤال مرة أخرى</translation>
+        <translation>दोबारा न पूछें</translation>
     </message>
     <message>
         <source>Confirm exit</source>
-        <translation>تأكيد الخروج</translation>
+        <translation>बाहर निकलने की पुष्टि करें</translation>
     </message>
     <message>
         <source>Are you sure you want to exit?</source>
-        <translation>هل أنت متأكد أنك تريد الخروج؟</translation>
+        <translation>क्या आप वाकई बाहर निकलना चाहते हैं?</translation>
     </message>
 </context>
 </TS>
