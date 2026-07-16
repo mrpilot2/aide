@@ -94,8 +94,6 @@ TEST_CASE(
 
     const StandardPathsTestModeGuard testModeGuard;
     const EnvVarGuard homeGuard("HOME", sandbox.path());
-    const EnvVarGuard xdgCacheGuard("XDG_CACHE_HOME",
-                                    sandbox.path() + "/cache");
 
     QCoreApplication::setApplicationName(
         "aide_logger_factory_consistency_test");
@@ -131,8 +129,6 @@ TEST_CASE(
 
     const StandardPathsTestModeGuard testModeGuard;
     const EnvVarGuard homeGuard("HOME", sandbox.path());
-    const EnvVarGuard xdgCacheGuard("XDG_CACHE_HOME",
-                                    sandbox.path() + "/cache");
     const EnvVarGuard tmpdirGuard("TMPDIR", sandbox.path() + "/tmp");
 
     REQUIRE_FALSE(LoggerFactory::logFilePath().has_value());
