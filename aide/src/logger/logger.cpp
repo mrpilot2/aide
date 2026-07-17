@@ -44,7 +44,7 @@ Logger::Logger(const FileName& logFileName, const LoggerName& loggerName)
         loggerName() + std::string("_macro"), begin(macroLogSinks),
         end(macroLogSinks));
 
-    m_logger->info("Create macro logger " + loggerName() + "_macro");
+    m_logger->trace("Create macro logger " + loggerName() + "_macro");
     m_macroLogger->set_level(
         static_cast<spdlog::level::level_enum>(SPDLOG_ACTIVE_LEVEL));
 #ifdef NDEBUG
