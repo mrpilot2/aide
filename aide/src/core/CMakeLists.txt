@@ -25,6 +25,7 @@ target_sources(
     menucontainer.cpp
     menucontainerinterface.cpp
     osfilemanagerlauncher.cpp
+    platformiconbaseline.cpp
     qtsettings.cpp
     settingsinterface.cpp
     showloginfilemanagerusecase.cpp

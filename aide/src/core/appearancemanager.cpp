@@ -11,6 +11,7 @@
 
 #include "aide/hierarchicalid.hpp"
 #include "aide/settingsinterface.hpp"
+#include "platformiconbaseline.hpp"
 
 namespace
 {
@@ -299,25 +300,24 @@ void AppearanceManager::applyIconSettings(const Theme& theme)
     }
 
     if (!iconThemeName.isEmpty()) {
-        // Capture the platform icon theme and its search paths once, before we
-        // override them. QIcon::setThemeSearchPaths() replaces the list, so
-        // without this the platform icon directories (/usr/share/icons, …)
-        // become unreachable. Keeping them — plus a fallback theme — lets icons
-        // the bundled aide-* themes don't provide still resolve. The most
-        // visible case is the window-*-symbolic icons the Wayland client-side
-        // decoration draws its title-bar buttons from.
-        static const QString platformThemeName = QIcon::themeName();
-        static const QStringList platformSearchPaths =
-            QIcon::themeSearchPaths();
+        // The platform icon theme and its search paths, captured once before
+        // AppearanceManager first overrides them (see
+        // platformiconbaseline.hpp). QIcon::setThemeSearchPaths() replaces the
+        // list, so without this the platform icon directories
+        // (/usr/share/icons, …) become unreachable. Keeping them — plus a
+        // fallback theme — lets icons the bundled aide-* themes don't provide
+        // still resolve. The most visible case is the window-*-symbolic icons
+        // the Wayland client-side decoration draws its title-bar buttons from.
+        const auto& baseline = platformIconBaseline();
 
         QStringList searchPaths = theme.iconSearchPaths;
-        for (const auto& path : platformSearchPaths) {
+        for (const auto& path : baseline.searchPaths) {
             if (!searchPaths.contains(path)) { searchPaths.append(path); }
         }
 
-        if (!platformThemeName.isEmpty() &&
-            platformThemeName != iconThemeName) {
-            QIcon::setFallbackThemeName(platformThemeName);
+        if (!baseline.themeName.isEmpty() &&
+            baseline.themeName != iconThemeName) {
+            QIcon::setFallbackThemeName(baseline.themeName);
         }
         QIcon::setThemeName(iconThemeName);
 

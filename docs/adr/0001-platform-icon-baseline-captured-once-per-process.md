@@ -1,0 +1,7 @@
+# Platform icon baseline is captured once per process, not once per AppearanceManager instance
+
+`AppearanceManager` overrides Qt's global icon theme (`QIcon::setThemeName`/`setThemeSearchPaths`) to apply aIDE's bundled icon themes, and needs the platform's original icon theme name and search paths as a fallback so consumer-supplied icons the bundled themes don't cover still resolve. `PlatformIconBaseline` (`aide/src/core/platformiconbaseline.hpp`) captures that baseline exactly once for the life of the process — first caller wins — rather than once per `AppearanceManager` instance.
+
+This is deliberate, not an oversight: Qt's icon theme is a real process-global singleton. An instance constructed after another instance has already called `QIcon::setThemeName()` would, if it captured its own "baseline," actually capture the *previous* instance's already-applied aIDE theme rather than the true original OS theme — silently corrupting the fallback for every `AppearanceManager` after the first one in a process. Production only ever constructs one `AppearanceManager` (a value member of `ApplicationBuilder`), so this only bites in the unit test binary, which constructs many instances against a single process-lifetime `QApplication` (`tests/ut/catch_main.cpp`).
+
+**Considered and rejected**: capturing the baseline fresh in each instance's constructor. It looks more testable and more "instance-owned," but regresses correctness as described above — a future pass should not re-propose instance-scoping this without accounting for it.
