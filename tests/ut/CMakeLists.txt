@@ -285,6 +285,7 @@ endif()
 
 set_source_files_properties(
   loggertest.cpp
+  loggerfactorytest.cpp
   PROPERTIES
     COMPILE_DEFINITIONS TEST_LOG_FILE_LOCATION="${CMAKE_CURRENT_BINARY_DIR}"
 )
