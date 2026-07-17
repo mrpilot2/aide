@@ -245,5 +245,9 @@
         <source>Are you sure you want to exit?</source>
         <translation>您确定要退出吗?</translation>
     </message>
+    <message>
+        <source>Show Log in %1</source>
+        <translation>在 %1 中显示日志</translation>
+    </message>
 </context>
 </TS>

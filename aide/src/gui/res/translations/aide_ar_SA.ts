@@ -245,5 +245,9 @@
         <source>Are you sure you want to exit?</source>
         <translation>هل أنت متأكد أنك تريد الخروج؟</translation>
     </message>
+    <message>
+        <source>Show Log in %1</source>
+        <translation>إظهار السجل في %1</translation>
+    </message>
 </context>
 </TS>

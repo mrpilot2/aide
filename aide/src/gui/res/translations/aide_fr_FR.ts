@@ -245,5 +245,9 @@
         <source>Are you sure you want to exit?</source>
         <translation>Voulez-vous vraiment quitter ?</translation>
     </message>
+    <message>
+        <source>Show Log in %1</source>
+        <translation>Afficher le journal dans %1</translation>
+    </message>
 </context>
 </TS>

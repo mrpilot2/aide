@@ -245,5 +245,9 @@
         <source>Are you sure you want to exit?</source>
         <translation>क्या आप वाकई बाहर निकलना चाहते हैं?</translation>
     </message>
+    <message>
+        <source>Show Log in %1</source>
+        <translation>%1 में लॉग दिखाएं</translation>
+    </message>
 </context>
 </TS>

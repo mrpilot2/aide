@@ -245,5 +245,9 @@
         <source>Are you sure you want to exit?</source>
         <translation>¿Está seguro de que desea salir?</translation>
     </message>
+    <message>
+        <source>Show Log in %1</source>
+        <translation>Mostrar registro en %1</translation>
+    </message>
 </context>
 </TS>
