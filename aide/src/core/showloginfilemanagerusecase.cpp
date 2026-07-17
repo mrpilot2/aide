@@ -27,6 +27,8 @@ void ShowLogInFileManagerUseCase::showLogInFileManager() const
         return;
     }
 
+    m_logger->trace("Show log in file manager {}", *logFilePath);
+
     const auto logDirectory = QFileInfo(QString::fromStdString(*logFilePath))
                                   .absolutePath()
                                   .toStdString();
