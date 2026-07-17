@@ -1,18 +1,16 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for Claude Code in this repository.
 
 ## Project Overview
 
-**aIDE** is a C++20/Qt6 (minimum 6.5) framework library for building Qt-based desktop applications. It provides reusable components including action registry, settings management, key binding UI, and logging infrastructure. Consumers embed aIDE as a CMake dependency and compose an `Application` via `ApplicationBuilder`.
+**aIDE** — C++20/Qt6 (min 6.5) framework library for Qt desktop apps. Provides action registry, settings management, key binding UI, logging infrastructure. Consumers embed as a CMake dependency and compose an `Application` via `ApplicationBuilder`.
 
 ## Build System
 
-Uses CMake 3.26+ with presets (defined in `CMakePresets.json`) and Conan 2 for dependency management (`conanfile.txt`). Conan is invoked automatically via `conan_provider.cmake` as a `CMAKE_PROJECT_TOP_LEVEL_INCLUDES` hook.
+CMake 3.26+ with presets (`CMakePresets.json`) + Conan 2 (`conanfile.txt`), invoked automatically via `conan_provider.cmake`.
 
-### Preset naming convention
-
-`{role}-{platform}-{linkage}-{build-type}`
+Preset naming: `{role}-{platform}-{linkage}-{build-type}`
 
 | Role | What it enables |
 |------|----------------|
@@ -21,10 +19,8 @@ Uses CMake 3.26+ with presets (defined in `CMakePresets.json`) and Conan 2 for d
 | `ci-strict` | clang, warnings-as-errors, sanitizers |
 | `ci-static` | clang, warnings-as-errors, clang-tidy, cppcheck |
 
-### Configure, build, test
-
 ```bash
-# Full workflow (configure + build + test)
+# Full workflow (configure + build + test) — always use 'dev-' presets to verify changes
 cmake --workflow --preset workflow-dev-unix-static-debug
 
 # Or step by step:
@@ -38,13 +34,11 @@ cmake --build --preset build-client-unix-static-debug
 ctest --preset test-client-unix-static-debug
 ```
 
-Always use 'dev-' presets to verify the changes and test the code.
-
-Build output lands in `build/<preset-name>/`.
+Build output: `build/<preset-name>/`.
 
 ### Run a single test
 
-Tests use **Catch2 3.x**. The test binary is `tests/ut/ut.aide` inside the build dir:
+Catch2 3.x, binary at `tests/ut/ut.aide` inside the build dir:
 
 ```bash
 ./build/client-unix-static-debug/tests/ut/ut.aide "test name or pattern"
@@ -52,23 +46,19 @@ Tests use **Catch2 3.x**. The test binary is `tests/ut/ut.aide` inside the build
 ./build/client-unix-static-debug/tests/ut/ut.aide "[tag]"             # by tag
 ```
 
-### Code formatting & linting
+### Formatting & linting
 
-Pre-commit hooks enforce formatting. To run manually:
+Pre-commit hooks enforce formatting (`.clang-format`, `.clang-tidy`, `.cmake-format.yaml`):
 
 ```bash
-pre-commit run --all-files          # all hooks (clang-format, cmake-format, etc.)
+pre-commit run --all-files          # all hooks
 pre-commit run clang-format         # C++ formatting only
 pre-commit run cmake-format         # CMake formatting only
 ```
 
-Configuration: `.clang-format`, `.clang-tidy`, `.cmake-format.yaml`.
-
-Clang-tidy and cppcheck run as part of `dev` and `ci-static` presets at build time (not as separate commands).
+clang-tidy/cppcheck run at build time in `dev`/`ci-static` presets, not as separate commands.
 
 ## Architecture
-
-### Layering
 
 ```
 ApplicationBuilder  ←  consumer entry point
@@ -77,83 +67,35 @@ ApplicationBuilder  ←  consumer entry point
          │    ├── UseCase classes  (ShowKeymap, ShowSettingsDialog, …)
          │    ├── ActionRegistry   (maps HierarchicalId → QAction)
          │    ├── Settings         (QSettings wrapper behind SettingsInterface)
-         │    └── HierarchicalId   (dot-separated ID system for actions/settings)
+         │    └── HierarchicalId   (dot-separated ID system for actions/settings, e.g. "aide.file.open")
          ├── gui/    (Qt widgets and dialogs)
          │    ├── MainWindow
-         │    ├── settings/  (SettingsDialog + page tree model)
+         │    ├── settings/  (SettingsDialog + page tree model + KeymapTreeModel)
          │    └── widgets/   (SearchLineEdit, AideTreeView, AideTableView, …)
          └── logger/ (spdlog-based, implements LoggerInterface)
 ```
 
-### Key abstractions (all in `aide/include/aide/`)
+Key interfaces (`aide/include/aide/`): `LoggerInterface`, `SettingsInterface`, `ActionRegistryInterface`, `MenuContainerInterface`, `TranslatorInterface` — decouple core/gui from concrete Qt/spdlog dependencies for testability.
 
-- `LoggerInterface` — injected into all components; avoids direct spdlog dependency in consumer code
-- `SettingsInterface` — wraps QSettings; allows test doubles
-- `ActionRegistryInterface` — decouples action dispatch from Qt menus
-- `MenuContainerInterface` / `TranslatorInterface` — further GUI isolation
-
-### Settings & keymap
-
-`core/settings/` manages both application preferences and key bindings. The keymap subsystem stores per-action key sequences in `SettingsInterface` and exposes them through `KeymapTreeModel` (a `QAbstractItemModel`) displayed in the settings dialog.
-
-### HierarchicalId
-
-Central to action and settings lookup — a dot-separated string (e.g. `"aide.file.open"`) with a tree structure backed by `TreeModel`. Used as the key in `ActionRegistry`.
-
-### Build information
-
-`aide/src/buildinformation/` generates a header at configure time with version, build date, and compiler info via CMake's `configure_file`.
+`demo/` is a runnable example app — reference for `ApplicationBuilder` usage.
 
 ## Conventions
 
 - C++20 throughout; no exceptions in public API (Qt signal/slot style error handling).
-- Commit messages follow **Conventional Commits** (`feat:`, `fix:`, `ci:`, `chore:`, etc.) — enforced by pre-commit hook.
-- Releases are managed by **release-please** acting on the `main` branch; development happens on `develop`.
-- The `demo/` directory contains a runnable example application consuming the library — useful reference for how `ApplicationBuilder` is used.
+- Conventional Commits (`feat:`, `fix:`, `ci:`, `chore:`, …) — enforced by pre-commit hook.
+- release-please manages releases from `main`; development happens on `develop`.
 
 ## Common pitfalls
 
-### Magic numbers in dev/ci-static builds
-
-`readability-magic-numbers` is active and treated as an error. Any numeric literal — including color component values like `QColor(220, 235, 255)` — must be extracted to named `constexpr` variables before they appear in source.
-
-### cppcheck virtualCallInConstructor
-
-Calling a virtual method (e.g. `reset()`) from a constructor is flagged. Fix: extract a private non-virtual helper (e.g. `syncToModel()`) that both the constructor and the virtual method call.
-
-### Pre-commit clang-format modifies files in-place
-
-When `git commit` fails because clang-format rewrote a file, the hook has already applied the fix. Re-stage the modified file (`git add <file>`) and run `git commit` again. Never use `--no-verify`.
-
-### Catch2 cognitive complexity
-
-clang-tidy enforces a cognitive complexity ceiling (~25). Deep `SECTION` nesting in Catch2 tests can exceed it. Split into separate `TEST_CASE` functions instead of nesting further.
-
-### Qt icon theme resource layout
-
-For `QIcon::fromTheme()` to resolve icons from embedded `.qrc` resources the path structure must be:
-
-```
-<qrc-prefix>/<theme-name>/index.theme
-<qrc-prefix>/<theme-name>/scalable/<category>/<icon-name>.svg
-```
-
-The `qrc` prefix must match the path passed to `QIcon::setThemeSearchPaths()`.
-
-### AppearanceManager and SettingsPageRegistry are instance-based
-
-`SettingsPageRegistry` is an instance member of `ApplicationBuilder`, not a static singleton. Access it via `app.settingsPageRegistry()` (returns a reference). There is no `deleteAllPages()` — registry lifetime is tied to `ApplicationBuilder`.
+- **Magic numbers** (`dev`/`ci-static`): `readability-magic-numbers` is an error — extract all numeric literals (including e.g. `QColor(220, 235, 255)`) to named `constexpr`.
+- **cppcheck virtualCallInConstructor**: calling a virtual (e.g. `reset()`) from a ctor is flagged — extract a private non-virtual helper (e.g. `syncToModel()`) called by both.
+- **clang-format rewrites on commit**: if `git commit` fails this way, the hook already fixed the file — `git add` it and re-commit. Never `--no-verify`.
+- **Catch2 cognitive complexity**: clang-tidy caps it (~25) — split deep `SECTION` nesting into separate `TEST_CASE`s.
+- **Qt icon theme layout**: `QIcon::fromTheme()` needs `<qrc-prefix>/<theme-name>/index.theme` and `<qrc-prefix>/<theme-name>/scalable/<category>/<icon-name>.svg`, prefix matching `QIcon::setThemeSearchPaths()`.
+- **SettingsPageRegistry is instance-based**, not a singleton — access via `app.settingsPageRegistry()`; no `deleteAllPages()`, lifetime is tied to `ApplicationBuilder`.
 
 ## Agent skills
 
-### Issue tracker
-
-Issues are tracked in the mrpilot2/aide GitHub Issues (via the `gh` CLI); external PRs are not a triage surface. See `docs/agents/issue-tracker.md`.
-
-### Triage labels
-
-Canonical vocabulary, unmodified: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
-
-### Domain docs
-
-Single-context layout (`CONTEXT.md` + `docs/adr/` at repo root). See `docs/agents/domain.md`.
+- **Issue tracker**: mrpilot2/aide GitHub Issues via `gh` CLI; external PRs are not a triage surface. See `docs/agents/issue-tracker.md`.
+- **Triage labels**: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
+- **Domain docs**: single-context layout (`CONTEXT.md` + `docs/adr/` at repo root). See `docs/agents/domain.md`.
