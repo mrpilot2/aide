@@ -286,7 +286,7 @@
     </message>
     <message>
         <source>Show Log in %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Protokoll in %1 anzeigen</translation>
     </message>
 </context>
 </TS>
