@@ -1,3 +1,5 @@
+#include <cstdio>
+#include <filesystem>
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -86,4 +88,47 @@ TEST_CASE(
         QStandardPaths::TempLocation);
 
     REQUIRE_FALSE(LoggerFactory::logFilePath().has_value());
+}
+
+TEST_CASE(
+    "LoggerFactory::createLogger still returns a working logger when no "
+    "writable location exists",
+    "[LoggerFactory]")
+{
+    const QTemporaryDir sandbox;
+    REQUIRE(sandbox.isValid());
+
+    const StandardPathsTestModeGuard testModeGuard;
+
+    // See the "logFilePath is absent" test above for why CacheLocation is
+    // blocked directly rather than via a HOME override.
+    const BlockedStandardLocationGuard cacheGuard(
+        QStandardPaths::CacheLocation);
+
+    const EnvVarGuard tmpdirGuard("TMPDIR", sandbox.path() + "/tmp");
+    const EnvVarGuard tmpGuard("TMP", sandbox.path() + "/tmp");
+    const EnvVarGuard tempGuard("TEMP", sandbox.path() + "/tmp");
+    const BlockedStandardLocationGuard tempLocationGuard(
+        QStandardPaths::TempLocation);
+
+    // The fallback logger hardcodes FileName("aide.log"), which the
+    // rotating sink writes relative to the current working directory - see
+    // "Logger constructor variants" in loggertest.cpp for the same
+    // technique applied to Logger's default constructor directly.
+    const std::filesystem::path previousWorkingDir{
+        std::filesystem::current_path()};
+    std::filesystem::current_path(TEST_LOG_FILE_LOCATION);
+
+    const auto logger =
+        LoggerFactory::createLogger("logger_factory_fallback_test");
+
+    REQUIRE(logger != nullptr);
+    REQUIRE_NOTHROW(logger->info("fallback logger probe"));
+    REQUIRE_NOTHROW(logger->flush());
+
+    std::filesystem::current_path(previousWorkingDir);
+    [[maybe_unused]] auto res =
+        std::remove((std::filesystem::path{TEST_LOG_FILE_LOCATION} / "aide.log")
+                        .string()
+                        .c_str());
 }
