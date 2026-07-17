@@ -7,7 +7,8 @@
 #include <QByteArray>
 #include <QDir>
 #include <QFile>
-#include <QFileDevice>
+#include <QFileInfo>
+#include <QIODevice>
 #include <QStandardPaths>
 #include <QString>
 
@@ -71,72 +72,67 @@ namespace aide::test
 
     namespace detail
     {
-        // Finds the "qttest" (Windows) or ".qttest" (generic Unix/macOS)
-        // sandbox segment that QStandardPaths::setTestModeEnabled(true)
-        // inserts into a resolved location, returning everything up to and
-        // including that segment. Returns an empty string if neither marker
-        // is present, meaning test mode did not actually sandbox this
-        // location on the current platform.
-        inline QString findTestModeSandboxRoot(const QString& resolvedLocation)
+        // Creates an empty regular file at the shallowest path segment of
+        // targetPath that doesn't yet exist, and returns that file's path
+        // (or an empty string if targetPath already fully exists, or the
+        // file couldn't be created). A later QDir::mkpath(targetPath) call
+        // is then guaranteed to fail: a directory can never be created
+        // where a file already sits, regardless of platform-specific
+        // permission semantics - unlike removing the owner-write bit,
+        // which is a POSIX concept that doesn't reliably stop directory
+        // content creation on Windows (a folder's read-only attribute is
+        // cosmetic there, not an access control restriction).
+        inline QString blockPathWithFile(const QString& targetPath)
         {
-            for (const auto& marker :
-                 {QStringLiteral("/.qttest"), QStringLiteral("/qttest")}) {
-                const auto index = resolvedLocation.indexOf(marker);
-                if (index != -1) {
-                    return resolvedLocation.left(index + marker.length());
-                }
+            QString path = QDir::cleanPath(targetPath);
+            QString shallowestMissing;
+            while (!path.isEmpty() && !QFileInfo::exists(path)) {
+                shallowestMissing = path;
+                const auto parent = QFileInfo(path).path();
+                if (parent == path) { break; }
+                path = parent;
             }
-            return {};
+            if (shallowestMissing.isEmpty()) { return {}; }
+            QFile blocker(shallowestMissing);
+            if (!blocker.open(QIODevice::WriteOnly)) { return {}; }
+            blocker.close();
+            return shallowestMissing;
         }
     } // namespace detail
 
-    // Makes QStandardPaths::CacheLocation's test-mode sandbox directory
-    // unwritable for the guard's lifetime, so any code trying to create a
-    // subdirectory underneath it is guaranteed to fail - on every platform.
-    //
-    // An env-var override of HOME (the technique that works for
-    // TempLocation via TMPDIR/TMP/TEMP) is not reliable for CacheLocation:
-    // Windows resolves it via SHGetKnownFolderPath, which ignores env vars
-    // entirely, and macOS's NSSearchPathForDirectoriesInDomains-based
-    // resolution silently skips its own test-mode substitution once HOME
-    // no longer matches what Foundation actually resolved. Targeting the
-    // "qttest"/".qttest" segment Qt itself inserts sidesteps both platform
-    // quirks.
-    class UnwritableCacheLocationGuard
+    // Blocks a QStandardPaths location from ever being created for the
+    // guard's lifetime, by placing an empty file exactly where Qt would
+    // need to create a directory (see blockPathWithFile). Use this instead
+    // of an env-var override to isolate CacheLocation in particular: an
+    // overridden HOME is not reliable there since Windows resolves it via
+    // SHGetKnownFolderPath (ignores env vars entirely) and macOS's
+    // NSSearchPathForDirectoriesInDomains-based resolution silently skips
+    // its own test-mode substitution once HOME no longer matches what
+    // Foundation actually resolved.
+    class BlockedStandardLocationGuard
     {
     public:
-        UnwritableCacheLocationGuard()
-            : m_path(detail::findTestModeSandboxRoot(
-                  QStandardPaths::writableLocation(
-                      QStandardPaths::CacheLocation)))
-        {
-            if (!m_path.isEmpty()) {
-                QDir().mkpath(m_path);
-                QFile::setPermissions(
-                    m_path, QFileDevice::ReadOwner | QFileDevice::ExeOwner);
-            }
-        }
+        explicit BlockedStandardLocationGuard(
+            QStandardPaths::StandardLocation location)
+            : m_blockerPath(detail::blockPathWithFile(
+                  QStandardPaths::writableLocation(location)))
+        {}
 
-        UnwritableCacheLocationGuard(const UnwritableCacheLocationGuard&) =
+        BlockedStandardLocationGuard(const BlockedStandardLocationGuard&) =
             delete;
-        UnwritableCacheLocationGuard& operator=(
-            const UnwritableCacheLocationGuard&)                     = delete;
-        UnwritableCacheLocationGuard(UnwritableCacheLocationGuard&&) = delete;
-        UnwritableCacheLocationGuard& operator=(
-            UnwritableCacheLocationGuard&&) = delete;
+        BlockedStandardLocationGuard& operator=(
+            const BlockedStandardLocationGuard&)                     = delete;
+        BlockedStandardLocationGuard(BlockedStandardLocationGuard&&) = delete;
+        BlockedStandardLocationGuard& operator=(
+            BlockedStandardLocationGuard&&) = delete;
 
-        ~UnwritableCacheLocationGuard()
+        ~BlockedStandardLocationGuard()
         {
-            if (!m_path.isEmpty()) {
-                QFile::setPermissions(m_path, QFileDevice::ReadOwner |
-                                                  QFileDevice::WriteOwner |
-                                                  QFileDevice::ExeOwner);
-                QDir(m_path).removeRecursively();
-            }
+            if (!m_blockerPath.isEmpty()) { QFile::remove(m_blockerPath); }
         }
 
     private:
-        QString m_path;
+        QString m_blockerPath;
     };
 } // namespace aide::test
 
