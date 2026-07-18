@@ -82,6 +82,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       $<$<TARGET_EXISTS:Qt::lrelease>:applicationtranslatortest.cpp>
       changedetectortest.cpp
       desktopentrynameresolvertest.cpp
+      diagnostictextbuildertest.cpp
       keymapcontextmenuprovidertest.cpp
       keymapcontrollertest.cpp
       keymaptreemodeltest.cpp

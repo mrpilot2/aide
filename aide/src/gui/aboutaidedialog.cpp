@@ -3,16 +3,14 @@
 
 #include <QClipboard>
 #include <QString>
-#include <QThread>
 #include <QToolTip>
 
-#include "aide/utils/systemmemory.hpp"
 #include "aideinformation.hpp"
+#include "diagnostictextbuilder.hpp"
 #include "thirdpartylicensesdialog.hpp"
 #include "ui_aboutaidedialog.h"
 
 using aide::gui::AboutAideDialog;
-using aide::utils::SystemMemory;
 
 AboutAideDialog::AboutAideDialog(QWidget* parent)
     : QDialog(parent)
@@ -77,33 +75,6 @@ void AboutAideDialog::onThirdPartyLibrariesLinkClicked() const
 
 void AboutAideDialog::copySystemInfoToClipBoard() const
 {
-    const auto memoryInBytes{SystemMemory::getAvailableRAMInBytes()};
-    const auto memoryInfo{QString("%1 MB").arg(
-        memoryInBytes.has_value()
-            ? QString::number(memoryInBytes.value() / BYTE_TO_MEGABYTE)
-            : "Undefined")};
-
-    const auto locale{QLocale::system()};
-    auto clipBoardText{
-        QString("aIDE %1\n%2 built on %3\n\nCompiler: %4 %5\nBuild Type: "
-                "%6\nCompile Flags: %7\n\nQt Version: %8\nOS: %9\nKernel: "
-                "%10\nMemory: %11\nCores: %12\n")
-            .arg(QString::fromStdString(m_info.versionInfo),
-                 QString::fromStdString(m_info.gitHash),
-                 locale.toString(m_info.buildDate,
-                                 QLocale::FormatType::LongFormat),
-                 QString::fromStdString(m_info.compiler),
-                 QString::fromStdString(m_info.compilerVersion),
-                 QString::fromStdString(m_info.buildType),
-                 QString::fromStdString(m_info.compileFlags), qVersion(),
-                 QSysInfo::prettyProductName(), QSysInfo::kernelVersion(),
-                 memoryInfo, QString::number(QThread::idealThreadCount()))};
-
-#ifdef Q_OS_LINUX
-    clipBoardText += QString("Desktop environment: %1")
-                         .arg(QString(qgetenv("XDG_CURRENT_DESKTOP")));
-#endif
-
     auto* clipboard = QApplication::clipboard();
-    clipboard->setText(clipBoardText);
+    clipboard->setText(core::DiagnosticTextBuilder::build(m_info));
 }

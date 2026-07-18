@@ -4,6 +4,7 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include <aide/buildinformation.hpp>
+#include <aide/githubrepository.hpp>
 
 #include "aboutaideusecase.hpp"
 #include "mockaboutdialog.hpp"
@@ -32,8 +33,8 @@ TEST_CASE("Any AboutAideUseCase")
         useCase.showAboutAideInformation();
 
         REQUIRE(dialog->getInfo().whatsNewUrl ==
-                "https://github.com/mrpilot2/aide/releases/tag/" +
-                    std::string("v") +
+                std::string(aide::constants::GITHUB_REPO_URL) +
+                    "/releases/tag/v" +
                     aide::build_information::AIDE_VERSION_STRING);
     }
 

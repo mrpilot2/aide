@@ -10,7 +10,6 @@
 #include "aideinformation.hpp"
 #include "aideinformationpresenter.hpp"
 
-static constexpr const auto BYTE_TO_MEGABYTE = 1024 * 1024;
 namespace Ui
 {
     class AboutAideDialog;

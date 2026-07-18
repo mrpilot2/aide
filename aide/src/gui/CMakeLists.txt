@@ -77,7 +77,6 @@ target_link_libraries(
     Aide::AideCore
     Aide::AideLogger
     Aide::AideWidgets
-    Aide::AideUtils
     Qt::Widgets
     $<BUILD_LOCAL_INTERFACE:aide_options>
     $<BUILD_LOCAL_INTERFACE:aide_warnings>

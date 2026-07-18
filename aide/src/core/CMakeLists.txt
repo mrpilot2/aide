@@ -18,6 +18,7 @@ target_sources(
     ../gui/res/icons/icon_themes.qrc
     applicationclose.cpp
     desktopentrynameresolver.cpp
+    diagnostictextbuilder.cpp
     hierarchicalid.cpp
     loggerfactory.cpp
     mainwindowgeometryandstate.cpp
@@ -66,6 +67,7 @@ target_sources(
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/appearancemanager.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/applicationconfig.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/colorscheme.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/githubrepository.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/hierarchicalid.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/menucontainerinterface.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/settingsinterface.hpp
@@ -85,6 +87,7 @@ target_link_libraries(
   PUBLIC Qt::Core Qt::Widgets Aide::AideLogger
   PRIVATE
     Aide::AideBuildInformation
+    Aide::AideUtils
     $<BUILD_LOCAL_INTERFACE:aide_coverage>
     $<BUILD_LOCAL_INTERFACE:aide_options>
     $<BUILD_LOCAL_INTERFACE:aide_warnings>
