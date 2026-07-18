@@ -249,5 +249,9 @@
         <source>Show Log in %1</source>
         <translation>إظهار السجل في %1</translation>
     </message>
+    <message>
+        <source>Report Bug in aIDE</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

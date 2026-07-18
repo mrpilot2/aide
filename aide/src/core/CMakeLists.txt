@@ -8,6 +8,7 @@ target_sources(
   AideCore
   PRIVATE
     aboutaideusecase.cpp
+    aideinformationbuilder.cpp
     aidesettingsprovider.cpp
     actionregistry.cpp
     appearancemanager.cpp
@@ -26,8 +27,10 @@ target_sources(
     menucontainer.cpp
     menucontainerinterface.cpp
     osfilemanagerlauncher.cpp
+    osurllauncher.cpp
     platformiconbaseline.cpp
     qtsettings.cpp
+    reportbugusecase.cpp
     settingsinterface.cpp
     showloginfilemanagerusecase.cpp
     settings/settingsdialogchangepagecontroller.cpp
@@ -72,6 +75,7 @@ target_sources(
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/menucontainerinterface.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/settingsinterface.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/theme.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/urllauncherinterface.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/settings/settingspage.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/settings/settingspageregistry.hpp
 )

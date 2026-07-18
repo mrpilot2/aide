@@ -1,6 +1,9 @@
+#include <algorithm>
+
 #include <catch2/catch_test_macros.hpp>
 
 #include <QApplication>
+#include <QMenu>
 
 #include <aide/aideconstants.hpp>
 #include <aide/applicationconfig.hpp>
@@ -165,4 +168,140 @@ TEST_CASE(
             registry->action(CONSTANTS().HELP_SHOW_LOG_IN_FILE_MANAGER)
                 .has_value());
     }
+}
+
+TEST_CASE("A main window with the report-bug feature enabled")
+{
+    QApplication::setApplicationName("aide_test");
+    QApplication::setOrganizationName("aide_company");
+
+    MockSettings settings;
+    const auto registry = std::make_shared<ActionRegistry>(
+        settings, std::make_shared<NullLogger>());
+
+    MainWindow mainWindow(
+        std::make_shared<NullLogger>(),
+        ApplicationConfig{}.setEnabled(
+            ApplicationConfig::Feature::ReportBugAction, true),
+        nullptr);
+    mainWindow.setMainWindowController(nullptr, registry);
+
+    SECTION("registers the report-bug action")
+    {
+        REQUIRE(registry->action(CONSTANTS().HELP_REPORT_BUG).has_value());
+    }
+
+    SECTION("does not bind a default key sequence")
+    {
+        REQUIRE(registry->actions()
+                    .at(CONSTANTS().HELP_REPORT_BUG)
+                    .defaultKeySequences.empty());
+    }
+}
+
+TEST_CASE("A main window with the report-bug feature left at its default")
+{
+    QApplication::setApplicationName("aide_test");
+    QApplication::setOrganizationName("aide_company");
+
+    MockSettings settings;
+    const auto registry = std::make_shared<ActionRegistry>(
+        settings, std::make_shared<NullLogger>());
+
+    MainWindow mainWindow(std::make_shared<NullLogger>(), ApplicationConfig{},
+                          nullptr);
+    mainWindow.setMainWindowController(nullptr, registry);
+
+    SECTION("does not register the report-bug action")
+    {
+        REQUIRE_FALSE(
+            registry->action(CONSTANTS().HELP_REPORT_BUG).has_value());
+    }
+}
+
+TEST_CASE(
+    "A main window with neither the show-log-in-file-manager nor the "
+    "report-bug feature enabled")
+{
+    QApplication::setApplicationName("aide_test");
+    QApplication::setOrganizationName("aide_company");
+
+    MockSettings settings;
+    const auto registry = std::make_shared<ActionRegistry>(
+        settings, std::make_shared<NullLogger>());
+
+    MainWindow mainWindow(std::make_shared<NullLogger>(), ApplicationConfig{},
+                          nullptr);
+    mainWindow.setMainWindowController(nullptr, registry);
+
+    SECTION("leaves no stray separator before the About actions")
+    {
+        const auto menuHelpContainer =
+            registry->getMenuContainer(CONSTANTS().MENU_HELP);
+        REQUIRE(menuHelpContainer.has_value());
+        // NOLINTNEXTLINE(bugprone-unchecked-optional-access)
+        const auto* menuHelp = menuHelpContainer.value()->menu();
+
+        REQUIRE_FALSE(menuHelp->actions().first()->isSeparator());
+    }
+}
+
+TEST_CASE(
+    "A main window with both the show-log-in-file-manager and the "
+    "report-bug feature enabled registers both gated actions")
+{
+    QApplication::setApplicationName("aide_test");
+    QApplication::setOrganizationName("aide_company");
+
+    MockSettings settings;
+    const auto registry = std::make_shared<ActionRegistry>(
+        settings, std::make_shared<NullLogger>());
+
+    MainWindow mainWindow(
+        std::make_shared<NullLogger>(),
+        ApplicationConfig{}
+            .setEnabled(ApplicationConfig::Feature::ShowLogInFileManagerAction,
+                        true)
+            .setEnabled(ApplicationConfig::Feature::ReportBugAction, true),
+        nullptr);
+    mainWindow.setMainWindowController(nullptr, registry);
+
+    REQUIRE(registry->action(CONSTANTS().HELP_SHOW_LOG_IN_FILE_MANAGER)
+                .has_value());
+    REQUIRE(registry->action(CONSTANTS().HELP_REPORT_BUG).has_value());
+}
+
+TEST_CASE(
+    "A main window with both the show-log-in-file-manager and the "
+    "report-bug feature enabled adds exactly one separator after the "
+    "gated actions")
+{
+    QApplication::setApplicationName("aide_test");
+    QApplication::setOrganizationName("aide_company");
+
+    MockSettings settings;
+    const auto registry = std::make_shared<ActionRegistry>(
+        settings, std::make_shared<NullLogger>());
+
+    MainWindow mainWindow(
+        std::make_shared<NullLogger>(),
+        ApplicationConfig{}
+            .setEnabled(ApplicationConfig::Feature::ShowLogInFileManagerAction,
+                        true)
+            .setEnabled(ApplicationConfig::Feature::ReportBugAction, true),
+        nullptr);
+    mainWindow.setMainWindowController(nullptr, registry);
+
+    const auto menuHelpContainer =
+        registry->getMenuContainer(CONSTANTS().MENU_HELP);
+    REQUIRE(menuHelpContainer.has_value());
+    // NOLINTNEXTLINE(bugprone-unchecked-optional-access)
+    const auto* menuHelp = menuHelpContainer.value()->menu();
+    const auto actions   = menuHelp->actions();
+
+    const auto separatorCount =
+        std::count_if(actions.cbegin(), actions.cend(),
+                      [](const auto* action) { return action->isSeparator(); });
+
+    REQUIRE(separatorCount == 1);
 }

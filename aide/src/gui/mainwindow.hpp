@@ -63,7 +63,7 @@ namespace aide::gui
 
         void registerViewMenu(const ActionRegistryInterfacePtr& actionRegistry);
 
-        void registerShowLogInFileManagerAction(
+        void registerGatedHelpActions(
             QMenu* menuHelp, const ActionRegistryInterfacePtr& actionRegistry);
 
         void toggleFullScreen();
@@ -83,6 +83,7 @@ namespace aide::gui
         std::shared_ptr<QAction> m_actionQuit;
         std::shared_ptr<QAction> m_actionFullScreen;
         std::shared_ptr<QAction> m_actionShowLogInFileManager;
+        std::shared_ptr<QAction> m_actionReportBug;
         std::shared_ptr<QAction> m_actionAboutAide;
         std::shared_ptr<QAction> m_actionAboutQt;
     };

@@ -4,13 +4,12 @@
 #include <utility>
 
 #include <QFile>
-#include <QLocale>
 
 #include <aide/application.hpp>
-#include <aide/buildinformation.hpp>
 #include <aide/githubrepository.hpp>
 
 #include "aideinformation.hpp"
+#include "aideinformationbuilder.hpp"
 
 using aide::core::AboutAideUseCase;
 
@@ -22,17 +21,7 @@ AboutAideUseCase::AboutAideUseCase(AideInformationPresenterWeakPtr presenter,
 
 void AboutAideUseCase::showAboutAideInformation() const
 {
-    AideInformation info;
-
-    info.versionInfo = build_information::AIDE_VERSION_STRING;
-    info.gitHash     = build_information::GIT_HASH;
-
-    info.buildDate =
-        QLocale("en_US").toDate(QString(__DATE__).simplified(), "MMM d yyyy");
-    info.compiler        = build_information::CMAKE_CXX_COMPILER;
-    info.compilerVersion = build_information::CMAKE_CXX_COMPILER_VERSION;
-    info.buildType       = build_information::CMAKE_BUILD_TYPE;
-    info.compileFlags    = build_information::COMPILE_FLAGS;
+    AideInformation info = AideInformationBuilder::buildCurrent();
 
     info.whatsNewUrl = std::string(constants::GITHUB_REPO_URL) +
                        "/releases/tag/v" + info.versionInfo;

@@ -41,6 +41,10 @@ namespace aide::gui
         // instance supplied as the context object.
         static void onUserWantsToShowLogInFileManager();
 
+        // Not a member of the instance's state either; see the comment on
+        // onUserWantsToShowLogInFileManager above.
+        static void onUserWantsToReportBug();
+
     public slots:
         void onUserWantsToShowSettingsDialog() const;
 

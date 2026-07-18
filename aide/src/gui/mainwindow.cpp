@@ -98,7 +98,7 @@ void MainWindow::registerActions(
     auto* menuHelp{menuHelpContainer->menu()};
     menuHelp->setTitle(QApplication::tr("&Help", "MainWindow"));
 
-    registerShowLogInFileManagerAction(menuHelp, actionRegistry);
+    registerGatedHelpActions(menuHelp, actionRegistry);
 
     m_actionAboutAide = std::make_shared<QAction>(tr("About") + " aIDE", this);
     connect(m_actionAboutAide.get(), &QAction::triggered, m_controller.get(),
@@ -148,30 +148,47 @@ void MainWindow::registerViewMenu(
     m_ui->menubar->addMenu(menuView);
 }
 
-void MainWindow::registerShowLogInFileManagerAction(
+void MainWindow::registerGatedHelpActions(
     QMenu* menuHelp, const ActionRegistryInterfacePtr& actionRegistry)
 {
     // Gating: not created, not registered, mirroring registerViewMenu above.
-    // This feature defaults to disabled since it is only appropriate for
-    // developer-facing consumer applications.
-    if (!m_config.isEnabled(
+    // These features default to disabled since they are only appropriate
+    // for developer-facing consumer applications. Both gated actions share
+    // one trailing separator, added only if at least one of them was
+    // actually registered, so the Help menu never shows a stray separator
+    // before "About Aide" / "About Qt".
+    bool anyGatedActionRegistered = false;
+
+    if (m_config.isEnabled(
             ApplicationConfig::Feature::ShowLogInFileManagerAction)) {
-        return;
+        const core::OsFileManagerLauncher launcher;
+        m_actionShowLogInFileManager = std::make_shared<QAction>(
+            tr("Show Log in %1")
+                .arg(QString::fromStdString(launcher.displayName())),
+            this);
+        connect(m_actionShowLogInFileManager.get(), &QAction::triggered,
+                m_controller.get(),
+                &MainWindowController::onUserWantsToShowLogInFileManager);
+        menuHelp->addAction(m_actionShowLogInFileManager.get());
+        actionRegistry->registerAction(
+            m_actionShowLogInFileManager,
+            CONSTANTS().HELP_SHOW_LOG_IN_FILE_MANAGER);
+        anyGatedActionRegistered = true;
     }
 
-    const core::OsFileManagerLauncher launcher;
-    m_actionShowLogInFileManager = std::make_shared<QAction>(
-        tr("Show Log in %1")
-            .arg(QString::fromStdString(launcher.displayName())),
-        this);
-    connect(m_actionShowLogInFileManager.get(), &QAction::triggered,
-            m_controller.get(),
-            &MainWindowController::onUserWantsToShowLogInFileManager);
-    menuHelp->addAction(m_actionShowLogInFileManager.get());
-    menuHelp->addSeparator();
+    if (m_config.isEnabled(ApplicationConfig::Feature::ReportBugAction)) {
+        m_actionReportBug =
+            std::make_shared<QAction>(tr("Report Bug in aIDE"), this);
+        connect(m_actionReportBug.get(), &QAction::triggered,
+                m_controller.get(),
+                &MainWindowController::onUserWantsToReportBug);
+        menuHelp->addAction(m_actionReportBug.get());
+        actionRegistry->registerAction(m_actionReportBug,
+                                       CONSTANTS().HELP_REPORT_BUG);
+        anyGatedActionRegistered = true;
+    }
 
-    actionRegistry->registerAction(m_actionShowLogInFileManager,
-                                   CONSTANTS().HELP_SHOW_LOG_IN_FILE_MANAGER);
+    if (anyGatedActionRegistered) { menuHelp->addSeparator(); }
 }
 
 void MainWindow::toggleFullScreen()

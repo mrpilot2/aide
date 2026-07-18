@@ -23,6 +23,8 @@ namespace aide::constants
 
         const HierarchicalId HELP_SHOW_LOG_IN_FILE_MANAGER{
             MENU_HELP.addLevel("Show Log in File Manager")};
+        const HierarchicalId HELP_REPORT_BUG{
+            MENU_HELP.addLevel("Report Bug in aIDE")};
         const HierarchicalId HELP_ABOUT_AIDE{MENU_HELP.addLevel("About Aide")};
         const HierarchicalId HELP_ABOUT_QT{MENU_HELP.addLevel("About Qt")};
     };

@@ -76,6 +76,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       aboutaideusecasetest.cpp
       actionregistrytest.cpp
       addshortcutdialogtest.cpp
+      aideinformationbuildertest.cpp
       appearancepagetest.cpp
       aidesettingsprovidertest.cpp
       applicationcloseinteractortest.cpp
@@ -105,8 +106,10 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       mockkeymappagewidget.cpp
       mockmainwindowview.cpp
       mocksettingsdialog.cpp
+      mockurllauncher.cpp
       nulllogger.cpp
       qtsettingstest.cpp
+      reportbugusecasetest.cpp
       searchfilterresultdelegatetest.cpp
       searchlineedittest.cpp
       settingsdialogtest.cpp

@@ -288,5 +288,9 @@
         <source>Show Log in %1</source>
         <translation>Protokoll in %1 anzeigen</translation>
     </message>
+    <message>
+        <source>Report Bug in aIDE</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
