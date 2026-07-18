@@ -1,18 +1,23 @@
 
 #include "mainwindow.hpp"
 
+#include <algorithm>
 #include <utility>
 
 #include <QCheckBox>
 #include <QEvent>
+#include <QFrame>
 #include <QLayout>
 #include <QMenu>
 #include <QMessageBox>
 #include <QObject>
 #include <QPushButton>
 #include <QString>
+#include <QVBoxLayout>
+#include <QWidget>
 
 #include "actionregistry.hpp"
+#include "aide/gui/widgets/banner.hpp"
 #include "aideconstants.hpp"
 #include "applicationtranslator.hpp"
 #include "mainwindowcontroller.hpp"
@@ -21,11 +26,13 @@
 #include "settings/settingsdialog.hpp"
 #include "ui_mainwindow.h"
 
+using aide::NotificationType;
 using aide::constants::CONSTANTS;
 using aide::core::UserSelection;
 using aide::gui::MainWindow;
 using aide::gui::MainWindowControllerPtr;
 using aide::gui::TranslatorInterface;
+using aide::widgets::Banner;
 
 extern int qInitResources_icons();
 
@@ -236,6 +243,87 @@ QIcon MainWindow::createIconFromTheme(const std::string& iconName)
         icon.addFile(QString::fromUtf8(""), QSize(), QIcon::Normal, QIcon::Off);
     }
     return icon;
+}
+
+Banner* MainWindow::addBanner(NotificationType type, const QString& message)
+{
+    ensureBannerHost();
+
+    auto* banner = new Banner(type, message, m_bannerHost);
+    connect(banner, &Banner::closed, this,
+            [this, banner]() { removeBanner(banner); });
+
+    m_banners.push_back(banner);
+    rebuildBannerHostLayout();
+
+    return banner;
+}
+
+void MainWindow::removeBanner(Banner* banner)
+{
+    const auto it = std::find(m_banners.begin(), m_banners.end(), banner);
+    if (it == m_banners.end()) { return; }
+
+    m_banners.erase(it);
+    // Detach immediately rather than waiting for the deferred deletion to
+    // run, so the banner is no longer reachable (e.g. via findChildren())
+    // as soon as removeBanner() returns.
+    banner->setParent(nullptr);
+    banner->deleteLater();
+    rebuildBannerHostLayout();
+}
+
+void MainWindow::ensureBannerHost()
+{
+    // The banner host wraps whatever is currently the central widget the
+    // first time a banner is requested, so it works whether the consumer
+    // set a central widget before or never at all. QMainWindow's own
+    // setCentralWidget() is not virtual and cannot be intercepted, so a
+    // consumer replacing the central widget again after banners exist would
+    // discard this wrapper along with any active banners - an inherent
+    // QMainWindow single-owner constraint, not something addBanner() can
+    // guard against.
+    if (m_bannerWrapper != nullptr) { return; }
+
+    auto* previousCentralWidget = centralWidget();
+
+    m_bannerWrapper     = new QWidget(this);
+    auto* wrapperLayout = new QVBoxLayout(m_bannerWrapper);
+    wrapperLayout->setContentsMargins(0, 0, 0, 0);
+    wrapperLayout->setSpacing(0);
+
+    m_bannerHost       = new QWidget(m_bannerWrapper);
+    m_bannerHostLayout = new QVBoxLayout(m_bannerHost);
+    m_bannerHostLayout->setContentsMargins(0, 0, 0, 0);
+    m_bannerHostLayout->setSpacing(0);
+
+    wrapperLayout->addWidget(m_bannerHost);
+    if (previousCentralWidget != nullptr) {
+        wrapperLayout->addWidget(previousCentralWidget, 1);
+    }
+
+    setCentralWidget(m_bannerWrapper);
+}
+
+void MainWindow::rebuildBannerHostLayout()
+{
+    while (QLayoutItem* item = m_bannerHostLayout->takeAt(0)) {
+        auto* widget = item->widget();
+        delete item;
+        const bool isBanner = std::find(m_banners.cbegin(), m_banners.cend(),
+                                        widget) != m_banners.cend();
+        if (widget != nullptr && !isBanner) { widget->deleteLater(); }
+    }
+
+    for (std::size_t i = 0; i < m_banners.size(); ++i) {
+        if (i > 0) {
+            auto* divider = new QFrame(m_bannerHost);
+            divider->setFrameShape(QFrame::HLine);
+            divider->setFrameShadow(QFrame::Plain);
+            m_bannerHostLayout->addWidget(divider);
+        }
+        m_bannerHostLayout->addWidget(m_banners[i]);
+    }
 }
 
 void MainWindow::closeEvent(QCloseEvent* event)

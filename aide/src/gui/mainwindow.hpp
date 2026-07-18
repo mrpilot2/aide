@@ -3,9 +3,11 @@
 #define AIDE_MAINWINDOW_HPP
 
 #include <memory>
+#include <vector>
 
 #include <aide/actionregistryinterface.hpp>
 #include <aide/applicationconfig.hpp>
+#include <aide/notificationtype.hpp>
 
 #include "applicationclose.hpp"
 #include "loggerinterface.hpp"
@@ -17,8 +19,15 @@ namespace Ui
     class MainWindow;
 } // namespace Ui
 
+namespace aide::widgets
+{
+    class Banner;
+} // namespace aide::widgets
+
 class QIcon;
 class QMenu;
+class QString;
+class QVBoxLayout;
 class QWidget;
 
 namespace aide::gui
@@ -50,6 +59,22 @@ namespace aide::gui
         std::tuple<aide::core::UserSelection, bool>
         letUserConfirmApplicationClose() override;
 
+        /**
+         * @brief Push an editor-mount banner above the central widget and
+         * return it. Wraps whatever is currently the central widget on the
+         * first call; several active banners stack vertically, newest at
+         * the bottom, with a hairline divider between them. Caller-driven:
+         * never goes through NotificationManager::post() (see #145).
+         */
+        aide::widgets::Banner* addBanner(NotificationType type,
+                                         const QString& message);
+
+        /**
+         * @brief Remove and delete a banner previously returned by
+         * addBanner(). No-op if @p banner is not currently mounted.
+         */
+        void removeBanner(aide::widgets::Banner* banner);
+
     public slots:
         void refreshIcons();
 
@@ -71,6 +96,9 @@ namespace aide::gui
         [[nodiscard]] static QIcon createIconFromTheme(
             const std::string& iconName);
 
+        void ensureBannerHost();
+        void rebuildBannerHostLayout();
+
         LoggerPtr logger;
 
         ApplicationConfig m_config;
@@ -86,6 +114,11 @@ namespace aide::gui
         std::shared_ptr<QAction> m_actionReportBug;
         std::shared_ptr<QAction> m_actionAboutAide;
         std::shared_ptr<QAction> m_actionAboutQt;
+
+        QWidget* m_bannerWrapper{nullptr};
+        QWidget* m_bannerHost{nullptr};
+        QVBoxLayout* m_bannerHostLayout{nullptr};
+        std::vector<aide::widgets::Banner*> m_banners;
     };
 
 } // namespace aide::gui

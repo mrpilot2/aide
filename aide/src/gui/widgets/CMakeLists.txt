@@ -6,6 +6,7 @@ target_sources(
   PRIVATE
     aidetableview.cpp
     aidetreeview.cpp
+    banner.cpp
     multicolumnsortfilterproxymodel.cpp
     searchfilterresultdelegate.cpp
     searchfilterwidget.cpp
@@ -20,6 +21,7 @@ target_sources(
       FILES
         ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/aidetableview.hpp
         ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/aidetreeview.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/banner.hpp
         ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/searchfilterwidget.hpp
         ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/searchlineedit.hpp
 )

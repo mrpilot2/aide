@@ -4,21 +4,26 @@
 
 #include <QApplication>
 #include <QMenu>
+#include <QToolButton>
 
 #include <aide/aideconstants.hpp>
 #include <aide/applicationconfig.hpp>
+#include <aide/notificationtype.hpp>
 
 #include "actionregistry.hpp"
+#include "aide/gui/widgets/banner.hpp"
 #include "mainwindow.hpp"
 #include "mocksettings.hpp"
 #include "nulllogger.hpp"
 
 using aide::ActionRegistry;
 using aide::ApplicationConfig;
+using aide::NotificationType;
 using aide::constants::CONSTANTS;
 using aide::gui::MainWindow;
 using aide::test::MockSettings;
 using aide::test::NullLogger;
+using aide::widgets::Banner;
 
 TEST_CASE("Any main window")
 {
@@ -269,6 +274,66 @@ TEST_CASE(
     REQUIRE(registry->action(CONSTANTS().HELP_SHOW_LOG_IN_FILE_MANAGER)
                 .has_value());
     REQUIRE(registry->action(CONSTANTS().HELP_REPORT_BUG).has_value());
+}
+
+TEST_CASE("A main window's banner mount", "[MainWindow]")
+{
+    QApplication::setApplicationName("aide_test");
+    QApplication::setOrganizationName("aide_company");
+
+    SECTION("addBanner returns a banner mounted under the window")
+    {
+        MainWindow mainWindow(std::make_shared<NullLogger>(),
+                              ApplicationConfig{}, nullptr);
+
+        auto* banner =
+            mainWindow.addBanner(NotificationType::Warning, "Disk space low");
+
+        REQUIRE(banner != nullptr);
+        REQUIRE(mainWindow.isAncestorOf(banner));
+    }
+
+    SECTION("several active banners stack newest at the bottom")
+    {
+        MainWindow mainWindow(std::make_shared<NullLogger>(),
+                              ApplicationConfig{}, nullptr);
+
+        auto* first =
+            mainWindow.addBanner(NotificationType::Information, "First");
+        auto* second =
+            mainWindow.addBanner(NotificationType::Warning, "Second");
+
+        mainWindow.show();
+        QApplication::processEvents();
+
+        REQUIRE(first->y() < second->y());
+    }
+
+    SECTION("removeBanner removes the banner from the window")
+    {
+        MainWindow mainWindow(std::make_shared<NullLogger>(),
+                              ApplicationConfig{}, nullptr);
+
+        auto* banner = mainWindow.addBanner(NotificationType::Error, "Boom");
+        mainWindow.removeBanner(banner);
+        QApplication::processEvents();
+
+        REQUIRE(mainWindow.findChildren<Banner*>().isEmpty());
+    }
+
+    SECTION("closing a banner via its close button removes it from the window")
+    {
+        MainWindow mainWindow(std::make_shared<NullLogger>(),
+                              ApplicationConfig{}, nullptr);
+
+        auto* banner = mainWindow.addBanner(NotificationType::Success, "Done");
+        auto* closeButton = banner->findChild<QToolButton*>();
+        REQUIRE(closeButton != nullptr);
+        closeButton->click();
+        QApplication::processEvents();
+
+        REQUIRE(mainWindow.findChildren<Banner*>().isEmpty());
+    }
 }
 
 TEST_CASE(

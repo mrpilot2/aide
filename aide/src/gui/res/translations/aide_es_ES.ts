@@ -50,6 +50,13 @@
     </message>
 </context>
 <context>
+    <name>Banner</name>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Cerrar</translation>
+    </message>
+</context>
+<context>
     <name>QApplication</name>
     <message>
         <source>Keymap</source>

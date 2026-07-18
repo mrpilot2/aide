@@ -69,6 +69,13 @@
     </message>
 </context>
 <context>
+    <name>Banner</name>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Schließen</translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
         <source>MainWindow</source>
