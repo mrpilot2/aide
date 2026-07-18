@@ -8,6 +8,7 @@
 
 #include <aide/application.hpp>
 #include <aide/buildinformation.hpp>
+#include <aide/githubrepository.hpp>
 
 #include "aideinformation.hpp"
 
@@ -33,8 +34,8 @@ void AboutAideUseCase::showAboutAideInformation() const
     info.buildType       = build_information::CMAKE_BUILD_TYPE;
     info.compileFlags    = build_information::COMPILE_FLAGS;
 
-    info.whatsNewUrl =
-        "https://github.com/mrpilot2/aide/releases/tag/v" + info.versionInfo;
+    info.whatsNewUrl = std::string(constants::GITHUB_REPO_URL) +
+                       "/releases/tag/v" + info.versionInfo;
 
     info.thirdPartyLicensesHtml = getThirdPartyLicenses();
 
