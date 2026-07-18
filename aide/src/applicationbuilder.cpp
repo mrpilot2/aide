@@ -4,12 +4,14 @@
 
 #include <settings/keymap/keymappage.hpp>
 
+#include "core/urllauncherresolver.hpp"
 #include "gui/settings/appearancepage.hpp"
 #include "logger/loggerfactory.hpp"
 
 using aide::ApplicationBuilder;
 using aide::LoggerPtr;
 using aide::core::KeymapPage;
+using aide::core::UrlLauncherResolver;
 using aide::gui::KeymapPageWidget;
 using aide::gui::MainWindow;
 using aide::gui::MainWindowController;
@@ -34,7 +36,7 @@ ApplicationBuilder::ApplicationBuilder(ApplicationConfig config)
           std::make_shared<SettingsDialogController>(m_showSettingsDialog))
     , m_mainController(std::make_shared<MainWindowController>(
           m_mainWindow, m_applicationClose, m_mainWindowGeometryAndState,
-          m_showSettingsDialog))
+          m_showSettingsDialog, UrlLauncherResolver::resolve(m_config)))
     , m_keyMapPageWidget{std::make_unique<KeymapPageWidget>(
           m_settingsDialog.get())}
     , m_keyMapPage(std::make_shared<KeymapPage>(m_actionRegistry,

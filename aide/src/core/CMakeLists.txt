@@ -56,6 +56,7 @@ target_sources(
     settings/keymap/pendingkeymapstate.cpp
     treeitem.cpp
     treemodel.cpp
+    urllauncherresolver.cpp
 )
 
 target_sources(

@@ -4,6 +4,8 @@
 
 #include <memory>
 
+#include <aide/urllauncherinterface.hpp>
+
 namespace aide
 {
     /**
@@ -69,6 +71,22 @@ namespace aide
          *         feature's built-in default.
          */
         [[nodiscard]] bool isEnabled(Feature feature) const;
+
+        /**
+         * @brief Substitutes a consumer-supplied launcher for the one
+         * used to open URLs (e.g. by the "Report Bug in aIDE" action),
+         * instead of the default OS-backed launcher.
+         * @return *this, so calls can be chained fluently.
+         */
+        ApplicationConfig& setUrlLauncher(UrlLauncherPtr launcher);
+
+        /**
+         * @brief The consumer-supplied URL launcher override, if any.
+         * @return the overriding launcher, or nullptr if none was set - in
+         *         which case the caller should fall back to the default
+         *         OS-backed launcher.
+         */
+        [[nodiscard]] UrlLauncherPtr urlLauncher() const;
 
     private:
         class Impl;
