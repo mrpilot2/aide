@@ -83,6 +83,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       aboutaideusecasetest.cpp
       actionregistrytest.cpp
       addshortcutdialogtest.cpp
+      aidedialogtest.cpp
       aideinformationbuildertest.cpp
       appearancepagetest.cpp
       aidesettingsprovidertest.cpp

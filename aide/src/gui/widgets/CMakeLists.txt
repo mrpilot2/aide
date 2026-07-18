@@ -4,6 +4,7 @@ add_library(Aide::AideWidgets ALIAS AideQt${QT_VERSION_MAJOR}Widgets)
 target_sources(
   AideQt${QT_VERSION_MAJOR}Widgets
   PRIVATE
+    aidedialog.cpp
     aidetableview.cpp
     aidetreeview.cpp
     banner.cpp
@@ -19,6 +20,7 @@ target_sources(
     FILE_SET HEADERS
       BASE_DIRS ${CMAKE_CURRENT_LIST_DIR}/../../include
       FILES
+        ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/aidedialog.hpp
         ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/aidetableview.hpp
         ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/aidetreeview.hpp
         ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/banner.hpp
