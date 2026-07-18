@@ -90,6 +90,11 @@ aide::ActionRegistryInterfacePtr Application::actionRegistry() const
     return m_appBuilder->actionRegistry();
 }
 
+aide::NotificationManagerInterface& Application::notificationManager() const
+{
+    return m_appBuilder->notificationManager();
+}
+
 aide::core::SettingsPageRegistry& Application::settingsPageRegistry() const
 {
     return m_appBuilder->settingsPageRegistry();

@@ -26,6 +26,7 @@ target_sources(
     mainwindowinterface.cpp
     menucontainer.cpp
     menucontainerinterface.cpp
+    notificationmanager.cpp
     osfilemanagerlauncher.cpp
     osurllauncher.cpp
     platformiconbaseline.cpp
@@ -74,6 +75,14 @@ target_sources(
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/githubrepository.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/hierarchicalid.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/menucontainerinterface.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/notification.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/notificationaction.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/notificationdisplaytype.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/notificationgroup.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/notificationid.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/notificationmanager.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/notificationmanagerinterface.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/notificationtype.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/settingsinterface.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/theme.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/urllauncherinterface.hpp

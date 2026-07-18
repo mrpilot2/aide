@@ -23,6 +23,8 @@ ApplicationBuilder::ApplicationBuilder(ApplicationConfig config)
     , m_settingsProvider(std::make_shared<AideSettingsProvider>())
     , m_actionRegistry{std::make_shared<ActionRegistry>(
           *(AideSettingsProvider::versionableSettings()), m_logger)}
+    , m_notificationManager{std::make_shared<NotificationManager>(
+          *(AideSettingsProvider::versionableSettings()))}
     , m_mainWindow(new MainWindow(m_logger, m_config, nullptr))
     , m_settingsDialog(std::make_shared<SettingsDialog>(m_mainWindow.get()))
     , m_applicationClose(m_mainWindow,
@@ -107,6 +109,12 @@ ApplicationBuilder::settingsProvider() const
 aide::ActionRegistryInterfacePtr ApplicationBuilder::actionRegistry() const
 {
     return m_actionRegistry;
+}
+
+aide::NotificationManagerInterface& ApplicationBuilder::notificationManager()
+    const
+{
+    return *m_notificationManager;
 }
 
 aide::core::SettingsPageRegistry& ApplicationBuilder::settingsPageRegistry()

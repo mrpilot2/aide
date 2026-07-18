@@ -3,6 +3,7 @@
 
 #include <aide/appearancemanager.hpp>
 #include <aide/applicationconfig.hpp>
+#include <aide/notificationmanager.hpp>
 #include <settings/keymap/keymappage.hpp>
 #include <settings/settingspageregistry.hpp>
 
@@ -36,6 +37,8 @@ namespace aide
 
         [[nodiscard]] ActionRegistryInterfacePtr actionRegistry() const;
 
+        [[nodiscard]] NotificationManagerInterface& notificationManager() const;
+
         [[nodiscard]] aide::core::SettingsPageRegistry& settingsPageRegistry();
 
         [[nodiscard]] aide::AppearanceManager& appearanceManager();
@@ -58,6 +61,8 @@ namespace aide
         std::shared_ptr<AideSettingsProvider> m_settingsProvider;
 
         std::shared_ptr<aide::ActionRegistry> m_actionRegistry;
+
+        std::shared_ptr<aide::NotificationManager> m_notificationManager;
 
         std::shared_ptr<aide::gui::MainWindow> m_mainWindow;
 

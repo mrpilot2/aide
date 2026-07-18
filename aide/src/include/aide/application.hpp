@@ -10,6 +10,7 @@
 #include <aide/appearancemanager.hpp>
 #include <aide/applicationconfig.hpp>
 #include <aide/loggerinterface.hpp>
+#include <aide/notificationmanagerinterface.hpp>
 #include <aide/settings/settingspageregistry.hpp>
 
 class QMainWindow;
@@ -61,6 +62,8 @@ namespace aide
             const;
 
         [[nodiscard]] ActionRegistryInterfacePtr actionRegistry() const;
+
+        [[nodiscard]] NotificationManagerInterface& notificationManager() const;
 
         [[nodiscard]] core::SettingsPageRegistry& settingsPageRegistry() const;
 
