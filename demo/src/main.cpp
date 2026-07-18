@@ -18,6 +18,7 @@
 
 #include "colorschemereactor.hpp"
 #include "demosettingspage.hpp"
+#include "reportbugpreviewlauncher.hpp"
 
 using aide::constants::CONSTANTS;
 
@@ -37,10 +38,16 @@ int main(int argc, char* argv[])
     // to disabled since they are only appropriate for developer-facing
     // consumer applications. The demo opts in explicitly so both features
     // are visibly exercised by anyone running it.
+    //
+    // ReportBugAction also gets a demo-supplied UrlLauncherInterface
+    // override, so clicking the action shows a preview dialog of the ticket
+    // that would have been filed instead of opening a real browser and
+    // filing a real issue against aIDE's own repository.
     aide::ApplicationConfig config;
     config.setEnabled(
         aide::ApplicationConfig::Feature::ShowLogInFileManagerAction, true);
     config.setEnabled(aide::ApplicationConfig::Feature::ReportBugAction, true);
+    config.setUrlLauncher(std::make_shared<demo::ReportBugPreviewLauncher>());
     const aide::Application app(argc, argv, config);
 
     app.translator()->addAdditionalTranslationFilePath(

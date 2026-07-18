@@ -34,6 +34,7 @@ add_executable(
   colorschemereactor.hpp
   demosettingspage.cpp
   main.cpp
+  reportbugpreviewlauncher.cpp
 )
 
 target_link_libraries(
