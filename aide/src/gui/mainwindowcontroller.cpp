@@ -11,7 +11,6 @@
 #include "mainwindow.hpp"
 #include "mainwindowgeometryandstatecontroller.hpp"
 #include "osfilemanagerlauncher.hpp"
-#include "osurllauncher.hpp"
 #include "reportbugusecase.hpp"
 #include "showloginfilemanagerusecase.hpp"
 
@@ -25,11 +24,13 @@ MainWindowController::MainWindowController(
     std::shared_ptr<MainWindow> mainWindow,
     const ApplicationCloseController& closeUseCase,
     MainWindowGeometryAndStateController& saveUseCase,
-    ShowSettingsDialogController& settingsDialogUseCase)
+    ShowSettingsDialogController& settingsDialogUseCase,
+    aide::UrlLauncherPtr urlLauncher)
     : m_mainWindow(std::move(mainWindow))
     , applicationCloseInteractor(closeUseCase)
     , saveGeometryAndStateInteractor(saveUseCase)
     , showSettingsDialogInteractor(settingsDialogUseCase)
+    , m_urlLauncher(std::move(urlLauncher))
 {}
 
 void MainWindowController::onUserWantsToQuitApplication(
@@ -65,10 +66,9 @@ void MainWindowController::onUserWantsToShowLogInFileManager()
     useCase.showLogInFileManager();
 }
 
-void MainWindowController::onUserWantsToReportBug()
+void MainWindowController::onUserWantsToReportBug() const
 {
-    const auto launcher = std::make_shared<core::OsUrlLauncher>();
     const core::ReportBugUseCase useCase(
-        launcher, core::LoggerFactory::createLogger("ReportBug"));
+        m_urlLauncher, core::LoggerFactory::createLogger("ReportBug"));
     useCase.reportBug();
 }

@@ -1,6 +1,7 @@
 #include "aide/applicationconfig.hpp"
 
 #include <map>
+#include <utility>
 
 using aide::ApplicationConfig;
 
@@ -21,6 +22,13 @@ public:
         m_overrides[feature] = enabled;
     }
 
+    void setUrlLauncher(UrlLauncherPtr launcher)
+    {
+        m_urlLauncher = std::move(launcher);
+    }
+
+    [[nodiscard]] UrlLauncherPtr urlLauncher() const { return m_urlLauncher; }
+
 private:
     // Single source of truth for per-feature defaults. Every feature ships
     // enabled today; flip an entry here to make a future feature opt-in
@@ -38,6 +46,7 @@ private:
     }
 
     std::map<Feature, bool> m_overrides;
+    UrlLauncherPtr m_urlLauncher;
 };
 
 ApplicationConfig::ApplicationConfig()
@@ -71,4 +80,15 @@ ApplicationConfig& ApplicationConfig::setEnabled(Feature feature, bool enabled)
 bool ApplicationConfig::isEnabled(Feature feature) const
 {
     return m_impl->isEnabled(feature);
+}
+
+ApplicationConfig& ApplicationConfig::setUrlLauncher(UrlLauncherPtr launcher)
+{
+    m_impl->setUrlLauncher(std::move(launcher));
+    return *this;
+}
+
+aide::UrlLauncherPtr ApplicationConfig::urlLauncher() const
+{
+    return m_impl->urlLauncher();
 }

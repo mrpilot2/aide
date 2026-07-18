@@ -124,6 +124,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       systemmemorytest.cpp
       treeitemtest.cpp
       treemodeltest.cpp
+      urllauncherresolvertest.cpp
   )
 endif()
 

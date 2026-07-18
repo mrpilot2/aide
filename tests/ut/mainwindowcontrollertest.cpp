@@ -12,6 +12,7 @@
 #include "mainwindow.hpp"
 #include "mainwindowcontroller.hpp"
 #include "mainwindowgeometryandstatecontroller.hpp"
+#include "mockurllauncher.hpp"
 #include "nulllogger.hpp"
 #include "settings/showsettingsdialogcontroller.hpp"
 
@@ -22,6 +23,7 @@ using aide::core::ShowSettingsDialogController;
 using aide::gui::MainWindow;
 using aide::gui::MainWindowController;
 using aide::test::NullLogger;
+using aide::tests::MockUrlLauncher;
 
 namespace
 {
@@ -77,7 +79,8 @@ TEST_CASE("A main window controller handling a close request")
     FakeShowSettingsDialogController settingsController;
 
     const MainWindowController controller(mainWindow, closeController,
-                                          saveController, settingsController);
+                                          saveController, settingsController,
+                                          std::make_shared<MockUrlLauncher>());
 
     const QByteArray geometry("geometry-bytes");
     const QByteArray state("state-bytes");
@@ -124,12 +127,41 @@ TEST_CASE(
     FakeShowSettingsDialogController settingsController;
 
     const MainWindowController controller(mainWindow, closeController,
-                                          saveController, settingsController);
+                                          saveController, settingsController,
+                                          std::make_shared<MockUrlLauncher>());
 
     SECTION("delegates to the show settings dialog interactor")
     {
         controller.onUserWantsToShowSettingsDialog();
 
         REQUIRE(settingsController.showCalled);
+    }
+}
+
+TEST_CASE("A main window controller handling a request to report a bug")
+{
+    QApplication::setApplicationName("aide_test");
+    QApplication::setOrganizationName("aide_company");
+
+    const auto mainWindow = std::make_shared<MainWindow>(
+        std::make_shared<NullLogger>(), ApplicationConfig{}, nullptr);
+
+    const FakeApplicationCloseController closeController;
+    FakeMainWindowGeometryAndStateController saveController;
+    FakeShowSettingsDialogController settingsController;
+
+    const auto urlLauncher = std::make_shared<MockUrlLauncher>();
+
+    const MainWindowController controller(mainWindow, closeController,
+                                          saveController, settingsController,
+                                          urlLauncher);
+
+    SECTION(
+        "asks the launcher supplied at construction time to open the bug "
+        "report URL, instead of the default OS-backed launcher")
+    {
+        controller.onUserWantsToReportBug();
+
+        REQUIRE(urlLauncher->lastRequestedUrl.has_value());
     }
 }

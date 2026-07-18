@@ -6,6 +6,7 @@
 
 #include <QObject>
 
+#include <aide/urllauncherinterface.hpp>
 #include <settings/showsettingsdialogcontroller.hpp>
 
 class QByteArray;
@@ -29,7 +30,8 @@ namespace aide::gui
             std::shared_ptr<MainWindow> mainWindow,
             const aide::core::ApplicationCloseController& closeUseCase,
             aide::core::MainWindowGeometryAndStateController& saveUseCase,
-            core::ShowSettingsDialogController& settingsDialogUseCase);
+            core::ShowSettingsDialogController& settingsDialogUseCase,
+            aide::UrlLauncherPtr urlLauncher);
 
         void onUserWantsToQuitApplication(QCloseEvent* event,
                                           const QByteArray& geometry,
@@ -41,9 +43,10 @@ namespace aide::gui
         // instance supplied as the context object.
         static void onUserWantsToShowLogInFileManager();
 
-        // Not a member of the instance's state either; see the comment on
-        // onUserWantsToShowLogInFileManager above.
-        static void onUserWantsToReportBug();
+        // Uses the launcher supplied at construction time (the consumer's
+        // ApplicationConfig override, or the default OS-backed launcher),
+        // so it is an instance method rather than the static one above.
+        void onUserWantsToReportBug() const;
 
     public slots:
         void onUserWantsToShowSettingsDialog() const;
@@ -59,6 +62,8 @@ namespace aide::gui
             saveGeometryAndStateInteractor;
 
         aide::core::ShowSettingsDialogController& showSettingsDialogInteractor;
+
+        aide::UrlLauncherPtr m_urlLauncher;
     };
 
     using MainWindowControllerPtr = std::shared_ptr<MainWindowController>;

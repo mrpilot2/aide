@@ -1,8 +1,13 @@
+#include <memory>
+
 #include <catch2/catch_test_macros.hpp>
 
 #include <aide/applicationconfig.hpp>
 
+#include "mockurllauncher.hpp"
+
 using aide::ApplicationConfig;
+using aide::tests::MockUrlLauncher;
 
 using Feature = ApplicationConfig::Feature;
 
@@ -99,5 +104,45 @@ TEST_CASE("An application config")
 
         REQUIRE_FALSE(original.isEnabled(Feature::ViewFullscreenAction));
         REQUIRE(assigned.isEnabled(Feature::ViewFullscreenAction));
+    }
+
+    SECTION("has no URL launcher override by default")
+    {
+        const ApplicationConfig config;
+
+        REQUIRE(config.urlLauncher() == nullptr);
+    }
+
+    SECTION("reflects an explicit URL launcher override")
+    {
+        ApplicationConfig config;
+        const auto launcher = std::make_shared<MockUrlLauncher>();
+
+        config.setUrlLauncher(launcher);
+
+        REQUIRE(config.urlLauncher() == launcher);
+    }
+
+    SECTION("setUrlLauncher chains fluently")
+    {
+        ApplicationConfig config;
+
+        REQUIRE(&config.setUrlLauncher(std::make_shared<MockUrlLauncher>()) ==
+                &config);
+    }
+
+    SECTION(
+        "a copy carries the URL launcher override independently of the "
+        "original")
+    {
+        ApplicationConfig original;
+        const auto launcher = std::make_shared<MockUrlLauncher>();
+        original.setUrlLauncher(launcher);
+
+        ApplicationConfig copy{original};
+        copy.setUrlLauncher(nullptr);
+
+        REQUIRE(original.urlLauncher() == launcher);
+        REQUIRE(copy.urlLauncher() == nullptr);
     }
 }
