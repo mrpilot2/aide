@@ -61,6 +61,7 @@ target_sources(
     hierarchicalidtest.cpp
     mocksettings.cpp
     mocksettingspage.cpp
+    mockurllauncher.cpp
     searchfilterwidgettest.cpp
     settingspageregistrytest.cpp
     settingspagetest.cpp
@@ -106,7 +107,6 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       mockkeymappagewidget.cpp
       mockmainwindowview.cpp
       mocksettingsdialog.cpp
-      mockurllauncher.cpp
       nulllogger.cpp
       qtsettingstest.cpp
       reportbugusecasetest.cpp
