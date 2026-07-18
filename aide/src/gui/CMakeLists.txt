@@ -39,6 +39,7 @@ target_sources(
     aboutaidedialog.cpp
     mainwindow.cpp
     mainwindowcontroller.cpp
+    notificationballoonhost.cpp
     thirdpartylicensesdialog.cpp
     settings/appearancepage.cpp
     settings/changedetector.cpp

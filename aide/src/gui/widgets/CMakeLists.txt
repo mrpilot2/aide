@@ -1,6 +1,14 @@
 add_library(AideQt${QT_VERSION_MAJOR}Widgets)
 add_library(Aide::AideWidgets ALIAS AideQt${QT_VERSION_MAJOR}Widgets)
 
+include(GenerateExportHeader)
+generate_export_header(
+  AideQt${QT_VERSION_MAJOR}Widgets
+  BASE_NAME AideWidgets
+  EXPORT_FILE_NAME
+    ${CMAKE_CURRENT_BINARY_DIR}/generated_include/aide/gui/widgets/aidewidgets_export.h
+)
+
 target_sources(
   AideQt${QT_VERSION_MAJOR}Widgets
   PRIVATE
@@ -9,6 +17,7 @@ target_sources(
     aidetreeview.cpp
     banner.cpp
     multicolumnsortfilterproxymodel.cpp
+    notificationballoon.cpp
     searchfilterresultdelegate.cpp
     searchfilterwidget.cpp
     searchlineedit.cpp
@@ -24,8 +33,18 @@ target_sources(
         ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/aidetableview.hpp
         ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/aidetreeview.hpp
         ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/banner.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/notificationballoon.hpp
         ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/searchfilterwidget.hpp
         ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/searchlineedit.hpp
+)
+
+target_sources(
+  AideQt${QT_VERSION_MAJOR}Widgets
+  PUBLIC
+    FILE_SET HEADERS
+      BASE_DIRS ${CMAKE_CURRENT_BINARY_DIR}/generated_include
+      FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/generated_include/aide/gui/widgets/aidewidgets_export.h
 )
 
 target_include_directories(

@@ -300,4 +300,15 @@
         <translation type="unfinished"></translation>
     </message>
 </context>
+<context>
+    <name>aide::widgets::NotificationBalloon</name>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Schließen</translation>
+    </message>
+    <message>
+        <source>More ▾</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>

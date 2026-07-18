@@ -68,6 +68,7 @@ target_sources(
     mocksettings.cpp
     mocksettingspage.cpp
     mockurllauncher.cpp
+    notificationballoontest.cpp
     searchfilterwidgettest.cpp
     settingspageregistrytest.cpp
     settingspagetest.cpp
@@ -107,6 +108,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       mainwindowtest.cpp
       menucontainertest.cpp
       multicolumnsortfilterproxymodeltest.cpp
+      notificationballoonhosttest.cpp
       notificationmanagertest.cpp
       searchhistorytest.cpp
       mockaboutdialog.cpp

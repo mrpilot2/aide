@@ -12,6 +12,7 @@
 #include "applicationclose.hpp"
 #include "gui/mainwindow.hpp"
 #include "gui/mainwindowcontroller.hpp"
+#include "gui/notificationballoonhost.hpp"
 #include "gui/settings/keymap/keymappagewidget.hpp"
 #include "gui/settings/settingsdialog.hpp"
 #include "loggerinterface.hpp"
@@ -65,6 +66,9 @@ namespace aide
         std::shared_ptr<aide::NotificationManager> m_notificationManager;
 
         std::shared_ptr<aide::gui::MainWindow> m_mainWindow;
+
+        std::unique_ptr<aide::gui::NotificationBalloonHost>
+            m_notificationBalloonHost;
 
         std::shared_ptr<aide::gui::SettingsDialog> m_settingsDialog;
 

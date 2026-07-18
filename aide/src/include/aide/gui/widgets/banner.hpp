@@ -5,6 +5,7 @@
 #include <QFrame>
 #include <QString>
 
+#include <aide/gui/widgets/aidewidgets_export.h>
 #include <aide/notificationaction.hpp>
 #include <aide/notificationtype.hpp>
 
@@ -23,7 +24,7 @@ namespace aide::widgets
      * NotificationAction from the core notification model but never goes
      * through NotificationManager::post() and is never logged (see #145).
      */
-    class Banner : public QFrame
+    class AIDEWIDGETS_EXPORT Banner : public QFrame
     {
         Q_OBJECT
     public:

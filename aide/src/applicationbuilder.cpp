@@ -26,6 +26,9 @@ ApplicationBuilder::ApplicationBuilder(ApplicationConfig config)
     , m_notificationManager{std::make_shared<NotificationManager>(
           *(AideSettingsProvider::versionableSettings()))}
     , m_mainWindow(new MainWindow(m_logger, m_config, nullptr))
+    , m_notificationBalloonHost(std::make_unique<gui::NotificationBalloonHost>(
+          *m_notificationManager,
+          *(AideSettingsProvider::versionableSettings()), m_mainWindow.get()))
     , m_settingsDialog(std::make_shared<SettingsDialog>(m_mainWindow.get()))
     , m_applicationClose(m_mainWindow,
                          *(AideSettingsProvider::versionableSettings()))
@@ -68,6 +71,14 @@ ApplicationBuilder::ApplicationBuilder(ApplicationConfig config)
     // at runtime via the exported virtual metaObject(), so it links there.
     QObject::connect(&m_appearanceManager, SIGNAL(appearanceChanged()),
                      m_mainWindow.get(), SLOT(refreshIcons()));
+
+    // Same string-based-connect reasoning as above: NotificationManager
+    // (AideCore) is the sender, NotificationBalloonHost (AideGui) the
+    // receiver, so a pointer-to-member connect would not link on MSVC.
+    QObject::connect(m_notificationManager.get(),
+                     SIGNAL(notificationPosted(aide::NotificationId)),
+                     m_notificationBalloonHost.get(),
+                     SLOT(onNotificationPosted(aide::NotificationId)));
 }
 
 aide::AppearanceManager& ApplicationBuilder::appearanceManager()
