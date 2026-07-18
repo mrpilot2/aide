@@ -87,13 +87,15 @@
     </message>
     <message>
         <source>Report Bug in aIDE (preview)</source>
-        <translation type="unfinished"></translation>
+        <translation>الإبلاغ عن خطأ في aIDE (معاينة)</translation>
     </message>
     <message>
         <source>The demo app does not file real GitHub issues. This would have opened a new issue against aIDE&apos;s own repository (%1) with:
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>لا يقوم التطبيق التجريبي بإرسال تقارير GitHub حقيقية. كان سيتم فتح تقرير جديد في مستودع aIDE الخاص (%1) بالمحتوى التالي:
+
+%2</translation>
     </message>
 </context>
 </TS>

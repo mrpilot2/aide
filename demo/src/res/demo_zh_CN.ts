@@ -87,13 +87,15 @@
     </message>
     <message>
         <source>Report Bug in aIDE (preview)</source>
-        <translation type="unfinished"></translation>
+        <translation>在 aIDE 中报告错误(预览)</translation>
     </message>
     <message>
         <source>The demo app does not file real GitHub issues. This would have opened a new issue against aIDE&apos;s own repository (%1) with:
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>演示应用不会提交真实的 GitHub 问题。原本会在 aIDE 自己的仓库(%1)中创建一个新问题,内容如下:
+
+%2</translation>
     </message>
 </context>
 </TS>

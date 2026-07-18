@@ -87,13 +87,15 @@
     </message>
     <message>
         <source>Report Bug in aIDE (preview)</source>
-        <translation type="unfinished"></translation>
+        <translation>Signaler un bug dans aIDE (aperçu)</translation>
     </message>
     <message>
         <source>The demo app does not file real GitHub issues. This would have opened a new issue against aIDE&apos;s own repository (%1) with:
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;application de démonstration ne crée pas de véritables tickets GitHub. Un nouveau ticket aurait été ouvert dans le dépôt d&apos;aIDE (%1) avec le contenu suivant :
+
+%2</translation>
     </message>
 </context>
 </TS>
