@@ -10,7 +10,7 @@ add_library(
   aide_catch_main
   OBJECT
   catch_main.cpp
-  ${CMAKE_SOURCE_DIR}/tools/sanitizerdefaults.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/../../tools/sanitizerdefaults.cpp
 )
 target_link_libraries(
   aide_catch_main
@@ -30,7 +30,7 @@ add_library(
   aide_catch_main_application
   OBJECT
   catch_main_application.cpp
-  ${CMAKE_SOURCE_DIR}/tools/sanitizerdefaults.cpp
+  ${CMAKE_CURRENT_LIST_DIR}/../../tools/sanitizerdefaults.cpp
 )
 target_link_libraries(
   aide_catch_main_application
