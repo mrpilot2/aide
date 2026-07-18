@@ -4,7 +4,6 @@
 #include <utility>
 
 #include <QString>
-#include <QSysInfo>
 #include <QUrl>
 #include <QUrlQuery>
 
@@ -13,27 +12,13 @@
 #include "aideinformation.hpp"
 #include "aideinformationbuilder.hpp"
 #include "diagnostictextbuilder.hpp"
-#include "logger/loggerfactory.hpp"
 
 using aide::core::ReportBugUseCase;
 
 namespace
 {
-    // Maps the current OS to one of the "Operating System" dropdown's fixed
-    // option labels in bug.yml (Linux/Windows/MAC), so GitHub pre-selects
-    // the matching option. Anything that is not recognizably Windows or
-    // macOS is reported as Linux, the most common case for the remaining
-    // kernels aIDE runs on.
-    QString resolveOsOptionLabel()
-    {
-        if (QSysInfo::kernelType() == QLatin1String("winnt")) {
-            return QStringLiteral("Windows");
-        }
-        if (QSysInfo::kernelType() == QLatin1String("darwin")) {
-            return QStringLiteral("MAC");
-        }
-        return QStringLiteral("Linux");
-    }
+    constexpr auto LOGS_PLACEHOLDER = "Paste your log here";
+    constexpr auto LOGS_SEPARATOR   = "\n\n---\n\n";
 } // namespace
 
 ReportBugUseCase::ReportBugUseCase(UrlLauncherPtr launcher, LoggerPtr logger)
@@ -43,24 +28,15 @@ ReportBugUseCase::ReportBugUseCase(UrlLauncherPtr launcher, LoggerPtr logger)
 
 void ReportBugUseCase::reportBug() const
 {
-    const auto logFilePath = LoggerFactory::logFilePath();
-
-    if (!logFilePath) {
-        m_logger->warn(
-            "Could not resolve the log file path; unable to report a bug");
-        return;
-    }
-
     const auto info = AideInformationBuilder::buildCurrent();
 
-    const auto logs = DiagnosticTextBuilder::build(info) +
-                      "\n\nLog file: " + QString::fromStdString(*logFilePath);
+    const auto logs = QString(LOGS_PLACEHOLDER) + QString(LOGS_SEPARATOR) +
+                      DiagnosticTextBuilder::build(info);
 
     QUrl url(QString(constants::GITHUB_REPO_URL) + "/issues/new");
     QUrlQuery query;
     query.addQueryItem("template", "bug.yml");
     query.addQueryItem("version", QString::fromStdString(info.versionInfo));
-    query.addQueryItem("os", resolveOsOptionLabel());
     query.addQueryItem("logs", logs);
     url.setQuery(query);
 
