@@ -60,6 +60,22 @@ TEST_CASE("An application config")
         REQUIRE(config.isEnabled(Feature::ShowLogInFileManagerAction));
     }
 
+    SECTION("defaults the report-bug feature to disabled")
+    {
+        const ApplicationConfig config;
+
+        REQUIRE_FALSE(config.isEnabled(Feature::ReportBugAction));
+    }
+
+    SECTION("reflects an explicit opt-in for the report-bug feature")
+    {
+        ApplicationConfig config;
+
+        config.setEnabled(Feature::ReportBugAction, true);
+
+        REQUIRE(config.isEnabled(Feature::ReportBugAction));
+    }
+
     SECTION("a copy carries overrides independently of the original")
     {
         ApplicationConfig original;

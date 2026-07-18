@@ -31,6 +31,7 @@ private:
         case Feature::ViewFullscreenAction:
             return true;
         case Feature::ShowLogInFileManagerAction:
+        case Feature::ReportBugAction:
             return false;
         }
         return true;

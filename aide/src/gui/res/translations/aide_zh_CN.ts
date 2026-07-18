@@ -249,5 +249,9 @@
         <source>Show Log in %1</source>
         <translation>在 %1 中显示日志</translation>
     </message>
+    <message>
+        <source>Report Bug in aIDE</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

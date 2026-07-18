@@ -11,6 +11,8 @@
 #include "mainwindow.hpp"
 #include "mainwindowgeometryandstatecontroller.hpp"
 #include "osfilemanagerlauncher.hpp"
+#include "osurllauncher.hpp"
+#include "reportbugusecase.hpp"
 #include "showloginfilemanagerusecase.hpp"
 
 using aide::core::AboutAideUseCase;
@@ -61,4 +63,12 @@ void MainWindowController::onUserWantsToShowLogInFileManager()
     const core::ShowLogInFileManagerUseCase useCase(
         launcher, core::LoggerFactory::createLogger("ShowLogInFileManager"));
     useCase.showLogInFileManager();
+}
+
+void MainWindowController::onUserWantsToReportBug()
+{
+    const auto launcher = std::make_shared<core::OsUrlLauncher>();
+    const core::ReportBugUseCase useCase(
+        launcher, core::LoggerFactory::createLogger("ReportBug"));
+    useCase.reportBug();
 }

@@ -13,10 +13,11 @@ namespace aide
      * the aide::Application at construction time to declare which built-in
      * features the application uses. Every feature defaults to enabled, so a
      * zero-configuration application behaves exactly like today's aIDE - with
-     * one documented exception: ShowLogInFileManagerAction defaults to
-     * disabled, since it is only appropriate for developer-facing consumer
-     * applications and would otherwise expose a concept (the log file) that
-     * end users of most aIDE-based applications have no reason to know
+     * two documented exceptions, ShowLogInFileManagerAction and
+     * ReportBugAction, which default to disabled since they are only
+     * appropriate for developer-facing consumer applications and would
+     * otherwise expose concepts (the log file, aIDE's own issue tracker)
+     * that end users of most aIDE-based applications have no reason to know
      * about.
      *
      * The type is an ordinary copyable value with a private implementation
@@ -40,8 +41,12 @@ namespace aide
             ViewFullscreenAction,
 
             /// Help → "Show Log in <File Manager>" action. Defaults to
-            /// disabled, unlike every other feature in this enum.
+            /// disabled, unlike most other features in this enum.
             ShowLogInFileManagerAction,
+
+            /// Help → "Report Bug in aIDE" action. Defaults to disabled,
+            /// unlike most other features in this enum.
+            ReportBugAction,
         };
 
         ApplicationConfig();
