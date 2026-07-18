@@ -1,12 +1,13 @@
-// Default sanitizer runtime options baked into the test binaries themselves,
-// so they apply no matter how the binary is invoked (ctest --preset, bare
-// ctest, or running the executable directly) rather than only when the
-// CMakePresets.json testPresets environment happens to be in effect.
+// Default sanitizer runtime options baked into the binary itself, so they
+// apply no matter how it is invoked (ctest --preset, bare ctest, or running
+// the executable directly) rather than only when the CMakePresets.json
+// environment happens to be in effect.
 //
 // LeakSanitizer's exit-time "stop the world" thread-suspension deadlocks
-// whenever a test's QApplication spins up GLib helper threads (dconf worker,
-// gdbus, pool-spawner) to watch the live desktop theme - which only happens
-// on a host with a real desktop session. detect_leaks=0 matches the fact
+// whenever a QApplication in this binary spins up GLib helper threads (dconf
+// worker, gdbus, pool-spawner) to watch the live desktop theme - which only
+// happens on a host with a real desktop session (see GitHub issue #140,
+// where this hung the demo app on exit). detect_leaks=0 matches the fact
 // that aide_ENABLE_SANITIZER_LEAK is already OFF: this project never wanted
 // a leak sanitizer, but ASan's built-in LSan integration runs by default
 // unless told otherwise.

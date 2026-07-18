@@ -6,7 +6,12 @@ option(
   "Specify if unit tests are executed on CI - changes reporter"
 )
 
-add_library(aide_catch_main OBJECT catch_main.cpp sanitizerdefaults.cpp)
+add_library(
+  aide_catch_main
+  OBJECT
+  catch_main.cpp
+  ${CMAKE_SOURCE_DIR}/tools/sanitizerdefaults.cpp
+)
 target_link_libraries(
   aide_catch_main
   PUBLIC Catch2::Catch2
@@ -25,7 +30,7 @@ add_library(
   aide_catch_main_application
   OBJECT
   catch_main_application.cpp
-  sanitizerdefaults.cpp
+  ${CMAKE_SOURCE_DIR}/tools/sanitizerdefaults.cpp
 )
 target_link_libraries(
   aide_catch_main_application

@@ -35,6 +35,7 @@ add_executable(
   demosettingspage.cpp
   main.cpp
   reportbugpreviewlauncher.cpp
+  ${CMAKE_SOURCE_DIR}/tools/sanitizerdefaults.cpp
 )
 
 target_link_libraries(
