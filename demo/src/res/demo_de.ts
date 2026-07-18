@@ -87,13 +87,15 @@
     </message>
     <message>
         <source>Report Bug in aIDE (preview)</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler in aIDE melden (Vorschau)</translation>
     </message>
     <message>
         <source>The demo app does not file real GitHub issues. This would have opened a new issue against aIDE&apos;s own repository (%1) with:
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Demo-Anwendung meldet keine echten GitHub-Issues. Es wäre ein neues Issue im eigenen Repository von aIDE (%1) mit folgendem Inhalt eröffnet worden:
+
+%2</translation>
     </message>
 </context>
 </TS>

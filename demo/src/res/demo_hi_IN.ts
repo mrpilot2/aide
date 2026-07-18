@@ -87,13 +87,15 @@
     </message>
     <message>
         <source>Report Bug in aIDE (preview)</source>
-        <translation type="unfinished"></translation>
+        <translation>aIDE में बग रिपोर्ट करें (पूर्वावलोकन)</translation>
     </message>
     <message>
         <source>The demo app does not file real GitHub issues. This would have opened a new issue against aIDE&apos;s own repository (%1) with:
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>डेमो ऐप वास्तविक GitHub इशू दर्ज नहीं करता। यह aIDE के अपने रिपॉज़िटरी (%1) में निम्न सामग्री के साथ एक नया इशू खोलता:
+
+%2</translation>
     </message>
 </context>
 </TS>

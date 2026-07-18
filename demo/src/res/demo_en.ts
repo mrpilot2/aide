@@ -87,13 +87,13 @@
     </message>
     <message>
         <source>Report Bug in aIDE (preview)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>The demo app does not file real GitHub issues. This would have opened a new issue against aIDE&apos;s own repository (%1) with:
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 </TS>
