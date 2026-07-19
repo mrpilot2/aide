@@ -15,3 +15,7 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets)
 find_package(Qt6LinguistTools)
 
 add_subdirectory(src)
+
+if(TARGET aide_catch_main)
+  add_subdirectory(tests)
+endif()
