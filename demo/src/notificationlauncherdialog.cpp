@@ -1,5 +1,6 @@
 #include "notificationlauncherdialog.hpp"
 
+#include <array>
 #include <utility>
 
 #include <QApplication>
@@ -21,6 +22,17 @@ using aide::NotificationAction;
 using aide::NotificationManagerInterface;
 using aide::NotificationType;
 using demo::NotificationLauncherDialog;
+
+namespace
+{
+    struct SeverityButton
+    {
+        NotificationType type;
+        QString buttonLabel;
+        QString title;
+        QString content;
+    };
+} // namespace
 
 NotificationLauncherDialog::NotificationLauncherDialog(
     NotificationManagerInterface& notificationManager,
@@ -49,32 +61,25 @@ QWidget* NotificationLauncherDialog::createBalloonSection()
 
     auto* transientRow = new QHBoxLayout;
 
-    auto* infoButton    = new QPushButton(tr("Info"), group);
-    auto* successButton = new QPushButton(tr("Success"), group);
-    auto* warningButton = new QPushButton(tr("Warning"), group);
-    auto* errorButton   = new QPushButton(tr("Error"), group);
+    const std::array<SeverityButton, 4> severityButtons{{
+        {NotificationType::Information, tr("Info"), tr("Information"),
+         tr("This is an informational balloon notification.")},
+        {NotificationType::Success, tr("Success"), tr("Success"),
+         tr("This is a success balloon notification.")},
+        {NotificationType::Warning, tr("Warning"), tr("Warning"),
+         tr("This is a warning balloon notification.")},
+        {NotificationType::Error, tr("Error"), tr("Error"),
+         tr("This is an error balloon notification.")},
+    }};
 
-    connect(infoButton, &QPushButton::clicked, this, [this]() {
-        postBalloon(NotificationType::Information, tr("Information"),
-                    tr("This is an informational balloon notification."));
-    });
-    connect(successButton, &QPushButton::clicked, this, [this]() {
-        postBalloon(NotificationType::Success, tr("Success"),
-                    tr("This is a success balloon notification."));
-    });
-    connect(warningButton, &QPushButton::clicked, this, [this]() {
-        postBalloon(NotificationType::Warning, tr("Warning"),
-                    tr("This is a warning balloon notification."));
-    });
-    connect(errorButton, &QPushButton::clicked, this, [this]() {
-        postBalloon(NotificationType::Error, tr("Error"),
-                    tr("This is an error balloon notification."));
-    });
-
-    transientRow->addWidget(infoButton);
-    transientRow->addWidget(successButton);
-    transientRow->addWidget(warningButton);
-    transientRow->addWidget(errorButton);
+    for (const auto& severityButton : severityButtons) {
+        auto* button = new QPushButton(severityButton.buttonLabel, group);
+        connect(button, &QPushButton::clicked, this, [this, severityButton]() {
+            postBalloon(severityButton.type, severityButton.title,
+                        severityButton.content);
+        });
+        transientRow->addWidget(button);
+    }
 
     auto* extraRow = new QHBoxLayout;
 
