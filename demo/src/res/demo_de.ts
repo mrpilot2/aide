@@ -97,5 +97,104 @@
 
 %2</translation>
     </message>
+    <message>
+        <source>Demo Balloon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Demo Sticky Balloon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Demo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>demo::NotificationLauncherDialog</name>
+    <message>
+        <source>Notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Balloon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Success</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is an informational balloon notification.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a success balloon notification.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a warning balloon notification.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is an error balloon notification.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>With 2 actions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sticky</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Action required</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This balloon carries two actions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Retry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot;Retry&quot; action triggered.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&quot;View Details&quot; action triggered.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This balloon has no auto-dismiss timer; close it manually.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

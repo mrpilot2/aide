@@ -34,6 +34,7 @@ add_executable(
   colorschemereactor.hpp
   demosettingspage.cpp
   main.cpp
+  notificationlauncherdialog.cpp
   reportbugpreviewlauncher.cpp
   ${CMAKE_CURRENT_LIST_DIR}/../../tools/sanitizerdefaults.cpp
 )

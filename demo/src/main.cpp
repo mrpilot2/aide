@@ -13,11 +13,15 @@
 #include <aide/application.hpp>
 #include <aide/colorscheme.hpp>
 #include <aide/gui/translatorinterface.hpp>
+#include <aide/hierarchicalid.hpp>
 #include <aide/menucontainerinterface.hpp>
+#include <aide/notificationdisplaytype.hpp>
+#include <aide/notificationgroup.hpp>
 #include <aide/theme.hpp>
 
 #include "colorschemereactor.hpp"
 #include "demosettingspage.hpp"
+#include "notificationlauncherdialog.hpp"
 #include "reportbugpreviewlauncher.hpp"
 
 using aide::constants::CONSTANTS;
@@ -149,5 +153,51 @@ int main(int argc, char* argv[])
         actionRegistry->registerAction(
             actionNewProject, aide::HierarchicalId("Main Menu")("File")("New"));
     }
+
+    // "Demo" menu (placed before "Help") with the Notifications launcher
+    // (#164). Two demo NotificationGroups are registered once at startup and
+    // shared with every launcher dialog instance the action opens.
+    const auto demoBalloonGroupId{aide::HierarchicalId("Demo")("Balloon")};
+    const auto demoStickyBalloonGroupId{
+        aide::HierarchicalId("Demo")("Sticky Balloon")};
+
+    auto& notificationManager = app.notificationManager();
+    notificationManager.registerGroup(
+        {.id                 = demoBalloonGroupId,
+         .displayName        = QApplication::tr("Demo Balloon"),
+         .defaultDisplayType = aide::NotificationDisplayType::Balloon});
+    notificationManager.registerGroup(
+        {.id                 = demoStickyBalloonGroupId,
+         .displayName        = QApplication::tr("Demo Sticky Balloon"),
+         .defaultDisplayType = aide::NotificationDisplayType::StickyBalloon});
+
+    auto* menuDemoContainer{actionRegistry->createMenu(
+        aide::HierarchicalId("Main Menu")("Demo"), mainWindow->menuBar())};
+    auto* menuDemo{menuDemoContainer->menu()};
+    menuDemo->setTitle(QApplication::tr("&Demo"));
+
+    auto actionNotifications =
+        std::make_shared<QAction>(QApplication::tr("Notifications"));
+    actionNotifications->setParent(menuDemo);
+    menuDemo->addAction(actionNotifications.get());
+    actionRegistry->registerAction(
+        actionNotifications,
+        aide::HierarchicalId("Main Menu")("Demo")("Notifications"));
+
+    QObject::connect(actionNotifications.get(), &QAction::triggered,
+                     [&notificationManager, mainWindow, demoBalloonGroupId,
+                      demoStickyBalloonGroupId]() {
+                         demo::NotificationLauncherDialog dialog(
+                             notificationManager, demoBalloonGroupId,
+                             demoStickyBalloonGroupId, mainWindow.get());
+                         dialog.exec();
+                     });
+
+    // clang-format off
+    mainWindow->menuBar()->insertMenu(
+        actionRegistry->getMenuContainer(CONSTANTS().MENU_HELP).value()->menu()->menuAction(), /* NOLINT(bugprone-unchecked-optional-access) */
+        menuDemo);
+    // clang-format on
+
     return aide::Application::exec();
 }
