@@ -75,11 +75,13 @@ SearchFilterWidget::SearchFilterWidget(const HierarchicalId& id,
             &SearchFilterWidget::onUserRequestsToChangeVisibility);
 
     // Set visibility delayed - overridden functions shall not be called
-    // in constructor
+    // in constructor. Bound to `this` as the context object so the timer's
+    // queued call is automatically cancelled if the widget is destroyed
+    // before it fires, instead of invoking a dangling `this`.
     // NOLINTNEXTLINE
-    QTimer::singleShot(VISIBILITY_TOGGLE_DELAY, [this, visibilitySetting]() {
-        this->setVisible(visibilitySetting);
-    });
+    QTimer::singleShot(
+        VISIBILITY_TOGGLE_DELAY, this,
+        [this, visibilitySetting]() { setVisible(visibilitySetting); });
 }
 
 SearchFilterWidget::~SearchFilterWidget() = default;
