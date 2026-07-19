@@ -7,12 +7,11 @@
 #include <QWidget>
 
 #include "aide/gui/widgets/notificationballoon.hpp"
-#include "aide/hierarchicalid.hpp"
 #include "aide/notificationdisplaytype.hpp"
 #include "aide/notificationmanagerinterface.hpp"
 #include "aide/settingsinterface.hpp"
+#include "settings/notifications/notificationsettingskeys.hpp"
 
-using aide::HierarchicalId;
 using aide::Notification;
 using aide::NotificationBalloonPlacement;
 using aide::NotificationId;
@@ -23,17 +22,8 @@ using aide::widgets::NotificationBalloon;
 
 namespace
 {
-    constexpr auto NOTIFICATIONS_SETTINGS_ROOT = "notifications";
-    constexpr auto BALLOON_PLACEMENT_KEY       = "balloonPlacement";
-
     constexpr int SCREEN_MARGIN{16};
     constexpr int BALLOON_SPACING{8};
-
-    HierarchicalId balloonPlacementKey()
-    {
-        return HierarchicalId(NOTIFICATIONS_SETTINGS_ROOT)(
-            BALLOON_PLACEMENT_KEY);
-    }
 
     bool isRightCorner(NotificationBalloonPlacement placement)
     {
@@ -72,7 +62,7 @@ void NotificationBalloonHost::onNotificationPosted(NotificationId id)
 NotificationBalloonPlacement NotificationBalloonHost::placement() const
 {
     const auto value = m_settings.value(
-        balloonPlacementKey(),
+        core::notificationBalloonPlacementKey(),
         static_cast<int>(NotificationBalloonPlacement::BottomRight));
     return static_cast<NotificationBalloonPlacement>(value.toInt());
 }

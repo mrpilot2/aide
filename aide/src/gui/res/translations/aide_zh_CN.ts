@@ -340,6 +340,10 @@
         <source>Notifications</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Appearance &amp; Behavior</source>
+        <translation type="unfinished">外观和行为</translation>
+    </message>
 </context>
 <context>
     <name>aide::widgets::NotificationBalloon</name>

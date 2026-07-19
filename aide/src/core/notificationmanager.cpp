@@ -3,19 +3,7 @@
 #include <utility>
 
 #include "aide/settingsinterface.hpp"
-
-namespace
-{
-    constexpr auto NOTIFICATIONS_SETTINGS_ROOT = "notifications";
-    constexpr auto DO_NOT_DISTURB_KEY          = "doNotDisturb";
-    constexpr auto DISPLAY_TYPE_KEY_SUFFIX     = "displayType";
-
-    aide::HierarchicalId doNotDisturbKey()
-    {
-        return aide::HierarchicalId(NOTIFICATIONS_SETTINGS_ROOT)(
-            DO_NOT_DISTURB_KEY);
-    }
-} // namespace
+#include "settings/notifications/notificationsettingskeys.hpp"
 
 using aide::HierarchicalId;
 using aide::Notification;
@@ -131,12 +119,13 @@ NotificationDisplayType NotificationManager::resolvedDisplayType(
 
 bool NotificationManager::doNotDisturb() const
 {
-    return m_settings.value(doNotDisturbKey(), false).toBool();
+    return m_settings.value(core::notificationDoNotDisturbKey(), false)
+        .toBool();
 }
 
 void NotificationManager::setDoNotDisturb(bool enabled)
 {
-    m_settings.setValue(doNotDisturbKey(), enabled);
+    m_settings.setValue(core::notificationDoNotDisturbKey(), enabled);
 }
 
 bool NotificationManager::hasUnread() const
@@ -155,7 +144,7 @@ NotificationDisplayType NotificationManager::resolveDisplayType(
     if (doNotDisturb()) { return NotificationDisplayType::None; }
 
     const auto overrideValue =
-        m_settings.value(displayTypeOverrideKey(groupId));
+        m_settings.value(core::notificationDisplayTypeKey(groupId));
     if (overrideValue.isValid()) {
         return static_cast<NotificationDisplayType>(overrideValue.toInt());
     }
@@ -163,17 +152,6 @@ NotificationDisplayType NotificationManager::resolveDisplayType(
     if (const auto grp = group(groupId)) { return grp->defaultDisplayType; }
 
     return NotificationDisplayType::None;
-}
-
-HierarchicalId NotificationManager::displayTypeOverrideKey(
-    const HierarchicalId& groupId)
-{
-    auto key = HierarchicalId(NOTIFICATIONS_SETTINGS_ROOT);
-    for (const auto* level : groupId) {
-        key.addLevel(level);
-    }
-    key.addLevel(DISPLAY_TYPE_KEY_SUFFIX);
-    return key;
 }
 
 void NotificationManager::setHasUnread(bool unread)

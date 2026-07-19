@@ -15,12 +15,15 @@
 
 #include "settings/notifications/notificationgrouptablemodel.hpp"
 #include "settings/notifications/notificationpopuptypedelegate.hpp"
+#include "settings/notifications/notificationsettingskeys.hpp"
 #include "settings/searchpattern.hpp"
 
 using aide::HierarchicalId;
 using aide::NotificationDisplayType;
 using aide::NotificationManagerInterface;
 using aide::SettingsInterface;
+using aide::core::notificationBalloonPlacementKey;
+using aide::core::notificationDisplayTypeKey;
 using aide::core::NotificationGroupTableModel;
 using aide::core::tokenizeSearchPattern;
 using aide::gui::NotificationPopupTypeDelegate;
@@ -29,39 +32,16 @@ using aide::widgets::AideTableView;
 
 namespace
 {
-    constexpr auto NOTIFICATIONS_SETTINGS_ROOT = "notifications";
-    constexpr auto BALLOON_PLACEMENT_KEY       = "balloonPlacement";
-    constexpr auto DISPLAY_TYPE_KEY_SUFFIX     = "displayType";
-
     constexpr int NO_MATCH_INDEX = -1;
     constexpr int FALLBACK_INDEX = 0;
-
-    HierarchicalId balloonPlacementKey()
-    {
-        return HierarchicalId(NOTIFICATIONS_SETTINGS_ROOT)(
-            BALLOON_PLACEMENT_KEY);
-    }
-
-    // Mirrors NotificationManager's private displayTypeOverrideKey(): the
-    // key format is locked (#154 persistence contract), duplicated here the
-    // same way NotificationBalloonHost duplicates the placement key rather
-    // than widen NotificationManagerInterface for a single writer.
-    HierarchicalId displayTypeKey(const HierarchicalId& groupId)
-    {
-        auto key = HierarchicalId(NOTIFICATIONS_SETTINGS_ROOT);
-        for (const auto* level : groupId) {
-            key.addLevel(level);
-        }
-        key.addLevel(DISPLAY_TYPE_KEY_SUFFIX);
-        return key;
-    }
 } // namespace
 
 NotificationsSettingsPage::NotificationsSettingsPage(
     NotificationManagerInterface& manager, SettingsInterface& settings,
     QWidget* parent)
     : QWidget(parent)
-    , core::SettingsPage(HierarchicalId("Notifications"))
+    , core::SettingsPage(
+          HierarchicalId("Appearance & Behavior")("Notifications"))
     , m_manager(manager)
     , m_settings(settings)
     , m_doNotDisturbCheckBox(new QCheckBox(tr("Do Not Disturb"), this))
@@ -111,7 +91,7 @@ QWidget* NotificationsSettingsPage::widget()
 
 QStringList NotificationsSettingsPage::groupTitles() const
 {
-    return {tr("Notifications")};
+    return {tr("Appearance & Behavior"), tr("Notifications")};
 }
 
 bool NotificationsSettingsPage::isModified() const
@@ -129,11 +109,12 @@ void NotificationsSettingsPage::reset()
 void NotificationsSettingsPage::apply()
 {
     m_manager.setDoNotDisturb(m_doNotDisturbCheckBox->isChecked());
-    m_settings.setValue(balloonPlacementKey(), m_placementCombo->currentData());
+    m_settings.setValue(notificationBalloonPlacementKey(),
+                        m_placementCombo->currentData());
 
     for (int row = 0; row < m_model->rowCount(); ++row) {
         const auto& group = m_model->groupAt(row);
-        m_settings.setValue(displayTypeKey(group.id),
+        m_settings.setValue(notificationDisplayTypeKey(group.id),
                             static_cast<int>(m_model->displayTypeAt(row)));
     }
 
@@ -165,7 +146,7 @@ void NotificationsSettingsPage::syncControlsFromSettings()
 
     const auto placementValue =
         m_settings
-            .value(balloonPlacementKey(),
+            .value(notificationBalloonPlacementKey(),
                    static_cast<int>(NotificationBalloonPlacement::BottomRight))
             .toInt();
     const auto placementIndex = m_placementCombo->findData(placementValue);
@@ -174,8 +155,9 @@ void NotificationsSettingsPage::syncControlsFromSettings()
 
     m_model->setGroups(m_manager.groups());
     for (int row = 0; row < m_model->rowCount(); ++row) {
-        const auto& group        = m_model->groupAt(row);
-        const auto overrideValue = m_settings.value(displayTypeKey(group.id));
+        const auto& group = m_model->groupAt(row);
+        const auto overrideValue =
+            m_settings.value(notificationDisplayTypeKey(group.id));
         if (overrideValue.isValid()) {
             m_model->setDisplayTypeAt(row, static_cast<NotificationDisplayType>(
                                                overrideValue.toInt()));

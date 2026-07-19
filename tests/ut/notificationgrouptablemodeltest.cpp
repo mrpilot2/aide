@@ -56,11 +56,12 @@ TEST_CASE("NotificationGroupTableModel seeded with groups",
         REQUIRE(model.displayTypeAt(1) == NotificationDisplayType::None);
     }
 
-    SECTION("shows the group's display name")
+    SECTION("shows the group's display name and id")
     {
         const auto index =
             model.index(0, NotificationGroupTableModel::GroupColumn);
-        REQUIRE(model.data(index, Qt::DisplayRole).toString() == "Build");
+        REQUIRE(model.data(index, Qt::DisplayRole).toString() ==
+                "Build (build)");
     }
 
     SECTION("shows the group id as a tooltip")

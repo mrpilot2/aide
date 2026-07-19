@@ -74,9 +74,6 @@ namespace aide
         [[nodiscard]] NotificationDisplayType resolveDisplayType(
             const HierarchicalId& groupId) const;
 
-        [[nodiscard]] static HierarchicalId displayTypeOverrideKey(
-            const HierarchicalId& groupId);
-
         void setHasUnread(bool unread);
 
         SettingsInterface& m_settings;

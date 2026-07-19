@@ -379,6 +379,10 @@
         <source>Notifications</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Appearance &amp; Behavior</source>
+        <translation type="unfinished">Erscheinungsbild &amp; Verhalten</translation>
+    </message>
 </context>
 <context>
     <name>aide::widgets::NotificationBalloon</name>

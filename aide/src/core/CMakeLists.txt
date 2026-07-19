@@ -56,6 +56,7 @@ target_sources(
     settings/keymap/keymaptreemodel.cpp
     settings/keymap/pendingkeymapstate.cpp
     settings/notifications/notificationgrouptablemodel.cpp
+    settings/notifications/notificationsettingskeys.hpp
     treeitem.cpp
     treemodel.cpp
     urllauncherresolver.cpp

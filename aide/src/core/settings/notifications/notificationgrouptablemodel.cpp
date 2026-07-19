@@ -18,11 +18,15 @@ namespace
     constexpr int HIGHLIGHT_GREEN = 235;
     constexpr int HIGHLIGHT_BLUE  = 205;
 
+    // "Group" column text: HierarchicalId + description (#154). Most groups
+    // carry a displayName, so both are shown; a group with no displayName
+    // falls back to the id alone rather than repeating it.
     QString groupLabel(const NotificationGroup& group)
     {
+        const auto idText = QString::fromStdString(group.id.name());
         return group.displayName.isEmpty()
-                   ? QString::fromStdString(group.id.name())
-                   : group.displayName;
+                   ? idText
+                   : QString("%1 (%2)").arg(group.displayName, idText);
     }
 } // namespace
 
