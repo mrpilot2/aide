@@ -6,6 +6,8 @@
 #include <aide/hierarchicalid.hpp>
 #include <aide/notificationtype.hpp>
 
+class QComboBox;
+class QPushButton;
 class QWidget;
 
 namespace aide
@@ -16,7 +18,7 @@ namespace aide
 namespace demo
 {
     // Shell opened by the demo's "Demo -> Notifications" menu action (#164).
-    // Owns only the "Balloon" section; the "Got it" (#165), dialog banner
+    // Owns the "Balloon" and "Got it" (#165) sections; the dialog banner
     // (#166) and editor banner (#167) sections attach their own QGroupBox
     // here as those tickets land.
     class NotificationLauncherDialog : public QDialog
@@ -31,15 +33,22 @@ namespace demo
 
     private:
         [[nodiscard]] QWidget* createBalloonSection();
+        [[nodiscard]] QWidget* createGotItSection();
 
         void postBalloon(aide::NotificationType type, const QString& title,
                          const QString& content);
         void postBalloonWithActions();
         void postStickyBalloon();
 
+        void showGotIt();
+        static void resetGotItSeenFlag();
+
         aide::NotificationManagerInterface& m_notificationManager;
         aide::HierarchicalId m_balloonGroupId;
         aide::HierarchicalId m_stickyBalloonGroupId;
+
+        QPushButton* m_gotItAnchorButton{nullptr};
+        QComboBox* m_gotItPositionCombo{nullptr};
     };
 } // namespace demo
 

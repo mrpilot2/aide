@@ -41,7 +41,12 @@ add_executable(
 
 target_link_libraries(
   aide_demo
-  PRIVATE Aide::AideApplication Aide::AideCore aide_warnings aide_options
+  PRIVATE
+    Aide::AideApplication
+    Aide::AideCore
+    Aide::AideWidgets
+    aide_warnings
+    aide_options
 )
 
 if(WIN32)

@@ -45,6 +45,7 @@ target_link_libraries(
     aide_warnings
     Aide::AideApplication
     Aide::AideCore
+    Aide::AideWidgets
 )
 
 enable_testing()

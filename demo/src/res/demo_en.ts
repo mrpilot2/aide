@@ -194,5 +194,37 @@
         <source>This balloon has no auto-dismiss timer; close it manually.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Got it</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sample anchor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset seen flag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a sample &quot;Got it&quot; tooltip shown by the demo launcher.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
