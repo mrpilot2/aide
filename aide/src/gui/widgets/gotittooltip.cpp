@@ -43,6 +43,35 @@ namespace
     constexpr int BODY_RADIUS{7};
     constexpr int DEFAULT_MAX_COUNT{1};
 
+    // Below this QPalette::Window lightness (0-255), the active palette
+    // counts as a dark theme.
+    constexpr int DARK_THEME_LIGHTNESS_THRESHOLD{128};
+    // QColor::lighter()/darker() factor: >100 lightens/darkens by that
+    // percentage, so 130 gives a 30% shift - enough to read as a distinct
+    // surface from the app background while staying within the theme.
+    constexpr int SURFACE_SHIFT_PERCENT{130};
+
+    // Mirrors NotificationBalloon's balloonSurfaceColor(): QPalette::ToolTip*
+    // roles are frequently not honoured by the platform theme for a
+    // custom-painted popup like this one, which left the body readable in
+    // one theme and not the other. Deriving the surface from the app's own
+    // Window color instead keeps it paired with the WindowText color the
+    // labels actually draw with.
+    QColor surfaceColorFor(const QPalette& appPalette)
+    {
+        const auto windowColor = appPalette.color(QPalette::Window);
+        const bool isDarkTheme =
+            windowColor.lightness() < DARK_THEME_LIGHTNESS_THRESHOLD;
+        return isDarkTheme ? windowColor.lighter(SURFACE_SHIFT_PERCENT)
+                           : windowColor.darker(SURFACE_SHIFT_PERCENT);
+    }
+
+    QColor readableTextColorFor(const QColor& surface)
+    {
+        return surface.lightness() < DARK_THEME_LIGHTNESS_THRESHOLD ? Qt::white
+                                                                    : Qt::black;
+    }
+
     HierarchicalId gotItKey(const std::string& id)
     {
         return HierarchicalId(GOTIT_SETTINGS_ROOT)(GOTIT_SETTINGS_GROUP)(
@@ -145,10 +174,20 @@ GotItTooltip::GotItTooltip(SettingsInterface& settings, const char* id,
     , m_linkButton(new QToolButton(this))
     , m_gotItButton(new QPushButton(tr("Got it"), this))
 {
-    setWindowFlags(Qt::FramelessWindowHint | Qt::Tool |
-                   Qt::WindowStaysOnTopHint);
+    // No WindowStaysOnTopHint: see NotificationBalloon's constructor for why
+    // - it floats above every window on the desktop rather than just this
+    // one, so Alt+Tab to another app left the tooltip stranded on top of
+    // it. showGotIt() reparents this to the target's window once known,
+    // which keeps Qt::Tool's transient-window behaviour scoped to it.
+    setWindowFlags(Qt::FramelessWindowHint | Qt::Tool);
     setAttribute(Qt::WA_TranslucentBackground);
     setFixedWidth(TOOLTIP_WIDTH);
+
+    m_surfaceColor          = surfaceColorFor(palette());
+    QPalette contentPalette = palette();
+    contentPalette.setColor(QPalette::WindowText,
+                            readableTextColorFor(m_surfaceColor));
+    setPalette(contentPalette);
 
     m_stepLabel->setFixedSize(STEP_BADGE_SIZE, STEP_BADGE_SIZE);
     m_stepLabel->setAlignment(Qt::AlignCenter);
@@ -285,7 +324,13 @@ void GotItTooltip::showGotIt(QWidget* target, GotItPosition position)
         return;
     }
 
-    m_target   = target;
+    m_target = target;
+    if (auto* window = target->window(); window != nullptr) {
+        // Transient child of the target's own window (see the constructor's
+        // comment): keeps this tooltip above only that window, and moved,
+        // raised, and minimized together with it.
+        setParent(window, windowFlags());
+    }
     m_position = position;
     applyArrowMargins();
     enqueue();
@@ -316,39 +361,64 @@ void GotItTooltip::waitForTargetThenShow()
         return;
     }
 
-    if (m_target->isVisible() && !m_target->rect().isEmpty()) {
-        showNow();
-        return;
-    }
-
+    // Filters stay installed for the tooltip's whole lifetime (removed only
+    // in the destructor), not just until first shown: once visible, the same
+    // window events keep the tooltip in step with its target's window - see
+    // eventFilter().
     m_target->installEventFilter(this);
     if (auto* window = m_target->window();
         window != nullptr && window != m_target) {
         window->installEventFilter(this);
     }
+
+    if (m_target->isVisible() && !m_target->rect().isEmpty()) { showNow(); }
 }
 
 bool GotItTooltip::eventFilter(QObject* watched, QEvent* event)
 {
-    // Show fires once the target (or its window) becomes visible; Resize
-    // covers the case named in #147 - target already shown but still at
-    // empty bounds, e.g. a freshly-added toolbar button awaiting layout.
-    const bool relevantEvent =
-        event->type() == QEvent::Show || event->type() == QEvent::Resize;
-    if (relevantEvent && !m_target.isNull() && m_target->isVisible() &&
-        !m_target->rect().isEmpty()) {
-        m_target->removeEventFilter(this);
-        if (auto* window = m_target->window();
-            window != nullptr && window != m_target) {
-            window->removeEventFilter(this);
+    if (m_target.isNull()) { return QWidget::eventFilter(watched, event); }
+
+    if (!m_shown) {
+        // Show fires once the target (or its window) becomes visible;
+        // Resize covers the case named in #147 - target already shown but
+        // still at empty bounds, e.g. a freshly-added toolbar button
+        // awaiting layout.
+        const bool relevantEvent =
+            event->type() == QEvent::Show || event->type() == QEvent::Resize;
+        if (relevantEvent && m_target->isVisible() &&
+            !m_target->rect().isEmpty()) {
+            showNow();
         }
-        showNow();
+        return QWidget::eventFilter(watched, event);
+    }
+
+    // Once shown, the target's window is the only thing still tracked: keep
+    // the tooltip anchored while it moves or resizes, and hide/restore it in
+    // step with minimize, mirroring NotificationBalloonHost's anchor window
+    // handling.
+    if (auto* window = m_target->window(); watched == window) {
+        switch (event->type()) {
+        case QEvent::Move:
+        case QEvent::Resize:
+            positionNearTarget();
+            break;
+        case QEvent::WindowStateChange:
+        {
+            const bool minimized = window->isMinimized();
+            setVisible(!minimized);
+            if (!minimized) { positionNearTarget(); }
+            break;
+        }
+        default:
+            break;
+        }
     }
     return QWidget::eventFilter(watched, event);
 }
 
 void GotItTooltip::showNow()
 {
+    m_shown = true;
     positionNearTarget();
     show();
     raise();
@@ -439,7 +509,7 @@ void GotItTooltip::paintEvent(QPaintEvent* /*event*/)
     path.addRoundedRect(geometry.bodyRect, BODY_RADIUS, BODY_RADIUS);
     path.addPolygon(geometry.arrowPolygon);
 
-    painter.fillPath(path, palette().color(QPalette::ToolTipBase));
+    painter.fillPath(path, m_surfaceColor);
     painter.setPen(palette().color(QPalette::Mid));
     painter.drawPath(path);
 }

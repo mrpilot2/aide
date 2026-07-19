@@ -4,6 +4,7 @@
 #include <functional>
 #include <string>
 
+#include <QColor>
 #include <QPointer>
 #include <QString>
 #include <QWidget>
@@ -111,6 +112,8 @@ namespace aide::widgets
 
         QPointer<QWidget> m_target;
         GotItPosition m_position{GotItPosition::Below};
+        bool m_shown{false};
+        QColor m_surfaceColor;
 
         QLabel* m_stepLabel{nullptr};
         QLabel* m_headerLabel{nullptr};
