@@ -32,69 +32,72 @@ namespace
     constexpr int INFORMATION_STRIPE_R{25};
     constexpr int INFORMATION_STRIPE_G{118};
     constexpr int INFORMATION_STRIPE_B{210};
-    constexpr int INFORMATION_BACKGROUND_R{227};
-    constexpr int INFORMATION_BACKGROUND_G{242};
-    constexpr int INFORMATION_BACKGROUND_B{253};
 
     constexpr int SUCCESS_STRIPE_R{56};
     constexpr int SUCCESS_STRIPE_G{142};
     constexpr int SUCCESS_STRIPE_B{60};
-    constexpr int SUCCESS_BACKGROUND_R{232};
-    constexpr int SUCCESS_BACKGROUND_G{245};
-    constexpr int SUCCESS_BACKGROUND_B{233};
 
     constexpr int WARNING_STRIPE_R{245};
     constexpr int WARNING_STRIPE_G{124};
     constexpr int WARNING_STRIPE_B{0};
-    constexpr int WARNING_BACKGROUND_R{255};
-    constexpr int WARNING_BACKGROUND_G{243};
-    constexpr int WARNING_BACKGROUND_B{224};
 
     constexpr int ERROR_STRIPE_R{211};
     constexpr int ERROR_STRIPE_G{47};
     constexpr int ERROR_STRIPE_B{47};
-    constexpr int ERROR_BACKGROUND_R{255};
-    constexpr int ERROR_BACKGROUND_G{235};
-    constexpr int ERROR_BACKGROUND_B{238};
+
+    // Below this QPalette::Window lightness (0-255), the active palette
+    // counts as a dark theme.
+    constexpr int DARK_THEME_LIGHTNESS_THRESHOLD{128};
+    // QColor::lighter()/darker() factor: >100 lightens/darkens by that
+    // percentage, so 130 gives a 30% shift - enough to read as a distinct
+    // surface from the app background while staying within the theme.
+    constexpr int BALLOON_SURFACE_SHIFT_PERCENT{130};
 
     struct BalloonPalette
     {
         QColor stripeColor;
-        QColor backgroundColor;
         QString iconThemeName;
     };
 
-    // Placeholder palette/icon-name table, duplicated from Banner's own
-    // placeholder: both surfaces switch to AppearanceManager::severityColor()
-    // once #157 lands per-type assets.
+    // Placeholder icon-name table, duplicated from Banner's own placeholder:
+    // both surfaces switch to AppearanceManager::severityColor() once #157
+    // lands per-type assets. The panel background is themed, not
+    // severity-tinted (see balloonSurfaceColor()), so only the stripe color
+    // carries severity here.
     BalloonPalette paletteFor(NotificationType type)
     {
         switch (type) {
         case NotificationType::Success:
             return {
                 QColor(SUCCESS_STRIPE_R, SUCCESS_STRIPE_G, SUCCESS_STRIPE_B),
-                QColor(SUCCESS_BACKGROUND_R, SUCCESS_BACKGROUND_G,
-                       SUCCESS_BACKGROUND_B),
                 "emblem-ok"};
         case NotificationType::Warning:
             return {
                 QColor(WARNING_STRIPE_R, WARNING_STRIPE_G, WARNING_STRIPE_B),
-                QColor(WARNING_BACKGROUND_R, WARNING_BACKGROUND_G,
-                       WARNING_BACKGROUND_B),
                 "dialog-warning"};
         case NotificationType::Error:
             return {QColor(ERROR_STRIPE_R, ERROR_STRIPE_G, ERROR_STRIPE_B),
-                    QColor(ERROR_BACKGROUND_R, ERROR_BACKGROUND_G,
-                           ERROR_BACKGROUND_B),
                     "dialog-error"};
         case NotificationType::Information:
         default:
             return {QColor(INFORMATION_STRIPE_R, INFORMATION_STRIPE_G,
                            INFORMATION_STRIPE_B),
-                    QColor(INFORMATION_BACKGROUND_R, INFORMATION_BACKGROUND_G,
-                           INFORMATION_BACKGROUND_B),
                     "dialog-information"};
         }
+    }
+
+    // Derives the balloon panel's background from the current app palette
+    // instead of the severity color: a pastel tint stayed light even under a
+    // dark theme, so white theme text drawn over it was unreadable (see
+    // bug report). Shifting the app's own Window color keeps text contrast
+    // correct in both themes while still reading as a raised surface.
+    QColor balloonSurfaceColor(const QPalette& appPalette)
+    {
+        const auto windowColor = appPalette.color(QPalette::Window);
+        const bool isDarkTheme =
+            windowColor.lightness() < DARK_THEME_LIGHTNESS_THRESHOLD;
+        return isDarkTheme ? windowColor.lighter(BALLOON_SURFACE_SHIFT_PERCENT)
+                           : windowColor.darker(BALLOON_SURFACE_SHIFT_PERCENT);
     }
 
     QIcon iconFromTheme(const QString& name)
@@ -124,23 +127,23 @@ NotificationBalloon::NotificationBalloon(NotificationType type,
     setAttribute(Qt::WA_TranslucentBackground);
     setFixedWidth(BALLOON_WIDTH);
 
-    const auto palette = paletteFor(type);
+    const auto severityPalette = paletteFor(type);
 
     auto* stripe = new QWidget(this);
     stripe->setFixedWidth(STRIPE_WIDTH);
     stripe->setAutoFillBackground(true);
     QPalette stripePalette = stripe->palette();
-    stripePalette.setColor(QPalette::Window, palette.stripeColor);
+    stripePalette.setColor(QPalette::Window, severityPalette.stripeColor);
     stripe->setPalette(stripePalette);
 
     auto* panel = new QWidget(this);
     panel->setAutoFillBackground(true);
     QPalette panelPalette = panel->palette();
-    panelPalette.setColor(QPalette::Window, palette.backgroundColor);
+    panelPalette.setColor(QPalette::Window, balloonSurfaceColor(palette()));
     panel->setPalette(panelPalette);
 
-    m_iconLabel->setPixmap(
-        iconFromTheme(palette.iconThemeName).pixmap(ICON_SIZE, ICON_SIZE));
+    m_iconLabel->setPixmap(iconFromTheme(severityPalette.iconThemeName)
+                               .pixmap(ICON_SIZE, ICON_SIZE));
 
     QFont titleFont = m_titleLabel->font();
     titleFont.setBold(true);
@@ -195,7 +198,7 @@ NotificationBalloon::NotificationBalloon(NotificationType type,
             QStringLiteral("QProgressBar { border: none; background: "
                            "transparent; } QProgressBar::chunk { "
                            "background-color: %1; }")
-                .arg(palette.stripeColor.name()));
+                .arg(severityPalette.stripeColor.name()));
         rootLayout->addWidget(m_countdownBar);
 
         m_remainingMs    = DISMISS_MS;
