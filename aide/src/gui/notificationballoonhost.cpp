@@ -2,6 +2,7 @@
 
 #include <algorithm>
 
+#include <QEvent>
 #include <QGuiApplication>
 #include <QScreen>
 #include <QWidget>
@@ -22,7 +23,7 @@ using aide::widgets::NotificationBalloon;
 
 namespace
 {
-    constexpr int SCREEN_MARGIN{16};
+    constexpr int WINDOW_MARGIN{16};
     constexpr int BALLOON_SPACING{8};
 
     bool isRightCorner(NotificationBalloonPlacement placement)
@@ -45,7 +46,38 @@ NotificationBalloonHost::NotificationBalloonHost(
     , m_notificationManager(notificationManager)
     , m_settings(settings)
     , m_anchorWidget(anchorWidget)
-{}
+{
+    if (m_anchorWidget != nullptr) { m_anchorWidget->installEventFilter(this); }
+}
+
+bool NotificationBalloonHost::eventFilter(QObject* watched, QEvent* event)
+{
+    if (watched == m_anchorWidget) {
+        switch (event->type()) {
+        case QEvent::Move:
+        case QEvent::Resize:
+            relayout(false);
+            break;
+        case QEvent::WindowStateChange:
+            updateBalloonVisibilityForWindowState();
+            break;
+        default:
+            break;
+        }
+    }
+    return QObject::eventFilter(watched, event);
+}
+
+void NotificationBalloonHost::updateBalloonVisibilityForWindowState()
+{
+    if (m_anchorWidget == nullptr) { return; }
+
+    const bool minimized = m_anchorWidget->isMinimized();
+    for (auto* balloon : m_balloons) {
+        balloon->setVisible(!minimized);
+    }
+    if (!minimized) { relayout(false); }
+}
 
 void NotificationBalloonHost::onNotificationPosted(NotificationId id)
 {
@@ -67,13 +99,9 @@ NotificationBalloonPlacement NotificationBalloonHost::placement() const
     return static_cast<NotificationBalloonPlacement>(value.toInt());
 }
 
-QRect NotificationBalloonHost::anchorScreenGeometry() const
+QRect NotificationBalloonHost::anchorRect() const
 {
-    if (m_anchorWidget != nullptr) {
-        if (auto* screen = m_anchorWidget->screen(); screen != nullptr) {
-            return screen->availableGeometry();
-        }
-    }
+    if (m_anchorWidget != nullptr) { return m_anchorWidget->frameGeometry(); }
     if (auto* screen = QGuiApplication::primaryScreen(); screen != nullptr) {
         return screen->availableGeometry();
     }
@@ -83,8 +111,9 @@ QRect NotificationBalloonHost::anchorScreenGeometry() const
 void NotificationBalloonHost::showBalloon(const Notification& notification,
                                           bool sticky)
 {
-    auto* balloon = new NotificationBalloon(
-        notification.type, notification.title, notification.content, sticky);
+    auto* balloon =
+        new NotificationBalloon(notification.type, notification.title,
+                                notification.content, sticky, m_anchorWidget);
 
     for (const auto& action : notification.actions) {
         balloon->addAction(action);
@@ -110,31 +139,34 @@ void NotificationBalloonHost::removeBalloon(NotificationBalloon* balloon)
 
 void NotificationBalloonHost::relayout(bool animateNewest)
 {
-    const auto screenRect       = anchorScreenGeometry();
+    if (m_anchorWidget != nullptr && m_anchorWidget->isMinimized()) { return; }
+
+    const auto anchor           = anchorRect();
     const auto currentPlacement = placement();
     const bool right            = isRightCorner(currentPlacement);
     const bool bottom           = isBottomCorner(currentPlacement);
 
-    int edgeY = bottom ? screenRect.bottom() - SCREEN_MARGIN
-                       : screenRect.top() + SCREEN_MARGIN;
+    int edgeY =
+        bottom ? anchor.bottom() - WINDOW_MARGIN : anchor.top() + WINDOW_MARGIN;
 
     // Newest balloon (back of the vector) sits nearest the corner; older
-    // balloons are pushed toward screen center as new ones arrive.
+    // balloons are pushed toward the anchor window's center as new ones
+    // arrive.
     for (auto it = m_balloons.rbegin(); it != m_balloons.rend(); ++it) {
         auto* balloon    = *it;
         const int width  = balloon->width();
         const int height = balloon->sizeHint().height();
 
-        const int posX = right ? screenRect.right() - SCREEN_MARGIN - width
-                               : screenRect.left() + SCREEN_MARGIN;
+        const int posX = right ? anchor.right() - WINDOW_MARGIN - width
+                               : anchor.left() + WINDOW_MARGIN;
         const int posY = bottom ? edgeY - height : edgeY;
 
         const bool isNewest = animateNewest && it == m_balloons.rbegin();
         if (isNewest) {
             const QPoint targetPos(posX, posY);
-            const QPoint startPos =
-                bottom ? QPoint(posX, screenRect.bottom())
-                       : QPoint(posX, screenRect.top() - height);
+            const QPoint startPos = bottom
+                                        ? QPoint(posX, anchor.bottom())
+                                        : QPoint(posX, anchor.top() - height);
             balloon->resize(width, height);
             balloon->slideIn(startPos, targetPos);
         } else {

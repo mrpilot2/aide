@@ -23,6 +23,8 @@ namespace aide::widgets
     class NotificationBalloon;
 } // namespace aide::widgets
 
+class QEvent;
+
 namespace aide::gui
 {
     /**
@@ -48,13 +50,17 @@ namespace aide::gui
             aide::SettingsInterface& settings, QWidget* anchorWidget,
             QObject* parent = nullptr);
 
+    protected:
+        bool eventFilter(QObject* watched, QEvent* event) override;
+
     private:
         [[nodiscard]] aide::NotificationBalloonPlacement placement() const;
-        [[nodiscard]] QRect anchorScreenGeometry() const;
+        [[nodiscard]] QRect anchorRect() const;
 
         void showBalloon(const aide::Notification& notification, bool sticky);
         void removeBalloon(aide::widgets::NotificationBalloon* balloon);
         void relayout(bool animateNewest);
+        void updateBalloonVisibilityForWindowState();
 
         aide::NotificationManagerInterface& m_notificationManager;
         aide::SettingsInterface& m_settings;

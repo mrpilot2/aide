@@ -114,8 +114,13 @@ NotificationBalloon::NotificationBalloon(NotificationType type,
     , m_closeButton(new QToolButton(this))
     , m_actionsLayout(new QHBoxLayout)
 {
-    setWindowFlags(Qt::FramelessWindowHint | Qt::Tool |
-                   Qt::WindowStaysOnTopHint);
+    // No WindowStaysOnTopHint: that hint floats above every window on the
+    // desktop, not just this app's own window, so switching to another app
+    // (Alt+Tab) left the balloon stranded on top of it. Qt::Tool with a
+    // parent instead makes this a transient child of the parent's window,
+    // so the window manager keeps it above only that window and moves,
+    // raises, and minimizes it together with its owner.
+    setWindowFlags(Qt::FramelessWindowHint | Qt::Tool);
     setAttribute(Qt::WA_TranslucentBackground);
     setFixedWidth(BALLOON_WIDTH);
 
