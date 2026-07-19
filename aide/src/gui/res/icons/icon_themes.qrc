@@ -4,9 +4,17 @@
     <file alias="aide-dark/scalable/actions/application-exit.svg">themes/aide-dark/scalable/actions/application-exit.svg</file>
     <file alias="aide-dark/scalable/actions/edit-find.svg">themes/aide-dark/scalable/actions/edit-find.svg</file>
     <file alias="aide-dark/scalable/places/folder.svg">themes/aide-dark/scalable/places/folder.svg</file>
+    <file alias="aide-dark/scalable/status/dialog-information.svg">themes/aide-dark/scalable/status/dialog-information.svg</file>
+    <file alias="aide-dark/scalable/status/emblem-success.svg">themes/aide-dark/scalable/status/emblem-success.svg</file>
+    <file alias="aide-dark/scalable/status/dialog-warning.svg">themes/aide-dark/scalable/status/dialog-warning.svg</file>
+    <file alias="aide-dark/scalable/status/dialog-error.svg">themes/aide-dark/scalable/status/dialog-error.svg</file>
     <file alias="aide-light/index.theme">themes/aide-light/index.theme</file>
     <file alias="aide-light/scalable/actions/application-exit.svg">themes/aide-light/scalable/actions/application-exit.svg</file>
     <file alias="aide-light/scalable/actions/edit-find.svg">themes/aide-light/scalable/actions/edit-find.svg</file>
     <file alias="aide-light/scalable/places/folder.svg">themes/aide-light/scalable/places/folder.svg</file>
+    <file alias="aide-light/scalable/status/dialog-information.svg">themes/aide-light/scalable/status/dialog-information.svg</file>
+    <file alias="aide-light/scalable/status/emblem-success.svg">themes/aide-light/scalable/status/emblem-success.svg</file>
+    <file alias="aide-light/scalable/status/dialog-warning.svg">themes/aide-light/scalable/status/dialog-warning.svg</file>
+    <file alias="aide-light/scalable/status/dialog-error.svg">themes/aide-light/scalable/status/dialog-error.svg</file>
   </qresource>
 </RCC>

@@ -1,7 +1,7 @@
 [Icon Theme]
 Name=aide-light
 Comment=aIDE light icons for dark backgrounds
-Directories=scalable/actions,scalable/places
+Directories=scalable/actions,scalable/places,scalable/status
 
 [scalable/actions]
 Size=48
@@ -10,6 +10,12 @@ MinSize=1
 MaxSize=256
 
 [scalable/places]
+Size=48
+Type=Scalable
+MinSize=1
+MaxSize=256
+
+[scalable/status]
 Size=48
 Type=Scalable
 MinSize=1

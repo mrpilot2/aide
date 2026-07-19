@@ -10,6 +10,7 @@
 #include <QStyleHints>
 
 #include "aide/hierarchicalid.hpp"
+#include "aide/notificationtype.hpp"
 #include "aide/settingsinterface.hpp"
 #include "platformiconbaseline.hpp"
 
@@ -23,6 +24,40 @@ namespace
     constexpr auto BUILTIN_ICON_SEARCH_PATH = ":/aide/icons";
 
     constexpr double LUMINANCE_LIGHT_THRESHOLD = 0.5;
+
+    // Severity colour tokens (locked in #156): left-stripe colour, re-queried
+    // on theme switch, shared with the matching icon glyph fill.
+    namespace scLight
+    {
+        constexpr int INFO_R    = 0x35;
+        constexpr int INFO_G    = 0x74;
+        constexpr int INFO_B    = 0xf0;
+        constexpr int SUCCESS_R = 0x36;
+        constexpr int SUCCESS_G = 0x96;
+        constexpr int SUCCESS_B = 0x50;
+        constexpr int WARNING_R = 0xb8;
+        constexpr int WARNING_G = 0x84;
+        constexpr int WARNING_B = 0x00;
+        constexpr int ERROR_R   = 0xdb;
+        constexpr int ERROR_G   = 0x58;
+        constexpr int ERROR_B   = 0x60;
+    } // namespace scLight
+
+    namespace scDark
+    {
+        constexpr int INFO_R    = 0x54;
+        constexpr int INFO_G    = 0x8a;
+        constexpr int INFO_B    = 0xf7;
+        constexpr int SUCCESS_R = 0x5f;
+        constexpr int SUCCESS_G = 0xad;
+        constexpr int SUCCESS_B = 0x65;
+        constexpr int WARNING_R = 0xcb;
+        constexpr int WARNING_G = 0xa6;
+        constexpr int WARNING_B = 0x4d;
+        constexpr int ERROR_R   = 0xe0;
+        constexpr int ERROR_G   = 0x70;
+        constexpr int ERROR_B   = 0x7a;
+    } // namespace scDark
 
     // Named constants for light palette colors
     namespace lp
@@ -78,6 +113,7 @@ namespace
 
 using aide::AppearanceManager;
 using aide::ColorScheme;
+using aide::NotificationType;
 using aide::Theme;
 
 // Forces the icon_themes.qrc resource object (compiled into AideCore) to be
@@ -176,6 +212,32 @@ ColorScheme AppearanceManager::colorScheme() const
         return schemeFromPalette(QApplication::palette());
     }
     return schemeFromPalette(findTheme(m_activeThemeName).palette);
+}
+
+QColor AppearanceManager::severityColor(NotificationType type) const
+{
+    const auto pick = [isDark = colorScheme() == ColorScheme::Dark](
+                          int lightR, int lightG, int lightB, int darkR,
+                          int darkG, int darkB) {
+        return isDark ? QColor(darkR, darkG, darkB)
+                      : QColor(lightR, lightG, lightB);
+    };
+
+    switch (type) {
+    case NotificationType::Success:
+        return pick(scLight::SUCCESS_R, scLight::SUCCESS_G, scLight::SUCCESS_B,
+                    scDark::SUCCESS_R, scDark::SUCCESS_G, scDark::SUCCESS_B);
+    case NotificationType::Warning:
+        return pick(scLight::WARNING_R, scLight::WARNING_G, scLight::WARNING_B,
+                    scDark::WARNING_R, scDark::WARNING_G, scDark::WARNING_B);
+    case NotificationType::Error:
+        return pick(scLight::ERROR_R, scLight::ERROR_G, scLight::ERROR_B,
+                    scDark::ERROR_R, scDark::ERROR_G, scDark::ERROR_B);
+    case NotificationType::Information:
+    default:
+        return pick(scLight::INFO_R, scLight::INFO_G, scLight::INFO_B,
+                    scDark::INFO_R, scDark::INFO_G, scDark::INFO_B);
+    }
 }
 
 void AppearanceManager::applyAppearance(const QString& themeName,

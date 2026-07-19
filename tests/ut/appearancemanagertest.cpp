@@ -10,12 +10,14 @@
 
 #include <aide/appearancemanager.hpp>
 #include <aide/colorscheme.hpp>
+#include <aide/notificationtype.hpp>
 #include <aide/theme.hpp>
 
 #include "mocksettings.hpp"
 
 using aide::AppearanceManager;
 using aide::ColorScheme;
+using aide::NotificationType;
 using aide::Theme;
 using aide::test::MockSettings;
 
@@ -336,4 +338,66 @@ TEST_CASE(
     const auto* expected =
         (scheme == ColorScheme::Light) ? "aide-dark" : "aide-light";
     REQUIRE(QIcon::themeName() == expected);
+}
+
+TEST_CASE("AppearanceManager severityColor", "[AppearanceManager]")
+{
+    AppearanceManager manager{std::make_shared<MockSettings>()};
+
+    SECTION("Light theme returns the light severity tokens")
+    {
+        manager.applyAppearance("Light", QApplication::font().family(),
+                                QApplication::font().pointSize());
+
+        REQUIRE(manager.severityColor(NotificationType::Information) ==
+                QColor("#3574f0"));
+        REQUIRE(manager.severityColor(NotificationType::Success) ==
+                QColor("#369650"));
+        REQUIRE(manager.severityColor(NotificationType::Warning) ==
+                QColor("#b88400"));
+        REQUIRE(manager.severityColor(NotificationType::Error) ==
+                QColor("#db5860"));
+    }
+
+    SECTION("Dark theme returns the dark severity tokens")
+    {
+        manager.applyAppearance("Dark", QApplication::font().family(),
+                                QApplication::font().pointSize());
+
+        REQUIRE(manager.severityColor(NotificationType::Information) ==
+                QColor("#548af7"));
+        REQUIRE(manager.severityColor(NotificationType::Success) ==
+                QColor("#5fad65"));
+        REQUIRE(manager.severityColor(NotificationType::Warning) ==
+                QColor("#cba64d"));
+        REQUIRE(manager.severityColor(NotificationType::Error) ==
+                QColor("#e0707a"));
+    }
+
+    SECTION("is re-queried after a theme switch")
+    {
+        manager.applyAppearance("Light", QApplication::font().family(),
+                                QApplication::font().pointSize());
+        REQUIRE(manager.severityColor(NotificationType::Error) ==
+                QColor("#db5860"));
+
+        manager.applyAppearance("Dark", QApplication::font().family(),
+                                QApplication::font().pointSize());
+        REQUIRE(manager.severityColor(NotificationType::Error) ==
+                QColor("#e0707a"));
+    }
+}
+
+TEST_CASE("Bundled aide status icons are registered at runtime",
+          "[AppearanceManager]")
+{
+    for (const auto* theme : {"aide-dark", "aide-light"}) {
+        for (const auto* icon : {"dialog-information", "emblem-success",
+                                 "dialog-warning", "dialog-error"}) {
+            const QString path =
+                QString(":/aide/icons/%1/scalable/status/%2.svg")
+                    .arg(theme, icon);
+            REQUIRE(QFile::exists(path));
+        }
+    }
 }

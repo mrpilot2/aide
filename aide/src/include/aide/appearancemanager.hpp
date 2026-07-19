@@ -4,12 +4,14 @@
 #include <memory>
 #include <vector>
 
+#include <QColor>
 #include <QFont>
 #include <QObject>
 #include <QPalette>
 #include <QStringList>
 
 #include <aide/colorscheme.hpp>
+#include <aide/notificationtype.hpp>
 #include <aide/theme.hpp>
 
 namespace aide
@@ -32,6 +34,7 @@ namespace aide
         [[nodiscard]] QString activeThemeName() const;
         [[nodiscard]] QFont activeFont() const;
         [[nodiscard]] ColorScheme colorScheme() const;
+        [[nodiscard]] QColor severityColor(NotificationType type) const;
 
         void applyAppearance(const QString& themeName,
                              const QString& fontFamily, int fontSizePoints);
