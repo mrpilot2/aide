@@ -15,12 +15,7 @@ add_library(
 target_link_libraries(
   aide_catch_main
   PUBLIC Catch2::Catch2
-  PRIVATE
-    Aide::AideApplication
-    Qt::Widgets
-    aide_options
-    aide_warnings
-    aide_coverage
+  PRIVATE Aide::AideApplication Qt::Widgets aide_options aide_warnings
 )
 
 # Separate entry point for the [Application] tests: aide::Application is itself
@@ -35,7 +30,7 @@ add_library(
 target_link_libraries(
   aide_catch_main_application
   PUBLIC Catch2::Catch2
-  PRIVATE Aide::AideApplication aide_options aide_warnings aide_coverage
+  PRIVATE Aide::AideApplication aide_options aide_warnings
 )
 
 set(CMAKE_AUTORCC ON)
@@ -140,7 +135,6 @@ target_link_libraries(
     Qt::Core
     Qt::Widgets
     Qt::Test
-    aide_coverage
     aide_options
     aide_warnings
     Aide::AideBuildInformation
@@ -203,7 +197,6 @@ target_link_libraries(
     Qt::Core
     Qt::Widgets
     Qt::Test
-    aide_coverage
     aide_options
     aide_warnings
     Aide::AideBuildInformation
