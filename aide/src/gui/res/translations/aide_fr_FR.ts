@@ -75,6 +75,29 @@
     </message>
 </context>
 <context>
+    <name>NotificationView</name>
+    <message>
+        <source>No notifications yet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notification Settings…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timeline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear all</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QApplication</name>
     <message>
         <source>Keymap</source>
@@ -350,6 +373,28 @@
     <message>
         <source>Close</source>
         <translation type="obsolete">Fermer</translation>
+    </message>
+</context>
+<context>
+    <name>aide::widgets::NotificationLogItemDelegate</name>
+    <message>
+        <source>More ▾</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished">Paramètres</translation>
+    </message>
+    <message>
+        <source>Turn off popups for this group</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>aide::widgets::NotificationTimestampFormatter</name>
+    <message>
+        <source>Yesterday %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

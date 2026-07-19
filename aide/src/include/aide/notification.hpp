@@ -4,6 +4,7 @@
 #include <vector>
 
 #include <QDateTime>
+#include <QMetaType>
 #include <QString>
 
 #include <aide/hierarchicalid.hpp>
@@ -30,5 +31,9 @@ namespace aide
         QDateTime timestamp;
     };
 } // namespace aide
+
+// Lets the notification-view model (#155) carry a full Notification through
+// QVariant/QModelIndex::data() without a separate role per field.
+Q_DECLARE_METATYPE(aide::Notification)
 
 #endif // AIDE_NOTIFICATION_HPP

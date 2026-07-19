@@ -19,6 +19,9 @@ target_sources(
     gotittooltip.cpp
     multicolumnsortfilterproxymodel.cpp
     notificationballoon.cpp
+    notificationlogitemdelegate.cpp
+    notificationtimestampformatter.cpp
+    notificationview.cpp
     searchfilterresultdelegate.cpp
     searchfilterwidget.cpp
     searchlineedit.cpp
@@ -36,6 +39,7 @@ target_sources(
         ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/banner.hpp
         ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/gotittooltip.hpp
         ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/notificationballoon.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/notificationview.hpp
         ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/searchfilterwidget.hpp
         ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/searchlineedit.hpp
 )

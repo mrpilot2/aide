@@ -2,6 +2,17 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="sv_SE">
 <context>
+    <name>QObject</name>
+    <message>
+        <source>No notifications yet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear all</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Unit Test</name>
     <message>
         <source>Translation</source>

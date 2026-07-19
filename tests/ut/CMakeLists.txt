@@ -112,7 +112,10 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       menucontainertest.cpp
       multicolumnsortfilterproxymodeltest.cpp
       notificationballoonhosttest.cpp
+      notificationlogmodeltest.cpp
       notificationmanagertest.cpp
+      notificationtimestampformattertest.cpp
+      notificationviewtest.cpp
       searchhistorytest.cpp
       mockaboutdialog.cpp
       mockapplicationcloseview.cpp
