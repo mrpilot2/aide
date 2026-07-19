@@ -186,6 +186,8 @@ double NotificationGroupTableModel::rowsScore(const QStringList& words) const
 
 void NotificationGroupTableModel::setSearchPattern(const QString& pattern)
 {
+    if (m_searchPattern == pattern) { return; }
+
     m_searchPattern = pattern;
     if (m_rows.empty()) { return; }
 
