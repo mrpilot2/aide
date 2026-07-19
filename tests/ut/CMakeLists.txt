@@ -100,6 +100,8 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       keymappagetest.cpp
       keymappagewidgetcontrollertest.cpp
       keymappagewidgettest.cpp
+      notificationgrouptablemodeltest.cpp
+      notificationssettingspagetest.cpp
       pendingkeymapstatetest.cpp
       platformiconbaselinetest.cpp
       loggertest.cpp

@@ -48,6 +48,8 @@ target_sources(
     settings/keymap/addshortcutdialog.cpp
     settings/keymap/keymappagewidget.cpp
     settings/keymap/keymappagewidgetcontroller.cpp
+    settings/notifications/notificationpopuptypedelegate.cpp
+    settings/notifications/notificationssettingspage.cpp
     $<$<TARGET_EXISTS:Qt::lrelease>:applicationtranslator.cpp>
     $<$<NOT:$<TARGET_EXISTS:Qt::lrelease>>:nullapplicationtranslator.cpp>
     $<$<TARGET_EXISTS:Qt::lrelease>:${CMAKE_CURRENT_BINARY_DIR}/translations.qrc

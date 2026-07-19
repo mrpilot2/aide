@@ -46,6 +46,16 @@ std::optional<NotificationGroup> NotificationManager::group(
     return {};
 }
 
+std::vector<NotificationGroup> NotificationManager::groups() const
+{
+    std::vector<NotificationGroup> result;
+    result.reserve(m_groups.size());
+    for (const auto& [id, notificationGroup] : m_groups) {
+        result.push_back(notificationGroup);
+    }
+    return result;
+}
+
 NotificationId NotificationManager::post(Notification notification)
 {
     const NotificationId id{m_nextId++};

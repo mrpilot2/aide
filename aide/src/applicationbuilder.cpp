@@ -6,6 +6,7 @@
 
 #include "core/urllauncherresolver.hpp"
 #include "gui/settings/appearancepage.hpp"
+#include "gui/settings/notifications/notificationssettingspage.hpp"
 #include "logger/loggerfactory.hpp"
 
 using aide::ApplicationBuilder;
@@ -63,6 +64,10 @@ ApplicationBuilder::ApplicationBuilder(ApplicationConfig config)
     m_settingsPageRegistry.addPage(
         std::make_shared<gui::AppearancePage>(m_appearanceManager));
     m_settingsPageRegistry.addPage(m_keyMapPage);
+    m_settingsPageRegistry.addPage(
+        std::make_shared<gui::NotificationsSettingsPage>(
+            *m_notificationManager,
+            *(AideSettingsProvider::versionableSettings())));
 
     // String-based connect on purpose: a pointer-to-member connect references
     // the sender's and receiver's staticMetaObject data symbols, which are not

@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <memory>
 
 #include <catch2/catch_test_macros.hpp>
@@ -77,6 +78,35 @@ TEST_CASE("Any notification manager", "[NotificationManager]")
         const auto group = manager.group(groupId);
         REQUIRE(group.has_value());
         REQUIRE(group->displayName == "Build"); // NOLINT
+    }
+
+    SECTION("groups lists every registered group")
+    {
+        manager.registerGroup(NotificationGroup{
+            .id                 = groupId,
+            .displayName        = "Build",
+            .defaultDisplayType = NotificationDisplayType::Balloon});
+        manager.registerGroup(NotificationGroup{
+            .id                 = HierarchicalId("vcs"),
+            .displayName        = "VCS",
+            .defaultDisplayType = NotificationDisplayType::None});
+
+        const auto groups = manager.groups();
+        REQUIRE(groups.size() == 2);
+
+        const auto hasGroup = [&groups](const QString& displayName) {
+            return std::ranges::any_of(
+                groups, [&displayName](const NotificationGroup& group) {
+                    return group.displayName == displayName;
+                });
+        };
+        REQUIRE(hasGroup("Build"));
+        REQUIRE(hasGroup("VCS"));
+    }
+
+    SECTION("groups is empty for a manager with no registered groups")
+    {
+        REQUIRE(manager.groups().empty());
     }
 
     SECTION("post assigns a monotonic id and a timestamp")

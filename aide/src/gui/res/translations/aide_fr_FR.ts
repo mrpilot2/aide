@@ -184,6 +184,37 @@
     </message>
 </context>
 <context>
+    <name>aide::core::NotificationGroupTableModel</name>
+    <message>
+        <source>On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Group</source>
+        <translation type="unfinished">Groupe</translation>
+    </message>
+    <message>
+        <source>Popup type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Balloon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sticky balloon</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>aide::core::SettingsPageGroupTreeModel</name>
     <message>
         <source>Group</source>
@@ -276,6 +307,37 @@
     </message>
     <message>
         <source>Report Bug in aIDE</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>aide::gui::NotificationsSettingsPage</name>
+    <message>
+        <source>Do Not Disturb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Balloon placement:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notifications</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

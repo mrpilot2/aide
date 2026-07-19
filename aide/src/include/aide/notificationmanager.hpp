@@ -27,6 +27,8 @@ namespace aide
         [[nodiscard]] std::optional<NotificationGroup> group(
             const HierarchicalId& id) const override;
 
+        [[nodiscard]] std::vector<NotificationGroup> groups() const override;
+
         NotificationId post(Notification notification) override;
 
         void remove(NotificationId id) override;

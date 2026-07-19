@@ -25,6 +25,9 @@ namespace aide
         [[nodiscard]] virtual std::optional<NotificationGroup> group(
             const HierarchicalId& id) const = 0;
 
+        // all registered groups, in id order (settings page, #154)
+        [[nodiscard]] virtual std::vector<NotificationGroup> groups() const = 0;
+
         // emit
         virtual NotificationId post(Notification notification) = 0;
 
