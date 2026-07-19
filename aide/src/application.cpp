@@ -64,7 +64,7 @@ void Application::disableLoggingToConsole()
     Logger::disableLoggingToConsole();
 }
 
-std::shared_ptr<QMainWindow> Application::mainWindow() const
+std::shared_ptr<aide::core::MainWindowInterface> Application::mainWindow() const
 {
     return m_appBuilder->mainWindow();
 }

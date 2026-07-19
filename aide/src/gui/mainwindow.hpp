@@ -7,12 +7,12 @@
 
 #include <aide/actionregistryinterface.hpp>
 #include <aide/applicationconfig.hpp>
+#include <aide/mainwindowinterface.hpp>
 #include <aide/notificationtype.hpp>
 
 #include "applicationclose.hpp"
 #include "loggerinterface.hpp"
 #include "mainwindowcontroller.hpp"
-#include "mainwindowinterface.hpp"
 
 namespace Ui
 {
@@ -67,13 +67,13 @@ namespace aide::gui
          * never goes through NotificationManager::post() (see #145).
          */
         aide::widgets::Banner* addBanner(NotificationType type,
-                                         const QString& message);
+                                         const QString& message) override;
 
         /**
          * @brief Remove and delete a banner previously returned by
          * addBanner(). No-op if @p banner is not currently mounted.
          */
-        void removeBanner(aide::widgets::Banner* banner);
+        void removeBanner(aide::widgets::Banner* banner) override;
 
     public slots:
         void refreshIcons();

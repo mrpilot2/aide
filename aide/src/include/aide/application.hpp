@@ -10,10 +10,9 @@
 #include <aide/appearancemanager.hpp>
 #include <aide/applicationconfig.hpp>
 #include <aide/loggerinterface.hpp>
+#include <aide/mainwindowinterface.hpp>
 #include <aide/notificationmanagerinterface.hpp>
 #include <aide/settings/settingspageregistry.hpp>
-
-class QMainWindow;
 
 namespace aide
 {
@@ -53,7 +52,8 @@ namespace aide
 
         static void disableLoggingToConsole();
 
-        [[nodiscard]] std::shared_ptr<QMainWindow> mainWindow() const;
+        [[nodiscard]] std::shared_ptr<core::MainWindowInterface> mainWindow()
+            const;
 
         [[nodiscard]] std::shared_ptr<gui::TranslatorInterface> translator()
             const;

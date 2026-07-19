@@ -116,6 +116,12 @@ TEST_CASE("Application main window is never null", "[Application]")
     const aide::Application app(numberOfArgs, appName.data());
 
     REQUIRE(app.mainWindow() != nullptr);
+
+    auto* const banner = app.mainWindow()->addBanner(
+        aide::NotificationType::Information, "banner message");
+    REQUIRE(banner != nullptr);
+
+    app.mainWindow()->removeBanner(banner);
 }
 
 TEST_CASE("Application settings provider is never null", "[Application]")

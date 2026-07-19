@@ -77,6 +77,7 @@ target_sources(
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/colorscheme.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/githubrepository.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/hierarchicalid.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/mainwindowinterface.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/menucontainerinterface.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/notification.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/notificationaction.hpp

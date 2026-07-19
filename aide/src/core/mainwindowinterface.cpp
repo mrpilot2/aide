@@ -1,4 +1,4 @@
-#include "mainwindowinterface.hpp"
+#include <aide/mainwindowinterface.hpp>
 
 using aide::core::MainWindowInterface;
 

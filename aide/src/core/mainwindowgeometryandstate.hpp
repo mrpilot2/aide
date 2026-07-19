@@ -1,8 +1,9 @@
 #ifndef AIDE_MAIN_WINDOW_GEOMETRY_AND_STATE_HPP
 #define AIDE_MAIN_WINDOW_GEOMETRY_AND_STATE_HPP
 
+#include <aide/mainwindowinterface.hpp>
+
 #include "mainwindowgeometryandstatecontroller.hpp"
-#include "mainwindowinterface.hpp"
 
 namespace aide
 {

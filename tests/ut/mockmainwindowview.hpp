@@ -3,7 +3,7 @@
 
 #include <QByteArray>
 
-#include "mainwindowinterface.hpp"
+#include <aide/mainwindowinterface.hpp>
 
 namespace aide::test
 {
@@ -12,6 +12,11 @@ namespace aide::test
     public:
         void restoreGeometryAndState(QByteArray geometry,
                                      QByteArray state) override;
+
+        aide::widgets::Banner* addBanner(NotificationType type,
+                                         const QString& message) override;
+
+        void removeBanner(aide::widgets::Banner* banner) override;
 
         [[nodiscard]] const QByteArray& getState() const;
 

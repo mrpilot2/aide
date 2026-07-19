@@ -9,6 +9,14 @@ void MockMainWindowView::restoreGeometryAndState(const QByteArray geometry,
     currentState    = state;
 }
 
+aide::widgets::Banner* MockMainWindowView::addBanner(NotificationType /*type*/,
+                                                     const QString& /*message*/)
+{
+    return nullptr;
+}
+
+void MockMainWindowView::removeBanner(aide::widgets::Banner* /*banner*/) {}
+
 const QByteArray& MockMainWindowView::getState() const
 {
     return currentState;
