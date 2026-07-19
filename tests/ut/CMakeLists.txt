@@ -64,6 +64,7 @@ target_sources(
     applicationconfigtest.cpp
     bannertest.cpp
     buildinformationtest.cpp
+    gotittooltiptest.cpp
     hierarchicalidtest.cpp
     mocksettings.cpp
     mocksettingspage.cpp

@@ -57,6 +57,24 @@
     </message>
 </context>
 <context>
+    <name>GotItTooltip</name>
+    <message>
+        <source>Got it</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NotificationBalloon</name>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>More ▾</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QApplication</name>
     <message>
         <source>&amp;File</source>
@@ -258,17 +276,6 @@
     </message>
     <message>
         <source>Report Bug in aIDE</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>aide::widgets::NotificationBalloon</name>
-    <message>
-        <source>Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>More ▾</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

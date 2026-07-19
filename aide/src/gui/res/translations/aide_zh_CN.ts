@@ -57,6 +57,24 @@
     </message>
 </context>
 <context>
+    <name>GotItTooltip</name>
+    <message>
+        <source>Got it</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NotificationBalloon</name>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">关闭</translation>
+    </message>
+    <message>
+        <source>More ▾</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QApplication</name>
     <message>
         <source>Keymap</source>
@@ -265,11 +283,7 @@
     <name>aide::widgets::NotificationBalloon</name>
     <message>
         <source>Close</source>
-        <translation type="unfinished">关闭</translation>
-    </message>
-    <message>
-        <source>More ▾</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">关闭</translation>
     </message>
 </context>
 </TS>

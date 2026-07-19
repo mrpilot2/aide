@@ -16,6 +16,7 @@ target_sources(
     aidetableview.cpp
     aidetreeview.cpp
     banner.cpp
+    gotittooltip.cpp
     multicolumnsortfilterproxymodel.cpp
     notificationballoon.cpp
     searchfilterresultdelegate.cpp
@@ -33,6 +34,7 @@ target_sources(
         ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/aidetableview.hpp
         ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/aidetreeview.hpp
         ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/banner.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/gotittooltip.hpp
         ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/notificationballoon.hpp
         ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/searchfilterwidget.hpp
         ${CMAKE_CURRENT_LIST_DIR}/../../include/aide/gui/widgets/searchlineedit.hpp
