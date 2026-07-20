@@ -5,6 +5,7 @@
 #include <QDialog>
 #include <QString>
 
+#include <aide/gui/widgets/aidewidgets_export.h>
 #include <aide/notificationtype.hpp>
 
 class QVBoxLayout;
@@ -22,7 +23,7 @@ namespace aide::widgets
      * New dialogs only - existing dialogs are not retrofitted onto this
      * base.
      */
-    class AideDialog : public QDialog
+    class AIDEWIDGETS_EXPORT AideDialog : public QDialog
     {
         Q_OBJECT
     public:
