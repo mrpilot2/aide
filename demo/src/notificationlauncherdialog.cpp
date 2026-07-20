@@ -15,7 +15,9 @@
 #include <QVariant>
 
 #include <aide/aidesettingsprovider.hpp>
+#include <aide/gui/widgets/banner.hpp>
 #include <aide/gui/widgets/gotittooltip.hpp>
+#include <aide/mainwindowinterface.hpp>
 #include <aide/notification.hpp>
 #include <aide/notificationaction.hpp>
 #include <aide/notificationmanagerinterface.hpp>
@@ -29,6 +31,7 @@ using aide::Notification;
 using aide::NotificationAction;
 using aide::NotificationManagerInterface;
 using aide::NotificationType;
+using aide::core::MainWindowInterface;
 using aide::widgets::GotItPosition;
 using aide::widgets::GotItTooltip;
 using demo::NotificationLauncherDialog;
@@ -57,10 +60,11 @@ namespace
 
 NotificationLauncherDialog::NotificationLauncherDialog(
     NotificationManagerInterface& notificationManager,
-    HierarchicalId balloonGroupId, HierarchicalId stickyBalloonGroupId,
-    QWidget* parent)
+    MainWindowInterface& mainWindow, HierarchicalId balloonGroupId,
+    HierarchicalId stickyBalloonGroupId, QWidget* parent)
     : QDialog(parent)
     , m_notificationManager{notificationManager}
+    , m_mainWindow{mainWindow}
     , m_balloonGroupId{std::move(balloonGroupId)}
     , m_stickyBalloonGroupId{std::move(stickyBalloonGroupId)}
 {
@@ -70,6 +74,7 @@ NotificationLauncherDialog::NotificationLauncherDialog(
     mainLayout->addWidget(createBalloonSection());
     mainLayout->addWidget(createGotItSection());
     mainLayout->addWidget(createDialogBannerSection());
+    mainLayout->addWidget(createEditorBannerSection());
 
     auto* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close, this);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
@@ -183,6 +188,43 @@ QWidget* NotificationLauncherDialog::createDialogBannerSection()
     return group;
 }
 
+QWidget* NotificationLauncherDialog::createEditorBannerSection()
+{
+    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
+    auto* group       = new QGroupBox(tr("Editor banner"));
+    auto* groupLayout = new QVBoxLayout(group);
+
+    auto* severityRow = new QHBoxLayout;
+
+    const std::array<SeverityButton, 4> severityButtons{{
+        {NotificationType::Information, tr("Info"), tr("Information"),
+         tr("This is an informational editor banner.")},
+        {NotificationType::Success, tr("Success"), tr("Success"),
+         tr("This is a success editor banner.")},
+        {NotificationType::Warning, tr("Warning"), tr("Warning"),
+         tr("This is a warning editor banner.")},
+        {NotificationType::Error, tr("Error"), tr("Error"),
+         tr("This is an error editor banner.")},
+    }};
+
+    for (const auto& severityButton : severityButtons) {
+        auto* button = new QPushButton(severityButton.buttonLabel, group);
+        connect(button, &QPushButton::clicked, this, [this, severityButton]() {
+            addEditorBanner(severityButton.type, severityButton.content);
+        });
+        severityRow->addWidget(button);
+    }
+
+    auto* clearAllButton = new QPushButton(tr("Clear all"), group);
+    connect(clearAllButton, &QPushButton::clicked, this,
+            &NotificationLauncherDialog::clearEditorBanners);
+
+    groupLayout->addLayout(severityRow);
+    groupLayout->addWidget(clearAllButton);
+
+    return group;
+}
+
 void NotificationLauncherDialog::showGotIt()
 {
     const auto settings = AideSettingsProvider::unversionableSettings();
@@ -254,4 +296,18 @@ void NotificationLauncherDialog::postStickyBalloon()
     notification.content =
         tr("This balloon has no auto-dismiss timer; close it manually.");
     m_notificationManager.post(std::move(notification));
+}
+
+void NotificationLauncherDialog::addEditorBanner(NotificationType type,
+                                                 const QString& message)
+{
+    m_editorBanners.push_back(m_mainWindow.addBanner(type, message));
+}
+
+void NotificationLauncherDialog::clearEditorBanners()
+{
+    for (auto* banner : m_editorBanners) {
+        m_mainWindow.removeBanner(banner);
+    }
+    m_editorBanners.clear();
 }

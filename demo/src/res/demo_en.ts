@@ -277,5 +277,29 @@
         <source>Open dialog banner demo</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Editor banner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is an informational editor banner.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a success editor banner.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a warning editor banner.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is an error editor banner.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear all</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

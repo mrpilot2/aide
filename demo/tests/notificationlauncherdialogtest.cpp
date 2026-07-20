@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <optional>
 #include <vector>
 
@@ -14,6 +15,7 @@
 #include <aide/gui/widgets/banner.hpp>
 #include <aide/gui/widgets/gotittooltip.hpp>
 #include <aide/hierarchicalid.hpp>
+#include <aide/mainwindowinterface.hpp>
 #include <aide/notification.hpp>
 #include <aide/notificationgroup.hpp>
 #include <aide/notificationid.hpp>
@@ -32,6 +34,7 @@ using aide::NotificationGroup;
 using aide::NotificationId;
 using aide::NotificationManagerInterface;
 using aide::NotificationType;
+using aide::core::MainWindowInterface;
 using aide::widgets::Banner;
 using aide::widgets::GotItTooltip;
 using demo::NotificationDemoDialog;
@@ -114,6 +117,55 @@ namespace
         std::vector<NotificationGroup> m_groups;
     };
 
+    // Records addBanner()/removeBanner() calls so the #167 acceptance
+    // criteria (stacking on every click, "Clear all" removing everything
+    // tracked so far) can be asserted without a real MainWindow.
+    class FakeMainWindow : public MainWindowInterface
+    {
+    public:
+        void restoreGeometryAndState(QByteArray /*geometry*/,
+                                     QByteArray /*state*/) override
+        {}
+
+        Banner* addBanner(NotificationType type,
+                          const QString& message) override
+        {
+            // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
+            auto* banner = new Banner(type, message, this);
+            m_added.push_back(banner);
+            return banner;
+        }
+
+        void removeBanner(Banner* banner) override
+        {
+            m_removed.push_back(banner);
+            banner->deleteLater();
+        }
+
+        [[nodiscard]] const std::vector<Banner*>& added() const
+        {
+            return m_added;
+        }
+
+        [[nodiscard]] const std::vector<Banner*>& removed() const
+        {
+            return m_removed;
+        }
+
+    private:
+        std::vector<Banner*> m_added;
+        std::vector<Banner*> m_removed;
+    };
+
+    const QGroupBox* findGroupBox(const QWidget& parent, const QString& title)
+    {
+        const auto groups = parent.findChildren<QGroupBox*>();
+        const auto it     = std::find_if(
+            groups.begin(), groups.end(),
+            [&title](const auto* group) { return group->title() == title; });
+        return it == groups.end() ? nullptr : *it;
+    }
+
     constexpr int PUMP_ITERATIONS{5};
 
     void pump()
@@ -186,11 +238,13 @@ namespace
 TEST_CASE("A NotificationLauncherDialog", "[NotificationLauncherDialog]")
 {
     FakeNotificationManager manager;
+    FakeMainWindow mainWindow;
     const HierarchicalId balloonGroupId{HierarchicalId("Demo")("Balloon")};
     const HierarchicalId stickyGroupId{
         HierarchicalId("Demo")("Sticky Balloon")};
 
-    NotificationLauncherDialog dialog(manager, balloonGroupId, stickyGroupId);
+    NotificationLauncherDialog dialog(manager, mainWindow, balloonGroupId,
+                                      stickyGroupId);
     dialog.show();
     [[maybe_unused]] const bool exposed = QTest::qWaitForWindowExposed(&dialog);
 
@@ -267,11 +321,12 @@ TEST_CASE("A NotificationLauncherDialog has a Dialog banner group box",
           "[NotificationLauncherDialog]")
 {
     FakeNotificationManager manager;
+    FakeMainWindow mainWindow;
     const HierarchicalId balloonGroupId{HierarchicalId("Demo")("Balloon")};
     const HierarchicalId stickyGroupId{
         HierarchicalId("Demo")("Sticky Balloon")};
 
-    const NotificationLauncherDialog dialog(manager, balloonGroupId,
+    const NotificationLauncherDialog dialog(manager, mainWindow, balloonGroupId,
                                             stickyGroupId);
 
     bool found = false;
@@ -288,11 +343,13 @@ TEST_CASE(
     "[NotificationLauncherDialog]")
 {
     FakeNotificationManager manager;
+    FakeMainWindow mainWindow;
     const HierarchicalId balloonGroupId{HierarchicalId("Demo")("Balloon")};
     const HierarchicalId stickyGroupId{
         HierarchicalId("Demo")("Sticky Balloon")};
 
-    NotificationLauncherDialog dialog(manager, balloonGroupId, stickyGroupId);
+    NotificationLauncherDialog dialog(manager, mainWindow, balloonGroupId,
+                                      stickyGroupId);
     dialog.show();
     [[maybe_unused]] const bool exposed = QTest::qWaitForWindowExposed(&dialog);
     pump();
@@ -333,15 +390,97 @@ TEST_CASE(
     REQUIRE(bannerCountAfterClick == 1);
 }
 
-TEST_CASE("A NotificationLauncherDialog has a Got it group box",
+TEST_CASE("A NotificationLauncherDialog has an Editor banner group box",
           "[NotificationLauncherDialog]")
 {
     FakeNotificationManager manager;
+    FakeMainWindow mainWindow;
     const HierarchicalId balloonGroupId{HierarchicalId("Demo")("Balloon")};
     const HierarchicalId stickyGroupId{
         HierarchicalId("Demo")("Sticky Balloon")};
 
-    const NotificationLauncherDialog dialog(manager, balloonGroupId,
+    const NotificationLauncherDialog dialog(manager, mainWindow, balloonGroupId,
+                                            stickyGroupId);
+
+    const auto* editorBannerGroup = findGroupBox(dialog, "Editor banner");
+    REQUIRE(editorBannerGroup != nullptr);
+    REQUIRE(findButton(*editorBannerGroup, "Info") != nullptr);
+    REQUIRE(findButton(*editorBannerGroup, "Success") != nullptr);
+    REQUIRE(findButton(*editorBannerGroup, "Warning") != nullptr);
+    REQUIRE(findButton(*editorBannerGroup, "Error") != nullptr);
+    REQUIRE(findButton(*editorBannerGroup, "Clear all") != nullptr);
+}
+
+TEST_CASE(
+    "Each editor banner severity button adds a stacked banner via the main "
+    "window",
+    "[NotificationLauncherDialog]")
+{
+    FakeNotificationManager manager;
+    FakeMainWindow mainWindow;
+    const HierarchicalId balloonGroupId{HierarchicalId("Demo")("Balloon")};
+    const HierarchicalId stickyGroupId{
+        HierarchicalId("Demo")("Sticky Balloon")};
+
+    const NotificationLauncherDialog dialog(manager, mainWindow, balloonGroupId,
+                                            stickyGroupId);
+
+    const auto* editorBannerGroup = findGroupBox(dialog, "Editor banner");
+    REQUIRE(editorBannerGroup != nullptr);
+
+    QTest::mouseClick(findButton(*editorBannerGroup, "Info"), Qt::LeftButton);
+    QTest::mouseClick(findButton(*editorBannerGroup, "Success"),
+                      Qt::LeftButton);
+    QTest::mouseClick(findButton(*editorBannerGroup, "Warning"),
+                      Qt::LeftButton);
+    QTest::mouseClick(findButton(*editorBannerGroup, "Error"), Qt::LeftButton);
+
+    REQUIRE(mainWindow.added().size() == 4);
+    for (const auto* banner : mainWindow.added()) {
+        CHECK(banner != nullptr);
+    }
+    CHECK(mainWindow.removed().empty());
+}
+
+TEST_CASE("Clear all removes every tracked editor banner from the main window",
+          "[NotificationLauncherDialog]")
+{
+    FakeNotificationManager manager;
+    FakeMainWindow mainWindow;
+    const HierarchicalId balloonGroupId{HierarchicalId("Demo")("Balloon")};
+    const HierarchicalId stickyGroupId{
+        HierarchicalId("Demo")("Sticky Balloon")};
+
+    const NotificationLauncherDialog dialog(manager, mainWindow, balloonGroupId,
+                                            stickyGroupId);
+
+    const auto* editorBannerGroup = findGroupBox(dialog, "Editor banner");
+    REQUIRE(editorBannerGroup != nullptr);
+
+    QTest::mouseClick(findButton(*editorBannerGroup, "Info"), Qt::LeftButton);
+    QTest::mouseClick(findButton(*editorBannerGroup, "Warning"),
+                      Qt::LeftButton);
+    REQUIRE(mainWindow.added().size() == 2);
+
+    QTest::mouseClick(findButton(*editorBannerGroup, "Clear all"),
+                      Qt::LeftButton);
+
+    REQUIRE(mainWindow.removed().size() == 2);
+    CHECK(std::is_permutation(mainWindow.removed().begin(),
+                              mainWindow.removed().end(),
+                              mainWindow.added().begin()));
+}
+
+TEST_CASE("A NotificationLauncherDialog has a Got it group box",
+          "[NotificationLauncherDialog]")
+{
+    FakeNotificationManager manager;
+    FakeMainWindow mainWindow;
+    const HierarchicalId balloonGroupId{HierarchicalId("Demo")("Balloon")};
+    const HierarchicalId stickyGroupId{
+        HierarchicalId("Demo")("Sticky Balloon")};
+
+    const NotificationLauncherDialog dialog(manager, mainWindow, balloonGroupId,
                                             stickyGroupId);
 
     bool found = false;
@@ -357,11 +496,13 @@ TEST_CASE("Show raises a GotItTooltip for every offered position",
     resetGotItSeenFlag();
 
     FakeNotificationManager manager;
+    FakeMainWindow mainWindow;
     const HierarchicalId balloonGroupId{HierarchicalId("Demo")("Balloon")};
     const HierarchicalId stickyGroupId{
         HierarchicalId("Demo")("Sticky Balloon")};
 
-    NotificationLauncherDialog dialog(manager, balloonGroupId, stickyGroupId);
+    NotificationLauncherDialog dialog(manager, mainWindow, balloonGroupId,
+                                      stickyGroupId);
     dialog.show();
     [[maybe_unused]] const bool exposed = QTest::qWaitForWindowExposed(&dialog);
     pump();
@@ -386,11 +527,13 @@ TEST_CASE("The \"Got it\" section of a NotificationLauncherDialog",
     resetGotItSeenFlag();
 
     FakeNotificationManager manager;
+    FakeMainWindow mainWindow;
     const HierarchicalId balloonGroupId{HierarchicalId("Demo")("Balloon")};
     const HierarchicalId stickyGroupId{
         HierarchicalId("Demo")("Sticky Balloon")};
 
-    NotificationLauncherDialog dialog(manager, balloonGroupId, stickyGroupId);
+    NotificationLauncherDialog dialog(manager, mainWindow, balloonGroupId,
+                                      stickyGroupId);
     dialog.show();
     [[maybe_unused]] const bool exposed = QTest::qWaitForWindowExposed(&dialog);
     pump();

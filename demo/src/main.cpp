@@ -188,8 +188,9 @@ int main(int argc, char* argv[])
                      [&notificationManager, mainWindow, demoBalloonGroupId,
                       demoStickyBalloonGroupId]() {
                          demo::NotificationLauncherDialog dialog(
-                             notificationManager, demoBalloonGroupId,
-                             demoStickyBalloonGroupId, mainWindow.get());
+                             notificationManager, *mainWindow,
+                             demoBalloonGroupId, demoStickyBalloonGroupId,
+                             mainWindow.get());
                          dialog.exec();
                      });
 
