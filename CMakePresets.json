@@ -33,7 +33,7 @@
         "AIDE_ENABLE_CLANG_TIDY": "OFF",
         "AIDE_ENABLE_CPPCHECK": "OFF",
         "AIDE_ENABLE_PCH": "OFF",
-        "AIDE_ENABLE_CACHE": "OFF",
+        "AIDE_ENABLE_CACHE": "ON",
         "aide_ENABLE_ABI_COMPLIANCE_CHECK": "OFF",
 
         "AIDE_ENABLE_COVERAGE": "OFF"
