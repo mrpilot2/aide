@@ -20,7 +20,9 @@ set_target_properties(ut.aide.demo PROPERTIES AUTOMOC ON)
 target_sources(
   ut.aide.demo
   PRIVATE
+    notificationdemodialogtest.cpp
     notificationlauncherdialogtest.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/notificationdemodialog.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/notificationlauncherdialog.cpp
     # aide_catch_main's catch_main.cpp constructs aide::test::MockSettings;
     # every executable linking that object library must supply its

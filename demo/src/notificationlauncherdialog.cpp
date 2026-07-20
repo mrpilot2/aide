@@ -21,6 +21,8 @@
 #include <aide/notificationmanagerinterface.hpp>
 #include <aide/settingsinterface.hpp>
 
+#include "notificationdemodialog.hpp"
+
 using aide::AideSettingsProvider;
 using aide::HierarchicalId;
 using aide::Notification;
@@ -67,6 +69,7 @@ NotificationLauncherDialog::NotificationLauncherDialog(
     auto* mainLayout = new QVBoxLayout(this);
     mainLayout->addWidget(createBalloonSection());
     mainLayout->addWidget(createGotItSection());
+    mainLayout->addWidget(createDialogBannerSection());
 
     auto* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close, this);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
@@ -159,6 +162,23 @@ QWidget* NotificationLauncherDialog::createGotItSection()
 
     groupLayout->addLayout(anchorRow);
     groupLayout->addLayout(controlsRow);
+
+    return group;
+}
+
+QWidget* NotificationLauncherDialog::createDialogBannerSection()
+{
+    // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
+    auto* group       = new QGroupBox(tr("Dialog banner"));
+    auto* groupLayout = new QVBoxLayout(group);
+
+    auto* openButton = new QPushButton(tr("Open dialog banner demo"), group);
+    connect(openButton, &QPushButton::clicked, this, [this]() {
+        demo::NotificationDemoDialog dialog(this);
+        dialog.exec();
+    });
+
+    groupLayout->addWidget(openButton);
 
     return group;
 }

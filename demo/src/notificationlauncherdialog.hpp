@@ -18,9 +18,9 @@ namespace aide
 namespace demo
 {
     // Shell opened by the demo's "Demo -> Notifications" menu action (#164).
-    // Owns the "Balloon" and "Got it" (#165) sections; the dialog banner
-    // (#166) and editor banner (#167) sections attach their own QGroupBox
-    // here as those tickets land.
+    // Owns the "Balloon", "Got it" (#165) and "Dialog banner" (#166)
+    // sections; the editor banner (#167) section attaches its own QGroupBox
+    // here as that ticket lands.
     class NotificationLauncherDialog : public QDialog
     {
         Q_OBJECT
@@ -34,6 +34,7 @@ namespace demo
     private:
         [[nodiscard]] QWidget* createBalloonSection();
         [[nodiscard]] QWidget* createGotItSection();
+        [[nodiscard]] QWidget* createDialogBannerSection();
 
         void postBalloon(aide::NotificationType type, const QString& title,
                          const QString& content);

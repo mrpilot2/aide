@@ -8,8 +8,10 @@
 #include <QGroupBox>
 #include <QPushButton>
 #include <QTest>
+#include <QTimer>
 
 #include <aide/aidesettingsprovider.hpp>
+#include <aide/gui/widgets/banner.hpp>
 #include <aide/gui/widgets/gotittooltip.hpp>
 #include <aide/hierarchicalid.hpp>
 #include <aide/notification.hpp>
@@ -18,7 +20,9 @@
 #include <aide/notificationmanagerinterface.hpp>
 #include <aide/settingsinterface.hpp>
 
+#include "notificationdemodialog.hpp"
 #include "notificationlauncherdialog.hpp"
+#include "testhelpers.hpp"
 
 using aide::AideSettingsProvider;
 using aide::HierarchicalId;
@@ -28,8 +32,11 @@ using aide::NotificationGroup;
 using aide::NotificationId;
 using aide::NotificationManagerInterface;
 using aide::NotificationType;
+using aide::widgets::Banner;
 using aide::widgets::GotItTooltip;
+using demo::NotificationDemoDialog;
 using demo::NotificationLauncherDialog;
+using demo::test::findButton;
 
 namespace
 {
@@ -106,14 +113,6 @@ namespace
         std::vector<Notification> m_posted;
         std::vector<NotificationGroup> m_groups;
     };
-
-    QPushButton* findButton(const QWidget& parent, const QString& text)
-    {
-        for (auto* button : parent.findChildren<QPushButton*>()) {
-            if (button->text() == text) { return button; }
-        }
-        return nullptr;
-    }
 
     constexpr int PUMP_ITERATIONS{5};
 
@@ -262,6 +261,76 @@ TEST_CASE("A NotificationLauncherDialog", "[NotificationLauncherDialog]")
         REQUIRE(manager.posted().size() == 1);
         CHECK(manager.posted().back().groupId == stickyGroupId);
     }
+}
+
+TEST_CASE("A NotificationLauncherDialog has a Dialog banner group box",
+          "[NotificationLauncherDialog]")
+{
+    FakeNotificationManager manager;
+    const HierarchicalId balloonGroupId{HierarchicalId("Demo")("Balloon")};
+    const HierarchicalId stickyGroupId{
+        HierarchicalId("Demo")("Sticky Balloon")};
+
+    const NotificationLauncherDialog dialog(manager, balloonGroupId,
+                                            stickyGroupId);
+
+    bool found = false;
+    for (const auto* group : dialog.findChildren<QGroupBox*>()) {
+        if (group->title() == "Dialog banner") { found = true; }
+    }
+    REQUIRE(found);
+    REQUIRE(findButton(dialog, "Open dialog banner demo") != nullptr);
+}
+
+TEST_CASE(
+    "The Open dialog banner demo button shows a NotificationDemoDialog "
+    "whose severity buttons drive its own banner slot",
+    "[NotificationLauncherDialog]")
+{
+    FakeNotificationManager manager;
+    const HierarchicalId balloonGroupId{HierarchicalId("Demo")("Balloon")};
+    const HierarchicalId stickyGroupId{
+        HierarchicalId("Demo")("Sticky Balloon")};
+
+    NotificationLauncherDialog dialog(manager, balloonGroupId, stickyGroupId);
+    dialog.show();
+    [[maybe_unused]] const bool exposed = QTest::qWaitForWindowExposed(&dialog);
+    pump();
+
+    auto* openButton = findButton(dialog, "Open dialog banner demo");
+    REQUIRE(openButton != nullptr);
+
+    bool demoDialogFound      = false;
+    bool warningButtonFound   = false;
+    int bannerCountAfterClick = -1;
+
+    // NotificationDemoDialog::exec() blocks this thread until it closes, so
+    // the interaction with it has to be scheduled to run from inside its own
+    // nested event loop rather than after QTest::mouseClick() returns.
+    // Assertions themselves stay outside the lambda: throwing a Catch2
+    // REQUIRE failure across a Qt nested event loop is not something Qt's
+    // dispatcher is expected to handle cleanly.
+    QTimer::singleShot(0, [&dialog, &demoDialogFound, &warningButtonFound,
+                           &bannerCountAfterClick]() {
+        auto* demoDialog = dialog.findChild<NotificationDemoDialog*>();
+        demoDialogFound  = (demoDialog != nullptr);
+        if (demoDialog == nullptr) { return; }
+
+        auto* warningButton = findButton(*demoDialog, "Warning");
+        warningButtonFound  = (warningButton != nullptr);
+        if (warningButton != nullptr) {
+            QTest::mouseClick(warningButton, Qt::LeftButton);
+            bannerCountAfterClick =
+                static_cast<int>(demoDialog->findChildren<Banner*>().size());
+        }
+
+        demoDialog->close();
+    });
+    QTest::mouseClick(openButton, Qt::LeftButton);
+
+    REQUIRE(demoDialogFound);
+    REQUIRE(warningButtonFound);
+    REQUIRE(bannerCountAfterClick == 1);
 }
 
 TEST_CASE("A NotificationLauncherDialog has a Got it group box",

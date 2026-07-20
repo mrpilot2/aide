@@ -115,6 +115,49 @@
     </message>
 </context>
 <context>
+    <name>demo::NotificationDemoDialog</name>
+    <message>
+        <source>Dialog Banner Demo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is an informational banner.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Success</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a success banner.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a warning banner.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is an error banner.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>demo::NotificationLauncherDialog</name>
     <message>
         <source>Notifications</source>
@@ -226,6 +269,14 @@
     </message>
     <message>
         <source>This is a sample &quot;Got it&quot; tooltip shown by the demo launcher.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dialog banner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open dialog banner demo</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
