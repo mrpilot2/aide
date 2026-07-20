@@ -24,6 +24,10 @@ namespace
     constexpr int INFORMATION_BACKGROUND_R{227};
     constexpr int INFORMATION_BACKGROUND_G{242};
     constexpr int INFORMATION_BACKGROUND_B{253};
+    // #263141
+    constexpr int INFORMATION_DARK_BACKGROUND_R{0x26};
+    constexpr int INFORMATION_DARK_BACKGROUND_G{0x31};
+    constexpr int INFORMATION_DARK_BACKGROUND_B{0x41};
 
     constexpr int SUCCESS_STRIPE_R{56};
     constexpr int SUCCESS_STRIPE_G{142};
@@ -31,6 +35,10 @@ namespace
     constexpr int SUCCESS_BACKGROUND_R{232};
     constexpr int SUCCESS_BACKGROUND_G{245};
     constexpr int SUCCESS_BACKGROUND_B{233};
+    // #253327
+    constexpr int SUCCESS_DARK_BACKGROUND_R{0x25};
+    constexpr int SUCCESS_DARK_BACKGROUND_G{0x33};
+    constexpr int SUCCESS_DARK_BACKGROUND_B{0x27};
 
     constexpr int WARNING_STRIPE_R{245};
     constexpr int WARNING_STRIPE_G{124};
@@ -38,6 +46,10 @@ namespace
     constexpr int WARNING_BACKGROUND_R{255};
     constexpr int WARNING_BACKGROUND_G{243};
     constexpr int WARNING_BACKGROUND_B{224};
+    // #3a3320
+    constexpr int WARNING_DARK_BACKGROUND_R{0x3a};
+    constexpr int WARNING_DARK_BACKGROUND_G{0x33};
+    constexpr int WARNING_DARK_BACKGROUND_B{0x20};
 
     constexpr int ERROR_STRIPE_R{211};
     constexpr int ERROR_STRIPE_G{47};
@@ -45,11 +57,16 @@ namespace
     constexpr int ERROR_BACKGROUND_R{255};
     constexpr int ERROR_BACKGROUND_G{235};
     constexpr int ERROR_BACKGROUND_B{238};
+    // #3a2626
+    constexpr int ERROR_DARK_BACKGROUND_R{0x3a};
+    constexpr int ERROR_DARK_BACKGROUND_G{0x26};
+    constexpr int ERROR_DARK_BACKGROUND_B{0x26};
 
     struct BannerPalette
     {
         QColor stripeColor;
         QColor backgroundColor;
+        QColor darkThemeBackgroundColor;
         QString iconThemeName;
     };
 
@@ -66,17 +83,23 @@ namespace
                 QColor(SUCCESS_STRIPE_R, SUCCESS_STRIPE_G, SUCCESS_STRIPE_B),
                 QColor(SUCCESS_BACKGROUND_R, SUCCESS_BACKGROUND_G,
                        SUCCESS_BACKGROUND_B),
+                QColor(SUCCESS_DARK_BACKGROUND_R, SUCCESS_DARK_BACKGROUND_G,
+                       SUCCESS_DARK_BACKGROUND_B),
                 "emblem-ok"};
         case NotificationType::Warning:
             return {
                 QColor(WARNING_STRIPE_R, WARNING_STRIPE_G, WARNING_STRIPE_B),
                 QColor(WARNING_BACKGROUND_R, WARNING_BACKGROUND_G,
                        WARNING_BACKGROUND_B),
+                QColor(WARNING_DARK_BACKGROUND_R, WARNING_DARK_BACKGROUND_G,
+                       WARNING_DARK_BACKGROUND_B),
                 "dialog-warning"};
         case NotificationType::Error:
             return {QColor(ERROR_STRIPE_R, ERROR_STRIPE_G, ERROR_STRIPE_B),
                     QColor(ERROR_BACKGROUND_R, ERROR_BACKGROUND_G,
                            ERROR_BACKGROUND_B),
+                    QColor(ERROR_DARK_BACKGROUND_R, ERROR_DARK_BACKGROUND_G,
+                           ERROR_DARK_BACKGROUND_B),
                     "dialog-error"};
         case NotificationType::Information:
         default:
@@ -84,6 +107,9 @@ namespace
                            INFORMATION_STRIPE_B),
                     QColor(INFORMATION_BACKGROUND_R, INFORMATION_BACKGROUND_G,
                            INFORMATION_BACKGROUND_B),
+                    QColor(INFORMATION_DARK_BACKGROUND_R,
+                           INFORMATION_DARK_BACKGROUND_G,
+                           INFORMATION_DARK_BACKGROUND_B),
                     "dialog-information"};
         }
     }
@@ -91,6 +117,26 @@ namespace
     QIcon iconFromTheme(const QString& name)
     {
         return QIcon::hasThemeIcon(name) ? QIcon::fromTheme(name) : QIcon();
+    }
+
+    // Below this QColor lightness (0-255), a color counts as dark - mirrors
+    // NotificationBalloon's / GotItTooltip's own threshold for the same
+    // decision.
+    constexpr int DARK_THEME_LIGHTNESS_THRESHOLD{128};
+
+    // The severity pastel is tuned for a light app background; under a dark
+    // theme it needs its own dark, still-recognizably-tinted variant
+    // (darkThemeBackgroundColor) instead, so it neither washes out as a flat
+    // gray nor sits at a lightness too close to the app's own dark
+    // surfaces.
+    QColor backgroundColorFor(const BannerPalette& palette,
+                              const QPalette& appPalette)
+    {
+        const bool isDarkTheme =
+            appPalette.color(QPalette::Window).lightness() <
+            DARK_THEME_LIGHTNESS_THRESHOLD;
+        return isDarkTheme ? palette.darkThemeBackgroundColor
+                           : palette.backgroundColor;
     }
 } // namespace
 
@@ -112,7 +158,8 @@ Banner::Banner(NotificationType type, const QString& message, QWidget* parent)
 
     setAutoFillBackground(true);
     QPalette framePalette = this->palette();
-    framePalette.setColor(QPalette::Window, palette.backgroundColor);
+    framePalette.setColor(QPalette::Window,
+                          backgroundColorFor(palette, framePalette));
     setPalette(framePalette);
 
     m_iconLabel->setPixmap(
