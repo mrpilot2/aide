@@ -9,8 +9,9 @@ using aide::test::MockSettings;
 void MockSettings::setValue(const HierarchicalId& groupAndKey,
                             const QVariant& value)
 {
-    [[maybe_unused]] auto res = inMemorySettings.emplace(groupAndKey, value);
-    if (!res.second) { inMemorySettings.at(groupAndKey) = value; }
+    const auto key            = groupAndKey.name();
+    [[maybe_unused]] auto res = inMemorySettings.emplace(key, value);
+    if (!res.second) { inMemorySettings.at(key) = value; }
 }
 
 QVariant MockSettings::value(const HierarchicalId& groupAndKey)
@@ -21,15 +22,14 @@ QVariant MockSettings::value(const HierarchicalId& groupAndKey)
 QVariant MockSettings::value(const HierarchicalId& groupAndKey,
                              const QVariant& defaultValue)
 {
-    if (inMemorySettings.contains(groupAndKey)) {
-        return inMemorySettings.at(groupAndKey);
-    }
+    const auto key = groupAndKey.name();
+    if (inMemorySettings.contains(key)) { return inMemorySettings.at(key); }
     return defaultValue;
 }
 
 void MockSettings::removeKey(const HierarchicalId& key)
 {
-    inMemorySettings.erase(key);
+    inMemorySettings.erase(key.name());
 }
 
 void MockSettings::save() {}

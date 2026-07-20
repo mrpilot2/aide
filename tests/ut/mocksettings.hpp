@@ -23,7 +23,12 @@ namespace aide::test
         void load() override;
 
     private:
-        std::map<HierarchicalId, QVariant> inMemorySettings;
+        // Keyed on the resolved name string, not HierarchicalId itself:
+        // HierarchicalId stores raw const char* levels rather than owning
+        // copies (see hierarchicalid.hpp), so a HierarchicalId built from a
+        // temporary (e.g. a std::string::c_str()) dangles once that
+        // temporary is gone. A long-lived map key must not be one.
+        std::map<std::string, QVariant> inMemorySettings;
     };
 } // namespace aide::test
 
