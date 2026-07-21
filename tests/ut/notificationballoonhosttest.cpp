@@ -100,6 +100,7 @@ TEST_CASE("A NotificationBalloonHost", "[NotificationBalloonHost]")
 
         const auto before = liveBalloonCount(anchor);
         manager.post(makeNotification(groupId));
+        // cppcheck-suppress knownConditionTrueFalse
         REQUIRE(liveBalloonCount(anchor) == before);
     }
 
@@ -107,6 +108,7 @@ TEST_CASE("A NotificationBalloonHost", "[NotificationBalloonHost]")
     {
         const auto before = liveBalloonCount(anchor);
         manager.post(makeNotification(groupId));
+        // cppcheck-suppress knownConditionTrueFalse
         REQUIRE(liveBalloonCount(anchor) == before);
     }
 
