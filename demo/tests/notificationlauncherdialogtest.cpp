@@ -160,8 +160,8 @@ namespace
     const QGroupBox* findGroupBox(const QWidget& parent, const QString& title)
     {
         const auto groups = parent.findChildren<QGroupBox*>();
-        const auto it     = std::find_if(
-            groups.begin(), groups.end(),
+        const auto it     = std::ranges::find_if(
+            groups,
             [&title](const auto* group) { return group->title() == title; });
         return it == groups.end() ? nullptr : *it;
     }

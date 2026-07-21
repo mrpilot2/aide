@@ -72,15 +72,16 @@ TEST_CASE("A Banner's action", "[Banner]")
     Banner banner(NotificationType::Information, "Message");
 
     bool handlerCalled = false;
-    banner.addAction(NotificationAction{"Undo", [&handlerCalled]() {
-                                            handlerCalled = true;
-                                        }});
+    banner.addAction(
+        NotificationAction{.title = "Undo", .handler = [&handlerCalled]() {
+                               handlerCalled = true;
+                           }});
 
     const auto buttons = banner.findChildren<QToolButton*>();
     REQUIRE(buttons.size() == 2);
 
-    const auto actionButtonIt = std::find_if(
-        buttons.cbegin(), buttons.cend(),
+    const auto actionButtonIt = std::ranges::find_if(
+        buttons,
         [](const QToolButton* button) { return button->text() == "Undo"; });
     REQUIRE(actionButtonIt != buttons.cend());
 

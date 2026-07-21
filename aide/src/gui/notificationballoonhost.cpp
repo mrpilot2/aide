@@ -107,7 +107,7 @@ QRect NotificationBalloonHost::anchorRect() const
     // in the anchor's own local coordinate space, not global screen
     // coordinates.
     if (m_anchorWidget != nullptr) {
-        return QRect(QPoint(0, 0), m_anchorWidget->size());
+        return {QPoint(0, 0), m_anchorWidget->size()};
     }
     if (auto* screen = QGuiApplication::primaryScreen(); screen != nullptr) {
         return screen->availableGeometry();
@@ -135,7 +135,7 @@ void NotificationBalloonHost::showBalloon(const Notification& notification,
 
 void NotificationBalloonHost::removeBalloon(NotificationBalloon* balloon)
 {
-    const auto it = std::find(m_balloons.begin(), m_balloons.end(), balloon);
+    const auto it = std::ranges::find(m_balloons, balloon);
     if (it == m_balloons.end()) { return; }
 
     m_balloons.erase(it);

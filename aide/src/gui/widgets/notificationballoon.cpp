@@ -68,21 +68,23 @@ namespace
     {
         switch (type) {
         case NotificationType::Success:
-            return {
-                QColor(SUCCESS_STRIPE_R, SUCCESS_STRIPE_G, SUCCESS_STRIPE_B),
-                "emblem-ok"};
+            return {.stripeColor   = QColor(SUCCESS_STRIPE_R, SUCCESS_STRIPE_G,
+                                            SUCCESS_STRIPE_B),
+                    .iconThemeName = "emblem-ok"};
         case NotificationType::Warning:
-            return {
-                QColor(WARNING_STRIPE_R, WARNING_STRIPE_G, WARNING_STRIPE_B),
-                "dialog-warning"};
+            return {.stripeColor   = QColor(WARNING_STRIPE_R, WARNING_STRIPE_G,
+                                            WARNING_STRIPE_B),
+                    .iconThemeName = "dialog-warning"};
         case NotificationType::Error:
-            return {QColor(ERROR_STRIPE_R, ERROR_STRIPE_G, ERROR_STRIPE_B),
-                    "dialog-error"};
+            return {.stripeColor =
+                        QColor(ERROR_STRIPE_R, ERROR_STRIPE_G, ERROR_STRIPE_B),
+                    .iconThemeName = "dialog-error"};
         case NotificationType::Information:
         default:
-            return {QColor(INFORMATION_STRIPE_R, INFORMATION_STRIPE_G,
-                           INFORMATION_STRIPE_B),
-                    "dialog-information"};
+            return {.stripeColor =
+                        QColor(INFORMATION_STRIPE_R, INFORMATION_STRIPE_G,
+                               INFORMATION_STRIPE_B),
+                    .iconThemeName = "dialog-information"};
         }
     }
 

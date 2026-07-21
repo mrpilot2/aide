@@ -79,38 +79,48 @@ namespace
     {
         switch (type) {
         case NotificationType::Success:
-            return {
-                QColor(SUCCESS_STRIPE_R, SUCCESS_STRIPE_G, SUCCESS_STRIPE_B),
-                QColor(SUCCESS_BACKGROUND_R, SUCCESS_BACKGROUND_G,
-                       SUCCESS_BACKGROUND_B),
-                QColor(SUCCESS_DARK_BACKGROUND_R, SUCCESS_DARK_BACKGROUND_G,
-                       SUCCESS_DARK_BACKGROUND_B),
-                "emblem-ok"};
+            return {.stripeColor = QColor(SUCCESS_STRIPE_R, SUCCESS_STRIPE_G,
+                                          SUCCESS_STRIPE_B),
+                    .backgroundColor =
+                        QColor(SUCCESS_BACKGROUND_R, SUCCESS_BACKGROUND_G,
+                               SUCCESS_BACKGROUND_B),
+                    .darkThemeBackgroundColor = QColor(
+                        SUCCESS_DARK_BACKGROUND_R, SUCCESS_DARK_BACKGROUND_G,
+                        SUCCESS_DARK_BACKGROUND_B),
+                    .iconThemeName = "emblem-ok"};
         case NotificationType::Warning:
-            return {
-                QColor(WARNING_STRIPE_R, WARNING_STRIPE_G, WARNING_STRIPE_B),
-                QColor(WARNING_BACKGROUND_R, WARNING_BACKGROUND_G,
-                       WARNING_BACKGROUND_B),
-                QColor(WARNING_DARK_BACKGROUND_R, WARNING_DARK_BACKGROUND_G,
-                       WARNING_DARK_BACKGROUND_B),
-                "dialog-warning"};
+            return {.stripeColor = QColor(WARNING_STRIPE_R, WARNING_STRIPE_G,
+                                          WARNING_STRIPE_B),
+                    .backgroundColor =
+                        QColor(WARNING_BACKGROUND_R, WARNING_BACKGROUND_G,
+                               WARNING_BACKGROUND_B),
+                    .darkThemeBackgroundColor = QColor(
+                        WARNING_DARK_BACKGROUND_R, WARNING_DARK_BACKGROUND_G,
+                        WARNING_DARK_BACKGROUND_B),
+                    .iconThemeName = "dialog-warning"};
         case NotificationType::Error:
-            return {QColor(ERROR_STRIPE_R, ERROR_STRIPE_G, ERROR_STRIPE_B),
-                    QColor(ERROR_BACKGROUND_R, ERROR_BACKGROUND_G,
-                           ERROR_BACKGROUND_B),
+            return {
+                .stripeColor =
+                    QColor(ERROR_STRIPE_R, ERROR_STRIPE_G, ERROR_STRIPE_B),
+                .backgroundColor = QColor(
+                    ERROR_BACKGROUND_R, ERROR_BACKGROUND_G, ERROR_BACKGROUND_B),
+                .darkThemeBackgroundColor =
                     QColor(ERROR_DARK_BACKGROUND_R, ERROR_DARK_BACKGROUND_G,
                            ERROR_DARK_BACKGROUND_B),
-                    "dialog-error"};
+                .iconThemeName = "dialog-error"};
         case NotificationType::Information:
         default:
-            return {QColor(INFORMATION_STRIPE_R, INFORMATION_STRIPE_G,
-                           INFORMATION_STRIPE_B),
-                    QColor(INFORMATION_BACKGROUND_R, INFORMATION_BACKGROUND_G,
-                           INFORMATION_BACKGROUND_B),
-                    QColor(INFORMATION_DARK_BACKGROUND_R,
-                           INFORMATION_DARK_BACKGROUND_G,
-                           INFORMATION_DARK_BACKGROUND_B),
-                    "dialog-information"};
+            return {.stripeColor =
+                        QColor(INFORMATION_STRIPE_R, INFORMATION_STRIPE_G,
+                               INFORMATION_STRIPE_B),
+                    .backgroundColor = QColor(INFORMATION_BACKGROUND_R,
+                                              INFORMATION_BACKGROUND_G,
+                                              INFORMATION_BACKGROUND_B),
+                    .darkThemeBackgroundColor =
+                        QColor(INFORMATION_DARK_BACKGROUND_R,
+                               INFORMATION_DARK_BACKGROUND_G,
+                               INFORMATION_DARK_BACKGROUND_B),
+                    .iconThemeName = "dialog-information"};
         }
     }
 

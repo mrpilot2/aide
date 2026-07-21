@@ -32,13 +32,18 @@ NotificationDemoDialog::NotificationDemoDialog(QWidget* parent)
     auto* buttonsRow = new QHBoxLayout;
 
     const std::array<SeverityButton, 4> severityButtons{{
-        {NotificationType::Information, tr("Info"),
-         tr("This is an informational banner.")},
-        {NotificationType::Success, tr("Success"),
-         tr("This is a success banner.")},
-        {NotificationType::Warning, tr("Warning"),
-         tr("This is a warning banner.")},
-        {NotificationType::Error, tr("Error"), tr("This is an error banner.")},
+        {.type        = NotificationType::Information,
+         .buttonLabel = tr("Info"),
+         .message     = tr("This is an informational banner.")},
+        {.type        = NotificationType::Success,
+         .buttonLabel = tr("Success"),
+         .message     = tr("This is a success banner.")},
+        {.type        = NotificationType::Warning,
+         .buttonLabel = tr("Warning"),
+         .message     = tr("This is a warning banner.")},
+        {.type        = NotificationType::Error,
+         .buttonLabel = tr("Error"),
+         .message     = tr("This is an error banner.")},
     }};
 
     for (const auto& severityButton : severityButtons) {

@@ -261,7 +261,7 @@ Banner* MainWindow::addBanner(NotificationType type, const QString& message)
 
 void MainWindow::removeBanner(Banner* banner)
 {
-    const auto it = std::find(m_banners.begin(), m_banners.end(), banner);
+    const auto it = std::ranges::find(m_banners, banner);
     if (it == m_banners.end()) { return; }
 
     m_banners.erase(it);
@@ -310,8 +310,8 @@ void MainWindow::rebuildBannerHostLayout()
     while (QLayoutItem* item = m_bannerHostLayout->takeAt(0)) {
         auto* widget = item->widget();
         delete item;
-        const bool isBanner = std::find(m_banners.cbegin(), m_banners.cend(),
-                                        widget) != m_banners.cend();
+        const bool isBanner =
+            std::ranges::find(m_banners, widget) != m_banners.cend();
         if (widget != nullptr && !isBanner) { widget->deleteLater(); }
     }
 

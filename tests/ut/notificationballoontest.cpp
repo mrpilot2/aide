@@ -79,19 +79,21 @@ TEST_CASE("Up to two NotificationBalloon actions show as inline buttons",
 
     bool firstCalled  = false;
     bool secondCalled = false;
-    balloon.addAction(NotificationAction{"First", [&firstCalled]() {
-                                             firstCalled = true;
-                                         }});
-    balloon.addAction(NotificationAction{"Second", [&secondCalled]() {
-                                             secondCalled = true;
-                                         }});
+    balloon.addAction(
+        NotificationAction{.title = "First", .handler = [&firstCalled]() {
+                               firstCalled = true;
+                           }});
+    balloon.addAction(
+        NotificationAction{.title = "Second", .handler = [&secondCalled]() {
+                               secondCalled = true;
+                           }});
 
     const auto buttons    = balloon.findChildren<QToolButton*>();
     const auto findByText = [&buttons](const QString& text) {
-        return std::find_if(buttons.cbegin(), buttons.cend(),
-                            [&text](const QToolButton* button) {
-                                return button->text() == text;
-                            });
+        return std::ranges::find_if(buttons,
+                                    [&text](const QToolButton* button) {
+                                        return button->text() == text;
+                                    });
     };
 
     const auto firstIt = findByText("First");
@@ -115,24 +117,25 @@ TEST_CASE(
     NotificationBalloon balloon(NotificationType::Information, "Title",
                                 "Message", true);
 
-    balloon.addAction(NotificationAction{"First", []() {
+    balloon.addAction(NotificationAction{.title = "First", .handler = []() {
                                          }});
-    balloon.addAction(NotificationAction{"Second", []() {
+    balloon.addAction(NotificationAction{.title = "Second", .handler = []() {
                                          }});
 
     bool thirdCalled = false;
-    balloon.addAction(NotificationAction{"Third", [&thirdCalled]() {
-                                             thirdCalled = true;
-                                         }});
+    balloon.addAction(
+        NotificationAction{.title = "Third", .handler = [&thirdCalled]() {
+                               thirdCalled = true;
+                           }});
 
     const auto buttons = balloon.findChildren<QToolButton*>();
-    const auto moreIt  = std::find_if(
-        buttons.cbegin(), buttons.cend(),
+    const auto moreIt  = std::ranges::find_if(
+        buttons,
         [](const QToolButton* button) { return button->text() == "More ▾"; });
     REQUIRE(moreIt != buttons.cend());
 
-    const auto thirdIt = std::find_if(
-        buttons.cbegin(), buttons.cend(),
+    const auto thirdIt = std::ranges::find_if(
+        buttons,
         [](const QToolButton* button) { return button->text() == "Third"; });
     REQUIRE(thirdIt == buttons.cend());
 

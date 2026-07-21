@@ -1,6 +1,7 @@
 #include "notificationlogmodel.hpp"
 
 #include <algorithm>
+#include <ranges>
 
 #include <QObject>
 
@@ -17,7 +18,7 @@ NotificationLogModel::NotificationLogModel(
 {
     // notifications() is chronological ascending (monotonic id order);
     // reverse once here so the model itself is newest-first throughout.
-    std::reverse(m_entries.begin(), m_entries.end());
+    std::ranges::reverse(m_entries);
 
     if (const auto* source = dynamic_cast<QObject*>(&m_manager)) {
         connect(source, SIGNAL(notificationPosted(aide::NotificationId)), this,
@@ -58,9 +59,8 @@ const aide::Notification& NotificationLogModel::notificationAt(int row) const
 
 int NotificationLogModel::rowOf(NotificationId id) const
 {
-    const auto found =
-        std::find_if(m_entries.begin(), m_entries.end(),
-                     [id](const auto& entry) { return entry.id == id; });
+    const auto found = std::ranges::find_if(
+        m_entries, [id](const auto& entry) { return entry.id == id; });
     return found == m_entries.end()
                ? -1
                : static_cast<int>(std::distance(m_entries.begin(), found));

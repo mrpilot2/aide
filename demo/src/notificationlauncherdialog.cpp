@@ -90,14 +90,22 @@ QWidget* NotificationLauncherDialog::createBalloonSection()
     auto* transientRow = new QHBoxLayout;
 
     const std::array<SeverityButton, 4> severityButtons{{
-        {NotificationType::Information, tr("Info"), tr("Information"),
-         tr("This is an informational balloon notification.")},
-        {NotificationType::Success, tr("Success"), tr("Success"),
-         tr("This is a success balloon notification.")},
-        {NotificationType::Warning, tr("Warning"), tr("Warning"),
-         tr("This is a warning balloon notification.")},
-        {NotificationType::Error, tr("Error"), tr("Error"),
-         tr("This is an error balloon notification.")},
+        {.type        = NotificationType::Information,
+         .buttonLabel = tr("Info"),
+         .title       = tr("Information"),
+         .content     = tr("This is an informational balloon notification.")},
+        {.type        = NotificationType::Success,
+         .buttonLabel = tr("Success"),
+         .title       = tr("Success"),
+         .content     = tr("This is a success balloon notification.")},
+        {.type        = NotificationType::Warning,
+         .buttonLabel = tr("Warning"),
+         .title       = tr("Warning"),
+         .content     = tr("This is a warning balloon notification.")},
+        {.type        = NotificationType::Error,
+         .buttonLabel = tr("Error"),
+         .title       = tr("Error"),
+         .content     = tr("This is an error balloon notification.")},
     }};
 
     for (const auto& severityButton : severityButtons) {
@@ -141,9 +149,9 @@ QWidget* NotificationLauncherDialog::createGotItSection()
 
     m_gotItPositionCombo = new QComboBox(group);
     const std::array<GotItPositionOption, 3> positionOptions{{
-        {GotItPosition::Below, tr("Below")},
-        {GotItPosition::Above, tr("Above")},
-        {GotItPosition::Right, tr("Right")},
+        {.position = GotItPosition::Below, .label = tr("Below")},
+        {.position = GotItPosition::Above, .label = tr("Above")},
+        {.position = GotItPosition::Right, .label = tr("Right")},
     }};
     for (const auto& option : positionOptions) {
         m_gotItPositionCombo->addItem(
@@ -197,14 +205,22 @@ QWidget* NotificationLauncherDialog::createEditorBannerSection()
     auto* severityRow = new QHBoxLayout;
 
     const std::array<SeverityButton, 4> severityButtons{{
-        {NotificationType::Information, tr("Info"), tr("Information"),
-         tr("This is an informational editor banner.")},
-        {NotificationType::Success, tr("Success"), tr("Success"),
-         tr("This is a success editor banner.")},
-        {NotificationType::Warning, tr("Warning"), tr("Warning"),
-         tr("This is a warning editor banner.")},
-        {NotificationType::Error, tr("Error"), tr("Error"),
-         tr("This is an error editor banner.")},
+        {.type        = NotificationType::Information,
+         .buttonLabel = tr("Info"),
+         .title       = tr("Information"),
+         .content     = tr("This is an informational editor banner.")},
+        {.type        = NotificationType::Success,
+         .buttonLabel = tr("Success"),
+         .title       = tr("Success"),
+         .content     = tr("This is a success editor banner.")},
+        {.type        = NotificationType::Warning,
+         .buttonLabel = tr("Warning"),
+         .title       = tr("Warning"),
+         .content     = tr("This is a warning editor banner.")},
+        {.type        = NotificationType::Error,
+         .buttonLabel = tr("Error"),
+         .title       = tr("Error"),
+         .content     = tr("This is an error editor banner.")},
     }};
 
     for (const auto& severityButton : severityButtons) {
