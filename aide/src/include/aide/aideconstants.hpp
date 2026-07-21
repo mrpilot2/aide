@@ -27,6 +27,10 @@ namespace aide::constants
             MENU_HELP.addLevel("Report Bug in aIDE")};
         const HierarchicalId HELP_ABOUT_AIDE{MENU_HELP.addLevel("About Aide")};
         const HierarchicalId HELP_ABOUT_QT{MENU_HELP.addLevel("About Qt")};
+
+        // built-in settings pages
+        const HierarchicalId SETTINGS_NOTIFICATIONS{
+            HierarchicalId("Appearance & Behavior")("Notifications")};
     };
 
     const static Constants& CONSTANTS()

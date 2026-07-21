@@ -7,6 +7,7 @@
 #include <QLabel>
 #include <QVBoxLayout>
 
+#include <aide/aideconstants.hpp>
 #include <aide/gui/widgets/aidetableview.hpp>
 #include <aide/hierarchicalid.hpp>
 #include <aide/notificationballoonplacement.hpp>
@@ -18,10 +19,10 @@
 #include "settings/notifications/notificationsettingskeys.hpp"
 #include "settings/searchpattern.hpp"
 
-using aide::HierarchicalId;
 using aide::NotificationDisplayType;
 using aide::NotificationManagerInterface;
 using aide::SettingsInterface;
+using aide::constants::CONSTANTS;
 using aide::core::notificationBalloonPlacementKey;
 using aide::core::notificationDisplayTypeKey;
 using aide::core::NotificationGroupTableModel;
@@ -40,8 +41,7 @@ NotificationsSettingsPage::NotificationsSettingsPage(
     NotificationManagerInterface& manager, SettingsInterface& settings,
     QWidget* parent)
     : QWidget(parent)
-    , core::SettingsPage(
-          HierarchicalId("Appearance & Behavior")("Notifications"))
+    , core::SettingsPage(CONSTANTS().SETTINGS_NOTIFICATIONS)
     , m_manager(manager)
     , m_settings(settings)
     , m_doNotDisturbCheckBox(new QCheckBox(tr("Do Not Disturb"), this))

@@ -1,4 +1,5 @@
 #include <QAction>
+#include <QByteArray>
 #include <QDir>
 #include <QLabel>
 #include <QMainWindow>
@@ -6,6 +7,7 @@
 #include <QMenuBar>
 #include <QMessageBox>
 #include <QPalette>
+#include <QSplitter>
 #include <QString>
 
 #include <aide/aideconstants.hpp>
@@ -13,10 +15,12 @@
 #include <aide/application.hpp>
 #include <aide/colorscheme.hpp>
 #include <aide/gui/translatorinterface.hpp>
+#include <aide/gui/widgets/notificationview.hpp>
 #include <aide/hierarchicalid.hpp>
 #include <aide/menucontainerinterface.hpp>
 #include <aide/notificationdisplaytype.hpp>
 #include <aide/notificationgroup.hpp>
+#include <aide/settingsinterface.hpp>
 #include <aide/theme.hpp>
 
 #include "colorschemereactor.hpp"
@@ -104,7 +108,8 @@ int main(int argc, char* argv[])
         &app.appearanceManager(), SIGNAL(colorSchemeChanged(aide::ColorScheme)),
         &colorSchemeReactor, SLOT(onColorSchemeChanged(aide::ColorScheme)));
 
-    auto mainWindow = app.mainWindow();
+    auto mainWindow           = app.mainWindow();
+    auto& notificationManager = app.notificationManager();
 
     auto* description(new QLabel(
         QApplication::translate("",
@@ -112,7 +117,16 @@ int main(int argc, char* argv[])
                                 "library within the demo application"),
         mainWindow.get()));
 
-    mainWindow->setCentralWidget(description);
+    // Notification log view on the right: aIDE-owned (#155) and already
+    // wired so its "Notification Settings..." entries open Settings on the
+    // Notifications page. The demo only decides where to put it.
+    auto demoSettings = aide::AideSettingsProvider::unversionableSettings();
+    auto* notificationView = mainWindow->notificationLogView();
+
+    auto* centralSplitter = new QSplitter(Qt::Horizontal, mainWindow.get());
+    centralSplitter->addWidget(description);
+    centralSplitter->addWidget(notificationView);
+    mainWindow->setCentralWidget(centralSplitter);
 
     app.settingsPageRegistry().addPage(std::make_unique<DemoSettingsPage>(
         aide::HierarchicalId("Demo Page 1")("Demo Subpage 1")(
@@ -126,6 +140,7 @@ int main(int argc, char* argv[])
     // extend file menu
 
     auto actionRegistry{app.actionRegistry()};
+
     auto menuFileContainer{actionRegistry->getMenuContainer(
         aide::HierarchicalId("Main Menu")("File"))};
     auto actionNewProject =
@@ -154,6 +169,67 @@ int main(int argc, char* argv[])
             actionNewProject, aide::HierarchicalId("Main Menu")("File")("New"));
     }
 
+    // Checkable "Notification Log" toggle in the View menu (created by aIDE
+    // itself since ViewFullscreenAction defaults on and the demo does not
+    // disable it). Visibility and splitter width persist across restarts via
+    // the demo's unversionable settings.
+    auto menuViewContainer{
+        actionRegistry->getMenuContainer(CONSTANTS().MENU_VIEW)};
+
+    // Declared outside the if-block: ActionRegistry::registerAction() only
+    // keeps a weak_ptr, and QAction::setParent() is QObject ownership, not
+    // shared_ptr ownership, so a shared_ptr scoped to the if-block would drop
+    // to zero refs and delete the action (silently removing it from the
+    // menu) before the window is ever painted.
+    std::shared_ptr<QAction> actionNotificationLog;
+
+    if (menuViewContainer.has_value()) {
+        auto* menuView{menuViewContainer.value()->menu()};
+
+        const auto notificationLogVisibleKey{
+            aide::HierarchicalId("Demo")("NotificationLog")("Visible")};
+        const auto notificationLogSplitterKey{
+            aide::HierarchicalId("Demo")("NotificationLog")("SplitterState")};
+
+        const bool notificationLogVisible =
+            demoSettings->value(notificationLogVisibleKey, true).toBool();
+        notificationView->setVisible(notificationLogVisible);
+
+        if (const auto splitterState =
+                demoSettings->value(notificationLogSplitterKey).toByteArray();
+            !splitterState.isEmpty()) {
+            centralSplitter->restoreState(splitterState);
+        }
+
+        actionNotificationLog =
+            std::make_shared<QAction>(QApplication::tr("Notification Log"));
+        actionNotificationLog->setCheckable(true);
+        actionNotificationLog->setChecked(notificationLogVisible);
+        actionNotificationLog->setParent(menuView);
+        menuView->addAction(actionNotificationLog.get());
+        mainWindow->menuBar()->update();
+        actionRegistry->registerAction(
+            actionNotificationLog,
+            aide::HierarchicalId("Main Menu")("View")("Notification Log"));
+
+        QObject::connect(
+            actionNotificationLog.get(), &QAction::toggled, notificationView,
+            [notificationView, demoSettings,
+             notificationLogVisibleKey](bool checked) {
+                notificationView->setVisible(checked);
+                demoSettings->setValue(notificationLogVisibleKey, checked);
+                demoSettings->save();
+            });
+
+        QObject::connect(
+            centralSplitter, &QSplitter::splitterMoved, centralSplitter,
+            [centralSplitter, demoSettings, notificationLogSplitterKey]() {
+                demoSettings->setValue(notificationLogSplitterKey,
+                                       centralSplitter->saveState());
+                demoSettings->save();
+            });
+    }
+
     // "Demo" menu (placed before "Help") with the Notifications launcher
     // (#164). Two demo NotificationGroups are registered once at startup and
     // shared with every launcher dialog instance the action opens.
@@ -161,7 +237,6 @@ int main(int argc, char* argv[])
     const auto demoStickyBalloonGroupId{
         aide::HierarchicalId("Demo")("Sticky Balloon")};
 
-    auto& notificationManager = app.notificationManager();
     notificationManager.registerGroup(
         {.id                 = demoBalloonGroupId,
          .displayName        = QApplication::tr("Demo Balloon"),

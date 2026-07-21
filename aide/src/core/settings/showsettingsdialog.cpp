@@ -26,6 +26,18 @@ ShowSettingsDialog::ShowSettingsDialog(SettingsDialogWeakPtr dialog,
 
 void ShowSettingsDialog::showSettingsDialog()
 {
+    showSettingsDialog(nullptr);
+}
+
+void ShowSettingsDialog::showSettingsDialog(
+    const aide::HierarchicalId& selectedGroup)
+{
+    showSettingsDialog(&selectedGroup);
+}
+
+void ShowSettingsDialog::showSettingsDialog(
+    const aide::HierarchicalId* explicitlySelectedGroup)
+{
     const auto dialog = settingsDialog.lock();
 
     if (dialog == nullptr) { return; }
@@ -47,12 +59,17 @@ void ShowSettingsDialog::showSettingsDialog()
         p->widget()->setVisible(false);
     });
 
-    const auto lastSelectedTreeItem =
-        saveGeometryAndState.selectedTreeViewItem();
+    // An explicitly requested page (e.g. NotificationView's "Notification
+    // Settings..." overflow entry) always wins over the persisted
+    // last-selected page.
+    const auto requestedTreeItem =
+        explicitlySelectedGroup != nullptr
+            ? QString::fromStdString(explicitlySelectedGroup->name())
+            : saveGeometryAndState.selectedTreeViewItem();
 
-    if (!lastSelectedTreeItem.isEmpty()) {
+    if (!requestedTreeItem.isEmpty()) {
         const auto index = treeModel->recursivelyFindSelectedTreeItemIndex(
-            lastSelectedTreeItem, QModelIndex());
+            requestedTreeItem, QModelIndex());
 
         dialog->setSelectedGroupIndex(mapFromSourceIndex(index));
     } else {

@@ -7,6 +7,7 @@
 #include <QCloseEvent>
 
 #include <aide/applicationconfig.hpp>
+#include <aide/hierarchicalid.hpp>
 
 #include "applicationclosecontroller.hpp"
 #include "mainwindow.hpp"
@@ -61,8 +62,15 @@ namespace
     {
     public:
         bool showCalled{false};
+        bool showWithSelectedGroupCalled{false};
 
         void showSettingsDialog() override { showCalled = true; }
+
+        void showSettingsDialog(
+            const aide::HierarchicalId& /*selectedGroup*/) override
+        {
+            showWithSelectedGroupCalled = true;
+        }
     };
 } // namespace
 

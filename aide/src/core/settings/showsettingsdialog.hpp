@@ -34,6 +34,9 @@ namespace aide::core
 
         void showSettingsDialog() override;
 
+        void showSettingsDialog(
+            const aide::HierarchicalId& selectedGroup) override;
+
         void changeSelectedPage(const QItemSelection& selected,
                                 const QItemSelection& deselected) override;
 
@@ -50,6 +53,12 @@ namespace aide::core
         void applyModifiedSettingsPages() override;
 
     private:
+        // Shared implementation for both overloads above; nullptr means "use
+        // the persisted last-selected page", matching the original no-arg
+        // behavior.
+        void showSettingsDialog(
+            const aide::HierarchicalId* explicitlySelectedGroup);
+
         void checkTreeModelIsInitialized() const;
 
         bool autoSelectBestMatchingPage();

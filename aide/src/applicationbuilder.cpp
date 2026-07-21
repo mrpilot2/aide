@@ -51,6 +51,8 @@ ApplicationBuilder::ApplicationBuilder(ApplicationConfig config)
           m_keyMapPage->getTreeModel(), m_keyMapPage->keyMapWidget()))
 {
     m_mainWindow->setMainWindowController(m_mainController, m_actionRegistry);
+    m_mainWindow->createNotificationLogView(
+        *m_notificationManager, *(AideSettingsProvider::versionableSettings()));
     m_settingsDialog->setController(m_settingsDialogController);
 
     m_mainWindowGeometryAndState.restoreGeometryAndState();

@@ -4,6 +4,8 @@
 
 #include <QCloseEvent>
 
+#include <aide/aideconstants.hpp>
+
 #include "aboutaidedialog.hpp"
 #include "aboutaideusecase.hpp"
 #include "applicationclosecontroller.hpp"
@@ -14,6 +16,7 @@
 #include "reportbugusecase.hpp"
 #include "showloginfilemanagerusecase.hpp"
 
+using aide::constants::CONSTANTS;
 using aide::core::AboutAideUseCase;
 using aide::core::ApplicationCloseController;
 using aide::core::MainWindowGeometryAndStateController;
@@ -48,6 +51,12 @@ void MainWindowController::onUserWantsToQuitApplication(
 void MainWindowController::onUserWantsToShowSettingsDialog() const
 {
     showSettingsDialogInteractor.showSettingsDialog();
+}
+
+void MainWindowController::onUserWantsToShowNotificationSettings() const
+{
+    showSettingsDialogInteractor.showSettingsDialog(
+        CONSTANTS().SETTINGS_NOTIFICATIONS);
 }
 
 void MainWindowController::onUserWantsToShowAboutAideDialog() const

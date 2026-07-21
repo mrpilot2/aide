@@ -22,7 +22,14 @@ namespace Ui
 namespace aide::widgets
 {
     class Banner;
+    class NotificationView;
 } // namespace aide::widgets
+
+namespace aide
+{
+    class NotificationManagerInterface;
+    class SettingsInterface;
+} // namespace aide
 
 class QIcon;
 class QMenu;
@@ -75,6 +82,20 @@ namespace aide::gui
          */
         void removeBanner(aide::widgets::Banner* banner) override;
 
+        /**
+         * @brief Creates the notification log view (#155), wiring its
+         * settingsRequested()/groupSettingsRequested() signals to open
+         * Settings on the built-in Notifications page. Called once by
+         * ApplicationBuilder, after setMainWindowController(); the returned
+         * pointer (via notificationLogView()) is not added to any layout.
+         */
+        void createNotificationLogView(
+            aide::NotificationManagerInterface& manager,
+            aide::SettingsInterface& settings);
+
+        [[nodiscard]] aide::widgets::NotificationView* notificationLogView()
+            const override;
+
     public slots:
         void refreshIcons();
 
@@ -119,6 +140,8 @@ namespace aide::gui
         QWidget* m_bannerHost{nullptr};
         QVBoxLayout* m_bannerHostLayout{nullptr};
         std::vector<aide::widgets::Banner*> m_banners;
+
+        aide::widgets::NotificationView* m_notificationLogView{nullptr};
     };
 
 } // namespace aide::gui

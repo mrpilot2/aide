@@ -51,6 +51,11 @@ namespace aide::gui
     public slots:
         void onUserWantsToShowSettingsDialog() const;
 
+        // NotificationView's settingsRequested()/groupSettingsRequested()
+        // (#155): opens Settings with the built-in Notifications page
+        // pre-selected, instead of falling back to the last-selected page.
+        void onUserWantsToShowNotificationSettings() const;
+
         void onUserWantsToShowAboutAideDialog() const;
 
     private:

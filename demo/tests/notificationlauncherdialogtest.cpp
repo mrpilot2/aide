@@ -142,6 +142,12 @@ namespace
             banner->deleteLater();
         }
 
+        [[nodiscard]] aide::widgets::NotificationView* notificationLogView()
+            const override
+        {
+            return nullptr;
+        }
+
         [[nodiscard]] const std::vector<Banner*>& added() const
         {
             return m_added;

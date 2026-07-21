@@ -113,6 +113,10 @@
         <source>Notifications</source>
         <translation>Benachrichtigungen</translation>
     </message>
+    <message>
+        <source>Notification Log</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>demo::NotificationDemoDialog</name>

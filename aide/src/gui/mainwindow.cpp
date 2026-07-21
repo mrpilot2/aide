@@ -16,6 +16,9 @@
 #include <QVBoxLayout>
 #include <QWidget>
 
+#include <aide/gui/widgets/notificationview.hpp>
+#include <aide/hierarchicalid.hpp>
+
 #include "actionregistry.hpp"
 #include "aide/gui/widgets/banner.hpp"
 #include "aideconstants.hpp"
@@ -26,6 +29,7 @@
 #include "settings/settingsdialog.hpp"
 #include "ui_mainwindow.h"
 
+using aide::HierarchicalId;
 using aide::NotificationType;
 using aide::constants::CONSTANTS;
 using aide::core::UserSelection;
@@ -33,6 +37,7 @@ using aide::gui::MainWindow;
 using aide::gui::MainWindowControllerPtr;
 using aide::gui::TranslatorInterface;
 using aide::widgets::Banner;
+using aide::widgets::NotificationView;
 
 extern int qInitResources_icons();
 
@@ -271,6 +276,26 @@ void MainWindow::removeBanner(Banner* banner)
     banner->setParent(nullptr);
     banner->deleteLater();
     rebuildBannerHostLayout();
+}
+
+void MainWindow::createNotificationLogView(
+    aide::NotificationManagerInterface& manager,
+    aide::SettingsInterface& settings)
+{
+    m_notificationLogView = new NotificationView(manager, settings, this);
+
+    connect(m_notificationLogView, &NotificationView::settingsRequested,
+            m_controller.get(),
+            &MainWindowController::onUserWantsToShowNotificationSettings);
+    connect(m_notificationLogView, &NotificationView::groupSettingsRequested,
+            m_controller.get(), [this](const HierarchicalId&) {
+                m_controller->onUserWantsToShowNotificationSettings();
+            });
+}
+
+aide::widgets::NotificationView* MainWindow::notificationLogView() const
+{
+    return m_notificationLogView;
 }
 
 void MainWindow::ensureBannerHost()

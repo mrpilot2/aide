@@ -18,6 +18,9 @@ namespace aide::test
 
         void removeBanner(aide::widgets::Banner* banner) override;
 
+        [[nodiscard]] aide::widgets::NotificationView* notificationLogView()
+            const override;
+
         [[nodiscard]] const QByteArray& getState() const;
 
         [[nodiscard]] const QByteArray& getGeometry() const;

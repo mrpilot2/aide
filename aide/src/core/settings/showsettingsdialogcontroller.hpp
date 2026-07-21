@@ -3,6 +3,11 @@
 
 class QItemSelection;
 
+namespace aide
+{
+    class HierarchicalId;
+} // namespace aide
+
 namespace aide::core
 {
     class ShowSettingsDialogController
@@ -11,6 +16,12 @@ namespace aide::core
         virtual ~ShowSettingsDialogController() = default;
 
         virtual void showSettingsDialog() = 0;
+
+        // Opens the dialog with a specific page pre-selected (identified by
+        // SettingsPage::group()), instead of the usual last-selected/first
+        // page fallback.
+        virtual void showSettingsDialog(
+            const aide::HierarchicalId& selectedGroup) = 0;
     };
 } // namespace aide::core
 

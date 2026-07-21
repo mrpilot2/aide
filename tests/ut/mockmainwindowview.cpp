@@ -17,6 +17,11 @@ aide::widgets::Banner* MockMainWindowView::addBanner(NotificationType /*type*/,
 
 void MockMainWindowView::removeBanner(aide::widgets::Banner* /*banner*/) {}
 
+aide::widgets::NotificationView* MockMainWindowView::notificationLogView() const
+{
+    return nullptr;
+}
+
 const QByteArray& MockMainWindowView::getState() const
 {
     return currentState;
