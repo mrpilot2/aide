@@ -72,14 +72,14 @@
     <name>Banner</name>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Schließen</translation>
+        <translation>Schließen</translation>
     </message>
 </context>
 <context>
     <name>GotItTooltip</name>
     <message>
         <source>Got it</source>
-        <translation type="unfinished"></translation>
+        <translation>Verstanden</translation>
     </message>
 </context>
 <context>
@@ -101,34 +101,34 @@
     <name>NotificationBalloon</name>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Schließen</translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <source>More ▾</source>
-        <translation type="unfinished"></translation>
+        <translation>Mehr ▾</translation>
     </message>
 </context>
 <context>
     <name>NotificationView</name>
     <message>
         <source>No notifications yet</source>
-        <translation type="unfinished"></translation>
+        <translation>Noch keine Benachrichtigungen</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Benachrichtigungen</translation>
     </message>
     <message>
         <source>Notification Settings…</source>
-        <translation type="unfinished"></translation>
+        <translation>Benachrichtigungseinstellungen…</translation>
     </message>
     <message>
         <source>Timeline</source>
-        <translation type="unfinished"></translation>
+        <translation>Verlauf</translation>
     </message>
     <message>
         <source>Clear all</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle löschen</translation>
     </message>
 </context>
 <context>
@@ -249,31 +249,31 @@
     <name>aide::core::NotificationGroupTableModel</name>
     <message>
         <source>On</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished">Gruppe</translation>
+        <translation>Gruppe</translation>
     </message>
     <message>
         <source>Popup type</source>
-        <translation type="unfinished"></translation>
+        <translation>Popup-Typ</translation>
     </message>
     <message>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Protokoll</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine</translation>
     </message>
     <message>
         <source>Balloon</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprechblase</translation>
     </message>
     <message>
         <source>Sticky balloon</source>
-        <translation type="unfinished"></translation>
+        <translation>Bleibende Sprechblase</translation>
     </message>
 </context>
 <context>
@@ -369,42 +369,42 @@
     </message>
     <message>
         <source>Report Bug in aIDE</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler in aIDE melden</translation>
     </message>
 </context>
 <context>
     <name>aide::gui::NotificationsSettingsPage</name>
     <message>
         <source>Do Not Disturb</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht stören</translation>
     </message>
     <message>
         <source>Bottom right</source>
-        <translation type="unfinished"></translation>
+        <translation>Unten rechts</translation>
     </message>
     <message>
         <source>Bottom left</source>
-        <translation type="unfinished"></translation>
+        <translation>Unten links</translation>
     </message>
     <message>
         <source>Top right</source>
-        <translation type="unfinished"></translation>
+        <translation>Oben rechts</translation>
     </message>
     <message>
         <source>Top left</source>
-        <translation type="unfinished"></translation>
+        <translation>Oben links</translation>
     </message>
     <message>
         <source>Balloon placement:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprechblasenposition:</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Benachrichtigungen</translation>
     </message>
     <message>
         <source>Appearance &amp; Behavior</source>
-        <translation type="unfinished">Erscheinungsbild &amp; Verhalten</translation>
+        <translation>Erscheinungsbild &amp; Verhalten</translation>
     </message>
 </context>
 <context>
@@ -418,22 +418,22 @@
     <name>aide::widgets::NotificationLogItemDelegate</name>
     <message>
         <source>More ▾</source>
-        <translation type="unfinished"></translation>
+        <translation>Mehr ▾</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Einstellungen</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>Turn off popups for this group</source>
-        <translation type="unfinished"></translation>
+        <translation>Popups für diese Gruppe deaktivieren</translation>
     </message>
 </context>
 <context>
     <name>aide::widgets::NotificationTimestampFormatter</name>
     <message>
         <source>Yesterday %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestern %1</translation>
     </message>
 </context>
 </TS>

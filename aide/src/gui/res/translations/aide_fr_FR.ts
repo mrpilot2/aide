@@ -53,48 +53,48 @@
     <name>Banner</name>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Fermer</translation>
+        <translation>Fermer</translation>
     </message>
 </context>
 <context>
     <name>GotItTooltip</name>
     <message>
         <source>Got it</source>
-        <translation type="unfinished"></translation>
+        <translation>Compris</translation>
     </message>
 </context>
 <context>
     <name>NotificationBalloon</name>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Fermer</translation>
+        <translation>Fermer</translation>
     </message>
     <message>
         <source>More ▾</source>
-        <translation type="unfinished"></translation>
+        <translation>Plus ▾</translation>
     </message>
 </context>
 <context>
     <name>NotificationView</name>
     <message>
         <source>No notifications yet</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucune notification pour le moment</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Notifications</translation>
     </message>
     <message>
         <source>Notification Settings…</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres de notification…</translation>
     </message>
     <message>
         <source>Timeline</source>
-        <translation type="unfinished"></translation>
+        <translation>Chronologie</translation>
     </message>
     <message>
         <source>Clear all</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout effacer</translation>
     </message>
 </context>
 <context>
@@ -210,31 +210,31 @@
     <name>aide::core::NotificationGroupTableModel</name>
     <message>
         <source>On</source>
-        <translation type="unfinished"></translation>
+        <translation>Activé</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished">Groupe</translation>
+        <translation>Groupe</translation>
     </message>
     <message>
         <source>Popup type</source>
-        <translation type="unfinished"></translation>
+        <translation>Type de popup</translation>
     </message>
     <message>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Journal</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun</translation>
     </message>
     <message>
         <source>Balloon</source>
-        <translation type="unfinished"></translation>
+        <translation>Bulle</translation>
     </message>
     <message>
         <source>Sticky balloon</source>
-        <translation type="unfinished"></translation>
+        <translation>Bulle persistante</translation>
     </message>
 </context>
 <context>
@@ -330,42 +330,42 @@
     </message>
     <message>
         <source>Report Bug in aIDE</source>
-        <translation type="unfinished"></translation>
+        <translation>Signaler un bug dans aIDE</translation>
     </message>
 </context>
 <context>
     <name>aide::gui::NotificationsSettingsPage</name>
     <message>
         <source>Do Not Disturb</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne pas déranger</translation>
     </message>
     <message>
         <source>Bottom right</source>
-        <translation type="unfinished"></translation>
+        <translation>En bas à droite</translation>
     </message>
     <message>
         <source>Bottom left</source>
-        <translation type="unfinished"></translation>
+        <translation>En bas à gauche</translation>
     </message>
     <message>
         <source>Top right</source>
-        <translation type="unfinished"></translation>
+        <translation>En haut à droite</translation>
     </message>
     <message>
         <source>Top left</source>
-        <translation type="unfinished"></translation>
+        <translation>En haut à gauche</translation>
     </message>
     <message>
         <source>Balloon placement:</source>
-        <translation type="unfinished"></translation>
+        <translation>Emplacement de la bulle :</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Notifications</translation>
     </message>
     <message>
         <source>Appearance &amp; Behavior</source>
-        <translation type="unfinished">Apparence et comportement</translation>
+        <translation>Apparence et comportement</translation>
     </message>
 </context>
 <context>
@@ -379,22 +379,22 @@
     <name>aide::widgets::NotificationLogItemDelegate</name>
     <message>
         <source>More ▾</source>
-        <translation type="unfinished"></translation>
+        <translation>Plus ▾</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Paramètres</translation>
+        <translation>Paramètres</translation>
     </message>
     <message>
         <source>Turn off popups for this group</source>
-        <translation type="unfinished"></translation>
+        <translation>Désactiver les popups pour ce groupe</translation>
     </message>
 </context>
 <context>
     <name>aide::widgets::NotificationTimestampFormatter</name>
     <message>
         <source>Yesterday %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier %1</translation>
     </message>
 </context>
 </TS>

@@ -99,209 +99,209 @@
     </message>
     <message>
         <source>Demo Balloon</source>
-        <translation type="unfinished"></translation>
+        <translation>डेमो बैलून</translation>
     </message>
     <message>
         <source>Demo Sticky Balloon</source>
-        <translation type="unfinished"></translation>
+        <translation>डेमो स्थायी बैलून</translation>
     </message>
     <message>
         <source>&amp;Demo</source>
-        <translation type="unfinished"></translation>
+        <translation>डेमो(&amp;D)</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>सूचनाएं</translation>
     </message>
 </context>
 <context>
     <name>demo::NotificationDemoDialog</name>
     <message>
         <source>Dialog Banner Demo</source>
-        <translation type="unfinished"></translation>
+        <translation>डायलॉग बैनर डेमो</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>जानकारी</translation>
     </message>
     <message>
         <source>This is an informational banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>यह एक सूचनात्मक बैनर है।</translation>
     </message>
     <message>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>सफलता</translation>
     </message>
     <message>
         <source>This is a success banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>यह एक सफलता बैनर है।</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>चेतावनी</translation>
     </message>
     <message>
         <source>This is a warning banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>यह एक चेतावनी बैनर है।</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>त्रुटि</translation>
     </message>
     <message>
         <source>This is an error banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>यह एक त्रुटि बैनर है।</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>साफ़ करें</translation>
     </message>
 </context>
 <context>
     <name>demo::NotificationLauncherDialog</name>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>सूचनाएं</translation>
     </message>
     <message>
         <source>Balloon</source>
-        <translation type="unfinished"></translation>
+        <translation>बैलून</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>जानकारी</translation>
     </message>
     <message>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>सफलता</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>चेतावनी</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>त्रुटि</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>जानकारी</translation>
     </message>
     <message>
         <source>This is an informational balloon notification.</source>
-        <translation type="unfinished"></translation>
+        <translation>यह एक सूचनात्मक बैलून सूचना है।</translation>
     </message>
     <message>
         <source>This is a success balloon notification.</source>
-        <translation type="unfinished"></translation>
+        <translation>यह एक सफलता बैलून सूचना है।</translation>
     </message>
     <message>
         <source>This is a warning balloon notification.</source>
-        <translation type="unfinished"></translation>
+        <translation>यह एक चेतावनी बैलून सूचना है।</translation>
     </message>
     <message>
         <source>This is an error balloon notification.</source>
-        <translation type="unfinished"></translation>
+        <translation>यह एक त्रुटि बैलून सूचना है।</translation>
     </message>
     <message>
         <source>With 2 actions</source>
-        <translation type="unfinished"></translation>
+        <translation>2 क्रियाओं के साथ</translation>
     </message>
     <message>
         <source>Sticky</source>
-        <translation type="unfinished"></translation>
+        <translation>स्थायी</translation>
     </message>
     <message>
         <source>Action required</source>
-        <translation type="unfinished"></translation>
+        <translation>क्रिया आवश्यक</translation>
     </message>
     <message>
         <source>This balloon carries two actions.</source>
-        <translation type="unfinished"></translation>
+        <translation>इस बैलून में दो क्रियाएं हैं।</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished"></translation>
+        <translation>पुनः प्रयास करें</translation>
     </message>
     <message>
         <source>&quot;Retry&quot; action triggered.</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;पुनः प्रयास करें&quot; क्रिया सक्रिय हुई।</translation>
     </message>
     <message>
         <source>View Details</source>
-        <translation type="unfinished"></translation>
+        <translation>विवरण देखें</translation>
     </message>
     <message>
         <source>&quot;View Details&quot; action triggered.</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;विवरण देखें&quot; क्रिया सक्रिय हुई।</translation>
     </message>
     <message>
         <source>This balloon has no auto-dismiss timer; close it manually.</source>
-        <translation type="unfinished"></translation>
+        <translation>इस बैलून में स्वतः-बंद टाइमर नहीं है; इसे मैन्युअल रूप से बंद करें।</translation>
     </message>
     <message>
         <source>Got it</source>
-        <translation type="unfinished"></translation>
+        <translation>समझ गया</translation>
     </message>
     <message>
         <source>Sample anchor</source>
-        <translation type="unfinished"></translation>
+        <translation>नमूना एंकर</translation>
     </message>
     <message>
         <source>Below</source>
-        <translation type="unfinished"></translation>
+        <translation>नीचे</translation>
     </message>
     <message>
         <source>Above</source>
-        <translation type="unfinished"></translation>
+        <translation>ऊपर</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>दाएं</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>दिखाएं</translation>
     </message>
     <message>
         <source>Reset seen flag</source>
-        <translation type="unfinished"></translation>
+        <translation>देखा गया फ़्लैग रीसेट करें</translation>
     </message>
     <message>
         <source>This is a sample &quot;Got it&quot; tooltip shown by the demo launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>यह डेमो लॉन्चर द्वारा दिखाया गया एक नमूना &quot;समझ गया&quot; टूलटिप है।</translation>
     </message>
     <message>
         <source>Dialog banner</source>
-        <translation type="unfinished"></translation>
+        <translation>डायलॉग बैनर</translation>
     </message>
     <message>
         <source>Open dialog banner demo</source>
-        <translation type="unfinished"></translation>
+        <translation>डायलॉग बैनर डेमो खोलें</translation>
     </message>
     <message>
         <source>Editor banner</source>
-        <translation type="unfinished"></translation>
+        <translation>एडिटर बैनर</translation>
     </message>
     <message>
         <source>This is an informational editor banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>यह एक सूचनात्मक एडिटर बैनर है।</translation>
     </message>
     <message>
         <source>This is a success editor banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>यह एक सफलता एडिटर बैनर है।</translation>
     </message>
     <message>
         <source>This is a warning editor banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>यह एक चेतावनी एडिटर बैनर है।</translation>
     </message>
     <message>
         <source>This is an error editor banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>यह एक त्रुटि एडिटर बैनर है।</translation>
     </message>
     <message>
         <source>Clear all</source>
-        <translation type="unfinished"></translation>
+        <translation>सभी साफ़ करें</translation>
     </message>
 </context>
 </TS>

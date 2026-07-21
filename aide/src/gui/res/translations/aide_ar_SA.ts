@@ -53,48 +53,48 @@
     <name>Banner</name>
     <message>
         <source>Close</source>
-        <translation type="unfinished">إغلاق</translation>
+        <translation>إغلاق</translation>
     </message>
 </context>
 <context>
     <name>GotItTooltip</name>
     <message>
         <source>Got it</source>
-        <translation type="unfinished"></translation>
+        <translation>فهمت</translation>
     </message>
 </context>
 <context>
     <name>NotificationBalloon</name>
     <message>
         <source>Close</source>
-        <translation type="unfinished">إغلاق</translation>
+        <translation>إغلاق</translation>
     </message>
     <message>
         <source>More ▾</source>
-        <translation type="unfinished"></translation>
+        <translation>المزيد ▾</translation>
     </message>
 </context>
 <context>
     <name>NotificationView</name>
     <message>
         <source>No notifications yet</source>
-        <translation type="unfinished"></translation>
+        <translation>لا توجد إشعارات بعد</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>الإشعارات</translation>
     </message>
     <message>
         <source>Notification Settings…</source>
-        <translation type="unfinished"></translation>
+        <translation>إعدادات الإشعارات…</translation>
     </message>
     <message>
         <source>Timeline</source>
-        <translation type="unfinished"></translation>
+        <translation>الجدول الزمني</translation>
     </message>
     <message>
         <source>Clear all</source>
-        <translation type="unfinished"></translation>
+        <translation>مسح الكل</translation>
     </message>
 </context>
 <context>
@@ -210,31 +210,31 @@
     <name>aide::core::NotificationGroupTableModel</name>
     <message>
         <source>On</source>
-        <translation type="unfinished"></translation>
+        <translation>تشغيل</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished">مجموعة</translation>
+        <translation>مجموعة</translation>
     </message>
     <message>
         <source>Popup type</source>
-        <translation type="unfinished"></translation>
+        <translation>نوع النافذة المنبثقة</translation>
     </message>
     <message>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation>السجل</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>بلا</translation>
     </message>
     <message>
         <source>Balloon</source>
-        <translation type="unfinished"></translation>
+        <translation>بالونة</translation>
     </message>
     <message>
         <source>Sticky balloon</source>
-        <translation type="unfinished"></translation>
+        <translation>بالونة ثابتة</translation>
     </message>
 </context>
 <context>
@@ -330,42 +330,42 @@
     </message>
     <message>
         <source>Report Bug in aIDE</source>
-        <translation type="unfinished"></translation>
+        <translation>الإبلاغ عن خلل في aIDE</translation>
     </message>
 </context>
 <context>
     <name>aide::gui::NotificationsSettingsPage</name>
     <message>
         <source>Do Not Disturb</source>
-        <translation type="unfinished"></translation>
+        <translation>عدم الإزعاج</translation>
     </message>
     <message>
         <source>Bottom right</source>
-        <translation type="unfinished"></translation>
+        <translation>أسفل اليمين</translation>
     </message>
     <message>
         <source>Bottom left</source>
-        <translation type="unfinished"></translation>
+        <translation>أسفل اليسار</translation>
     </message>
     <message>
         <source>Top right</source>
-        <translation type="unfinished"></translation>
+        <translation>أعلى اليمين</translation>
     </message>
     <message>
         <source>Top left</source>
-        <translation type="unfinished"></translation>
+        <translation>أعلى اليسار</translation>
     </message>
     <message>
         <source>Balloon placement:</source>
-        <translation type="unfinished"></translation>
+        <translation>موضع البالونة:</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>الإشعارات</translation>
     </message>
     <message>
         <source>Appearance &amp; Behavior</source>
-        <translation type="unfinished">المظهر والسلوك</translation>
+        <translation>المظهر والسلوك</translation>
     </message>
 </context>
 <context>
@@ -379,22 +379,22 @@
     <name>aide::widgets::NotificationLogItemDelegate</name>
     <message>
         <source>More ▾</source>
-        <translation type="unfinished"></translation>
+        <translation>المزيد ▾</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">الإعدادات</translation>
+        <translation>الإعدادات</translation>
     </message>
     <message>
         <source>Turn off popups for this group</source>
-        <translation type="unfinished"></translation>
+        <translation>إيقاف النوافذ المنبثقة لهذه المجموعة</translation>
     </message>
 </context>
 <context>
     <name>aide::widgets::NotificationTimestampFormatter</name>
     <message>
         <source>Yesterday %1</source>
-        <translation type="unfinished"></translation>
+        <translation>أمس %1</translation>
     </message>
 </context>
 </TS>

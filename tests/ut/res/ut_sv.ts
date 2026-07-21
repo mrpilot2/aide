@@ -5,11 +5,11 @@
     <name>QObject</name>
     <message>
         <source>No notifications yet</source>
-        <translation type="unfinished"></translation>
+        <translation>Inga aviseringar än</translation>
     </message>
     <message>
         <source>Clear all</source>
-        <translation type="unfinished"></translation>
+        <translation>Rensa allt</translation>
     </message>
 </context>
 <context>
@@ -23,7 +23,7 @@
     <name>aide::gui::MainWindow</name>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Avsluta</translation>
     </message>
 </context>
 </TS>

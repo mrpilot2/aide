@@ -53,48 +53,48 @@
     <name>Banner</name>
     <message>
         <source>Close</source>
-        <translation type="unfinished">बंद करें</translation>
+        <translation>बंद करें</translation>
     </message>
 </context>
 <context>
     <name>GotItTooltip</name>
     <message>
         <source>Got it</source>
-        <translation type="unfinished"></translation>
+        <translation>समझ गया</translation>
     </message>
 </context>
 <context>
     <name>NotificationBalloon</name>
     <message>
         <source>Close</source>
-        <translation type="unfinished">बंद करें</translation>
+        <translation>बंद करें</translation>
     </message>
     <message>
         <source>More ▾</source>
-        <translation type="unfinished"></translation>
+        <translation>अधिक ▾</translation>
     </message>
 </context>
 <context>
     <name>NotificationView</name>
     <message>
         <source>No notifications yet</source>
-        <translation type="unfinished"></translation>
+        <translation>अभी तक कोई सूचना नहीं</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>सूचनाएं</translation>
     </message>
     <message>
         <source>Notification Settings…</source>
-        <translation type="unfinished"></translation>
+        <translation>सूचना सेटिंग्स…</translation>
     </message>
     <message>
         <source>Timeline</source>
-        <translation type="unfinished"></translation>
+        <translation>समयरेखा</translation>
     </message>
     <message>
         <source>Clear all</source>
-        <translation type="unfinished"></translation>
+        <translation>सभी साफ़ करें</translation>
     </message>
 </context>
 <context>
@@ -210,31 +210,31 @@
     <name>aide::core::NotificationGroupTableModel</name>
     <message>
         <source>On</source>
-        <translation type="unfinished"></translation>
+        <translation>चालू</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished">समूह</translation>
+        <translation>समूह</translation>
     </message>
     <message>
         <source>Popup type</source>
-        <translation type="unfinished"></translation>
+        <translation>पॉपअप प्रकार</translation>
     </message>
     <message>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation>लॉग</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>कोई नहीं</translation>
     </message>
     <message>
         <source>Balloon</source>
-        <translation type="unfinished"></translation>
+        <translation>बैलून</translation>
     </message>
     <message>
         <source>Sticky balloon</source>
-        <translation type="unfinished"></translation>
+        <translation>स्थायी बैलून</translation>
     </message>
 </context>
 <context>
@@ -330,42 +330,42 @@
     </message>
     <message>
         <source>Report Bug in aIDE</source>
-        <translation type="unfinished"></translation>
+        <translation>aIDE में बग की रिपोर्ट करें</translation>
     </message>
 </context>
 <context>
     <name>aide::gui::NotificationsSettingsPage</name>
     <message>
         <source>Do Not Disturb</source>
-        <translation type="unfinished"></translation>
+        <translation>परेशान न करें</translation>
     </message>
     <message>
         <source>Bottom right</source>
-        <translation type="unfinished"></translation>
+        <translation>नीचे दाएं</translation>
     </message>
     <message>
         <source>Bottom left</source>
-        <translation type="unfinished"></translation>
+        <translation>नीचे बाएं</translation>
     </message>
     <message>
         <source>Top right</source>
-        <translation type="unfinished"></translation>
+        <translation>ऊपर दाएं</translation>
     </message>
     <message>
         <source>Top left</source>
-        <translation type="unfinished"></translation>
+        <translation>ऊपर बाएं</translation>
     </message>
     <message>
         <source>Balloon placement:</source>
-        <translation type="unfinished"></translation>
+        <translation>बैलून स्थिति:</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>सूचनाएं</translation>
     </message>
     <message>
         <source>Appearance &amp; Behavior</source>
-        <translation type="unfinished">रूप और व्यवहार</translation>
+        <translation>रूप और व्यवहार</translation>
     </message>
 </context>
 <context>
@@ -379,22 +379,22 @@
     <name>aide::widgets::NotificationLogItemDelegate</name>
     <message>
         <source>More ▾</source>
-        <translation type="unfinished"></translation>
+        <translation>अधिक ▾</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">सेटिंग्स</translation>
+        <translation>सेटिंग्स</translation>
     </message>
     <message>
         <source>Turn off popups for this group</source>
-        <translation type="unfinished"></translation>
+        <translation>इस समूह के लिए पॉपअप बंद करें</translation>
     </message>
 </context>
 <context>
     <name>aide::widgets::NotificationTimestampFormatter</name>
     <message>
         <source>Yesterday %1</source>
-        <translation type="unfinished"></translation>
+        <translation>कल %1</translation>
     </message>
 </context>
 </TS>

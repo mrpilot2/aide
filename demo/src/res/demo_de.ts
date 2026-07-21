@@ -99,209 +99,209 @@
     </message>
     <message>
         <source>Demo Balloon</source>
-        <translation type="unfinished"></translation>
+        <translation>Demo-Sprechblase</translation>
     </message>
     <message>
         <source>Demo Sticky Balloon</source>
-        <translation type="unfinished"></translation>
+        <translation>Demo bleibende Sprechblase</translation>
     </message>
     <message>
         <source>&amp;Demo</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Demo</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Benachrichtigungen</translation>
     </message>
 </context>
 <context>
     <name>demo::NotificationDemoDialog</name>
     <message>
         <source>Dialog Banner Demo</source>
-        <translation type="unfinished"></translation>
+        <translation>Dialog-Banner-Demo</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
     <message>
         <source>This is an informational banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ist ein Informationsbanner.</translation>
     </message>
     <message>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>Erfolg</translation>
     </message>
     <message>
         <source>This is a success banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ist ein Erfolgsbanner.</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Warnung</translation>
     </message>
     <message>
         <source>This is a warning banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ist ein Warnbanner.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>This is an error banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ist ein Fehlerbanner.</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen</translation>
     </message>
 </context>
 <context>
     <name>demo::NotificationLauncherDialog</name>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Benachrichtigungen</translation>
     </message>
     <message>
         <source>Balloon</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprechblase</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
     <message>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>Erfolg</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Warnung</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Information</translation>
     </message>
     <message>
         <source>This is an informational balloon notification.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ist eine informative Sprechblasen-Benachrichtigung.</translation>
     </message>
     <message>
         <source>This is a success balloon notification.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ist eine erfolgreiche Sprechblasen-Benachrichtigung.</translation>
     </message>
     <message>
         <source>This is a warning balloon notification.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ist eine warnende Sprechblasen-Benachrichtigung.</translation>
     </message>
     <message>
         <source>This is an error balloon notification.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ist eine fehlerhafte Sprechblasen-Benachrichtigung.</translation>
     </message>
     <message>
         <source>With 2 actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Mit 2 Aktionen</translation>
     </message>
     <message>
         <source>Sticky</source>
-        <translation type="unfinished"></translation>
+        <translation>Bleibend</translation>
     </message>
     <message>
         <source>Action required</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktion erforderlich</translation>
     </message>
     <message>
         <source>This balloon carries two actions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Sprechblase enthält zwei Aktionen.</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederholen</translation>
     </message>
     <message>
         <source>&quot;Retry&quot; action triggered.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktion „Wiederholen“ ausgelöst.</translation>
     </message>
     <message>
         <source>View Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Details anzeigen</translation>
     </message>
     <message>
         <source>&quot;View Details&quot; action triggered.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktion „Details anzeigen“ ausgelöst.</translation>
     </message>
     <message>
         <source>This balloon has no auto-dismiss timer; close it manually.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Sprechblase hat keinen automatischen Timer; manuell schließen.</translation>
     </message>
     <message>
         <source>Got it</source>
-        <translation type="unfinished"></translation>
+        <translation>Verstanden</translation>
     </message>
     <message>
         <source>Sample anchor</source>
-        <translation type="unfinished"></translation>
+        <translation>Beispielanker</translation>
     </message>
     <message>
         <source>Below</source>
-        <translation type="unfinished"></translation>
+        <translation>Unten</translation>
     </message>
     <message>
         <source>Above</source>
-        <translation type="unfinished"></translation>
+        <translation>Oben</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechts</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzeigen</translation>
     </message>
     <message>
         <source>Reset seen flag</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesehen-Markierung zurücksetzen</translation>
     </message>
     <message>
         <source>This is a sample &quot;Got it&quot; tooltip shown by the demo launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ist ein Beispiel-Tooltip „Verstanden“, angezeigt vom Demo-Launcher.</translation>
     </message>
     <message>
         <source>Dialog banner</source>
-        <translation type="unfinished"></translation>
+        <translation>Dialog-Banner</translation>
     </message>
     <message>
         <source>Open dialog banner demo</source>
-        <translation type="unfinished"></translation>
+        <translation>Dialog-Banner-Demo öffnen</translation>
     </message>
     <message>
         <source>Editor banner</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor-Banner</translation>
     </message>
     <message>
         <source>This is an informational editor banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ist ein informativer Editor-Banner.</translation>
     </message>
     <message>
         <source>This is a success editor banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ist ein erfolgreicher Editor-Banner.</translation>
     </message>
     <message>
         <source>This is a warning editor banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ist ein warnender Editor-Banner.</translation>
     </message>
     <message>
         <source>This is an error editor banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ist ein fehlerhafter Editor-Banner.</translation>
     </message>
     <message>
         <source>Clear all</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle löschen</translation>
     </message>
 </context>
 </TS>

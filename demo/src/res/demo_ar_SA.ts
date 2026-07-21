@@ -99,209 +99,209 @@
     </message>
     <message>
         <source>Demo Balloon</source>
-        <translation type="unfinished"></translation>
+        <translation>بالونة تجريبية</translation>
     </message>
     <message>
         <source>Demo Sticky Balloon</source>
-        <translation type="unfinished"></translation>
+        <translation>بالونة تجريبية ثابتة</translation>
     </message>
     <message>
         <source>&amp;Demo</source>
-        <translation type="unfinished"></translation>
+        <translation>تجريبي(&amp;D)</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>الإشعارات</translation>
     </message>
 </context>
 <context>
     <name>demo::NotificationDemoDialog</name>
     <message>
         <source>Dialog Banner Demo</source>
-        <translation type="unfinished"></translation>
+        <translation>عرض شريط الحوار التجريبي</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>معلومات</translation>
     </message>
     <message>
         <source>This is an informational banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>هذا شريط إعلامي.</translation>
     </message>
     <message>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>نجاح</translation>
     </message>
     <message>
         <source>This is a success banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>هذا شريط نجاح.</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>تحذير</translation>
     </message>
     <message>
         <source>This is a warning banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>هذا شريط تحذير.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>خطأ</translation>
     </message>
     <message>
         <source>This is an error banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>هذا شريط خطأ.</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>مسح</translation>
     </message>
 </context>
 <context>
     <name>demo::NotificationLauncherDialog</name>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>الإشعارات</translation>
     </message>
     <message>
         <source>Balloon</source>
-        <translation type="unfinished"></translation>
+        <translation>بالونة</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>معلومات</translation>
     </message>
     <message>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>نجاح</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>تحذير</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>خطأ</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>معلومات</translation>
     </message>
     <message>
         <source>This is an informational balloon notification.</source>
-        <translation type="unfinished"></translation>
+        <translation>هذا إشعار بالوني إعلامي.</translation>
     </message>
     <message>
         <source>This is a success balloon notification.</source>
-        <translation type="unfinished"></translation>
+        <translation>هذا إشعار بالوني للنجاح.</translation>
     </message>
     <message>
         <source>This is a warning balloon notification.</source>
-        <translation type="unfinished"></translation>
+        <translation>هذا إشعار بالوني للتحذير.</translation>
     </message>
     <message>
         <source>This is an error balloon notification.</source>
-        <translation type="unfinished"></translation>
+        <translation>هذا إشعار بالوني للخطأ.</translation>
     </message>
     <message>
         <source>With 2 actions</source>
-        <translation type="unfinished"></translation>
+        <translation>مع إجراءين</translation>
     </message>
     <message>
         <source>Sticky</source>
-        <translation type="unfinished"></translation>
+        <translation>ثابت</translation>
     </message>
     <message>
         <source>Action required</source>
-        <translation type="unfinished"></translation>
+        <translation>إجراء مطلوب</translation>
     </message>
     <message>
         <source>This balloon carries two actions.</source>
-        <translation type="unfinished"></translation>
+        <translation>تحتوي هذه البالونة على إجراءين.</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished"></translation>
+        <translation>إعادة المحاولة</translation>
     </message>
     <message>
         <source>&quot;Retry&quot; action triggered.</source>
-        <translation type="unfinished"></translation>
+        <translation>تم تنفيذ إجراء &quot;إعادة المحاولة&quot;.</translation>
     </message>
     <message>
         <source>View Details</source>
-        <translation type="unfinished"></translation>
+        <translation>عرض التفاصيل</translation>
     </message>
     <message>
         <source>&quot;View Details&quot; action triggered.</source>
-        <translation type="unfinished"></translation>
+        <translation>تم تنفيذ إجراء &quot;عرض التفاصيل&quot;.</translation>
     </message>
     <message>
         <source>This balloon has no auto-dismiss timer; close it manually.</source>
-        <translation type="unfinished"></translation>
+        <translation>لا تحتوي هذه البالونة على مؤقت إغلاق تلقائي؛ أغلقها يدويًا.</translation>
     </message>
     <message>
         <source>Got it</source>
-        <translation type="unfinished"></translation>
+        <translation>فهمت</translation>
     </message>
     <message>
         <source>Sample anchor</source>
-        <translation type="unfinished"></translation>
+        <translation>مرساة نموذجية</translation>
     </message>
     <message>
         <source>Below</source>
-        <translation type="unfinished"></translation>
+        <translation>أسفل</translation>
     </message>
     <message>
         <source>Above</source>
-        <translation type="unfinished"></translation>
+        <translation>أعلى</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>يمين</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>عرض</translation>
     </message>
     <message>
         <source>Reset seen flag</source>
-        <translation type="unfinished"></translation>
+        <translation>إعادة تعيين علامة المشاهدة</translation>
     </message>
     <message>
         <source>This is a sample &quot;Got it&quot; tooltip shown by the demo launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>هذا تلميح &quot;فهمت&quot; نموذجي يعرضه مشغل العرض التجريبي.</translation>
     </message>
     <message>
         <source>Dialog banner</source>
-        <translation type="unfinished"></translation>
+        <translation>شريط الحوار</translation>
     </message>
     <message>
         <source>Open dialog banner demo</source>
-        <translation type="unfinished"></translation>
+        <translation>فتح عرض شريط الحوار التجريبي</translation>
     </message>
     <message>
         <source>Editor banner</source>
-        <translation type="unfinished"></translation>
+        <translation>شريط المحرر</translation>
     </message>
     <message>
         <source>This is an informational editor banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>هذا شريط محرر إعلامي.</translation>
     </message>
     <message>
         <source>This is a success editor banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>هذا شريط محرر للنجاح.</translation>
     </message>
     <message>
         <source>This is a warning editor banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>هذا شريط محرر للتحذير.</translation>
     </message>
     <message>
         <source>This is an error editor banner.</source>
-        <translation type="unfinished"></translation>
+        <translation>هذا شريط محرر للخطأ.</translation>
     </message>
     <message>
         <source>Clear all</source>
-        <translation type="unfinished"></translation>
+        <translation>مسح الكل</translation>
     </message>
 </context>
 </TS>
