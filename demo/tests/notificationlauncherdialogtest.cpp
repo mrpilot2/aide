@@ -190,18 +190,16 @@ namespace
         }
     }
 
-    // The tooltip is a top-level QWidget with no parent (GotItTooltip's
-    // default parent is nullptr), so it cannot be found via
-    // dialog.findChild<>(). Dismissed/never-shown instances stay in
-    // topLevelWidgets() until their deleteLater() is actually processed, so
-    // only a visible one counts as "currently showing".
-    GotItTooltip* findVisibleTooltip()
+    // The tooltip is reparented (in showGotIt()) to the target's window,
+    // i.e. somewhere under dialog once shown, so it's found via
+    // dialog.findChildren<>() rather than topLevelWidgets(). Dismissed/
+    // never-shown instances stay around until their deleteLater() is
+    // actually processed, so only a visible one counts as "currently
+    // showing".
+    GotItTooltip* findVisibleTooltip(const QWidget& root)
     {
-        for (auto* widget : QApplication::topLevelWidgets()) {
-            if (auto* tooltip = qobject_cast<GotItTooltip*>(widget);
-                tooltip != nullptr && tooltip->isVisible()) {
-                return tooltip;
-            }
+        for (auto* tooltip : root.findChildren<GotItTooltip*>()) {
+            if (tooltip->isVisible()) { return tooltip; }
         }
         return nullptr;
     }
@@ -209,14 +207,15 @@ namespace
     // One position's worth of the "show every position" loop, pulled out of
     // its TEST_CASE so that function's cognitive complexity (clang-tidy caps
     // it around 25) stays under the for-loop-plus-several-REQUIRE budget.
-    void showAndDismissGotIt(QComboBox& positionCombo, int index,
-                             QPushButton& showButton, QPushButton& resetButton)
+    void showAndDismissGotIt(const QWidget& root, QComboBox& positionCombo,
+                             int index, QPushButton& showButton,
+                             QPushButton& resetButton)
     {
         positionCombo.setCurrentIndex(index);
         QTest::mouseClick(&showButton, Qt::LeftButton);
         pump();
 
-        auto* tooltip = findVisibleTooltip();
+        auto* tooltip = findVisibleTooltip(root);
         REQUIRE(tooltip != nullptr);
         REQUIRE(tooltip->isVisible());
 
@@ -517,7 +516,8 @@ TEST_CASE("Show raises a GotItTooltip for every offered position",
     REQUIRE(positionCombo->count() == 3);
 
     for (int index = 0; index < positionCombo->count(); ++index) {
-        showAndDismissGotIt(*positionCombo, index, *showButton, *resetButton);
+        showAndDismissGotIt(dialog, *positionCombo, index, *showButton,
+                            *resetButton);
     }
 }
 
@@ -548,19 +548,19 @@ TEST_CASE("The \"Got it\" section of a NotificationLauncherDialog",
         QTest::mouseClick(showButton, Qt::LeftButton);
         pump();
 
-        auto* tooltip = findVisibleTooltip();
+        auto* tooltip = findVisibleTooltip(dialog);
         REQUIRE(tooltip != nullptr);
         auto* gotItButton = tooltip->findChild<QPushButton*>();
         REQUIRE(gotItButton != nullptr);
         QTest::mouseClick(gotItButton, Qt::LeftButton);
         pump();
 
-        REQUIRE(findVisibleTooltip() == nullptr);
+        REQUIRE(findVisibleTooltip(dialog) == nullptr);
 
         QTest::mouseClick(showButton, Qt::LeftButton);
         pump();
 
-        REQUIRE(findVisibleTooltip() == nullptr);
+        REQUIRE(findVisibleTooltip(dialog) == nullptr);
     }
 
     SECTION("Reset seen flag reshows the tooltip afterwards")
@@ -568,20 +568,20 @@ TEST_CASE("The \"Got it\" section of a NotificationLauncherDialog",
         QTest::mouseClick(showButton, Qt::LeftButton);
         pump();
 
-        auto* firstTooltip = findVisibleTooltip();
+        auto* firstTooltip = findVisibleTooltip(dialog);
         REQUIRE(firstTooltip != nullptr);
         auto* gotItButton = firstTooltip->findChild<QPushButton*>();
         REQUIRE(gotItButton != nullptr);
         QTest::mouseClick(gotItButton, Qt::LeftButton);
         pump();
 
-        REQUIRE(findVisibleTooltip() == nullptr);
+        REQUIRE(findVisibleTooltip(dialog) == nullptr);
 
         QTest::mouseClick(resetButton, Qt::LeftButton);
         QTest::mouseClick(showButton, Qt::LeftButton);
         pump();
 
-        auto* secondTooltip = findVisibleTooltip();
+        auto* secondTooltip = findVisibleTooltip(dialog);
         REQUIRE(secondTooltip != nullptr);
         REQUIRE(secondTooltip->isVisible());
 
