@@ -67,6 +67,7 @@ nav:
   - Fundamentals:
     - HierarchicalId: fundamentals/hierarchical-id.md
     - Application Lifecycle: fundamentals/application-lifecycle.md
+    - ApplicationConfig: fundamentals/application-config.md
   - Core Concepts:
     - Action Registry: core/action-registry.md
     - Appearance: core/appearance.md
@@ -75,6 +76,7 @@ nav:
       - Adding Settings Pages: core/settings/adding-settings-pages.md
     - Key Bindings: core/key-bindings.md
     - Logging: core/logging.md
+    - Notifications: core/notifications.md
   - UI Components:
     - Main Window: ui/main-window.md
     - Widgets:

@@ -27,13 +27,23 @@ aide::Application::setApplicationDisplayName("My Application"); // optional, for
 const aide::Application app(argc, argv);
 ```
 
+To opt into or out of built-in features, pass an [`ApplicationConfig`](application-config.md):
+
+```cpp
+aide::ApplicationConfig config;
+config.setEnabled(aide::ApplicationConfig::Feature::ReportBugAction, true);
+
+const aide::Application app(argc, argv, config);
+```
+
 During construction, `Application` internally creates and wires:
 
 - **Logger** — spdlog-backed; log files are written to the platform's standard app data location
 - **Settings stores** — two `SettingsInterface` instances (versionable and unversionable) backed by `QSettings`
 - **Main window** — a `QMainWindow` with pre-built `File` and `Help` menus
 - **Action registry** — populated with the built-in actions (`FILE_SETTINGS`, `FILE_QUIT`, `HELP_ABOUT_AIDE`, `HELP_ABOUT_QT`)
-- **Settings dialog** — including the built-in keymap settings page
+- **Settings dialog** — including the built-in keymap and [notifications](../core/notifications.md) settings pages
+- **Notification manager** and balloon host — see [Notifications](../core/notifications.md)
 
 ---
 
@@ -46,6 +56,7 @@ auto mainWindow    = app.mainWindow();       // shared_ptr<QMainWindow>
 auto actionReg     = app.actionRegistry();   // shared_ptr<ActionRegistryInterface>
 auto settings      = app.settingsProvider(); // shared_ptr<AideSettingsProvider>
 auto translator    = app.translator();       // shared_ptr<TranslatorInterface>
+auto& notifManager = app.notificationManager(); // NotificationManagerInterface&
 ```
 
 The logger is accessed statically (because it is also used before the app object exists):
