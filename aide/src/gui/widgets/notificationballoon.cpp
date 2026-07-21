@@ -117,13 +117,21 @@ NotificationBalloon::NotificationBalloon(NotificationType type,
     , m_closeButton(new QToolButton(this))
     , m_actionsLayout(new QHBoxLayout)
 {
-    // No WindowStaysOnTopHint: that hint floats above every window on the
-    // desktop, not just this app's own window, so switching to another app
-    // (Alt+Tab) left the balloon stranded on top of it. Qt::Tool with a
-    // parent instead makes this a transient child of the parent's window,
-    // so the window manager keeps it above only that window and moves,
-    // raises, and minimizes it together with its owner.
-    setWindowFlags(Qt::FramelessWindowHint | Qt::Tool);
+    if (parent == nullptr) {
+        // No anchor widget available (e.g. headless tests): fall back to
+        // an independent top-level tool window. No WindowStaysOnTopHint:
+        // that hint floats above every window on the desktop, not just
+        // this app's own window.
+        setWindowFlags(Qt::FramelessWindowHint | Qt::Tool);
+    }
+    // Otherwise stay a plain child widget of the anchor. A separate
+    // top-level (even Qt::Tool, transient-for the anchor) requires
+    // requesting absolute screen coordinates to position it, which
+    // Wayland's compositor ignores/reinterprets for toplevels - it placed
+    // the balloon relative to whatever surface currently had focus instead
+    // of the anchor. A plain child positioned in the anchor's local
+    // coordinate space has no such protocol restriction and works
+    // identically on X11 and Wayland.
     setAttribute(Qt::WA_TranslucentBackground);
     setFixedWidth(BALLOON_WIDTH);
 
@@ -256,6 +264,7 @@ void NotificationBalloon::slideIn(const QPoint& fromPos, const QPoint& toPos)
 {
     move(fromPos);
     show();
+    raise();
 
     m_slideAnimation = new QPropertyAnimation(this, "pos", this);
     m_slideAnimation->setDuration(SLIDE_ANIMATION_MS);

@@ -4,15 +4,14 @@
 
 #include <QCoreApplication>
 #include <QEvent>
-#include <QGuiApplication>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QLayout>
 #include <QList>
 #include <QPainter>
 #include <QPainterPath>
 #include <QPolygon>
 #include <QPushButton>
-#include <QScreen>
 #include <QTimer>
 #include <QToolButton>
 #include <QVBoxLayout>
@@ -174,12 +173,10 @@ GotItTooltip::GotItTooltip(SettingsInterface& settings, const char* id,
     , m_linkButton(new QToolButton(this))
     , m_gotItButton(new QPushButton(tr("Got it"), this))
 {
-    // No WindowStaysOnTopHint: see NotificationBalloon's constructor for why
-    // - it floats above every window on the desktop rather than just this
-    // one, so Alt+Tab to another app left the tooltip stranded on top of
-    // it. showGotIt() reparents this to the target's window once known,
-    // which keeps Qt::Tool's transient-window behaviour scoped to it.
-    setWindowFlags(Qt::FramelessWindowHint | Qt::Tool);
+    // Stays a plain child widget (see NotificationBalloon's constructor for
+    // why): showGotIt() reparents this to the target's window once known,
+    // and a plain child positioned in that window's local coordinate space
+    // needs no window flags and has no Wayland absolute-positioning issue.
     setAttribute(Qt::WA_TranslucentBackground);
     setFixedWidth(TOOLTIP_WIDTH);
 
@@ -325,12 +322,11 @@ void GotItTooltip::showGotIt(QWidget* target, GotItPosition position)
     }
 
     m_target = target;
-    if (auto* window = target->window(); window != nullptr) {
-        // Transient child of the target's own window (see the constructor's
-        // comment): keeps this tooltip above only that window, and moved,
-        // raised, and minimized together with it.
-        setParent(window, windowFlags());
-    }
+    // QWidget::window() is never null (a parentless widget is its own
+    // window), so this always finds a real anchor. Plain child of the
+    // target's own window: keeps this tooltip positioned, raised, and
+    // minimized together with it.
+    setParent(target->window());
     m_position = position;
     applyArrowMargins();
     enqueue();
@@ -432,10 +428,18 @@ void GotItTooltip::positionNearTarget()
 {
     if (m_target.isNull()) { return; }
 
-    const QRect targetRect(m_target->mapToGlobal(QPoint(0, 0)),
+    auto* window = m_target->window();
+    const QRect targetRect(m_target->mapTo(window, QPoint(0, 0)),
                            m_target->size());
-    const int width  = TOOLTIP_WIDTH;
-    const int height = sizeHint().height();
+    const int width = TOOLTIP_WIDTH;
+    // sizeHint().height() alone under-measures the wrapped body label here:
+    // it reflects the layout's current width, which may still be the
+    // widget's pre-resize default rather than the fixed TOOLTIP_WIDTH,
+    // giving a too-short box for the actual wrapped text. Asking the layout
+    // for the height at the width we're about to set avoids that.
+    const int height = layout()->hasHeightForWidth()
+                           ? layout()->totalHeightForWidth(width)
+                           : sizeHint().height();
     resize(width, height);
 
     int posX = targetRect.left();
@@ -460,16 +464,13 @@ void GotItTooltip::positionNearTarget()
         break;
     }
 
-    if (auto* screen = m_target->screen(); screen != nullptr) {
-        const auto avail = screen->availableGeometry();
-        posX             = std::clamp(posX, avail.left() + SCREEN_EDGE_MARGIN,
-                                      std::max(avail.left() + SCREEN_EDGE_MARGIN,
-                                               avail.right() - width - SCREEN_EDGE_MARGIN));
-        posY =
-            std::clamp(posY, avail.top() + SCREEN_EDGE_MARGIN,
-                       std::max(avail.top() + SCREEN_EDGE_MARGIN,
-                                avail.bottom() - height - SCREEN_EDGE_MARGIN));
-    }
+    const QRect avail = window->rect();
+    posX              = std::clamp(posX, avail.left() + SCREEN_EDGE_MARGIN,
+                                   std::max(avail.left() + SCREEN_EDGE_MARGIN,
+                                            avail.right() - width - SCREEN_EDGE_MARGIN));
+    posY              = std::clamp(posY, avail.top() + SCREEN_EDGE_MARGIN,
+                                   std::max(avail.top() + SCREEN_EDGE_MARGIN,
+                                            avail.bottom() - height - SCREEN_EDGE_MARGIN));
 
     move(posX, posY);
 }

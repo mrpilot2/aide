@@ -4,6 +4,7 @@
 
 #include <QEvent>
 #include <QGuiApplication>
+#include <QPoint>
 #include <QScreen>
 #include <QWidget>
 
@@ -101,7 +102,13 @@ NotificationBalloonPlacement NotificationBalloonHost::placement() const
 
 QRect NotificationBalloonHost::anchorRect() const
 {
-    if (m_anchorWidget != nullptr) { return m_anchorWidget->frameGeometry(); }
+    // Balloons are plain child widgets of the anchor (see
+    // NotificationBalloon's constructor), so their geometry is positioned
+    // in the anchor's own local coordinate space, not global screen
+    // coordinates.
+    if (m_anchorWidget != nullptr) {
+        return QRect(QPoint(0, 0), m_anchorWidget->size());
+    }
     if (auto* screen = QGuiApplication::primaryScreen(); screen != nullptr) {
         return screen->availableGeometry();
     }
@@ -171,6 +178,7 @@ void NotificationBalloonHost::relayout(bool animateNewest)
             balloon->slideIn(startPos, targetPos);
         } else {
             balloon->setGeometry(posX, posY, width, height);
+            balloon->raise();
         }
 
         edgeY =

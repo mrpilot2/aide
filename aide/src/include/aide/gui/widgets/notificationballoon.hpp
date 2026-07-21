@@ -44,7 +44,8 @@ namespace aide::widgets
 
         /**
          * @brief Show the balloon and slide it from @p fromPos to @p toPos
-         * (both top-left points in global screen coordinates).
+         * (both top-left points in the parent widget's local coordinate
+         * space).
          */
         void slideIn(const QPoint& fromPos, const QPoint& toPos);
 

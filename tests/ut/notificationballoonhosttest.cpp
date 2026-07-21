@@ -31,15 +31,12 @@ using aide::widgets::NotificationBalloon;
 
 namespace
 {
-    std::size_t liveBalloonCount()
+    std::size_t liveBalloonCount(const QWidget& anchor)
     {
-        std::size_t count = 0;
-        for (auto* widget : QApplication::topLevelWidgets()) {
-            if (qobject_cast<NotificationBalloon*>(widget) != nullptr) {
-                ++count;
-            }
-        }
-        return count;
+        return static_cast<std::size_t>(
+            anchor
+                .findChildren<NotificationBalloon*>(Qt::FindDirectChildrenOnly)
+                .size());
     }
 
     Notification makeNotification(HierarchicalId groupId)
@@ -77,9 +74,9 @@ TEST_CASE("A NotificationBalloonHost", "[NotificationBalloonHost]")
             .displayName        = "Build",
             .defaultDisplayType = NotificationDisplayType::Balloon});
 
-        const auto before = liveBalloonCount();
+        const auto before = liveBalloonCount(anchor);
         manager.post(makeNotification(groupId));
-        REQUIRE(liveBalloonCount() == before + 1);
+        REQUIRE(liveBalloonCount(anchor) == before + 1);
     }
 
     SECTION("shows a balloon for a StickyBalloon-routed notification")
@@ -89,9 +86,9 @@ TEST_CASE("A NotificationBalloonHost", "[NotificationBalloonHost]")
             .displayName        = "Build",
             .defaultDisplayType = NotificationDisplayType::StickyBalloon});
 
-        const auto before = liveBalloonCount();
+        const auto before = liveBalloonCount(anchor);
         manager.post(makeNotification(groupId));
-        REQUIRE(liveBalloonCount() == before + 1);
+        REQUIRE(liveBalloonCount(anchor) == before + 1);
     }
 
     SECTION("shows no balloon for a None-routed notification")
@@ -101,16 +98,16 @@ TEST_CASE("A NotificationBalloonHost", "[NotificationBalloonHost]")
             .displayName        = "Build",
             .defaultDisplayType = NotificationDisplayType::None});
 
-        const auto before = liveBalloonCount();
+        const auto before = liveBalloonCount(anchor);
         manager.post(makeNotification(groupId));
-        REQUIRE(liveBalloonCount() == before);
+        REQUIRE(liveBalloonCount(anchor) == before);
     }
 
     SECTION("shows no balloon for an unregistered group")
     {
-        const auto before = liveBalloonCount();
+        const auto before = liveBalloonCount(anchor);
         manager.post(makeNotification(groupId));
-        REQUIRE(liveBalloonCount() == before);
+        REQUIRE(liveBalloonCount(anchor) == before);
     }
 
     SECTION("stacks a balloon per posted notification")
@@ -120,10 +117,10 @@ TEST_CASE("A NotificationBalloonHost", "[NotificationBalloonHost]")
             .displayName        = "Build",
             .defaultDisplayType = NotificationDisplayType::Balloon});
 
-        const auto before = liveBalloonCount();
+        const auto before = liveBalloonCount(anchor);
         manager.post(makeNotification(groupId));
         manager.post(makeNotification(groupId));
-        REQUIRE(liveBalloonCount() == before + 2);
+        REQUIRE(liveBalloonCount(anchor) == before + 2);
     }
 }
 
@@ -153,7 +150,7 @@ TEST_CASE("A NotificationBalloonHost's placement setting",
                 .isValid());
 
         manager.post(makeNotification(groupId));
-        REQUIRE(liveBalloonCount() > 0);
+        REQUIRE(liveBalloonCount(anchor) > 0);
     }
 
     SECTION("honours an explicit corner setting")
@@ -162,8 +159,8 @@ TEST_CASE("A NotificationBalloonHost's placement setting",
             HierarchicalId("notifications")("balloonPlacement"),
             static_cast<int>(NotificationBalloonPlacement::TopLeft));
 
-        const auto before = liveBalloonCount();
+        const auto before = liveBalloonCount(anchor);
         manager.post(makeNotification(groupId));
-        REQUIRE(liveBalloonCount() == before + 1);
+        REQUIRE(liveBalloonCount(anchor) == before + 1);
     }
 }
