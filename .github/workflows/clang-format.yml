@@ -25,6 +25,7 @@ jobs:
       - uses: EndBug/add-and-commit@v10
         id: commit
         with:
+          add: '**/*.hpp **/*.cpp'
           author_name: Clang-format Robot
           author_email: bot@github.com
           message: 'style: automatic clang-format changes'
