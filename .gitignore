@@ -5,3 +5,4 @@ site/
 docs/api-reference/*
 !docs/api-reference/index.md
 .idea
+.ccache/

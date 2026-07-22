@@ -27,6 +27,7 @@ jobs:
       - uses: EndBug/add-and-commit@v10
         id: commit
         with:
+          add: '3rd-party-licenses.md'
           author_name: License Check Robot
           author_email: bot@github.com
           message: 'chore: automatic third party licenses update'
