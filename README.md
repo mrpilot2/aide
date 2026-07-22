@@ -1,4 +1,4 @@
-# aIDE
+ # aIDE
 
 > A JetBrains IntelliJ-inspired application platform for C++/Qt desktop applications.
 
