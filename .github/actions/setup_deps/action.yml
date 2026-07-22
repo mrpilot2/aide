@@ -28,6 +28,8 @@ runs:
 
     - name: Setup ccache
       uses: hendrikmuhs/ccache-action@v1.2
+      with:
+          key: ${{ github.job }}-${{ runner.os }}
     
     - name: Setup cmake
       uses: jwlawson/actions-setup-cmake@v2
