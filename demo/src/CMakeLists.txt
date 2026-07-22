@@ -33,6 +33,7 @@ add_executable(
   res/icons/demo_icons.qrc
   colorschemereactor.hpp
   demosettingspage.cpp
+  demosetup.cpp
   main.cpp
   notificationdemodialog.cpp
   notificationlauncherdialog.cpp
