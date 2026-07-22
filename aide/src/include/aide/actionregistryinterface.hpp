@@ -10,6 +10,7 @@
 
 #include <QKeySequence>
 #include <QList>
+#include <QPointer>
 
 #include <aide/menucontainerinterface.hpp>
 
@@ -23,7 +24,7 @@ namespace aide
 
     struct Action
     {
-        std::weak_ptr<QAction> action;
+        QPointer<QAction> action;
         std::string description;
         QList<QKeySequence> defaultKeySequences;
         QList<QKeySequence> keySequences;
@@ -50,19 +51,19 @@ namespace aide
     public:
         virtual ~ActionRegistryInterface() = default;
 
-        virtual void registerAction(std::weak_ptr<QAction> action,
+        virtual void registerAction(QAction* action,
                                     const HierarchicalId& uniqueId) = 0;
 
-        virtual void registerAction(std::weak_ptr<QAction> action,
+        virtual void registerAction(QAction* action,
                                     const HierarchicalId& uniqueId,
                                     std::string description) = 0;
 
         virtual void registerAction(
-            std::weak_ptr<QAction> action, const HierarchicalId& uniqueId,
+            QAction* action, const HierarchicalId& uniqueId,
             const std::vector<QKeySequence>& defaultKeySequences) = 0;
 
         virtual void registerAction(
-            std::weak_ptr<QAction> action, const HierarchicalId& uniqueId,
+            QAction* action, const HierarchicalId& uniqueId,
             std::string description,
             const std::vector<QKeySequence>& defaultKeySequences) = 0;
 

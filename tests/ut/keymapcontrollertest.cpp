@@ -52,21 +52,20 @@ namespace
             return m_actions;
         }
 
-        void registerAction(std::weak_ptr<QAction> /*action*/,
+        void registerAction(QAction* /*action*/,
                             const HierarchicalId& /*uniqueId*/) override
         {}
-        void registerAction(std::weak_ptr<QAction> /*action*/,
+        void registerAction(QAction* /*action*/,
                             const HierarchicalId& /*uniqueId*/,
                             std::string /*description*/) override
         {}
         void registerAction(
-            std::weak_ptr<QAction> /*action*/,
-            const HierarchicalId& /*uniqueId*/,
+            QAction* /*action*/, const HierarchicalId& /*uniqueId*/,
             const std::vector<QKeySequence>& /*defaultKeySequences*/) override
         {}
         void registerAction(
-            std::weak_ptr<QAction> /*action*/,
-            const HierarchicalId& /*uniqueId*/, std::string /*description*/,
+            QAction* /*action*/, const HierarchicalId& /*uniqueId*/,
+            std::string /*description*/,
             const std::vector<QKeySequence>& /*defaultKeySequences*/) override
         {}
         [[nodiscard]] std::optional<QAction*> action(

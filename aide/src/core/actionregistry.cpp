@@ -14,13 +14,13 @@ ActionRegistry::ActionRegistry(SettingsInterface& settingsInterface,
     , logger{std::move(loggerInterface)}
 {}
 
-void ActionRegistry::registerAction(const std::weak_ptr<QAction> action,
+void ActionRegistry::registerAction(QAction* action,
                                     const HierarchicalId& uniqueId)
 {
     registerAction(action, uniqueId, "", {});
 }
 
-void ActionRegistry::registerAction(const std::weak_ptr<QAction> action,
+void ActionRegistry::registerAction(QAction* action,
                                     const HierarchicalId& uniqueId,
                                     std::string description)
 {
@@ -28,14 +28,14 @@ void ActionRegistry::registerAction(const std::weak_ptr<QAction> action,
 }
 
 void ActionRegistry::registerAction(
-    const std::weak_ptr<QAction> action, const HierarchicalId& uniqueId,
+    QAction* action, const HierarchicalId& uniqueId,
     const std::vector<QKeySequence>& defaultKeySequences)
 {
     registerAction(action, uniqueId, "", defaultKeySequences);
 }
 
 void ActionRegistry::registerAction(
-    const std::weak_ptr<QAction> action, const HierarchicalId& uniqueId,
+    QAction* action, const HierarchicalId& uniqueId,
     const std::string description,
     const std::vector<QKeySequence>& defaultKeySequences)
 {
@@ -65,14 +65,12 @@ void ActionRegistry::registerAction(
                                 .defaultKeySequences = qtDefaultSequences,
                                 .keySequences        = userKeySequences};
 
-    if (!action.expired()) {
-        const auto sharedAction = action.lock();
-        sharedAction->setStatusTip(QString::fromStdString(description));
+    if (action != nullptr) {
+        action->setStatusTip(QString::fromStdString(description));
         const auto shortcuts = detailedAction.getActiveKeySequences();
-        sharedAction->setShortcuts(shortcuts.size() == 1 &&
-                                           shortcuts.at(0).isEmpty()
-                                       ? QList<QKeySequence>()
-                                       : shortcuts);
+        action->setShortcuts(shortcuts.size() == 1 && shortcuts.at(0).isEmpty()
+                                 ? QList<QKeySequence>()
+                                 : shortcuts);
     }
     m_actions.try_emplace(uniqueId, detailedAction);
 }
@@ -98,7 +96,7 @@ void ActionRegistry::modifyShortcutsForAction(
 
     auto& act = m_actions.at(id);
 
-    act.action.lock()->setShortcuts(shortcuts);
+    if (act.action != nullptr) { act.action->setShortcuts(shortcuts); }
 
     if (Action::areKeySequencesTheSame(shortcuts, act.defaultKeySequences)) {
         act.keySequences.clear();
@@ -117,7 +115,7 @@ const std::map<HierarchicalId, Action>& ActionRegistry::actions() const
 std::optional<QAction*> ActionRegistry::action(const HierarchicalId& id) const
 {
     if (const auto it = m_actions.find(id); it != m_actions.end()) {
-        return it->second.action.lock().get();
+        return it->second.action.data();
     }
 
     logger->warn(

@@ -79,10 +79,10 @@ void MainWindow::registerActions(
     auto* menuFile{menuFileContainer->menu()};
     menuFile->setTitle(QApplication::tr("&File", "MainWindow"));
 
-    m_actionSettings = std::make_shared<QAction>(tr("Settings"), this);
-    connect(m_actionSettings.get(), &QAction::triggered, m_controller.get(),
+    m_actionSettings = new QAction(tr("Settings"), this);
+    connect(m_actionSettings, &QAction::triggered, m_controller.get(),
             &MainWindowController::onUserWantsToShowSettingsDialog);
-    menuFile->addAction(m_actionSettings.get());
+    menuFile->addAction(m_actionSettings);
 
     actionRegistry->registerAction(
         m_actionSettings, CONSTANTS().FILE_SETTINGS,
@@ -90,11 +90,11 @@ void MainWindow::registerActions(
         {QKeySequence(Qt::CTRL | Qt::ALT | Qt::Key_S)});
     menuFile->addSeparator();
 
-    m_actionQuit = std::make_shared<QAction>(
-        createIconFromTheme("application-exit"), tr("Quit"), this);
-    connect(m_actionQuit.get(), &QAction::triggered, QApplication::instance(),
+    m_actionQuit =
+        new QAction(createIconFromTheme("application-exit"), tr("Quit"), this);
+    connect(m_actionQuit, &QAction::triggered, QApplication::instance(),
             &QApplication::quit);
-    menuFile->addAction(m_actionQuit.get());
+    menuFile->addAction(m_actionQuit);
 
     actionRegistry->registerAction(
         m_actionQuit, CONSTANTS().FILE_QUIT,
@@ -112,17 +112,17 @@ void MainWindow::registerActions(
 
     registerGatedHelpActions(menuHelp, actionRegistry);
 
-    m_actionAboutAide = std::make_shared<QAction>(tr("About") + " aIDE", this);
-    connect(m_actionAboutAide.get(), &QAction::triggered, m_controller.get(),
+    m_actionAboutAide = new QAction(tr("About") + " aIDE", this);
+    connect(m_actionAboutAide, &QAction::triggered, m_controller.get(),
             &MainWindowController::onUserWantsToShowAboutAideDialog);
-    menuHelp->addAction(m_actionAboutAide.get());
+    menuHelp->addAction(m_actionAboutAide);
     actionRegistry->registerAction(m_actionAboutAide,
                                    CONSTANTS().HELP_ABOUT_AIDE);
 
-    m_actionAboutQt = std::make_shared<QAction>(tr("About Qt"), this);
-    connect(m_actionAboutQt.get(), &QAction::triggered,
-            QApplication::instance(), &QApplication::aboutQt);
-    menuHelp->addAction(m_actionAboutQt.get());
+    m_actionAboutQt = new QAction(tr("About Qt"), this);
+    connect(m_actionAboutQt, &QAction::triggered, QApplication::instance(),
+            &QApplication::aboutQt);
+    menuHelp->addAction(m_actionAboutQt);
 
     actionRegistry->registerAction(m_actionAboutQt, CONSTANTS().HELP_ABOUT_QT);
     m_ui->menubar->addMenu(menuHelp);
@@ -144,13 +144,13 @@ void MainWindow::registerViewMenu(
     auto* menuView{menuViewContainer->menu()};
     menuView->setTitle(QApplication::tr("&View", "MainWindow"));
 
-    m_actionFullScreen = std::make_shared<QAction>(tr("Full Screen"), this);
+    m_actionFullScreen = new QAction(tr("Full Screen"), this);
     m_actionFullScreen->setCheckable(true);
     m_actionFullScreen->setChecked(
         windowState().testFlag(Qt::WindowFullScreen));
-    connect(m_actionFullScreen.get(), &QAction::triggered, this,
+    connect(m_actionFullScreen, &QAction::triggered, this,
             &MainWindow::toggleFullScreen);
-    menuView->addAction(m_actionFullScreen.get());
+    menuView->addAction(m_actionFullScreen);
 
     actionRegistry->registerAction(m_actionFullScreen,
                                    CONSTANTS().VIEW_FULLSCREEN,
@@ -174,14 +174,14 @@ void MainWindow::registerGatedHelpActions(
     if (m_config.isEnabled(
             ApplicationConfig::Feature::ShowLogInFileManagerAction)) {
         const core::OsFileManagerLauncher launcher;
-        m_actionShowLogInFileManager = std::make_shared<QAction>(
+        m_actionShowLogInFileManager = new QAction(
             tr("Show Log in %1")
                 .arg(QString::fromStdString(launcher.displayName())),
             this);
-        connect(m_actionShowLogInFileManager.get(), &QAction::triggered,
+        connect(m_actionShowLogInFileManager, &QAction::triggered,
                 m_controller.get(),
                 &MainWindowController::onUserWantsToShowLogInFileManager);
-        menuHelp->addAction(m_actionShowLogInFileManager.get());
+        menuHelp->addAction(m_actionShowLogInFileManager);
         actionRegistry->registerAction(
             m_actionShowLogInFileManager,
             CONSTANTS().HELP_SHOW_LOG_IN_FILE_MANAGER);
@@ -189,12 +189,10 @@ void MainWindow::registerGatedHelpActions(
     }
 
     if (m_config.isEnabled(ApplicationConfig::Feature::ReportBugAction)) {
-        m_actionReportBug =
-            std::make_shared<QAction>(tr("Report Bug in aIDE"), this);
-        connect(m_actionReportBug.get(), &QAction::triggered,
-                m_controller.get(),
+        m_actionReportBug = new QAction(tr("Report Bug in aIDE"), this);
+        connect(m_actionReportBug, &QAction::triggered, m_controller.get(),
                 &MainWindowController::onUserWantsToReportBug);
-        menuHelp->addAction(m_actionReportBug.get());
+        menuHelp->addAction(m_actionReportBug);
         actionRegistry->registerAction(m_actionReportBug,
                                        CONSTANTS().HELP_REPORT_BUG);
         anyGatedActionRegistered = true;
@@ -233,7 +231,7 @@ std::shared_ptr<TranslatorInterface> MainWindow::translator() const
 
 void MainWindow::refreshIcons()
 {
-    if (m_actionQuit) {
+    if (m_actionQuit != nullptr) {
         m_actionQuit->setIcon(createIconFromTheme("application-exit"));
     }
 }

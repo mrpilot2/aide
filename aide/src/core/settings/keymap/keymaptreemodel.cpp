@@ -137,7 +137,7 @@ QVariant KeyMapTreeModel::data(const QModelIndex& index, const int role) const
     if (role == Qt::DecorationRole && index.column() == 0) {
         const auto action = findCorrespondingAction(index);
         if (!action) { return QIcon::fromTheme("folder"); }
-        if (const auto qaction = action->action.lock(); qaction != nullptr) {
+        if (const auto* qaction = action->action.data(); qaction != nullptr) {
             return qaction->icon();
         }
         return QIcon::fromTheme("folder");
@@ -201,7 +201,7 @@ std::optional<QString> KeyMapTreeModel::translatedLabel(
     const QModelIndex& index) const
 {
     if (const auto action = findCorrespondingAction(index)) {
-        if (const auto qaction = action->action.lock();
+        if (const auto* qaction = action->action.data();
             qaction != nullptr && !qaction->text().isEmpty()) {
             return stripMnemonic(qaction->text());
         }

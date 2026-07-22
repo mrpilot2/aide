@@ -21,19 +21,18 @@ namespace aide
         explicit ActionRegistry(SettingsInterface& settingsInterface,
                                 LoggerPtr loggerInterface);
 
-        void registerAction(std::weak_ptr<QAction> action,
+        void registerAction(QAction* action,
                             const HierarchicalId& uniqueId) override;
 
-        void registerAction(std::weak_ptr<QAction> action,
-                            const HierarchicalId& uniqueId,
+        void registerAction(QAction* action, const HierarchicalId& uniqueId,
                             std::string description) override;
 
         void registerAction(
-            std::weak_ptr<QAction> action, const HierarchicalId& uniqueId,
+            QAction* action, const HierarchicalId& uniqueId,
             const std::vector<QKeySequence>& defaultKeySequences) override;
 
         void registerAction(
-            std::weak_ptr<QAction> action, const HierarchicalId& uniqueId,
+            QAction* action, const HierarchicalId& uniqueId,
             std::string description,
             const std::vector<QKeySequence>& defaultKeySequences) override;
 

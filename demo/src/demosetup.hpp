@@ -30,19 +30,19 @@ namespace demo
     /// Registers the demo's example settings pages.
     void registerDemoSettingsPages(const aide::Application& app);
 
-    /// Adds a "New project ..." entry to the File menu.
-    [[nodiscard]] std::shared_ptr<QAction> extendFileMenu(
-        const aide::Application& app);
+    /// Adds a "New project ..." entry to the File menu. The returned action
+    /// is owned by the File menu; the caller does not need to keep it alive.
+    QAction* extendFileMenu(const aide::Application& app);
 
     /// Adds a checkable "Notification Log" toggle to the View menu, wired to
-    /// persist visibility and splitter state via the demo's settings.
-    [[nodiscard]] std::shared_ptr<QAction> addNotificationLogToggle(
-        const aide::Application& app);
+    /// persist visibility and splitter state via the demo's settings. The
+    /// returned action is owned by the View menu.
+    QAction* addNotificationLogToggle(const aide::Application& app);
 
     /// Adds a "Demo" menu (before "Help") with a Notifications launcher
-    /// action, and registers the demo notification groups it exercises.
-    [[nodiscard]] std::shared_ptr<QAction> buildDemoMenu(
-        const aide::Application& app);
+    /// action, and registers the demo notification groups it exercises. The
+    /// returned action is owned by the Demo menu.
+    QAction* buildDemoMenu(const aide::Application& app);
 } // namespace demo
 
 #endif // DEMO_DEMO_SETUP_HPP

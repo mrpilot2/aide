@@ -45,11 +45,9 @@ int main(int argc, char* argv[])
     demo::buildCentralWidget(app);
     demo::registerDemoSettingsPages(app);
 
-    // Actions returned below are kept alive for the whole event loop: see
-    // the ownership note in demosetup.hpp.
-    auto actionNewProject      = demo::extendFileMenu(app);
-    auto actionNotificationLog = demo::addNotificationLogToggle(app);
-    auto actionNotifications   = demo::buildDemoMenu(app);
+    demo::extendFileMenu(app);
+    demo::addNotificationLogToggle(app);
+    demo::buildDemoMenu(app);
 
     return aide::Application::exec();
 }

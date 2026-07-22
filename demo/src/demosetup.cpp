@@ -131,32 +131,28 @@ namespace demo
             aide::AideSettingsProvider::unversionableSettings()));
     }
 
-    std::shared_ptr<QAction> extendFileMenu(const aide::Application& app)
+    QAction* extendFileMenu(const aide::Application& app)
     {
         auto mainWindow     = app.mainWindow();
         auto actionRegistry = app.actionRegistry();
         auto menuFileContainer{actionRegistry->getMenuContainer(
             aide::HierarchicalId("Main Menu")("File"))};
 
-        std::shared_ptr<QAction> actionNewProject;
-        if (!menuFileContainer.has_value()) { return actionNewProject; }
-
-        actionNewProject =
-            std::make_shared<QAction>(QApplication::tr("New project ..."));
+        if (!menuFileContainer.has_value()) { return nullptr; }
 
         auto* menuFile{menuFileContainer.value()->menu()};
-        actionNewProject->setParent(menuFile);
-        QObject::connect(
-            actionNewProject.get(), &QAction::triggered, [mainWindow]() {
-                QMessageBox::information(
-                    mainWindow.get(), QApplication::tr("Menu Extension"),
-                    QApplication::tr("This action shows the menu extension "
-                                     "capabilities of aIDE."));
-            });
+        auto* actionNewProject =
+            new QAction(QApplication::tr("New project ..."), menuFile);
+        QObject::connect(actionNewProject, &QAction::triggered, [mainWindow]() {
+            QMessageBox::information(
+                mainWindow.get(), QApplication::tr("Menu Extension"),
+                QApplication::tr("This action shows the menu extension "
+                                 "capabilities of aIDE."));
+        });
         // clang-format off
         menuFile->insertAction(
             actionRegistry->action(CONSTANTS().FILE_SETTINGS).value(), /* NOLINT(bugprone-unchecked-optional-access) */
-            actionNewProject.get());
+            actionNewProject);
         menuFile->insertSeparator(
             actionRegistry->action(CONSTANTS().FILE_SETTINGS).value()); /* NOLINT(bugprone-unchecked-optional-access) */
         // clang-format on
@@ -168,8 +164,7 @@ namespace demo
         return actionNewProject;
     }
 
-    std::shared_ptr<QAction> addNotificationLogToggle(
-        const aide::Application& app)
+    QAction* addNotificationLogToggle(const aide::Application& app)
     {
         auto mainWindow     = app.mainWindow();
         auto actionRegistry = app.actionRegistry();
@@ -181,8 +176,7 @@ namespace demo
         auto menuViewContainer{
             actionRegistry->getMenuContainer(CONSTANTS().MENU_VIEW)};
 
-        std::shared_ptr<QAction> actionNotificationLog;
-        if (!menuViewContainer.has_value()) { return actionNotificationLog; }
+        if (!menuViewContainer.has_value()) { return nullptr; }
 
         auto* menuView{menuViewContainer.value()->menu()};
         auto* notificationView = mainWindow->notificationLogView();
@@ -199,19 +193,18 @@ namespace demo
             demoSettings->value(notificationLogVisibleKey, true).toBool();
         notificationView->setVisible(notificationLogVisible);
 
-        actionNotificationLog =
-            std::make_shared<QAction>(QApplication::tr("Notification Log"));
+        auto* actionNotificationLog =
+            new QAction(QApplication::tr("Notification Log"), menuView);
         actionNotificationLog->setCheckable(true);
         actionNotificationLog->setChecked(notificationLogVisible);
-        actionNotificationLog->setParent(menuView);
-        menuView->addAction(actionNotificationLog.get());
+        menuView->addAction(actionNotificationLog);
         mainWindow->menuBar()->update();
         actionRegistry->registerAction(
             actionNotificationLog,
             aide::HierarchicalId("Main Menu")("View")("Notification Log"));
 
         QObject::connect(
-            actionNotificationLog.get(), &QAction::toggled, notificationView,
+            actionNotificationLog, &QAction::toggled, notificationView,
             [notificationView, demoSettings,
              notificationLogVisibleKey](bool checked) {
                 notificationView->setVisible(checked);
@@ -232,7 +225,7 @@ namespace demo
         return actionNotificationLog;
     }
 
-    std::shared_ptr<QAction> buildDemoMenu(const aide::Application& app)
+    QAction* buildDemoMenu(const aide::Application& app)
     {
         auto mainWindow           = app.mainWindow();
         auto actionRegistry       = app.actionRegistry();
@@ -260,15 +253,14 @@ namespace demo
         auto* menuDemo{menuDemoContainer->menu()};
         menuDemo->setTitle(QApplication::tr("&Demo"));
 
-        auto actionNotifications =
-            std::make_shared<QAction>(QApplication::tr("Notifications"));
-        actionNotifications->setParent(menuDemo);
-        menuDemo->addAction(actionNotifications.get());
+        auto* actionNotifications =
+            new QAction(QApplication::tr("Notifications"), menuDemo);
+        menuDemo->addAction(actionNotifications);
         actionRegistry->registerAction(
             actionNotifications,
             aide::HierarchicalId("Main Menu")("Demo")("Notifications"));
 
-        QObject::connect(actionNotifications.get(), &QAction::triggered,
+        QObject::connect(actionNotifications, &QAction::triggered,
                          [&notificationManager, mainWindow, demoBalloonGroupId,
                           demoStickyBalloonGroupId]() {
                              demo::NotificationLauncherDialog dialog(

@@ -48,9 +48,9 @@ TEST_CASE("Any keymap page")
     auto logger = std::make_shared<NullLogger>();
     auto registry(std::make_shared<ActionRegistry>(settings, logger));
 
-    const auto action{std::make_shared<QAction>()};
+    const auto action{std::make_unique<QAction>()};
 
-    registry->registerAction(action,
+    registry->registerAction(action.get(),
                              HierarchicalId("Main Menu")("File")("New File"),
                              {QKeySequence("Alt+F4")});
 

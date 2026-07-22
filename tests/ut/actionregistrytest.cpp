@@ -39,23 +39,24 @@ TEST_CASE("Any action registry ")
 
     SECTION("can register an action with description and default key sequence")
     {
-        auto action = std::make_shared<QAction>("&File", nullptr);
+        auto action = std::make_unique<QAction>("&File", nullptr);
         const HierarchicalId id{HierarchicalId("MainMenu")("File")};
         const QKeySequence defaultKeySequence(QKeySequence::Quit);
         const std::string description("Quit the application");
 
-        registry.registerAction(action, id, description, {defaultKeySequence});
+        registry.registerAction(action.get(), id, description,
+                                {defaultKeySequence});
 
         REQUIRE(registry.actions().size() == 1);
     }
 
     SECTION("can register an action with description only")
     {
-        auto action = std::make_shared<QAction>("&File", nullptr);
+        auto action = std::make_unique<QAction>("&File", nullptr);
         const HierarchicalId id{HierarchicalId("MainMenu")("File")};
         const std::string description("Quit the application");
 
-        registry.registerAction(action, id, description);
+        registry.registerAction(action.get(), id, description);
 
         REQUIRE(registry.actions().size() == 1);
         REQUIRE(action->shortcut().isEmpty());
@@ -64,11 +65,11 @@ TEST_CASE("Any action registry ")
 
     SECTION("can register an action with key sequence but without description")
     {
-        auto action = std::make_shared<QAction>("&File", nullptr);
+        auto action = std::make_unique<QAction>("&File", nullptr);
         const HierarchicalId id{HierarchicalId("MainMenu")("File")};
         const QKeySequence defaultKeySequence(QKeySequence::Quit);
 
-        registry.registerAction(action, id, {defaultKeySequence});
+        registry.registerAction(action.get(), id, {defaultKeySequence});
 
         REQUIRE(registry.actions().size() == 1);
         REQUIRE(action->shortcut() == QKeySequence(QKeySequence::Quit));
@@ -77,10 +78,10 @@ TEST_CASE("Any action registry ")
 
     SECTION("can register an action without key sequence and description")
     {
-        auto action = std::make_shared<QAction>("&File", nullptr);
+        auto action = std::make_unique<QAction>("&File", nullptr);
         const HierarchicalId id{HierarchicalId("MainMenu")("File")};
 
-        registry.registerAction(action, id);
+        registry.registerAction(action.get(), id);
 
         REQUIRE(registry.actions().size() == 1);
         REQUIRE(registry.actions().at(id).defaultKeySequences.isEmpty());
@@ -89,22 +90,22 @@ TEST_CASE("Any action registry ")
 
     SECTION("does not allow duplicate actions")
     {
-        auto action = std::make_shared<QAction>("&File", nullptr);
+        auto action = std::make_unique<QAction>("&File", nullptr);
         const HierarchicalId id{HierarchicalId("MainMenu")("File")};
 
-        registry.registerAction(action, id);
-        registry.registerAction(action, id);
+        registry.registerAction(action.get(), id);
+        registry.registerAction(action.get(), id);
 
         REQUIRE(registry.actions().size() == 1);
     }
 
     SECTION("allows multiple key sequences")
     {
-        auto action = std::make_shared<QAction>("&File", nullptr);
+        auto action = std::make_unique<QAction>("&File", nullptr);
         const HierarchicalId id{HierarchicalId("MainMenu")("File")};
 
         registry.registerAction(
-            action, id,
+            action.get(), id,
             std::vector({QKeySequence("Alt+F4"), QKeySequence("Alt+F3")}));
 
         REQUIRE(registry.actions().at(id).defaultKeySequences.size() == 2);
@@ -113,14 +114,15 @@ TEST_CASE("Any action registry ")
 
     SECTION("overwrites key sequences from settings if present")
     {
-        auto action = std::make_shared<QAction>("&File", nullptr);
+        auto action = std::make_unique<QAction>("&File", nullptr);
         const HierarchicalId id{HierarchicalId("MainMenu")("File")};
 
         const auto settingsKey{HierarchicalId("Keymap")("MainMenu")("File")};
 
         settings.setValue(settingsKey, QKeySequence("5"));
 
-        registry.registerAction(action, id, std::vector({QKeySequence("4")}));
+        registry.registerAction(action.get(), id,
+                                std::vector({QKeySequence("4")}));
 
         REQUIRE(action->shortcuts().size() == 1);
         REQUIRE(action->shortcuts() ==
@@ -128,14 +130,14 @@ TEST_CASE("Any action registry ")
     }
     SECTION("allows to overwrite key sequences with empty key sequence")
     {
-        auto action = std::make_shared<QAction>("&File", nullptr);
+        auto action = std::make_unique<QAction>("&File", nullptr);
         const HierarchicalId id{HierarchicalId("MainMenu")("File")};
 
         const auto settingsKey{HierarchicalId("Keymap")("MainMenu")("File")};
 
         settings.setValue(settingsKey, QKeySequence());
 
-        registry.registerAction(action, id,
+        registry.registerAction(action.get(), id,
                                 std::vector({QKeySequence("Alt+F4")}));
 
         REQUIRE(action->shortcuts().isEmpty());
@@ -143,14 +145,15 @@ TEST_CASE("Any action registry ")
 
     SECTION("allows to modify shortcuts for an action id")
     {
-        auto action = std::make_shared<QAction>("&File", nullptr);
+        auto action = std::make_unique<QAction>("&File", nullptr);
         const HierarchicalId id{HierarchicalId("MainMenu")("File")};
 
         const auto settingsKey{HierarchicalId("Keymap")("MainMenu")("File")};
 
         settings.setValue(settingsKey, QKeySequence("F5"));
 
-        registry.registerAction(action, id, std::vector({QKeySequence("F4")}));
+        registry.registerAction(action.get(), id,
+                                std::vector({QKeySequence("F4")}));
 
         registry.modifyShortcutsForAction(id, QList({QKeySequence("F6")}));
 
@@ -163,14 +166,15 @@ TEST_CASE("Any action registry ")
 
     SECTION("uses default shortcuts if modified shortcuts equal default")
     {
-        auto action = std::make_shared<QAction>("&File", nullptr);
+        auto action = std::make_unique<QAction>("&File", nullptr);
         const HierarchicalId id{HierarchicalId("MainMenu")("File")};
 
         const auto settingsKey{HierarchicalId("Keymap")("MainMenu")("File")};
 
         settings.setValue(settingsKey, QKeySequence("F5"));
 
-        registry.registerAction(action, id, std::vector({QKeySequence("F4")}));
+        registry.registerAction(action.get(), id,
+                                std::vector({QKeySequence("F4")}));
 
         registry.modifyShortcutsForAction(id, QList({QKeySequence("F4")}));
 
@@ -182,10 +186,11 @@ TEST_CASE("Any action registry ")
 
     SECTION("added action can be retrieved from registry")
     {
-        auto action = std::make_shared<QAction>("&File", nullptr);
+        auto action = std::make_unique<QAction>("&File", nullptr);
         const HierarchicalId id{HierarchicalId("MainMenu")("File")};
 
-        registry.registerAction(action, id, std::vector({QKeySequence("F4")}));
+        registry.registerAction(action.get(), id,
+                                std::vector({QKeySequence("F4")}));
 
         REQUIRE(registry.action(id).has_value());
         // clang-format off

@@ -31,6 +31,7 @@ namespace aide
     class SettingsInterface;
 } // namespace aide
 
+class QAction;
 class QIcon;
 class QMenu;
 class QString;
@@ -128,13 +129,13 @@ namespace aide::gui
 
         std::shared_ptr<TranslatorInterface> m_translator;
         std::unique_ptr<Ui::MainWindow> m_ui;
-        std::shared_ptr<QAction> m_actionSettings;
-        std::shared_ptr<QAction> m_actionQuit;
-        std::shared_ptr<QAction> m_actionFullScreen;
-        std::shared_ptr<QAction> m_actionShowLogInFileManager;
-        std::shared_ptr<QAction> m_actionReportBug;
-        std::shared_ptr<QAction> m_actionAboutAide;
-        std::shared_ptr<QAction> m_actionAboutQt;
+        QAction* m_actionSettings{nullptr};
+        QAction* m_actionQuit{nullptr};
+        QAction* m_actionFullScreen{nullptr};
+        QAction* m_actionShowLogInFileManager{nullptr};
+        QAction* m_actionReportBug{nullptr};
+        QAction* m_actionAboutAide{nullptr};
+        QAction* m_actionAboutQt{nullptr};
 
         QWidget* m_bannerWrapper{nullptr};
         QWidget* m_bannerHost{nullptr};

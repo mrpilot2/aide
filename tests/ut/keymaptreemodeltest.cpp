@@ -42,8 +42,8 @@ TEST_CASE("A new keymap tree model with one action registered")
     auto logger = std::make_shared<NullLogger>();
     auto registry(std::make_shared<ActionRegistry>(settings, logger));
 
-    auto action{std::make_shared<QAction>()};
-    registry->registerAction(action, HierarchicalId("New File"));
+    auto action{std::make_unique<QAction>()};
+    registry->registerAction(action.get(), HierarchicalId("New File"));
     const KeyMapTreeModel treeModel(registry);
 
     SECTION("has one row")
@@ -79,10 +79,12 @@ TEST_CASE("A new keymap tree model with multiple actions registered")
     auto logger = std::make_shared<NullLogger>();
     auto registry(std::make_shared<ActionRegistry>(settings, logger));
 
-    auto action{std::make_shared<QAction>()};
+    auto action{std::make_unique<QAction>()};
 
-    registry->registerAction(action, HierarchicalId("Main Menu")("Close"));
-    registry->registerAction(action, HierarchicalId("Main Menu")("New File"));
+    registry->registerAction(action.get(),
+                             HierarchicalId("Main Menu")("Close"));
+    registry->registerAction(action.get(),
+                             HierarchicalId("Main Menu")("New File"));
     const KeyMapTreeModel treeModel(registry);
 
     SECTION("use same tree item for same group")
@@ -128,10 +130,10 @@ TEST_CASE("Any keymap tree model")
     auto logger = std::make_shared<NullLogger>();
     auto registry(std::make_shared<ActionRegistry>(settings, logger));
 
-    auto action{std::make_shared<QAction>(QIcon::fromTheme("application-exit"),
+    auto action{std::make_unique<QAction>(QIcon::fromTheme("application-exit"),
                                           "abc", nullptr)};
     auto id = HierarchicalId("Main Menu")("Close");
-    registry->registerAction(action, id, "Thoughtful description");
+    registry->registerAction(action.get(), id, "Thoughtful description");
 
     KeyMapTreeModel treeModel(registry);
 
@@ -193,9 +195,10 @@ TEST_CASE("Any keymap tree model")
 
     SECTION("does not show icon if action has not assigned one")
     {
-        auto newAction{std::make_shared<QAction>("New", nullptr)};
+        auto newAction{std::make_unique<QAction>("New", nullptr)};
         auto newId = HierarchicalId("Main Menu")("New");
-        registry->registerAction(newAction, newId, "Thoughtful description");
+        registry->registerAction(newAction.get(), newId,
+                                 "Thoughtful description");
 
         const QModelIndex root = treeModel.index(0, 0, QModelIndex());
         const QModelIndex elem = treeModel.index(1, 0, root);
@@ -278,8 +281,9 @@ TEST_CASE("Keymap tree model translated labels")
 
     SECTION("leaf label uses the action's text with mnemonic stripped")
     {
-        auto action{std::make_shared<QAction>(QString("&Close"), nullptr)};
-        registry->registerAction(action, HierarchicalId("Main Menu")("Close"));
+        auto action{std::make_unique<QAction>(QString("&Close"), nullptr)};
+        registry->registerAction(action.get(),
+                                 HierarchicalId("Main Menu")("Close"));
 
         const KeyMapTreeModel treeModel(registry);
         const QModelIndex root = treeModel.index(0, 0);
@@ -291,8 +295,9 @@ TEST_CASE("Keymap tree model translated labels")
     SECTION("leaf label keeps a trailing ellipsis")
     {
         auto action{
-            std::make_shared<QAction>(QString("&New project ..."), nullptr)};
-        registry->registerAction(action, HierarchicalId("Main Menu")("New"));
+            std::make_unique<QAction>(QString("&New project ..."), nullptr)};
+        registry->registerAction(action.get(),
+                                 HierarchicalId("Main Menu")("New"));
 
         const KeyMapTreeModel treeModel(registry);
         const QModelIndex root = treeModel.index(0, 0);
@@ -305,8 +310,8 @@ TEST_CASE("Keymap tree model translated labels")
     SECTION("leaf label falls back to the raw id when the action has expired")
     {
         {
-            auto action{std::make_shared<QAction>(QString("Close"), nullptr)};
-            registry->registerAction(action,
+            auto action{std::make_unique<QAction>(QString("Close"), nullptr)};
+            registry->registerAction(action.get(),
                                      HierarchicalId("Main Menu")("Close"));
         }
 
@@ -319,8 +324,9 @@ TEST_CASE("Keymap tree model translated labels")
 
     SECTION("group label uses the corresponding menu's title")
     {
-        auto action{std::make_shared<QAction>(QString("Close"), nullptr)};
-        registry->registerAction(action, HierarchicalId("Main Menu")("Close"));
+        auto action{std::make_unique<QAction>(QString("Close"), nullptr)};
+        registry->registerAction(action.get(),
+                                 HierarchicalId("Main Menu")("Close"));
 
         auto* menuContainer = registry->createMenu(HierarchicalId("Main Menu"));
         menuContainer->menu()->setTitle("&Main");
@@ -333,8 +339,8 @@ TEST_CASE("Keymap tree model translated labels")
 
     SECTION("group label falls back to the raw id when no menu backs it")
     {
-        auto action{std::make_shared<QAction>(QString("Close"), nullptr)};
-        registry->registerAction(action,
+        auto action{std::make_unique<QAction>(QString("Close"), nullptr)};
+        registry->registerAction(action.get(),
                                  HierarchicalId("Main Menu")("File")("Close"));
 
         const KeyMapTreeModel treeModel(registry);
@@ -346,8 +352,9 @@ TEST_CASE("Keymap tree model translated labels")
 
     SECTION("root 'Main Menu' group label translates even without a menu")
     {
-        auto action{std::make_shared<QAction>(QString("Close"), nullptr)};
-        registry->registerAction(action, HierarchicalId("Main Menu")("Close"));
+        auto action{std::make_unique<QAction>(QString("Close"), nullptr)};
+        registry->registerAction(action.get(),
+                                 HierarchicalId("Main Menu")("Close"));
 
         const KeyMapTreeModel treeModel(registry);
         const QModelIndex root = treeModel.index(0, 0);

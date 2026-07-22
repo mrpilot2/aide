@@ -27,9 +27,9 @@ TEST_CASE("A key map page widget controller handling an existing shortcut")
     auto logger = std::make_shared<NullLogger>();
     auto registry(std::make_shared<ActionRegistry>(settings, logger));
 
-    auto action{std::make_shared<QAction>()};
+    auto action{std::make_unique<QAction>()};
     const QKeySequence defaultSequence(Qt::CTRL | Qt::Key_N);
-    registry->registerAction(action, HierarchicalId("New File"), "",
+    registry->registerAction(action.get(), HierarchicalId("New File"), "",
                              {defaultSequence});
 
     auto treeModel = std::make_shared<KeyMapTreeModel>(registry);
