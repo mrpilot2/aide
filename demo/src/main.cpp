@@ -40,6 +40,7 @@ int main(int argc, char* argv[])
         QDir(":/demo_translations"), QString("demo"));
 
     demo::registerDemoTheme(app);
+    // cppcheck-suppress unreadVariable
     auto colorSchemeReactor = demo::watchColorScheme(app);
 
     demo::buildCentralWidget(app);
