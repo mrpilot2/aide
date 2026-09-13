@@ -24,9 +24,9 @@ target_link_libraries(
   AideLogger
   PUBLIC spdlog::spdlog fmt::fmt
   PRIVATE
-    $<BUILD_LOCAL_INTERFACE:aide_coverage>
-    $<BUILD_LOCAL_INTERFACE:aide_options>
-    $<BUILD_LOCAL_INTERFACE:aide_warnings>
+    $<BUILD_LOCAL_INTERFACE:$<$<TARGET_EXISTS:aide_coverage>:aide_coverage>>
+    $<BUILD_LOCAL_INTERFACE:$<$<TARGET_EXISTS:aide_options>:aide_options>>
+    $<BUILD_LOCAL_INTERFACE:$<$<TARGET_EXISTS:aide_warnings>:aide_warnings>>
 )
 
 set(
