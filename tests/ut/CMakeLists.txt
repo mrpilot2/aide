@@ -170,18 +170,6 @@ if(TARGET Aide::AideVcs)
   # the dynamic loader can't resolve libAideVcs.so at test startup, same as
   # AideCore/AideGui/AideLogger/AideUtils below.
   target_link_libraries(ut.aide PRIVATE Aide::AideVcs)
-
-  # These tests reach into aide::vcs's internal (non-installed) headers
-  # (vcsrepository.hpp, vcsmanager.hpp, ...), so they only build when the
-  # module itself is compiled in.
-  target_sources(
-    ut.aide
-    PRIVATE
-      vcscommandlineredactortest.cpp
-      vcsmanagertest.cpp
-      vcsrepositorytest.cpp
-      vcsrepositoryintegrationtest.cpp
-  )
 endif()
 
 if(NOT PROJECT_IS_TOP_LEVEL)
@@ -195,6 +183,23 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       ${CMAKE_SOURCE_DIR}/aide/src/include
       ${CMAKE_SOURCE_DIR}/aide/src/include/aide
   )
+
+  if(TARGET Aide::AideVcs)
+    # These tests reach into aide::vcs's internal (non-installed) headers
+    # (vcsrepository.hpp, vcsmanager.hpp, ...), so - like the other
+    # internal-header tests above (desktopentrynameresolvertest.cpp, ...) -
+    # they only build as part of the full aide checkout, never against a
+    # standalone installed-lib build (nulllogger.cpp, needed here, is only
+    # compiled in this branch too).
+    target_sources(
+      ut.aide
+      PRIVATE
+        vcscommandlineredactortest.cpp
+        vcsmanagertest.cpp
+        vcsrepositorytest.cpp
+        vcsrepositoryintegrationtest.cpp
+    )
+  endif()
 endif()
 
 if(APPLE)
