@@ -139,3 +139,17 @@ aide::core::SettingsPageRegistry& ApplicationBuilder::settingsPageRegistry()
 {
     return m_settingsPageRegistry;
 }
+
+std::optional<aide::VcsManagerInterfacePtr> ApplicationBuilder::vcsManager()
+    const
+{
+#ifdef AIDE_ENABLE_VCS
+    if (!m_config.isEnabled(
+            aide::ApplicationConfig::Feature::VersionControlIntegration)) {
+        return std::nullopt;
+    }
+    return std::static_pointer_cast<aide::VcsManagerInterface>(m_vcsManager);
+#else
+    return std::nullopt;
+#endif
+}

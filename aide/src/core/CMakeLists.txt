@@ -90,6 +90,7 @@ target_sources(
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/settingsinterface.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/theme.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/urllauncherinterface.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/vcsmanagerinterface.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/settings/settingspage.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/settings/settingspageregistry.hpp
 )
