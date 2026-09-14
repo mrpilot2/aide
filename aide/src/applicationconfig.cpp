@@ -37,6 +37,7 @@ private:
     {
         switch (feature) {
         case Feature::ViewFullscreenAction:
+        case Feature::VersionControlIntegration:
             return true;
         case Feature::ShowLogInFileManagerAction:
         case Feature::ReportBugAction:

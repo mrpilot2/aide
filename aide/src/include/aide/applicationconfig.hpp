@@ -49,6 +49,12 @@ namespace aide
             /// Help → "Report Bug in aIDE" action. Defaults to disabled,
             /// unlike most other features in this enum.
             ReportBugAction,
+
+            /// Git version control integration (#169). Requires the
+            /// aide::vcs module to be compiled in (AIDE_ENABLE_VCS); if it
+            /// is not, Application::vcsManager() returns an empty optional
+            /// regardless of this setting.
+            VersionControlIntegration,
         };
 
         ApplicationConfig();
