@@ -40,6 +40,7 @@ jobs:
         with:
           cmake_version: ${{matrix.cmake}}
           qt_version: ${{ matrix.qt }}
+          ccache_key: build-${{ matrix.os }}-${{ matrix.cmake }}
 
       - name: Select preset
         id: preset
