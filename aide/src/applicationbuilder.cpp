@@ -148,7 +148,7 @@ std::optional<aide::VcsManagerInterfacePtr> ApplicationBuilder::vcsManager()
             aide::ApplicationConfig::Feature::VersionControlIntegration)) {
         return std::nullopt;
     }
-    return std::static_pointer_cast<aide::VcsManagerInterface>(m_vcsManager);
+    return aide::VcsManagerInterfacePtr{m_vcsManager};
 #else
     return std::nullopt;
 #endif

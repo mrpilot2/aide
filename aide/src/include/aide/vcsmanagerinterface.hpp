@@ -18,13 +18,7 @@ namespace aide
     class VcsManagerInterface
     {
     public:
-        VcsManagerInterface()          = default;
         virtual ~VcsManagerInterface() = default;
-
-        VcsManagerInterface(const VcsManagerInterface&)            = default;
-        VcsManagerInterface& operator=(const VcsManagerInterface&) = default;
-        VcsManagerInterface(VcsManagerInterface&&)                 = default;
-        VcsManagerInterface& operator=(VcsManagerInterface&&)      = default;
 
         [[nodiscard]] virtual std::vector<std::string> registeredRepositories()
             const = 0;
