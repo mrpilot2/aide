@@ -170,7 +170,8 @@
     },
 
     { "name": "role-ci-static-clang-tidy", "hidden": true,
-      "inherits": ["werror", "clang-tidy-only", "test-on-ci"]
+      "inherits": ["werror", "clang-tidy-only", "test-on-ci"],
+      "cacheVariables": { "AIDE_CLANG_TIDY_ENABLE_CHECK_PROFILE": "ON" }
     },
 
     { "name": "role-ci-static-cppcheck", "hidden": true,

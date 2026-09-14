@@ -112,6 +112,18 @@ macro(aide_enable_clang_tidy target WARNINGS_AS_ERRORS)
       list(APPEND CLANG_TIDY_OPTIONS -warnings-as-errors=*)
     endif()
 
+    # investigate slow checks: profile per-check timings, one JSON per
+    # translation unit, under CMAKE_BINARY_DIR/clang-tidy-profile
+    if(AIDE_CLANG_TIDY_ENABLE_CHECK_PROFILE)
+      set(CLANG_TIDY_PROFILE_DIR ${CMAKE_BINARY_DIR}/clang-tidy-profile)
+      file(MAKE_DIRECTORY ${CLANG_TIDY_PROFILE_DIR})
+      list(
+        APPEND CLANG_TIDY_OPTIONS
+        -enable-check-profile
+        -store-check-profile=${CLANG_TIDY_PROFILE_DIR}
+      )
+    endif()
+
     message("Also setting clang-tidy globally")
     set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_OPTIONS})
   else()

@@ -41,6 +41,17 @@ jobs:
         env:
           QT_QPA_PLATFORM: offscreen
 
+      - name: "Summarize clang-tidy check profile"
+        if: always()
+        run: python3 tools/summarize_clang_tidy_profile.py build/ci-static-clang-tidy-unix-static-debug/clang-tidy-profile
+
+      - name: Upload clang-tidy profile
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: clang-tidy-profile
+          path: build/ci-static-clang-tidy-unix-static-debug/clang-tidy-profile
+
   cppcheck:
     name: cppcheck, ${{ matrix.cmake_name }}, ${{ matrix.qt_name }}
     strategy:
