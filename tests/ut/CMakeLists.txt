@@ -163,6 +163,14 @@ target_link_libraries(
     Aide::AideWidgets
 )
 
+if(TARGET Aide::AideVcs)
+  # aide::vcs is a private, shared-build-only runtime dependency of
+  # Aide::AideApplication (#170): it must be relinked directly here too, or
+  # the dynamic loader can't resolve libAideVcs.so at test startup, same as
+  # AideCore/AideGui/AideLogger/AideUtils below.
+  target_link_libraries(ut.aide PRIVATE Aide::AideVcs)
+endif()
+
 if(NOT PROJECT_IS_TOP_LEVEL)
   target_link_libraries(
     ut.aide
@@ -225,6 +233,11 @@ target_link_libraries(
     Aide::AideUtils
     Aide::AideWidgets
 )
+
+if(TARGET Aide::AideVcs)
+  # See the same guard on ut.aide above (#170).
+  target_link_libraries(ut.aide.application PRIVATE Aide::AideVcs)
+endif()
 
 if(NOT PROJECT_IS_TOP_LEVEL)
   target_include_directories(

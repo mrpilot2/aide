@@ -51,6 +51,11 @@ target_link_libraries(
     aide_options
 )
 
+if(TARGET Aide::AideVcs)
+  # See tests/ut/CMakeLists.txt for why (#170).
+  target_link_libraries(aide_demo PRIVATE Aide::AideVcs)
+endif()
+
 if(WIN32)
   target_compile_definitions(
     aide_demo
