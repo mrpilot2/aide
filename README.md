@@ -207,7 +207,8 @@ ctest --preset test-dev-unix-static-debug
 | `client` | Plain build, no extra tooling |
 | `dev` | Clang, warnings-as-errors, ASan + UBSan, coverage, clang-tidy, cppcheck |
 | `ci-strict` | Clang, warnings-as-errors, sanitizers |
-| `ci-static` | Clang, warnings-as-errors, clang-tidy, cppcheck |
+| `ci-static-clang-tidy` | Clang, warnings-as-errors, clang-tidy only |
+| `ci-static-cppcheck` | Clang, warnings-as-errors, cppcheck only |
 
 Presets follow the naming pattern `{role}-{platform}-{linkage}-{build_type}`, e.g. `dev-unix-static-debug` or `client-windows-shared`.
 

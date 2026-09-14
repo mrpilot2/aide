@@ -17,7 +17,8 @@ Preset naming: `{role}-{platform}-{linkage}-{build-type}`
 | `client` | Plain build, no extras |
 | `dev` | clang, warnings-as-errors, sanitizers (ASAN+UBSAN), coverage, clang-tidy, cppcheck |
 | `ci-strict` | clang, warnings-as-errors, sanitizers |
-| `ci-static` | clang, warnings-as-errors, clang-tidy, cppcheck |
+| `ci-static-clang-tidy` | clang, warnings-as-errors, clang-tidy only |
+| `ci-static-cppcheck` | clang, warnings-as-errors, cppcheck only |
 
 ```bash
 # Full workflow (configure + build + test) — always use 'dev-' presets to verify changes
@@ -56,7 +57,7 @@ pre-commit run clang-format         # C++ formatting only
 pre-commit run cmake-format         # CMake formatting only
 ```
 
-clang-tidy/cppcheck run at build time in `dev`/`ci-static` presets, not as separate commands.
+clang-tidy/cppcheck run at build time in `dev`/`ci-static-clang-tidy`/`ci-static-cppcheck` presets, not as separate commands.
 
 ## Architecture
 
@@ -87,7 +88,7 @@ Key interfaces (`aide/include/aide/`): `LoggerInterface`, `SettingsInterface`, `
 
 ## Common pitfalls
 
-- **Magic numbers** (`dev`/`ci-static`): `readability-magic-numbers` is an error — extract all numeric literals (including e.g. `QColor(220, 235, 255)`) to named `constexpr`.
+- **Magic numbers** (`dev`/`ci-static-clang-tidy`): `readability-magic-numbers` is an error — extract all numeric literals (including e.g. `QColor(220, 235, 255)`) to named `constexpr`.
 - **cppcheck virtualCallInConstructor**: calling a virtual (e.g. `reset()`) from a ctor is flagged — extract a private non-virtual helper (e.g. `syncToModel()`) called by both.
 - **clang-format rewrites on commit**: if `git commit` fails this way, the hook already fixed the file — `git add` it and re-commit. Never `--no-verify`.
 - **Catch2 cognitive complexity**: clang-tidy caps it (~25) — split deep `SECTION` nesting into separate `TEST_CASE`s.

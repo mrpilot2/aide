@@ -107,6 +107,14 @@
       }
     },
 
+    { "name": "clang-tidy-only", "hidden": true,
+      "cacheVariables": { "AIDE_ENABLE_CLANG_TIDY": "ON" }
+    },
+
+    { "name": "cppcheck-only", "hidden": true,
+      "cacheVariables": { "AIDE_ENABLE_CPPCHECK": "ON" }
+    },
+
     { "name": "werror", "hidden": true,
       "cacheVariables": { "AIDE_WARNINGS_AS_ERRORS": "ON" }
     },
@@ -161,8 +169,12 @@
       "inherits": ["werror", "sanitizers", "test-on-ci"]
     },
 
-    { "name": "role-ci-static", "hidden": true,
-      "inherits": ["werror", "static-analysis", "test-on-ci"]
+    { "name": "role-ci-static-clang-tidy", "hidden": true,
+      "inherits": ["werror", "clang-tidy-only", "test-on-ci"]
+    },
+
+    { "name": "role-ci-static-cppcheck", "hidden": true,
+      "inherits": ["werror", "cppcheck-only", "test-on-ci"]
     },
 
     { "name": "dev-unix-static-debug",   "inherits": ["clang","static","debug","role-dev", "platform-unix"] },
@@ -182,10 +194,15 @@
 
     { "name": "ci-coverage-unix", "inherits": ["static","debug","coverage", "platform-unix"] },
 
-    { "name": "ci-static-unix-static-debug",   "inherits": ["clang","static","debug","role-ci-static", "platform-unix"] },
-    { "name": "ci-static-unix-static-release", "inherits": ["clang","static","release","role-ci-static", "platform-unix"] },
-    { "name": "ci-static-unix-shared-debug",   "inherits": ["clang","shared","debug","role-ci-static", "platform-unix"] },
-    { "name": "ci-static-unix-shared-release", "inherits": ["clang","shared","release","role-ci-static", "platform-unix"] },
+    { "name": "ci-static-clang-tidy-unix-static-debug",   "inherits": ["clang","static","debug","role-ci-static-clang-tidy", "platform-unix"] },
+    { "name": "ci-static-clang-tidy-unix-static-release", "inherits": ["clang","static","release","role-ci-static-clang-tidy", "platform-unix"] },
+    { "name": "ci-static-clang-tidy-unix-shared-debug",   "inherits": ["clang","shared","debug","role-ci-static-clang-tidy", "platform-unix"] },
+    { "name": "ci-static-clang-tidy-unix-shared-release", "inherits": ["clang","shared","release","role-ci-static-clang-tidy", "platform-unix"] },
+
+    { "name": "ci-static-cppcheck-unix-static-debug",   "inherits": ["clang","static","debug","role-ci-static-cppcheck", "platform-unix"] },
+    { "name": "ci-static-cppcheck-unix-static-release", "inherits": ["clang","static","release","role-ci-static-cppcheck", "platform-unix"] },
+    { "name": "ci-static-cppcheck-unix-shared-debug",   "inherits": ["clang","shared","debug","role-ci-static-cppcheck", "platform-unix"] },
+    { "name": "ci-static-cppcheck-unix-shared-release", "inherits": ["clang","shared","release","role-ci-static-cppcheck", "platform-unix"] },
 
     { "name": "ci-abi-check-unix-shared-debug",   "inherits": ["shared","debug","abi-check", "platform-unix"], "cacheVariables": { "CMAKE_DEBUG_POSTFIX": "_d" } },
 
@@ -228,10 +245,15 @@
 
     { "name": "build-ci-coverage-unix", "configurePreset": "ci-coverage-unix", "jobs": 0 },
 
-    { "name": "build-ci-static-unix-static-debug",   "configurePreset": "ci-static-unix-static-debug",   "jobs": 0 },
-    { "name": "build-ci-static-unix-static-release", "configurePreset": "ci-static-unix-static-release", "jobs": 0 },
-    { "name": "build-ci-static-unix-shared-debug",   "configurePreset": "ci-static-unix-shared-debug",   "jobs": 0 },
-    { "name": "build-ci-static-unix-shared-release", "configurePreset": "ci-static-unix-shared-release", "jobs": 0 },
+    { "name": "build-ci-static-clang-tidy-unix-static-debug",   "configurePreset": "ci-static-clang-tidy-unix-static-debug",   "jobs": 0 },
+    { "name": "build-ci-static-clang-tidy-unix-static-release", "configurePreset": "ci-static-clang-tidy-unix-static-release", "jobs": 0 },
+    { "name": "build-ci-static-clang-tidy-unix-shared-debug",   "configurePreset": "ci-static-clang-tidy-unix-shared-debug",   "jobs": 0 },
+    { "name": "build-ci-static-clang-tidy-unix-shared-release", "configurePreset": "ci-static-clang-tidy-unix-shared-release", "jobs": 0 },
+
+    { "name": "build-ci-static-cppcheck-unix-static-debug",   "configurePreset": "ci-static-cppcheck-unix-static-debug",   "jobs": 0 },
+    { "name": "build-ci-static-cppcheck-unix-static-release", "configurePreset": "ci-static-cppcheck-unix-static-release", "jobs": 0 },
+    { "name": "build-ci-static-cppcheck-unix-shared-debug",   "configurePreset": "ci-static-cppcheck-unix-shared-debug",   "jobs": 0 },
+    { "name": "build-ci-static-cppcheck-unix-shared-release", "configurePreset": "ci-static-cppcheck-unix-shared-release", "jobs": 0 },
 
     { "name": "build-ci-abi-check-unix-shared-debug", "configurePreset": "ci-abi-check-unix-shared-debug", "jobs": 0, "targets": ["generate_abi_compliance_report"] },
 
@@ -301,10 +323,15 @@
 
     { "name": "test-ci-coverage-unix", "inherits": "test-common", "configurePreset": "ci-coverage-unix" },
 
-    { "name": "test-ci-static-unix-static-debug", "inherits": "test-common",   "configurePreset": "ci-static-unix-static-debug" },
-    { "name": "test-ci-static-unix-static-release", "inherits": "test-common", "configurePreset": "ci-static-unix-static-release" },
-    { "name": "test-ci-static-unix-shared-debug", "inherits": "test-common",   "configurePreset": "ci-static-unix-shared-debug" },
-    { "name": "test-ci-static-unix-shared-release", "inherits": "test-common", "configurePreset": "ci-static-unix-shared-release" },
+    { "name": "test-ci-static-clang-tidy-unix-static-debug", "inherits": "test-common",   "configurePreset": "ci-static-clang-tidy-unix-static-debug" },
+    { "name": "test-ci-static-clang-tidy-unix-static-release", "inherits": "test-common", "configurePreset": "ci-static-clang-tidy-unix-static-release" },
+    { "name": "test-ci-static-clang-tidy-unix-shared-debug", "inherits": "test-common",   "configurePreset": "ci-static-clang-tidy-unix-shared-debug" },
+    { "name": "test-ci-static-clang-tidy-unix-shared-release", "inherits": "test-common", "configurePreset": "ci-static-clang-tidy-unix-shared-release" },
+
+    { "name": "test-ci-static-cppcheck-unix-static-debug", "inherits": "test-common",   "configurePreset": "ci-static-cppcheck-unix-static-debug" },
+    { "name": "test-ci-static-cppcheck-unix-static-release", "inherits": "test-common", "configurePreset": "ci-static-cppcheck-unix-static-release" },
+    { "name": "test-ci-static-cppcheck-unix-shared-debug", "inherits": "test-common",   "configurePreset": "ci-static-cppcheck-unix-shared-debug" },
+    { "name": "test-ci-static-cppcheck-unix-shared-release", "inherits": "test-common", "configurePreset": "ci-static-cppcheck-unix-shared-release" },
 
     { "name": "test-dev-windows-static-debug", "inherits": "test-common",   "configurePreset": "dev-windows-static",   "configuration": "Debug" },
     { "name": "test-dev-windows-shared-debug", "inherits": "test-common",   "configurePreset": "dev-windows-shared",   "configuration": "Debug" },
@@ -401,38 +428,74 @@
     },
 
     {
-      "name": "workflow-ci-static-unix-static-debug",
+      "name": "workflow-ci-static-clang-tidy-unix-static-debug",
       "steps": [
-        { "type": "configure", "name": "ci-static-unix-static-debug" },
-        { "type": "build", "name": "build-ci-static-unix-static-debug" },
-        { "type": "test", "name": "test-ci-static-unix-static-debug" }
+        { "type": "configure", "name": "ci-static-clang-tidy-unix-static-debug" },
+        { "type": "build", "name": "build-ci-static-clang-tidy-unix-static-debug" },
+        { "type": "test", "name": "test-ci-static-clang-tidy-unix-static-debug" }
       ]
     },
 
     {
-      "name": "workflow-ci-static-unix-static-release",
+      "name": "workflow-ci-static-clang-tidy-unix-static-release",
       "steps": [
-        { "type": "configure", "name": "ci-static-unix-static-release" },
-        { "type": "build", "name": "build-ci-static-unix-static-release" },
-        { "type": "test", "name": "test-ci-static-unix-static-release" }
+        { "type": "configure", "name": "ci-static-clang-tidy-unix-static-release" },
+        { "type": "build", "name": "build-ci-static-clang-tidy-unix-static-release" },
+        { "type": "test", "name": "test-ci-static-clang-tidy-unix-static-release" }
       ]
     },
 
     {
-      "name": "workflow-ci-static-unix-shared-debug",
+      "name": "workflow-ci-static-clang-tidy-unix-shared-debug",
       "steps": [
-        { "type": "configure", "name": "ci-static-unix-shared-debug" },
-        { "type": "build", "name": "build-ci-static-unix-shared-debug" },
-        { "type": "test", "name": "test-ci-static-unix-shared-debug" }
+        { "type": "configure", "name": "ci-static-clang-tidy-unix-shared-debug" },
+        { "type": "build", "name": "build-ci-static-clang-tidy-unix-shared-debug" },
+        { "type": "test", "name": "test-ci-static-clang-tidy-unix-shared-debug" }
       ]
     },
 
     {
-      "name": "workflow-ci-static-unix-shared-release",
+      "name": "workflow-ci-static-clang-tidy-unix-shared-release",
       "steps": [
-        { "type": "configure", "name": "ci-static-unix-shared-release" },
-        { "type": "build", "name": "build-ci-static-unix-shared-release" },
-        { "type": "test", "name": "test-ci-static-unix-shared-release" }
+        { "type": "configure", "name": "ci-static-clang-tidy-unix-shared-release" },
+        { "type": "build", "name": "build-ci-static-clang-tidy-unix-shared-release" },
+        { "type": "test", "name": "test-ci-static-clang-tidy-unix-shared-release" }
+      ]
+    },
+
+    {
+      "name": "workflow-ci-static-cppcheck-unix-static-debug",
+      "steps": [
+        { "type": "configure", "name": "ci-static-cppcheck-unix-static-debug" },
+        { "type": "build", "name": "build-ci-static-cppcheck-unix-static-debug" },
+        { "type": "test", "name": "test-ci-static-cppcheck-unix-static-debug" }
+      ]
+    },
+
+    {
+      "name": "workflow-ci-static-cppcheck-unix-static-release",
+      "steps": [
+        { "type": "configure", "name": "ci-static-cppcheck-unix-static-release" },
+        { "type": "build", "name": "build-ci-static-cppcheck-unix-static-release" },
+        { "type": "test", "name": "test-ci-static-cppcheck-unix-static-release" }
+      ]
+    },
+
+    {
+      "name": "workflow-ci-static-cppcheck-unix-shared-debug",
+      "steps": [
+        { "type": "configure", "name": "ci-static-cppcheck-unix-shared-debug" },
+        { "type": "build", "name": "build-ci-static-cppcheck-unix-shared-debug" },
+        { "type": "test", "name": "test-ci-static-cppcheck-unix-shared-debug" }
+      ]
+    },
+
+    {
+      "name": "workflow-ci-static-cppcheck-unix-shared-release",
+      "steps": [
+        { "type": "configure", "name": "ci-static-cppcheck-unix-shared-release" },
+        { "type": "build", "name": "build-ci-static-cppcheck-unix-shared-release" },
+        { "type": "test", "name": "test-ci-static-cppcheck-unix-shared-release" }
       ]
     },
     {

@@ -70,7 +70,7 @@ app.appearanceManager().registerTheme(
 Registered themes appear automatically in the Appearance settings page combo box. Registering a theme whose `name` already exists throws `std::invalid_argument`.
 
 !!! warning "Magic numbers"
-    `dev` and `ci-static` builds treat `readability-magic-numbers` as an error. Extract every `QColor` component into a named `constexpr` before it appears in source. See *Common pitfalls* in `CLAUDE.md`.
+    `dev` and `ci-static-clang-tidy` builds treat `readability-magic-numbers` as an error. Extract every `QColor` component into a named `constexpr` before it appears in source. See *Common pitfalls* in `CLAUDE.md`.
 
 ---
 

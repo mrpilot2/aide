@@ -4,12 +4,11 @@ on:
   workflow_call:
 
 jobs:
-  build:
-    name: ${{ matrix.os }}, ${{ matrix.cmake_name }}, ${{ matrix.qt_name }}
+  clang-tidy:
+    name: clang-tidy, ${{ matrix.cmake_name }}, ${{ matrix.qt_name }}
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-latest, ubuntu-24.04]
         cmake: [4.x]
         qt: [6.9.2]
 
@@ -20,7 +19,44 @@ jobs:
           - qt: 6.9.2
             qt_name: Qt6
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - id: setup_deps
+        uses: ./.github/actions/setup_deps
+        with:
+          cmake_version: ${{matrix.cmake}}
+          qt_version: ${{ matrix.qt }}
+
+      # Static Debug: clang-tidy
+      - name: "Static Debug: clang-tidy"
+        run: cmake --workflow --preset=workflow-ci-static-clang-tidy-unix-static-debug
+        env:
+          QT_QPA_PLATFORM: offscreen
+
+  cppcheck:
+    name: cppcheck, ${{ matrix.cmake_name }}, ${{ matrix.qt_name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        cmake: [4.x]
+        qt: [6.9.2]
+
+        include:
+          - cmake: 4.x
+            cmake_name: CMake Latest
+
+          - qt: 6.9.2
+            qt_name: Qt6
+
+    runs-on: ubuntu-24.04
     defaults:
       run:
         shell: bash
@@ -37,11 +73,10 @@ jobs:
           qt_version: ${{ matrix.qt }}
 
       - name: Install apt dependencies
-        if: runner.os == 'Linux'
         run: sudo apt install cppcheck
 
-      # Static Debug
-      - name: "Static Debug: Static analysis"
-        run: cmake --workflow --preset=workflow-ci-static-unix-static-debug
+      # Static Debug: cppcheck
+      - name: "Static Debug: cppcheck"
+        run: cmake --workflow --preset=workflow-ci-static-cppcheck-unix-static-debug
         env:
           QT_QPA_PLATFORM: offscreen
