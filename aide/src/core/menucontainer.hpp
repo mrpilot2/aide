@@ -3,12 +3,9 @@
 #ifndef AIDE_MENU_CONTAINER_HPP
 #define AIDE_MENU_CONTAINER_HPP
 
-#include <memory>
-
-#include <QMenu>
-
 #include "menucontainerinterface.hpp"
 
+class QMenu;
 class QWidget;
 
 namespace aide

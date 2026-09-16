@@ -1,6 +1,7 @@
 #include "applicationtranslator.hpp"
 
 #include <QApplication>
+#include <QDir>
 #include <QLibraryInfo>
 #include <QtCore/QDirIterator>
 #include <QtGlobal>

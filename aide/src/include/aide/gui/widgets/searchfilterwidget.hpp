@@ -3,9 +3,8 @@
 
 #include <memory>
 
-#include <QAbstractItemDelegate>
 #include <QAction>
-#include <QSortFilterProxyModel>
+#include <QString>
 #include <QWidget>
 
 #include <aide/hierarchicalid.hpp>
@@ -24,6 +23,11 @@ namespace aide
 } // namespace aide
 
 class QAbstractItemDelegate;
+class QAbstractItemModel;
+class QIcon;
+class QKeySequence;
+class QSortFilterProxyModel;
+class QTimer;
 
 namespace aide::widgets
 {

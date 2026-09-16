@@ -7,24 +7,28 @@
 #include <QApplication>
 
 #include <aide/actionregistryinterface.hpp>
-#include <aide/appearancemanager.hpp>
-#include <aide/applicationconfig.hpp>
 #include <aide/loggerinterface.hpp>
-#include <aide/mainwindowinterface.hpp>
-#include <aide/notificationmanagerinterface.hpp>
-#include <aide/settings/settingspageregistry.hpp>
 
 namespace aide
 {
     class ApplicationBuilder;
     class ActionRegistry;
     class AideSettingsProvider;
+    class AppearanceManager;
+    class ApplicationConfig;
+    class NotificationManagerInterface;
 
     namespace gui
     {
         class MainWindow;
         class TranslatorInterface;
     } // namespace gui
+
+    namespace core
+    {
+        class MainWindowInterface;
+        class SettingsPageRegistry;
+    } // namespace core
 
     /**
      * @brief The aide::Application class manages the GUI application

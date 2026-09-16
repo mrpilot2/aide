@@ -3,6 +3,9 @@
 
 #include <QTimer>
 
+#include <aide/applicationconfig.hpp>
+#include <aide/mainwindowinterface.hpp>
+
 #include "aidesettingsprovider.hpp"
 #include "applicationbuilder.hpp"
 #include "gui/mainwindow.hpp"

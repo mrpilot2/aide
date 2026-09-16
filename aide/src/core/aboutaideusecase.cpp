@@ -5,7 +5,6 @@
 
 #include <QFile>
 
-#include <aide/application.hpp>
 #include <aide/githubrepository.hpp>
 
 #include "aideinformation.hpp"

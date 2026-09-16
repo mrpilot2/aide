@@ -15,9 +15,12 @@
 #include <aide/colorscheme.hpp>
 #include <aide/gui/widgets/notificationview.hpp>
 #include <aide/hierarchicalid.hpp>
+#include <aide/mainwindowinterface.hpp>
 #include <aide/menucontainerinterface.hpp>
 #include <aide/notificationdisplaytype.hpp>
 #include <aide/notificationgroup.hpp>
+#include <aide/notificationmanagerinterface.hpp>
+#include <aide/settings/settingspageregistry.hpp>
 #include <aide/settingsinterface.hpp>
 #include <aide/theme.hpp>
 

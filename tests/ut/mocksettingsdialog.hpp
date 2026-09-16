@@ -1,6 +1,7 @@
 #ifndef AIDE_MOCK_SETTINGS_DIALOG_HPP
 #define AIDE_MOCK_SETTINGS_DIALOG_HPP
 
+#include <QModelIndex>
 #include <QStringList>
 
 #include "settings/settingsdialoginterface.hpp"

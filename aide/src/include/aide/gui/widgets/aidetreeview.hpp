@@ -2,7 +2,10 @@
 #ifndef AIDE_AIDE_TREE_VIEW_HPP
 #define AIDE_AIDE_TREE_VIEW_HPP
 
+#include <QString>
 #include <QTreeView>
+
+class QPaintEvent;
 
 namespace aide::widgets
 {

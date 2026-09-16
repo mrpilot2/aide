@@ -2,14 +2,15 @@
 #define AIDE_ACTION_REGISTRY_HPP
 
 #include <optional>
-#include <settingsinterface.hpp>
 
-#include <QAction>
 #include <QKeySequence>
 
 #include <aide/actionregistryinterface.hpp>
 #include <aide/hierarchicalid.hpp>
 #include <aide/loggerinterface.hpp>
+
+class QAction;
+class QWidget;
 
 namespace aide
 {

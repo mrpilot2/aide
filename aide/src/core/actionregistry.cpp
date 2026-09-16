@@ -1,5 +1,9 @@
 #include "actionregistry.hpp"
 
+#include <QAction>
+
+#include <aide/settingsinterface.hpp>
+
 #include "menucontainer.hpp"
 
 using aide::Action;

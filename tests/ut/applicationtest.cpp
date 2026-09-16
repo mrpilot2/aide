@@ -8,6 +8,9 @@
 #include <QtCore/QStandardPaths>
 
 #include <aide/application.hpp>
+#include <aide/applicationconfig.hpp>
+#include <aide/mainwindowinterface.hpp>
+#include <aide/notificationtype.hpp>
 
 namespace
 {

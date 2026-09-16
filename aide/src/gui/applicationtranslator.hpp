@@ -1,15 +1,19 @@
 #ifndef AIDE_APPLICATIONTRANSLATOR_HPP
 #define AIDE_APPLICATIONTRANSLATOR_HPP
 
+#include <map>
 #include <memory>
 #include <set>
+#include <string>
+#include <vector>
 
-#include <QDir>
-#include <QMap>
+#include <QString>
 #include <QTranslator>
 
 #include <aide/loggerinterface.hpp>
 #include <gui/translatorinterface.hpp>
+
+class QDir;
 
 namespace aide::gui
 {

@@ -2,6 +2,7 @@
 #include <QString>
 
 #include <aide/application.hpp>
+#include <aide/applicationconfig.hpp>
 #include <aide/gui/translatorinterface.hpp>
 
 #include "colorschemereactor.hpp"

@@ -2,7 +2,10 @@
 #ifndef AIDE_AIDE_TABLE_VIEW_HPP
 #define AIDE_AIDE_TABLE_VIEW_HPP
 
+#include <QString>
 #include <QTableView>
+
+class QPaintEvent;
 
 namespace aide::widgets
 {

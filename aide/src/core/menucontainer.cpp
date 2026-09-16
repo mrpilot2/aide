@@ -1,6 +1,8 @@
 
 #include "menucontainer.hpp"
 
+#include <QMenu>
+
 using aide::MenuContainer;
 
 MenuContainer::MenuContainer(QWidget* parent)

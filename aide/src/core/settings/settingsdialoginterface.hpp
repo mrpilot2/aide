@@ -12,6 +12,7 @@
 class QAbstractItemModel;
 class QWidget;
 class QByteArray;
+class QModelIndex;
 
 namespace aide::core
 {

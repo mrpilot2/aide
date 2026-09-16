@@ -1,7 +1,8 @@
 #ifndef AIDE_GEOMETRY_AND_STATE_DATA_HPP
 #define AIDE_GEOMETRY_AND_STATE_DATA_HPP
 
-#include <QPersistentModelIndex>
+#include <QByteArray>
+#include <QString>
 
 namespace aide::core
 {
