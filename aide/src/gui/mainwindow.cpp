@@ -281,6 +281,12 @@ void MainWindow::createNotificationLogView(
     aide::SettingsInterface& settings)
 {
     m_notificationLogView = new NotificationView(manager, settings, this);
+    // Not added to any layout by aIDE (see class comment on
+    // notificationLogView()): stays hidden until a consumer embeds it and
+    // shows it. Without this, Qt auto-shows this raw child as soon as the
+    // main window is shown, painting it at (0,0) on top of the menu bar for
+    // any consumer that never places it.
+    m_notificationLogView->hide();
 
     connect(m_notificationLogView, &NotificationView::settingsRequested,
             m_controller.get(),
