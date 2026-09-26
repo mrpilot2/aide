@@ -9,7 +9,7 @@ using aide::widgets::MultiColumnSortFilterProxyModel;
 
 void MultiColumnSortFilterProxyModel::invalidateColumnFilter()
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 9, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 10, 0)
     beginFilterChange();
     endFilterChange();
 #else

@@ -47,7 +47,7 @@ namespace aide::widgets
 
         QAbstractItemDelegate* getItemDelegate();
 
-    private slots:
+    private:
         void onUserRequestsToChangeVisibility(bool visible);
 
         void textChanged(const QString& text);
