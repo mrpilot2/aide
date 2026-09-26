@@ -187,10 +187,7 @@ if(APPLE)
 endif()
 
 set(LICENSE_FILE "${CMAKE_INSTALL_PREFIX}/share/doc/aide/licenses.html")
-set(
-  DEVEL_LICENSE_FILE
-  "${CMAKE_CURRENT_BINARY_DIR}/../../aide/dependencies/licenses.html"
-)
+get_property(DEVEL_LICENSE_FILE GLOBAL PROPERTY AIDE_DEVEL_LICENSE_FILE)
 
 set_source_files_properties(
   aboutaideusecasetest.cpp

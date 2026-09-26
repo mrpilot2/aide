@@ -105,6 +105,10 @@ math(EXPR markdown_substring "${markdown_length} - 2")
 string(SUBSTRING ${markdown_content} 0 ${markdown_substring} markdown_content)
 
 configure_file(licenses.hml.in licenses.html @ONLY)
+set_property(
+  GLOBAL
+  PROPERTY AIDE_DEVEL_LICENSE_FILE "${CMAKE_CURRENT_BINARY_DIR}/licenses.html"
+)
 
 if(AIDE_CHECK_LICENSES_AVAILABILITY)
   configure_file(
