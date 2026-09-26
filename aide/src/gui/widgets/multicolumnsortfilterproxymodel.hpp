@@ -33,6 +33,8 @@ namespace aide::widgets
                               const QModelIndex& source_parent) const override;
 
     private:
+        void invalidateColumnFilter();
+
         std::map<int, QString> m_columnFilterMap;
 
         FilterOption m_option{FilterOption::Regex};

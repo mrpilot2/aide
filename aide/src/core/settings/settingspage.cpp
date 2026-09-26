@@ -125,7 +125,7 @@ QStringList SettingsPage::groupTitles() const
 
 bool SettingsPage::matches(const QString& pattern)
 {
-    QWidget* pageWidget = widget();
+    const QWidget* pageWidget = widget();
     if (pageWidget == nullptr) { return false; }
 
     const auto words = tokenizeSearchPattern(pattern);
@@ -156,7 +156,7 @@ bool SettingsPage::matches(const QString& pattern)
 
 double SettingsPage::score(const QStringList& words)
 {
-    QWidget* pageWidget = widget();
+    const QWidget* pageWidget = widget();
     if (pageWidget == nullptr) { return 0.0; }
 
     QStringList texts;

@@ -30,7 +30,7 @@ macro(aide_enable_cppcheck WARNINGS_AS_ERRORS CPPCHECK_OPTIONS)
         # false positive with structured bindings (fixed in cppcheck 2.8)
         --suppress=unassignedVariable
         --suppress=incorrectStringBooleanError
-        --suppress=*:*/*_autogen/*.h
+        --suppress=*:*_autogen/*
         --check-level=exhaustive
         --std=c++20
         --library=qt

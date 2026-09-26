@@ -7,6 +7,16 @@
 
 using aide::widgets::MultiColumnSortFilterProxyModel;
 
+void MultiColumnSortFilterProxyModel::invalidateColumnFilter()
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 9, 0)
+    beginFilterChange();
+    endFilterChange();
+#else
+    invalidateFilter();
+#endif
+}
+
 void MultiColumnSortFilterProxyModel::setFilterForColumn(
     const int column, const QString& filterText)
 {
@@ -16,20 +26,20 @@ void MultiColumnSortFilterProxyModel::setFilterForColumn(
     } else {
         m_columnFilterMap.try_emplace(column, filterText);
     }
-    invalidateFilter();
+    invalidateColumnFilter();
 }
 
 void MultiColumnSortFilterProxyModel::clearFilterForAllColumns()
 {
     m_columnFilterMap.clear();
-    invalidateFilter();
+    invalidateColumnFilter();
 }
 
 void MultiColumnSortFilterProxyModel::clearFilterForColumn(const int column)
 {
     if (m_columnFilterMap.contains(column)) {
         m_columnFilterMap.erase(column);
-        invalidateFilter();
+        invalidateColumnFilter();
     }
 }
 

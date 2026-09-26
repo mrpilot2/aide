@@ -336,7 +336,7 @@ void MainWindow::ensureBannerHost()
 
 void MainWindow::rebuildBannerHostLayout()
 {
-    while (QLayoutItem* item = m_bannerHostLayout->takeAt(0)) {
+    while (const QLayoutItem* item = m_bannerHostLayout->takeAt(0)) {
         auto* widget = item->widget();
         delete item;
         const bool isBanner =

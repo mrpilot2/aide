@@ -102,8 +102,8 @@ SettingsDialogGeometryAndStateData SettingsDialog::currentGeometry() const
 
     auto selectedIndexes = ui->treeView->selectionModel()->selectedIndexes();
     if (!selectedIndexes.empty()) {
-        auto index                      = selectedIndexes.at(0);
-        QAbstractItemModel* sourceModel = ui->treeView->model();
+        auto index                            = selectedIndexes.at(0);
+        const QAbstractItemModel* sourceModel = ui->treeView->model();
 
         if (auto* proxy =
                 qobject_cast<QSortFilterProxyModel*>(ui->treeView->model())) {

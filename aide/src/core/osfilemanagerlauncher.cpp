@@ -64,7 +64,7 @@ namespace
 
     std::string resolveDisplayName()
     {
-#if defined(Q_OS_WIN)
+#ifdef Q_OS_WIN
         return "File Explorer";
 #elif defined(Q_OS_MACOS)
         return "Finder";
