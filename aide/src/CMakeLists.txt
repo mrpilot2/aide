@@ -3,6 +3,10 @@ add_subdirectory(core)
 add_subdirectory(gui)
 add_subdirectory(logger)
 
+if(AIDE_ENABLE_VCS)
+  add_subdirectory(vcs)
+endif()
+
 add_library(AideQt${QT_VERSION_MAJOR}Application)
 add_library(Aide::AideApplication ALIAS AideQt${QT_VERSION_MAJOR}Application)
 
@@ -35,6 +39,17 @@ target_link_libraries(
     $<BUILD_LOCAL_INTERFACE:$<$<TARGET_EXISTS:aide_options>:aide_options>>
     $<BUILD_LOCAL_INTERFACE:$<$<TARGET_EXISTS:aide_warnings>:aide_warnings>>
 )
+
+if(AIDE_ENABLE_VCS)
+  target_link_libraries(
+    AideQt${QT_VERSION_MAJOR}Application
+    PRIVATE Aide::AideVcs
+  )
+  target_compile_definitions(
+    AideQt${QT_VERSION_MAJOR}Application
+    PRIVATE AIDE_ENABLE_VCS
+  )
+endif()
 
 if(WIN32)
   target_compile_definitions(

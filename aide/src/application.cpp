@@ -109,3 +109,8 @@ const aide::ApplicationConfig& Application::config() const
 {
     return m_appBuilder->config();
 }
+
+std::optional<aide::VcsManagerInterfacePtr> Application::vcsManager() const
+{
+    return m_appBuilder->vcsManager();
+}

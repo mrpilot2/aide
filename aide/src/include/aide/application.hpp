@@ -3,6 +3,7 @@
 #define AIDE_APPLICATION_HPP
 
 #include <memory>
+#include <optional>
 
 #include <QApplication>
 
@@ -13,6 +14,7 @@
 #include <aide/mainwindowinterface.hpp>
 #include <aide/notificationmanagerinterface.hpp>
 #include <aide/settings/settingspageregistry.hpp>
+#include <aide/vcsmanagerinterface.hpp>
 
 namespace aide
 {
@@ -70,6 +72,8 @@ namespace aide
         [[nodiscard]] AppearanceManager& appearanceManager() const;
 
         [[nodiscard]] const ApplicationConfig& config() const;
+
+        [[nodiscard]] std::optional<VcsManagerInterfacePtr> vcsManager() const;
 
     private:
         static bool isOrganizationNameSet();

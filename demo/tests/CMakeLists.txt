@@ -50,6 +50,13 @@ target_link_libraries(
     Aide::AideWidgets
 )
 
+if(TARGET Aide::AideVcs)
+  # See tests/ut/CMakeLists.txt for why: a private, shared-build-only
+  # runtime dependency of Aide::AideApplication needs relinking directly
+  # here too, or the dynamic loader can't resolve libAideVcs.so (#170).
+  target_link_libraries(ut.aide.demo PRIVATE Aide::AideVcs)
+endif()
+
 enable_testing()
 catch_discover_tests(
   ut.aide.demo REPORTER console WORKING_DIRECTORY

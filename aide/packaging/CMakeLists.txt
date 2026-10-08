@@ -1,14 +1,22 @@
 include(GNUInstallDirs)
 
+set(
+  AIDE_INSTALL_TARGETS
+  AideQt${QT_VERSION_MAJOR}Application
+  AideBuildInformation
+  AideCore
+  AideGui
+  AideLogger
+  AideUtils
+  AideQt${QT_VERSION_MAJOR}Widgets
+)
+
+if(AIDE_ENABLE_VCS)
+  list(APPEND AIDE_INSTALL_TARGETS AideVcs)
+endif()
+
 install(
-  TARGETS
-    AideQt${QT_VERSION_MAJOR}Application
-    AideBuildInformation
-    AideCore
-    AideGui
-    AideLogger
-    AideUtils
-    AideQt${QT_VERSION_MAJOR}Widgets
+  TARGETS ${AIDE_INSTALL_TARGETS}
   EXPORT AideTargets
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/aide COMPONENT Devel

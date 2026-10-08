@@ -23,6 +23,19 @@ if(PROJECT_IS_TOP_LEVEL)
   aide_local_options()
 endif()
 
+include(FeatureSummary)
+
+option(
+  AIDE_ENABLE_VCS
+  "Builds the aide::vcs Git version control integration module"
+  ON
+)
+add_feature_info(
+  EnableVcs
+  AIDE_ENABLE_VCS
+  "Builds the aide::vcs Git version control integration module."
+)
+
 include(dependencies/Qt.cmake)
 add_subdirectory(dependencies)
 

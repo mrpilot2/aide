@@ -106,6 +106,24 @@ TEST_CASE("An application config")
         REQUIRE(assigned.isEnabled(Feature::ViewFullscreenAction));
     }
 
+    SECTION("enables the version-control-integration feature by default")
+    {
+        const ApplicationConfig config;
+
+        REQUIRE(config.isEnabled(Feature::VersionControlIntegration));
+    }
+
+    SECTION(
+        "reflects an explicit opt-out for the version-control-integration "
+        "feature")
+    {
+        ApplicationConfig config;
+
+        config.setEnabled(Feature::VersionControlIntegration, false);
+
+        REQUIRE_FALSE(config.isEnabled(Feature::VersionControlIntegration));
+    }
+
     SECTION("has no URL launcher override by default")
     {
         const ApplicationConfig config;
