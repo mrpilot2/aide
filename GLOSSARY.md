@@ -11,7 +11,7 @@ A unit of end-user help tied to a part of the UI, such as a settings page.
 _Avoid_: Help page (for the identifier), help entry, help section
 
 **Help Topic ID**:
-The identifier of a Help Topic; the last part of the topic's URL relative to the Help Base URL (e.g. `keymap`).
+The identifier a subsystem declares for its Help Topic; a relative path that, unless the client remaps it, is the topic's location under the Help Base URL (e.g. `keymap`, `settings/keymap`).
 _Avoid_: Help slug, help path, help key
 
 **Help Base URL**:
