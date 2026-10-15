@@ -15,7 +15,9 @@ namespace aide::test
     // For code that logs through the global AIDE_LOG_* macros instead of an
     // injected LoggerPtr (e.g. value types such as HelpTopicId): while alive,
     // replaces the macros' logger with one writing into a string stream, and
-    // restores the original on destruction.
+    // restores the original on destruction. Goes through LoggerMacros, not
+    // spdlog directly: in shared builds on Windows and macOS the test binary
+    // and AideLogger each have their own spdlog registry.
     class CapturedMacroLog
     {
     public:

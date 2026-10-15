@@ -8,6 +8,14 @@ class LoggerMacros
 {
 public:
     static std::shared_ptr<spdlog::logger> getLogger(const std::string& name);
+
+    // Register/drop in the spdlog registry that getLogger() reads. In shared
+    // builds on Windows and macOS every module has its own spdlog registry,
+    // so code outside AideLogger (e.g. tests swapping the macro logger) must
+    // go through these rather than call spdlog::register_logger directly.
+    static void registerLogger(const std::shared_ptr<spdlog::logger>& logger);
+
+    static void dropLogger(const std::string& name);
 };
 
 const char* const AIDE_DEFAULT_MACRO_LOGGER{"aide_macro"};
