@@ -12,6 +12,7 @@
 #include "settings/searchpattern.hpp"
 #include "settings/textmatcher.hpp"
 
+using aide::HelpTopicId;
 using aide::HierarchicalId;
 using aide::core::SettingsPage;
 
@@ -112,6 +113,11 @@ SettingsPage::~SettingsPage() = default;
 const HierarchicalId& SettingsPage::group() const
 {
     return settingsGroup;
+}
+
+HelpTopicId SettingsPage::helpTopicId() const
+{
+    return {};
 }
 
 QStringList SettingsPage::groupTitles() const

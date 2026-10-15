@@ -29,6 +29,16 @@ MockSettingsPage::MockSettingsPage(const HierarchicalId& group,
 
 MockSettingsPage::~MockSettingsPage() = default;
 
+void MockSettingsPage::setHelpTopicId(HelpTopicId id)
+{
+    declaredHelpTopicId = std::move(id);
+}
+
+aide::HelpTopicId MockSettingsPage::helpTopicId() const
+{
+    return declaredHelpTopicId.value_or(SettingsPage::helpTopicId());
+}
+
 QWidget* MockSettingsPage::widget()
 {
     return mockWidget.get();

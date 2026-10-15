@@ -17,9 +17,28 @@ ShowSettingsDialog::ShowSettingsDialog(SettingsDialogWeakPtr dialog,
                                        SettingsPageRegistry& registry,
                                        SettingsInterface& settings,
                                        LoggerPtr loggerInterface)
+    : ShowSettingsDialog(std::move(dialog), registry, settings,
+                         std::move(loggerInterface), nullptr)
+{}
+
+ShowSettingsDialog::ShowSettingsDialog(SettingsDialogWeakPtr dialog,
+                                       SettingsPageRegistry& registry,
+                                       SettingsInterface& settings,
+                                       LoggerPtr loggerInterface,
+                                       const ShowHelpUseCase& helpUseCase)
+    : ShowSettingsDialog(std::move(dialog), registry, settings,
+                         std::move(loggerInterface), &helpUseCase)
+{}
+
+ShowSettingsDialog::ShowSettingsDialog(SettingsDialogWeakPtr dialog,
+                                       SettingsPageRegistry& registry,
+                                       SettingsInterface& settings,
+                                       LoggerPtr loggerInterface,
+                                       const ShowHelpUseCase* helpUseCase)
     : m_registry(registry)
     , settingsDialog{std::move(dialog)}
     , logger{std::move(loggerInterface)}
+    , m_helpUseCase{helpUseCase}
     , saveGeometryAndState(settingsDialog, settings)
     , searchHistory(settings)
 {}
@@ -44,6 +63,8 @@ void ShowSettingsDialog::showSettingsDialog(
 
     dialog->showEmptyPageWidget();
     dialog->setSelectedPageDisplayName("");
+    dialog->showHelpButton(isHelpActive());
+    dialog->enableHelpButton(false);
 
     treeModel  = std::make_shared<SettingsPageGroupTreeModel>(m_registry);
     proxyModel = std::make_shared<SettingsPageFilterProxyModel>();
@@ -132,6 +153,7 @@ void ShowSettingsDialog::changeSelectedPage(
             showEmptyPageWidget();
             view->showResetLabel(false);
         }
+        view->enableHelpButton(isHelpAvailableForCurrentPage());
     }
 }
 
@@ -251,7 +273,26 @@ void ShowSettingsDialog::clearSelectedPage()
     if (const auto view = settingsDialog.lock(); view != nullptr) {
         showEmptyPageWidget();
         view->showResetLabel(false);
+        view->enableHelpButton(false);
     }
+}
+
+bool ShowSettingsDialog::isHelpActive() const
+{
+    return m_helpUseCase != nullptr && m_helpUseCase->isHelpActive();
+}
+
+bool ShowSettingsDialog::isHelpAvailableForCurrentPage() const
+{
+    return m_helpUseCase != nullptr && currentlySelectedPage != nullptr &&
+           m_helpUseCase->isHelpAvailable(currentlySelectedPage->helpTopicId());
+}
+
+void ShowSettingsDialog::showHelpForCurrentPage()
+{
+    if (!isHelpAvailableForCurrentPage()) { return; }
+
+    m_helpUseCase->showHelp(currentlySelectedPage->helpTopicId());
 }
 
 void ShowSettingsDialog::updateDisplayName(

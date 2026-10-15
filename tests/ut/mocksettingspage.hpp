@@ -34,6 +34,10 @@ namespace aide::test
 
         [[nodiscard]] QStringList groupTitles() const override;
 
+        void setHelpTopicId(HelpTopicId id);
+
+        [[nodiscard]] HelpTopicId helpTopicId() const override;
+
         void reset() override;
 
         [[nodiscard]] bool wasResetCalled() const;
@@ -58,6 +62,8 @@ namespace aide::test
         uint16_t resetCounter{0};
 
         std::optional<QStringList> overriddenGroupTitles;
+
+        std::optional<HelpTopicId> declaredHelpTopicId;
     };
 } // namespace aide::test
 
