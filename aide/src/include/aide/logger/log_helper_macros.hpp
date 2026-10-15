@@ -16,6 +16,8 @@ public:
     static void registerLogger(const std::shared_ptr<spdlog::logger>& logger);
 
     static void dropLogger(const std::string& name);
+
+    static void dropAllLoggers();
 };
 
 const char* const AIDE_DEFAULT_MACRO_LOGGER{"aide_macro"};
