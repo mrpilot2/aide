@@ -242,9 +242,9 @@ The following CMake options are available (most are set automatically by presets
 
 ## License
 
-aIDE is licensed under the **[GNU General Public License v3.0](LICENSE)**.
+aIDE is licensed under the **[MIT License](LICENSE)**.
 
-> **Important:** GPLv3 is a copyleft license. If you embed aIDE in your application and distribute it, your application must also be released under a GPL-compatible open-source license. Embedding aIDE in a closed-source or proprietary application is **not permitted** under this license.
+> **Note on Qt:** aIDE links against Qt, which is available under the LGPLv3 (or a commercial license). To comply with the LGPL, link Qt **dynamically** (as shared libraries) so end users can replace the Qt libraries in your distributed application. aIDE's build refuses a static Qt by default; set `AIDE_ALLOW_STATIC_QT=ON` only if you hold a commercial Qt license or otherwise meet the LGPL relinking requirements.
 
 aIDE includes third-party open-source libraries under their own licenses. See [3rd-party-licenses.md](3rd-party-licenses.md) for details.
 
