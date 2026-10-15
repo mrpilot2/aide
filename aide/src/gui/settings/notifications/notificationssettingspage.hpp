@@ -48,6 +48,7 @@ namespace aide::gui
         QWidget* widget() override;
         [[nodiscard]] bool isModified() const override;
         [[nodiscard]] QStringList groupTitles() const override;
+        [[nodiscard]] HelpTopicId helpTopicId() const override;
         void reset() override;
         void apply() override;
 

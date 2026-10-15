@@ -58,6 +58,10 @@ namespace aide::gui
 
         void enableApplyButton(bool enable) override;
 
+        void showHelpButton(bool show) override;
+
+        void enableHelpButton(bool enable) override;
+
     private:
         void connectSignals();
 

@@ -26,6 +26,11 @@ bool KeymapPage::isModified() const
     return m_controller.isModified();
 }
 
+aide::HelpTopicId KeymapPage::helpTopicId() const
+{
+    return HelpTopicId{"keymap"};
+}
+
 QStringList KeymapPage::groupTitles() const
 {
     return {QApplication::tr("Keymap", "KeymapPage")};
