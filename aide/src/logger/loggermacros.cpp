@@ -14,3 +14,8 @@ void LoggerMacros::dropLogger(const std::string& name)
 {
     spdlog::drop(name);
 }
+
+void LoggerMacros::dropAllLoggers()
+{
+    spdlog::drop_all();
+}
