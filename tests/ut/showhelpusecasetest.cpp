@@ -9,53 +9,19 @@
 #include <aide/helptopicid.hpp>
 
 #include "mockurllauncher.hpp"
+#include "recordinglogger.hpp"
 #include "showhelpusecase.hpp"
 
 using aide::ApplicationConfig;
 using aide::HelpTopicId;
 using aide::core::ShowHelpUseCase;
+using aide::test::RecordingLogger;
 using aide::tests::MockUrlLauncher;
 
 using Feature = ApplicationConfig::Feature;
 
 namespace
 {
-    // Counts log lines, without depending on the real spdlog-backed logger.
-    class RecordingLogger : public aide::LoggerInterface
-    {
-    public:
-        mutable int lineCount{0};
-
-        void flush() override {}
-        void setLevel(aide::LogLevel /*level*/) override {}
-
-    private:
-        void doLogTrace(std::string_view /*message*/) const override
-        {
-            ++lineCount;
-        }
-        void doLogDebug(std::string_view /*message*/) const override
-        {
-            ++lineCount;
-        }
-        void doLogInfo(std::string_view /*message*/) const override
-        {
-            ++lineCount;
-        }
-        void doLogWarn(std::string_view /*message*/) const override
-        {
-            ++lineCount;
-        }
-        void doLogError(std::string_view /*message*/) const override
-        {
-            ++lineCount;
-        }
-        void doLogCritical(std::string_view /*message*/) const override
-        {
-            ++lineCount;
-        }
-    };
-
     struct Fixture
     {
         std::shared_ptr<MockUrlLauncher> launcher{
@@ -124,7 +90,7 @@ TEST_CASE("Help with the feature on but no base URL is inactive",
 
     SECTION("and says so in a single log line")
     {
-        REQUIRE(fixture.logger->lineCount == 1);
+        REQUIRE(fixture.logger->lines().size() == 1);
     }
 }
 
@@ -139,7 +105,7 @@ TEST_CASE("Help with the feature off is inactive even with a base URL",
     REQUIRE_FALSE(useCase.showHelp(HelpTopicId{"keymap"}));
     REQUIRE_FALSE(useCase.showHelpContents());
     REQUIRE_FALSE(fixture.launcher->lastRequestedUrl.has_value());
-    REQUIRE(fixture.logger->lineCount == 0);
+    REQUIRE(fixture.logger->lines().empty());
 }
 
 TEST_CASE("An empty help topic is not available", "[ShowHelpUseCase]")

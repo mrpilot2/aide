@@ -1,5 +1,3 @@
-#include <memory>
-#include <sstream>
 #include <string>
 
 #include <catch2/catch_test_macros.hpp>
@@ -7,48 +5,11 @@
 #include <QString>
 
 #include <aide/helptopicid.hpp>
-#include <aide/logger/log_helper_macros.hpp>
-#include <spdlog/sinks/ostream_sink.h>
-#include <spdlog/spdlog.h>
+
+#include "capturedmacrolog.hpp"
 
 using aide::HelpTopicId;
-
-namespace
-{
-    // Temporarily replaces the logger behind the AIDE_LOG_* macros with one
-    // that writes into a string stream, restoring the original afterwards.
-    class CapturedMacroLog
-    {
-    public:
-        CapturedMacroLog()
-            : m_previous(spdlog::get(AIDE_DEFAULT_MACRO_LOGGER))
-        {
-            spdlog::drop(AIDE_DEFAULT_MACRO_LOGGER);
-            auto sink = std::make_shared<spdlog::sinks::ostream_sink_mt>(m_out);
-            auto logger = std::make_shared<spdlog::logger>(
-                AIDE_DEFAULT_MACRO_LOGGER, sink);
-            logger->set_level(spdlog::level::trace);
-            spdlog::register_logger(logger);
-        }
-
-        ~CapturedMacroLog()
-        {
-            spdlog::drop(AIDE_DEFAULT_MACRO_LOGGER);
-            if (m_previous != nullptr) { spdlog::register_logger(m_previous); }
-        }
-
-        CapturedMacroLog(const CapturedMacroLog&)            = delete;
-        CapturedMacroLog& operator=(const CapturedMacroLog&) = delete;
-        CapturedMacroLog(CapturedMacroLog&&)                 = delete;
-        CapturedMacroLog& operator=(CapturedMacroLog&&)      = delete;
-
-        [[nodiscard]] std::string text() const { return m_out.str(); }
-
-    private:
-        std::shared_ptr<spdlog::logger> m_previous;
-        std::ostringstream m_out;
-    };
-} // namespace
+using aide::test::CapturedMacroLog;
 
 TEST_CASE("A default-constructed help topic id is empty", "[HelpTopicId]")
 {
