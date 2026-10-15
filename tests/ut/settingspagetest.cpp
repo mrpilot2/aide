@@ -389,3 +389,11 @@ TEST_CASE("Graying out non-matching content on a settings page")
         REQUIRE(isDimmed(sibling));
     }
 }
+
+TEST_CASE("A settings page that does not declare a help topic",
+          "[SettingsPage]")
+{
+    const MockSettingsPage page;
+
+    REQUIRE(page.helpTopicId().isEmpty());
+}

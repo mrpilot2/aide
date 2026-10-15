@@ -20,6 +20,9 @@ namespace aide::core
         ShowHelpUseCase(ApplicationConfig config, UrlLauncherPtr launcher,
                         LoggerPtr logger);
 
+        // True when Feature::Help is enabled and a Help Base URL is set.
+        [[nodiscard]] bool isHelpActive() const;
+
         // True when help is active and the topic is non-empty and not
         // disabled. Disabling is checked against the declared ID, before any
         // remap.
@@ -34,8 +37,6 @@ namespace aide::core
         bool showHelpContents() const;
 
     private:
-        [[nodiscard]] bool isHelpActive() const;
-
         [[nodiscard]] QUrl baseUrlWithTrailingSlash() const;
 
         bool open(const QUrl& url) const;

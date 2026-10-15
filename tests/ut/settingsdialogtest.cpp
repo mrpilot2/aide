@@ -2,13 +2,28 @@
 
 #include <catch2/catch_test_macros.hpp>
 
+#include <QDialogButtonBox>
+#include <QPushButton>
 #include <QStandardItemModel>
 #include <QTreeView>
 #include <QWidget>
 
 #include "settings/settingsdialog.hpp"
+#include "settings/settingsdialogcontroller.hpp"
+#include "spychangepagecontroller.hpp"
 
 using aide::gui::SettingsDialog;
+using aide::gui::SettingsDialogController;
+using aide::test::SpyChangePageController;
+
+namespace
+{
+    QPushButton* helpButton(const SettingsDialog& dialog)
+    {
+        const auto* box = dialog.findChild<QDialogButtonBox*>("helpButtonBox");
+        return box == nullptr ? nullptr : box->button(QDialogButtonBox::Help);
+    }
+} // namespace
 
 TEST_CASE("SettingsDialog programmatic page selection", "[SettingsDialog]")
 {
@@ -77,4 +92,45 @@ TEST_CASE("SettingsDialog does not free a page it does not own",
     // The shared_ptr must still be the sole, valid owner after the dialog dies.
     REQUIRE(page.use_count() == 1);
     REQUIRE(page->parent() == nullptr);
+}
+
+TEST_CASE("SettingsDialog Help button", "[SettingsDialog][Help]")
+{
+    SettingsDialog dialog;
+    auto* button = helpButton(dialog);
+    REQUIRE(button != nullptr);
+
+    SECTION("is disabled initially")
+    {
+        REQUIRE_FALSE(button->isEnabled());
+    }
+
+    SECTION("can be hidden and shown")
+    {
+        dialog.showHelpButton(false);
+        REQUIRE(button->isHidden());
+
+        dialog.showHelpButton(true);
+        REQUIRE_FALSE(button->isHidden());
+    }
+
+    SECTION("can be enabled and disabled")
+    {
+        dialog.enableHelpButton(true);
+        REQUIRE(button->isEnabled());
+
+        dialog.enableHelpButton(false);
+        REQUIRE_FALSE(button->isEnabled());
+    }
+
+    SECTION("shows help for the current page when clicked")
+    {
+        SpyChangePageController spy;
+        dialog.setController(std::make_shared<SettingsDialogController>(spy));
+        dialog.enableHelpButton(true);
+
+        button->click();
+
+        REQUIRE(spy.showHelpForCurrentPageCalled);
+    }
 }

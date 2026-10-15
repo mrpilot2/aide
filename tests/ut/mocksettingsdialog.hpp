@@ -49,6 +49,14 @@ namespace aide::test
 
         [[nodiscard]] bool isApplyButtonEnabled() const;
 
+        void showHelpButton(bool show) override;
+
+        [[nodiscard]] bool isHelpButtonVisible() const;
+
+        void enableHelpButton(bool enable) override;
+
+        [[nodiscard]] bool isHelpButtonEnabled() const;
+
         void simulateUserAcceptsDialog(bool accept);
 
     private:
@@ -61,6 +69,12 @@ namespace aide::test
         bool resetLabelIsVisible{false};
 
         bool applyButtonIsEnabled{false};
+
+        // Start out the opposite of what the real dialog shows initially,
+        // so tests prove the use case sets the Help button state explicitly.
+        bool helpButtonIsVisible{true};
+
+        bool helpButtonIsEnabled{true};
 
         bool userShallAcceptDialog{false};
 

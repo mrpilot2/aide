@@ -47,6 +47,13 @@ namespace aide::core
         virtual void showResetLabel(bool show) = 0;
 
         virtual void enableApplyButton(bool enable) = 0;
+
+        // Hidden while help is inactive (Feature::Help off or no Help Base
+        // URL).
+        virtual void showHelpButton(bool show) = 0;
+
+        // Enabled only while the selected page has an available Help Topic.
+        virtual void enableHelpButton(bool enable) = 0;
     };
 
     using SettingsDialogWeakPtr = std::weak_ptr<SettingsDialogInterface>;

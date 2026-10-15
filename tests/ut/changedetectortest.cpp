@@ -21,8 +21,8 @@
 #include <QWidget>
 
 #include "settings/changedetector.hpp"
-#include "settings/settingsdialogchangepagecontroller.hpp"
 #include "settings/settingsdialogcontroller.hpp"
+#include "spychangepagecontroller.hpp"
 
 namespace
 {
@@ -31,31 +31,9 @@ namespace
     constexpr int kSliderMax{100};
     constexpr int kSliderValue{50};
     constexpr int kDateYear{2025};
-
-    class SpyChangePageController
-        : public aide::core::SettingsDialogChangePageController
-    {
-    public:
-        bool anyGuiElementChangedCalled{false};
-
-        void changeSelectedPage(const QItemSelection& /*selected*/,
-                                const QItemSelection& /*deselected*/) override
-        {}
-
-        void searchPatternChanged(const QString& /*pattern*/) override {}
-
-        void commitCurrentSearchPattern() override {}
-
-        void anyGuiElementHasChanged() override
-        {
-            anyGuiElementChangedCalled = true;
-        }
-
-        void resetCurrentPage() override {}
-
-        void applyModifiedSettingsPages() override {}
-    };
 } // namespace
+
+using aide::test::SpyChangePageController;
 
 TEST_CASE("installChangeDetector for QLineEdit", "[ChangeDetector]")
 {

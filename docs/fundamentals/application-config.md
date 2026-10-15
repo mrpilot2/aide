@@ -95,6 +95,21 @@ A topic resolves to `<Help Base URL>/<topic-id>/`, matching mkdocs directory URL
 
 `Application::showHelp()`, `isHelpAvailable()` and `showHelpContents()` open URLs through the configured URL launcher (see above). They return `false`, launching nothing, when help is inactive or the topic is empty or disabled.
 
+### Settings pages
+
+A settings page declares its Help Topic by overriding `SettingsPage::helpTopicId()`. The default returns an empty ID, so pages that don't override it still compile and simply have no topic:
+
+```cpp
+aide::HelpTopicId MySettingsPage::helpTopicId() const
+{
+    return aide::HelpTopicId{"my-settings"};
+}
+```
+
+aIDE's built-in pages declare `appearance`, `keymap` and `notifications`. These IDs are **stable public API**, so renaming or removing one is a breaking change.
+
+The settings dialog's Help button is **hidden** while help is inactive. It is **disabled** while the selected page or group node has no available topic (`isHelpAvailable()` is false), and **enabled** otherwise. Clicking it opens the selected page's topic. Its state updates on every selection change.
+
 ---
 
 ## Value semantics

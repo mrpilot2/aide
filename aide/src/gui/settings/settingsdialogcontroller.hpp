@@ -35,6 +35,8 @@ namespace aide::gui
 
         void onUserWantsToApplySettingsPages() const;
 
+        void onUserWantsHelpForCurrentPage() const;
+
     private:
         aide::core::SettingsDialogChangePageController& controller;
     };
