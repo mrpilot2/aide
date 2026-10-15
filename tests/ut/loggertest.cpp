@@ -115,7 +115,7 @@ TEST_CASE("Test different log levels", "[Logger]")
 // NOLINTNEXTLINE
 TEST_CASE("Test log macros", "[Logger]")
 {
-    spdlog::drop_all();
+    LoggerMacros::dropAllLoggers();
     const std::string logFileNameStr =
         TEST_LOG_FILE_LOCATION + std::string("/aide_test.log");
     const char* logFileName{logFileNameStr.c_str()};
@@ -388,7 +388,7 @@ TEST_CASE("Logger constructor variants", "[Logger]")
 
     SECTION("default constructor constructs without crash")
     {
-        spdlog::drop_all();
+        LoggerMacros::dropAllLoggers();
         Logger logger;
         logger.info("default ctor");
         logger.flush();
@@ -396,7 +396,7 @@ TEST_CASE("Logger constructor variants", "[Logger]")
 
     SECTION("LoggerName constructor constructs without crash")
     {
-        spdlog::drop_all();
+        LoggerMacros::dropAllLoggers();
         Logger logger(LoggerName("test_named_logger"));
         logger.info("named ctor");
         logger.flush();
@@ -417,7 +417,7 @@ TEST_CASE("Logger setLevel filters messages", "[Logger]")
                                      std::string("/aide_setlevel_test.log")};
     const char* logFileName{logFileNameStr.c_str()};
     [[maybe_unused]] auto res = std::remove(logFileName);
-    spdlog::drop_all();
+    LoggerMacros::dropAllLoggers();
 
     auto logger = Logger(FileName(logFileName));
 
