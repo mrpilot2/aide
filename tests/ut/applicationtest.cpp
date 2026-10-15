@@ -186,7 +186,7 @@ TEST_CASE("Application shows help through the configured URL launcher",
     aide::Application::setApplicationName("aide_test");
     aide::Application::setOrganizationName("aide_company");
 
-    const auto launcher = std::make_shared<aide::tests::MockUrlLauncher>();
+    const auto launcher = std::make_shared<aide::test::MockUrlLauncher>();
 
     int numberOfArgs{1};
     // NOLINTNEXTLINE
@@ -227,7 +227,7 @@ TEST_CASE("Application help is inactive without a Help Base URL",
     aide::Application::setApplicationName("aide_test");
     aide::Application::setOrganizationName("aide_company");
 
-    const auto launcher = std::make_shared<aide::tests::MockUrlLauncher>();
+    const auto launcher = std::make_shared<aide::test::MockUrlLauncher>();
 
     int numberOfArgs{1};
     // NOLINTNEXTLINE
