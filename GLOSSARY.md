@@ -22,6 +22,14 @@ _Avoid_: Help root, docs URL
 The rendered web page a resolved Help Topic URL shows in the browser.
 _Avoid_: Help Topic (for the page itself)
 
+**Context Help**:
+Opening the Help Topic of whatever the user is working in, found from the focused part of the UI outward; falls back to Help Contents when nothing there has a topic.
+_Avoid_: F1 help (the key can be remapped), contextual help
+
+**Help Contents**:
+The entry point of a client's End-User Help, the page at the Help Base URL itself; not a Help Topic.
+_Avoid_: Help index, help home
+
 **End-User Help**:
 Help content written for the users of a client application, distinct from the Developer Guide.
 _Avoid_: User docs, manual
