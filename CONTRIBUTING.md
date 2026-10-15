@@ -4,6 +4,10 @@
 
 Commit messages must follow [Conventional Commits](https://www.conventionalcommits.org/) (`feat:`, `fix:`, `ci:`, `chore:`, etc.) — enforced by pre-commit hook.
 
+## Documentation
+
+A change to a public header under `aide/src/include/aide/` updates the page under `docs/` that covers that API (e.g. `ApplicationConfig` → `docs/fundamentals/application-config.md`). A new `ApplicationConfig::Feature` adds a row to that page's features table.
+
 ## Code formatting
 
 Pre-commit hooks enforce formatting. Run manually with:

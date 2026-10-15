@@ -38,12 +38,13 @@ Build output: `build/<preset-name>/`.
 
 ### Run a single test
 
-Catch2 3.x, binary at `tests/ut/ut.aide` inside the build dir:
+Catch2 3.x, binaries in `bin/` inside the build dir: `ut.aide` for most tests, `ut.aide.application` for `[Application]` tests (each constructs its own `aide::Application`):
 
 ```bash
-./build/client-unix-static-debug/tests/ut/ut.aide "test name or pattern"
-./build/client-unix-static-debug/tests/ut/ut.aide --list-tests        # list all
-./build/client-unix-static-debug/tests/ut/ut.aide "[tag]"             # by tag
+./build/client-unix-static-debug/bin/ut.aide "test name or pattern"
+./build/client-unix-static-debug/bin/ut.aide --list-tests        # list all
+./build/client-unix-static-debug/bin/ut.aide "[tag]"             # by tag
+./build/client-unix-static-debug/bin/ut.aide.application         # [Application] tests
 ```
 
 ### Formatting & linting
@@ -56,7 +57,7 @@ pre-commit run clang-format         # C++ formatting only
 pre-commit run cmake-format         # CMake formatting only
 ```
 
-clang-tidy/cppcheck run at build time in `dev`/`ci-static` presets, not as separate commands.
+clang-tidy/cppcheck run at build time in `dev`/`ci-static` presets. For fast clang-tidy feedback while iterating on the `client` preset, run `tools/tidy-changed.sh [base-ref]` (changed `.cpp` files only, dev-preset options; needs `build/dev-unix-static-debug` configured once) before the full dev workflow.
 
 ## Architecture
 
@@ -98,4 +99,4 @@ Key interfaces (`aide/include/aide/`): `LoggerInterface`, `SettingsInterface`, `
 
 - **Issue tracker**: read `docs/agents/issue-tracker.md` before any `gh issue`/`gh pr` call (plain `gh issue view` fails on this repo). mrpilot2/aide GitHub Issues; external PRs are not a triage surface.
 - **Triage labels**: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
-- **Domain docs**: single-context layout (`CONTEXT.md` + `docs/adr/` at repo root). See `docs/agents/domain.md`.
+- **Domain docs**: single-context layout (`GLOSSARY.md` + `docs/adr/` at repo root). See `docs/agents/domain.md`.

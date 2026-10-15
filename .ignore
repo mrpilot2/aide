@@ -1,0 +1,2 @@
+# Stale agent worktrees duplicate the whole tree; keep them out of searches.
+.claude/worktrees/
