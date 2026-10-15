@@ -36,6 +36,7 @@ The active config is readable back via `app.config()`.
 | `ViewFullscreenAction` | enabled | Checkable View → Full Screen action bound to F11 |
 | `ShowLogInFileManagerAction` | **disabled** | Help → "Show Log in \<File Manager\>" action |
 | `ReportBugAction` | **disabled** | Help → "Report Bug in aIDE" action |
+| `Help` | enabled | Web-based End-User Help; only active once a Help Base URL is set (see [Help](#help)) |
 
 `ShowLogInFileManagerAction` and `ReportBugAction` default to disabled because they expose concepts (the log file location, aIDE's own issue tracker) that end users of most aIDE-based applications have no reason to know about. Enable them for developer-facing tools.
 
@@ -67,6 +68,32 @@ config.setUrlLauncher(std::make_shared<MyUrlLauncher>());
 ```
 
 `urlLauncher()` returns `nullptr` if no override was set, in which case callers fall back to the default OS-backed launcher.
+
+---
+
+## Help
+
+Help opens Help Pages from the client's own web help in the browser. It is **active** only when `Feature::Help` is enabled (the default) **and** a Help Base URL is set. With the feature on but no URL, help stays inactive and that is logged once; it is not an error.
+
+```cpp
+aide::ApplicationConfig config;
+config.setHelpBaseUrl(QUrl("https://example.com/help"))
+      .remapHelpTopic(aide::HelpTopicId{"keymap"}, aide::HelpTopicId{"shortcuts"})
+      .disableHelpTopic(aide::HelpTopicId{"notifications"});
+
+aide::Application app(argc, argv, config);
+app.showHelp(aide::HelpTopicId{"appearance"}); // opens https://example.com/help/appearance/
+app.showHelpContents();                        // opens https://example.com/help/
+```
+
+A **Help Topic ID** (`aide::HelpTopicId`, header `aide/helptopicid.hpp`) is a relative path; nesting with `/` is allowed (`settings/keymap`). A leading `/`, a `..` segment, `?` or `#` make it invalid: it becomes an empty ID and a warning is logged.
+
+A topic resolves to `<Help Base URL>/<topic-id>/`, matching mkdocs directory URLs; a missing trailing slash on the base is added.
+
+- `remapHelpTopic(source, target)` sends a topic to another location. Remaps apply one step only (`a→b`, `b→c` sends `a` to `b`), and the last registration wins.
+- `disableHelpTopic(id)` turns help off for a topic. It is checked against the declared ID, before any remap, so remapping onto a disabled ID does not disable the topic.
+
+`Application::showHelp()`, `isHelpAvailable()` and `showHelpContents()` open URLs through the configured URL launcher (see above). They return `false`, launching nothing, when help is inactive or the topic is empty or disabled.
 
 ---
 

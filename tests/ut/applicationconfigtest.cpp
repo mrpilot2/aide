@@ -146,3 +146,36 @@ TEST_CASE("An application config")
         REQUIRE(copy.urlLauncher() == nullptr);
     }
 }
+
+TEST_CASE("An application config's help settings")
+{
+    SECTION("enable the help feature by default")
+    {
+        const ApplicationConfig config;
+
+        REQUIRE(config.isEnabled(Feature::Help));
+    }
+
+    SECTION("have no Help Base URL by default")
+    {
+        const ApplicationConfig config;
+
+        REQUIRE(config.helpBaseUrl().isEmpty());
+    }
+
+    SECTION("are carried by a copy independently of the original")
+    {
+        ApplicationConfig original;
+        original.setHelpBaseUrl(QUrl("https://x/help"))
+            .disableHelpTopic(aide::HelpTopicId{"keymap"});
+
+        ApplicationConfig copy{original};
+        copy.setHelpBaseUrl(QUrl("https://y/help"))
+            .disableHelpTopic(aide::HelpTopicId{"appearance"});
+
+        REQUIRE(original.helpBaseUrl() == QUrl("https://x/help"));
+        REQUIRE_FALSE(
+            original.isHelpTopicDisabled(aide::HelpTopicId{"appearance"}));
+        REQUIRE(copy.isHelpTopicDisabled(aide::HelpTopicId{"keymap"}));
+    }
+}

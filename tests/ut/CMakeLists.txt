@@ -65,6 +65,7 @@ target_sources(
     bannertest.cpp
     buildinformationtest.cpp
     gotittooltiptest.cpp
+    helptopicidtest.cpp
     hierarchicalidtest.cpp
     mocksettings.cpp
     mocksettingspage.cpp
@@ -134,6 +135,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       settingspagegrouptreemodeltest.cpp
       settingsdialogcontrollertest.cpp
       settingspagerankertest.cpp
+      showhelpusecasetest.cpp
       showloginfilemanagerusecasetest.cpp
       showsettingsdialogtest.cpp
       textmatchertest.cpp
@@ -202,7 +204,10 @@ endif()
 
 add_executable(ut.aide.application)
 
-target_sources(ut.aide.application PRIVATE applicationtest.cpp mocksettings.cpp)
+target_sources(
+  ut.aide.application
+  PRIVATE applicationtest.cpp mocksettings.cpp mockurllauncher.cpp
+)
 
 target_link_libraries(
   ut.aide.application
