@@ -8,6 +8,9 @@
 #include <QtCore/QStandardPaths>
 
 #include <aide/application.hpp>
+#include <aide/helptopicid.hpp>
+
+#include "mockurllauncher.hpp"
 
 namespace
 {
@@ -173,4 +176,67 @@ TEST_CASE("Application exposes the config it was constructed with",
 
     REQUIRE_FALSE(app.config().isEnabled(
         aide::ApplicationConfig::Feature::ViewFullscreenAction));
+}
+
+TEST_CASE("Application shows help through the configured URL launcher",
+          "[Application]")
+{
+    aide::Application::disableLoggingToConsole();
+
+    aide::Application::setApplicationName("aide_test");
+    aide::Application::setOrganizationName("aide_company");
+
+    const auto launcher = std::make_shared<aide::tests::MockUrlLauncher>();
+
+    int numberOfArgs{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+    aide::Application app(numberOfArgs, appName.data(),
+                          aide::ApplicationConfig{}
+                              .setUrlLauncher(launcher)
+                              .setHelpBaseUrl(QUrl("https://x/help"))
+                              .disableHelpTopic(aide::HelpTopicId{"off"}));
+
+    SECTION("for an available topic")
+    {
+        REQUIRE(app.isHelpAvailable(aide::HelpTopicId{"keymap"}));
+        REQUIRE(app.showHelp(aide::HelpTopicId{"keymap"}));
+        REQUIRE(launcher->lastRequestedUrl ==
+                std::string("https://x/help/keymap/"));
+    }
+
+    SECTION("for Help Contents")
+    {
+        REQUIRE(app.showHelpContents());
+        REQUIRE(launcher->lastRequestedUrl == std::string("https://x/help/"));
+    }
+
+    SECTION("but not for a disabled topic")
+    {
+        REQUIRE_FALSE(app.isHelpAvailable(aide::HelpTopicId{"off"}));
+        REQUIRE_FALSE(app.showHelp(aide::HelpTopicId{"off"}));
+        REQUIRE_FALSE(launcher->lastRequestedUrl.has_value());
+    }
+}
+
+TEST_CASE("Application help is inactive without a Help Base URL",
+          "[Application]")
+{
+    aide::Application::disableLoggingToConsole();
+
+    aide::Application::setApplicationName("aide_test");
+    aide::Application::setOrganizationName("aide_company");
+
+    const auto launcher = std::make_shared<aide::tests::MockUrlLauncher>();
+
+    int numberOfArgs{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+    aide::Application app(numberOfArgs, appName.data(),
+                          aide::ApplicationConfig{}.setUrlLauncher(launcher));
+
+    REQUIRE_FALSE(app.isHelpAvailable(aide::HelpTopicId{"keymap"}));
+    REQUIRE_FALSE(app.showHelp(aide::HelpTopicId{"keymap"}));
+    REQUIRE_FALSE(app.showHelpContents());
+    REQUIRE_FALSE(launcher->lastRequestedUrl.has_value());
 }

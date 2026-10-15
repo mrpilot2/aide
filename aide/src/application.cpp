@@ -11,6 +11,7 @@
 
 using aide::Application;
 using aide::ApplicationBuilder;
+using aide::HelpTopicId;
 using aide::LoggerPtr;
 using aide::gui::TranslatorInterface;
 
@@ -108,4 +109,19 @@ aide::AppearanceManager& Application::appearanceManager() const
 const aide::ApplicationConfig& Application::config() const
 {
     return m_appBuilder->config();
+}
+
+bool Application::showHelp(const HelpTopicId& id)
+{
+    return m_appBuilder->showHelpUseCase().showHelp(id);
+}
+
+bool Application::isHelpAvailable(const HelpTopicId& id) const
+{
+    return m_appBuilder->showHelpUseCase().isHelpAvailable(id);
+}
+
+bool Application::showHelpContents()
+{
+    return m_appBuilder->showHelpUseCase().showHelpContents();
 }
