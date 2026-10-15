@@ -96,6 +96,6 @@ Key interfaces (`aide/include/aide/`): `LoggerInterface`, `SettingsInterface`, `
 
 ## Agent skills
 
-- **Issue tracker**: mrpilot2/aide GitHub Issues via `gh` CLI; external PRs are not a triage surface. See `docs/agents/issue-tracker.md`.
+- **Issue tracker**: read `docs/agents/issue-tracker.md` before any `gh issue`/`gh pr` call (plain `gh issue view` fails on this repo). mrpilot2/aide GitHub Issues; external PRs are not a triage surface.
 - **Triage labels**: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
 - **Domain docs**: single-context layout (`CONTEXT.md` + `docs/adr/` at repo root). See `docs/agents/domain.md`.
