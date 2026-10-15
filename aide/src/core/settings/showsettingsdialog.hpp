@@ -18,6 +18,7 @@
 #include "settingspagefilterproxymodel.hpp"
 #include "settingspagegrouptreemodel.hpp"
 #include "settingspageranker.hpp"
+#include "showhelpusecase.hpp"
 #include "showsettingsdialogcontroller.hpp"
 
 namespace aide::core
@@ -31,6 +32,14 @@ namespace aide::core
                                     SettingsPageRegistry& registry,
                                     SettingsInterface& settings,
                                     LoggerPtr loggerInterface);
+
+        // With a help use case, the dialog's Help button opens the selected
+        // page's Help Topic. Without one, the button stays hidden.
+        ShowSettingsDialog(SettingsDialogWeakPtr dialog,
+                           SettingsPageRegistry& registry,
+                           SettingsInterface& settings,
+                           LoggerPtr loggerInterface,
+                           const ShowHelpUseCase& helpUseCase);
 
         void showSettingsDialog() override;
 
@@ -52,12 +61,20 @@ namespace aide::core
 
         void applyModifiedSettingsPages() override;
 
+        void showHelpForCurrentPage() override;
+
     private:
         // Shared implementation for both overloads above; nullptr means "use
         // the persisted last-selected page", matching the original no-arg
         // behavior.
         void showSettingsDialog(
             const aide::HierarchicalId* explicitlySelectedGroup);
+
+        ShowSettingsDialog(SettingsDialogWeakPtr dialog,
+                           SettingsPageRegistry& registry,
+                           SettingsInterface& settings,
+                           LoggerPtr loggerInterface,
+                           const ShowHelpUseCase* helpUseCase);
 
         void checkTreeModelIsInitialized() const;
 
@@ -68,6 +85,10 @@ namespace aide::core
             std::vector<std::pair<QModelIndex, SettingsPagePtr>>& out) const;
 
         void clearSelectedPage();
+
+        [[nodiscard]] bool isHelpActive() const;
+
+        [[nodiscard]] bool isHelpAvailableForCurrentPage() const;
 
         void updateDisplayName(const QModelIndex& selectedIndex) const;
 
@@ -89,6 +110,7 @@ namespace aide::core
         std::shared_ptr<SettingsPageFilterProxyModel> proxyModel;
 
         const LoggerPtr logger;
+        const ShowHelpUseCase* m_helpUseCase;
         SettingsPagePtr currentlySelectedPage{nullptr};
 
         QString m_currentSearchPattern;

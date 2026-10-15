@@ -59,4 +59,11 @@ TEST_CASE(
 
         REQUIRE(spy.commitCurrentSearchPatternCalled);
     }
+
+    SECTION("onUserWantsHelpForCurrentPage shows help for the current page")
+    {
+        controller.onUserWantsHelpForCurrentPage();
+
+        REQUIRE(spy.showHelpForCurrentPageCalled);
+    }
 }

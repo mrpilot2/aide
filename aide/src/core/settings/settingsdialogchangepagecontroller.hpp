@@ -32,6 +32,8 @@ namespace aide::core
         virtual void resetCurrentPage() = 0;
 
         virtual void applyModifiedSettingsPages() = 0;
+
+        virtual void showHelpForCurrentPage() = 0;
     };
 } // namespace aide::core
 

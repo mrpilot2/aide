@@ -93,6 +93,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       aidesettingsprovidertest.cpp
       applicationcloseinteractortest.cpp
       $<$<TARGET_EXISTS:Qt::lrelease>:applicationtranslatortest.cpp>
+      builtinhelptopicstest.cpp
       changedetectortest.cpp
       desktopentrynameresolvertest.cpp
       diagnostictextbuildertest.cpp
@@ -140,6 +141,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       showhelpusecasetest.cpp
       showloginfilemanagerusecasetest.cpp
       showsettingsdialogtest.cpp
+      showsettingsdialoghelptest.cpp
       textmatchertest.cpp
       systemmemorytest.cpp
       treeitemtest.cpp

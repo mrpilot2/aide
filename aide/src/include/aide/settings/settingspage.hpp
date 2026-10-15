@@ -5,6 +5,7 @@
 
 #include <QStringList>
 
+#include <aide/helptopicid.hpp>
 #include <aide/hierarchicalid.hpp>
 
 class QString;
@@ -37,6 +38,17 @@ namespace aide::core
          * so lupdate can extract them automatically.
          */
         [[nodiscard]] virtual QStringList groupTitles() const;
+
+        /**
+         * @brief Returns the Help Topic the settings dialog's Help button
+         * opens while this page is selected.
+         *
+         * The default implementation returns an empty ID: the page has no
+         * topic and the Help button stays disabled. aIDE's built-in pages
+         * return `appearance`, `keymap` and `notifications`; these IDs are
+         * stable public API.
+         */
+        [[nodiscard]] virtual HelpTopicId helpTopicId() const;
 
         [[nodiscard]] virtual QWidget* widget() = 0;
 

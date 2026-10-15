@@ -20,6 +20,7 @@ namespace aide::test
         bool applyModifiedPagesCalled{false};
         bool searchPatternChangedCalled{false};
         bool commitCurrentSearchPatternCalled{false};
+        bool showHelpForCurrentPageCalled{false};
         QString lastSearchPattern;
 
         void changeSelectedPage(const QItemSelection& /*selected*/,
@@ -49,6 +50,11 @@ namespace aide::test
         void applyModifiedSettingsPages() override
         {
             applyModifiedPagesCalled = true;
+        }
+
+        void showHelpForCurrentPage() override
+        {
+            showHelpForCurrentPageCalled = true;
         }
     };
 } // namespace aide::test

@@ -89,6 +89,11 @@ QWidget* NotificationsSettingsPage::widget()
     return this;
 }
 
+aide::HelpTopicId NotificationsSettingsPage::helpTopicId() const
+{
+    return HelpTopicId{"notifications"};
+}
+
 QStringList NotificationsSettingsPage::groupTitles() const
 {
     return {tr("Appearance & Behavior"), tr("Notifications")};
