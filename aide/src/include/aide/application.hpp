@@ -9,6 +9,7 @@
 #include <aide/actionregistryinterface.hpp>
 #include <aide/appearancemanager.hpp>
 #include <aide/applicationconfig.hpp>
+#include <aide/helptopicid.hpp>
 #include <aide/loggerinterface.hpp>
 #include <aide/mainwindowinterface.hpp>
 #include <aide/notificationmanagerinterface.hpp>
@@ -70,6 +71,31 @@ namespace aide
         [[nodiscard]] AppearanceManager& appearanceManager() const;
 
         [[nodiscard]] const ApplicationConfig& config() const;
+
+        /**
+         * @brief Opens the Help Page of a Help Topic in the browser.
+         *
+         * The topic resolves to `<Help Base URL>/<topic-id>/` after any
+         * remap from the ApplicationConfig, and is opened through the
+         * config's UrlLauncherInterface (the OS launcher if none was set).
+         * @return false, launching nothing, when isHelpAvailable() is false;
+         *         otherwise whether the launcher reported success.
+         */
+        bool showHelp(const HelpTopicId& id);
+
+        /**
+         * @brief Whether showHelp() would open a page for @p id.
+         * @return true when help is active (Feature::Help enabled and a Help
+         *         Base URL set) and the topic is non-empty and not disabled.
+         */
+        [[nodiscard]] bool isHelpAvailable(const HelpTopicId& id) const;
+
+        /**
+         * @brief Opens Help Contents, the page at the Help Base URL itself.
+         * @return false, launching nothing, when help is inactive; otherwise
+         *         whether the launcher reported success.
+         */
+        bool showHelpContents();
 
     private:
         static bool isOrganizationNameSet();
