@@ -5,7 +5,7 @@ Issues and PRDs for this repo live as GitHub issues. Use the `gh` CLI for all op
 ## Conventions
 
 - **Create an issue**: `gh issue create --title "..." --body "..."`. Use a heredoc for multi-line bodies.
-- **Read an issue**: `gh issue view <number> --json title,body,labels,comments --jq '.title, .body, (.labels|map(.name)|join(",")), (.comments[]|.body)'`. Plain `gh issue view <number> --comments` fails on this repo with a "Projects (classic) is being deprecated" GraphQL error; `--json` avoids it.
+- **Read an issue**: `gh issue view <number> --comments`.
 - **List issues**: `gh issue list --state open --json number,title,body,labels,comments --jq '[.[] | {number, title, body, labels: [.labels[].name], comments: [.comments[].body]}]'` with appropriate `--label` and `--state` filters.
 - **Comment on an issue**: `gh issue comment <number> --body "..."`
 - **Apply / remove labels**: `gh issue edit <number> --add-label "..."` / `--remove-label "..."`
@@ -31,7 +31,7 @@ Create a GitHub issue.
 
 ## When a skill says "fetch the relevant ticket"
 
-Use the `--json` form from **Read an issue** above.
+Run `gh issue view <number> --comments`.
 
 ## Wayfinding operations
 
