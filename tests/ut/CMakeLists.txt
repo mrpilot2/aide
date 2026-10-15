@@ -64,6 +64,7 @@ target_sources(
     applicationconfigtest.cpp
     bannertest.cpp
     buildinformationtest.cpp
+    capturedmacrolog.cpp
     gotittooltiptest.cpp
     hierarchicalidtest.cpp
     mocksettings.cpp
@@ -125,6 +126,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       mocksettingsdialog.cpp
       nulllogger.cpp
       qtsettingstest.cpp
+      recordinglogger.cpp
       reportbugusecasetest.cpp
       searchfilterresultdelegatetest.cpp
       searchlineedittest.cpp
