@@ -97,6 +97,19 @@ A topic resolves to `<Help Base URL>/<topic-id>/`, matching mkdocs directory URL
 
 While help is active, Help → "Help Contents" heads the Help menu and opens the Help Base URL root, like `showHelpContents()`. It has no default shortcut; users can assign one in the Keymap. While help is inactive the action is neither created nor registered, so it is absent from both the menu and the Keymap. It has no `Feature` value of its own.
 
+### Widgets and Context Help
+
+Bind a Help Topic to any widget, including stock Qt ones, with the free functions in `aide/widgethelptopic.hpp`. Calling `setHelpTopic` again replaces the topic, and an empty ID clears it:
+
+```cpp
+#include <aide/widgethelptopic.hpp>
+
+aide::setHelpTopic(workspace, aide::HelpTopicId{"workspace"});
+aide::helpTopic(workspace); // HelpTopicId{"workspace"}
+```
+
+While help is active, the main window has a **Context Help** action (`HELP_CONTEXT_HELP`). Its default shortcut is `QKeySequence::HelpContents` (F1, or Cmd+? on macOS), and users can remap it in the Keymap. It is not shown in the Help menu. When triggered, it starts at the focused widget and walks up the parent chain to the first widget with a topic. A topic on a child therefore wins over its container's. The walk stops at the focused widget's window: the window's own topic still counts, but a parent window's does not. If the walk finds no topic, or the topic is disabled, Context Help opens Help Contents instead. While help is inactive the action is neither created nor registered, so the key does nothing.
+
 ### Settings pages
 
 A settings page declares its Help Topic by overriding `SettingsPage::helpTopicId()`. The default returns an empty ID, so pages that don't override it still compile and simply have no topic:

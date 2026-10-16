@@ -53,6 +53,10 @@ namespace aide::gui
         // Help -> Help Contents: opens the Help Base URL root.
         void onUserWantsToShowHelpContents() const;
 
+        // Context Help: opens the focused widget's resolved topic, else Help
+        // Contents.
+        void onUserWantsToShowContextHelp() const;
+
     public slots:
         void onUserWantsToShowSettingsDialog() const;
 
