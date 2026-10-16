@@ -113,6 +113,9 @@ namespace aide::gui
         void registerHelpContentsAction(
             QMenu* menuHelp, const ActionRegistryInterfacePtr& actionRegistry);
 
+        void registerContextHelpAction(
+            const ActionRegistryInterfacePtr& actionRegistry);
+
         void registerGatedHelpActions(
             QMenu* menuHelp, const ActionRegistryInterfacePtr& actionRegistry);
 
@@ -136,6 +139,7 @@ namespace aide::gui
         QAction* m_actionQuit{nullptr};
         QAction* m_actionFullScreen{nullptr};
         QAction* m_actionHelpContents{nullptr};
+        QAction* m_actionContextHelp{nullptr};
         QAction* m_actionShowLogInFileManager{nullptr};
         QAction* m_actionReportBug{nullptr};
         QAction* m_actionAboutAide{nullptr};

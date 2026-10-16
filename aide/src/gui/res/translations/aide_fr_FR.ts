@@ -321,6 +321,10 @@
         <translation>Ouvrir le contenu de l&apos;aide dans le navigateur</translation>
     </message>
     <message>
+        <source>Context Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Don&apos;t ask again</source>
         <translation>Ne plus demander</translation>
     </message>
@@ -335,6 +339,10 @@
     <message>
         <source>Show Log in %1</source>
         <translation>Afficher le journal dans %1</translation>
+    </message>
+    <message>
+        <source>Open help for the focused widget in the browser</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Report Bug in aIDE</source>
