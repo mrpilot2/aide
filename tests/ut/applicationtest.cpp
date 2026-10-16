@@ -7,6 +7,7 @@
 #include <catch2/generators/catch_generators.hpp>
 
 #include <QAction>
+#include <QLineEdit>
 #include <QMenu>
 #include <QTest>
 #include <QtCore/QStandardPaths>
@@ -14,6 +15,7 @@
 #include <aide/aideconstants.hpp>
 #include <aide/application.hpp>
 #include <aide/helptopicid.hpp>
+#include <aide/widgethelptopic.hpp>
 
 #include "mockurllauncher.hpp"
 
@@ -28,6 +30,20 @@ namespace
         std::stringstream fileContent;
         fileContent << logFile.rdbuf();
         return fileContent.str().find(searchString);
+    }
+
+    // Puts a focused line edit into the shown, active main window, so key
+    // presses on it go through the main window's shortcuts.
+    QLineEdit* focusLineEditInMainWindow(const aide::Application& app)
+    {
+        auto* mainWindow = app.mainWindow().get();
+        auto* lineEdit   = new QLineEdit(mainWindow);
+        mainWindow->setCentralWidget(lineEdit);
+        mainWindow->show();
+        mainWindow->activateWindow();
+        REQUIRE(QTest::qWaitForWindowActive(mainWindow));
+        lineEdit->setFocus();
+        return lineEdit;
     }
 } // namespace
 
@@ -358,5 +374,140 @@ TEST_CASE("Application with help inactive offers no Help Contents",
 
         // NOLINTNEXTLINE(bugprone-unchecked-optional-access)
         REQUIRE(menuHelp->actions().first() == aboutAide.value());
+    }
+}
+
+TEST_CASE("Application with help active offers Context Help", "[Application]")
+{
+    aide::Application::disableLoggingToConsole();
+
+    aide::Application::setApplicationName("aide_test");
+    aide::Application::setOrganizationName("aide_company");
+
+    const auto launcher = std::make_shared<aide::tests::MockUrlLauncher>();
+
+    int numberOfArgs{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+    const aide::Application app(
+        numberOfArgs, appName.data(),
+        aide::ApplicationConfig{}.setUrlLauncher(launcher).setHelpBaseUrl(
+            QUrl("https://x/help")));
+
+    const auto registry = app.actionRegistry();
+    const auto action   = registry->action(CONSTANTS().HELP_CONTEXT_HELP);
+    REQUIRE(action.has_value());
+
+    SECTION("with the platform's Help Contents key as default shortcut")
+    {
+        REQUIRE(registry->actions()
+                    .at(CONSTANTS().HELP_CONTEXT_HELP)
+                    .defaultKeySequences ==
+                QList<QKeySequence>{QKeySequence(QKeySequence::HelpContents)});
+    }
+
+    SECTION("on the main window but not in the Help menu")
+    {
+        const auto menuHelpContainer =
+            registry->getMenuContainer(CONSTANTS().MENU_HELP);
+        REQUIRE(menuHelpContainer.has_value());
+        // NOLINTNEXTLINE(bugprone-unchecked-optional-access)
+        const auto* menuHelp = menuHelpContainer.value()->menu();
+
+        // NOLINTBEGIN(bugprone-unchecked-optional-access)
+        REQUIRE(app.mainWindow()->actions().contains(action.value()));
+        REQUIRE_FALSE(menuHelp->actions().contains(action.value()));
+        // NOLINTEND(bugprone-unchecked-optional-access)
+    }
+
+    SECTION("whose shortcut opens the focused widget's topic")
+    {
+        auto* lineEdit = focusLineEditInMainWindow(app);
+        aide::setHelpTopic(lineEdit, aide::HelpTopicId{"workspace"});
+
+        QTest::keySequence(lineEdit, QKeySequence(QKeySequence::HelpContents));
+
+        REQUIRE(launcher->lastRequestedUrl ==
+                std::string("https://x/help/workspace/"));
+    }
+}
+
+TEST_CASE("Remapping Context Help changes the key that triggers it",
+          "[Application]")
+{
+    aide::Application::disableLoggingToConsole();
+
+    aide::Application::setApplicationName("aide_test");
+    aide::Application::setOrganizationName("aide_company");
+
+    const auto launcher = std::make_shared<aide::tests::MockUrlLauncher>();
+
+    int numberOfArgs{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+    const aide::Application app(
+        numberOfArgs, appName.data(),
+        aide::ApplicationConfig{}.setUrlLauncher(launcher).setHelpBaseUrl(
+            QUrl("https://x/help")));
+
+    const auto registry = app.actionRegistry();
+    const QKeySequence userShortcut(Qt::CTRL | Qt::SHIFT | Qt::Key_H);
+    registry->modifyShortcutsForAction(CONSTANTS().HELP_CONTEXT_HELP,
+                                       {userShortcut});
+
+    auto* lineEdit = focusLineEditInMainWindow(app);
+
+    QTest::keySequence(lineEdit, QKeySequence(QKeySequence::HelpContents));
+    const auto urlAfterDefaultKey = launcher->lastRequestedUrl;
+
+    QTest::keySequence(lineEdit, userShortcut);
+    const auto urlAfterUserKey = launcher->lastRequestedUrl;
+
+    // Back to the default, so the persisted Keymap entry is removed again
+    // and does not leak into later runs.
+    registry->modifyShortcutsForAction(
+        CONSTANTS().HELP_CONTEXT_HELP,
+        {QKeySequence(QKeySequence::HelpContents)});
+
+    REQUIRE_FALSE(urlAfterDefaultKey.has_value());
+    REQUIRE(urlAfterUserKey == std::string("https://x/help/"));
+}
+
+TEST_CASE("Application with help inactive offers no Context Help",
+          "[Application]")
+{
+    aide::Application::disableLoggingToConsole();
+
+    aide::Application::setApplicationName("aide_test");
+    aide::Application::setOrganizationName("aide_company");
+
+    const auto launcher = std::make_shared<aide::tests::MockUrlLauncher>();
+
+    const auto config = GENERATE_COPY(
+        aide::ApplicationConfig{}.setUrlLauncher(launcher),
+        aide::ApplicationConfig{}
+            .setUrlLauncher(launcher)
+            .setHelpBaseUrl(QUrl("https://x/help"))
+            .setEnabled(aide::ApplicationConfig::Feature::Help, false));
+
+    int numberOfArgs{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+    const aide::Application app(numberOfArgs, appName.data(), config);
+
+    SECTION("in the Keymap")
+    {
+        REQUIRE_FALSE(app.actionRegistry()->actions().contains(
+            CONSTANTS().HELP_CONTEXT_HELP));
+    }
+
+    SECTION("so the default Context Help key does nothing")
+    {
+        auto* lineEdit = focusLineEditInMainWindow(app);
+        aide::setHelpTopic(lineEdit, aide::HelpTopicId{"workspace"});
+
+        QTest::keySequence(lineEdit, QKeySequence(QKeySequence::HelpContents));
+
+        REQUIRE_FALSE(launcher->lastRequestedUrl.has_value());
     }
 }

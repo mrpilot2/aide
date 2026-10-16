@@ -230,3 +230,47 @@ TEST_CASE("A help topic remapped onto an empty id is not available",
     REQUIRE_FALSE(useCase.isHelpAvailable(HelpTopicId{"a"}));
     REQUIRE_FALSE(useCase.showHelp(HelpTopicId{"a"}));
 }
+
+TEST_CASE("Context Help opens the resolved topic", "[ShowHelpUseCase]")
+{
+    const Fixture fixture;
+    const auto useCase = fixture.useCase(configWithBase("https://x/help"));
+
+    REQUIRE(useCase.showContextHelp(HelpTopicId{"workspace"}));
+    REQUIRE(fixture.launcher->lastRequestedUrl ==
+            std::string("https://x/help/workspace/"));
+}
+
+TEST_CASE("Context Help falls back to Help Contents", "[ShowHelpUseCase]")
+{
+    const Fixture fixture;
+
+    SECTION("when no topic was resolved")
+    {
+        const auto useCase = fixture.useCase(configWithBase("https://x/help"));
+
+        REQUIRE(useCase.showContextHelp(HelpTopicId{}));
+        REQUIRE(fixture.launcher->lastRequestedUrl ==
+                std::string("https://x/help/"));
+    }
+
+    SECTION("when the resolved topic is disabled")
+    {
+        const auto useCase =
+            fixture.useCase(configWithBase("https://x/help")
+                                .disableHelpTopic(HelpTopicId{"disabled"}));
+
+        REQUIRE(useCase.showContextHelp(HelpTopicId{"disabled"}));
+        REQUIRE(fixture.launcher->lastRequestedUrl ==
+                std::string("https://x/help/"));
+    }
+}
+
+TEST_CASE("Context Help with help inactive opens nothing", "[ShowHelpUseCase]")
+{
+    const Fixture fixture;
+    const auto useCase = fixture.useCase(ApplicationConfig{});
+
+    REQUIRE_FALSE(useCase.showContextHelp(HelpTopicId{"topic"}));
+    REQUIRE_FALSE(fixture.launcher->lastRequestedUrl.has_value());
+}

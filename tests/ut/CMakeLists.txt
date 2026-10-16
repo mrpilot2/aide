@@ -75,6 +75,7 @@ target_sources(
     searchfilterwidgettest.cpp
     settingspageregistrytest.cpp
     settingspagetest.cpp
+    widgethelptopictest.cpp
     $<$<TARGET_EXISTS:Qt::lrelease>:${CMAKE_CURRENT_BINARY_DIR}/ut_translations.qrc
     ${QM_FILES}>
     res/ut_icons.qrc
@@ -95,6 +96,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       $<$<TARGET_EXISTS:Qt::lrelease>:applicationtranslatortest.cpp>
       builtinhelptopicstest.cpp
       changedetectortest.cpp
+      contexthelptopictest.cpp
       desktopentrynameresolvertest.cpp
       diagnostictextbuildertest.cpp
       keymapcontextmenuprovidertest.cpp

@@ -36,6 +36,7 @@ target_sources(
     settingsinterface.cpp
     showhelpusecase.cpp
     showloginfilemanagerusecase.cpp
+    widgethelptopic.cpp
     settings/settingsdialogchangepagecontroller.cpp
     settings/settingsdialoggeometryandstate.cpp
     settings/settingspage.cpp
@@ -93,6 +94,7 @@ target_sources(
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/settingsinterface.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/theme.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/urllauncherinterface.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/widgethelptopic.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/settings/settingspage.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/settings/settingspageregistry.hpp
 )

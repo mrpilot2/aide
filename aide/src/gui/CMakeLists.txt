@@ -37,6 +37,7 @@ target_sources(
   AideGui
   PRIVATE
     aboutaidedialog.cpp
+    contexthelptopic.cpp
     mainwindow.cpp
     mainwindowcontroller.cpp
     notificationballoonhost.cpp

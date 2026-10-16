@@ -321,6 +321,10 @@
         <translation>ब्राउज़र में सहायता सामग्री खोलें</translation>
     </message>
     <message>
+        <source>Context Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Don&apos;t ask again</source>
         <translation>दोबारा न पूछें</translation>
     </message>
@@ -335,6 +339,10 @@
     <message>
         <source>Show Log in %1</source>
         <translation>%1 में लॉग दिखाएं</translation>
+    </message>
+    <message>
+        <source>Open help for the focused widget in the browser</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Report Bug in aIDE</source>

@@ -321,6 +321,10 @@
         <translation>在浏览器中打开帮助内容</translation>
     </message>
     <message>
+        <source>Context Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Don&apos;t ask again</source>
         <translation>不再询问</translation>
     </message>
@@ -335,6 +339,10 @@
     <message>
         <source>Show Log in %1</source>
         <translation>在 %1 中显示日志</translation>
+    </message>
+    <message>
+        <source>Open help for the focused widget in the browser</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Report Bug in aIDE</source>

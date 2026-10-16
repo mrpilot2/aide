@@ -44,6 +44,12 @@ bool ShowHelpUseCase::showHelpContents() const
     return open(baseUrlWithTrailingSlash());
 }
 
+bool ShowHelpUseCase::showContextHelp(const HelpTopicId& resolvedTopic) const
+{
+    if (isHelpAvailable(resolvedTopic)) { return showHelp(resolvedTopic); }
+    return showHelpContents();
+}
+
 bool ShowHelpUseCase::isHelpActive() const
 {
     return isHelpActive(m_config);

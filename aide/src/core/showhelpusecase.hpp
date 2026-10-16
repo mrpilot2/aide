@@ -40,6 +40,11 @@ namespace aide::core
         // when help is inactive.
         bool showHelpContents() const;
 
+        // Context Help for the topic resolved from the focused widget (see
+        // gui/contexthelptopic.hpp): opens it when available, else Help
+        // Contents. Returns false, launching nothing, when help is inactive.
+        bool showContextHelp(const HelpTopicId& resolvedTopic) const;
+
     private:
         [[nodiscard]] QUrl baseUrlWithTrailingSlash() const;
 
