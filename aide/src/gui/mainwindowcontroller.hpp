@@ -16,6 +16,7 @@ namespace aide::core
 {
     class ApplicationCloseController;
     class MainWindowGeometryAndStateController;
+    class ShowHelpUseCase;
 } // namespace aide::core
 
 namespace aide::gui
@@ -31,7 +32,8 @@ namespace aide::gui
             const aide::core::ApplicationCloseController& closeUseCase,
             aide::core::MainWindowGeometryAndStateController& saveUseCase,
             core::ShowSettingsDialogController& settingsDialogUseCase,
-            aide::UrlLauncherPtr urlLauncher);
+            aide::UrlLauncherPtr urlLauncher,
+            const aide::core::ShowHelpUseCase& showHelpUseCase);
 
         void onUserWantsToQuitApplication(QCloseEvent* event,
                                           const QByteArray& geometry,
@@ -47,6 +49,9 @@ namespace aide::gui
         // ApplicationConfig override, or the default OS-backed launcher),
         // so it is an instance method rather than the static one above.
         void onUserWantsToReportBug() const;
+
+        // Help -> Help Contents: opens the Help Base URL root.
+        void onUserWantsToShowHelpContents() const;
 
     public slots:
         void onUserWantsToShowSettingsDialog() const;
@@ -69,6 +74,8 @@ namespace aide::gui
         aide::core::ShowSettingsDialogController& showSettingsDialogInteractor;
 
         aide::UrlLauncherPtr m_urlLauncher;
+
+        const aide::core::ShowHelpUseCase& m_showHelpUseCase;
     };
 
     using MainWindowControllerPtr = std::shared_ptr<MainWindowController>;

@@ -95,6 +95,8 @@ A topic resolves to `<Help Base URL>/<topic-id>/`, matching mkdocs directory URL
 
 `Application::showHelp()`, `isHelpAvailable()` and `showHelpContents()` open URLs through the configured URL launcher (see above). They return `false`, launching nothing, when help is inactive or the topic is empty or disabled.
 
+While help is active, Help → "Help Contents" heads the Help menu and opens the Help Base URL root, like `showHelpContents()`. It has no default shortcut; users can assign one in the Keymap. While help is inactive the action is neither created nor registered, so it is absent from both the menu and the Keymap. It has no `Feature` value of its own.
+
 ### Settings pages
 
 A settings page declares its Help Topic by overriding `SettingsPage::helpTopicId()`. The default returns an empty ID, so pages that don't override it still compile and simply have no topic:

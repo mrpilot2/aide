@@ -23,6 +23,10 @@ namespace aide::core
         // True when Feature::Help is enabled and a Help Base URL is set.
         [[nodiscard]] bool isHelpActive() const;
 
+        // The same rule for a config alone, for callers that hold only the
+        // config (MainWindow gates the Help Contents action on it).
+        [[nodiscard]] static bool isHelpActive(const ApplicationConfig& config);
+
         // True when help is active and the topic is non-empty and not
         // disabled. Disabling is checked against the declared ID, before any
         // remap.

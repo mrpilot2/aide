@@ -313,6 +313,14 @@
         <translation>पूर्ण स्क्रीन मोड टॉगल करें</translation>
     </message>
     <message>
+        <source>Help Contents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open the help contents in the browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Don&apos;t ask again</source>
         <translation>दोबारा न पूछें</translation>
     </message>

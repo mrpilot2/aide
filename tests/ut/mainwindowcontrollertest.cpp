@@ -16,10 +16,12 @@
 #include "mockurllauncher.hpp"
 #include "nulllogger.hpp"
 #include "settings/showsettingsdialogcontroller.hpp"
+#include "showhelpusecase.hpp"
 
 using aide::ApplicationConfig;
 using aide::core::ApplicationCloseController;
 using aide::core::MainWindowGeometryAndStateController;
+using aide::core::ShowHelpUseCase;
 using aide::core::ShowSettingsDialogController;
 using aide::gui::MainWindow;
 using aide::gui::MainWindowController;
@@ -58,6 +60,12 @@ namespace
         void restoreGeometryAndState() override {}
     };
 
+    ShowHelpUseCase inactiveHelp()
+    {
+        return {ApplicationConfig{}, std::make_shared<MockUrlLauncher>(),
+                std::make_shared<NullLogger>()};
+    }
+
     class FakeShowSettingsDialogController : public ShowSettingsDialogController
     {
     public:
@@ -86,9 +94,11 @@ TEST_CASE("A main window controller handling a close request")
     FakeMainWindowGeometryAndStateController saveController;
     FakeShowSettingsDialogController settingsController;
 
-    const MainWindowController controller(mainWindow, closeController,
-                                          saveController, settingsController,
-                                          std::make_shared<MockUrlLauncher>());
+    const auto showHelpUseCase = inactiveHelp();
+
+    const MainWindowController controller(
+        mainWindow, closeController, saveController, settingsController,
+        std::make_shared<MockUrlLauncher>(), showHelpUseCase);
 
     const QByteArray geometry("geometry-bytes");
     const QByteArray state("state-bytes");
@@ -134,9 +144,11 @@ TEST_CASE(
     FakeMainWindowGeometryAndStateController saveController;
     FakeShowSettingsDialogController settingsController;
 
-    const MainWindowController controller(mainWindow, closeController,
-                                          saveController, settingsController,
-                                          std::make_shared<MockUrlLauncher>());
+    const auto showHelpUseCase = inactiveHelp();
+
+    const MainWindowController controller(
+        mainWindow, closeController, saveController, settingsController,
+        std::make_shared<MockUrlLauncher>(), showHelpUseCase);
 
     SECTION("delegates to the show settings dialog interactor")
     {
@@ -160,9 +172,11 @@ TEST_CASE("A main window controller handling a request to report a bug")
 
     const auto urlLauncher = std::make_shared<MockUrlLauncher>();
 
+    const auto showHelpUseCase = inactiveHelp();
+
     const MainWindowController controller(mainWindow, closeController,
                                           saveController, settingsController,
-                                          urlLauncher);
+                                          urlLauncher, showHelpUseCase);
 
     SECTION(
         "asks the launcher supplied at construction time to open the bug "

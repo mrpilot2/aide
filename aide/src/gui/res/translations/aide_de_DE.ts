@@ -364,6 +364,14 @@
         <translation>Vollbildmodus umschalten</translation>
     </message>
     <message>
+        <source>Help Contents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open the help contents in the browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Show Log in %1</source>
         <translation>Protokoll in %1 anzeigen</translation>
     </message>
