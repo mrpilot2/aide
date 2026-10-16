@@ -12,9 +12,11 @@
 #include "mainwindowcontroller.hpp"
 #include "mockurllauncher.hpp"
 #include "nulllogger.hpp"
+#include "showhelpusecase.hpp"
 #include "spymainwindowcontrollers.hpp"
 
 using aide::ApplicationConfig;
+using aide::core::ShowHelpUseCase;
 using aide::gui::MainWindow;
 using aide::gui::MainWindowController;
 using aide::test::MockUrlLauncher;
@@ -22,6 +24,15 @@ using aide::test::NullLogger;
 using aide::test::SpyApplicationCloseController;
 using aide::test::SpyMainWindowGeometryAndStateController;
 using aide::test::SpyShowSettingsDialogController;
+
+namespace
+{
+    ShowHelpUseCase inactiveHelp()
+    {
+        return {ApplicationConfig{}, std::make_shared<MockUrlLauncher>(),
+                std::make_shared<NullLogger>()};
+    }
+} // namespace
 
 TEST_CASE("A main window controller handling a close request")
 {
@@ -35,9 +46,11 @@ TEST_CASE("A main window controller handling a close request")
     SpyMainWindowGeometryAndStateController saveController;
     SpyShowSettingsDialogController settingsController;
 
-    const MainWindowController controller(mainWindow, closeController,
-                                          saveController, settingsController,
-                                          std::make_shared<MockUrlLauncher>());
+    const auto showHelpUseCase = inactiveHelp();
+
+    const MainWindowController controller(
+        mainWindow, closeController, saveController, settingsController,
+        std::make_shared<MockUrlLauncher>(), showHelpUseCase);
 
     const QByteArray geometry("geometry-bytes");
     const QByteArray state("state-bytes");
@@ -83,9 +96,11 @@ TEST_CASE(
     SpyMainWindowGeometryAndStateController saveController;
     SpyShowSettingsDialogController settingsController;
 
-    const MainWindowController controller(mainWindow, closeController,
-                                          saveController, settingsController,
-                                          std::make_shared<MockUrlLauncher>());
+    const auto showHelpUseCase = inactiveHelp();
+
+    const MainWindowController controller(
+        mainWindow, closeController, saveController, settingsController,
+        std::make_shared<MockUrlLauncher>(), showHelpUseCase);
 
     SECTION("delegates to the show settings dialog interactor")
     {
@@ -109,9 +124,11 @@ TEST_CASE("A main window controller handling a request to report a bug")
 
     const auto urlLauncher = std::make_shared<MockUrlLauncher>();
 
+    const auto showHelpUseCase = inactiveHelp();
+
     const MainWindowController controller(mainWindow, closeController,
                                           saveController, settingsController,
-                                          urlLauncher);
+                                          urlLauncher, showHelpUseCase);
 
     SECTION(
         "asks the launcher supplied at construction time to open the bug "
