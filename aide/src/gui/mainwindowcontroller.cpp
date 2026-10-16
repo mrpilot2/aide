@@ -2,6 +2,7 @@
 
 #include <utility>
 
+#include <QApplication>
 #include <QCloseEvent>
 
 #include <aide/aideconstants.hpp>
@@ -9,6 +10,7 @@
 #include "aboutaidedialog.hpp"
 #include "aboutaideusecase.hpp"
 #include "applicationclosecontroller.hpp"
+#include "contexthelptopic.hpp"
 #include "logger/loggerfactory.hpp"
 #include "mainwindow.hpp"
 #include "mainwindowgeometryandstatecontroller.hpp"
@@ -88,4 +90,10 @@ void MainWindowController::onUserWantsToReportBug() const
 void MainWindowController::onUserWantsToShowHelpContents() const
 {
     m_showHelpUseCase.showHelpContents();
+}
+
+void MainWindowController::onUserWantsToShowContextHelp() const
+{
+    m_showHelpUseCase.showContextHelp(
+        contextHelpTopic(QApplication::focusWidget()));
 }

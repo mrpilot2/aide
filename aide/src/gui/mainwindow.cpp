@@ -112,6 +112,7 @@ void MainWindow::registerActions(
     menuHelp->setTitle(QApplication::tr("&Help", "MainWindow"));
 
     registerHelpContentsAction(menuHelp, actionRegistry);
+    registerContextHelpAction(actionRegistry);
     registerGatedHelpActions(menuHelp, actionRegistry);
 
     m_actionAboutAide = new QAction(tr("About") + " aIDE", this);
@@ -180,6 +181,24 @@ void MainWindow::registerHelpContentsAction(
         m_actionHelpContents, CONSTANTS().HELP_CONTENTS,
         tr("Open the help contents in the browser").toStdString());
     menuHelp->addSeparator();
+}
+
+void MainWindow::registerContextHelpAction(
+    const ActionRegistryInterfacePtr& actionRegistry)
+{
+    // Gated like Help Contents above. Context Help is not shown in the Help
+    // menu: it is added to the main window only, so its shortcut works there
+    // and it can be remapped in the Keymap.
+    if (!core::ShowHelpUseCase::isHelpActive(m_config)) { return; }
+
+    m_actionContextHelp = new QAction(tr("Context Help"), this);
+    connect(m_actionContextHelp, &QAction::triggered, m_controller.get(),
+            &MainWindowController::onUserWantsToShowContextHelp);
+    addAction(m_actionContextHelp);
+    actionRegistry->registerAction(
+        m_actionContextHelp, CONSTANTS().HELP_CONTEXT_HELP,
+        tr("Open help for the focused widget in the browser").toStdString(),
+        {QKeySequence(QKeySequence::HelpContents)});
 }
 
 void MainWindow::registerGatedHelpActions(
