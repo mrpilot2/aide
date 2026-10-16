@@ -365,11 +365,11 @@
     </message>
     <message>
         <source>Help Contents</source>
-        <translation type="unfinished"></translation>
+        <translation>Hilfeinhalt</translation>
     </message>
     <message>
         <source>Open the help contents in the browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Hilfeinhalt im Browser öffnen</translation>
     </message>
     <message>
         <source>Show Log in %1</source>

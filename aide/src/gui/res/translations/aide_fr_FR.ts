@@ -314,11 +314,11 @@
     </message>
     <message>
         <source>Help Contents</source>
-        <translation type="unfinished"></translation>
+        <translation>Contenu de l&apos;aide</translation>
     </message>
     <message>
         <source>Open the help contents in the browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir le contenu de l&apos;aide dans le navigateur</translation>
     </message>
     <message>
         <source>Don&apos;t ask again</source>
