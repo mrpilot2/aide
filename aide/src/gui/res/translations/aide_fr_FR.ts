@@ -322,7 +322,7 @@
     </message>
     <message>
         <source>Context Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Aide contextuelle</translation>
     </message>
     <message>
         <source>Don&apos;t ask again</source>
@@ -342,7 +342,7 @@
     </message>
     <message>
         <source>Open help for the focused widget in the browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir l&apos;aide de l&apos;élément actif dans le navigateur</translation>
     </message>
     <message>
         <source>Report Bug in aIDE</source>

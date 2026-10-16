@@ -322,7 +322,7 @@
     </message>
     <message>
         <source>Context Help</source>
-        <translation type="unfinished"></translation>
+        <translation>تعليمات سياقية</translation>
     </message>
     <message>
         <source>Don&apos;t ask again</source>
@@ -342,7 +342,7 @@
     </message>
     <message>
         <source>Open help for the focused widget in the browser</source>
-        <translation type="unfinished"></translation>
+        <translation>فتح تعليمات العنصر المحدد في المتصفح</translation>
     </message>
     <message>
         <source>Report Bug in aIDE</source>

@@ -322,7 +322,7 @@
     </message>
     <message>
         <source>Context Help</source>
-        <translation type="unfinished"></translation>
+        <translation>संदर्भ सहायता</translation>
     </message>
     <message>
         <source>Don&apos;t ask again</source>
@@ -342,7 +342,7 @@
     </message>
     <message>
         <source>Open help for the focused widget in the browser</source>
-        <translation type="unfinished"></translation>
+        <translation>फ़ोकस किए गए विजेट की सहायता ब्राउज़र में खोलें</translation>
     </message>
     <message>
         <source>Report Bug in aIDE</source>

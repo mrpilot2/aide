@@ -333,7 +333,7 @@
     </message>
     <message>
         <source>Open help for the focused widget in the browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Hilfe zum fokussierten Element im Browser öffnen</translation>
     </message>
     <message>
         <source>Don&apos;t ask again</source>
@@ -377,7 +377,7 @@
     </message>
     <message>
         <source>Context Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontexthilfe</translation>
     </message>
     <message>
         <source>Show Log in %1</source>

@@ -322,7 +322,7 @@
     </message>
     <message>
         <source>Context Help</source>
-        <translation type="unfinished"></translation>
+        <translation>上下文帮助</translation>
     </message>
     <message>
         <source>Don&apos;t ask again</source>
@@ -342,7 +342,7 @@
     </message>
     <message>
         <source>Open help for the focused widget in the browser</source>
-        <translation type="unfinished"></translation>
+        <translation>在浏览器中打开当前焦点控件的帮助</translation>
     </message>
     <message>
         <source>Report Bug in aIDE</source>
