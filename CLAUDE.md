@@ -49,12 +49,12 @@ Catch2 3.x, binaries in `bin/` inside the build dir: `ut.aide` for most tests, `
 
 ### Formatting & linting
 
-Pre-commit hooks enforce formatting (`.clang-format`, `.clang-tidy`, `.cmake-format.yaml`):
+Pre-commit hooks enforce formatting (`.clang-format`, `.clang-tidy`, `.gersemirc`):
 
 ```bash
 pre-commit run --all-files          # all hooks
 pre-commit run clang-format         # C++ formatting only
-pre-commit run cmake-format         # CMake formatting only
+pre-commit run gersemi              # CMake formatting only
 ```
 
 clang-tidy/cppcheck run at build time in `dev`/`ci-static` presets. For fast clang-tidy feedback while iterating on the `client` preset, run `tools/tidy-changed.sh [base-ref]` (changed `.cpp` files only, dev-preset options; needs `build/dev-unix-static-debug` configured once) before the full dev workflow.
@@ -90,6 +90,7 @@ Key interfaces (`aide/include/aide/`): `LoggerInterface`, `SettingsInterface`, `
 
 - **Magic numbers** (`dev`/`ci-static`): `readability-magic-numbers` is an error — extract all numeric literals (including e.g. `QColor(220, 235, 255)`) to named `constexpr`.
 - **cppcheck virtualCallInConstructor**: calling a virtual (e.g. `reset()`) from a ctor is flagged — extract a private non-virtual helper (e.g. `syncToModel()`) called by both.
+- **Translations**: the build's lupdate adds each new `tr()` string to the shipped `.ts` files (listed in `aide/src/gui/CMakeLists.txt`) as `type="unfinished"`. Translate them in the same change, for every shipped language; `aide_en.ts` takes an empty finished `<translation></translation>`.
 - **clang-format rewrites on commit**: if `git commit` fails this way, the hook already fixed the file — `git add` it and re-commit. Never `--no-verify`.
 - **Catch2 cognitive complexity**: clang-tidy caps it (~25) — split deep `SECTION` nesting into separate `TEST_CASE`s.
 - **Qt icon theme layout**: `QIcon::fromTheme()` needs `<qrc-prefix>/<theme-name>/index.theme` and `<qrc-prefix>/<theme-name>/scalable/<category>/<icon-name>.svg`, prefix matching `QIcon::setThemeSearchPaths()`.
