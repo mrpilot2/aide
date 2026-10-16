@@ -9,35 +9,12 @@
 #include <QUrlQuery>
 
 #include "mockurllauncher.hpp"
+#include "recordinglogger.hpp"
 #include "reportbugusecase.hpp"
 
 using aide::core::ReportBugUseCase;
+using aide::test::RecordingLogger;
 using aide::tests::MockUrlLauncher;
-
-namespace
-{
-    // Records whether a warning was logged, without depending on the real
-    // spdlog-backed logger.
-    class RecordingLogger : public aide::LoggerInterface
-    {
-    public:
-        mutable bool warnCalled{false};
-
-        void flush() override {}
-        void setLevel(aide::LogLevel /*level*/) override {}
-
-    private:
-        void doLogTrace(std::string_view /*message*/) const override {}
-        void doLogDebug(std::string_view /*message*/) const override {}
-        void doLogInfo(std::string_view /*message*/) const override {}
-        void doLogWarn(std::string_view /*message*/) const override
-        {
-            warnCalled = true;
-        }
-        void doLogError(std::string_view /*message*/) const override {}
-        void doLogCritical(std::string_view /*message*/) const override {}
-    };
-} // namespace
 
 TEST_CASE("A ReportBugUseCase", "[ReportBugUseCase]")
 {
@@ -63,7 +40,7 @@ TEST_CASE("A ReportBugUseCase", "[ReportBugUseCase]")
         REQUIRE(query.queryItemValue("template") == "bug.yml");
         REQUIRE_FALSE(query.queryItemValue("version").isEmpty());
         REQUIRE_FALSE(query.queryItemValue("logs").isEmpty());
-        REQUIRE_FALSE(logger->warnCalled);
+        REQUIRE_FALSE(logger->hasWarning());
     }
 
     SECTION("leaves the reporter-authored fields out of the URL")
@@ -119,6 +96,6 @@ TEST_CASE("A ReportBugUseCase", "[ReportBugUseCase]")
         const ReportBugUseCase useCase(launcher, logger);
         useCase.reportBug();
 
-        REQUIRE(logger->warnCalled);
+        REQUIRE(logger->hasWarning());
     }
 }

@@ -313,6 +313,18 @@
         <translation>पूर्ण स्क्रीन मोड टॉगल करें</translation>
     </message>
     <message>
+        <source>Help Contents</source>
+        <translation>सहायता सामग्री</translation>
+    </message>
+    <message>
+        <source>Open the help contents in the browser</source>
+        <translation>ब्राउज़र में सहायता सामग्री खोलें</translation>
+    </message>
+    <message>
+        <source>Context Help</source>
+        <translation>संदर्भ सहायता</translation>
+    </message>
+    <message>
         <source>Don&apos;t ask again</source>
         <translation>दोबारा न पूछें</translation>
     </message>
@@ -327,6 +339,10 @@
     <message>
         <source>Show Log in %1</source>
         <translation>%1 में लॉग दिखाएं</translation>
+    </message>
+    <message>
+        <source>Open help for the focused widget in the browser</source>
+        <translation>फ़ोकस किए गए विजेट की सहायता ब्राउज़र में खोलें</translation>
     </message>
     <message>
         <source>Report Bug in aIDE</source>

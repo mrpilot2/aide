@@ -52,6 +52,11 @@ bool AppearancePage::isModified() const
            m_fontSizeSpinBox->value() != m_appliedFontSize;
 }
 
+aide::HelpTopicId AppearancePage::helpTopicId() const
+{
+    return HelpTopicId{"appearance"};
+}
+
 QStringList AppearancePage::groupTitles() const
 {
     return {tr("Appearance & Behavior"), tr("Appearance")};

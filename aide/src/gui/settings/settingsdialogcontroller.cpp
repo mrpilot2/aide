@@ -38,3 +38,8 @@ void SettingsDialogController::onUserWantsToApplySettingsPages() const
 {
     controller.applyModifiedSettingsPages();
 }
+
+void SettingsDialogController::onUserWantsHelpForCurrentPage() const
+{
+    controller.showHelpForCurrentPage();
+}

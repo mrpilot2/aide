@@ -64,7 +64,9 @@ target_sources(
     applicationconfigtest.cpp
     bannertest.cpp
     buildinformationtest.cpp
+    capturedmacrolog.cpp
     gotittooltiptest.cpp
+    helptopicidtest.cpp
     hierarchicalidtest.cpp
     mocksettings.cpp
     mocksettingspage.cpp
@@ -73,6 +75,7 @@ target_sources(
     searchfilterwidgettest.cpp
     settingspageregistrytest.cpp
     settingspagetest.cpp
+    widgethelptopictest.cpp
     $<$<TARGET_EXISTS:Qt::lrelease>:${CMAKE_CURRENT_BINARY_DIR}/ut_translations.qrc
     ${QM_FILES}>
     res/ut_icons.qrc
@@ -91,7 +94,9 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       aidesettingsprovidertest.cpp
       applicationcloseinteractortest.cpp
       $<$<TARGET_EXISTS:Qt::lrelease>:applicationtranslatortest.cpp>
+      builtinhelptopicstest.cpp
       changedetectortest.cpp
+      contexthelptopictest.cpp
       desktopentrynameresolvertest.cpp
       diagnostictextbuildertest.cpp
       keymapcontextmenuprovidertest.cpp
@@ -125,6 +130,7 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       mocksettingsdialog.cpp
       nulllogger.cpp
       qtsettingstest.cpp
+      recordinglogger.cpp
       reportbugusecasetest.cpp
       searchfilterresultdelegatetest.cpp
       searchlineedittest.cpp
@@ -134,8 +140,10 @@ if(NOT PROJECT_IS_TOP_LEVEL)
       settingspagegrouptreemodeltest.cpp
       settingsdialogcontrollertest.cpp
       settingspagerankertest.cpp
+      showhelpusecasetest.cpp
       showloginfilemanagerusecasetest.cpp
       showsettingsdialogtest.cpp
+      showsettingsdialoghelptest.cpp
       textmatchertest.cpp
       systemmemorytest.cpp
       treeitemtest.cpp
@@ -202,7 +210,10 @@ endif()
 
 add_executable(ut.aide.application)
 
-target_sources(ut.aide.application PRIVATE applicationtest.cpp mocksettings.cpp)
+target_sources(
+  ut.aide.application
+  PRIVATE applicationtest.cpp mocksettings.cpp mockurllauncher.cpp
+)
 
 target_link_libraries(
   ut.aide.application

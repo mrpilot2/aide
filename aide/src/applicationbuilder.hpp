@@ -10,6 +10,7 @@
 #include "actionregistry.hpp"
 #include "aidesettingsprovider.hpp"
 #include "applicationclose.hpp"
+#include "core/showhelpusecase.hpp"
 #include "gui/mainwindow.hpp"
 #include "gui/mainwindowcontroller.hpp"
 #include "gui/notificationballoonhost.hpp"
@@ -44,6 +45,9 @@ namespace aide
 
         [[nodiscard]] aide::AppearanceManager& appearanceManager();
 
+        [[nodiscard]] const aide::core::ShowHelpUseCase& showHelpUseCase()
+            const;
+
         static LoggerPtr setupLogger(const std::string& loggerName);
 
     private:
@@ -58,6 +62,10 @@ namespace aide
             AideSettingsProvider::versionableSettings()};
 
         aide::ApplicationConfig m_config;
+
+        aide::UrlLauncherPtr m_urlLauncher;
+
+        aide::core::ShowHelpUseCase m_showHelpUseCase;
 
         std::shared_ptr<AideSettingsProvider> m_settingsProvider;
 

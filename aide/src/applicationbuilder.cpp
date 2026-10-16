@@ -21,6 +21,8 @@ using aide::gui::SettingsDialogController;
 
 ApplicationBuilder::ApplicationBuilder(ApplicationConfig config)
     : m_config(std::move(config))
+    , m_urlLauncher(UrlLauncherResolver::resolve(m_config))
+    , m_showHelpUseCase(m_config, m_urlLauncher, m_logger)
     , m_settingsProvider(std::make_shared<AideSettingsProvider>())
     , m_actionRegistry{std::make_shared<ActionRegistry>(
           *(AideSettingsProvider::versionableSettings()), m_logger)}
@@ -37,12 +39,12 @@ ApplicationBuilder::ApplicationBuilder(ApplicationConfig config)
           m_mainWindow, *(AideSettingsProvider::unversionableSettings()))
     , m_showSettingsDialog(m_settingsDialog, m_settingsPageRegistry,
                            *(AideSettingsProvider::unversionableSettings()),
-                           m_logger)
+                           m_logger, m_showHelpUseCase)
     , m_settingsDialogController(
           std::make_shared<SettingsDialogController>(m_showSettingsDialog))
     , m_mainController(std::make_shared<MainWindowController>(
           m_mainWindow, m_applicationClose, m_mainWindowGeometryAndState,
-          m_showSettingsDialog, UrlLauncherResolver::resolve(m_config)))
+          m_showSettingsDialog, m_urlLauncher, m_showHelpUseCase))
     , m_keyMapPageWidget{std::make_unique<KeymapPageWidget>(
           m_settingsDialog.get())}
     , m_keyMapPage(std::make_shared<KeymapPage>(m_actionRegistry,
@@ -91,6 +93,11 @@ ApplicationBuilder::ApplicationBuilder(ApplicationConfig config)
 aide::AppearanceManager& ApplicationBuilder::appearanceManager()
 {
     return m_appearanceManager;
+}
+
+const aide::core::ShowHelpUseCase& ApplicationBuilder::showHelpUseCase() const
+{
+    return m_showHelpUseCase;
 }
 
 const aide::ApplicationConfig& ApplicationBuilder::config() const

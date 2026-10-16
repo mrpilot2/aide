@@ -67,6 +67,9 @@ void SettingsDialog::connectSignals()
     connect(ui->leaveDialogButtonBox->button(QDialogButtonBox::Apply),
             &QPushButton::clicked, settingsController.get(),
             &SettingsDialogController::onUserWantsToApplySettingsPages);
+    connect(ui->helpButtonBox, &QDialogButtonBox::helpRequested,
+            settingsController.get(),
+            &SettingsDialogController::onUserWantsHelpForCurrentPage);
     connect(ui->searchLineEdit, &QLineEdit::textChanged,
             settingsController.get(),
             &SettingsDialogController::onUserChangedSearchPattern);
@@ -194,6 +197,16 @@ void SettingsDialog::enableApplyButton(const bool enable)
 {
     ui->leaveDialogButtonBox->button(QDialogButtonBox::Apply)
         ->setEnabled(enable);
+}
+
+void SettingsDialog::showHelpButton(const bool show)
+{
+    ui->helpButtonBox->button(QDialogButtonBox::Help)->setVisible(show);
+}
+
+void SettingsDialog::enableHelpButton(const bool enable)
+{
+    ui->helpButtonBox->button(QDialogButtonBox::Help)->setEnabled(enable);
 }
 
 void SettingsDialog::installChangeDetector(QObject* widget) const

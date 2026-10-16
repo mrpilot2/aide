@@ -73,6 +73,26 @@ bool MockSettingsDialog::isApplyButtonEnabled() const
     return applyButtonIsEnabled;
 }
 
+void MockSettingsDialog::showHelpButton(const bool show)
+{
+    helpButtonIsVisible = show;
+}
+
+bool MockSettingsDialog::isHelpButtonVisible() const
+{
+    return helpButtonIsVisible;
+}
+
+void MockSettingsDialog::enableHelpButton(const bool enable)
+{
+    helpButtonIsEnabled = enable;
+}
+
+bool MockSettingsDialog::isHelpButtonEnabled() const
+{
+    return helpButtonIsEnabled;
+}
+
 void MockSettingsDialog::simulateUserAcceptsDialog(const bool accept)
 {
     userShallAcceptDialog = accept;

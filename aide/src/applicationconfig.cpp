@@ -1,6 +1,7 @@
 #include "aide/applicationconfig.hpp"
 
 #include <map>
+#include <set>
 #include <utility>
 
 using aide::ApplicationConfig;
@@ -29,6 +30,34 @@ public:
 
     [[nodiscard]] UrlLauncherPtr urlLauncher() const { return m_urlLauncher; }
 
+    void setHelpBaseUrl(const QUrl& baseUrl) { m_helpBaseUrl = baseUrl; }
+
+    [[nodiscard]] QUrl helpBaseUrl() const { return m_helpBaseUrl; }
+
+    void remapHelpTopic(const HelpTopicId& source, const HelpTopicId& target)
+    {
+        m_helpTopicRemaps[source] = target;
+    }
+
+    [[nodiscard]] HelpTopicId remappedHelpTopic(const HelpTopicId& id) const
+    {
+        if (const auto it = m_helpTopicRemaps.find(id);
+            it != m_helpTopicRemaps.end()) {
+            return it->second;
+        }
+        return id;
+    }
+
+    void disableHelpTopic(const HelpTopicId& id)
+    {
+        m_disabledHelpTopics.insert(id);
+    }
+
+    [[nodiscard]] bool isHelpTopicDisabled(const HelpTopicId& id) const
+    {
+        return m_disabledHelpTopics.contains(id);
+    }
+
 private:
     // Single source of truth for per-feature defaults. Every feature ships
     // enabled today; flip an entry here to make a future feature opt-in
@@ -37,6 +66,7 @@ private:
     {
         switch (feature) {
         case Feature::ViewFullscreenAction:
+        case Feature::Help:
             return true;
         case Feature::ShowLogInFileManagerAction:
         case Feature::ReportBugAction:
@@ -47,6 +77,9 @@ private:
 
     std::map<Feature, bool> m_overrides;
     UrlLauncherPtr m_urlLauncher;
+    QUrl m_helpBaseUrl;
+    std::map<HelpTopicId, HelpTopicId> m_helpTopicRemaps;
+    std::set<HelpTopicId> m_disabledHelpTopics;
 };
 
 ApplicationConfig::ApplicationConfig()
@@ -91,4 +124,39 @@ ApplicationConfig& ApplicationConfig::setUrlLauncher(UrlLauncherPtr launcher)
 aide::UrlLauncherPtr ApplicationConfig::urlLauncher() const
 {
     return m_impl->urlLauncher();
+}
+
+ApplicationConfig& ApplicationConfig::setHelpBaseUrl(const QUrl& baseUrl)
+{
+    m_impl->setHelpBaseUrl(baseUrl);
+    return *this;
+}
+
+QUrl ApplicationConfig::helpBaseUrl() const
+{
+    return m_impl->helpBaseUrl();
+}
+
+ApplicationConfig& ApplicationConfig::remapHelpTopic(const HelpTopicId& source,
+                                                     const HelpTopicId& target)
+{
+    m_impl->remapHelpTopic(source, target);
+    return *this;
+}
+
+aide::HelpTopicId ApplicationConfig::remappedHelpTopic(
+    const HelpTopicId& id) const
+{
+    return m_impl->remappedHelpTopic(id);
+}
+
+ApplicationConfig& ApplicationConfig::disableHelpTopic(const HelpTopicId& id)
+{
+    m_impl->disableHelpTopic(id);
+    return *this;
+}
+
+bool ApplicationConfig::isHelpTopicDisabled(const HelpTopicId& id) const
+{
+    return m_impl->isHelpTopicDisabled(id);
 }

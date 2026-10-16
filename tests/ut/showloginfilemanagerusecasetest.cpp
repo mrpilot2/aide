@@ -14,6 +14,7 @@
 #include <aide/logger/loggerfactory.hpp>
 
 #include "mockfilemanagerlauncher.hpp"
+#include "recordinglogger.hpp"
 #include "showloginfilemanagerusecase.hpp"
 #include "standardpathstestguards.hpp"
 
@@ -21,33 +22,9 @@ using aide::core::LoggerFactory;
 using aide::core::ShowLogInFileManagerUseCase;
 using aide::test::BlockedStandardLocationGuard;
 using aide::test::EnvVarGuard;
+using aide::test::RecordingLogger;
 using aide::test::StandardPathsTestModeGuard;
 using aide::tests::MockFileManagerLauncher;
-
-namespace
-{
-    // Records whether a warning was logged, without depending on the real
-    // spdlog-backed logger.
-    class RecordingLogger : public aide::LoggerInterface
-    {
-    public:
-        mutable bool warnCalled{false};
-
-        void flush() override {}
-        void setLevel(aide::LogLevel /*level*/) override {}
-
-    private:
-        void doLogTrace(std::string_view /*message*/) const override {}
-        void doLogDebug(std::string_view /*message*/) const override {}
-        void doLogInfo(std::string_view /*message*/) const override {}
-        void doLogWarn(std::string_view /*message*/) const override
-        {
-            warnCalled = true;
-        }
-        void doLogError(std::string_view /*message*/) const override {}
-        void doLogCritical(std::string_view /*message*/) const override {}
-    };
-} // namespace
 
 TEST_CASE("A ShowLogInFileManagerUseCase with a resolvable log file path",
           "[ShowLogInFileManagerUseCase]")
@@ -86,7 +63,7 @@ TEST_CASE("A ShowLogInFileManagerUseCase with a resolvable log file path",
         REQUIRE(launcher->lastRequestedDirectory.has_value());
         // NOLINTNEXTLINE(bugprone-unchecked-optional-access)
         REQUIRE(launcher->lastRequestedDirectory.value() == expectedDirectory);
-        REQUIRE_FALSE(logger->warnCalled);
+        REQUIRE_FALSE(logger->hasWarning());
     }
 
     SECTION(
@@ -100,7 +77,7 @@ TEST_CASE("A ShowLogInFileManagerUseCase with a resolvable log file path",
         const ShowLogInFileManagerUseCase useCase(launcher, logger);
         useCase.showLogInFileManager();
 
-        REQUIRE(logger->warnCalled);
+        REQUIRE(logger->hasWarning());
     }
 }
 
@@ -142,6 +119,6 @@ TEST_CASE("A ShowLogInFileManagerUseCase with an unresolvable log file path",
 
     SECTION("logs a warning")
     {
-        REQUIRE(logger->warnCalled);
+        REQUIRE(logger->hasWarning());
     }
 }
