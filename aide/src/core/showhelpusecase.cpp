@@ -46,8 +46,13 @@ bool ShowHelpUseCase::showHelpContents() const
 
 bool ShowHelpUseCase::isHelpActive() const
 {
-    return m_config.isEnabled(ApplicationConfig::Feature::Help) &&
-           !m_config.helpBaseUrl().isEmpty();
+    return isHelpActive(m_config);
+}
+
+bool ShowHelpUseCase::isHelpActive(const ApplicationConfig& config)
+{
+    return config.isEnabled(ApplicationConfig::Feature::Help) &&
+           !config.helpBaseUrl().isEmpty();
 }
 
 QUrl ShowHelpUseCase::baseUrlWithTrailingSlash() const

@@ -44,7 +44,7 @@ ApplicationBuilder::ApplicationBuilder(ApplicationConfig config)
           std::make_shared<SettingsDialogController>(m_showSettingsDialog))
     , m_mainController(std::make_shared<MainWindowController>(
           m_mainWindow, m_applicationClose, m_mainWindowGeometryAndState,
-          m_showSettingsDialog, m_urlLauncher))
+          m_showSettingsDialog, m_urlLauncher, m_showHelpUseCase))
     , m_keyMapPageWidget{std::make_unique<KeymapPageWidget>(
           m_settingsDialog.get())}
     , m_keyMapPage(std::make_shared<KeymapPage>(m_actionRegistry,
