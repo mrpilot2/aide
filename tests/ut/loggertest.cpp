@@ -15,8 +15,8 @@ using aide::FileName;
 using aide::Logger;
 using aide::LoggerName;
 using aide::LogLevel;
+using aide::test::captureStdout;
 using aide::test::ConsoleLoggingGuard;
-using aide::test::StdoutCaptureGuard;
 
 namespace
 {
@@ -393,16 +393,18 @@ TEST_CASE("Logger mirrors messages to the console in debug builds", "[Logger]")
     spdlog::drop_all();
 
     const ConsoleLoggingGuard consoleGuard;
-    StdoutCaptureGuard stdoutCapture;
-    REQUIRE(stdoutCapture.isCapturing());
+    // Construct the logger inside the capture: on Windows the console sink
+    // picks up the stdout handle when it is created, not when it writes.
+    const auto consoleOutput = captureStdout([&logFileNameStr] {
+        auto logger = Logger(FileName(logFileNameStr));
+        logger.critical("console sink probe");
+        logger.flush();
+    });
 
-    auto logger = Logger(FileName(logFileNameStr));
-    logger.critical("console sink probe");
-    logger.flush();
+    REQUIRE(consoleOutput.has_value());
 
-    const auto consoleOutput = stdoutCapture.captured();
-
-    REQUIRE_THAT(consoleOutput,
+    // NOLINTNEXTLINE(bugprone-unchecked-optional-access)
+    REQUIRE_THAT(consoleOutput.value(),
                  Catch::Matchers::ContainsSubstring("console sink probe"));
     REQUIRE_THAT(::getFileContents(logFileNameStr.c_str()),
                  Catch::Matchers::ContainsSubstring("console sink probe"));
