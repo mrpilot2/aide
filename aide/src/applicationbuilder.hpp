@@ -1,9 +1,12 @@
 #ifndef AIDE_APPLICATION_BUILDER_HPP
 #define AIDE_APPLICATION_BUILDER_HPP
 
+#include <optional>
+
 #include <aide/appearancemanager.hpp>
 #include <aide/applicationconfig.hpp>
 #include <aide/notificationmanager.hpp>
+#include <aide/vcsmanagerinterface.hpp>
 #include <settings/keymap/keymappage.hpp>
 #include <settings/settingspageregistry.hpp>
 
@@ -19,6 +22,10 @@
 #include "mainwindowgeometryandstate.hpp"
 #include "settings/keymap/keymappagewidgetcontroller.hpp"
 #include "settings/showsettingsdialog.hpp"
+
+#ifdef AIDE_ENABLE_VCS
+#include "vcs/vcsmanager.hpp"
+#endif
 
 namespace aide
 {
@@ -43,6 +50,8 @@ namespace aide
         [[nodiscard]] aide::core::SettingsPageRegistry& settingsPageRegistry();
 
         [[nodiscard]] aide::AppearanceManager& appearanceManager();
+
+        [[nodiscard]] std::optional<VcsManagerInterfacePtr> vcsManager() const;
 
         static LoggerPtr setupLogger(const std::string& loggerName);
 
@@ -87,6 +96,11 @@ namespace aide
         std::shared_ptr<core::KeymapPage> m_keyMapPage;
 
         aide::gui::KeyMapPageControllerPtr m_keymapPageController;
+
+#ifdef AIDE_ENABLE_VCS
+        std::shared_ptr<aide::VcsManager> m_vcsManager{
+            std::make_shared<aide::VcsManager>()};
+#endif
     };
 } // namespace aide
 #endif // AIDE_APPLICATION_BUILDER_HPP
