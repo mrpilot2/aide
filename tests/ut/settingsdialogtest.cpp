@@ -7,34 +7,17 @@
 #include <QWidget>
 
 #include "settings/settingsdialog.hpp"
-#include "settings/settingsdialogchangepagecontroller.hpp"
 #include "settings/settingsdialogcontroller.hpp"
+#include "spychangepagecontroller.hpp"
 
 using aide::gui::SettingsDialog;
-
-namespace
-{
-    // SettingsDialog wires its tree selection to the controller, so a dialog
-    // without one makes connect() fail with a Qt warning. The selection
-    // tests only look at the view, so the controller ignores everything.
-    class NoOpChangePageController
-        : public aide::core::SettingsDialogChangePageController
-    {
-    public:
-        void changeSelectedPage(const QItemSelection& /*selected*/,
-                                const QItemSelection& /*deselected*/) override
-        {}
-        void searchPatternChanged(const QString& /*pattern*/) override {}
-        void commitCurrentSearchPattern() override {}
-        void anyGuiElementHasChanged() override {}
-        void resetCurrentPage() override {}
-        void applyModifiedSettingsPages() override {}
-    };
-} // namespace
+using aide::test::SpyChangePageController;
 
 TEST_CASE("SettingsDialog programmatic page selection", "[SettingsDialog]")
 {
-    NoOpChangePageController changePageController;
+    // SettingsDialog wires its tree selection to the controller, so a dialog
+    // without one makes connect() fail with a Qt warning.
+    SpyChangePageController changePageController;
     SettingsDialog dialog;
     dialog.setController(std::make_shared<aide::gui::SettingsDialogController>(
         changePageController));

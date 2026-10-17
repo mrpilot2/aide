@@ -24,8 +24,9 @@ using aide::core::ShowLogInFileManagerUseCase;
 using aide::test::BlockedStandardLocationGuard;
 using aide::test::CerrCaptureGuard;
 using aide::test::EnvVarGuard;
+using aide::test::kLogDirectoryCreationFailure;
+using aide::test::MockFileManagerLauncher;
 using aide::test::StandardPathsTestModeGuard;
-using aide::tests::MockFileManagerLauncher;
 
 namespace
 {
@@ -153,8 +154,7 @@ TEST_CASE("A ShowLogInFileManagerUseCase with an unresolvable log file path",
 
     SECTION("reports the unusable log directories on stderr")
     {
-        REQUIRE_THAT(cerrCapture.captured(),
-                     Catch::Matchers::ContainsSubstring(
-                         "Could not create standard log directory"));
+        REQUIRE_THAT(cerrCapture.captured(), Catch::Matchers::ContainsSubstring(
+                                                 kLogDirectoryCreationFailure));
     }
 }

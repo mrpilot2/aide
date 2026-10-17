@@ -12,7 +12,7 @@
 using aide::ApplicationConfig;
 using aide::core::OsUrlLauncher;
 using aide::core::UrlLauncherResolver;
-using aide::tests::MockUrlLauncher;
+using aide::test::MockUrlLauncher;
 
 TEST_CASE("A UrlLauncherResolver", "[UrlLauncherResolver]")
 {

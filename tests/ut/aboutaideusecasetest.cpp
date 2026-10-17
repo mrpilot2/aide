@@ -11,7 +11,7 @@
 #include "nulllogger.hpp"
 
 using aide::core::AboutAideUseCase;
-using aide::tests::MockAboutDialog;
+using aide::test::MockAboutDialog;
 
 TEST_CASE("Any AboutAideUseCase")
 {

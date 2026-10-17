@@ -1,5 +1,5 @@
-#ifndef AIDE_FAKE_MAIN_WINDOW_CONTROLLERS_HPP
-#define AIDE_FAKE_MAIN_WINDOW_CONTROLLERS_HPP
+#ifndef AIDE_SPY_MAIN_WINDOW_CONTROLLERS_HPP
+#define AIDE_SPY_MAIN_WINDOW_CONTROLLERS_HPP
 
 #include <memory>
 
@@ -15,7 +15,7 @@
 
 namespace aide::test
 {
-    class FakeApplicationCloseController
+    class SpyApplicationCloseController
         : public aide::core::ApplicationCloseController
     {
     public:
@@ -27,7 +27,7 @@ namespace aide::test
         }
     };
 
-    class FakeMainWindowGeometryAndStateController
+    class SpyMainWindowGeometryAndStateController
         : public aide::core::MainWindowGeometryAndStateController
     {
     public:
@@ -46,7 +46,7 @@ namespace aide::test
         void restoreGeometryAndState() override {}
     };
 
-    class FakeShowSettingsDialogController
+    class SpyShowSettingsDialogController
         : public aide::core::ShowSettingsDialogController
     {
     public:
@@ -62,22 +62,22 @@ namespace aide::test
         }
     };
 
-    // A real MainWindowController backed by the fakes above, for tests that
+    // A real MainWindowController backed by the spies above, for tests that
     // exercise MainWindow itself. MainWindow wires its actions to the
     // controller, so handing it nullptr instead makes every connect() fail
     // with a Qt warning and leaves the actions dangling. Declare it before the
-    // MainWindow so the fakes the controller references outlive the window.
-    struct FakeMainWindowControllerSet
+    // MainWindow so the spies the controller references outlive the window.
+    struct SpyMainWindowControllerSet
     {
-        FakeApplicationCloseController closeController;
-        FakeMainWindowGeometryAndStateController geometryAndStateController;
-        FakeShowSettingsDialogController settingsDialogController;
+        SpyApplicationCloseController closeController;
+        SpyMainWindowGeometryAndStateController geometryAndStateController;
+        SpyShowSettingsDialogController settingsDialogController;
         aide::gui::MainWindowControllerPtr controller{
             std::make_shared<aide::gui::MainWindowController>(
                 nullptr, closeController, geometryAndStateController,
                 settingsDialogController,
-                std::make_shared<aide::tests::MockUrlLauncher>())};
+                std::make_shared<aide::test::MockUrlLauncher>())};
     };
 } // namespace aide::test
 
-#endif // AIDE_FAKE_MAIN_WINDOW_CONTROLLERS_HPP
+#endif // AIDE_SPY_MAIN_WINDOW_CONTROLLERS_HPP

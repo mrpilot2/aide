@@ -1,6 +1,6 @@
 #include "mockfilemanagerlauncher.hpp"
 
-using aide::tests::MockFileManagerLauncher;
+using aide::test::MockFileManagerLauncher;
 
 std::string MockFileManagerLauncher::displayName() const
 {

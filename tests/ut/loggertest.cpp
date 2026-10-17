@@ -15,6 +15,7 @@ using aide::FileName;
 using aide::Logger;
 using aide::LoggerName;
 using aide::LogLevel;
+using aide::test::ConsoleLoggingGuard;
 using aide::test::StdoutCaptureGuard;
 
 namespace
@@ -379,33 +380,24 @@ TEST_CASE("Test log macros", "[Logger]")
 }
 #endif
 
-#if !defined(NDEBUG) && SPDLOG_ACTIVE_LEVEL <= SPDLOG_LEVEL_INFO
+#if !defined(NDEBUG) && SPDLOG_ACTIVE_LEVEL <= SPDLOG_LEVEL_CRITICAL
 TEST_CASE("Logger mirrors messages to the console in debug builds", "[Logger]")
 {
     // The test runner disables console logging for the whole run so the
     // debug-build console sink doesn't flood the test output. Re-enable it
-    // here, capture stdout, and restore the runner's default afterwards.
-    struct ConsoleLoggingGuard
-    {
-        ConsoleLoggingGuard() { Logger::enableLoggingToConsole(); }
-        ConsoleLoggingGuard(const ConsoleLoggingGuard&)            = delete;
-        ConsoleLoggingGuard& operator=(const ConsoleLoggingGuard&) = delete;
-        ConsoleLoggingGuard(ConsoleLoggingGuard&&)                 = delete;
-        ConsoleLoggingGuard& operator=(ConsoleLoggingGuard&&)      = delete;
-        ~ConsoleLoggingGuard() { Logger::disableLoggingToConsole(); }
-    };
-
+    // here and capture stdout to check what the sink writes. Critical is the
+    // one level every SPDLOG_ACTIVE_LEVEL short of OFF compiles in.
     const std::string logFileNameStr{TEST_LOG_FILE_LOCATION +
                                      std::string("/aide_console_test.log")};
     [[maybe_unused]] auto res = std::remove(logFileNameStr.c_str());
     spdlog::drop_all();
 
     const ConsoleLoggingGuard consoleGuard;
-    StdoutCaptureGuard stdoutCapture(TEST_LOG_FILE_LOCATION +
-                                     std::string("/aide_console_test.out"));
+    StdoutCaptureGuard stdoutCapture;
+    REQUIRE(stdoutCapture.isCapturing());
 
     auto logger = Logger(FileName(logFileNameStr));
-    logger.info("console sink probe");
+    logger.critical("console sink probe");
     logger.flush();
 
     const auto consoleOutput = stdoutCapture.captured();

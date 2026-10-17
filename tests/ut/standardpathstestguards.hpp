@@ -14,6 +14,11 @@
 
 namespace aide::test
 {
+    // The prefix LoggerFactory writes to std::cerr whenever it cannot create a
+    // log directory - what a BlockedStandardLocationGuard provokes.
+    inline constexpr const char* kLogDirectoryCreationFailure{
+        "Could not create standard log directory"};
+
     // Restores an environment variable to whatever it was before the test
     // touched it, even if a REQUIRE() aborts the test case early.
     class EnvVarGuard

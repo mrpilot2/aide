@@ -6,7 +6,7 @@
 
 #include <aide/urllauncherinterface.hpp>
 
-namespace aide::tests
+namespace aide::test
 {
     class MockUrlLauncher : public aide::UrlLauncherInterface
     {
@@ -16,6 +16,6 @@ namespace aide::tests
 
         bool openUrl(const std::string& url) const override;
     };
-} // namespace aide::tests
+} // namespace aide::test
 
 #endif // AIDE_MOCK_URL_LAUNCHER_HPP

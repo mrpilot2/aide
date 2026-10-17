@@ -2,7 +2,7 @@
 
 #include "mockaboutdialog.hpp"
 
-using aide::tests::MockAboutDialog;
+using aide::test::MockAboutDialog;
 
 void MockAboutDialog::showAboutInformation(const core::AideInformation& info)
 {

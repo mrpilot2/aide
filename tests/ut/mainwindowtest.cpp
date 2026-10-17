@@ -12,19 +12,19 @@
 
 #include "actionregistry.hpp"
 #include "aide/gui/widgets/banner.hpp"
-#include "fakemainwindowcontrollers.hpp"
 #include "mainwindow.hpp"
 #include "mocksettings.hpp"
 #include "nulllogger.hpp"
+#include "spymainwindowcontrollers.hpp"
 
 using aide::ActionRegistry;
 using aide::ApplicationConfig;
 using aide::NotificationType;
 using aide::constants::CONSTANTS;
 using aide::gui::MainWindow;
-using aide::test::FakeMainWindowControllerSet;
 using aide::test::MockSettings;
 using aide::test::NullLogger;
+using aide::test::SpyMainWindowControllerSet;
 using aide::widgets::Banner;
 
 TEST_CASE("Any main window")
@@ -38,7 +38,7 @@ TEST_CASE("Any main window")
 
     SECTION("registers actions")
     {
-        const FakeMainWindowControllerSet controllers;
+        const SpyMainWindowControllerSet controllers;
         MainWindow mainWindow(std::make_shared<NullLogger>(),
                               ApplicationConfig{}, nullptr);
         mainWindow.setMainWindowController(controllers.controller, registry);
@@ -55,7 +55,7 @@ TEST_CASE("A main window with the full screen feature enabled")
     const auto registry = std::make_shared<ActionRegistry>(
         settings, std::make_shared<NullLogger>());
 
-    const FakeMainWindowControllerSet controllers;
+    const SpyMainWindowControllerSet controllers;
     MainWindow mainWindow(std::make_shared<NullLogger>(), ApplicationConfig{},
                           nullptr);
     mainWindow.setMainWindowController(controllers.controller, registry);
@@ -106,7 +106,7 @@ TEST_CASE("A main window with the full screen feature disabled")
     const auto registry = std::make_shared<ActionRegistry>(
         settings, std::make_shared<NullLogger>());
 
-    const FakeMainWindowControllerSet controllers;
+    const SpyMainWindowControllerSet controllers;
     MainWindow mainWindow(
         std::make_shared<NullLogger>(),
         ApplicationConfig{}.setEnabled(
@@ -136,7 +136,7 @@ TEST_CASE("A main window with the show-log-in-file-manager feature enabled")
     const auto registry = std::make_shared<ActionRegistry>(
         settings, std::make_shared<NullLogger>());
 
-    const FakeMainWindowControllerSet controllers;
+    const SpyMainWindowControllerSet controllers;
     MainWindow mainWindow(
         std::make_shared<NullLogger>(),
         ApplicationConfig{}.setEnabled(
@@ -169,7 +169,7 @@ TEST_CASE(
     const auto registry = std::make_shared<ActionRegistry>(
         settings, std::make_shared<NullLogger>());
 
-    const FakeMainWindowControllerSet controllers;
+    const SpyMainWindowControllerSet controllers;
     MainWindow mainWindow(std::make_shared<NullLogger>(), ApplicationConfig{},
                           nullptr);
     mainWindow.setMainWindowController(controllers.controller, registry);
@@ -191,7 +191,7 @@ TEST_CASE("A main window with the report-bug feature enabled")
     const auto registry = std::make_shared<ActionRegistry>(
         settings, std::make_shared<NullLogger>());
 
-    const FakeMainWindowControllerSet controllers;
+    const SpyMainWindowControllerSet controllers;
     MainWindow mainWindow(
         std::make_shared<NullLogger>(),
         ApplicationConfig{}.setEnabled(
@@ -221,7 +221,7 @@ TEST_CASE("A main window with the report-bug feature left at its default")
     const auto registry = std::make_shared<ActionRegistry>(
         settings, std::make_shared<NullLogger>());
 
-    const FakeMainWindowControllerSet controllers;
+    const SpyMainWindowControllerSet controllers;
     MainWindow mainWindow(std::make_shared<NullLogger>(), ApplicationConfig{},
                           nullptr);
     mainWindow.setMainWindowController(controllers.controller, registry);
@@ -244,7 +244,7 @@ TEST_CASE(
     const auto registry = std::make_shared<ActionRegistry>(
         settings, std::make_shared<NullLogger>());
 
-    const FakeMainWindowControllerSet controllers;
+    const SpyMainWindowControllerSet controllers;
     MainWindow mainWindow(std::make_shared<NullLogger>(), ApplicationConfig{},
                           nullptr);
     mainWindow.setMainWindowController(controllers.controller, registry);
@@ -272,7 +272,7 @@ TEST_CASE(
     const auto registry = std::make_shared<ActionRegistry>(
         settings, std::make_shared<NullLogger>());
 
-    const FakeMainWindowControllerSet controllers;
+    const SpyMainWindowControllerSet controllers;
     MainWindow mainWindow(
         std::make_shared<NullLogger>(),
         ApplicationConfig{}
@@ -359,7 +359,7 @@ TEST_CASE(
     const auto registry = std::make_shared<ActionRegistry>(
         settings, std::make_shared<NullLogger>());
 
-    const FakeMainWindowControllerSet controllers;
+    const SpyMainWindowControllerSet controllers;
     MainWindow mainWindow(
         std::make_shared<NullLogger>(),
         ApplicationConfig{}

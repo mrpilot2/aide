@@ -22,6 +22,7 @@ using aide::core::LoggerFactory;
 using aide::test::BlockedStandardLocationGuard;
 using aide::test::CerrCaptureGuard;
 using aide::test::EnvVarGuard;
+using aide::test::kLogDirectoryCreationFailure;
 using aide::test::StandardPathsTestModeGuard;
 
 namespace
@@ -92,9 +93,8 @@ TEST_CASE(
     const CerrCaptureGuard cerrCapture;
 
     REQUIRE_FALSE(LoggerFactory::logFilePath().has_value());
-    REQUIRE_THAT(cerrCapture.captured(),
-                 Catch::Matchers::ContainsSubstring(
-                     "Could not create standard log directory"));
+    REQUIRE_THAT(cerrCapture.captured(), Catch::Matchers::ContainsSubstring(
+                                             kLogDirectoryCreationFailure));
 }
 
 TEST_CASE(
@@ -132,9 +132,8 @@ TEST_CASE(
         LoggerFactory::createLogger("logger_factory_fallback_test");
 
     REQUIRE(logger != nullptr);
-    REQUIRE_THAT(cerrCapture.captured(),
-                 Catch::Matchers::ContainsSubstring(
-                     "Could not create standard log directory"));
+    REQUIRE_THAT(cerrCapture.captured(), Catch::Matchers::ContainsSubstring(
+                                             kLogDirectoryCreationFailure));
     REQUIRE_NOTHROW(logger->info("fallback logger probe"));
     REQUIRE_NOTHROW(logger->flush());
 

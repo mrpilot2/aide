@@ -7,7 +7,7 @@
 #include "mockurllauncher.hpp"
 
 using aide::ApplicationConfig;
-using aide::tests::MockUrlLauncher;
+using aide::test::MockUrlLauncher;
 
 using Feature = ApplicationConfig::Feature;
 

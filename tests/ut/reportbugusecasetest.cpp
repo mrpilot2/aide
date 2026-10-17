@@ -12,7 +12,7 @@
 #include "reportbugusecase.hpp"
 
 using aide::core::ReportBugUseCase;
-using aide::tests::MockUrlLauncher;
+using aide::test::MockUrlLauncher;
 
 namespace
 {

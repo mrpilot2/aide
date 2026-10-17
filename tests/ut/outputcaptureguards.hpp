@@ -7,7 +7,10 @@
 #include <sstream>
 #include <streambuf>
 #include <string>
-#include <utility>
+
+#include <QTemporaryDir>
+
+#include "logger.hpp"
 
 #ifdef _WIN32
 #include <io.h>
@@ -25,56 +28,66 @@ namespace aide::test
         {
             return _fileno(stream);
         }
-        inline int dupFd(int fd)
+        inline int dupFd(int descriptor)
         {
-            return _dup(fd);
+            return _dup(descriptor);
         }
-        inline int dup2Fd(int from, int to)
+        inline int dup2Fd(int source, int target)
         {
-            return _dup2(from, to);
+            return _dup2(source, target);
         }
-        inline int closeFd(int fd)
+        inline int closeFd(int descriptor)
         {
-            return _close(fd);
+            return _close(descriptor);
         }
 #else
         inline int fdOf(std::FILE* stream)
         {
             return fileno(stream);
         }
-        inline int dupFd(int fd)
+        inline int dupFd(int descriptor)
         {
-            return dup(fd);
+            return dup(descriptor);
         }
-        inline int dup2Fd(int from, int to)
+        inline int dup2Fd(int source, int target)
         {
-            return dup2(from, to);
+            return dup2(source, target);
         }
-        inline int closeFd(int fd)
+        inline int closeFd(int descriptor)
         {
-            return close(fd);
+            return close(descriptor);
         }
 #endif
     } // namespace detail
 
-    // Redirects the process's stdout file descriptor into a file for the
-    // guard's lifetime. Swapping std::cout's buffer is not enough here:
-    // spdlog's console sinks write to the C stdout stream (or, on Windows,
-    // the STD_OUTPUT_HANDLE that _dup2 updates for console apps), so only an
-    // fd-level redirect catches them. The guard both keeps the test output
-    // clean and lets the test assert on what was written.
+    // Redirects the process's stdout file descriptor into a private temporary
+    // file for the guard's lifetime. Swapping std::cout's buffer is not
+    // enough here: spdlog's console sinks write to the C stdout stream (or, on
+    // Windows, the STD_OUTPUT_HANDLE that _dup2 updates for console apps), so
+    // only an fd-level redirect catches them. The guard both keeps the test
+    // output clean and lets the test assert on what was written.
     class StdoutCaptureGuard
     {
     public:
-        explicit StdoutCaptureGuard(std::string captureFileName)
-            : m_captureFileName{std::move(captureFileName)}
-            // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
-            , m_captureFile{std::fopen(m_captureFileName.c_str(), "w")}
+        StdoutCaptureGuard()
+            : m_captureFileName{
+                  m_captureDir.filePath(QStringLiteral("stdout.txt"))
+                      .toStdString()}
         {
+            if (!m_captureDir.isValid()) { return; }
+            // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
+            m_captureFile = std::fopen(m_captureFileName.c_str(), "w");
             if (m_captureFile == nullptr) { return; }
+
             [[maybe_unused]] auto flushed = std::fflush(stdout);
             m_savedStdout                 = detail::dupFd(detail::fdOf(stdout));
-            detail::dup2Fd(detail::fdOf(m_captureFile), detail::fdOf(stdout));
+            if (m_savedStdout < 0 || detail::dup2Fd(detail::fdOf(m_captureFile),
+                                                    detail::fdOf(stdout)) < 0) {
+                // Leave stdout untouched; isCapturing() reports the failure.
+                if (m_savedStdout >= 0) { detail::closeFd(m_savedStdout); }
+                m_savedStdout = -1;
+                closeCaptureFile();
+            }
         }
 
         StdoutCaptureGuard(const StdoutCaptureGuard&)            = delete;
@@ -82,15 +95,15 @@ namespace aide::test
         StdoutCaptureGuard(StdoutCaptureGuard&&)                 = delete;
         StdoutCaptureGuard& operator=(StdoutCaptureGuard&&)      = delete;
 
-        ~StdoutCaptureGuard()
-        {
-            restore();
-            [[maybe_unused]] auto res = std::remove(m_captureFileName.c_str());
-        }
+        ~StdoutCaptureGuard() { restore(); }
+
+        // False if the redirect could not be set up, in which case stdout
+        // was never touched and captured() returns nothing.
+        [[nodiscard]] bool isCapturing() const { return m_savedStdout >= 0; }
 
         // Ends the redirect and returns everything written to stdout while it
         // was active.
-        std::string captured()
+        [[nodiscard]] std::string captured()
         {
             restore();
             const std::ifstream file(m_captureFileName, std::ios::in);
@@ -102,15 +115,23 @@ namespace aide::test
     private:
         void restore()
         {
-            if (m_captureFile == nullptr) { return; }
+            if (m_savedStdout < 0) { return; }
             [[maybe_unused]] auto flushed = std::fflush(stdout);
             detail::dup2Fd(m_savedStdout, detail::fdOf(stdout));
             detail::closeFd(m_savedStdout);
+            m_savedStdout = -1;
+            closeCaptureFile();
+        }
+
+        void closeCaptureFile()
+        {
+            if (m_captureFile == nullptr) { return; }
             // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
             [[maybe_unused]] auto closed = std::fclose(m_captureFile);
             m_captureFile                = nullptr;
         }
 
+        QTemporaryDir m_captureDir;
         std::string m_captureFileName;
         std::FILE* m_captureFile{nullptr};
         int m_savedStdout{-1};
@@ -138,6 +159,22 @@ namespace aide::test
     private:
         std::ostringstream m_captured;
         std::streambuf* m_previous;
+    };
+
+    // Turns the debug-build console log sink back on for the guard's
+    // lifetime. The test runner disables it for the whole run (see
+    // catch_main.cpp), so the guard restores exactly that default.
+    class ConsoleLoggingGuard
+    {
+    public:
+        ConsoleLoggingGuard() { aide::Logger::enableLoggingToConsole(); }
+
+        ConsoleLoggingGuard(const ConsoleLoggingGuard&)            = delete;
+        ConsoleLoggingGuard& operator=(const ConsoleLoggingGuard&) = delete;
+        ConsoleLoggingGuard(ConsoleLoggingGuard&&)                 = delete;
+        ConsoleLoggingGuard& operator=(ConsoleLoggingGuard&&)      = delete;
+
+        ~ConsoleLoggingGuard() { aide::Logger::disableLoggingToConsole(); }
     };
 } // namespace aide::test
 
