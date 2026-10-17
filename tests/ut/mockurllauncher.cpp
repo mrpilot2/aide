@@ -1,6 +1,6 @@
 #include "mockurllauncher.hpp"
 
-using aide::tests::MockUrlLauncher;
+using aide::test::MockUrlLauncher;
 
 bool MockUrlLauncher::openUrl(const std::string& url) const
 {

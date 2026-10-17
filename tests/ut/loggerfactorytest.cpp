@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <filesystem>
 #include <fstream>
+#include <optional>
 #include <sstream>
 #include <string>
 #include <utility>
@@ -15,11 +16,14 @@
 
 #include <aide/logger/loggerfactory.hpp>
 
+#include "outputcaptureguards.hpp"
 #include "standardpathstestguards.hpp"
 
 using aide::core::LoggerFactory;
 using aide::test::BlockedStandardLocationGuard;
+using aide::test::captureCerr;
 using aide::test::EnvVarGuard;
+using aide::test::kLogDirectoryCreationFailure;
 using aide::test::StandardPathsTestModeGuard;
 
 namespace
@@ -87,7 +91,13 @@ TEST_CASE(
     const BlockedStandardLocationGuard tempLocationGuard(
         QStandardPaths::TempLocation);
 
-    REQUIRE_FALSE(LoggerFactory::logFilePath().has_value());
+    std::optional<std::string> logFilePath;
+    const auto diagnostics = captureCerr(
+        [&logFilePath] { logFilePath = LoggerFactory::logFilePath(); });
+
+    REQUIRE_FALSE(logFilePath.has_value());
+    REQUIRE_THAT(diagnostics, Catch::Matchers::ContainsSubstring(
+                                  kLogDirectoryCreationFailure));
 }
 
 TEST_CASE(
@@ -119,10 +129,14 @@ TEST_CASE(
         std::filesystem::current_path()};
     std::filesystem::current_path(TEST_LOG_FILE_LOCATION);
 
-    const auto logger =
-        LoggerFactory::createLogger("logger_factory_fallback_test");
+    aide::LoggerPtr logger;
+    const auto diagnostics = captureCerr([&logger] {
+        logger = LoggerFactory::createLogger("logger_factory_fallback_test");
+    });
 
     REQUIRE(logger != nullptr);
+    REQUIRE_THAT(diagnostics, Catch::Matchers::ContainsSubstring(
+                                  kLogDirectoryCreationFailure));
     REQUIRE_NOTHROW(logger->info("fallback logger probe"));
     REQUIRE_NOTHROW(logger->flush());
 

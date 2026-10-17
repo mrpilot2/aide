@@ -7,12 +7,20 @@
 #include <QWidget>
 
 #include "settings/settingsdialog.hpp"
+#include "settings/settingsdialogcontroller.hpp"
+#include "spychangepagecontroller.hpp"
 
 using aide::gui::SettingsDialog;
+using aide::test::SpyChangePageController;
 
 TEST_CASE("SettingsDialog programmatic page selection", "[SettingsDialog]")
 {
+    // SettingsDialog wires its tree selection to the controller, so a dialog
+    // without one makes connect() fail with a Qt warning.
+    SpyChangePageController changePageController;
     SettingsDialog dialog;
+    dialog.setController(std::make_shared<aide::gui::SettingsDialogController>(
+        changePageController));
 
     auto model = std::make_shared<QStandardItemModel>();
     model->appendRow(new QStandardItem("Alpha"));

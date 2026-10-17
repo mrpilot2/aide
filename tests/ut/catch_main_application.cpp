@@ -6,6 +6,7 @@
 #include <aide/aidesettingsprovider.hpp>
 
 #include "mocksettings.hpp"
+#include "offscreenmessagefilter.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -15,6 +16,7 @@ int main(int argc, char* argv[])
     if (!qEnvironmentVariableIsSet("QT_QPA_PLATFORM")) {
         qputenv("QT_QPA_PLATFORM", "offscreen");
     }
+    aide::test::installOffscreenMessageFilter();
 
     aide::AideSettingsProvider::provideVersionableSettings(
         std::make_shared<aide::test::MockSettings>());

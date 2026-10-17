@@ -6,7 +6,7 @@
 #include "aideinformation.hpp"
 #include "aideinformationpresenter.hpp"
 
-namespace aide::tests
+namespace aide::test
 {
     class MockAboutDialog : public aide::core::AideInformationPresenter
     {
@@ -18,6 +18,6 @@ namespace aide::tests
     private:
         core::AideInformation m_info;
     };
-} // namespace aide::tests
+} // namespace aide::test
 
 #endif // ASIDE_AIDE_WRAPPER_MOCK_ABOUT_DIALOG_HPP

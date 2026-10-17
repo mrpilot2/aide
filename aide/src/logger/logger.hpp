@@ -55,6 +55,7 @@ namespace aide
         void flush() override;
 
         static void disableLoggingToConsole();
+        static void enableLoggingToConsole();
 
         void setLevel(LogLevel level) override;
 

@@ -9,8 +9,10 @@
 #include <QApplication>
 
 #include <aide/aidesettingsprovider.hpp>
+#include <aide/application.hpp>
 
 #include "mocksettings.hpp"
+#include "offscreenmessagefilter.hpp"
 
 namespace
 {
@@ -58,6 +60,12 @@ int main(int argc, char* argv[])
     if (!qEnvironmentVariableIsSet("QT_QPA_PLATFORM")) {
         qputenv("QT_QPA_PLATFORM", "offscreen");
     }
+    aide::test::installOffscreenMessageFilter();
+
+    // Logger tests assert on the log file, never on the console, so the
+    // debug-build console sink only floods the test output. Disable it before
+    // any test can construct a Logger - test order is randomised.
+    aide::Application::disableLoggingToConsole();
 
     aide::AideSettingsProvider::provideVersionableSettings(
         std::make_shared<aide::test::MockSettings>());

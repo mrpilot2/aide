@@ -7,72 +7,21 @@
 #include <QCloseEvent>
 
 #include <aide/applicationconfig.hpp>
-#include <aide/hierarchicalid.hpp>
 
-#include "applicationclosecontroller.hpp"
 #include "mainwindow.hpp"
 #include "mainwindowcontroller.hpp"
-#include "mainwindowgeometryandstatecontroller.hpp"
 #include "mockurllauncher.hpp"
 #include "nulllogger.hpp"
-#include "settings/showsettingsdialogcontroller.hpp"
+#include "spymainwindowcontrollers.hpp"
 
 using aide::ApplicationConfig;
-using aide::core::ApplicationCloseController;
-using aide::core::MainWindowGeometryAndStateController;
-using aide::core::ShowSettingsDialogController;
 using aide::gui::MainWindow;
 using aide::gui::MainWindowController;
+using aide::test::MockUrlLauncher;
 using aide::test::NullLogger;
-using aide::tests::MockUrlLauncher;
-
-namespace
-{
-    class FakeApplicationCloseController : public ApplicationCloseController
-    {
-    public:
-        bool allowClose{true};
-
-        [[nodiscard]] bool isCloseAllowed() const override
-        {
-            return allowClose;
-        }
-    };
-
-    class FakeMainWindowGeometryAndStateController
-        : public MainWindowGeometryAndStateController
-    {
-    public:
-        bool saveCalled{false};
-        QByteArray lastGeometry;
-        QByteArray lastState;
-
-        void saveGeometryAndState(const QByteArray& geometry,
-                                  const QByteArray& state) override
-        {
-            saveCalled   = true;
-            lastGeometry = geometry;
-            lastState    = state;
-        }
-
-        void restoreGeometryAndState() override {}
-    };
-
-    class FakeShowSettingsDialogController : public ShowSettingsDialogController
-    {
-    public:
-        bool showCalled{false};
-        bool showWithSelectedGroupCalled{false};
-
-        void showSettingsDialog() override { showCalled = true; }
-
-        void showSettingsDialog(
-            const aide::HierarchicalId& /*selectedGroup*/) override
-        {
-            showWithSelectedGroupCalled = true;
-        }
-    };
-} // namespace
+using aide::test::SpyApplicationCloseController;
+using aide::test::SpyMainWindowGeometryAndStateController;
+using aide::test::SpyShowSettingsDialogController;
 
 TEST_CASE("A main window controller handling a close request")
 {
@@ -82,9 +31,9 @@ TEST_CASE("A main window controller handling a close request")
     const auto mainWindow = std::make_shared<MainWindow>(
         std::make_shared<NullLogger>(), ApplicationConfig{}, nullptr);
 
-    FakeApplicationCloseController closeController;
-    FakeMainWindowGeometryAndStateController saveController;
-    FakeShowSettingsDialogController settingsController;
+    SpyApplicationCloseController closeController;
+    SpyMainWindowGeometryAndStateController saveController;
+    SpyShowSettingsDialogController settingsController;
 
     const MainWindowController controller(mainWindow, closeController,
                                           saveController, settingsController,
@@ -130,9 +79,9 @@ TEST_CASE(
     const auto mainWindow = std::make_shared<MainWindow>(
         std::make_shared<NullLogger>(), ApplicationConfig{}, nullptr);
 
-    const FakeApplicationCloseController closeController;
-    FakeMainWindowGeometryAndStateController saveController;
-    FakeShowSettingsDialogController settingsController;
+    const SpyApplicationCloseController closeController;
+    SpyMainWindowGeometryAndStateController saveController;
+    SpyShowSettingsDialogController settingsController;
 
     const MainWindowController controller(mainWindow, closeController,
                                           saveController, settingsController,
@@ -154,9 +103,9 @@ TEST_CASE("A main window controller handling a request to report a bug")
     const auto mainWindow = std::make_shared<MainWindow>(
         std::make_shared<NullLogger>(), ApplicationConfig{}, nullptr);
 
-    const FakeApplicationCloseController closeController;
-    FakeMainWindowGeometryAndStateController saveController;
-    FakeShowSettingsDialogController settingsController;
+    const SpyApplicationCloseController closeController;
+    SpyMainWindowGeometryAndStateController saveController;
+    SpyShowSettingsDialogController settingsController;
 
     const auto urlLauncher = std::make_shared<MockUrlLauncher>();
 

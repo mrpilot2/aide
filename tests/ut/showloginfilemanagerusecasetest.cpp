@@ -1,9 +1,11 @@
 
 #include <memory>
+#include <optional>
 #include <string>
 #include <utility>
 
 #include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_string.hpp>
 
 #include <QCoreApplication>
 #include <QFileInfo>
@@ -14,15 +16,18 @@
 #include <aide/logger/loggerfactory.hpp>
 
 #include "mockfilemanagerlauncher.hpp"
+#include "outputcaptureguards.hpp"
 #include "showloginfilemanagerusecase.hpp"
 #include "standardpathstestguards.hpp"
 
 using aide::core::LoggerFactory;
 using aide::core::ShowLogInFileManagerUseCase;
 using aide::test::BlockedStandardLocationGuard;
+using aide::test::captureCerr;
 using aide::test::EnvVarGuard;
+using aide::test::kLogDirectoryCreationFailure;
+using aide::test::MockFileManagerLauncher;
 using aide::test::StandardPathsTestModeGuard;
-using aide::tests::MockFileManagerLauncher;
 
 namespace
 {
@@ -127,13 +132,21 @@ TEST_CASE("A ShowLogInFileManagerUseCase with an unresolvable log file path",
     const BlockedStandardLocationGuard tempLocationGuard(
         QStandardPaths::TempLocation);
 
-    REQUIRE_FALSE(LoggerFactory::logFilePath().has_value());
-
     const auto launcher = std::make_shared<MockFileManagerLauncher>();
     const auto logger   = std::make_shared<RecordingLogger>();
 
     const ShowLogInFileManagerUseCase useCase(launcher, logger);
-    useCase.showLogInFileManager();
+
+    // Every unresolvable lookup reports its failed mkpath on std::cerr.
+    std::optional<std::string> logFilePath;
+    const auto diagnostics = captureCerr([&logFilePath, &useCase] {
+        logFilePath = LoggerFactory::logFilePath();
+        useCase.showLogInFileManager();
+    });
+
+    REQUIRE_FALSE(logFilePath.has_value());
+    REQUIRE_THAT(diagnostics, Catch::Matchers::ContainsSubstring(
+                                  kLogDirectoryCreationFailure));
 
     SECTION("does not ask the launcher to open anything")
     {

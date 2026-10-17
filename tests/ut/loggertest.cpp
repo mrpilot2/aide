@@ -9,11 +9,14 @@
 
 #include "application.hpp"
 #include "logger.hpp"
+#include "outputcaptureguards.hpp"
 
 using aide::FileName;
 using aide::Logger;
 using aide::LoggerName;
 using aide::LogLevel;
+using aide::test::captureStdout;
+using aide::test::ConsoleLoggingGuard;
 
 namespace
 {
@@ -374,6 +377,39 @@ TEST_CASE("Test log macros", "[Logger]")
 #endif
 
     ::clearLogFile(logFileName);
+}
+#endif
+
+#if !defined(NDEBUG) && SPDLOG_ACTIVE_LEVEL <= SPDLOG_LEVEL_CRITICAL
+TEST_CASE("Logger mirrors messages to the console in debug builds", "[Logger]")
+{
+    // The test runner disables console logging for the whole run so the
+    // debug-build console sink doesn't flood the test output. Re-enable it
+    // here and capture stdout to check what the sink writes. Critical is the
+    // one level every SPDLOG_ACTIVE_LEVEL short of OFF compiles in.
+    const std::string logFileNameStr{TEST_LOG_FILE_LOCATION +
+                                     std::string("/aide_console_test.log")};
+    [[maybe_unused]] auto res = std::remove(logFileNameStr.c_str());
+    spdlog::drop_all();
+
+    const ConsoleLoggingGuard consoleGuard;
+    // Construct the logger inside the capture: on Windows the console sink
+    // picks up the stdout handle when it is created, not when it writes.
+    const auto consoleOutput = captureStdout([&logFileNameStr] {
+        auto logger = Logger(FileName(logFileNameStr));
+        logger.critical("console sink probe");
+        logger.flush();
+    });
+
+    REQUIRE(consoleOutput.has_value());
+
+    // NOLINTNEXTLINE(bugprone-unchecked-optional-access)
+    REQUIRE_THAT(consoleOutput.value(),
+                 Catch::Matchers::ContainsSubstring("console sink probe"));
+    REQUIRE_THAT(::getFileContents(logFileNameStr.c_str()),
+                 Catch::Matchers::ContainsSubstring("console sink probe"));
+
+    [[maybe_unused]] auto res1 = std::remove(logFileNameStr.c_str());
 }
 #endif
 

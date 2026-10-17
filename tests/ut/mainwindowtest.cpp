@@ -15,6 +15,7 @@
 #include "mainwindow.hpp"
 #include "mocksettings.hpp"
 #include "nulllogger.hpp"
+#include "spymainwindowcontrollers.hpp"
 
 using aide::ActionRegistry;
 using aide::ApplicationConfig;
@@ -23,6 +24,7 @@ using aide::constants::CONSTANTS;
 using aide::gui::MainWindow;
 using aide::test::MockSettings;
 using aide::test::NullLogger;
+using aide::test::SpyMainWindowControllerSet;
 using aide::widgets::Banner;
 
 TEST_CASE("Any main window")
@@ -36,9 +38,10 @@ TEST_CASE("Any main window")
 
     SECTION("registers actions")
     {
+        const SpyMainWindowControllerSet controllers;
         MainWindow mainWindow(std::make_shared<NullLogger>(),
                               ApplicationConfig{}, nullptr);
-        mainWindow.setMainWindowController(nullptr, registry);
+        mainWindow.setMainWindowController(controllers.controller, registry);
         REQUIRE(registry->actions().size() >= 2);
     }
 }
@@ -52,9 +55,10 @@ TEST_CASE("A main window with the full screen feature enabled")
     const auto registry = std::make_shared<ActionRegistry>(
         settings, std::make_shared<NullLogger>());
 
+    const SpyMainWindowControllerSet controllers;
     MainWindow mainWindow(std::make_shared<NullLogger>(), ApplicationConfig{},
                           nullptr);
-    mainWindow.setMainWindowController(nullptr, registry);
+    mainWindow.setMainWindowController(controllers.controller, registry);
 
     SECTION("registers a checkable full screen action")
     {
@@ -102,12 +106,13 @@ TEST_CASE("A main window with the full screen feature disabled")
     const auto registry = std::make_shared<ActionRegistry>(
         settings, std::make_shared<NullLogger>());
 
+    const SpyMainWindowControllerSet controllers;
     MainWindow mainWindow(
         std::make_shared<NullLogger>(),
         ApplicationConfig{}.setEnabled(
             ApplicationConfig::Feature::ViewFullscreenAction, false),
         nullptr);
-    mainWindow.setMainWindowController(nullptr, registry);
+    mainWindow.setMainWindowController(controllers.controller, registry);
 
     SECTION("does not register the full screen action")
     {
@@ -131,12 +136,13 @@ TEST_CASE("A main window with the show-log-in-file-manager feature enabled")
     const auto registry = std::make_shared<ActionRegistry>(
         settings, std::make_shared<NullLogger>());
 
+    const SpyMainWindowControllerSet controllers;
     MainWindow mainWindow(
         std::make_shared<NullLogger>(),
         ApplicationConfig{}.setEnabled(
             ApplicationConfig::Feature::ShowLogInFileManagerAction, true),
         nullptr);
-    mainWindow.setMainWindowController(nullptr, registry);
+    mainWindow.setMainWindowController(controllers.controller, registry);
 
     SECTION("registers the show-log-in-file-manager action")
     {
@@ -163,9 +169,10 @@ TEST_CASE(
     const auto registry = std::make_shared<ActionRegistry>(
         settings, std::make_shared<NullLogger>());
 
+    const SpyMainWindowControllerSet controllers;
     MainWindow mainWindow(std::make_shared<NullLogger>(), ApplicationConfig{},
                           nullptr);
-    mainWindow.setMainWindowController(nullptr, registry);
+    mainWindow.setMainWindowController(controllers.controller, registry);
 
     SECTION("does not register the show-log-in-file-manager action")
     {
@@ -184,12 +191,13 @@ TEST_CASE("A main window with the report-bug feature enabled")
     const auto registry = std::make_shared<ActionRegistry>(
         settings, std::make_shared<NullLogger>());
 
+    const SpyMainWindowControllerSet controllers;
     MainWindow mainWindow(
         std::make_shared<NullLogger>(),
         ApplicationConfig{}.setEnabled(
             ApplicationConfig::Feature::ReportBugAction, true),
         nullptr);
-    mainWindow.setMainWindowController(nullptr, registry);
+    mainWindow.setMainWindowController(controllers.controller, registry);
 
     SECTION("registers the report-bug action")
     {
@@ -213,9 +221,10 @@ TEST_CASE("A main window with the report-bug feature left at its default")
     const auto registry = std::make_shared<ActionRegistry>(
         settings, std::make_shared<NullLogger>());
 
+    const SpyMainWindowControllerSet controllers;
     MainWindow mainWindow(std::make_shared<NullLogger>(), ApplicationConfig{},
                           nullptr);
-    mainWindow.setMainWindowController(nullptr, registry);
+    mainWindow.setMainWindowController(controllers.controller, registry);
 
     SECTION("does not register the report-bug action")
     {
@@ -235,9 +244,10 @@ TEST_CASE(
     const auto registry = std::make_shared<ActionRegistry>(
         settings, std::make_shared<NullLogger>());
 
+    const SpyMainWindowControllerSet controllers;
     MainWindow mainWindow(std::make_shared<NullLogger>(), ApplicationConfig{},
                           nullptr);
-    mainWindow.setMainWindowController(nullptr, registry);
+    mainWindow.setMainWindowController(controllers.controller, registry);
 
     SECTION("leaves no stray separator before the About actions")
     {
@@ -262,6 +272,7 @@ TEST_CASE(
     const auto registry = std::make_shared<ActionRegistry>(
         settings, std::make_shared<NullLogger>());
 
+    const SpyMainWindowControllerSet controllers;
     MainWindow mainWindow(
         std::make_shared<NullLogger>(),
         ApplicationConfig{}
@@ -269,7 +280,7 @@ TEST_CASE(
                         true)
             .setEnabled(ApplicationConfig::Feature::ReportBugAction, true),
         nullptr);
-    mainWindow.setMainWindowController(nullptr, registry);
+    mainWindow.setMainWindowController(controllers.controller, registry);
 
     REQUIRE(registry->action(CONSTANTS().HELP_SHOW_LOG_IN_FILE_MANAGER)
                 .has_value());
@@ -348,6 +359,7 @@ TEST_CASE(
     const auto registry = std::make_shared<ActionRegistry>(
         settings, std::make_shared<NullLogger>());
 
+    const SpyMainWindowControllerSet controllers;
     MainWindow mainWindow(
         std::make_shared<NullLogger>(),
         ApplicationConfig{}
@@ -355,7 +367,7 @@ TEST_CASE(
                         true)
             .setEnabled(ApplicationConfig::Feature::ReportBugAction, true),
         nullptr);
-    mainWindow.setMainWindowController(nullptr, registry);
+    mainWindow.setMainWindowController(controllers.controller, registry);
 
     const auto menuHelpContainer =
         registry->getMenuContainer(CONSTANTS().MENU_HELP);

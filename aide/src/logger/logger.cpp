@@ -156,3 +156,8 @@ void Logger::disableLoggingToConsole()
 {
     m_disableLoggingToConsole = true;
 }
+
+void Logger::enableLoggingToConsole()
+{
+    m_disableLoggingToConsole = false;
+}

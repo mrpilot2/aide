@@ -6,7 +6,7 @@
 
 #include "filemanagerlauncher.hpp"
 
-namespace aide::tests
+namespace aide::test
 {
     class MockFileManagerLauncher : public aide::core::FileManagerLauncher
     {
@@ -18,6 +18,6 @@ namespace aide::tests
 
         bool openDirectory(const std::string& path) const override;
     };
-} // namespace aide::tests
+} // namespace aide::test
 
 #endif // AIDE_MOCK_FILE_MANAGER_LAUNCHER_HPP
