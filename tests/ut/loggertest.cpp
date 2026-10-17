@@ -9,11 +9,13 @@
 
 #include "application.hpp"
 #include "logger.hpp"
+#include "outputcaptureguards.hpp"
 
 using aide::FileName;
 using aide::Logger;
 using aide::LoggerName;
 using aide::LogLevel;
+using aide::test::StdoutCaptureGuard;
 
 namespace
 {
@@ -374,6 +376,46 @@ TEST_CASE("Test log macros", "[Logger]")
 #endif
 
     ::clearLogFile(logFileName);
+}
+#endif
+
+#if !defined(NDEBUG) && SPDLOG_ACTIVE_LEVEL <= SPDLOG_LEVEL_INFO
+TEST_CASE("Logger mirrors messages to the console in debug builds", "[Logger]")
+{
+    // The test runner disables console logging for the whole run so the
+    // debug-build console sink doesn't flood the test output. Re-enable it
+    // here, capture stdout, and restore the runner's default afterwards.
+    struct ConsoleLoggingGuard
+    {
+        ConsoleLoggingGuard() { Logger::enableLoggingToConsole(); }
+        ConsoleLoggingGuard(const ConsoleLoggingGuard&)            = delete;
+        ConsoleLoggingGuard& operator=(const ConsoleLoggingGuard&) = delete;
+        ConsoleLoggingGuard(ConsoleLoggingGuard&&)                 = delete;
+        ConsoleLoggingGuard& operator=(ConsoleLoggingGuard&&)      = delete;
+        ~ConsoleLoggingGuard() { Logger::disableLoggingToConsole(); }
+    };
+
+    const std::string logFileNameStr{TEST_LOG_FILE_LOCATION +
+                                     std::string("/aide_console_test.log")};
+    [[maybe_unused]] auto res = std::remove(logFileNameStr.c_str());
+    spdlog::drop_all();
+
+    const ConsoleLoggingGuard consoleGuard;
+    StdoutCaptureGuard stdoutCapture(TEST_LOG_FILE_LOCATION +
+                                     std::string("/aide_console_test.out"));
+
+    auto logger = Logger(FileName(logFileNameStr));
+    logger.info("console sink probe");
+    logger.flush();
+
+    const auto consoleOutput = stdoutCapture.captured();
+
+    REQUIRE_THAT(consoleOutput,
+                 Catch::Matchers::ContainsSubstring("console sink probe"));
+    REQUIRE_THAT(::getFileContents(logFileNameStr.c_str()),
+                 Catch::Matchers::ContainsSubstring("console sink probe"));
+
+    [[maybe_unused]] auto res1 = std::remove(logFileNameStr.c_str());
 }
 #endif
 

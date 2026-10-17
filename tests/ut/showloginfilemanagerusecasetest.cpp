@@ -4,6 +4,7 @@
 #include <utility>
 
 #include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_string.hpp>
 
 #include <QCoreApplication>
 #include <QFileInfo>
@@ -14,12 +15,14 @@
 #include <aide/logger/loggerfactory.hpp>
 
 #include "mockfilemanagerlauncher.hpp"
+#include "outputcaptureguards.hpp"
 #include "showloginfilemanagerusecase.hpp"
 #include "standardpathstestguards.hpp"
 
 using aide::core::LoggerFactory;
 using aide::core::ShowLogInFileManagerUseCase;
 using aide::test::BlockedStandardLocationGuard;
+using aide::test::CerrCaptureGuard;
 using aide::test::EnvVarGuard;
 using aide::test::StandardPathsTestModeGuard;
 using aide::tests::MockFileManagerLauncher;
@@ -127,6 +130,9 @@ TEST_CASE("A ShowLogInFileManagerUseCase with an unresolvable log file path",
     const BlockedStandardLocationGuard tempLocationGuard(
         QStandardPaths::TempLocation);
 
+    // Every unresolvable lookup reports its failed mkpath on std::cerr.
+    const CerrCaptureGuard cerrCapture;
+
     REQUIRE_FALSE(LoggerFactory::logFilePath().has_value());
 
     const auto launcher = std::make_shared<MockFileManagerLauncher>();
@@ -143,5 +149,12 @@ TEST_CASE("A ShowLogInFileManagerUseCase with an unresolvable log file path",
     SECTION("logs a warning")
     {
         REQUIRE(logger->warnCalled);
+    }
+
+    SECTION("reports the unusable log directories on stderr")
+    {
+        REQUIRE_THAT(cerrCapture.captured(),
+                     Catch::Matchers::ContainsSubstring(
+                         "Could not create standard log directory"));
     }
 }

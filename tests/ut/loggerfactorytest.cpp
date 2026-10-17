@@ -15,10 +15,12 @@
 
 #include <aide/logger/loggerfactory.hpp>
 
+#include "outputcaptureguards.hpp"
 #include "standardpathstestguards.hpp"
 
 using aide::core::LoggerFactory;
 using aide::test::BlockedStandardLocationGuard;
+using aide::test::CerrCaptureGuard;
 using aide::test::EnvVarGuard;
 using aide::test::StandardPathsTestModeGuard;
 
@@ -87,7 +89,12 @@ TEST_CASE(
     const BlockedStandardLocationGuard tempLocationGuard(
         QStandardPaths::TempLocation);
 
+    const CerrCaptureGuard cerrCapture;
+
     REQUIRE_FALSE(LoggerFactory::logFilePath().has_value());
+    REQUIRE_THAT(cerrCapture.captured(),
+                 Catch::Matchers::ContainsSubstring(
+                     "Could not create standard log directory"));
 }
 
 TEST_CASE(
@@ -119,10 +126,15 @@ TEST_CASE(
         std::filesystem::current_path()};
     std::filesystem::current_path(TEST_LOG_FILE_LOCATION);
 
+    const CerrCaptureGuard cerrCapture;
+
     const auto logger =
         LoggerFactory::createLogger("logger_factory_fallback_test");
 
     REQUIRE(logger != nullptr);
+    REQUIRE_THAT(cerrCapture.captured(),
+                 Catch::Matchers::ContainsSubstring(
+                     "Could not create standard log directory"));
     REQUIRE_NOTHROW(logger->info("fallback logger probe"));
     REQUIRE_NOTHROW(logger->flush());
 

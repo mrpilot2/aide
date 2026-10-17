@@ -10,6 +10,7 @@
 #include <aide/hierarchicalid.hpp>
 
 #include "applicationclosecontroller.hpp"
+#include "fakemainwindowcontrollers.hpp"
 #include "mainwindow.hpp"
 #include "mainwindowcontroller.hpp"
 #include "mainwindowgeometryandstatecontroller.hpp"
@@ -18,61 +19,13 @@
 #include "settings/showsettingsdialogcontroller.hpp"
 
 using aide::ApplicationConfig;
-using aide::core::ApplicationCloseController;
-using aide::core::MainWindowGeometryAndStateController;
-using aide::core::ShowSettingsDialogController;
 using aide::gui::MainWindow;
 using aide::gui::MainWindowController;
+using aide::test::FakeApplicationCloseController;
+using aide::test::FakeMainWindowGeometryAndStateController;
+using aide::test::FakeShowSettingsDialogController;
 using aide::test::NullLogger;
 using aide::tests::MockUrlLauncher;
-
-namespace
-{
-    class FakeApplicationCloseController : public ApplicationCloseController
-    {
-    public:
-        bool allowClose{true};
-
-        [[nodiscard]] bool isCloseAllowed() const override
-        {
-            return allowClose;
-        }
-    };
-
-    class FakeMainWindowGeometryAndStateController
-        : public MainWindowGeometryAndStateController
-    {
-    public:
-        bool saveCalled{false};
-        QByteArray lastGeometry;
-        QByteArray lastState;
-
-        void saveGeometryAndState(const QByteArray& geometry,
-                                  const QByteArray& state) override
-        {
-            saveCalled   = true;
-            lastGeometry = geometry;
-            lastState    = state;
-        }
-
-        void restoreGeometryAndState() override {}
-    };
-
-    class FakeShowSettingsDialogController : public ShowSettingsDialogController
-    {
-    public:
-        bool showCalled{false};
-        bool showWithSelectedGroupCalled{false};
-
-        void showSettingsDialog() override { showCalled = true; }
-
-        void showSettingsDialog(
-            const aide::HierarchicalId& /*selectedGroup*/) override
-        {
-            showWithSelectedGroupCalled = true;
-        }
-    };
-} // namespace
 
 TEST_CASE("A main window controller handling a close request")
 {
