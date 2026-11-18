@@ -116,7 +116,9 @@ namespace aide
          *
          * Remaps apply one step only (`a→b`, `b→c` sends `a` to `b`), and
          * the last registration for @p source wins. Remapping onto a disabled
-         * topic does not disable @p source.
+         * topic does not disable @p source. An empty @p target is ignored
+         * with a logged warning (@p source keeps its declared ID); to turn
+         * a topic's help off, use disableHelpTopic().
          * @return *this, so calls can be chained fluently.
          */
         ApplicationConfig& remapHelpTopic(const HelpTopicId& source,
