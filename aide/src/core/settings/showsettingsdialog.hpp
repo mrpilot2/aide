@@ -31,13 +31,9 @@ namespace aide::core
         , public SettingsDialogChangePageController
     {
     public:
-        explicit ShowSettingsDialog(SettingsDialogWeakPtr dialog,
-                                    SettingsPageRegistry& registry,
-                                    SettingsInterface& settings,
-                                    LoggerPtr loggerInterface);
-
-        // With a help use case, the dialog's Help button opens the selected
-        // page's Help Topic. Without one, the button stays hidden.
+        // With a help use case (it must outlive this object), the dialog's
+        // Help button opens the selected page's Help Topic. Without one, the
+        // button stays hidden.
         //
         // With an action registry, each time the dialog opens it gets its own
         // Context Help shortcut with the current Keymap keys of
@@ -47,7 +43,7 @@ namespace aide::core
                            SettingsPageRegistry& registry,
                            SettingsInterface& settings,
                            LoggerPtr loggerInterface,
-                           const ShowHelpUseCase& helpUseCase,
+                           const ShowHelpUseCase* helpUseCase        = nullptr,
                            ActionRegistryInterfacePtr actionRegistry = nullptr);
 
         void showSettingsDialog() override;
@@ -80,13 +76,6 @@ namespace aide::core
         // behavior.
         void showSettingsDialog(
             const aide::HierarchicalId* explicitlySelectedGroup);
-
-        ShowSettingsDialog(SettingsDialogWeakPtr dialog,
-                           SettingsPageRegistry& registry,
-                           SettingsInterface& settings,
-                           LoggerPtr loggerInterface,
-                           const ShowHelpUseCase* helpUseCase,
-                           ActionRegistryInterfacePtr actionRegistry);
 
         [[nodiscard]] QList<QKeySequence> contextHelpShortcuts() const;
 
