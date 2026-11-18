@@ -74,7 +74,9 @@ aIDE ships End-User Help pages for its built-in Help Topics (`appearance.md`,
 `keymap.md`, `notifications.md`), pinned to the linked aIDE version. The CMake
 variable **`AIDE_HELP_DIR`** holds the absolute path of their directory, both
 after `FetchContent_MakeAvailable(aide)` and after `find_package(AideQt6)`;
-the installed pages belong to the `Help` install component. See
+the installed pages belong to the `Help` install component. The installed
+package config sets `AIDE_HELP_DIR` even when that component was not
+installed; a help site built from it then fails on the missing pages. See
 [Building the Help Site](../help/help-site.md) for how to include them in your
 own help site.
 
