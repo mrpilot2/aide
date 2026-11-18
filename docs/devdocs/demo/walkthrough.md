@@ -155,7 +155,9 @@ The demo has two Help Topics of its own:
 
 The site lives in `demo/help/`: an index page, a page per demo topic, and
 `pymdownx.snippets` stubs that include aIDE's own pages for `appearance`,
-`keymap` and `notifications`. Build it from the repository root with:
+`keymap` and `notifications` (the recipe is described in
+[Building the Help Site](../help/help-site.md)). Build it from the repository
+root with:
 
 ```bash
 python3 -m venv build/help-venv
@@ -167,7 +169,8 @@ AIDE_HELP_DIR="$PWD/aide/help" build/help-venv/bin/mkdocs build --strict \
 The `ut.aide.demo.application` test builds the demo through `demoConfig()` and
 `setUpDemo()`, like `main()`, and checks that every ID in
 `declaredHelpTopics()` has a `<id>/index.html` in the site directory given by
-`AIDE_DEMO_HELP_SITE_DIR`. Without that variable the check is skipped:
+`AIDE_DEMO_HELP_SITE_DIR`. Without that variable the check is skipped (see
+[Help Coverage Test](../help/coverage-test.md)):
 
 ```bash
 AIDE_DEMO_HELP_SITE_DIR="$PWD/build/demo-help-site" \
