@@ -1,5 +1,9 @@
 @PACKAGE_INIT@
 
+# End-User Help pages for aIDE's built-in Help Topics (install component Help).
+# Same variable as in a FetchContent / add_subdirectory build.
+set(AIDE_HELP_DIR "@PACKAGE_AIDE_HELP_INSTALL_DIR@")
+
 include(CMakeFindDependencyMacro)
 
 find_dependency(spdlog)
