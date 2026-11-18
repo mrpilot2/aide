@@ -59,7 +59,7 @@ namespace
     struct Fixture
     {
         explicit Fixture(const ApplicationConfig& config = activeHelpConfig())
-            : help{config, launcher, logger}
+            : help{config, launcher, logger, registry}
         {}
 
         std::shared_ptr<MockSettingsDialog> view{

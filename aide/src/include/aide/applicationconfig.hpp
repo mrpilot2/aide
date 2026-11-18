@@ -3,6 +3,7 @@
 #define AIDE_APPLICATION_CONFIG_HPP
 
 #include <memory>
+#include <vector>
 
 #include <QUrl>
 
@@ -140,6 +141,24 @@ namespace aide
          * @brief Whether disableHelpTopic() was called for @p id.
          */
         [[nodiscard]] bool isHelpTopicDisabled(const HelpTopicId& id) const;
+
+        /**
+         * @brief Declares the widget Help Topic @p id up front.
+         *
+         * Settings pages declare their topics themselves; widget topics set
+         * with aide::setHelpTopic() are only known once the widget exists.
+         * Declaring them here lets Application::declaredHelpTopics() list
+         * them even when the widgets are created lazily. Declaring an empty
+         * ID or the same ID twice has no further effect.
+         * @return *this, so calls can be chained fluently.
+         */
+        ApplicationConfig& declareHelpTopic(const HelpTopicId& id);
+
+        /**
+         * @brief The widget Help Topics passed to declareHelpTopic(), sorted,
+         * as declared: before any disable or remap.
+         */
+        [[nodiscard]] std::vector<HelpTopicId> declaredWidgetHelpTopics() const;
 
     private:
         class Impl;
