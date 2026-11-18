@@ -3,6 +3,7 @@
 #define AIDE_APPLICATION_HPP
 
 #include <memory>
+#include <vector>
 
 #include <QApplication>
 
@@ -96,6 +97,18 @@ namespace aide
          *         whether the launcher reported success.
          */
         bool showHelpContents();
+
+        /**
+         * @brief Every Help Topic the application can open, so a test can
+         * check each one has a Help Page.
+         *
+         * Collects the registered settings pages' topics and those declared
+         * with ApplicationConfig::declareHelpTopic(), drops disabled ones
+         * (checked against the declared ID), applies remaps one step, and
+         * returns the result sorted and de-duplicated. Independent of
+         * whether help is active (Feature::Help or a Help Base URL).
+         */
+        [[nodiscard]] std::vector<HelpTopicId> declaredHelpTopics() const;
 
     private:
         static bool isOrganizationNameSet();

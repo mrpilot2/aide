@@ -2,6 +2,7 @@
 #include <array>
 #include <fstream>
 #include <sstream>
+#include <vector>
 
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/generators/catch_generators.hpp>
@@ -510,4 +511,70 @@ TEST_CASE("Application with help inactive offers no Context Help",
 
         REQUIRE_FALSE(launcher->lastRequestedUrl.has_value());
     }
+}
+
+TEST_CASE("Application declares the built-in settings pages' Help Topics",
+          "[Application]")
+{
+    aide::Application::disableLoggingToConsole();
+
+    aide::Application::setApplicationName("aide_test");
+    aide::Application::setOrganizationName("aide_company");
+
+    using aide::HelpTopicId;
+
+    // Help needs neither a base URL nor Feature::Help to list its topics.
+    auto config = GENERATE(aide::ApplicationConfig{},
+                           aide::ApplicationConfig{}.setEnabled(
+                               aide::ApplicationConfig::Feature::Help, false));
+
+    int numberOfArgs{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+    const aide::Application app(numberOfArgs, appName.data(), config);
+
+    REQUIRE(app.declaredHelpTopics() ==
+            std::vector{HelpTopicId{"appearance"}, HelpTopicId{"keymap"},
+                        HelpTopicId{"notifications"}});
+}
+
+TEST_CASE("Application's declared Help Topics follow the config",
+          "[Application]")
+{
+    aide::Application::disableLoggingToConsole();
+
+    aide::Application::setApplicationName("aide_test");
+    aide::Application::setOrganizationName("aide_company");
+
+    using aide::HelpTopicId;
+
+    struct Case
+    {
+        aide::ApplicationConfig config;
+        std::vector<HelpTopicId> expected;
+    };
+
+    const auto [config, expected] = GENERATE(
+        Case{aide::ApplicationConfig{}.disableHelpTopic(HelpTopicId{"keymap"}),
+             {HelpTopicId{"appearance"}, HelpTopicId{"notifications"}}},
+        Case{aide::ApplicationConfig{}.remapHelpTopic(
+                 HelpTopicId{"keymap"}, HelpTopicId{"settings/keys"}),
+             {HelpTopicId{"appearance"}, HelpTopicId{"notifications"},
+              HelpTopicId{"settings/keys"}}},
+        Case{aide::ApplicationConfig{}
+                 .remapHelpTopic(HelpTopicId{"keymap"}, HelpTopicId{"settings"})
+                 .remapHelpTopic(HelpTopicId{"appearance"},
+                                 HelpTopicId{"settings"}),
+             {HelpTopicId{"notifications"}, HelpTopicId{"settings"}}},
+        Case{aide::ApplicationConfig{}.declareHelpTopic(
+                 HelpTopicId{"editor/tabs"}),
+             {HelpTopicId{"appearance"}, HelpTopicId{"editor/tabs"},
+              HelpTopicId{"keymap"}, HelpTopicId{"notifications"}}});
+
+    int numberOfArgs{1};
+    // NOLINTNEXTLINE
+    std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
+    const aide::Application app(numberOfArgs, appName.data(), config);
+
+    REQUIRE(app.declaredHelpTopics() == expected);
 }

@@ -1,9 +1,13 @@
 #ifndef AIDE_SHOW_HELP_USE_CASE_HPP
 #define AIDE_SHOW_HELP_USE_CASE_HPP
 
+#include <set>
+#include <vector>
+
 #include <aide/applicationconfig.hpp>
 #include <aide/helptopicid.hpp>
 #include <aide/loggerinterface.hpp>
+#include <aide/settings/settingspageregistry.hpp>
 #include <aide/urllauncherinterface.hpp>
 
 namespace aide::core
@@ -17,8 +21,10 @@ namespace aide::core
     class ShowHelpUseCase
     {
     public:
+        // @p registry supplies the settings pages' Help Topics for
+        // declaredHelpTopics(); it must outlive the use case.
         ShowHelpUseCase(ApplicationConfig config, UrlLauncherPtr launcher,
-                        LoggerPtr logger);
+                        LoggerPtr logger, const SettingsPageRegistry& registry);
 
         // True when Feature::Help is enabled and a Help Base URL is set.
         [[nodiscard]] bool isHelpActive() const;
@@ -43,9 +49,25 @@ namespace aide::core
         // Context Help for the topic resolved from the focused widget (see
         // gui/contexthelptopic.hpp): opens it when available, else Help
         // Contents. Returns false, launching nothing, when help is inactive.
+        // The first time a topic was never declared (see
+        // declaredHelpTopics()), a warning is logged once for that topic.
         bool showContextHelp(const HelpTopicId& resolvedTopic) const;
 
+        // Every Help Topic the application resolves to, sorted and
+        // de-duplicated: the registered settings pages' topics plus the
+        // config's declared widget topics, minus disabled ones (checked
+        // against the declared ID), with remaps applied one step.
+        // Independent of whether help is active.
+        [[nodiscard]] std::vector<HelpTopicId> declaredHelpTopics() const;
+
     private:
+        // The settings pages' and declared widget topics as declared: before
+        // disabling or remapping, possibly with duplicates.
+        [[nodiscard]] std::vector<HelpTopicId> unresolvedDeclaredHelpTopics()
+            const;
+
+        void warnOnceIfUndeclared(const HelpTopicId& id) const;
+
         [[nodiscard]] QUrl baseUrlWithTrailingSlash() const;
 
         bool open(const QUrl& url) const;
@@ -53,6 +75,8 @@ namespace aide::core
         ApplicationConfig m_config;
         UrlLauncherPtr m_launcher;
         LoggerPtr m_logger;
+        const SettingsPageRegistry& m_registry;
+        mutable std::set<HelpTopicId> m_warnedUndeclaredTopics;
     };
 } // namespace aide::core
 
