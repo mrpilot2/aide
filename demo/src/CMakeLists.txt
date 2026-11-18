@@ -34,6 +34,7 @@ add_executable(
   colorschemereactor.hpp
   demosettingspage.cpp
   demosetup.cpp
+  desktopurllauncher.cpp
   main.cpp
   notificationdemodialog.cpp
   notificationlauncherdialog.cpp

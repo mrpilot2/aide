@@ -4,7 +4,6 @@
 #include <utility>
 
 #include <QApplication>
-#include <QDesktopServices>
 #include <QMessageBox>
 #include <QString>
 #include <QStringList>
@@ -13,7 +12,6 @@
 
 #include <aide/githubrepository.hpp>
 
-using demo::DesktopUrlLauncher;
 using demo::ReportBugPreviewLauncher;
 
 ReportBugPreviewLauncher::ReportBugPreviewLauncher(aide::UrlLauncherPtr browser)
@@ -24,7 +22,7 @@ bool ReportBugPreviewLauncher::openUrl(const std::string& url) const
 {
     const QUrl requestedUrl(QString::fromStdString(url));
     const QUrl newIssueUrl(QString(aide::constants::GITHUB_REPO_URL) +
-                           "/issues/new");
+                           QStringLiteral("/issues/new"));
     if (requestedUrl.adjusted(QUrl::RemoveQuery | QUrl::RemoveFragment) !=
         newIssueUrl) {
         return m_browser != nullptr && m_browser->openUrl(url);
@@ -46,9 +44,4 @@ bool ReportBugPreviewLauncher::openUrl(const std::string& url) const
                  fields.join("\n\n")));
 
     return true;
-}
-
-bool DesktopUrlLauncher::openUrl(const std::string& url) const
-{
-    return QDesktopServices::openUrl(QUrl(QString::fromStdString(url)));
 }

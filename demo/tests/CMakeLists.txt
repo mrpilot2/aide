@@ -77,6 +77,7 @@ target_sources(
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/colorschemereactor.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/demosettingspage.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/demosetup.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/desktopurllauncher.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/notificationdemodialog.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/notificationlauncherdialog.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/reportbugpreviewlauncher.cpp
