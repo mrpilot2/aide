@@ -77,6 +77,11 @@ nav:
     - Key Bindings: core/key-bindings.md
     - Logging: core/logging.md
     - Notifications: core/notifications.md
+  - End-User Help:
+    - Help API: help/index.md
+    - Building the Help Site: help/help-site.md
+    - Help Coverage Test: help/coverage-test.md
+    - Versioned Help: help/versioning.md
   - UI Components:
     - Main Window: ui/main-window.md
     - Widgets:
