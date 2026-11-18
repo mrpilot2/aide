@@ -13,7 +13,7 @@ namespace
         if (id.startsWith('/') || id.contains('?') || id.contains('#')) {
             return false;
         }
-        return !id.split('/').contains("..");
+        return !id.split('/').contains(QStringLiteral(".."));
     }
 } // namespace
 
