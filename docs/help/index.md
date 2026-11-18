@@ -90,7 +90,7 @@ aide::helpTopic(workspace); // HelpTopicId{"workspace"}
 
 Calling `setHelpTopic()` again replaces the topic, an empty ID clears it, and a null widget is ignored. `helpTopic()` returns the widget's own topic only; it does not consult parents.
 
-**Context Help** (`HELP_CONTEXT_HELP`, default shortcut `QKeySequence::HelpContents`: F1, or Cmd+? on macOS; remappable in the Keymap; not shown in the Help menu) starts at the focused widget and walks up the parent chain to the first widget with a topic. A topic on a child therefore wins over its container's, and a topic on a container covers all its children. The walk stops at the focused widget's window: the window's own topic still counts, a parent window's does not. If the walk finds no topic, or the topic is disabled, Context Help opens Help Contents.
+**Context Help** (`HELP_CONTEXT_HELP`, default shortcuts: every platform binding of `QKeySequence::HelpContents`, such as F1, or Cmd+? on macOS; remappable in the Keymap; not shown in the Help menu) starts at the focused widget and walks up the parent chain to the first widget with a topic. A topic on a child therefore wins over its container's, and a topic on a container covers all its children. The walk stops at the focused widget's window: the window's own topic still counts, a parent window's does not. If the walk finds no topic, or the topic is disabled, Context Help opens Help Contents.
 
 ### Declaring widget topics
 

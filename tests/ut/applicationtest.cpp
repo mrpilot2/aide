@@ -517,12 +517,14 @@ TEST_CASE("Application with help active offers Context Help", "[Application]")
     const auto action   = registry->action(CONSTANTS().HELP_CONTEXT_HELP);
     REQUIRE(action.has_value());
 
-    SECTION("with the platform's Help Contents key as default shortcut")
+    SECTION(
+        "with all of the platform's Help Contents keys as default "
+        "shortcuts")
     {
         REQUIRE(registry->actions()
                     .at(CONSTANTS().HELP_CONTEXT_HELP)
                     .defaultKeySequences ==
-                QList<QKeySequence>{QKeySequence(QKeySequence::HelpContents)});
+                QKeySequence::keyBindings(QKeySequence::HelpContents));
     }
 
     SECTION("on the main window but not in the Help menu")
