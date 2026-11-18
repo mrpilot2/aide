@@ -5,6 +5,9 @@
 
 #include <QAction>
 
+#include <aide/applicationconfig.hpp>
+#include <aide/urllauncherinterface.hpp>
+
 namespace aide
 {
     class Application;
@@ -13,6 +16,20 @@ namespace aide
 namespace demo
 {
     class ColorSchemeReactor;
+
+    /// The demo's ApplicationConfig: every built-in feature on, Report Bug
+    /// previewed instead of filed, and help pointed at the demo End-User Help
+    /// site (demo/help) on GitHub Pages. @p browser opens every other URL,
+    /// e.g. Help Pages; nullptr means the system's default browser.
+    [[nodiscard]] aide::ApplicationConfig demoConfig(
+        aide::UrlLauncherPtr browser = nullptr);
+
+    /// Builds the demo on top of @p app, which must have been constructed
+    /// from demoConfig(): theme, central widget, settings pages and menus.
+    /// The returned reactor must outlive the application event loop (see
+    /// watchColorScheme()).
+    [[nodiscard]] std::unique_ptr<ColorSchemeReactor> setUpDemo(
+        const aide::Application& app);
 
     /// Registers the "Demo Blue" theme and points the "System" theme's icon
     /// search path at the icon set matching the current OS color scheme.

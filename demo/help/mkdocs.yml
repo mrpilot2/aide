@@ -1,0 +1,34 @@
+# End-User Help of the aIDE demo application: the reference for how a client
+# application builds its help site on top of the Help Pages aIDE ships.
+#
+# Build from the repository root:
+#   python3 -m venv build/help-venv && build/help-venv/bin/pip install -r demo/help/requirements.txt
+#   AIDE_HELP_DIR="$PWD/aide/help" build/help-venv/bin/mkdocs build --strict \
+#     -f demo/help/mkdocs.yml -d "$PWD/build/demo-help-site"
+# Check that every demo Help Topic has a page (ut.aide.demo.application):
+#   AIDE_DEMO_HELP_SITE_DIR="$PWD/build/demo-help-site" \
+#     build/<preset>/bin/ut.aide.demo.application
+site_name: Fancy Demo Help
+# The demo's Help Base URL (demo::demoConfig()): every Help Topic ID is a
+# directory under it, e.g. <site_url>keymap/.
+site_url: https://mrpilot2.github.io/aide/demo-help/
+# Each page must become <topic-id>/index.html; mkdocs' default, kept explicit
+# because the Help Topic URLs depend on it.
+use_directory_urls: true
+
+theme:
+  name: material
+
+markdown_extensions:
+  - tables
+  - pymdownx.snippets:
+      # The Help Pages aIDE ships for its built-in Help Topics (CMake:
+      # AIDE_HELP_DIR). Required: an unset or wrong path fails the build.
+      base_path:
+        - !ENV AIDE_HELP_DIR
+      check_paths: true
+
+# No explicit nav: mkdocs lists every page in docs/ (by file name, titled by
+# its first heading), so a page added for a new Help Topic shows up without
+# further edits. Whether every Help Topic has a page is checked by the demo
+# help test, not by the build.
