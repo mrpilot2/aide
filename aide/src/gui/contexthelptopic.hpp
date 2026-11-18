@@ -14,6 +14,9 @@ namespace aide::gui
     // window's topic is ignored. Empty if none is found or @p focusWidget is
     // null.
     [[nodiscard]] HelpTopicId contextHelpTopic(const QWidget* focusWidget);
+
+    // contextHelpTopic() for the application's current focus widget.
+    [[nodiscard]] HelpTopicId focusedContextHelpTopic();
 } // namespace aide::gui
 
 #endif // AIDE_CONTEXT_HELP_TOPIC_HPP
