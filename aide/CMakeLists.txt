@@ -19,6 +19,16 @@ if(PROJECT_IS_TOP_LEVEL)
   aide_local_options()
 endif()
 
+# End-User Help pages for aIDE's built-in Help Topics. A cache entry, so
+# FetchContent / add_subdirectory consumers see it from any directory scope;
+# the installed package config sets the same variable for find_package users.
+set(
+  AIDE_HELP_DIR
+  "${CMAKE_CURRENT_SOURCE_DIR}/help"
+  CACHE INTERNAL
+  "Directory holding aIDE's End-User Help pages"
+)
+
 include(dependencies/Qt.cmake)
 add_subdirectory(dependencies)
 
