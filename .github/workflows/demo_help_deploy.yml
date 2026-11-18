@@ -1,0 +1,44 @@
+name: Publish Demo Help to GitHub Pages
+
+# Publishes the demo End-User Help site to the demo-help/ subpath of GitHub
+# Pages (https://mrpilot2.github.io/aide/demo-help/), next to the versioned
+# Developer Guide that doxygen.yml publishes with mike.
+#
+# With destination_dir, peaceiris/actions-gh-pages only cleans demo-help/
+# before copying the new site, so the Developer Guide stays intact; mike in
+# turn only rewrites its own version directories, leaving demo-help/ alone.
+# Both workflows use the `gh-pages` concurrency group so they never push to
+# gh-pages at the same time.
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  help_site:
+    uses: ./.github/workflows/help_site.yml
+
+  deploy:
+    name: Deploy demo help site
+    needs: help_site
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: gh-pages
+      cancel-in-progress: false
+    steps:
+      - name: Download demo help site
+        uses: actions/download-artifact@v8
+        with:
+          name: demo-help-site
+          path: demo-help-site
+
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          publish_dir: demo-help-site
+          destination_dir: demo-help
+          github_token: ${{ secrets.GITHUB_TOKEN }}

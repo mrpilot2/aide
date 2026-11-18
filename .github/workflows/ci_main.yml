@@ -24,6 +24,11 @@ jobs:
     if: ${{ needs.clang_format.outputs.pushed == 'false' }}
     uses: ./.github/workflows/verify_interface_header_sets.yml
 
+  help_site:
+    needs: clang_format
+    if: ${{ needs.clang_format.outputs.pushed == 'false' }}
+    uses: ./.github/workflows/help_site.yml
+
   abi_compliance_check:
     needs: verify_interface_header_sets
     uses: ./.github/workflows/abi_compliance_check.yml

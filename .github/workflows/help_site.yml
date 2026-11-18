@@ -1,0 +1,69 @@
+name: CI - Demo help site
+
+# Gate on the demo End-User Help site (demo/help): it must build strictly,
+# follow the End-User Help authoring rules, and have a page for every Help
+# Topic the demo declares. Uploads the built site as the `demo-help-site`
+# artifact, which demo_help_deploy.yml publishes.
+
+on:
+  workflow_call:
+
+jobs:
+  help_site:
+    name: Build and check the demo help site
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        shell: bash
+    env:
+      # Help Pages aIDE ships, included by the demo site's snippets stubs.
+      AIDE_HELP_DIR: ${{ github.workspace }}/aide/help
+      SITE_DIR: ${{ github.workspace }}/build/demo-help-site
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install MkDocs and plugins
+        run: pip install -r demo/help/requirements.txt
+
+      - name: Build demo help site
+        run: mkdocs build --strict -f demo/help/mkdocs.yml -d "${SITE_DIR}"
+
+      - name: Check End-User Help authoring rules
+        run: |
+          tools/check-end-user-help.sh aide/help
+          tools/check-end-user-help.sh demo/help/docs
+          tools/test-check-end-user-help.sh
+
+      - id: setup_deps
+        uses: ./.github/actions/setup_deps
+
+      - name: Build demo help test
+        run: |
+          cmake --preset client-unix-static-debug
+          cmake --build --preset build-client-unix-static-debug --target ut.aide.demo.application
+
+      # Runs the test binary directly instead of through ctest: ctest reports
+      # a skipped test (Catch2 exit code 4, e.g. when the site dir variable is
+      # missing) as passed, here any non-zero exit code fails the job.
+      - name: Check every demo Help Topic has a page
+        run: |
+          build/client-unix-static-debug/bin/ut.aide.demo.application \
+            "Every demo Help Topic has a page in the demo help site"
+        env:
+          AIDE_DEMO_HELP_SITE_DIR: ${{ env.SITE_DIR }}
+          QT_QPA_PLATFORM: offscreen
+
+      - name: Upload demo help site
+        uses: actions/upload-artifact@v7
+        with:
+          name: demo-help-site
+          path: build/demo-help-site
+          if-no-files-found: error
