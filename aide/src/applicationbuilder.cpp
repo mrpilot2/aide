@@ -40,7 +40,7 @@ ApplicationBuilder::ApplicationBuilder(ApplicationConfig config)
           m_mainWindow, *(AideSettingsProvider::unversionableSettings()))
     , m_showSettingsDialog(m_settingsDialog, m_settingsPageRegistry,
                            *(AideSettingsProvider::unversionableSettings()),
-                           m_logger, m_showHelpUseCase, m_actionRegistry)
+                           m_logger, &m_showHelpUseCase, m_actionRegistry)
     , m_settingsDialogController(
           std::make_shared<SettingsDialogController>(m_showSettingsDialog))
     , m_mainController(std::make_shared<MainWindowController>(

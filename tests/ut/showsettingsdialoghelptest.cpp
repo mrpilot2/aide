@@ -78,7 +78,7 @@ namespace
         std::shared_ptr<ActionRegistry> actions{
             std::make_shared<ActionRegistry>(settings, logger)};
         ShowSettingsDialog useCase{view,   registry, settings,
-                                   logger, help,     actions};
+                                   logger, &help,    actions};
 
         // Registers the Context Help action the way the main window does
         // while help is active.
@@ -288,6 +288,15 @@ TEST_CASE("Settings dialog Context Help shortcut uses the current Keymap keys",
 
         REQUIRE(fixture.view->contextHelpShortcuts() ==
                 QList<QKeySequence>{userShortcut});
+    }
+
+    SECTION("no key once the user removed it in the Keymap")
+    {
+        fixture.actions->modifyShortcutsForAction(CONSTANTS().HELP_CONTEXT_HELP,
+                                                  {QKeySequence()});
+        fixture.useCase.showSettingsDialog();
+
+        REQUIRE(fixture.view->contextHelpShortcuts().isEmpty());
     }
 }
 

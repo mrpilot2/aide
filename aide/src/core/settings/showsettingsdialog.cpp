@@ -3,7 +3,6 @@
 #include <stdexcept>
 #include <utility>
 
-#include <QAction>
 #include <QItemSelection>
 #include <QPersistentModelIndex>
 #include <QWidget>
@@ -16,24 +15,6 @@
 using aide::HelpTopicId;
 using aide::core::SettingsPageGroupTreeModel;
 using aide::core::ShowSettingsDialog;
-
-ShowSettingsDialog::ShowSettingsDialog(SettingsDialogWeakPtr dialog,
-                                       SettingsPageRegistry& registry,
-                                       SettingsInterface& settings,
-                                       LoggerPtr loggerInterface)
-    : ShowSettingsDialog(std::move(dialog), registry, settings,
-                         std::move(loggerInterface), nullptr, nullptr)
-{}
-
-ShowSettingsDialog::ShowSettingsDialog(
-    SettingsDialogWeakPtr dialog, SettingsPageRegistry& registry,
-    SettingsInterface& settings, LoggerPtr loggerInterface,
-    const ShowHelpUseCase& helpUseCase,
-    ActionRegistryInterfacePtr actionRegistry)
-    : ShowSettingsDialog(std::move(dialog), registry, settings,
-                         std::move(loggerInterface), &helpUseCase,
-                         std::move(actionRegistry))
-{}
 
 ShowSettingsDialog::ShowSettingsDialog(
     SettingsDialogWeakPtr dialog, SettingsPageRegistry& registry,
@@ -303,11 +284,14 @@ QList<QKeySequence> ShowSettingsDialog::contextHelpShortcuts() const
 {
     if (m_actionRegistry == nullptr) { return {}; }
 
-    const auto action =
-        m_actionRegistry->action(constants::CONSTANTS().HELP_CONTEXT_HELP);
-    if (!action.has_value() || action.value() == nullptr) { return {}; }
+    const auto& actions = m_actionRegistry->actions();
+    const auto it = actions.find(constants::CONSTANTS().HELP_CONTEXT_HELP);
+    if (it == actions.end() || it->second.action.isNull()) { return {}; }
 
-    return action.value()->shortcuts();
+    // A key removed in the Keymap is stored as one empty sequence.
+    auto keys = it->second.getActiveKeySequences();
+    keys.removeIf([](const QKeySequence& key) { return key.isEmpty(); });
+    return keys;
 }
 
 void ShowSettingsDialog::showHelpForCurrentPage()
