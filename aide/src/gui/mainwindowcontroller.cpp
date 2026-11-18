@@ -2,7 +2,6 @@
 
 #include <utility>
 
-#include <QApplication>
 #include <QCloseEvent>
 
 #include <aide/aideconstants.hpp>
@@ -94,6 +93,5 @@ void MainWindowController::onUserWantsToShowHelpContents() const
 
 void MainWindowController::onUserWantsToShowContextHelp() const
 {
-    m_showHelpUseCase.showContextHelp(
-        contextHelpTopic(QApplication::focusWidget()));
+    m_showHelpUseCase.showContextHelp(focusedContextHelpTopic());
 }
