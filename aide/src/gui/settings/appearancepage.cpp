@@ -54,7 +54,7 @@ bool AppearancePage::isModified() const
 
 aide::HelpTopicId AppearancePage::helpTopicId() const
 {
-    return HelpTopicId{"appearance"};
+    return HelpTopicId{QStringLiteral("appearance")};
 }
 
 QStringList AppearancePage::groupTitles() const

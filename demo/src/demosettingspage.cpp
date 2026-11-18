@@ -209,7 +209,7 @@ void DemoSettingsPage::createWidget()
 
 aide::HelpTopicId DemoSettingsPage::helpTopicId() const
 {
-    return aide::HelpTopicId{"demo-settings"};
+    return aide::HelpTopicId{QStringLiteral("demo-settings")};
 }
 
 QStringList DemoSettingsPage::groupTitles() const

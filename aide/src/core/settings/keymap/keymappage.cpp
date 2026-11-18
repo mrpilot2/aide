@@ -28,7 +28,7 @@ bool KeymapPage::isModified() const
 
 aide::HelpTopicId KeymapPage::helpTopicId() const
 {
-    return HelpTopicId{"keymap"};
+    return HelpTopicId{QStringLiteral("keymap")};
 }
 
 QStringList KeymapPage::groupTitles() const
