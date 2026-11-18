@@ -10,6 +10,11 @@ jobs:
   docs:
     name: Build and deploy docs
     runs-on: ubuntu-latest
+    # Shared with demo_help_deploy.yml: one push to gh-pages at a time, so the
+    # demo-help/ copied below is the latest one.
+    concurrency:
+      group: gh-pages
+      cancel-in-progress: false
     steps:
       - name: Check out
         uses: actions/checkout@v6
@@ -52,6 +57,15 @@ jobs:
 
       - name: Build MkDocs site
         run: mkdocs build --strict
+
+      # The publish step below replaces the whole gh-pages branch; carry the
+      # demo help site (demo_help_deploy.yml) over so it is not deleted.
+      - name: Keep the published demo help site
+        run: |
+          if git fetch origin gh-pages &&
+             git cat-file -e FETCH_HEAD:demo-help 2>/dev/null; then
+            git archive FETCH_HEAD demo-help | tar -x -C site
+          fi
 
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
