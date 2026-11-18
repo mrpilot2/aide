@@ -16,14 +16,18 @@ Follow these authoring rules for every page in `aide/help/`:
 - **No template variables.** Do not write `{{ ... }}`. Variables are not
   rendered inside snippets includes, and aIDE offers no variable contract.
 - **No concrete key sequences.** Name the action as the menus and the Keymap
-  show it (e.g. "the **Settings** action") and point to the Keymap page for
-  the current shortcut. Never write a key combination such as a modifier plus
+  show it (e.g. "the **Settings** action") and name the Keymap page (in
+  text, see below) for the current shortcut. Never write a key combination such as a modifier plus
   a letter, or a function key: users remap shortcuts, clients change
   defaults, and macOS differs.
 - **Never mention aIDE.** Pages must not name aIDE or link to its repository
   or Developer Guide.
 - **No relative links or images.** The client decides where each page lands
   in its site, so a relative link or image path breaks after inclusion.
+- **No hyperlinks at all.** A link to another page of the client's site would
+  have to be relative, and relative links are forbidden. Refer to another page
+  by naming it in the text instead: "see the Keymap page of the Settings
+  dialog", not a link to `keymap`.
 
 `tools/check-end-user-help.sh` enforces the rules a grep can catch (aIDE,
 `{{`, modifier key sequences and function keys); `tools/test-check-end-user-help.sh`
