@@ -4,6 +4,8 @@
 #include <QItemSelection>
 #include <QString>
 
+#include <aide/helptopicid.hpp>
+
 #include "settings/settingsdialogchangepagecontroller.hpp"
 
 namespace aide::test
@@ -21,6 +23,8 @@ namespace aide::test
         bool searchPatternChangedCalled{false};
         bool commitCurrentSearchPatternCalled{false};
         bool showHelpForCurrentPageCalled{false};
+        bool showContextHelpCalled{false};
+        HelpTopicId lastContextHelpTopic;
         QString lastSearchPattern;
 
         void changeSelectedPage(const QItemSelection& /*selected*/,
@@ -55,6 +59,12 @@ namespace aide::test
         void showHelpForCurrentPage() override
         {
             showHelpForCurrentPageCalled = true;
+        }
+
+        void showContextHelp(const HelpTopicId& resolvedTopic) override
+        {
+            showContextHelpCalled = true;
+            lastContextHelpTopic  = resolvedTopic;
         }
     };
 } // namespace aide::test

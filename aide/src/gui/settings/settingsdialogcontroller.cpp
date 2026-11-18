@@ -1,5 +1,11 @@
 #include "settingsdialogcontroller.hpp"
 
+#include <QApplication>
+
+#include <aide/helptopicid.hpp>
+
+#include "contexthelptopic.hpp"
+
 using aide::gui::SettingsDialogController;
 
 SettingsDialogController::SettingsDialogController(
@@ -42,4 +48,9 @@ void SettingsDialogController::onUserWantsToApplySettingsPages() const
 void SettingsDialogController::onUserWantsHelpForCurrentPage() const
 {
     controller.showHelpForCurrentPage();
+}
+
+void SettingsDialogController::onUserWantsContextHelp() const
+{
+    controller.showContextHelp(contextHelpTopic(QApplication::focusWidget()));
 }
