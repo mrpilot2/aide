@@ -71,47 +71,12 @@ aIDE headers are namespaced under `aide/`. A minimal include set for a typical c
 ## End-User Help pages
 
 aIDE ships End-User Help pages for its built-in Help Topics (`appearance.md`,
-`keymap.md`, `notifications.md`), pinned to the linked aIDE version. Include
-them in your own mkdocs-material help site through `pymdownx.snippets` stubs.
-
-The CMake variable **`AIDE_HELP_DIR`** holds the absolute path of the
-directory with these pages, whichever way you consume aIDE:
-
-| Consumption | Where `AIDE_HELP_DIR` comes from | Points to |
-|---|---|---|
-| `FetchContent` / `add_subdirectory` | cache entry set while aIDE is configured; visible from every directory after `FetchContent_MakeAvailable(aide)` | `<aide source>/aide/help` |
-| `find_package(AideQt6)` | set by the installed package config | `<prefix>/share/aide/help` |
-
-The installed pages belong to the `Help` install component. Install just the
-pages with:
-
-```bash
-cmake --install <build-dir> --component Help --prefix <prefix>
-```
-
-Pass the directory to your docs build, for example as the snippets
-`base_path`:
-
-```cmake
-add_custom_target(
-    help-site
-    COMMAND ${CMAKE_COMMAND} -E env "AIDE_HELP_DIR=${AIDE_HELP_DIR}"
-            mkdocs build --strict
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/help-site
-)
-```
-
-```yaml
-# help-site/mkdocs.yml
-markdown_extensions:
-  - pymdownx.snippets:
-      base_path:
-        - !ENV AIDE_HELP_DIR
-      check_paths: true
-```
-
-A stub page such as `help-site/docs/keymap.md` then contains only
-`--8<-- "keymap.md"`.
+`keymap.md`, `notifications.md`), pinned to the linked aIDE version. The CMake
+variable **`AIDE_HELP_DIR`** holds the absolute path of their directory, both
+after `FetchContent_MakeAvailable(aide)` and after `find_package(AideQt6)`;
+the installed pages belong to the `Help` install component. See
+[Building the Help Site](../help/help-site.md) for how to include them in your
+own help site.
 
 ---
 
