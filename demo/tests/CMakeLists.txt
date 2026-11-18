@@ -55,3 +55,66 @@ catch_discover_tests(
   ut.aide.demo REPORTER console WORKING_DIRECTORY
   ${CMAKE_CURRENT_LIST_DIR}/../../
 )
+
+# Demo tests that construct the demo's aide::Application (e.g. the help
+# coverage test, #201). aide::Application is itself a QApplication, so these
+# live in their own executable on aide_catch_main_application, which creates
+# no process-global QApplication (same split as ut.aide / ut.aide.application).
+add_executable(ut.aide.demo.application)
+
+set_target_properties(
+  ut.aide.demo.application
+  PROPERTIES
+    AUTOMOC ON
+    AUTOUIC ON
+    AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_SOURCE_DIR}/../src/res
+)
+
+target_sources(
+  ut.aide.demo.application
+  PRIVATE
+    demohelptest.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/colorschemereactor.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/demosettingspage.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/demosetup.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/notificationdemodialog.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/notificationlauncherdialog.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/reportbugpreviewlauncher.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../tests/ut/mocksettings.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../tests/ut/mockurllauncher.cpp
+)
+
+target_include_directories(
+  ut.aide.demo.application
+  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../src
+)
+
+target_link_libraries(
+  ut.aide.demo.application
+  PRIVATE
+    aide_catch_main_application
+    Qt::Core
+    Qt::Widgets
+    Qt::Test
+    aide_coverage
+    aide_options
+    aide_warnings
+    Aide::AideApplication
+    Aide::AideCore
+    Aide::AideWidgets
+)
+
+if(APPLE)
+  add_custom_command(
+    TARGET ut.aide.demo.application
+    POST_BUILD
+    COMMAND
+      ${CMAKE_INSTALL_NAME_TOOL} -add_rpath "${Qt6_DIR}/../../"
+      $<TARGET_FILE:ut.aide.demo.application>
+  )
+endif()
+
+catch_discover_tests(
+  ut.aide.demo.application REPORTER console WORKING_DIRECTORY
+  ${CMAKE_CURRENT_LIST_DIR}/../../
+)

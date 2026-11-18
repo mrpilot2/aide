@@ -6,7 +6,6 @@
 
 #include "colorschemereactor.hpp"
 #include "demosetup.hpp"
-#include "reportbugpreviewlauncher.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -14,41 +13,15 @@ int main(int argc, char* argv[])
     aide::Application::setApplicationName("Fancy_Aide_Demo");
     aide::Application::setApplicationDisplayName("Fancy Aide Demo");
 
-    // The demo keeps every built-in feature enabled and passes the config
-    // explicitly to show the API. A consumer that did not want the
-    // View -> Full Screen action would disable it here, e.g.:
-    //   config.setEnabled(
-    //       aide::ApplicationConfig::Feature::ViewFullscreenAction, false);
-    //
-    // Two exceptions: ShowLogInFileManagerAction and ReportBugAction default
-    // to disabled since they are only appropriate for developer-facing
-    // consumer applications. The demo opts in explicitly so both features
-    // are visibly exercised by anyone running it.
-    //
-    // ReportBugAction also gets a demo-supplied UrlLauncherInterface
-    // override, so clicking the action shows a preview dialog of the ticket
-    // that would have been filed instead of opening a real browser and
-    // filing a real issue against aIDE's own repository.
-    aide::ApplicationConfig config;
-    config.setEnabled(
-        aide::ApplicationConfig::Feature::ShowLogInFileManagerAction, true);
-    config.setEnabled(aide::ApplicationConfig::Feature::ReportBugAction, true);
-    config.setUrlLauncher(std::make_shared<demo::ReportBugPreviewLauncher>());
-    const aide::Application app(argc, argv, config);
+    // See demo::demoConfig() for the features, URL launcher and help the
+    // demo configures.
+    const aide::Application app(argc, argv, demo::demoConfig());
 
     app.translator()->addAdditionalTranslationFilePath(
         QDir(":/demo_translations"), QString("demo"));
 
-    demo::registerDemoTheme(app);
     // cppcheck-suppress unreadVariable
-    auto colorSchemeReactor = demo::watchColorScheme(app);
-
-    demo::buildCentralWidget(app);
-    demo::registerDemoSettingsPages(app);
-
-    demo::extendFileMenu(app);
-    demo::addNotificationLogToggle(app);
-    demo::buildDemoMenu(app);
+    const auto colorSchemeReactor = demo::setUpDemo(app);
 
     return aide::Application::exec();
 }
