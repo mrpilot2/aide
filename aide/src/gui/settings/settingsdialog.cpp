@@ -3,12 +3,16 @@
 #include <utility>
 
 #include <QAbstractItemModel>
+#include <QAction>
+#include <QKeySequence>
 #include <QLineEdit>
 #include <QList>
 #include <QPushButton>
 #include <QSortFilterProxyModel>
 #include <QStringList>
 #include <QWidget>
+
+#include <aide/widgethelptopic.hpp>
 
 #include "aide/gui/widgets/searchlineedit.hpp"
 #include "changedetector.hpp"
@@ -23,6 +27,7 @@ using aide::gui::SettingsDialog;
 SettingsDialog::SettingsDialog(QWidget* parent)
     : QDialog(parent)
     , ui(std::make_unique<Ui::SettingsDialog>())
+    , m_contextHelpAction(new QAction(this))
 {
     ui->setupUi(this);
 
@@ -35,6 +40,11 @@ SettingsDialog::SettingsDialog(QWidget* parent)
     ui->treeView->header()->setVisible(false);
 
     ui->resetLabel->hide();
+
+    // The main window's Context Help shortcut does not fire while this modal
+    // dialog is open, so the dialog has its own; it gets its keys from the
+    // Keymap each time it opens.
+    addAction(m_contextHelpAction);
 
     ui->splitter->setStretchFactor(0, 0);
     ui->splitter->setStretchFactor(1, 3);
@@ -70,6 +80,8 @@ void SettingsDialog::connectSignals()
     connect(ui->helpButtonBox, &QDialogButtonBox::helpRequested,
             settingsController.get(),
             &SettingsDialogController::onUserWantsHelpForCurrentPage);
+    connect(m_contextHelpAction, &QAction::triggered, settingsController.get(),
+            &SettingsDialogController::onUserWantsContextHelp);
     connect(ui->searchLineEdit, &QLineEdit::textChanged,
             settingsController.get(),
             &SettingsDialogController::onUserChangedSearchPattern);
@@ -207,6 +219,17 @@ void SettingsDialog::showHelpButton(const bool show)
 void SettingsDialog::enableHelpButton(const bool enable)
 {
     ui->helpButtonBox->button(QDialogButtonBox::Help)->setEnabled(enable);
+}
+
+void SettingsDialog::setHelpTopic(const HelpTopicId& topic)
+{
+    aide::setHelpTopic(this, topic);
+}
+
+void SettingsDialog::setContextHelpShortcuts(
+    const QList<QKeySequence>& shortcuts)
+{
+    m_contextHelpAction->setShortcuts(shortcuts);
 }
 
 void SettingsDialog::installChangeDetector(QObject* widget) const

@@ -3,13 +3,17 @@
 #include <stdexcept>
 #include <utility>
 
+#include <QAction>
 #include <QItemSelection>
 #include <QPersistentModelIndex>
 #include <QWidget>
 
+#include <aide/aideconstants.hpp>
+
 #include "settings/searchpattern.hpp"
 #include "settings/settingspage.hpp"
 
+using aide::HelpTopicId;
 using aide::core::SettingsPageGroupTreeModel;
 using aide::core::ShowSettingsDialog;
 
@@ -18,27 +22,29 @@ ShowSettingsDialog::ShowSettingsDialog(SettingsDialogWeakPtr dialog,
                                        SettingsInterface& settings,
                                        LoggerPtr loggerInterface)
     : ShowSettingsDialog(std::move(dialog), registry, settings,
-                         std::move(loggerInterface), nullptr)
+                         std::move(loggerInterface), nullptr, nullptr)
 {}
 
-ShowSettingsDialog::ShowSettingsDialog(SettingsDialogWeakPtr dialog,
-                                       SettingsPageRegistry& registry,
-                                       SettingsInterface& settings,
-                                       LoggerPtr loggerInterface,
-                                       const ShowHelpUseCase& helpUseCase)
+ShowSettingsDialog::ShowSettingsDialog(
+    SettingsDialogWeakPtr dialog, SettingsPageRegistry& registry,
+    SettingsInterface& settings, LoggerPtr loggerInterface,
+    const ShowHelpUseCase& helpUseCase,
+    ActionRegistryInterfacePtr actionRegistry)
     : ShowSettingsDialog(std::move(dialog), registry, settings,
-                         std::move(loggerInterface), &helpUseCase)
+                         std::move(loggerInterface), &helpUseCase,
+                         std::move(actionRegistry))
 {}
 
-ShowSettingsDialog::ShowSettingsDialog(SettingsDialogWeakPtr dialog,
-                                       SettingsPageRegistry& registry,
-                                       SettingsInterface& settings,
-                                       LoggerPtr loggerInterface,
-                                       const ShowHelpUseCase* helpUseCase)
+ShowSettingsDialog::ShowSettingsDialog(
+    SettingsDialogWeakPtr dialog, SettingsPageRegistry& registry,
+    SettingsInterface& settings, LoggerPtr loggerInterface,
+    const ShowHelpUseCase* helpUseCase,
+    ActionRegistryInterfacePtr actionRegistry)
     : m_registry(registry)
     , settingsDialog{std::move(dialog)}
     , logger{std::move(loggerInterface)}
     , m_helpUseCase{helpUseCase}
+    , m_actionRegistry{std::move(actionRegistry)}
     , saveGeometryAndState(settingsDialog, settings)
     , searchHistory(settings)
 {}
@@ -65,6 +71,7 @@ void ShowSettingsDialog::showSettingsDialog(
     dialog->setSelectedPageDisplayName("");
     dialog->showHelpButton(isHelpActive());
     dialog->enableHelpButton(false);
+    dialog->setContextHelpShortcuts(contextHelpShortcuts());
 
     treeModel  = std::make_shared<SettingsPageGroupTreeModel>(m_registry);
     proxyModel = std::make_shared<SettingsPageFilterProxyModel>();
@@ -154,6 +161,9 @@ void ShowSettingsDialog::changeSelectedPage(
             view->showResetLabel(false);
         }
         view->enableHelpButton(isHelpAvailableForCurrentPage());
+        view->setHelpTopic(currentlySelectedPage != nullptr
+                               ? currentlySelectedPage->helpTopicId()
+                               : HelpTopicId{});
     }
 }
 
@@ -274,6 +284,7 @@ void ShowSettingsDialog::clearSelectedPage()
         showEmptyPageWidget();
         view->showResetLabel(false);
         view->enableHelpButton(false);
+        view->setHelpTopic(HelpTopicId{});
     }
 }
 
@@ -288,11 +299,29 @@ bool ShowSettingsDialog::isHelpAvailableForCurrentPage() const
            m_helpUseCase->isHelpAvailable(currentlySelectedPage->helpTopicId());
 }
 
+QList<QKeySequence> ShowSettingsDialog::contextHelpShortcuts() const
+{
+    if (m_actionRegistry == nullptr) { return {}; }
+
+    const auto action =
+        m_actionRegistry->action(constants::CONSTANTS().HELP_CONTEXT_HELP);
+    if (!action.has_value() || action.value() == nullptr) { return {}; }
+
+    return action.value()->shortcuts();
+}
+
 void ShowSettingsDialog::showHelpForCurrentPage()
 {
     if (!isHelpAvailableForCurrentPage()) { return; }
 
     m_helpUseCase->showHelp(currentlySelectedPage->helpTopicId());
+}
+
+void ShowSettingsDialog::showContextHelp(const HelpTopicId& resolvedTopic)
+{
+    if (m_helpUseCase == nullptr) { return; }
+
+    m_helpUseCase->showContextHelp(resolvedTopic);
 }
 
 void ShowSettingsDialog::updateDisplayName(
