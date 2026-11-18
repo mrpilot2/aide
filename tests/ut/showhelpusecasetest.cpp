@@ -11,6 +11,7 @@
 #include <aide/hierarchicalid.hpp>
 #include <aide/settings/settingspageregistry.hpp>
 
+#include "capturedmacrolog.hpp"
 #include "mocksettingspage.hpp"
 #include "mockurllauncher.hpp"
 #include "recordinglogger.hpp"
@@ -20,6 +21,7 @@ using aide::ApplicationConfig;
 using aide::HelpTopicId;
 using aide::core::SettingsPageRegistry;
 using aide::core::ShowHelpUseCase;
+using aide::test::CapturedMacroLog;
 using aide::test::MockSettingsPage;
 using aide::test::MockUrlLauncher;
 using aide::test::RecordingLogger;
@@ -234,16 +236,20 @@ TEST_CASE("The last help topic remap registration wins", "[ShowHelpUseCase]")
             std::string("https://x/help/c/"));
 }
 
-TEST_CASE("A help topic remapped onto an empty id is not available",
+TEST_CASE("A remap onto an empty id is ignored with a warning",
           "[ShowHelpUseCase]")
 {
+    const CapturedMacroLog log;
     const Fixture fixture;
     const auto useCase =
         fixture.useCase(configWithBase("https://x/help")
                             .remapHelpTopic(HelpTopicId{"a"}, HelpTopicId{}));
 
-    REQUIRE_FALSE(useCase.isHelpAvailable(HelpTopicId{"a"}));
-    REQUIRE_FALSE(useCase.showHelp(HelpTopicId{"a"}));
+    REQUIRE(log.text().find("Ignoring remap of help topic 'a'") !=
+            std::string::npos);
+    REQUIRE(useCase.showHelp(HelpTopicId{"a"}));
+    REQUIRE(fixture.launcher->lastRequestedUrl ==
+            std::string("https://x/help/a/"));
 }
 
 TEST_CASE("Context Help opens the resolved topic", "[ShowHelpUseCase]")

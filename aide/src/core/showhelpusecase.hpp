@@ -61,6 +61,11 @@ namespace aide::core
         [[nodiscard]] std::vector<HelpTopicId> declaredHelpTopics() const;
 
     private:
+        // Where @p id points after the client's config is applied: empty if
+        // @p id is empty or disabled, otherwise its (one-step) remap target.
+        [[nodiscard]] HelpTopicId resolvedHelpTopic(
+            const HelpTopicId& id) const;
+
         // The settings pages' and declared widget topics as declared: before
         // disabling or remapping, possibly with duplicates.
         [[nodiscard]] std::vector<HelpTopicId> unresolvedDeclaredHelpTopics()

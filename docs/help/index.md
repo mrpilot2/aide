@@ -116,7 +116,7 @@ config.remapHelpTopic(aide::HelpTopicId{"keymap"}, aide::HelpTopicId{"settings/s
       .disableHelpTopic(aide::HelpTopicId{"notifications"});
 ```
 
-- `remapHelpTopic(source, target)` sends `source` to the location of `target`. Remaps apply **one step only**: with `a→b` and `b→c`, `a` goes to `b`. The last registration for a `source` wins. `remappedHelpTopic(id)` returns the target, or `id` if it was not remapped.
+- `remapHelpTopic(source, target)` sends `source` to the location of `target`. Remaps apply **one step only**: with `a→b` and `b→c`, `a` goes to `b`. The last registration for a `source` wins. A remap onto an empty `target` is ignored with a logged warning, and `source` keeps its declared ID: a remap only redirects, to turn a topic off use `disableHelpTopic`. `remappedHelpTopic(id)` returns the target, or `id` if it was not remapped.
 - `disableHelpTopic(id)` turns help off for a topic. It is checked against the **declared** ID, before any remap, so remapping onto a disabled ID does not disable the source. `isHelpTopicDisabled(id)` tells whether it was disabled.
 
 A disabled topic behaves like no topic: the Help button is disabled, `showHelp()` returns `false` and Context Help falls back to Help Contents.

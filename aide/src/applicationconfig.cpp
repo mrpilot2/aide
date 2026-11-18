@@ -4,6 +4,8 @@
 #include <set>
 #include <utility>
 
+#include "logger/log_helper_macros.hpp"
+
 using aide::ApplicationConfig;
 
 class ApplicationConfig::Impl
@@ -36,6 +38,14 @@ public:
 
     void remapHelpTopic(const HelpTopicId& source, const HelpTopicId& target)
     {
+        if (target.isEmpty()) {
+            AIDE_LOG_WARN(
+                "Ignoring remap of help topic '{}' onto an empty id: a remap "
+                "only redirects a topic; use disableHelpTopic() to turn its "
+                "help off",
+                source.value().toStdString())
+            return;
+        }
         m_helpTopicRemaps[source] = target;
     }
 

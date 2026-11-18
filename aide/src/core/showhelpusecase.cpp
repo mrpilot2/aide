@@ -27,9 +27,13 @@ ShowHelpUseCase::ShowHelpUseCase(ApplicationConfig config,
 
 bool ShowHelpUseCase::isHelpAvailable(const HelpTopicId& id) const
 {
-    return isHelpActive() && !id.isEmpty() &&
-           !m_config.isHelpTopicDisabled(id) &&
-           !m_config.remappedHelpTopic(id).isEmpty();
+    return isHelpActive() && !resolvedHelpTopic(id).isEmpty();
+}
+
+HelpTopicId ShowHelpUseCase::resolvedHelpTopic(const HelpTopicId& id) const
+{
+    if (id.isEmpty() || m_config.isHelpTopicDisabled(id)) { return {}; }
+    return m_config.remappedHelpTopic(id);
 }
 
 bool ShowHelpUseCase::showHelp(const HelpTopicId& id) const
@@ -37,7 +41,7 @@ bool ShowHelpUseCase::showHelp(const HelpTopicId& id) const
     if (!isHelpAvailable(id)) { return false; }
 
     QUrl url = baseUrlWithTrailingSlash();
-    url.setPath(url.path() + m_config.remappedHelpTopic(id).value() + '/');
+    url.setPath(url.path() + resolvedHelpTopic(id).value() + '/');
     return open(url);
 }
 
@@ -86,10 +90,8 @@ std::vector<HelpTopicId> ShowHelpUseCase::declaredHelpTopics() const
 {
     std::set<HelpTopicId> topics;
     for (const auto& declared : unresolvedDeclaredHelpTopics()) {
-        if (m_config.isHelpTopicDisabled(declared)) { continue; }
-        if (const auto resolved = m_config.remappedHelpTopic(declared);
-            !resolved.isEmpty()) {
-            topics.insert(resolved);
+        if (auto resolved = resolvedHelpTopic(declared); !resolved.isEmpty()) {
+            topics.insert(std::move(resolved));
         }
     }
     return {topics.begin(), topics.end()};
