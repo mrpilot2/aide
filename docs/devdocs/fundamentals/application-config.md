@@ -125,6 +125,24 @@ aIDE's built-in pages declare `appearance`, `keymap` and `notifications`. These 
 
 The settings dialog's Help button is **hidden** while help is inactive. It is **disabled** while the selected page or group node has no available topic (`isHelpAvailable()` is false), and **enabled** otherwise. Clicking it opens the selected page's topic. Its state updates on every selection change.
 
+### Declared Help Topics
+
+`Application::declaredHelpTopics()` lists every Help Topic the application can open, so a test can check that each one has a Help Page. It collects the registered settings pages' topics plus the widget topics declared with `ApplicationConfig::declareHelpTopic()`. It then drops disabled IDs (checked against the declared ID), applies remaps (one step only), and returns the list **sorted and de-duplicated**. The list ignores whether help is active: it is the same with no Help Base URL or with `Feature::Help` off.
+
+Widget topics are only known once the widget exists, so declare them up front. The check then sees them even when the widgets are created lazily:
+
+```cpp
+config.declareHelpTopic(aide::HelpTopicId{"workspace"})
+      .declareHelpTopic(aide::HelpTopicId{"editor/tabs"});
+
+// With no other setup:
+app.declaredHelpTopics(); // appearance, editor/tabs, keymap, notifications, workspace
+```
+
+With `disableHelpTopic(keymap)`, `keymap` is left out. With `remapHelpTopic(keymap, settings/keys)`, `settings/keys` takes its place. Two topics remapped onto one target appear once. `ApplicationConfig::declaredWidgetHelpTopics()` returns the declared widget topics as given, before disabling or remapping.
+
+The first time Context Help resolves to a topic that was never declared (neither a settings page's topic nor passed to `declareHelpTopic()`), it logs a warning naming the topic. It logs only once per topic. Context Help still opens the topic.
+
 ---
 
 ## Value semantics

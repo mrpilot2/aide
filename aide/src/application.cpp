@@ -125,3 +125,8 @@ bool Application::showHelpContents()
 {
     return m_appBuilder->showHelpUseCase().showHelpContents();
 }
+
+std::vector<HelpTopicId> Application::declaredHelpTopics() const
+{
+    return m_appBuilder->showHelpUseCase().declaredHelpTopics();
+}

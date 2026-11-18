@@ -22,7 +22,8 @@ using aide::gui::SettingsDialogController;
 ApplicationBuilder::ApplicationBuilder(ApplicationConfig config)
     : m_config(std::move(config))
     , m_urlLauncher(UrlLauncherResolver::resolve(m_config))
-    , m_showHelpUseCase(m_config, m_urlLauncher, m_logger)
+    , m_showHelpUseCase(m_config, m_urlLauncher, m_logger,
+                        m_settingsPageRegistry)
     , m_settingsProvider(std::make_shared<AideSettingsProvider>())
     , m_actionRegistry{std::make_shared<ActionRegistry>(
           *(AideSettingsProvider::versionableSettings()), m_logger)}

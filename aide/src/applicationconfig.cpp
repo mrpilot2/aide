@@ -58,6 +58,16 @@ public:
         return m_disabledHelpTopics.contains(id);
     }
 
+    void declareHelpTopic(const HelpTopicId& id)
+    {
+        if (!id.isEmpty()) { m_declaredHelpTopics.insert(id); }
+    }
+
+    [[nodiscard]] std::vector<HelpTopicId> declaredWidgetHelpTopics() const
+    {
+        return {m_declaredHelpTopics.begin(), m_declaredHelpTopics.end()};
+    }
+
 private:
     // Single source of truth for per-feature defaults. Every feature ships
     // enabled today; flip an entry here to make a future feature opt-in
@@ -80,6 +90,7 @@ private:
     QUrl m_helpBaseUrl;
     std::map<HelpTopicId, HelpTopicId> m_helpTopicRemaps;
     std::set<HelpTopicId> m_disabledHelpTopics;
+    std::set<HelpTopicId> m_declaredHelpTopics;
 };
 
 ApplicationConfig::ApplicationConfig()
@@ -159,4 +170,16 @@ ApplicationConfig& ApplicationConfig::disableHelpTopic(const HelpTopicId& id)
 bool ApplicationConfig::isHelpTopicDisabled(const HelpTopicId& id) const
 {
     return m_impl->isHelpTopicDisabled(id);
+}
+
+ApplicationConfig& ApplicationConfig::declareHelpTopic(const HelpTopicId& id)
+{
+    m_impl->declareHelpTopic(id);
+    return *this;
+}
+
+std::vector<aide::HelpTopicId> ApplicationConfig::declaredWidgetHelpTopics()
+    const
+{
+    return m_impl->declaredWidgetHelpTopics();
 }

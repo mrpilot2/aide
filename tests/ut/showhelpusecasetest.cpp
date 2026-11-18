@@ -1,5 +1,6 @@
 #include <memory>
 #include <string>
+#include <vector>
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -7,14 +8,19 @@
 
 #include <aide/applicationconfig.hpp>
 #include <aide/helptopicid.hpp>
+#include <aide/hierarchicalid.hpp>
+#include <aide/settings/settingspageregistry.hpp>
 
+#include "mocksettingspage.hpp"
 #include "mockurllauncher.hpp"
 #include "recordinglogger.hpp"
 #include "showhelpusecase.hpp"
 
 using aide::ApplicationConfig;
 using aide::HelpTopicId;
+using aide::core::SettingsPageRegistry;
 using aide::core::ShowHelpUseCase;
+using aide::test::MockSettingsPage;
 using aide::test::MockUrlLauncher;
 using aide::test::RecordingLogger;
 
@@ -28,11 +34,20 @@ namespace
             std::make_shared<MockUrlLauncher>()};
         std::shared_ptr<RecordingLogger> logger{
             std::make_shared<RecordingLogger>()};
+        SettingsPageRegistry registry;
 
         [[nodiscard]] ShowHelpUseCase useCase(
             const ApplicationConfig& config) const
         {
-            return {config, launcher, logger};
+            return {config, launcher, logger, registry};
+        }
+
+        void addPageWithTopic(const char* group, const char* topic)
+        {
+            auto page = std::make_shared<MockSettingsPage>(
+                aide::HierarchicalId("Page")(group));
+            page->setHelpTopicId(HelpTopicId{topic});
+            registry.addPage(page);
         }
     };
 
@@ -273,4 +288,135 @@ TEST_CASE("Context Help with help inactive opens nothing", "[ShowHelpUseCase]")
 
     REQUIRE_FALSE(useCase.showContextHelp(HelpTopicId{"topic"}));
     REQUIRE_FALSE(fixture.launcher->lastRequestedUrl.has_value());
+}
+
+TEST_CASE(
+    "Declared help topics are the settings pages' topics, sorted and "
+    "de-duplicated",
+    "[ShowHelpUseCase]")
+{
+    Fixture fixture;
+    fixture.addPageWithTopic("1", "b");
+    fixture.addPageWithTopic("2", "a");
+    fixture.addPageWithTopic("3", "b");
+    fixture.addPageWithTopic("4", "");
+
+    const auto useCase = fixture.useCase(ApplicationConfig{});
+
+    REQUIRE(useCase.declaredHelpTopics() ==
+            std::vector{HelpTopicId{"a"}, HelpTopicId{"b"}});
+}
+
+TEST_CASE("Declared help topics drop disabled topics and apply remaps",
+          "[ShowHelpUseCase]")
+{
+    Fixture fixture;
+    fixture.addPageWithTopic("1", "a");
+    fixture.addPageWithTopic("2", "b");
+    fixture.addPageWithTopic("3", "c");
+
+    SECTION("a disabled topic is dropped")
+    {
+        const auto useCase = fixture.useCase(
+            ApplicationConfig{}.disableHelpTopic(HelpTopicId{"b"}));
+
+        REQUIRE(useCase.declaredHelpTopics() ==
+                std::vector{HelpTopicId{"a"}, HelpTopicId{"c"}});
+    }
+
+    SECTION(
+        "disabling is checked against the declared topic, not its "
+        "remap target")
+    {
+        const auto useCase = fixture.useCase(
+            ApplicationConfig{}
+                .remapHelpTopic(HelpTopicId{"a"}, HelpTopicId{"z"})
+                .disableHelpTopic(HelpTopicId{"z"}));
+
+        REQUIRE(useCase.declaredHelpTopics() == std::vector{HelpTopicId{"b"},
+                                                            HelpTopicId{"c"},
+                                                            HelpTopicId{"z"}});
+    }
+
+    SECTION("a remapped topic is replaced by its target, one step only")
+    {
+        const auto useCase = fixture.useCase(
+            ApplicationConfig{}
+                .remapHelpTopic(HelpTopicId{"a"}, HelpTopicId{"x/y"})
+                .remapHelpTopic(HelpTopicId{"x/y"}, HelpTopicId{"q"}));
+
+        REQUIRE(useCase.declaredHelpTopics() ==
+                std::vector{HelpTopicId{"b"}, HelpTopicId{"c"},
+                            HelpTopicId{"x/y"}});
+    }
+
+    SECTION("topics remapped onto one target appear once")
+    {
+        const auto useCase = fixture.useCase(
+            ApplicationConfig{}
+                .remapHelpTopic(HelpTopicId{"a"}, HelpTopicId{"c"})
+                .remapHelpTopic(HelpTopicId{"b"}, HelpTopicId{"c"}));
+
+        REQUIRE(useCase.declaredHelpTopics() == std::vector{HelpTopicId{"c"}});
+    }
+}
+
+TEST_CASE("Declared help topics include the config's declared widget topics",
+          "[ShowHelpUseCase]")
+{
+    Fixture fixture;
+    fixture.addPageWithTopic("1", "page");
+
+    const auto useCase = fixture.useCase(
+        ApplicationConfig{}
+            .declareHelpTopic(HelpTopicId{"widget"})
+            .declareHelpTopic(HelpTopicId{"page"})
+            .declareHelpTopic(HelpTopicId{"off"})
+            .declareHelpTopic(HelpTopicId{"old"})
+            .disableHelpTopic(HelpTopicId{"off"})
+            .remapHelpTopic(HelpTopicId{"old"}, HelpTopicId{"new"}));
+
+    REQUIRE(useCase.declaredHelpTopics() == std::vector{HelpTopicId{"new"},
+                                                        HelpTopicId{"page"},
+                                                        HelpTopicId{"widget"}});
+}
+
+TEST_CASE("Context Help on an undeclared topic warns once", "[ShowHelpUseCase]")
+{
+    Fixture fixture;
+    fixture.addPageWithTopic("1", "page");
+    const auto useCase =
+        fixture.useCase(configWithBase("https://x/help")
+                            .declareHelpTopic(HelpTopicId{"widget"})
+                            .declareHelpTopic(HelpTopicId{"off"})
+                            .disableHelpTopic(HelpTopicId{"off"}));
+
+    SECTION("and still opens it")
+    {
+        REQUIRE(useCase.showContextHelp(HelpTopicId{"undeclared"}));
+        REQUIRE(fixture.logger->lines().size() == 1);
+        REQUIRE(fixture.logger->hasWarning());
+        REQUIRE(fixture.logger->lines().front().message.find("undeclared") !=
+                std::string::npos);
+    }
+
+    SECTION("and not again when triggered a second time")
+    {
+        useCase.showContextHelp(HelpTopicId{"undeclared"});
+        useCase.showContextHelp(HelpTopicId{"undeclared"});
+
+        REQUIRE(fixture.logger->lines().size() == 1);
+    }
+
+    SECTION(
+        "but not on a declared, page or disabled declared topic, or on "
+        "none")
+    {
+        useCase.showContextHelp(HelpTopicId{"widget"});
+        useCase.showContextHelp(HelpTopicId{"page"});
+        useCase.showContextHelp(HelpTopicId{"off"});
+        useCase.showContextHelp(HelpTopicId{});
+
+        REQUIRE(fixture.logger->lines().empty());
+    }
 }

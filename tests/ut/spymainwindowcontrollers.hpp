@@ -75,10 +75,11 @@ namespace aide::test
         SpyApplicationCloseController closeController;
         SpyMainWindowGeometryAndStateController geometryAndStateController;
         SpyShowSettingsDialogController settingsDialogController;
+        aide::core::SettingsPageRegistry noPages;
         aide::core::ShowHelpUseCase showHelpUseCase{
             aide::ApplicationConfig{},
             std::make_shared<aide::test::MockUrlLauncher>(),
-            std::make_shared<aide::test::NullLogger>()};
+            std::make_shared<aide::test::NullLogger>(), noPages};
         aide::gui::MainWindowControllerPtr controller{
             std::make_shared<aide::gui::MainWindowController>(
                 nullptr, closeController, geometryAndStateController,

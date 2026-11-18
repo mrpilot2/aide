@@ -29,8 +29,9 @@ namespace
 {
     ShowHelpUseCase inactiveHelp()
     {
+        static const aide::core::SettingsPageRegistry noPages;
         return {ApplicationConfig{}, std::make_shared<MockUrlLauncher>(),
-                std::make_shared<NullLogger>()};
+                std::make_shared<NullLogger>(), noPages};
     }
 } // namespace
 
