@@ -23,13 +23,6 @@ namespace demo
     private:
         aide::UrlLauncherPtr m_browser;
     };
-
-    // Opens URLs in the system's default browser.
-    class DesktopUrlLauncher : public aide::UrlLauncherInterface
-    {
-    public:
-        bool openUrl(const std::string& url) const override;
-    };
 } // namespace demo
 
 #endif // DEMO_REPORT_BUG_PREVIEW_LAUNCHER_HPP

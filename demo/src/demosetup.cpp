@@ -29,6 +29,7 @@
 
 #include "colorschemereactor.hpp"
 #include "demosettingspage.hpp"
+#include "desktopurllauncher.hpp"
 #include "notificationlauncherdialog.hpp"
 #include "reportbugpreviewlauncher.hpp"
 
@@ -41,7 +42,7 @@ namespace
     // DemoSettingsPage::helpTopicId().
     const aide::HelpTopicId& workspaceHelpTopic()
     {
-        static const aide::HelpTopicId topic{"demo-workspace"};
+        static const aide::HelpTopicId topic{QStringLiteral("demo-workspace")};
         return topic;
     }
 } // namespace
@@ -84,7 +85,8 @@ namespace demo
             .setEnabled(aide::ApplicationConfig::Feature::ReportBugAction, true)
             .setUrlLauncher(
                 std::make_shared<ReportBugPreviewLauncher>(std::move(browser)))
-            .setHelpBaseUrl(QUrl("https://mrpilot2.github.io/aide/demo-help/"))
+            .setHelpBaseUrl(QUrl(
+                QStringLiteral("https://mrpilot2.github.io/aide/demo-help/")))
             .declareHelpTopic(workspaceHelpTopic());
         return config;
     }
