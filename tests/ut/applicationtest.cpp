@@ -5,7 +5,6 @@
 #include <memory>
 #include <optional>
 #include <sstream>
-#include <utility>
 #include <vector>
 
 #include <catch2/catch_test_macros.hpp>
@@ -25,13 +24,14 @@
 #include <aide/aideconstants.hpp>
 #include <aide/application.hpp>
 #include <aide/helptopicid.hpp>
-#include <aide/settings/settingspage.hpp>
 #include <aide/settings/settingspageregistry.hpp>
 #include <aide/widgethelptopic.hpp>
 
+#include "mocksettingspage.hpp"
 #include "mockurllauncher.hpp"
 
 using aide::constants::CONSTANTS;
+using aide::test::MockSettingsPage;
 
 namespace
 {
@@ -57,37 +57,6 @@ namespace
         lineEdit->setFocus();
         return lineEdit;
     }
-
-    // A client settings page whose widget holds one line edit.
-    class ClientPage : public aide::core::SettingsPage
-    {
-    public:
-        ClientPage(aide::HierarchicalId group, aide::HelpTopicId topic)
-            : SettingsPage(std::move(group))
-            , m_topic(std::move(topic))
-            , m_lineEdit(new QLineEdit(m_widget.get()))
-        {}
-
-        [[nodiscard]] aide::HelpTopicId helpTopicId() const override
-        {
-            return m_topic;
-        }
-
-        QWidget* widget() override { return m_widget.get(); }
-
-        [[nodiscard]] QLineEdit* lineEdit() const { return m_lineEdit; }
-
-        [[nodiscard]] bool isModified() const override { return false; }
-
-        void reset() override {}
-
-        void apply() override {}
-
-    private:
-        aide::HelpTopicId m_topic;
-        std::unique_ptr<QWidget> m_widget{std::make_unique<QWidget>()};
-        QLineEdit* m_lineEdit;
-    };
 
     // Opens the settings dialog through File -> Settings, runs @p interact
     // once the modal dialog is shown and active, then cancels the dialog.
@@ -718,15 +687,16 @@ TEST_CASE_METHOD(HelpActiveApplication,
                  "focused widget inside the page",
                  "[Application]")
 {
-    const auto page = std::make_shared<ClientPage>(
-        aide::HierarchicalId("Client Page"), aide::HelpTopicId{"client-page"});
-    aide::setHelpTopic(page->lineEdit(),
-                       aide::HelpTopicId{"client-page/field"});
+    const auto page =
+        std::make_shared<MockSettingsPage>(aide::HierarchicalId("Client Page"));
+    page->setHelpTopicId(aide::HelpTopicId{"client-page"});
+    auto* lineEdit = new QLineEdit(page->widget());
+    aide::setHelpTopic(lineEdit, aide::HelpTopicId{"client-page/field"});
     app.settingsPageRegistry().addPage(page);
 
-    interactWithSettingsDialog(app, [&page](const QDialog& dialog) {
+    interactWithSettingsDialog(app, [lineEdit](const QDialog& dialog) {
         selectPageAndFocusTree(dialog, "Client Page");
-        page->lineEdit()->setFocus();
+        lineEdit->setFocus();
         pressInFocusWidget(QKeySequence(QKeySequence::HelpContents));
     });
 
@@ -739,8 +709,8 @@ TEST_CASE_METHOD(HelpActiveApplication,
                  "Contents on a page without a topic",
                  "[Application]")
 {
-    app.settingsPageRegistry().addPage(std::make_shared<ClientPage>(
-        aide::HierarchicalId("Client Page"), aide::HelpTopicId{}));
+    app.settingsPageRegistry().addPage(std::make_shared<MockSettingsPage>(
+        aide::HierarchicalId("Client Page")));
     bool helpButtonEnabled{true};
 
     interactWithSettingsDialog(

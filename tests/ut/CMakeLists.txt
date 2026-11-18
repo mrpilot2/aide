@@ -212,7 +212,11 @@ add_executable(ut.aide.application)
 
 target_sources(
   ut.aide.application
-  PRIVATE applicationtest.cpp mocksettings.cpp mockurllauncher.cpp
+  PRIVATE
+    applicationtest.cpp
+    mocksettings.cpp
+    mocksettingspage.cpp
+    mockurllauncher.cpp
 )
 
 target_link_libraries(
