@@ -31,6 +31,17 @@ install(
   FILES ${CMAKE_CURRENT_BINARY_DIR}/../dependencies/licenses.html
   DESTINATION ${CMAKE_INSTALL_DOCDIR}/
 )
+
+set(AIDE_HELP_INSTALL_DIR ${CMAKE_INSTALL_DATADIR}/aide/help)
+
+install(
+  DIRECTORY ${AIDE_HELP_DIR}/
+  DESTINATION ${AIDE_HELP_INSTALL_DIR}
+  COMPONENT Help
+  FILES_MATCHING
+  PATTERN "*.md"
+)
+
 include(CMakePackageConfigHelpers)
 
 write_basic_package_version_file(
@@ -59,6 +70,7 @@ configure_package_config_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/AideConfig.cmake.in
   "${CMAKE_BINARY_DIR}/AideQt${QT_VERSION_MAJOR}Config.cmake"
   INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/AideQt${QT_VERSION_MAJOR}"
+  PATH_VARS AIDE_HELP_INSTALL_DIR
   NO_SET_AND_CHECK_MACRO
   NO_CHECK_REQUIRED_COMPONENTS_MACRO
 )
