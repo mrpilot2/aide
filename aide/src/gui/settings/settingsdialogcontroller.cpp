@@ -1,7 +1,5 @@
 #include "settingsdialogcontroller.hpp"
 
-#include <QApplication>
-
 #include <aide/helptopicid.hpp>
 
 #include "contexthelptopic.hpp"
@@ -52,5 +50,5 @@ void SettingsDialogController::onUserWantsHelpForCurrentPage() const
 
 void SettingsDialogController::onUserWantsContextHelp() const
 {
-    controller.showContextHelp(contextHelpTopic(QApplication::focusWidget()));
+    controller.showContextHelp(focusedContextHelpTopic());
 }
