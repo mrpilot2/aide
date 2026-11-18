@@ -21,6 +21,8 @@ The installed pages belong to the `Help` install component. To install only the 
 cmake --install <build-dir> --component Help --prefix <prefix>
 ```
 
+The installed package config sets `AIDE_HELP_DIR` even if the `Help` component was not installed, so the variable can point to a directory that does not exist. The docs build then fails loudly on the first include (see `check_paths` below) rather than producing empty pages; install the `Help` component to fix it.
+
 Hand the directory to the docs build as an environment variable, for example from a custom target:
 
 ```cmake
