@@ -8,6 +8,7 @@
 #include <QPushButton>
 #include <QWidget>
 
+#include <aide/helptopicid.hpp>
 #include <aide/hierarchicalid.hpp>
 #include <aide/settingsinterface.hpp>
 
@@ -204,6 +205,11 @@ void DemoSettingsPage::createWidget()
             qOverload<>(&QTimer::start));
     connect(m_tableInsertTimer.get(), &QTimer::timeout, this,
             &DemoSettingsPage::insertIntoTableWidget);
+}
+
+aide::HelpTopicId DemoSettingsPage::helpTopicId() const
+{
+    return aide::HelpTopicId{"demo-settings"};
 }
 
 QStringList DemoSettingsPage::groupTitles() const

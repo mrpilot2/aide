@@ -138,3 +138,38 @@ Standard Qt event loop entry. The application runs until the user closes the win
 - Implements `apply()` to persist values to the settings store
 
 It is the recommended reference for implementing your own settings pages. See [Adding Settings Pages](../core/settings/adding-settings-pages.md).
+
+---
+
+## End-User Help
+
+`demo::demoConfig()` (in `demo/src/demosetup.cpp`) points help at the demo's
+own End-User Help site, published to `https://mrpilot2.github.io/aide/demo-help/`.
+The demo has two Help Topics of its own:
+
+- `demo-settings`, returned by `DemoSettingsPage::helpTopicId()`, opened by
+  the Settings dialog's **Help** button;
+- `demo-workspace`, bound to the central splitter with `aide::setHelpTopic()`
+  and declared with `ApplicationConfig::declareHelpTopic()`, opened by
+  Context Help anywhere in the workspace.
+
+The site lives in `demo/help/`: an index page, a page per demo topic, and
+`pymdownx.snippets` stubs that include aIDE's own pages for `appearance`,
+`keymap` and `notifications`. Build it from the repository root with:
+
+```bash
+python3 -m venv build/help-venv
+build/help-venv/bin/pip install -r demo/help/requirements.txt
+AIDE_HELP_DIR="$PWD/aide/help" build/help-venv/bin/mkdocs build --strict \
+  -f demo/help/mkdocs.yml -d "$PWD/build/demo-help-site"
+```
+
+The `ut.aide.demo.application` test builds the demo through `demoConfig()` and
+`setUpDemo()`, like `main()`, and checks that every ID in
+`declaredHelpTopics()` has a `<id>/index.html` in the site directory given by
+`AIDE_DEMO_HELP_SITE_DIR`. Without that variable the check is skipped:
+
+```bash
+AIDE_DEMO_HELP_SITE_DIR="$PWD/build/demo-help-site" \
+  ./build/client-unix-static-debug/bin/ut.aide.demo.application
+```

@@ -33,6 +33,9 @@ public:
 
     [[nodiscard]] QStringList groupTitles() const override;
 
+    /// `demo-settings`: the demo's own Help Topic for its example pages.
+    [[nodiscard]] aide::HelpTopicId helpTopicId() const override;
+
     void reset() override;
 
     void apply() override;
