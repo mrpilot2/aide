@@ -125,6 +125,8 @@ aIDE's built-in pages declare `appearance`, `keymap` and `notifications`. These 
 
 The settings dialog's Help button is **hidden** while help is inactive. It is **disabled** while the selected page or group node has no available topic (`isHelpAvailable()` is false), and **enabled** otherwise. Clicking it opens the selected page's topic. Its state updates on every selection change.
 
+Context Help also works inside the settings dialog. On every selection change the dialog binds the selected page's topic to itself, so with focus anywhere in the dialog, the page tree included, Context Help opens the selected page's topic. A widget inside a page that has its own topic wins. On a page or group node without a topic, Context Help opens Help Contents, while the Help button stays disabled: the button means "this page's help", the key means Context Help. The main window's shortcut does not fire while the modal dialog is open, so each time the dialog opens it adds its own shortcut with the **current Keymap keys** of `HELP_CONTEXT_HELP`. A remapped key therefore works in the next dialog opened. While help is inactive the action is not registered, and the dialog adds no shortcut.
+
 ### Declared Help Topics
 
 `Application::declaredHelpTopics()` lists every Help Topic the application can open, so a test can check that each one has a Help Page. It collects the registered settings pages' topics plus the widget topics declared with `ApplicationConfig::declareHelpTopic()`. It then drops disabled IDs (checked against the declared ID), applies remaps (one step only), and returns the list **sorted and de-duplicated**. The list ignores whether help is active: it is the same with no Help Base URL or with `Feature::Help` off.

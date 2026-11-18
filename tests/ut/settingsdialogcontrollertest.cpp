@@ -66,4 +66,11 @@ TEST_CASE(
 
         REQUIRE(spy.showHelpForCurrentPageCalled);
     }
+
+    SECTION("onUserWantsContextHelp shows Context Help")
+    {
+        controller.onUserWantsContextHelp();
+
+        REQUIRE(spy.showContextHelpCalled);
+    }
 }

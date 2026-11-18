@@ -4,9 +4,12 @@
 #include <utility>
 #include <vector>
 
+#include <QKeySequence>
+#include <QList>
 #include <QModelIndex>
 #include <QString>
 
+#include <aide/actionregistryinterface.hpp>
 #include <settings/settingspage.hpp>
 #include <settings/settingspageregistry.hpp>
 
@@ -35,11 +38,17 @@ namespace aide::core
 
         // With a help use case, the dialog's Help button opens the selected
         // page's Help Topic. Without one, the button stays hidden.
+        //
+        // With an action registry, each time the dialog opens it gets its own
+        // Context Help shortcut with the current Keymap keys of
+        // HELP_CONTEXT_HELP. Without one, or while that action is not
+        // registered (help inactive), the dialog gets no such shortcut.
         ShowSettingsDialog(SettingsDialogWeakPtr dialog,
                            SettingsPageRegistry& registry,
                            SettingsInterface& settings,
                            LoggerPtr loggerInterface,
-                           const ShowHelpUseCase& helpUseCase);
+                           const ShowHelpUseCase& helpUseCase,
+                           ActionRegistryInterfacePtr actionRegistry = nullptr);
 
         void showSettingsDialog() override;
 
@@ -63,6 +72,8 @@ namespace aide::core
 
         void showHelpForCurrentPage() override;
 
+        void showContextHelp(const HelpTopicId& resolvedTopic) override;
+
     private:
         // Shared implementation for both overloads above; nullptr means "use
         // the persisted last-selected page", matching the original no-arg
@@ -74,7 +85,10 @@ namespace aide::core
                            SettingsPageRegistry& registry,
                            SettingsInterface& settings,
                            LoggerPtr loggerInterface,
-                           const ShowHelpUseCase* helpUseCase);
+                           const ShowHelpUseCase* helpUseCase,
+                           ActionRegistryInterfacePtr actionRegistry);
+
+        [[nodiscard]] QList<QKeySequence> contextHelpShortcuts() const;
 
         void checkTreeModelIsInitialized() const;
 
@@ -111,6 +125,7 @@ namespace aide::core
 
         const LoggerPtr logger;
         const ShowHelpUseCase* m_helpUseCase;
+        const ActionRegistryInterfacePtr m_actionRegistry;
         SettingsPagePtr currentlySelectedPage{nullptr};
 
         QString m_currentSearchPattern;
