@@ -643,7 +643,7 @@ TEST_CASE("Application's declared Help Topics follow the config",
         std::vector<HelpTopicId> expected;
     };
 
-    const auto [config, expected] = GENERATE(
+    const auto testCase = GENERATE(
         Case{aide::ApplicationConfig{}.disableHelpTopic(HelpTopicId{"keymap"}),
              {HelpTopicId{"appearance"}, HelpTopicId{"notifications"}}},
         Case{aide::ApplicationConfig{}.remapHelpTopic(
@@ -663,9 +663,9 @@ TEST_CASE("Application's declared Help Topics follow the config",
     int numberOfArgs{1};
     // NOLINTNEXTLINE
     std::array<char*, 1> appName{{const_cast<char*>("aide_test")}};
-    const aide::Application app(numberOfArgs, appName.data(), config);
+    const aide::Application app(numberOfArgs, appName.data(), testCase.config);
 
-    REQUIRE(app.declaredHelpTopics() == expected);
+    REQUIRE(app.declaredHelpTopics() == testCase.expected);
 }
 
 TEST_CASE_METHOD(HelpActiveApplication,
