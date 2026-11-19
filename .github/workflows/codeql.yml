@@ -31,7 +31,7 @@ jobs:
       - name: Install Packages
         run: |
           sudo apt-get update
-          sudo apt-get install --yes g++-10 ccache
+          sudo apt-get install --yes g++ ccache
 
       - name: Setup Python
         uses: actions/setup-python@v6
