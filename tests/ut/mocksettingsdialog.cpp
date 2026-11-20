@@ -73,6 +73,26 @@ bool MockSettingsDialog::isApplyButtonEnabled() const
     return applyButtonIsEnabled;
 }
 
+void MockSettingsDialog::showHelpButton(const bool show)
+{
+    helpButtonIsVisible = show;
+}
+
+bool MockSettingsDialog::isHelpButtonVisible() const
+{
+    return helpButtonIsVisible;
+}
+
+void MockSettingsDialog::enableHelpButton(const bool enable)
+{
+    helpButtonIsEnabled = enable;
+}
+
+bool MockSettingsDialog::isHelpButtonEnabled() const
+{
+    return helpButtonIsEnabled;
+}
+
 void MockSettingsDialog::simulateUserAcceptsDialog(const bool accept)
 {
     userShallAcceptDialog = accept;
@@ -97,4 +117,25 @@ aide::core::SettingsDialogGeometryAndStateData
 MockSettingsDialog::currentGeometry() const
 {
     return geometryAndStateData;
+}
+
+void MockSettingsDialog::setHelpTopic(const HelpTopicId& topic)
+{
+    currentHelpTopic = topic;
+}
+
+const aide::HelpTopicId& MockSettingsDialog::helpTopic() const
+{
+    return currentHelpTopic;
+}
+
+void MockSettingsDialog::setContextHelpShortcuts(
+    const QList<QKeySequence>& shortcuts)
+{
+    currentContextHelpShortcuts = shortcuts;
+}
+
+const QList<QKeySequence>& MockSettingsDialog::contextHelpShortcuts() const
+{
+    return currentContextHelpShortcuts;
 }

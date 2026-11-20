@@ -1,6 +1,7 @@
 #include "reportbugpreviewlauncher.hpp"
 
 #include <string>
+#include <utility>
 
 #include <QApplication>
 #include <QMessageBox>
@@ -9,11 +10,24 @@
 #include <QUrl>
 #include <QUrlQuery>
 
+#include <aide/githubrepository.hpp>
+
 using demo::ReportBugPreviewLauncher;
+
+ReportBugPreviewLauncher::ReportBugPreviewLauncher(aide::UrlLauncherPtr browser)
+    : m_browser(std::move(browser))
+{}
 
 bool ReportBugPreviewLauncher::openUrl(const std::string& url) const
 {
     const QUrl requestedUrl(QString::fromStdString(url));
+    const QUrl newIssueUrl(QString(aide::constants::GITHUB_REPO_URL) +
+                           QStringLiteral("/issues/new"));
+    if (requestedUrl.adjusted(QUrl::RemoveQuery | QUrl::RemoveFragment) !=
+        newIssueUrl) {
+        return m_browser != nullptr && m_browser->openUrl(url);
+    }
+
     const QUrlQuery query(requestedUrl);
 
     QStringList fields;

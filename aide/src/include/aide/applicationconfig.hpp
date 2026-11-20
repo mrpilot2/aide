@@ -3,7 +3,11 @@
 #define AIDE_APPLICATION_CONFIG_HPP
 
 #include <memory>
+#include <vector>
 
+#include <QUrl>
+
+#include <aide/helptopicid.hpp>
 #include <aide/urllauncherinterface.hpp>
 
 namespace aide
@@ -49,6 +53,10 @@ namespace aide
             /// Help → "Report Bug in aIDE" action. Defaults to disabled,
             /// unlike most other features in this enum.
             ReportBugAction,
+
+            /// The web-based help system. Help is only active when this is
+            /// enabled *and* a Help Base URL is set (see setHelpBaseUrl()).
+            Help,
         };
 
         ApplicationConfig();
@@ -87,6 +95,72 @@ namespace aide
          *         OS-backed launcher.
          */
         [[nodiscard]] UrlLauncherPtr urlLauncher() const;
+
+        /**
+         * @brief Sets the Help Base URL, the root of the client's web help.
+         *
+         * A Help Topic resolves to `<base>/<topic-id>/`; a missing trailing
+         * slash on the base is added. Without a base URL help stays inactive
+         * even when Feature::Help is enabled.
+         * @return *this, so calls can be chained fluently.
+         */
+        ApplicationConfig& setHelpBaseUrl(const QUrl& baseUrl);
+
+        /**
+         * @brief The Help Base URL, or an empty QUrl if none was set.
+         */
+        [[nodiscard]] QUrl helpBaseUrl() const;
+
+        /**
+         * @brief Sends the Help Topic @p source to the location of @p target.
+         *
+         * Remaps apply one step only (`a→b`, `b→c` sends `a` to `b`), and
+         * the last registration for @p source wins. Remapping onto a disabled
+         * topic does not disable @p source. An empty @p target is ignored
+         * with a logged warning (@p source keeps its declared ID); to turn
+         * a topic's help off, use disableHelpTopic().
+         * @return *this, so calls can be chained fluently.
+         */
+        ApplicationConfig& remapHelpTopic(const HelpTopicId& source,
+                                          const HelpTopicId& target);
+
+        /**
+         * @brief Where the Help Topic @p id resolves to after remapping.
+         * @return the remap target if @p id was remapped, otherwise @p id.
+         */
+        [[nodiscard]] HelpTopicId remappedHelpTopic(
+            const HelpTopicId& id) const;
+
+        /**
+         * @brief Turns off help for the Help Topic @p id.
+         *
+         * Checked against the declared ID, before any remap.
+         * @return *this, so calls can be chained fluently.
+         */
+        ApplicationConfig& disableHelpTopic(const HelpTopicId& id);
+
+        /**
+         * @brief Whether disableHelpTopic() was called for @p id.
+         */
+        [[nodiscard]] bool isHelpTopicDisabled(const HelpTopicId& id) const;
+
+        /**
+         * @brief Declares the widget Help Topic @p id up front.
+         *
+         * Settings pages declare their topics themselves; widget topics set
+         * with aide::setHelpTopic() are only known once the widget exists.
+         * Declaring them here lets Application::declaredHelpTopics() list
+         * them even when the widgets are created lazily. Declaring an empty
+         * ID or the same ID twice has no further effect.
+         * @return *this, so calls can be chained fluently.
+         */
+        ApplicationConfig& declareHelpTopic(const HelpTopicId& id);
+
+        /**
+         * @brief The widget Help Topics passed to declareHelpTopic(), sorted,
+         * as declared: before any disable or remap.
+         */
+        [[nodiscard]] std::vector<HelpTopicId> declaredWidgetHelpTopics() const;
 
     private:
         class Impl;

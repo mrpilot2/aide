@@ -20,6 +20,7 @@ target_sources(
     applicationclose.cpp
     desktopentrynameresolver.cpp
     diagnostictextbuilder.cpp
+    helptopicid.cpp
     hierarchicalid.cpp
     loggerfactory.cpp
     mainwindowgeometryandstate.cpp
@@ -33,7 +34,9 @@ target_sources(
     qtsettings.cpp
     reportbugusecase.cpp
     settingsinterface.cpp
+    showhelpusecase.cpp
     showloginfilemanagerusecase.cpp
+    widgethelptopic.cpp
     settings/settingsdialogchangepagecontroller.cpp
     settings/settingsdialoggeometryandstate.cpp
     settings/settingspage.cpp
@@ -76,6 +79,7 @@ target_sources(
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/applicationconfig.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/colorscheme.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/githubrepository.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/helptopicid.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/hierarchicalid.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/mainwindowinterface.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/menucontainerinterface.hpp
@@ -90,6 +94,7 @@ target_sources(
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/settingsinterface.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/theme.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/urllauncherinterface.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/widgethelptopic.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/settings/settingspage.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/aide/settings/settingspageregistry.hpp
 )

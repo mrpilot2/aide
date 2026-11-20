@@ -4,9 +4,12 @@
 #include <utility>
 #include <vector>
 
+#include <QKeySequence>
+#include <QList>
 #include <QModelIndex>
 #include <QString>
 
+#include <aide/actionregistryinterface.hpp>
 #include <settings/settingspage.hpp>
 #include <settings/settingspageregistry.hpp>
 
@@ -18,6 +21,7 @@
 #include "settingspagefilterproxymodel.hpp"
 #include "settingspagegrouptreemodel.hpp"
 #include "settingspageranker.hpp"
+#include "showhelpusecase.hpp"
 #include "showsettingsdialogcontroller.hpp"
 
 namespace aide::core
@@ -27,10 +31,20 @@ namespace aide::core
         , public SettingsDialogChangePageController
     {
     public:
-        explicit ShowSettingsDialog(SettingsDialogWeakPtr dialog,
-                                    SettingsPageRegistry& registry,
-                                    SettingsInterface& settings,
-                                    LoggerPtr loggerInterface);
+        // With a help use case (it must outlive this object), the dialog's
+        // Help button opens the selected page's Help Topic. Without one, the
+        // button stays hidden.
+        //
+        // With an action registry, each time the dialog opens it gets its own
+        // Context Help shortcut with the current Keymap keys of
+        // HELP_CONTEXT_HELP. Without one, or while that action is not
+        // registered (help inactive), the dialog gets no such shortcut.
+        ShowSettingsDialog(SettingsDialogWeakPtr dialog,
+                           SettingsPageRegistry& registry,
+                           SettingsInterface& settings,
+                           LoggerPtr loggerInterface,
+                           const ShowHelpUseCase* helpUseCase        = nullptr,
+                           ActionRegistryInterfacePtr actionRegistry = nullptr);
 
         void showSettingsDialog() override;
 
@@ -52,12 +66,18 @@ namespace aide::core
 
         void applyModifiedSettingsPages() override;
 
+        void showHelpForCurrentPage() override;
+
+        void showContextHelp(const HelpTopicId& resolvedTopic) override;
+
     private:
         // Shared implementation for both overloads above; nullptr means "use
         // the persisted last-selected page", matching the original no-arg
         // behavior.
         void showSettingsDialog(
             const aide::HierarchicalId* explicitlySelectedGroup);
+
+        [[nodiscard]] QList<QKeySequence> contextHelpShortcuts() const;
 
         void checkTreeModelIsInitialized() const;
 
@@ -68,6 +88,10 @@ namespace aide::core
             std::vector<std::pair<QModelIndex, SettingsPagePtr>>& out) const;
 
         void clearSelectedPage();
+
+        [[nodiscard]] bool isHelpActive() const;
+
+        [[nodiscard]] bool isHelpAvailableForCurrentPage() const;
 
         void updateDisplayName(const QModelIndex& selectedIndex) const;
 
@@ -89,6 +113,8 @@ namespace aide::core
         std::shared_ptr<SettingsPageFilterProxyModel> proxyModel;
 
         const LoggerPtr logger;
+        const ShowHelpUseCase* m_helpUseCase;
+        const ActionRegistryInterfacePtr m_actionRegistry;
         SettingsPagePtr currentlySelectedPage{nullptr};
 
         QString m_currentSearchPattern;

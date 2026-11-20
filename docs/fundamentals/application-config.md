@@ -36,6 +36,7 @@ The active config is readable back via `app.config()`.
 | `ViewFullscreenAction` | enabled | Checkable View → Full Screen action bound to F11 |
 | `ShowLogInFileManagerAction` | **disabled** | Help → "Show Log in \<File Manager\>" action |
 | `ReportBugAction` | **disabled** | Help → "Report Bug in aIDE" action |
+| `Help` | enabled | Web-based End-User Help; only active once a Help Base URL is set (see [Help API](../help/index.md)) |
 
 `ShowLogInFileManagerAction` and `ReportBugAction` default to disabled because they expose concepts (the log file location, aIDE's own issue tracker) that end users of most aIDE-based applications have no reason to know about. Enable them for developer-facing tools.
 
@@ -67,6 +68,22 @@ config.setUrlLauncher(std::make_shared<MyUrlLauncher>());
 ```
 
 `urlLauncher()` returns `nullptr` if no override was set, in which case callers fall back to the default OS-backed launcher.
+
+---
+
+## Help
+
+Help opens Help Pages from the client's own web help in the browser. It is **active** only when `Feature::Help` is enabled (the default) **and** a Help Base URL is set:
+
+```cpp
+aide::ApplicationConfig config;
+config.setHelpBaseUrl(QUrl("https://example.com/help"))
+      .remapHelpTopic(aide::HelpTopicId{"keymap"}, aide::HelpTopicId{"shortcuts"})
+      .disableHelpTopic(aide::HelpTopicId{"notifications"})
+      .declareHelpTopic(aide::HelpTopicId{"workspace"});
+```
+
+The help calls on `ApplicationConfig` are `setHelpBaseUrl()` / `helpBaseUrl()`, `remapHelpTopic()` / `remappedHelpTopic()`, `disableHelpTopic()` / `isHelpTopicDisabled()` and `declareHelpTopic()` / `declaredWidgetHelpTopics()`. Their rules, together with Help Topic IDs, settings page and widget topics and the matching `Application` calls, are described in the [Help API](../help/index.md) chapter.
 
 ---
 

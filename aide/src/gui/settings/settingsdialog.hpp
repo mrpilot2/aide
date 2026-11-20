@@ -14,6 +14,7 @@ namespace Ui
     class SettingsDialog;
 } // namespace Ui
 
+class QAction;
 class QWidget;
 
 namespace aide::gui
@@ -58,6 +59,15 @@ namespace aide::gui
 
         void enableApplyButton(bool enable) override;
 
+        void showHelpButton(bool show) override;
+
+        void enableHelpButton(bool enable) override;
+
+        void setHelpTopic(const HelpTopicId& topic) override;
+
+        void setContextHelpShortcuts(
+            const QList<QKeySequence>& shortcuts) override;
+
     private:
         void connectSignals();
 
@@ -68,6 +78,10 @@ namespace aide::gui
         std::unique_ptr<Ui::SettingsDialog> ui;
 
         SettingsDialogControllerPtr settingsController;
+
+        // The dialog's own Context Help shortcut; no keys while help is
+        // inactive.
+        QAction* m_contextHelpAction;
     };
 
 } // namespace aide::gui

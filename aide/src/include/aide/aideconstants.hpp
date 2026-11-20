@@ -21,6 +21,9 @@ namespace aide::constants
 
         const HierarchicalId VIEW_FULLSCREEN{MENU_VIEW.addLevel("Full Screen")};
 
+        const HierarchicalId HELP_CONTENTS{MENU_HELP.addLevel("Help Contents")};
+        const HierarchicalId HELP_CONTEXT_HELP{
+            MENU_HELP.addLevel("Context Help")};
         const HierarchicalId HELP_SHOW_LOG_IN_FILE_MANAGER{
             MENU_HELP.addLevel("Show Log in File Manager")};
         const HierarchicalId HELP_REPORT_BUG{

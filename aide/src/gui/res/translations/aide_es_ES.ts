@@ -313,6 +313,18 @@
         <translation>Alternar modo de pantalla completa</translation>
     </message>
     <message>
+        <source>Help Contents</source>
+        <translation>Contenido de la ayuda</translation>
+    </message>
+    <message>
+        <source>Open the help contents in the browser</source>
+        <translation>Abrir el contenido de la ayuda en el navegador</translation>
+    </message>
+    <message>
+        <source>Context Help</source>
+        <translation>Ayuda contextual</translation>
+    </message>
+    <message>
         <source>Don&apos;t ask again</source>
         <translation>No preguntar de nuevo</translation>
     </message>
@@ -327,6 +339,10 @@
     <message>
         <source>Show Log in %1</source>
         <translation>Mostrar registro en %1</translation>
+    </message>
+    <message>
+        <source>Open help for the focused widget in the browser</source>
+        <translation>Abrir la ayuda del elemento enfocado en el navegador</translation>
     </message>
     <message>
         <source>Report Bug in aIDE</source>

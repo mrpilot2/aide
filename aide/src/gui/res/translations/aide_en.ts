@@ -293,6 +293,10 @@
         <translation></translation>
     </message>
     <message>
+        <source>Open help for the focused widget in the browser</source>
+        <translation></translation>
+    </message>
+    <message>
         <source>Don&apos;t ask again</source>
         <translation></translation>
     </message>
@@ -322,6 +326,18 @@
     </message>
     <message>
         <source>Toggle full screen mode</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Help Contents</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Open the help contents in the browser</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Context Help</source>
         <translation></translation>
     </message>
     <message>

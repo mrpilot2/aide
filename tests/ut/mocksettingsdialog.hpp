@@ -1,7 +1,11 @@
 #ifndef AIDE_MOCK_SETTINGS_DIALOG_HPP
 #define AIDE_MOCK_SETTINGS_DIALOG_HPP
 
+#include <QKeySequence>
+#include <QList>
 #include <QStringList>
+
+#include <aide/helptopicid.hpp>
 
 #include "settings/settingsdialoginterface.hpp"
 #include "userselection.hpp"
@@ -49,6 +53,23 @@ namespace aide::test
 
         [[nodiscard]] bool isApplyButtonEnabled() const;
 
+        void showHelpButton(bool show) override;
+
+        [[nodiscard]] bool isHelpButtonVisible() const;
+
+        void enableHelpButton(bool enable) override;
+
+        [[nodiscard]] bool isHelpButtonEnabled() const;
+
+        void setHelpTopic(const HelpTopicId& topic) override;
+
+        [[nodiscard]] const HelpTopicId& helpTopic() const;
+
+        void setContextHelpShortcuts(
+            const QList<QKeySequence>& shortcuts) override;
+
+        [[nodiscard]] const QList<QKeySequence>& contextHelpShortcuts() const;
+
         void simulateUserAcceptsDialog(bool accept);
 
     private:
@@ -62,7 +83,19 @@ namespace aide::test
 
         bool applyButtonIsEnabled{false};
 
+        // Start out the opposite of what the real dialog shows initially,
+        // so tests prove the use case sets the Help button state explicitly.
+        bool helpButtonIsVisible{true};
+
+        bool helpButtonIsEnabled{true};
+
         bool userShallAcceptDialog{false};
+
+        // Start out non-empty, so tests prove the use case sets them.
+        HelpTopicId currentHelpTopic{"unset"};
+
+        QList<QKeySequence> currentContextHelpShortcuts{
+            QKeySequence(Qt::Key_F35)};
 
         core::SettingsDialogGeometryAndStateData geometryAndStateData;
 

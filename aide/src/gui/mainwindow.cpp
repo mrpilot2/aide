@@ -3,10 +3,12 @@
 
 #include <algorithm>
 #include <utility>
+#include <vector>
 
 #include <QCheckBox>
 #include <QEvent>
 #include <QFrame>
+#include <QKeySequence>
 #include <QLayout>
 #include <QMenu>
 #include <QMessageBox>
@@ -27,6 +29,7 @@
 #include "menucontainerinterface.hpp"
 #include "osfilemanagerlauncher.hpp"
 #include "settings/settingsdialog.hpp"
+#include "showhelpusecase.hpp"
 #include "ui_mainwindow.h"
 
 using aide::HierarchicalId;
@@ -110,6 +113,13 @@ void MainWindow::registerActions(
     auto* menuHelp{menuHelpContainer->menu()};
     menuHelp->setTitle(QApplication::tr("&Help", "MainWindow"));
 
+    // Gating: not created, not registered, mirroring registerGatedHelpActions
+    // below - but gated on help being active (Feature::Help plus a Help Base
+    // URL) rather than on a Feature value of its own.
+    if (core::ShowHelpUseCase::isHelpActive(m_config)) {
+        registerHelpContentsAction(menuHelp, actionRegistry);
+        registerContextHelpAction(actionRegistry);
+    }
     registerGatedHelpActions(menuHelp, actionRegistry);
 
     m_actionAboutAide = new QAction(tr("About") + " aIDE", this);
@@ -158,6 +168,44 @@ void MainWindow::registerViewMenu(
                                    {QKeySequence(Qt::Key_F11)});
 
     m_ui->menubar->addMenu(menuView);
+}
+
+void MainWindow::registerHelpContentsAction(
+    QMenu* menuHelp, const ActionRegistryInterfacePtr& actionRegistry)
+{
+    // Only called while help is active. It heads the Help menu and is
+    // followed by a separator; no default shortcut, so it can only be bound
+    // by the user in the Keymap.
+    m_actionHelpContents = new QAction(tr("Help Contents"), this);
+    connect(m_actionHelpContents, &QAction::triggered, m_controller.get(),
+            &MainWindowController::onUserWantsToShowHelpContents);
+    menuHelp->addAction(m_actionHelpContents);
+    actionRegistry->registerAction(
+        m_actionHelpContents, CONSTANTS().HELP_CONTENTS,
+        tr("Open the help contents in the browser").toStdString());
+    menuHelp->addSeparator();
+}
+
+void MainWindow::registerContextHelpAction(
+    const ActionRegistryInterfacePtr& actionRegistry)
+{
+    // Only called while help is active. Context Help is not shown in the
+    // Help menu: it is added to the main window only, so its shortcut works
+    // there and it can be remapped in the Keymap.
+
+    // Every platform binding of Help Contents, not just the first.
+    const auto bindings = QKeySequence::keyBindings(QKeySequence::HelpContents);
+    const std::vector<QKeySequence> defaultKeySequences(bindings.begin(),
+                                                        bindings.end());
+
+    m_actionContextHelp = new QAction(tr("Context Help"), this);
+    connect(m_actionContextHelp, &QAction::triggered, m_controller.get(),
+            &MainWindowController::onUserWantsToShowContextHelp);
+    addAction(m_actionContextHelp);
+    actionRegistry->registerAction(
+        m_actionContextHelp, CONSTANTS().HELP_CONTEXT_HELP,
+        tr("Open help for the focused widget in the browser").toStdString(),
+        defaultKeySequences);
 }
 
 void MainWindow::registerGatedHelpActions(

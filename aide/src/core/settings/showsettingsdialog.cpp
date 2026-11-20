@@ -7,19 +7,25 @@
 #include <QPersistentModelIndex>
 #include <QWidget>
 
+#include <aide/aideconstants.hpp>
+
 #include "settings/searchpattern.hpp"
 #include "settings/settingspage.hpp"
 
+using aide::HelpTopicId;
 using aide::core::SettingsPageGroupTreeModel;
 using aide::core::ShowSettingsDialog;
 
-ShowSettingsDialog::ShowSettingsDialog(SettingsDialogWeakPtr dialog,
-                                       SettingsPageRegistry& registry,
-                                       SettingsInterface& settings,
-                                       LoggerPtr loggerInterface)
+ShowSettingsDialog::ShowSettingsDialog(
+    SettingsDialogWeakPtr dialog, SettingsPageRegistry& registry,
+    SettingsInterface& settings, LoggerPtr loggerInterface,
+    const ShowHelpUseCase* helpUseCase,
+    ActionRegistryInterfacePtr actionRegistry)
     : m_registry(registry)
     , settingsDialog{std::move(dialog)}
     , logger{std::move(loggerInterface)}
+    , m_helpUseCase{helpUseCase}
+    , m_actionRegistry{std::move(actionRegistry)}
     , saveGeometryAndState(settingsDialog, settings)
     , searchHistory(settings)
 {}
@@ -44,6 +50,9 @@ void ShowSettingsDialog::showSettingsDialog(
 
     dialog->showEmptyPageWidget();
     dialog->setSelectedPageDisplayName("");
+    dialog->showHelpButton(isHelpActive());
+    dialog->enableHelpButton(false);
+    dialog->setContextHelpShortcuts(contextHelpShortcuts());
 
     treeModel  = std::make_shared<SettingsPageGroupTreeModel>(m_registry);
     proxyModel = std::make_shared<SettingsPageFilterProxyModel>();
@@ -132,6 +141,10 @@ void ShowSettingsDialog::changeSelectedPage(
             showEmptyPageWidget();
             view->showResetLabel(false);
         }
+        view->enableHelpButton(isHelpAvailableForCurrentPage());
+        view->setHelpTopic(currentlySelectedPage != nullptr
+                               ? currentlySelectedPage->helpTopicId()
+                               : HelpTopicId{});
     }
 }
 
@@ -251,7 +264,48 @@ void ShowSettingsDialog::clearSelectedPage()
     if (const auto view = settingsDialog.lock(); view != nullptr) {
         showEmptyPageWidget();
         view->showResetLabel(false);
+        view->enableHelpButton(false);
+        view->setHelpTopic(HelpTopicId{});
     }
+}
+
+bool ShowSettingsDialog::isHelpActive() const
+{
+    return m_helpUseCase != nullptr && m_helpUseCase->isHelpActive();
+}
+
+bool ShowSettingsDialog::isHelpAvailableForCurrentPage() const
+{
+    return m_helpUseCase != nullptr && currentlySelectedPage != nullptr &&
+           m_helpUseCase->isHelpAvailable(currentlySelectedPage->helpTopicId());
+}
+
+QList<QKeySequence> ShowSettingsDialog::contextHelpShortcuts() const
+{
+    if (m_actionRegistry == nullptr) { return {}; }
+
+    const auto& actions = m_actionRegistry->actions();
+    const auto it = actions.find(constants::CONSTANTS().HELP_CONTEXT_HELP);
+    if (it == actions.end() || it->second.action.isNull()) { return {}; }
+
+    // A key removed in the Keymap is stored as one empty sequence.
+    auto keys = it->second.getActiveKeySequences();
+    keys.removeIf([](const QKeySequence& key) { return key.isEmpty(); });
+    return keys;
+}
+
+void ShowSettingsDialog::showHelpForCurrentPage()
+{
+    if (!isHelpAvailableForCurrentPage()) { return; }
+
+    m_helpUseCase->showHelp(currentlySelectedPage->helpTopicId());
+}
+
+void ShowSettingsDialog::showContextHelp(const HelpTopicId& resolvedTopic)
+{
+    if (m_helpUseCase == nullptr) { return; }
+
+    m_helpUseCase->showContextHelp(resolvedTopic);
 }
 
 void ShowSettingsDialog::updateDisplayName(

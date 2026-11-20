@@ -35,6 +35,12 @@ namespace aide::gui
 
         void onUserWantsToApplySettingsPages() const;
 
+        void onUserWantsHelpForCurrentPage() const;
+
+        // Resolves the Help Topic from the focused widget (see
+        // contexthelptopic.hpp) and shows Context Help for it.
+        void onUserWantsContextHelp() const;
+
     private:
         aide::core::SettingsDialogChangePageController& controller;
     };

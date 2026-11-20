@@ -313,6 +313,18 @@
         <translation>切换全屏模式</translation>
     </message>
     <message>
+        <source>Help Contents</source>
+        <translation>帮助内容</translation>
+    </message>
+    <message>
+        <source>Open the help contents in the browser</source>
+        <translation>在浏览器中打开帮助内容</translation>
+    </message>
+    <message>
+        <source>Context Help</source>
+        <translation>上下文帮助</translation>
+    </message>
+    <message>
         <source>Don&apos;t ask again</source>
         <translation>不再询问</translation>
     </message>
@@ -327,6 +339,10 @@
     <message>
         <source>Show Log in %1</source>
         <translation>在 %1 中显示日志</translation>
+    </message>
+    <message>
+        <source>Open help for the focused widget in the browser</source>
+        <translation>在浏览器中打开当前焦点控件的帮助</translation>
     </message>
     <message>
         <source>Report Bug in aIDE</source>

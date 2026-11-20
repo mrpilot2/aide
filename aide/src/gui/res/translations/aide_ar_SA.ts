@@ -313,6 +313,18 @@
         <translation>تبديل وضع ملء الشاشة</translation>
     </message>
     <message>
+        <source>Help Contents</source>
+        <translation>محتويات التعليمات</translation>
+    </message>
+    <message>
+        <source>Open the help contents in the browser</source>
+        <translation>فتح محتويات التعليمات في المتصفح</translation>
+    </message>
+    <message>
+        <source>Context Help</source>
+        <translation>تعليمات سياقية</translation>
+    </message>
+    <message>
         <source>Don&apos;t ask again</source>
         <translation>عدم السؤال مرة أخرى</translation>
     </message>
@@ -327,6 +339,10 @@
     <message>
         <source>Show Log in %1</source>
         <translation>إظهار السجل في %1</translation>
+    </message>
+    <message>
+        <source>Open help for the focused widget in the browser</source>
+        <translation>فتح تعليمات العنصر المحدد في المتصفح</translation>
     </message>
     <message>
         <source>Report Bug in aIDE</source>

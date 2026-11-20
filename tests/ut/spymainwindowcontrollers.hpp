@@ -5,13 +5,16 @@
 
 #include <QByteArray>
 
+#include <aide/applicationconfig.hpp>
 #include <aide/hierarchicalid.hpp>
 
 #include "applicationclosecontroller.hpp"
 #include "mainwindowcontroller.hpp"
 #include "mainwindowgeometryandstatecontroller.hpp"
 #include "mockurllauncher.hpp"
+#include "nulllogger.hpp"
 #include "settings/showsettingsdialogcontroller.hpp"
+#include "showhelpusecase.hpp"
 
 namespace aide::test
 {
@@ -72,11 +75,17 @@ namespace aide::test
         SpyApplicationCloseController closeController;
         SpyMainWindowGeometryAndStateController geometryAndStateController;
         SpyShowSettingsDialogController settingsDialogController;
+        aide::core::SettingsPageRegistry noPages;
+        aide::core::ShowHelpUseCase showHelpUseCase{
+            aide::ApplicationConfig{},
+            std::make_shared<aide::test::MockUrlLauncher>(),
+            std::make_shared<aide::test::NullLogger>(), noPages};
         aide::gui::MainWindowControllerPtr controller{
             std::make_shared<aide::gui::MainWindowController>(
                 nullptr, closeController, geometryAndStateController,
                 settingsDialogController,
-                std::make_shared<aide::test::MockUrlLauncher>())};
+                std::make_shared<aide::test::MockUrlLauncher>(),
+                showHelpUseCase)};
     };
 } // namespace aide::test
 

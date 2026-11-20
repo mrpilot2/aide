@@ -1,5 +1,11 @@
 @PACKAGE_INIT@
 
+# End-User Help pages for aIDE's built-in Help Topics (install component Help).
+# Same variable as in a FetchContent / add_subdirectory build.
+set(AIDE_HELP_DIR "@PACKAGE_AIDE_HELP_INSTALL_DIR@")
+
+include(CMakeFindDependencyMacro)
+
 find_dependency(spdlog)
 find_dependency(fmt)
 
@@ -19,8 +25,6 @@ set_target_properties(
   Aide::AideWidgets
   PROPERTIES INTERFACE_LINK_LIBRARIES Aide::AideQt@QT_VERSION_MAJOR@Widgets
 )
-
-include(CMakeFindDependencyMacro)
 
 find_dependency(
   Qt@QT_VERSION_MAJOR@

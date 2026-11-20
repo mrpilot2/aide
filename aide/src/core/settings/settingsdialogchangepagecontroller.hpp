@@ -4,6 +4,11 @@
 class QItemSelection;
 class QString;
 
+namespace aide
+{
+    class HelpTopicId;
+} // namespace aide
+
 namespace aide::core
 {
     class SettingsDialogChangePageController
@@ -32,6 +37,13 @@ namespace aide::core
         virtual void resetCurrentPage() = 0;
 
         virtual void applyModifiedSettingsPages() = 0;
+
+        virtual void showHelpForCurrentPage() = 0;
+
+        // Context Help from inside the dialog: opens @p resolvedTopic (the
+        // topic resolved from the focused widget) when available, else Help
+        // Contents.
+        virtual void showContextHelp(const HelpTopicId& resolvedTopic) = 0;
     };
 } // namespace aide::core
 

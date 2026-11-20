@@ -1,5 +1,9 @@
 #include "settingsdialogcontroller.hpp"
 
+#include <aide/helptopicid.hpp>
+
+#include "contexthelptopic.hpp"
+
 using aide::gui::SettingsDialogController;
 
 SettingsDialogController::SettingsDialogController(
@@ -37,4 +41,14 @@ void SettingsDialogController::onUserWantsToResetCurrentPage() const
 void SettingsDialogController::onUserWantsToApplySettingsPages() const
 {
     controller.applyModifiedSettingsPages();
+}
+
+void SettingsDialogController::onUserWantsHelpForCurrentPage() const
+{
+    controller.showHelpForCurrentPage();
+}
+
+void SettingsDialogController::onUserWantsContextHelp() const
+{
+    controller.showContextHelp(focusedContextHelpTopic());
 }

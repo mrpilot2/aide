@@ -1,5 +1,8 @@
 #include "demosetup.hpp"
 
+#include <memory>
+#include <utility>
+
 #include <QDir>
 #include <QLabel>
 #include <QMenu>
@@ -8,27 +11,101 @@
 #include <QPalette>
 #include <QSplitter>
 #include <QString>
+#include <QUrl>
 
 #include <aide/aideconstants.hpp>
 #include <aide/aidesettingsprovider.hpp>
 #include <aide/application.hpp>
 #include <aide/colorscheme.hpp>
 #include <aide/gui/widgets/notificationview.hpp>
+#include <aide/helptopicid.hpp>
 #include <aide/hierarchicalid.hpp>
 #include <aide/menucontainerinterface.hpp>
 #include <aide/notificationdisplaytype.hpp>
 #include <aide/notificationgroup.hpp>
 #include <aide/settingsinterface.hpp>
 #include <aide/theme.hpp>
+#include <aide/widgethelptopic.hpp>
 
 #include "colorschemereactor.hpp"
 #include "demosettingspage.hpp"
+#include "desktopurllauncher.hpp"
 #include "notificationlauncherdialog.hpp"
+#include "reportbugpreviewlauncher.hpp"
 
 using aide::constants::CONSTANTS;
 
+namespace
+{
+    // Help Topic of the demo's central widget (Context Help in the
+    // workspace). Settings pages declare their topics themselves, see
+    // DemoSettingsPage::helpTopicId().
+    const aide::HelpTopicId& workspaceHelpTopic()
+    {
+        static const aide::HelpTopicId topic{QStringLiteral("demo-workspace")};
+        return topic;
+    }
+} // namespace
+
 namespace demo
 {
+    aide::ApplicationConfig demoConfig(aide::UrlLauncherPtr browser)
+    {
+        if (browser == nullptr) {
+            browser = std::make_shared<DesktopUrlLauncher>();
+        }
+
+        // The demo keeps every built-in feature enabled and passes the
+        // config explicitly to show the API. A consumer that did not want
+        // the View -> Full Screen action would disable it here, e.g.:
+        //   config.setEnabled(
+        //       aide::ApplicationConfig::Feature::ViewFullscreenAction,
+        //       false);
+        //
+        // Two exceptions: ShowLogInFileManagerAction and ReportBugAction
+        // default to disabled since they are only appropriate for
+        // developer-facing consumer applications. The demo opts in
+        // explicitly so both features are visibly exercised by anyone
+        // running it.
+        //
+        // ReportBugAction also gets a demo-supplied UrlLauncherInterface
+        // override, so clicking the action shows a preview dialog of the
+        // ticket that would have been filed instead of opening a real
+        // browser and filing a real issue against aIDE's own repository.
+        // All other URLs (Help Pages) still go to @p browser.
+        //
+        // Help points at the demo's End-User Help site (demo/help), published
+        // to GitHub Pages. Every widget topic set with aide::setHelpTopic() is
+        // declared here, so the demo help test can check each one has a page.
+        aide::ApplicationConfig config;
+        config
+            .setEnabled(
+                aide::ApplicationConfig::Feature::ShowLogInFileManagerAction,
+                true)
+            .setEnabled(aide::ApplicationConfig::Feature::ReportBugAction, true)
+            .setUrlLauncher(
+                std::make_shared<ReportBugPreviewLauncher>(std::move(browser)))
+            .setHelpBaseUrl(QUrl(
+                QStringLiteral("https://mrpilot2.github.io/aide/demo-help/")))
+            .declareHelpTopic(workspaceHelpTopic());
+        return config;
+    }
+
+    std::unique_ptr<ColorSchemeReactor> setUpDemo(const aide::Application& app)
+    {
+        registerDemoTheme(app);
+        auto colorSchemeReactor = watchColorScheme(app);
+
+        buildCentralWidget(app);
+        registerDemoSettingsPages(app);
+
+        extendFileMenu(app);
+        addNotificationLogToggle(app);
+        buildDemoMenu(app);
+
+        return colorSchemeReactor;
+    }
+
     void registerDemoTheme(const aide::Application& app)
     {
         // Register a consumer-defined theme
@@ -108,6 +185,7 @@ namespace demo
         centralSplitter->addWidget(description);
         centralSplitter->addWidget(notificationView);
         mainWindow->setCentralWidget(centralSplitter);
+        aide::setHelpTopic(centralSplitter, workspaceHelpTopic());
 
         if (const auto splitterState =
                 demoSettings

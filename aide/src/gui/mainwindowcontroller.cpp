@@ -9,11 +9,13 @@
 #include "aboutaidedialog.hpp"
 #include "aboutaideusecase.hpp"
 #include "applicationclosecontroller.hpp"
+#include "contexthelptopic.hpp"
 #include "logger/loggerfactory.hpp"
 #include "mainwindow.hpp"
 #include "mainwindowgeometryandstatecontroller.hpp"
 #include "osfilemanagerlauncher.hpp"
 #include "reportbugusecase.hpp"
+#include "showhelpusecase.hpp"
 #include "showloginfilemanagerusecase.hpp"
 
 using aide::constants::CONSTANTS;
@@ -28,12 +30,14 @@ MainWindowController::MainWindowController(
     const ApplicationCloseController& closeUseCase,
     MainWindowGeometryAndStateController& saveUseCase,
     ShowSettingsDialogController& settingsDialogUseCase,
-    aide::UrlLauncherPtr urlLauncher)
+    aide::UrlLauncherPtr urlLauncher,
+    const core::ShowHelpUseCase& showHelpUseCase)
     : m_mainWindow(std::move(mainWindow))
     , applicationCloseInteractor(closeUseCase)
     , saveGeometryAndStateInteractor(saveUseCase)
     , showSettingsDialogInteractor(settingsDialogUseCase)
     , m_urlLauncher(std::move(urlLauncher))
+    , m_showHelpUseCase(showHelpUseCase)
 {}
 
 void MainWindowController::onUserWantsToQuitApplication(
@@ -80,4 +84,14 @@ void MainWindowController::onUserWantsToReportBug() const
     const core::ReportBugUseCase useCase(
         m_urlLauncher, core::LoggerFactory::createLogger("ReportBug"));
     useCase.reportBug();
+}
+
+void MainWindowController::onUserWantsToShowHelpContents() const
+{
+    m_showHelpUseCase.showHelpContents();
+}
+
+void MainWindowController::onUserWantsToShowContextHelp() const
+{
+    m_showHelpUseCase.showContextHelp(focusedContextHelpTopic());
 }
