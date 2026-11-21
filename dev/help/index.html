@@ -1,0 +1,2190 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Developer guide for the aIDE C++/Qt application framework library">
+      
+      
+        <meta name="author" content="Markus Reitböck">
+      
+      
+        <link rel="canonical" href="https://mrpilot2.github.io/aide/dev/help/">
+      
+      
+        <link rel="prev" href="../core/notifications/">
+      
+      
+        <link rel="next" href="help-site/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.2">
+    
+    
+      
+        <title>Help API - aIDE Developer Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#help-api" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="aIDE Developer Guide" class="md-header__button md-logo" aria-label="aIDE Developer Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            aIDE Developer Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Help API
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mrpilot2/aide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    mrpilot2/aide
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="aIDE Developer Guide" class="md-nav__button md-logo" aria-label="aIDE Developer Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    aIDE Developer Guide
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mrpilot2/aide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    mrpilot2/aide
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/quick-start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamentals/hierarchical-id/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HierarchicalId
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamentals/application-lifecycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Application Lifecycle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamentals/application-config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ApplicationConfig
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core Concepts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Core Concepts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../core/action-registry/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Action Registry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../core/appearance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appearance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Settings
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Settings
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../core/settings/settings-interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SettingsInterface
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../core/settings/adding-settings-pages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Adding Settings Pages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../core/key-bindings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Key Bindings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../core/logging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../core/notifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notifications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    End-User Help
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    End-User Help
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Help API
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Help API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#turning-help-on" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Turning help on
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#help-topic-ids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Help Topic IDs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#binding-topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Binding topics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Binding topics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#settings-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Settings pages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#widgets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Widgets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#declaring-widget-topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Declaring widget topics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#remapping-and-disabling-topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remapping and disabling topics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#opening-help-from-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opening help from code
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Opening help from code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#listing-every-topic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listing every topic
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#built-in-help-topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Built-in Help Topics
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="help-site/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building the Help Site
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="coverage-test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Help Coverage Test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="versioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Versioned Help
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UI Components
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    UI Components
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ui/main-window/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Main Window
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Widgets
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Widgets
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ui/widgets/aidetreeview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AideTreeView
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ui/widgets/aidetableview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AideTableView
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ui/widgets/search-filter-widget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SearchFilterWidget
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ui/widgets/search-line-edit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SearchLineEdit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ui/translations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Translations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../demo/walkthrough/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Demo Application
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resources
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Resources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-reference/index_classes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-reference/index_namespaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Namespaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../maintainers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maintainers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#turning-help-on" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Turning help on
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#help-topic-ids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Help Topic IDs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#binding-topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Binding topics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Binding topics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#settings-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Settings pages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#widgets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Widgets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#declaring-widget-topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Declaring widget topics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#remapping-and-disabling-topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remapping and disabling topics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#opening-help-from-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opening help from code
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Opening help from code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#listing-every-topic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listing every topic
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#built-in-help-topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Built-in Help Topics
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href=".." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    End-User Help
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="help-api">Help API<a class="headerlink" href="#help-api" title="Permanent link">&para;</a></h1>
+<p>aIDE's help system opens <strong>Help Pages</strong> from your application's own web help in the user's browser. You write and host the help site (mkdocs-material is the supported setup); aIDE gives you:</p>
+<ul>
+<li>the Help menu's <strong>Help Contents</strong> action, a <strong>Context Help</strong> action (F1 by default) and a <strong>Help</strong> button in the Settings dialog;</li>
+<li>C++ calls to bind <strong>Help Topics</strong> to settings pages and widgets, and to remap or disable them;</li>
+<li>End-User Help pages for its own Settings dialog pages, to include in your site (see <a href="help-site/">Building the Help Site</a>);</li>
+<li><code>Application::declaredHelpTopics()</code>, so a test can check that every topic has a page (see <a href="coverage-test/">Help Coverage Test</a>).</li>
+</ul>
+<p>aIDE never checks at runtime that a page exists, and never adds a version to a URL. Versioning and fallback for unknown topics are your docs server's job (see <a href="versioning/">Versioned Help</a>).</p>
+<hr />
+<h2 id="turning-help-on">Turning help on<a class="headerlink" href="#turning-help-on" title="Permanent link">&para;</a></h2>
+<p>Set a <strong>Help Base URL</strong>, the root of your help site, on the <a href="../fundamentals/application-config/"><code>ApplicationConfig</code></a>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;aide/application.hpp&gt;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;aide/applicationconfig.hpp&gt;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">aide</span><span class="o">::</span><span class="n">ApplicationConfig</span><span class="w"> </span><span class="n">config</span><span class="p">;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">config</span><span class="p">.</span><span class="n">setHelpBaseUrl</span><span class="p">(</span><span class="n">QUrl</span><span class="p">(</span><span class="s">"https://example.com/help/"</span><span class="p">));</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">aide</span><span class="o">::</span><span class="n">Application</span><span class="w"> </span><span class="nf">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">,</span><span class="w"> </span><span class="n">config</span><span class="p">);</span>
+</code></pre></div>
+<p>Help is <strong>active</strong> only when both hold:</p>
+<ul>
+<li><code>ApplicationConfig::Feature::Help</code> is enabled. It is enabled by default.</li>
+<li>A Help Base URL is set with <code>setHelpBaseUrl()</code>.</li>
+</ul>
+<p>With the feature on but no URL, help stays inactive and this is logged once; it is not an error. To switch the whole help system off, even with a URL set, disable the feature:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">config</span><span class="p">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">aide</span><span class="o">::</span><span class="n">ApplicationConfig</span><span class="o">::</span><span class="n">Feature</span><span class="o">::</span><span class="n">Help</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+</code></pre></div>
+<p>While help is inactive, aIDE shows no help UI at all: the Help Contents and Context Help actions are neither created nor registered (so they are absent from the menu and the Keymap), and the Settings dialog's Help button is hidden.</p>
+<p><code>helpBaseUrl()</code> returns the URL that was set, or an empty <code>QUrl</code>.</p>
+<hr />
+<h2 id="help-topic-ids">Help Topic IDs<a class="headerlink" href="#help-topic-ids" title="Permanent link">&para;</a></h2>
+<p>A <strong>Help Topic ID</strong> (<code>aide::HelpTopicId</code>, header <code>aide/helptopicid.hpp</code>) names one Help Page. It is a relative path under the Help Base URL:</p>
+<ul>
+<li>Nesting with <code>/</code> is allowed: <code>keymap</code>, <code>settings/keymap</code>.</li>
+<li>A leading <code>/</code>, a <code>..</code> segment, <code>?</code> or <code>#</code> make it invalid. Invalid input becomes an <strong>empty ID</strong> (no topic) and a warning is logged. No exception is thrown.</li>
+<li><code>value()</code> returns the ID as a <code>QString</code>, <code>isEmpty()</code> tells whether it is empty, and IDs compare with <code>==</code>, <code>!=</code> and <code>&lt;</code>.</li>
+</ul>
+<p>A topic resolves to <code>&lt;Help Base URL&gt;/&lt;topic-id&gt;/</code>, which matches mkdocs directory URLs (<code>use_directory_urls: true</code>, the default): the page <code>docs/settings/keymap.md</code> is served at <code>settings/keymap/</code>. A missing trailing slash on the base URL is added; otherwise the base URL is used exactly as given.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">config</span><span class="p">.</span><span class="n">setHelpBaseUrl</span><span class="p">(</span><span class="n">QUrl</span><span class="p">(</span><span class="s">"https://example.com/help"</span><span class="p">));</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1">// HelpTopicId{"appearance"}       -&gt; https://example.com/help/appearance/</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1">// HelpTopicId{"settings/keymap"}  -&gt; https://example.com/help/settings/keymap/</span>
+</code></pre></div>
+<hr />
+<h2 id="binding-topics">Binding topics<a class="headerlink" href="#binding-topics" title="Permanent link">&para;</a></h2>
+<h3 id="settings-pages">Settings pages<a class="headerlink" href="#settings-pages" title="Permanent link">&para;</a></h3>
+<p>A settings page declares its topic by overriding <code>SettingsPage::helpTopicId()</code>. The default returns an empty ID: the page has no topic.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">aide</span><span class="o">::</span><span class="n">HelpTopicId</span><span class="w"> </span><span class="nf">MySettingsPage::helpTopicId</span><span class="p">()</span><span class="w"> </span><span class="k">const</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">{</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">aide</span><span class="o">::</span><span class="n">HelpTopicId</span><span class="p">{</span><span class="s">"my-settings"</span><span class="p">};</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">}</span>
+</code></pre></div>
+<p>The Settings dialog's <strong>Help</strong> button opens the selected page's topic. It is hidden while help is inactive, disabled while the selected page or group node has no available topic, and enabled otherwise; its state updates on every selection change.</p>
+<p>Context Help also works inside the Settings dialog: with focus anywhere in it, Context Help opens the selected page's topic, unless a widget inside the page has its own topic. On a page without a topic, Context Help opens Help Contents while the Help button stays disabled. The dialog uses the current Keymap keys of Context Help each time it opens, so a remapped key works in the next dialog opened.</p>
+<h3 id="widgets">Widgets<a class="headerlink" href="#widgets" title="Permanent link">&para;</a></h3>
+<p>Bind a topic to any widget, including stock Qt ones, with the free functions in <code>aide/widgethelptopic.hpp</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;aide/widgethelptopic.hpp&gt;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">aide</span><span class="o">::</span><span class="n">setHelpTopic</span><span class="p">(</span><span class="n">workspace</span><span class="p">,</span><span class="w"> </span><span class="n">aide</span><span class="o">::</span><span class="n">HelpTopicId</span><span class="p">{</span><span class="s">"workspace"</span><span class="p">});</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">aide</span><span class="o">::</span><span class="n">helpTopic</span><span class="p">(</span><span class="n">workspace</span><span class="p">);</span><span class="w"> </span><span class="c1">// HelpTopicId{"workspace"}</span>
+</code></pre></div>
+<p>Calling <code>setHelpTopic()</code> again replaces the topic, an empty ID clears it, and a null widget is ignored. <code>helpTopic()</code> returns the widget's own topic only; it does not consult parents.</p>
+<p><strong>Context Help</strong> (<code>HELP_CONTEXT_HELP</code>, default shortcuts: every platform binding of <code>QKeySequence::HelpContents</code>, such as F1, or Cmd+? on macOS; remappable in the Keymap; not shown in the Help menu) starts at the focused widget and walks up the parent chain to the first widget with a topic. A topic on a child therefore wins over its container's, and a topic on a container covers all its children. The walk stops at the focused widget's window: the window's own topic still counts, a parent window's does not. If the walk finds no topic, or the topic is disabled, Context Help opens Help Contents.</p>
+<h3 id="declaring-widget-topics">Declaring widget topics<a class="headerlink" href="#declaring-widget-topics" title="Permanent link">&para;</a></h3>
+<p>Widget topics are only known once the widget exists. Declare every topic you pass to <code>setHelpTopic()</code> up front with <code>ApplicationConfig::declareHelpTopic()</code>, so that <a href="#listing-every-topic"><code>declaredHelpTopics()</code></a> sees it even when the widget is created lazily:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">config</span><span class="p">.</span><span class="n">declareHelpTopic</span><span class="p">(</span><span class="n">aide</span><span class="o">::</span><span class="n">HelpTopicId</span><span class="p">{</span><span class="s">"workspace"</span><span class="p">})</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">      </span><span class="p">.</span><span class="n">declareHelpTopic</span><span class="p">(</span><span class="n">aide</span><span class="o">::</span><span class="n">HelpTopicId</span><span class="p">{</span><span class="s">"editor/tabs"</span><span class="p">});</span>
+</code></pre></div>
+<p>Settings pages need no declaration: their <code>helpTopicId()</code> is collected from the settings page registry. Declaring an empty ID or the same ID twice has no further effect. <code>ApplicationConfig::declaredWidgetHelpTopics()</code> returns the declared widget topics as given, sorted, before any disable or remap.</p>
+<p>The first time Context Help resolves to a topic that was never declared (neither a settings page's topic nor passed to <code>declareHelpTopic()</code>), it logs a warning naming the topic, once per topic. Context Help still opens it.</p>
+<hr />
+<h2 id="remapping-and-disabling-topics">Remapping and disabling topics<a class="headerlink" href="#remapping-and-disabling-topics" title="Permanent link">&para;</a></h2>
+<p>Use these to fit topics (aIDE's built-in ones in particular) into your site's structure, or to suppress them:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">config</span><span class="p">.</span><span class="n">remapHelpTopic</span><span class="p">(</span><span class="n">aide</span><span class="o">::</span><span class="n">HelpTopicId</span><span class="p">{</span><span class="s">"keymap"</span><span class="p">},</span><span class="w"> </span><span class="n">aide</span><span class="o">::</span><span class="n">HelpTopicId</span><span class="p">{</span><span class="s">"settings/shortcuts"</span><span class="p">})</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">      </span><span class="p">.</span><span class="n">disableHelpTopic</span><span class="p">(</span><span class="n">aide</span><span class="o">::</span><span class="n">HelpTopicId</span><span class="p">{</span><span class="s">"notifications"</span><span class="p">});</span>
+</code></pre></div>
+<ul>
+<li><code>remapHelpTopic(source, target)</code> sends <code>source</code> to the location of <code>target</code>. Remaps apply <strong>one step only</strong>: with <code>a→b</code> and <code>b→c</code>, <code>a</code> goes to <code>b</code>. The last registration for a <code>source</code> wins. A remap onto an empty <code>target</code> is ignored with a logged warning, and <code>source</code> keeps its declared ID: a remap only redirects, to turn a topic off use <code>disableHelpTopic</code>. <code>remappedHelpTopic(id)</code> returns the target, or <code>id</code> if it was not remapped.</li>
+<li><code>disableHelpTopic(id)</code> turns help off for a topic. It is checked against the <strong>declared</strong> ID, before any remap, so remapping onto a disabled ID does not disable the source. <code>isHelpTopicDisabled(id)</code> tells whether it was disabled.</li>
+</ul>
+<p>A disabled topic behaves like no topic: the Help button is disabled, <code>showHelp()</code> returns <code>false</code> and Context Help falls back to Help Contents.</p>
+<hr />
+<h2 id="opening-help-from-code">Opening help from code<a class="headerlink" href="#opening-help-from-code" title="Permanent link">&para;</a></h2>
+<p><code>Application</code> (header <code>aide/application.hpp</code>) exposes:</p>
+<table>
+<thead>
+<tr>
+<th>Call</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bool showHelp(const HelpTopicId&amp; id)</code></td>
+<td>Opens the topic's page, after any remap. Returns <code>false</code>, launching nothing, when <code>isHelpAvailable(id)</code> is false; otherwise whether the launcher succeeded.</td>
+</tr>
+<tr>
+<td><code>bool isHelpAvailable(const HelpTopicId&amp; id) const</code></td>
+<td><code>true</code> when help is active and <code>id</code> is non-empty and not disabled.</td>
+</tr>
+<tr>
+<td><code>bool showHelpContents()</code></td>
+<td>Opens the Help Base URL itself. Returns <code>false</code> when help is inactive.</td>
+</tr>
+<tr>
+<td><code>std::vector&lt;HelpTopicId&gt; declaredHelpTopics() const</code></td>
+<td>Every topic the application can open, see below.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">app</span><span class="p">.</span><span class="n">showHelp</span><span class="p">(</span><span class="n">aide</span><span class="o">::</span><span class="n">HelpTopicId</span><span class="p">{</span><span class="s">"appearance"</span><span class="p">});</span><span class="w"> </span><span class="c1">// https://example.com/help/appearance/</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">app</span><span class="p">.</span><span class="n">showHelpContents</span><span class="p">();</span><span class="w">                        </span><span class="c1">// https://example.com/help/</span>
+</code></pre></div>
+<p>URLs open through the configured URL launcher (see <a href="../fundamentals/application-config/#overriding-the-url-launcher">Overriding the URL launcher</a>); without one, the operating system's default browser is used.</p>
+<p>The Help menu's <strong>Help Contents</strong> action (<code>HELP_CONTENTS</code>) heads the Help menu and opens the Help Base URL, like <code>showHelpContents()</code>. It has no default shortcut; users can assign one in the Keymap.</p>
+<h3 id="listing-every-topic">Listing every topic<a class="headerlink" href="#listing-every-topic" title="Permanent link">&para;</a></h3>
+<p><code>declaredHelpTopics()</code> lists every Help Topic the application can open, so a test can check that each one has a page. It:</p>
+<ol>
+<li>collects the <code>helpTopicId()</code> of every registered settings page plus the topics passed to <code>declareHelpTopic()</code>;</li>
+<li>drops disabled IDs (checked against the declared ID);</li>
+<li>applies remaps, one step;</li>
+<li>returns the result <strong>sorted and de-duplicated</strong>.</li>
+</ol>
+<p>It ignores whether help is active: the list is the same with no Help Base URL or with <code>Feature::Help</code> off. Call it after your settings pages are registered.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1">// declareHelpTopic("workspace"), declareHelpTopic("editor/tabs"), no other setup:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">app</span><span class="p">.</span><span class="n">declaredHelpTopics</span><span class="p">();</span><span class="w"> </span><span class="c1">// appearance, editor/tabs, keymap, notifications, workspace</span>
+</code></pre></div>
+<p>With <code>disableHelpTopic(keymap)</code>, <code>keymap</code> is left out. With <code>remapHelpTopic(keymap, settings/keys)</code>, <code>settings/keys</code> takes its place. Two topics remapped onto one target appear once.</p>
+<hr />
+<h2 id="built-in-help-topics">Built-in Help Topics<a class="headerlink" href="#built-in-help-topics" title="Permanent link">&para;</a></h2>
+<p>aIDE's built-in Settings dialog pages declare these topics:</p>
+<table>
+<thead>
+<tr>
+<th>Help Topic ID</th>
+<th>Settings page</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>appearance</code></td>
+<td>Appearance</td>
+</tr>
+<tr>
+<td><code>keymap</code></td>
+<td>Keymap</td>
+</tr>
+<tr>
+<td><code>notifications</code></td>
+<td>Notifications</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>IDs are stable public API</strong>: renaming or removing one is a breaking change, announced as such in the changelog, because your stubs and published page paths depend on them. The <strong>content</strong> of aIDE's pages for them is not stable API: it changes with aIDE releases and arrives with your next aIDE upgrade and docs build. To keep an old URL working after you move a page, use <code>remapHelpTopic()</code> or a redirect in your docs site.</p>
+<p><a href="help-site/">Building the Help Site</a> shows how to include aIDE's pages for these topics. The <a href="../demo/walkthrough/#end-user-help">demo application</a> uses all of the above.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "default": "latest", "provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>

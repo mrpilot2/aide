@@ -45,6 +45,10 @@
          <lastmod>2026-11-21</lastmod>
     </url>
     <url>
+         <loc>https://mrpilot2.github.io/aide/dev/api-reference/classaide_1_1HelpTopicId/</loc>
+         <lastmod>2026-11-21</lastmod>
+    </url>
+    <url>
          <loc>https://mrpilot2.github.io/aide/dev/api-reference/classaide_1_1HierarchicalId/</loc>
          <lastmod>2026-11-21</lastmod>
     </url>
@@ -226,6 +230,10 @@
     </url>
     <url>
          <loc>https://mrpilot2.github.io/aide/dev/api-reference/classaide_1_1core_1_1SettingsPageRegistry/</loc>
+         <lastmod>2026-11-21</lastmod>
+    </url>
+    <url>
+         <loc>https://mrpilot2.github.io/aide/dev/api-reference/classaide_1_1core_1_1ShowHelpUseCase/</loc>
          <lastmod>2026-11-21</lastmod>
     </url>
     <url>
@@ -538,6 +546,22 @@
     </url>
     <url>
          <loc>https://mrpilot2.github.io/aide/dev/getting-started/quick-start/</loc>
+         <lastmod>2026-11-21</lastmod>
+    </url>
+    <url>
+         <loc>https://mrpilot2.github.io/aide/dev/help/</loc>
+         <lastmod>2026-11-21</lastmod>
+    </url>
+    <url>
+         <loc>https://mrpilot2.github.io/aide/dev/help/coverage-test/</loc>
+         <lastmod>2026-11-21</lastmod>
+    </url>
+    <url>
+         <loc>https://mrpilot2.github.io/aide/dev/help/help-site/</loc>
+         <lastmod>2026-11-21</lastmod>
+    </url>
+    <url>
+         <loc>https://mrpilot2.github.io/aide/dev/help/versioning/</loc>
          <lastmod>2026-11-21</lastmod>
     </url>
     <url>
