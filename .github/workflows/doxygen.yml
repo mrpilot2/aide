@@ -3,7 +3,7 @@ name: Publish Documentation to GitHub Pages
 on:
   push:
     branches:
-      - develop
+      - main
     tags:
       - 'v*'
   workflow_dispatch:
@@ -77,5 +77,5 @@ jobs:
           mike set-default --push latest
 
       - name: Deploy development docs
-        if: github.ref == 'refs/heads/develop'
+        if: github.ref == 'refs/heads/main'
         run: mike deploy --push dev

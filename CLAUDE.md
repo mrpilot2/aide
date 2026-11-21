@@ -84,7 +84,7 @@ Key interfaces (`aide/include/aide/`): `LoggerInterface`, `SettingsInterface`, `
 
 - C++20 throughout; no exceptions in public API (Qt signal/slot style error handling).
 - Conventional Commits (`feat:`, `fix:`, `ci:`, `chore:`, …) — enforced by pre-commit hook.
-- release-please manages releases from `main`; development happens on `develop`.
+- Single branch: all work lands on `main` (via PRs); release-please (`release-please-config.json` + `.release-please-manifest.json`) opens release PRs from it.
 
 ## Common pitfalls
 

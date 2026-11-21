@@ -5,7 +5,7 @@ site_author: Markus Reitböck
 repo_name: mrpilot2/aide
 repo_url: https://github.com/mrpilot2/aide
 docs_dir: docs/devdocs
-edit_uri: edit/develop/docs/devdocs/
+edit_uri: edit/main/docs/devdocs/
 
 theme:
   name: material
