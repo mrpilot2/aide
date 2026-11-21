@@ -291,7 +291,7 @@ aide_discover_unit_tests(ut.aide.application)
 # Setup fixture that clears stale coverage data before the instrumented test
 # binaries run. Prevents a killed process from poisoning later runs with a
 # corrupt .gcda that crashes the gcov writeout at exit.
-if(aide_ENABLE_COVERAGE)
+if(AIDE_ENABLE_COVERAGE)
   add_test(
     NAME reset_coverage_data
     COMMAND
