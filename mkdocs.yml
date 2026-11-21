@@ -4,7 +4,8 @@ site_description: Developer guide for the aIDE C++/Qt application framework libr
 site_author: Markus Reitböck
 repo_name: mrpilot2/aide
 repo_url: https://github.com/mrpilot2/aide
-edit_uri: edit/develop/docs/
+docs_dir: docs/devdocs
+edit_uri: edit/develop/docs/devdocs/
 
 theme:
   name: material

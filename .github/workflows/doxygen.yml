@@ -22,7 +22,7 @@ jobs:
       - name: Generate Doxygen XML
         run: |
           mkdir -p build/doxygen
-          doxygen docs/Doxyfile
+          doxygen docs/devdocs/Doxyfile
 
       - name: Install doxybook2
         run: |
@@ -34,13 +34,13 @@ jobs:
         run: |
           doxybook2 \
             --input build/doxygen/xml \
-            --output docs/api-reference \
+            --output docs/devdocs/api-reference \
             --config .doxybook/config.json
-          rm -f docs/api-reference/index_files.md \
-                docs/api-reference/index_groups.md \
-                docs/api-reference/index_examples.md \
-                docs/api-reference/index_pages.md
-          sed -i '/^!!! info "CI-generated content"/,/^---$/d' docs/api-reference/index.md
+          rm -f docs/devdocs/api-reference/index_files.md \
+                docs/devdocs/api-reference/index_groups.md \
+                docs/devdocs/api-reference/index_examples.md \
+                docs/devdocs/api-reference/index_pages.md
+          sed -i '/^!!! info "CI-generated content"/,/^---$/d' docs/devdocs/api-reference/index.md
 
       - name: Set up Python
         uses: actions/setup-python@v5

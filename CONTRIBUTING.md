@@ -6,7 +6,7 @@ Commit messages must follow [Conventional Commits](https://www.conventionalcommi
 
 ## Documentation
 
-A change to a public header under `aide/src/include/aide/` updates the page under `docs/` that covers that API (e.g. `ApplicationConfig` → `docs/fundamentals/application-config.md`). A new `ApplicationConfig::Feature` adds a row to that page's features table.
+A change to a public header under `aide/src/include/aide/` updates the page under `docs/devdocs/` that covers that API (e.g. `ApplicationConfig` → `docs/devdocs/fundamentals/application-config.md`). A new `ApplicationConfig::Feature` adds a row to that page's features table.
 
 ## Code formatting
 

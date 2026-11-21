@@ -2,8 +2,8 @@
 !aide/src/buildinformation/
 install/
 site/
-docs/api-reference/*
-!docs/api-reference/index.md
+docs/devdocs/api-reference/*
+!docs/devdocs/api-reference/index.md
 .idea
 .ccache/
 graphify-out

@@ -9,11 +9,11 @@ This section contains the full API reference generated from the aIDE source code
 
     ```bash
     # 1. Generate Doxygen XML
-    doxygen docs/Doxyfile
+    doxygen docs/devdocs/Doxyfile
 
     # 2. Convert to Markdown with doxybook2
     doxybook2 --input build/doxygen/xml \
-              --output docs/api-reference \
+              --output docs/devdocs/api-reference \
               --config .doxybook/config.json
     ```
 
