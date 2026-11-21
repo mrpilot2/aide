@@ -4,11 +4,7 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
 include(FeatureSummary)
 
-include(VersionFromGit)
-
-version_from_git()
-
-project(aide LANGUAGES CXX VERSION ${VERSION})
+project(aide LANGUAGES CXX VERSION 0.3.1) # x-release-please-version
 
 set(CMAKE_CXX_EXTENSIONS OFF)
 
