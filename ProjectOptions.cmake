@@ -62,7 +62,7 @@ macro(aide_setup_options)
     option(AIDE_ENABLE_CPPCHECK "Enable cpp-check analysis" OFF)
     option(AIDE_ENABLE_PCH "Enable precompiled headers" OFF)
     option(AIDE_ENABLE_CACHE "Enable ccache" OFF)
-    option(aide_ENABLE_ABI_COMPLIANCE_CHECK "Enable ABI compliance check" OFF)
+    option(AIDE_ENABLE_ABI_COMPLIANCE_CHECK "Enable ABI compliance check" OFF)
   else()
     option(AIDE_ENABLE_IPO "Enable IPO/LTO" OFF)
     option(AIDE_WARNINGS_AS_ERRORS "Treat Warnings As Errors" ON)
@@ -85,7 +85,7 @@ macro(aide_setup_options)
     option(AIDE_ENABLE_CPPCHECK "Enable cpp-check analysis" ON)
     option(AIDE_ENABLE_PCH "Enable precompiled headers" OFF)
     option(AIDE_ENABLE_CACHE "Enable ccache" ON)
-    option(aide_ENABLE_ABI_COMPLIANCE_CHECK "Enable ABI compliance check" OFF)
+    option(AIDE_ENABLE_ABI_COMPLIANCE_CHECK "Enable ABI compliance check" OFF)
   endif()
 
   add_feature_info(
@@ -158,8 +158,8 @@ macro(aide_setup_options)
   add_feature_info(AIDE_ENABLE_PCH AIDE_ENABLE_PCH "Enable precompiled headers")
   add_feature_info(AIDE_ENABLE_CACHE AIDE_ENABLE_CACHE "Enable ccache")
   add_feature_info(
-    aide_ENABLE_ABI_COMPLIANCE_CHECK
-    aide_ENABLE_ABI_COMPLIANCE_CHECK
+    AIDE_ENABLE_ABI_COMPLIANCE_CHECK
+    AIDE_ENABLE_ABI_COMPLIANCE_CHECK
     "Enable ABI compliance check"
   )
 
@@ -179,7 +179,7 @@ macro(aide_setup_options)
       AIDE_ENABLE_COVERAGE
       AIDE_ENABLE_PCH
       AIDE_ENABLE_CACHE
-      aide_ENABLE_ABI_COMPLIANCE_CHECK
+      AIDE_ENABLE_ABI_COMPLIANCE_CHECK
     )
   endif()
 endmacro()
@@ -268,7 +268,7 @@ macro(aide_local_options)
     aide_enable_coverage(aide_coverage)
   endif()
 
-  if(aide_ENABLE_ABI_COMPLIANCE_CHECK)
+  if(AIDE_ENABLE_ABI_COMPLIANCE_CHECK)
     include(AbiComplianceCheck)
     aide_enable_compliance_check(aide_options)
   endif()

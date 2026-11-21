@@ -34,7 +34,7 @@
         "AIDE_ENABLE_CPPCHECK": "OFF",
         "AIDE_ENABLE_PCH": "OFF",
         "AIDE_ENABLE_CACHE": "ON",
-        "aide_ENABLE_ABI_COMPLIANCE_CHECK": "OFF",
+        "AIDE_ENABLE_ABI_COMPLIANCE_CHECK": "OFF",
 
         "AIDE_ENABLE_COVERAGE": "OFF"
       }
@@ -135,7 +135,7 @@
       "cacheVariables": {
         "CMAKE_C_COMPILER": "gcc",
         "CMAKE_CXX_COMPILER": "g++",
-        "aide_ENABLE_ABI_COMPLIANCE_CHECK": "ON",
+        "AIDE_ENABLE_ABI_COMPLIANCE_CHECK": "ON",
         "AIDE_PACKAGING_MAINTAINER_MODE": "ON"
       }
     },
