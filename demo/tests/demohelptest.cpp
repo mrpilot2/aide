@@ -19,9 +19,9 @@
 #include <aide/helptopicid.hpp>
 #include <aide/settings/settingspage.hpp>
 
-#include "../../tests/ut/mockurllauncher.hpp"
 #include "colorschemereactor.hpp"
 #include "demosetup.hpp"
+#include "mockurllauncher.hpp"
 
 using aide::HelpTopicId;
 using aide::constants::CONSTANTS;
