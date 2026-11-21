@@ -38,6 +38,23 @@ target_link_libraries(
   PRIVATE Aide::AideApplication aide_options aide_warnings aide_coverage
 )
 
+# Test doubles shared by ut.aide, ut.aide.application and the demo tests
+# (aide_catch_main's catch_main.cpp constructs aide::test::MockSettings, so
+# every executable linking it needs this library too).
+add_library(
+  aide_test_mocks
+  STATIC
+  mocksettings.cpp
+  mocksettingspage.cpp
+  mockurllauncher.cpp
+)
+target_include_directories(aide_test_mocks PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(
+  aide_test_mocks
+  PUBLIC Aide::AideApplication Aide::AideCore Qt::Core Qt::Widgets
+  PRIVATE aide_options aide_warnings aide_coverage
+)
+
 set(CMAKE_AUTORCC ON)
 
 if(TARGET Qt::lrelease)
@@ -68,9 +85,6 @@ target_sources(
     gotittooltiptest.cpp
     helptopicidtest.cpp
     hierarchicalidtest.cpp
-    mocksettings.cpp
-    mocksettingspage.cpp
-    mockurllauncher.cpp
     notificationballoontest.cpp
     searchfilterwidgettest.cpp
     settingspageregistrytest.cpp
@@ -156,6 +170,7 @@ target_link_libraries(
   ut.aide
   PRIVATE
     aide_catch_main
+    aide_test_mocks
     Qt::Core
     Qt::Widgets
     Qt::Test
@@ -210,19 +225,13 @@ endif()
 
 add_executable(ut.aide.application)
 
-target_sources(
-  ut.aide.application
-  PRIVATE
-    applicationtest.cpp
-    mocksettings.cpp
-    mocksettingspage.cpp
-    mockurllauncher.cpp
-)
+target_sources(ut.aide.application PRIVATE applicationtest.cpp)
 
 target_link_libraries(
   ut.aide.application
   PRIVATE
     aide_catch_main_application
+    aide_test_mocks
     Qt::Core
     Qt::Widgets
     Qt::Test

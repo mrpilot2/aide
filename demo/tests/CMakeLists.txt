@@ -12,33 +12,17 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS Test)
 
 add_executable(ut.aide.demo)
 
-# NotificationLauncherDialog (Q_OBJECT) is compiled straight into this
-# executable rather than via a moc-enabled library target, so this target
-# needs its own moc pass.
-set_target_properties(ut.aide.demo PROPERTIES AUTOMOC ON)
-
 target_sources(
   ut.aide.demo
-  PRIVATE
-    notificationdemodialogtest.cpp
-    notificationlauncherdialogtest.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../src/notificationdemodialog.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../src/notificationlauncherdialog.cpp
-    # aide_catch_main's catch_main.cpp constructs aide::test::MockSettings;
-    # every executable linking that object library must supply its
-    # definition, same as tests/ut/CMakeLists.txt's own ut.aide target does.
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../tests/ut/mocksettings.cpp
-)
-
-target_include_directories(
-  ut.aide.demo
-  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../src
+  PRIVATE notificationdemodialogtest.cpp notificationlauncherdialogtest.cpp
 )
 
 target_link_libraries(
   ut.aide.demo
   PRIVATE
     aide_catch_main
+    aide_test_mocks
+    aide_demo_lib
     Qt::Core
     Qt::Widgets
     Qt::Test
@@ -62,38 +46,14 @@ catch_discover_tests(
 # no process-global QApplication (same split as ut.aide / ut.aide.application).
 add_executable(ut.aide.demo.application)
 
-set_target_properties(
-  ut.aide.demo.application
-  PROPERTIES
-    AUTOMOC ON
-    AUTOUIC ON
-    AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_SOURCE_DIR}/../src/res
-)
-
-target_sources(
-  ut.aide.demo.application
-  PRIVATE
-    demohelptest.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../src/colorschemereactor.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../src/demosettingspage.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../src/demosetup.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../src/desktopurllauncher.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../src/notificationdemodialog.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../src/notificationlauncherdialog.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../src/reportbugpreviewlauncher.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../tests/ut/mocksettings.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../tests/ut/mockurllauncher.cpp
-)
-
-target_include_directories(
-  ut.aide.demo.application
-  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../src
-)
+target_sources(ut.aide.demo.application PRIVATE demohelptest.cpp)
 
 target_link_libraries(
   ut.aide.demo.application
   PRIVATE
     aide_catch_main_application
+    aide_test_mocks
+    aide_demo_lib
     Qt::Core
     Qt::Widgets
     Qt::Test
