@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.26)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/../cmake)
 
-project(aide.library LANGUAGES CXX VERSION 0.3.1) # x-release-please-version
+project(aide.library LANGUAGES CXX VERSION 1.0.0) # x-release-please-version
 
 set(CMAKE_CXX_EXTENSIONS OFF)
 
