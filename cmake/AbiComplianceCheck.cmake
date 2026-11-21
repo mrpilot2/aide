@@ -143,9 +143,9 @@ cd abibase
 if [ ! -f build/aide/abi_compliance_config.xml ]; then
 if [ -d .git ] && [ \"${LATEST_RELEASE_TAG}\" != \"`git log --pretty=oneline | cut -d' ' -f1`\" ]; then rm -rf .* 2> /dev/null; fi
     if [ ! -d .git ]; then
-        git init --initial-branch=develop
+        git init --initial-branch=main
         git remote add origin ${ORIGIN_URL}
-        git pull origin develop --tags
+        git pull origin main --tags
         git checkout ${LATEST_RELEASE_TAG}
     fi
     if [ ! -d build ]; then mkdir build; fi
