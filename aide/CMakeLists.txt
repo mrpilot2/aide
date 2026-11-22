@@ -36,7 +36,7 @@ add_subdirectory(doc)
 
 add_subdirectory(src)
 
-if(aide_ENABLE_ABI_COMPLIANCE_CHECK)
+if(AIDE_ENABLE_ABI_COMPLIANCE_CHECK)
   include(AbiComplianceCheck)
   aide_perform_abi_compliance_check(Aide::AideApplication Aide::AideWidgets)
 endif()
