@@ -4,7 +4,7 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
 include(FeatureSummary)
 
-project(aide LANGUAGES CXX VERSION 0.3.1) # x-release-please-version
+project(aide LANGUAGES CXX VERSION 1.0.0) # x-release-please-version
 
 set(CMAKE_CXX_EXTENSIONS OFF)
 
